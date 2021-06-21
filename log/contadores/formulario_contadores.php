@@ -6,16 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/formulario/formulario.css">
     <link rel="stylesheet" href="../css/formulario/bootstrap.min.css">
-    <title>Contadores</title>
+    <title>Formulario Contadores</title>
 </head>
 <body>
-<?php include '../includes/menu.php';
+<?php 
+
+include '../includes/menu.php';
+include 'includes/icono.php';
     
-    /* $prueba=$_SERVER['DOCUMENT_ROOT'];
-    var_dump($prueba);
-    $carpeta = $_SERVER['DOCUMENT_ROOT'] . '\php\control\log\uploads\documents';
-    var_dump($carpeta); */
- ?>
+   
+if (isset($_POST)) {
+
+  
+
+  $sede=$_POST['sede'];
+  
+
+
+
+  
+  
+
+  ?>
+
 
 <div id="body">
 
@@ -24,62 +37,198 @@
   
     <div class="fieldset">
     <br>
-    <center><legend>Registrar Contador</legend></center>
-
+    <center><h3>Registrar Contador de <?=$sede?></h3></center>
     
-  
     <div class="form-group">
-      <label for="sedes_nom" class="form-label mt-2">Sede</label>
-      <select name="sedes_nom" id="" required >
+              <?php  
 
-      <?php 
         require '../includes/conexion_control.php';
 
-        $sql = "SELECT sedes_nom FROM sedes  ";
+        $sql = "SELECT * FROM sedes WHERE sedes_nom = '$sede'  ";
         $consulta = mysqli_query($conn,$sql);
 
-        while ($res=mysqli_fetch_array($consulta)) {
+
+          while ($res=mysqli_fetch_array($consulta)) {
             
-            $sede=$res['sedes_nom'];
+            $sede_cont=$res['sedes_nom'];
+            $imp1=$res ['impresora1'];
+            $serial1=$res ['serial_imp1'];
+
+            $imp2=$res ['impresora2'];
+            $serial2=$res ['serial_imp2'];
+
+            $imp3=$res ['impresora3'];
+            $serial3=$res ['serial_imp3'];
+
+            $imp4=$res ['impresora4'];
+            $serial4=$res ['serial_imp4'];
             
-        ?>
-            <option value="<?=$sede?>"><?=$sede?></option>
+            //SEDES CON UNA SOLA IMPRESORA
+                    if ( $imp2 == '') {
+                      
+                      
+                      echo "
+                      <div class='form-group'>
+                        <label for='sede' class='form-label mt-2'>Sede</label> 
+                        <input type='text' name='sede' value='$sede_cont' readonly  class='form-control'  >
+                      </div>
 
-        <?php } ?>
-      
-      </select>
-      
-    </div>
-    <div class="form-group">
-      <label for="fecha" class="form-label mt-2">Fecha</label> 
-      <input type="date" name="fecha" id="" class="form-control"  required>
-    </div>
+                      <div class='form-group'>
+                        <label for='impresora1' class='form-label mt-2'>Impresora</label> 
+                        <input type='text' name='impresora1' value='$imp1' readonly  style='width: 130px;'  >
+                     
+                        <label for='serial1' class='form-label mt-2'>Serial</label> 
+                        <input type='text' name='serial1'  value='$serial1' style='width: 100px;' readonly    >
+                        <label for='inicial1' class='form-label mt-2'>Contador </label>
+                        <input type='number'  style='width: 200px;'  name='inicial1'  id='' required>
     
-    <div class="form-group">
-      <label for="cantidad" class="form-label mt-2">Contador </label>
-      <input type="number" class="form-control" name="cantidad"  id="" required>
-    </div>
+                      </div>
+                      
+                      
+                      
+                      
 
-    <div class="form-group">
-      <label for="ip" class="form-label mt-2">Direccion IP </label>
-      <input type="text" class="form-control" name="ip"  id="" required>
-    </div>
+                      <div class='form-group'>
+                        <label for='con_fecha' class='form-label mt-2'>Fecha</label> 
+                        <input type='date' name='con_fecha' id='' class='form-control'  required>
+                      </div>
 
 
+                    
+                      <div class='form-group'>
+                        <label for='imagen' class='form-label mt-2'>Contador Imagen</label>
+                        <input type='file' class='form-control' name='imagen' size='100' id='' required>
+                      </div>
+                      
+                      <div class='form-group'>
+                        <label for='con_des' class='form-label mt-2'>Comentario</label>
+                        <textarea name='con_des' id='' class='form-control'cols='15' rows='3' ></textarea>
+                      </div>";
+                        
+                      
 
-   
-    <div class="form-group">
-      <label for="excel" class="form-label mt-2">Contador Imagen</label>
-      <input type="file" class="form-control" name="excel" size="100" id="" required>
+                      
+                      
+               //SEDES CON MAS DE UNA IMPRESORA     
+                      }elseif ($imp3 == '') {
+                        
+                        echo "
+                        <div class='form-group'>
+                          <label for='sede' class='form-label mt-2'>Sede</label> 
+                          <input type='text' name='sede'  value='$sede_cont' class='form-control' readonly   >
+                        </div>
+  
+                        <div class='form-group'>
+                          <label for='impresora1' class='form-label mt-2'>Impresora</label> 
+                          <input type='text' name='impresora1'  style='width: 130px;' value='$imp1' readonly   >
+                          <label for='serial1' class='form-label mt-2'>Serial</label> 
+                          <input type='text' name='serial1'  style='width: 100px;' value='$serial1' readonly   >
+                          <label for='inicial1' class='form-label mt-2'>Contador </label>
+                          <input type='number'  style='width: 200px;' name='inicial1'  id='' required>
+                        </div>
+                      
+  
+                        <div class='form-group'>
+                          <label for='impresora2' class='form-label mt-2'>Impresora</label> 
+                          <input type='text' name='impresora2'  style='width: 130px;' value='$imp2' readonly   >
+                          <label for='serial2' class='form-label mt-2'>Serial</label> 
+                          <input type='text' name='serial2'  style='width: 100px;' value='$serial2' readonly   >
+                          <label for='inicial2' class='form-label mt-2'>Contador </label>
+                          <input type='number'  style='width: 200px;' name='inicial2'  id='' required>
+                        </div>
+                       
+  
+            
+                        
+                        <div class='form-group'>
+                          <label for='con_fecha' class='form-label mt-2'>Fecha</label> 
+                          <input type='date' name='con_fecha' id='' class='form-control'  required>
+                        </div>
+                        
+                        
+  
+                      
+                        <div class='form-group'>
+                          <label for='imagen' class='form-label mt-2'>Contador Imagen</label>
+                          <input type='file' class='form-control' name='imagen' size='100' id='' required>
+                        </div>
+  
+  
+                        <div class='form-group'>
+                          <label for='con_des' class='form-label mt-2'>Comentario</label>
+                          <textarea name='con_des' id='' class='form-control'cols='15' rows='3' ></textarea>
+                        </div>";
+                      }
+                       //SEDES CON MAS DE UNA IMPRESORA     
+                      else {
+
+                        echo "
+                      <div class='form-group'>
+                        <label for='sede' class='form-label mt-2'>Sede</label> 
+                        <input type='text' name='sede'  value='$sede_cont' class='form-control' readonly   >
+                      </div>
+
+                      <div class='form-group'>
+                        <label for='impresora1' class='form-label mt-2'>Impresora</label> 
+                        <input type='text' name='impresora1'  style='width: 130px;' value='$imp1' readonly   >
+                        <label for='serial1' class='form-label mt-2'>Serial</label> 
+                        <input type='text' name='serial1'  style='width: 100px;' value='$serial1' readonly   >
+                        <label for='inicial1' class='form-label mt-2'>Contador </label>
+                        <input type='number'  style='width: 200px;' name='inicial1'  id='' required>
+                      </div>
+                    
+
+                      <div class='form-group'>
+                        <label for='impresora2' class='form-label mt-2'>Impresora</label> 
+                        <input type='text' name='impresora2'  style='width: 130px;' value='$imp2' readonly   >
+                        <label for='serial2' class='form-label mt-2'>Serial</label> 
+                        <input type='text' name='serial2'  style='width: 100px;' value='$serial2' readonly   >
+                        <label for='inicial2' class='form-label mt-2'>Contador </label>
+                        <input type='number'  style='width: 200px;' name='inicial2'  id='' required>
+                      </div>
+                     
+                      <div class='form-group'>
+                        <label for='impresora3' class='form-label mt-2'>Impresora</label> 
+                        <input type='text' name='impresora3'  style='width: 130px;' value='$imp3' readonly   >
+                        <label for='serial3' class='form-label mt-2'>Serial</label> 
+                        <input type='text' name='serial3'  style='width: 100px;' value='$serial3' readonly   >
+                        <label for='inicial3' class='form-label mt-2'>Contador </label>
+                        <input type='number'  style='width: 200px;' name='inicial3'  id='' required>
+                      </div>
+                    
+
+          
+                      
+                      <div class='form-group'>
+                        <label for='con_fecha' class='form-label mt-2'>Fecha</label> 
+                        <input type='date' name='con_fecha' id='' class='form-control'  required>
+                      </div>
+                      
+                      
+
+                    
+                      <div class='form-group'>
+                        <label for='imagen' class='form-label mt-2'>Contador Imagen</label>
+                        <input type='file' class='form-control' name='imagen' size='100' id='' required>
+                      </div>
+
+
+                      <div class='form-group'>
+                        <label for='con_des' class='form-label mt-2'>Comentario</label>
+                        <textarea name='con_des' id='' class='form-control'cols='15' rows='3' ></textarea>
+                      </div>";
+
+
+              }}?>
+
     </div>
 
     
 
+    
 
-    <div class="form-group">
-      <label for="con_des" class="form-label mt-2">Comentario</label>
-      <textarea name="con_des" id="" class="form-control"cols="15" rows="3" ></textarea>
-    </div>
+
+    
    
    
     
@@ -97,13 +246,10 @@
 
 </div>
 
-<center><a href="buscador.php"class="btn btn-warning" >Buscar Contadores</a></center>
 
-<br>
     
   
-
-
+<?php } ?>
 
 
     

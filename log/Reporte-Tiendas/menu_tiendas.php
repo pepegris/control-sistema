@@ -11,7 +11,7 @@
 <?php
 
 include '../includes/menu.php';
-include 'includes/icono.php';
+
 
 ?>
 
@@ -23,21 +23,21 @@ include 'includes/icono.php';
 
 
 
-<center><h2 id="titulo">Reportes desde Previa </h2></center>
+<center><h2 id="titulo">Reportes desde Tiendas</h2></center>
 
 <div class="centrado">
     
 <div class="menu">
 
-        <a class="item" href="venta_tiendas.php">Ventas</a>
+        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="ventas/venta_tiendas.php">Ventas</a>
         
-        <a class="item" href="menu_stock.php">Stock</a>
-        <a class="item" href="#" >Articulos</a>
-        <a class="item" href="#">Precios</a>
+        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="stock/menu_stock.php">Stock</a>
+        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="articulos/menu_articulos.php" >Articulos</a>
+        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="#">Temporal</a>
 
 
         
-        <a class="item" href="#">beta</a>
+        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="#">beta</a>
 
         <div class="back-menu"></div>
         </div>

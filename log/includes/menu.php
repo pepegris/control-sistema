@@ -159,7 +159,7 @@
       </li>
 
       <li id="nav-item" class="nav-item">
-        <a href="../contadores/contadores.php" id="nav-link" class="nav-link">
+        <a href="../beta/prueba_r.php" id="nav-link" class="nav-link">
         <svg
             aria-hidden="true"
             focusable="false"
@@ -266,6 +266,8 @@
           <span id="link-text" class="link-text">Salir</span>
         </a>
       </li>
+
+      
     </ul>
   </nav>
   <script defer src="css/menu/theme.js"></script>

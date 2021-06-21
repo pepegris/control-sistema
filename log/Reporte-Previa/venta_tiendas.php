@@ -13,6 +13,7 @@
 <body>
 <?php include '../includes/menu.php';
      require '../includes/conexion_control.php';
+     include 'includes/icono.php';
  ?>
 
 
@@ -28,7 +29,7 @@
       <div class="card-body">
 
       
-  <form action="reporte_venta_diaria.php" method="post" id="formulario" enctype="multipart/form-data">
+  <form action="reporte_venta_diariap.php" method="post" id="formulario" enctype="multipart/form-data">
   <center><h2>Total de Venta</h2></center>
   
 

@@ -6,14 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/formulario/formulario.css">
     <link rel="stylesheet" href="../css/formulario/bootstrap.min.css">
+
+    
     <title>Fiscales</title>
 </head>
 <body>
 <?php include '../includes/menu.php';
+       include 'includes/icono.php';
     
  ?>
 
-<div id="body">
+<div id="body" >
 <form action="up_fiscales.php" method="POST" enctype="multipart/form-data"  >
   
     <div class="fieldset">
@@ -75,11 +78,11 @@
 
 </div>
 
-<center><a href="buscador.php"class="btn btn-warning" >Buscar Fiscales</a></center>
 
-<br>
     
   
+
+
 
 
 

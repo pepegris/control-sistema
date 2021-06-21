@@ -22,16 +22,17 @@ include 'includes/icono.php';
 
 
 
-<center><h2 id="titulo">Stock Tiendas </h2></center>
+<center><h2 id="titulo">Stock previa </h2></center>
 
 <div class="centrado">
     
 <div class="menu">
 
-        <a class="item" href="stock_tiendas_articulos.php">Stock por Articulos</a>
+
+        <a class="item" href="stock_previa_articulos.php">Stock Actual</a>
         
-        <a class="item" href="stock_tiendas_almacen.php">Stock por Almacen</a>
-        <a class="item" href="#" >beta</a>
+        <a class="item" href="stock_previa_almacen.php">Articulos con su Precios</a>
+        <a class="item" href="stock_previa_precio.php" >beta</a>
         <a class="item" href="#">beta</a>
 
 

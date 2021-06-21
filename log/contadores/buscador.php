@@ -136,7 +136,7 @@
       $id=$res['id'];
         $tienda=$res['tienda'];
         $descripcion=$res['con_des'];
-        $excel=$res['con_img'];
+        $img=$res['con_img'];
         $fecha_con=$res['con_fecha']; ?>
 
 <div class="col-sm-4">
@@ -145,7 +145,7 @@
         <h5 class="card-title"><?=$tienda?></h5>
         <p class="card-text"><?=$fecha_con?></p>
         <p class="card-text"><?=$descripcion?></p>
-        <a href="../uploads/documents/<?=$excel?>" download="<?=$tienda.'_'.$fecha_con?>" class="btn btn-primary">Descargar</a>
+        <a href="../uploads/documents/<?=$img?>" download="<?=$tienda.'_'.$fecha_con?>" class="btn btn-primary">Descargar</a>
         <a href='edit.php?id=<?php echo $id?>' class='btn btn-info'>
                 <i class='fas fa-marker'></i>
        </a>

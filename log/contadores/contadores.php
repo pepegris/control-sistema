@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/formulario/formulario.css">
     <link rel="stylesheet" href="../css/formulario/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../css/bootstrap-4.5.2-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../js/animations.css">
     <title>Contadores</title>
 </head>
 <body>
 <?php include '../includes/menu.php';
+
+    include 'includes/icono.php';
     
     /* $prueba=$_SERVER['DOCUMENT_ROOT'];
     var_dump($prueba);
@@ -19,18 +24,18 @@
 
 <div id="body">
 
+<!-- uploads_contadores.php -->
 
-<form action="uploads_contadores.php" method="POST" enctype="multipart/form-data"  >
+<form action="formulario_contadores.php" method="POST"    >
   
     <div class="fieldset">
     <br>
     <center><legend>Registrar Contador</legend></center>
 
     
-  
     <div class="form-group">
-      <label for="sedes_nom" class="form-label mt-2">Sede</label>
-      <select name="sedes_nom" id="" required >
+      <label for="sede" class="form-label mt-2" >Seleccionar Sede</label>
+      <select name="sede" id="" required  class="form-control">
 
       <?php 
         require '../includes/conexion_control.php';
@@ -43,37 +48,22 @@
             $sede=$res['sedes_nom'];
             
         ?>
-            <option value="<?=$sede?>"><?=$sede?></option>
+            <option value="<?=$sede?>" ><?=$sede?></option>
 
         <?php } ?>
       
       </select>
       
     </div>
-    <div class="form-group">
-      <label for="fecha" class="form-label mt-2">Fecha</label>
-      
-      <input type="date" name="fecha" id="" class="form-control"  required>
-    </div>
-   
-    <div class="form-group">
-      <label for="excel" class="form-label mt-2">Contador</label>
-      <input type="file" class="form-control" name="excel" size="100" id="" required>
-    </div>
-    <div class="form-group">
-      <label for="con_des" class="form-label mt-2">Comentario</label>
-      <textarea name="con_des" id="" class="form-control"cols="15" rows="3" ></textarea>
-    </div>
-   
-   
+     
     
    
  
     <br>
    
     
-    </div>
-    <center><button type="submit" class="btn btn-success">Save</button></center>
+    
+    <center><button type="submit" class="btn btn-info">Registrar</button></center>
     <br>
     
     
@@ -81,11 +71,8 @@
 
 </div>
 
-<center><a href="buscador.php"class="btn btn-warning" >Buscar Contadores</a></center>
 
-<br>
-    
-  
+
 
 
 

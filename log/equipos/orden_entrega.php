@@ -149,7 +149,7 @@ if  (isset($_GET['id'])) {
 
 		<tr >
         
-			<td colspan="3" style="text-align: right;">Recibido Firma y Sello :</td>
+			<td colspan="3" style="text-align: right;">Recibido Firma :</td>
 			<td style="text-align: right;"><hr></td>
 			
 			

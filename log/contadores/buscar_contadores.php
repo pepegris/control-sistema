@@ -19,75 +19,147 @@
 if (isset($_POST)) {
 
     require '../includes/conexion_control.php';
-    include '../includes/menu.php';
+    include '../includes/cabecera.php';
+
+    $sedes_nom=isset ($_POST ['sedes_nom']) ? mysqli_real_escape_string($conn,$_POST ['sedes_nom'] ): false ;
+    $fecha_desde=isset($_POST ['fecha_desde']) ? mysqli_real_escape_string($conn,$_POST['fecha_desde']):false ;
+    $fecha_hasta=isset($_POST ['fecha_hasta']) ? mysqli_real_escape_string($conn,$_POST['fecha_hasta']):false ;
     
     
  ?>
 
+ <center><h2>Contadores</h2><p>Desde <?=$fecha_desde?> hasta <?=$fecha_hasta?></p></center>
+<table  class='table table-hover' id="tblData" >
+        <thead>
+        
+            <tr class='table-primary'>
 
-<div class="row" id="contadores">
+                <th scope='col' abbr='Starter'>Sede</th>
+                <th scope='col' abbr='Starter'>Impresora</th>
+                <th scope='col' abbr='Starter'>Numero de Serie</th>
+                <th scope='col' abbr='Starter'>Inicial</th>
+                <th scope='col' abbr='Starter'>Final</th>
+                <th scope='col' abbr='Starter'>Observación</th>
+                <th scope='col' abbr='Starter'>Contador</th>
+                
+               
+				
+			<tr>
+		</thead>
 
 <?php 
 
 
 
-    $sedes_nom=isset ($_POST ['sedes_nom']) ? mysqli_real_escape_string($conn,$_POST ['sedes_nom'] ): false ;
-    $fecha_desde=isset($_POST ['fecha_desde']) ? mysqli_real_escape_string($conn,$_POST['fecha_desde']):false ;
-    $fecha_hasta=isset($_POST ['fecha_hasta']) ? mysqli_real_escape_string($conn,$_POST['fecha_hasta']):false ;
+
 
 
     if ($conn) {
 
         $sql;
         if ($sedes_nom) {
-
-            $sql="SELECT * from contador WHERE tienda='$sedes_nom' and con_fecha BETWEEN '$fecha_desde' and '$fecha_hasta' order by con_fecha desc ";
+            
+            $sql="SELECT * from contador WHERE tienda='$sedes_nom' and con_fecha BETWEEN '$fecha_desde' and '$fecha_hasta' ";
 
         }elseif ($sedes_nom==null) {
 
-            $sql="SELECT * from contador WHERE con_fecha BETWEEN '$fecha_desde' and '$fecha_hasta' order by con_fecha desc ";
+            $sql="SELECT * from contador WHERE con_fecha BETWEEN '$fecha_desde' and '$fecha_hasta' ";            
         }
+
         
 
-       
-        $consulta= mysqli_query($conn,$sql);
+     
+                                              //calculando los contadores del mes anterior
+ /*calculando los contadores del mes anterior*/       require 'includes/almacenando_contador.php'; //calculando los contadores del mes anterior
+                                                 //calculando los contadores del mes anterior    
 
+
+      $consulta= mysqli_query($conn,$sql);
+        
+        
         while ($res=mysqli_fetch_array($consulta)) {
+
             $id=$res['id'];
             $tienda=$res['tienda'];
-            $descripcion=$res['con_des'];
-            $excel=$res['con_img'];
-            $fecha_con=$res['con_fecha'];
+            $con_img=$res['con_img'];
+            $impresora1=$res['impresora1'];
+            $impresora2=$res['impresora2'];
+            $impresora3=$res['impresora3'];
+            $serial_imp1=$res['serial_imp1'];
+            $serial_imp2=$res['serial_imp2'];
+            $serial_imp3=$res['serial_imp3'];
+            $con_fecha=$res['con_fecha'];
+            $con_des=$res['con_des']; 
+            $inicial1=$res ['inicial1'];
+            $inicial2=$res ['inicial2'];
+            $inicial3=$res ['inicial3'];
 
+            //almacenando los contadores del mes anterior en la variable $final
+            require 'includes/contador_inicial.php';
+             
+            if ($impresora2 == null ) {
+
+                echo "
+                <tr>
+                <td>$tienda</td>
+                <td>$impresora1</td>
+                <td>$serial_imp1</td>
+
+                <td>$final</td>
+
+                <td>$inicial1</td>
+                <td>$con_des</td>
+                <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
+                <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>
+                </tr>";
+                
+                
+
+
+
+
+
+            } else {
+
+                require 'includes/contador.php';
+                
+
+                echo "
+                <tr>
+                <td>$tienda</td>
+                <td>$impresora1 <br> $impresora2 <br> $impresora3</td>
+                <td>$serial_imp1 <br> $serial_imp2 <br> $serial_imp3</td>
+
+                <td>$contador[0] <br> $contador[1] <br> $contador[2] </td>
+
+                <td>$inicial1 <br> $inicial2 <br> $inicial3 </td>
+                <td>$con_des</td>
+                <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
+                <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>
+                </tr>
+                  ";
+
+            }
             
+              
             
+
     
-
-        ?>
-
-<div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><?=$tienda?></h5>
-        <p class="card-text"><?=$fecha_con?></p>
-        <p class="card-text"><?=$descripcion?></p>
-        <a href="../uploads/documents/<?=$excel?>" download="<?=$tienda.'_'.$fecha_con?>" class="btn btn-primary">Descargar</a>
-        <a href='edit.php?id=<?php echo $id?>' class='btn btn-info'>
-                <i class='fas fa-marker'></i>
-              </a>
-              <a href='delete.php?id=<?php echo $id?>' class='btn btn-danger'>
-                <i class='far fa-trash-alt'></i>
-        </a>
-      </div>
-    </div>
-  </div>
-  
 
 
 
 
         
- <?php     }}}?>
+     }}
+ 
+ 
+ include '../includes/excel.php';
+ mysqli_close($conn);
+ 
+}
+ 
+ 
+ ?>
 
  </div>
 

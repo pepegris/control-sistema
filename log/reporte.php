@@ -27,15 +27,15 @@ include 'includes/menu_reporte.php';
     
 <div class="menu">
 
-        <a class="item" href="Reporte-Tiendas/menu_tiendas.php">Servidores Tiendas</a>
+        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="Reporte-Tiendas/menu_tiendas.php">Servidores Tiendas</a>
         
-        <a class="item" href="Reporte-Previa/menu_previa.php">Servidor Boleita</a>
-        <a class="item" href="#" >beta</a>
-        <a class="item" href="#">beta</a>
+        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="#">Servidor Boleita</a>
+        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="#" >beta</a>
+        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;"  href="#">beta</a>
 
 
         
-        <a class="item" href="#">beta</a>
+        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="#">beta</a>
 
         <div class="back-menu"></div>
         </div>

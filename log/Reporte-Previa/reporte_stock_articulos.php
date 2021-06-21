@@ -11,7 +11,7 @@
 <body>
 <?php 
 include '../includes/cabecera.php'  ;
-
+include 'includes/icono.php';
 
 ?>
   
@@ -120,7 +120,7 @@ if (isset($_POST)) {
            /*  echo 'este es el if '.$bd[$i].'<br>'; */
            
            $serverName = "SQL"; 
-           $connectionInfo = array( "Database"=>"$base_dato", "UID"=>"Mezcla", "PWD"=>"Zeus33$");
+           $connectionInfo = array( "Database"=>"$base_dato", "UID"=>"syncro", "PWD"=>"syncro");
            $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
 $solicitud="SELECT * from st_almac inner join art on st_almac.co_art=art.co_art where art.co_lin='$linea' and st_almac.stock_act > 0 and st_almac.co_alma=1";

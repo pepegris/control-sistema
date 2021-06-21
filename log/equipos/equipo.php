@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/formulario/buscador.css">
     <link rel="stylesheet" href="../css/formulario/bootstrap.min.css">
+
+    
     <title>Equipos</title>
 </head>
 <style>
@@ -32,7 +34,7 @@
     <div class="row">
     <div class="col">
     <h2>Por Fecha</h2>
-      <div class="card-body">
+      <div class="card-body" class="stretchLeft">
 
       <form action="buscar_equipos.php" method="POST"  >
   
@@ -64,7 +66,7 @@
      
      <div class="col">
      <h2>Por Sede</h2>
-      <div class="card-body">
+      <div class="card-body" class="stretchLeft">
 
       <form action="buscar_equipos.php" method="POST"  >
   
