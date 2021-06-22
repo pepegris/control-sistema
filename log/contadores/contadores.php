@@ -35,7 +35,7 @@
     
     <div class="form-group">
       <label for="sede" class="form-label mt-2" >Seleccionar Sede</label>
-      <select name="sede" id="" required  class="form-control">
+      <select name="sede" id="" required  class="form-control" style="height: 50px;">
 
       <?php 
         require '../includes/conexion_control.php';
@@ -63,7 +63,7 @@
    
     
     
-    <center><button type="submit" class="btn btn-info">Registrar</button></center>
+    <center><button type="submit" class="btn btn-primary">Registrar</button></center>
     <br>
     
     

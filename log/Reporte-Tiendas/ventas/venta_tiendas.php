@@ -12,7 +12,7 @@
 
 <body>
 <?php 
-     
+     include '../includes/cabecera.php';
      require '../includes/conexion_control.php';
      include '../includes/icono.php';
  ?>
@@ -79,7 +79,7 @@
 
 
      <center> 
-      <input type="submit" value="Enviar" class="btn btn-info">
+      <input type="submit" value="Enviar" class="btn btn-primary">
     
   </center>
   
@@ -135,7 +135,7 @@
 
 
      <center> 
-      <input type="submit" value="Enviar" class="btn btn-info">
+      <input type="submit" value="Enviar" class="btn btn-primary">
     
   </center>
   
@@ -202,7 +202,7 @@
 
 
      <center> 
-      <input type="submit" value="Enviar" class="btn btn-info">
+      <input type="submit" value="Enviar" class="btn btn-primary">
     
   </center>
   

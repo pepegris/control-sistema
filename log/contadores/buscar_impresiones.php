@@ -35,12 +35,10 @@ if (isset($_POST)) {
             <tr class='table-primary'>
 
                 <th scope='col' abbr='Starter'>Sede</th>
-                <th scope='col' abbr='Starter'>Impresora</th>
-                <th scope='col' abbr='Starter'>Numero de Serie</th>
-                <th scope='col' abbr='Starter'>Inicial</th>
-                <th scope='col' abbr='Starter'>Final</th>
-                <th scope='col' abbr='Starter'>Observacion</th>
                 <th scope='col' abbr='Starter'>Contador</th>
+                <th scope='col' abbr='Starter'>Impresiones</th>
+                <th scope='col' abbr='Starter'>Diferencia</th>
+                
                 
                 
                

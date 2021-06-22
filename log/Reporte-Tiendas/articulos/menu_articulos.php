@@ -10,7 +10,7 @@
 </head>
 <?php
 
-
+include '../includes/cabecera.php';
 include '../includes/icono.php';
 
 ?>

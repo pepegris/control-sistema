@@ -18,7 +18,7 @@
 
 <?php 
 
-
+include '../includes/cabecera.php';
   include '../includes/icono.php';
 
   $todos='Todos';
@@ -63,7 +63,7 @@
     <label for="linea">Linea del Articulo:</label>
       <select class="linea" name='linea' id="linea">
 
-      <option><?=/* $todos */ ?></option>
+      <option><?php/* $todos; */ ?></option>
       <?php
      /*  require '../includes/conexion_previa.php';
 
@@ -75,7 +75,7 @@
       $co_lin=$row['co_lin'];
  */
       ?>
-          <option><?=/* $co_lin */ ?></option>
+          <option><?php/* $co_lin; */ ?></option>
 
           
       <?php/*  } */?>

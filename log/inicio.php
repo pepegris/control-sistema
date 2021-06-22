@@ -140,7 +140,7 @@ while ($res5=mysqli_fetch_array($consulta5)) {
         <p class="card-text"><?=$descripcion?></p>
         <img src="uploads/img/<?=$imagen?>" style="height: 90px;" alt="">
         <hr>
-        <a href="uploads/img/<?=$imagen?>" download="<?=$tienda?>" class="btn btn-primary">Descargar</a>
+        <a href="uploads/img/<?=$imagen?>" download="<?=$tienda?>" class="btn btn-success">Descargar</a>
        <!--  <a href='edit.php?id=<?php echo $id?>' class='btn btn-info'>
                 <i class='fas fa-marker'></i>
        </a>
@@ -193,7 +193,7 @@ while ($res5=mysqli_fetch_array($consulta5)) {
         <h5 class="card-title"><?=$tienda?></h5>
         <p class="card-text"><?=$fecha_con?></p>
         <p class="card-text"><?=$descripcion?></p>
-        <a href="uploads/documents/<?=$excel?>" download="<?=$tienda.'_'.$fecha_con?>" class="btn btn-primary">Descargar</a>
+        <a href="uploads/documents/<?=$excel?>" download="<?=$tienda.'_'.$fecha_con?>" class="btn btn-success">Descargar</a>
         <!-- <a href='edit.php?id=<?php echo $id?>' class='btn btn-info'>
                 <i class='fas fa-marker'></i>
        </a>

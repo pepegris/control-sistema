@@ -56,7 +56,7 @@
 
   <br>
  
-  <center><button type="submit" class="btn btn-success">Buscar</button></center>
+  <center><button type="submit" class="btn btn-primary">Buscar</button></center>
   <br>
   
 </form>
@@ -113,7 +113,7 @@
 
   <br>
  
-  <center><button type="submit" class="btn btn-success">Buscar</button></center>
+  <center><button type="submit" class="btn btn-primary">Buscar</button></center>
   <br>
   
 </form>
@@ -171,7 +171,7 @@
     <label for="eq_des" >Comentario:</label>
     <textarea name="eq_des" class="form-control" id="" cols="5" rows="3" required></textarea>
     
-    <center><button type="submit" class="btn btn-success">Guardar</button></center>    
+    <center><button type="submit" class="btn btn-primary">Guardar</button></center>    
 
 
         

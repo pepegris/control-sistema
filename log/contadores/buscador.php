@@ -22,7 +22,7 @@
     
     <div class="row">
     <div class="col">
-    <h2>Por Fecha</h2>
+    <h2> Estado de Contadores</h2>
       <div class="card-body">
 
       <form action="buscar_contadores.php" method="POST"  >
@@ -30,6 +30,31 @@
     
   <br>
   <center><legend>Buscar Contadores</legend></center>
+
+
+  <div class="form-group">
+    <label for="sedes_nom" class="form-label mt-2">Sede</label>
+    <select name="sedes_nom" id=""  >
+
+    <option value="todos">Todas las Tiendas</option>
+    <?php 
+      
+
+      $sql = "SELECT sedes_nom FROM sedes  ";
+      $consulta = mysqli_query($conn,$sql);
+
+      while ($res=mysqli_fetch_array($consulta)) {
+          
+          $sede=$res['sedes_nom'];
+          
+      ?>
+          <option value="<?=$sede?>"><?=$sede?></option>
+
+      <?php } ?>
+    
+    </select>
+    
+  </div>
 
 
 
@@ -45,7 +70,7 @@
 
   <br>
  
-  <center><button type="submit" class="btn btn-success">Buscar</button></center>
+  <center><button type="submit" class="btn btn-primary">Buscar</button></center>
   <br>
   
 </form>
@@ -54,20 +79,21 @@
 
      
      <div class="col">
-     <h2>Por Sede</h2>
+     <h2>Total de impresiones realizada</h2>
       <div class="card-body">
 
-      <form action="buscar_contadores.php" method="POST"  >
+      <form action="buscar_impresiones.php" method="POST"  >
   
   
   <br>
-  <center><legend>Buscar Contadores</legend></center>
+  <center><legend>Impresiones</legend></center>
 
 
   <div class="form-group">
     <label for="sedes_nom" class="form-label mt-2">Sede</label>
     <select name="sedes_nom" id=""  >
 
+        <option value="todos">Todas las Tiendas</option>
     <?php 
       require '../includes/conexion_control.php';
 
@@ -102,7 +128,7 @@
 
   <br>
  
-  <center><button type="submit" class="btn btn-success">Buscar</button></center>
+  <center><button type="submit" class="btn btn-primary">Buscar</button></center>
   <br>
   
 </form>
@@ -145,7 +171,7 @@
         <h5 class="card-title"><?=$tienda?></h5>
         <p class="card-text"><?=$fecha_con?></p>
         <p class="card-text"><?=$descripcion?></p>
-        <a href="../uploads/documents/<?=$img?>" download="<?=$tienda.'_'.$fecha_con?>" class="btn btn-primary">Descargar</a>
+        <a href="../uploads/documents/<?=$img?>" download="<?=$tienda.'_'.$fecha_con?>" class="btn btn-success">Descargar</a>
         <a href='edit.php?id=<?php echo $id?>' class='btn btn-info'>
                 <i class='fas fa-marker'></i>
        </a>

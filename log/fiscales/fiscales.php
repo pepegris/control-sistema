@@ -70,7 +70,7 @@
    
     
     </div>
-    <center><button type="submit" class="btn btn-success">Save</button></center>
+    <center><button type="submit" class="btn btn-primary">Save</button></center>
     <br>
     
     

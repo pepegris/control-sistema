@@ -45,7 +45,7 @@
 
   <br>
  
-  <center><button type="submit" class="btn btn-success">Buscar</button></center>
+  <center><button type="submit" class="btn btn-primary">Buscar</button></center>
   <br>
   
 </form>
@@ -102,7 +102,7 @@
 
   <br>
  
-  <center><button type="submit" class="btn btn-success">Buscar</button></center>
+  <center><button type="submit" class="btn btn-primary">Buscar</button></center>
   <br>
   
 </form>
@@ -147,7 +147,7 @@
         <p class="card-text"><?=$descripcion?></p>
         <img src="../uploads/img/<?=$imagen?>" style="height: 90px;" alt="">
         <hr>
-        <a href="../uploads/img/<?=$imagen?>" download="<?=$tienda?>" class="btn btn-primary">Descargar</a>
+        <a href="../uploads/img/<?=$imagen?>" download="<?=$tienda?>" class="btn btn-success">Descargar</a>
         <a href='edit.php?id=<?php echo $id?>' class='btn btn-info'>
                 <i class='fas fa-marker'></i>
        </a>

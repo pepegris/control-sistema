@@ -40,8 +40,8 @@ CREATE TABLE sedes (
 
 
 -- insertando nombre de las tiendas
-    INSERT INTO  sedes VALUES (null,'Sede Boleita',null,'Xerox WC3550 MFP','Xerox WC3325 MFP','Xerox WC3550 MFP',null,'VMA561539','LA8186562','MXX976931',null,'0212-2398595',null);
-    INSERT INTO  sedes VALUES  ( null,'Sede Sabana Grande',null,'Xerox WC3315 MFP',null,null,null,'LA4229130',null,null,null,'0212-7621715',null);
+    INSERT INTO  sedes VALUES (null,'Sede Boleita',null,'Xerox WC3550 MFP','Xerox WC3325 MFP','Xerox WC3550 MFP',null,'VMA561539','LA8186562','MXX976931',null,'0212-2398595',0);
+    INSERT INTO  sedes VALUES  ( null,'Sede Sabana Grande',null,'Xerox WC3315 MFP',null,null,null,'LA4229130',null,null,null,'0212-7621715',0);
     INSERT INTO  sedes VALUES(null,'Comercial Merina','j-31229838-3','XeroxPhaser3250 P',null,null,null,'MXX976815',null,null,null,'0212-761-72-92',150);
     INSERT INTO  sedes VALUES(null,'Comercial Merina III','j-31229838-3','Xerox WC3315 MFP',null,null,null,'LA4229669',null,null,null,'0212-7629860',150);
     INSERT INTO  sedes VALUES(null,'Comercial Corina I','J-29627311-1','XeroxPhaser3250 P',null,null,null,'MXX976594',null,null,null,'0268-2525824',150);
@@ -58,7 +58,7 @@ CREATE TABLE sedes (
     INSERT INTO  sedes VALUES(null,'Comercial Vallepa','j-31139458-3','XeroxPhaser3250 P',null,null,null,'MXX976820',null,null,null,'0235-3415355',200);
     INSERT INTO  sedes VALUES(null,'Comercial Ojena','J-31139466-4','XeroxPhaser3250 P',null,null,null,'MXX510113',null,null,null,'0265-6312851',200);
     INSERT INTO  sedes VALUES(null,'Comercial Puecruz','J-31139419-2','XeroxPhaser3250 P',null,null,null,'MXX976602',null,null,null,'0281-2653442',400);
-    INSERT INTO  sedes VALUES(null,'Comercial Acari','j-31147177-4','XeroxPhaser3250 P',null,null,null,'MXX976602',null,null,null,'0255-6238590',250);
+    INSERT INTO  sedes VALUES(null,'Comercial Acari','j-31147177-4','XeroxPhaser3250 P',null,null,null,'MXX9766102',null,null,null,'0255-6238590',250);
         INSERT INTO  sedes VALUES(null,'Comercial Catica II','J-30691040-9','XeroxPhaser3250 P',null,null,null,'LA4229121',null,null,null,'',150);
 
 

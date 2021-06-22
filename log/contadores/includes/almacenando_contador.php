@@ -2,7 +2,7 @@
 
 
 
-
+// calculando los contadores finales
 
      $fecha_final_desde= date("Ymd",strtotime($fecha_desde."- 1 month"));
      $fecha_final_hasta= date("Ymd",strtotime($fecha_hasta."- 1 month"));
@@ -359,6 +359,10 @@
 
 
      }
+
+
+
+
 
      
 
