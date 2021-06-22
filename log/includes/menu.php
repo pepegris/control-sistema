@@ -159,7 +159,7 @@
       </li>
 
       <li id="nav-item" class="nav-item">
-        <a href="../beta/prueba_r.php" id="nav-link" class="nav-link">
+        <a href="../config/menu_datos.php" id="nav-link" class="nav-link">
         <svg
             aria-hidden="true"
             focusable="false"
@@ -183,7 +183,7 @@
               ></path>
             </g>
           </svg>
-          <span id="link-text" class="link-text">beta</span>
+          <span id="link-text" class="link-text">Configuracion</span>
         </a>
       </li>
 
