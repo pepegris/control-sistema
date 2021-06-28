@@ -10,7 +10,10 @@ $consulta_art= sqlsrv_query($conn,$sql_art);
 
 $total_art=array();
 $total_co=array();
+
+var_dump($sql_art);
 var_dump($consulta_art);
+
 while ($art=sqlsrv_fetch_array($sql_art)) {
 
     $cantidad_art=round($art[total_art]);
