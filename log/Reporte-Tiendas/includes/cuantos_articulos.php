@@ -19,18 +19,19 @@ while ($art=sqlsrv_fetch_array($sql_art)) {
     $co_art=$art[co_art];
     $total_co[]=$co_art;
 
-    
+    echo "$total_art";
+    echo "$total_co";
 
     
 }
-
- for ($i=0; $i < count($total_art) ; $i++) { 
+echo "aqui";
+/*  for ($i=0; $i < count($total_art) ; $i++) { 
      
     
     echo "mostranto $total_art[$i] - $total_co[$i]";
 
 
- }
+ } */
 
 
 
