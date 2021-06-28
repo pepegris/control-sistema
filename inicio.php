@@ -193,7 +193,7 @@ while ($res2=mysqli_fetch_array($consulta2)) {
         <h5 class="card-title"><?=$tienda?></h5>
         <p class="card-text"><?=$fecha_con?></p>
         <p class="card-text"><?=$descripcion?></p>
-        <a href="log/uploads/documents/<?=$excel?>" download="<?=$tienda.'_'.$fecha_con?>" class="btn btn-primary">Descargar</a>
+        <a href="log/uploads/img/<?=$excel?>" download="<?=$tienda.'_'.$fecha_con?>" class="btn btn-primary">Descargar</a>
         <!-- <a href='edit.php?id=<?php echo $id?>' class='btn btn-info'>
                 <i class='fas fa-marker'></i>
        </a>
