@@ -1,0 +1,2 @@
+# ignorar los archivos terminados en .txt dentro de la carpeta doc (pero no sus subdirectorios)
+log/uploads/img/ .jpg
