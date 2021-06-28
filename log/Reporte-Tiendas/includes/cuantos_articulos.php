@@ -11,7 +11,9 @@ var_dump($conn);
 echo "<br>";
 
 
-$sql_art = "SELECT *  from reng_fac inner join factura  on factura.fact_num=reng_fac.fact_num where reng_fac.fec_lote BETWEEN '20210621' AND '20210622' and factura.fec_emis BETWEEN '20210621' AND '20210622'";
+$sql_art = "SELECT co_art,COUNT(total_art)as vendido  from reng_fac inner join factura  on factura.fact_num=reng_fac.fact_num where reng_fac.fec_lote BETWEEN '20210601' AND '20210628' and factura.fec_emis BETWEEN '20210601' AND '20210628' group by co_art,total_art
+
+";
 
 $consulta_art= sqlsrv_query($conn,$sql_art);
 
@@ -25,7 +27,7 @@ echo "<br>";
 
 while ($art=sqlsrv_fetch_array($consulta_art)) {
 
-    $cantidad_art=round($art[total_art]);
+    $cantidad_art=round($art[vendido]);
     $total_art[]=$cantidad_art;
 
     $co_art=$art[co_art];
