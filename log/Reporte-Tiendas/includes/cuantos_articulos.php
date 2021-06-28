@@ -11,7 +11,7 @@ var_dump($conn);
 echo "<br>";
 
 
-$sql_art = "SELECT *  from reng_fac inner join factura  on factura.fact_num=reng_fac.fact_num where reng_fac.fec_lote ='20210621' and factura.fec_emis ='20210621'";
+$sql_art = "SELECT *  from reng_fac inner join factura  on factura.fact_num=reng_fac.fact_num where reng_fac.fec_lote BETWEEN '20210621' AND '20210622' and factura.fec_emis BETWEEN '20210621' AND '20210622'";
 
 $consulta_art= sqlsrv_query($conn,$sql_art);
 
