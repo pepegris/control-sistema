@@ -61,7 +61,7 @@ if (isset($_POST)) {
 
             if ($linea=='Todos') {
 
-                $solicitud="SELECT * from st_almac inner join art on st_almac.co_art=art.co_art where  st_almac.stock_act > 0 ";
+                $solicitud="SELECT * from st_almac inner join art on st_almac.co_art=art.co_art where  st_almac.stock_act > 0  ";
     
                }else {
     

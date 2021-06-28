@@ -4,6 +4,8 @@ $serverName = "SQL";
 $connectionInfo = array( "Database"=>"VALENA_A", "UID"=>"Mezcla", "PWD"=>"Zeus33$");
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
+
+
 $sql_art = "SELECT *  from reng_fac inner join factura  on factura.fact_num=reng_fac.fact_num where reng_fac.fec_lote ='20210621' and factura.fec_emis ='20210621'";
 
 $consulta_art= sqlsrv_query($conn,$sql_art);
