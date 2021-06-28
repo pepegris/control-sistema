@@ -1,4 +1,4 @@
 # ignorar los archivos terminados en .jpg y png dentro de la carpeta log/uploads/img/ 
-log/uploads/img/ .jpg
+log/uploads/img/* .jpg
 
-log/uploads/img/ .png
+log/uploads/img/* .png
