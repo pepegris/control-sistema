@@ -56,6 +56,7 @@ if (isset($_POST)) {
            $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
            
+           
            if ($base_dato == 'PREVIA_A') {
 
             if ($linea=='Todos') {
