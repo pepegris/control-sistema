@@ -180,7 +180,7 @@
   </div>
 
   <hr>
-
+<center><h2>Ordenes Registradas</h2></center>
      <!-- equipos actuales -->
  
 <?php 
