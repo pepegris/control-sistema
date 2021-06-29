@@ -180,9 +180,10 @@
   </div>
 
   <hr>
-<center><h2>Ordenes Registradas</h2></center>
+
+
      <!-- equipos actuales -->
- 
+     <center><h2>Ordenes Registradas</h2></center>
 <?php 
     
     $fecha_actual = date("d-m-Y");
