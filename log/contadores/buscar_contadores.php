@@ -147,7 +147,12 @@ if (isset($_POST)) {
                 
 
                 <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
+                <select name="" id="">
+                <option value=""><img src='../uploads/img/$con_img' alt=""> prueba</option>
+                <option value=""><img src='../uploads/img/$con_img' alt=""> prueba</option>
+                <option value=""><img src='../uploads/img/$con_img' alt=""> prueba</option> </select>
                 <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>
+                
                 </tr>
                   ";
 
