@@ -194,7 +194,7 @@
     //fecha actual del equipo
     //$fecha=date_default_timezone_get();
 
-    $sql3= "SELECT * from equipos WHERE eq_fecha>='$fecha'";
+    $sql3= "SELECT * from equipos WHERE eq_fecha>='$fecha' ORDER BY eq_fecha desc";
     $consulta3 = mysqli_query($conn,$sql3);
 
     while ($res=mysqli_fetch_array($consulta3)) {
