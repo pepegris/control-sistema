@@ -25,7 +25,7 @@ if (isset($_POST)) {
     $almacen=$_POST['almacen'];
 
 
-    require 'includes/tiendas.php';
+    require '../includes/tiendas.php';
 
 
    
