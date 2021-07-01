@@ -3,7 +3,7 @@
  
 
 
-
+/* 
  session_start();
 
 $cuenta_on=$_SESSION['username'];
@@ -13,7 +13,7 @@ if (!isset($cuenta_on)) {
 }
 
 $cuenta_on = ucwords($cuenta_on); 
-
+ */
 
  
 ?>

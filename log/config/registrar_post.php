@@ -5,11 +5,11 @@ include '../includes/loading.php';
 
 if (isset($_POST)) {
    // require '../includes/log.php';
-    require '../includes/conexion.php';
+    require '../includes/conexion_mysql.php';
 
-  //  var_dump($_POST);
+   // var_dump($_POST);
   $usuario=isset($_POST ['nombre']) ? mysqli_real_escape_string($conn,trim($_POST ['nombre'])) :false;
-  $email=isset($_POST ['email']) ? mysqli_real_escape_string($conn,trim($_POST ['email'])) :false;
+
   $telefono=isset($_POST ['telefono']) ? mysqli_real_escape_string($conn,$_POST ['telefono']) : false;
   $password=isset($_POST ['pass']) ? mysqli_real_escape_string($conn,trim($_POST ['pass'])) :false;
 
@@ -19,8 +19,7 @@ if (isset($_POST)) {
 
         if ($conn) {
 
-          // VALIDAR SI ES UN EMAIL VALIDO
-          if (!empty($email) && filter_var($email,FILTER_VALIDATE_EMAIL)) {
+       
 
               
             
@@ -34,7 +33,7 @@ if (isset($_POST)) {
             
 
          //insertar usuario en la base de datos
-        $sql= "INSERT INTO  usuario VALUES (null,'$usuario','$email','$password_segura','$telefono','$cuenta_on',now())";
+        $sql= "INSERT INTO  usuario VALUES (null,'$usuario','$password_segura','$telefono',now())";
  
         $guardar = mysqli_query($conn,$sql);
 
@@ -56,12 +55,7 @@ if (isset($_POST)) {
               
 
 
-            } else {
-              echo "<br><center><h3>ERROR</h3></center>";
-          echo "<h4>Correo invalido $email</h4>";
-           echo "<a href='registrar.php' class='btn btn-danger'>Salir</a>";
-          die();
-          }
+          
          
   
               
