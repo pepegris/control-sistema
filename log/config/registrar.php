@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/fondo.css">
+    <link rel="stylesheet" href="../css/fondo.css">
     
     <title>Registrar</title>
 </head>
@@ -41,7 +41,7 @@ form .fieldset .form-group span{
 <?php
 
 
-require_once '../includes/header.php';
+//require_once '../includes/header.php';
 require_once '../includes/menu.php';
 
 ?>
@@ -58,10 +58,7 @@ require_once '../includes/menu.php';
       <label for="nombre" class="form-label mt-2">Nombre</label>
       <input   type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre" required>
     </div>
-    <div class="form-group">
-      <label for="email" class="form-label mt-2">Email</label>
-      <input required name="email" type="email" class="form-control" id="nombre" placeholder="email" required>
-    </div>
+    
     <div class="form-group">
       <label for="telefono" class="form-label mt-2">Telofono</label>
       <input required name="telefono" type="text" class="form-control" id="nombre" placeholder="Telefono" required>
