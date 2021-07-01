@@ -109,6 +109,15 @@ CREATE TABLE equipos (
 
 );
 
+
+create table usuario(  
+  id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  usuario VARCHAR(150) UNIQUE NOT NULL,
+  clave VARCHAR(200) NOT NULL,
+  telefono VARCHAR(150),
+  fecha datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  );
+
 create table reporte (
 
     id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,  
