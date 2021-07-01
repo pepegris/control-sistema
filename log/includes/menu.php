@@ -157,6 +157,7 @@
           <span id="link-text" class="link-text">Reportes</span>
         </a>
       </li>
+      
 
       <li id="nav-item" class="nav-item">
         <a href="../config/menu_datos.php" id="nav-link" class="nav-link">
