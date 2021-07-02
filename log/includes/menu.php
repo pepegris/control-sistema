@@ -189,7 +189,7 @@
       </li>
 
       <li id="nav-item" class="nav-item" id="themeButton">
-        <a href="../inicio.php" id="nav-link" class="nav-link">
+        <a href="../salir.php" id="nav-link" class="nav-link">
           <svg
             class="theme-icon"
             id="lightIcon"
