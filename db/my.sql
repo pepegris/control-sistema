@@ -109,7 +109,7 @@ CREATE TABLE equipos (
 
 );
 
-
+--login 
 create table usuario(  
   id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
   usuario VARCHAR(150) UNIQUE NOT NULL,
