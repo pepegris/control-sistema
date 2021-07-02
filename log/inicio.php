@@ -75,7 +75,7 @@ h3{
 require 'includes/conexion_control.php';
   
 
-$sql5= "SELECT * from equipos WHERE eq_fecha>='$fecha' ORDER BY eq_fecha desc";
+$sql5= "SELECT * from equipos WHERE eq_fecha>='$fecha' ORDER BY eq_fecha desc DESC LIMIT 6";
 $consulta5 = mysqli_query($conn,$sql5);
 
 while ($res5=mysqli_fetch_array($consulta5)) {
@@ -139,7 +139,7 @@ while ($res5=mysqli_fetch_array($consulta5)) {
 
     
 
-    $sql= "SELECT * from fiscal WHERE fis_fecha>='$fecha' ORDER BY fis_fecha desc";
+    $sql= "SELECT * from fiscal WHERE fis_fecha>='$fecha' ORDER BY fis_fecha desc DESC LIMIT 6";
     $consulta = mysqli_query($conn,$sql);
 
     while ($res=mysqli_fetch_array($consulta)) {
@@ -194,7 +194,7 @@ while ($res5=mysqli_fetch_array($consulta5)) {
 
    
 
-    $sql3= "SELECT * from contador WHERE con_fecha>='$fecha' ORDER BY con_fecha desc";
+    $sql3= "SELECT * from contador WHERE con_fecha>='$fecha' ORDER BY con_fecha desc DESC LIMIT 6";
     $consulta3 = mysqli_query($conn,$sql3);
 
     while ($res3=mysqli_fetch_array($consulta3)) {
