@@ -82,7 +82,7 @@ h3{
 
   
 
-$sql2= "SELECT * from equipos WHERE eq_fecha>='$fecha' ORDER BY eq_fecha desc DESC LIMIT 6 ";
+$sql2= "SELECT * from equipos WHERE eq_fecha>='$fecha' ORDER BY eq_fecha  DESC LIMIT 6 ";
 $consulta2 = mysqli_query($conn,$sql2);
 
 while ($res2=mysqli_fetch_array($consulta2)) {
@@ -146,7 +146,7 @@ while ($res2=mysqli_fetch_array($consulta2)) {
 
     
 
-    $sql= "SELECT * from fiscal WHERE fis_fecha>='$fecha' ORDER BY fis_fecha desc DESC LIMIT 6";
+    $sql= "SELECT * from fiscal WHERE fis_fecha>='$fecha' ORDER BY fis_fecha  DESC LIMIT 6";
     $consulta = mysqli_query($conn,$sql);
 
     while ($res=mysqli_fetch_array($consulta)) {
@@ -201,7 +201,7 @@ while ($res2=mysqli_fetch_array($consulta2)) {
 
    
 
-    $sql3= "SELECT * from contador WHERE con_fecha>='$fecha' ORDER BY con_fecha desc DESC LIMIT 6";
+    $sql3= "SELECT * from contador WHERE con_fecha>='$fecha' ORDER BY con_fecha  DESC LIMIT 6";
     $consulta3 = mysqli_query($conn,$sql3);
 
     while ($res3=mysqli_fetch_array($consulta3)) {
