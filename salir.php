@@ -1,0 +1,1 @@
+<?php header("location:../menu_sistemas.php");?>
