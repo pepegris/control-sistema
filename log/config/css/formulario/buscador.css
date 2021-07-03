@@ -1,0 +1,27 @@
+table{
+  font-size: 25px;
+  border: black solid;
+  
+  
+}
+form {
+  border:black ;
+  border-radius: 10px;  
+  padding-top:10px;
+  background-color:  rgba(29, 27, 27, 0.205);
+  box-shadow: 2px 2px 5px #999;
+}
+form button {
+  margin: 5px 0 5px 0;
+}
+form .form-group{
+margin-top:5px;
+}
+table td {
+color:black;
+}
+#contadores {
+  
+  margin-left: 95px;
+  
+}
