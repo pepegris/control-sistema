@@ -33,12 +33,6 @@
 <body>
  
 
-<?php
-
-require_once '../includes/menu.php';
-
-
-?>
 
 
     <div class="empresa">
