@@ -41,14 +41,25 @@ require_once '../includes/cabecera.php';
 ?>
 
 
+
     <div class="empresa">
        
      
 <center>
-        <div class="card text-black mb-3" id="inf-empresa" >
-            <div class="card-header" style="color:white;" >Datos de las sedes</div>
-            <div class="card-body">
-
+<h2>Datos de las sedes</h2>
+<table  class='table table-hover' id='tblData' >
+                <thead>
+                    <tr class='table-primary'>
+                        <th scope='col' abbr='Starter'>Sede</th>
+                        <th scope='col' abbr='Starter'>Rif</th>
+                        <th scope='col' abbr='Starter'>Numero</th>
+                
+                        
+                    
+                        
+                    </tr>
+                </thead>
+                <tr>
             <?php
             require '../includes/conexion.php';
 
@@ -61,17 +72,21 @@ require_once '../includes/cabecera.php';
                 $rif=$res['rif'];
                 $numero=$res['numero'];?>
 
-            <h3 class="card-title"><?php echo "$sedes_nom" ?></h3>
-            
-            <p class="card-text"><b>RIF: </b><?php echo "$rif" ?></p>
-            <p><b>Tlf:</b> <?php echo "$numero" ?></p>
-            <hr>
+
+        <td><?=$sedes_nom?></td>
+        <td><?=$rif?></td>
+        <td><?=$numero?></td>
+        
+
+
+
+    
         
         
         
         <?php   }?>
-            
-            
+        </tr>
+        </table>
             
             
         </div>
