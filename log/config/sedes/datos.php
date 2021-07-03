@@ -42,7 +42,7 @@ require_once '../includes/cabecera.php';
 
 
 
-    <div class="empresa">
+    
        
      
 
@@ -89,21 +89,6 @@ require_once '../includes/cabecera.php';
         </table>
             
             
-        </div>
-
-            
-           
-            
-            
-       
-        
-     
-
-        
-    
-    
-    </div>
-
 
 
 
