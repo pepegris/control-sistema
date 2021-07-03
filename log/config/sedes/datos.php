@@ -45,7 +45,7 @@ require_once '../includes/cabecera.php';
     <div class="empresa">
        
      
-<center>
+
 <h2>Datos de las sedes</h2>
 <table  class='table table-hover' id='tblData' >
                 <thead>
@@ -90,7 +90,7 @@ require_once '../includes/cabecera.php';
             
             
         </div>
-        </center>  
+
             
            
             
