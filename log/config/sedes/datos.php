@@ -59,7 +59,7 @@ require_once '../includes/cabecera.php';
                         
                     </tr>
                 </thead>
-                <tr>
+                
             <?php
             require '../includes/conexion.php';
 
@@ -72,20 +72,20 @@ require_once '../includes/cabecera.php';
                 $rif=$res['rif'];
                 $numero=$res['numero'];?>
 
-
+<tr>
         <td><?=$sedes_nom?></td>
         <td><?=$rif?></td>
         <td><?=$numero?></td>
         
 
-
+        </tr>
 
     
         
         
         
         <?php   }?>
-        </tr>
+       
         </table>
             
             
