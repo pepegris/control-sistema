@@ -33,15 +33,17 @@
 <body>
  
 
+<?php
+
+require_once '../includes/cabecera.php';
+
+
+?>
 
 
     <div class="empresa">
        
-        <?php
-                require '../includes/empresa.php';
-
-                
-            ?>
+     
 <center>
         <div class="card text-black mb-3" id="inf-empresa" >
             <div class="card-header" style="color:white;" >Datos de las sedes</div>
@@ -63,6 +65,7 @@
             
             <p class="card-text"><b>RIF: </b><?php echo "$rif" ?></p>
             <p><b>Tlf:</b> <?php echo "$numero" ?></p>
+            <hr>
         
         
         
