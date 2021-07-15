@@ -67,8 +67,6 @@
                      $contador_Sabana_Grande[]=$final2;
                      $contador_Sabana_Grande[]=$final3;
 
-                    $img_Sabana_Grande[]=$con_img;                 
-                    $img_Sabana_Grande[]=$con_img2;
                      
                      
                      
@@ -85,8 +83,7 @@
                         $contador_Merina[]=$final2;
                         $contador_Merina[]=$final3;
    
-                        $img_Merina[]=$con_img;                 
-                        $img_Merina[]=$con_img2;     
+                    
                         
                         
                         
@@ -102,8 +99,7 @@
                             $contador_Merina_III[]=$final2;
                             $contador_Merina_III[]=$final3;
     
-                            $img_Merina_III[]=$con_img;                 
-                            $img_Merina_III[]=$con_img2;  
+                           
                              
                             
                             
@@ -121,9 +117,7 @@
                                 $contador_Corina_I[]=$final3;
         
                                                                 
-                                $img_Corina_I[]=$con_img;                 
-                                $img_Corina_I[]=$con_img2; 
-                                
+                    
                                 
                                 break;
 
@@ -137,9 +131,7 @@
                                     $contador_Corina_II[]=$final2;
                                     $contador_Corina_II[]=$final3;
             
-                                    $img_Corina_II[]=$con_img;                 
-                                    $img_Corina_II[]=$con_img2;                        
-                                    
+                   
                                     
                                     
                                     break;
@@ -154,9 +146,7 @@
                                         $contador_Punto_Fijo[]=$final2;
                                         $contador_Punto_Fijo[]=$final3;
                 
-                                        $img_Punto_Fijo[]=$con_img;                 
-                                          $img_Punto_Fijo[]=$con_img2; 
-                                         
+                                    
                                         
                                         
                                         
@@ -172,8 +162,7 @@
                                             $contador_Matur[]=$final2;
                                             $contador_Matur[]=$final3;
                                             
-                                            $img_Matur[]=$con_img;                 
-                                            $img_Matur[]=$con_img2; 
+                                           
                                                                                      
                                             
                                             
@@ -190,8 +179,7 @@
                                                 $contador_Valena[]=$final2;
                                                 $contador_Valena[]=$final3;
                         
-                                                $img_Valena[]=$con_img;                 
-                                                $img_Valena[]=$con_img2;                                        
+                                                                                    
                                                 
                                                 
                                                 
@@ -207,8 +195,7 @@
                                                     $contador_Trina[]=$final2;
                                                     $contador_Trina[]=$final3;
                             
-                                                    $img_Trina[]=$con_img;                 
-                                                    $img_Trina[]=$con_img2;                                        
+                                                                                           
                                                     
                                                     
                                                     
@@ -224,9 +211,7 @@
                                                         $contador_Kagu[]=$final2;
                                                         $contador_Kagu[]=$final3;
                                 
-                                                        $img_Kagu[]=$con_img;                 
-                                                        $img_Kagu[]=$con_img2;                                             
-                                                        
+                                                  
                                                         
                                                         
                                                         break;
@@ -241,10 +226,6 @@
                                                             $contador_Nachari[]=$final2;
                                                             $contador_Nachari[]=$final3;
 
-                                                            $img_Nachari[]=$con_img;                 
-                                                            $img_Nachari[]=$con_img2; 
-                                                                                                                       
-                                                            
                                                             
                                                             
                                                             break;
@@ -259,10 +240,7 @@
                                                                 $contador_Higue[]=$final2;
                                                                 $contador_Higue[]=$final3;
                                         
-                                                                $img_Higue[]=$con_img;                 
-                                                                $img_Higue[]=$con_img2;                                                 
-                                                                
-                                                                
+                                                            
                                                                 
                                                                 break;
 
@@ -277,10 +255,7 @@
                                                                     $contador_Turme[]=$final3;
                                                
                                                                                                                                      
-                                                                    $img_Turme[]=$con_img;                 
-                                                                   $img_Turme[]=$con_img2;
-                                                                    
-                                                                    
+                                                                
                                                                     break;
 
                                                                      case 'Comercial Apura':
@@ -293,9 +268,7 @@
                                                                         $contador_Apura[]=$final2;
                                                                         $contador_Apura[]=$final3;
                                                 
-                                                                        $img_Apura[]=$con_img;                 
-                                                                        $img_Apura[]=$con_img2;                                                    
-                                                                        
+                                                                      
                                                                         
                                                                         
                                                                         break;
@@ -309,10 +282,7 @@
                                                                             $contador_Vallepa[]=$final2;
                                                                             $contador_Vallepa[]=$final3;
                                                     
-                                                                            $img_Vallepa[]=$con_img;                 
-                                                                            $img_Vallepa[]=$con_img2;                                                            
-                                                                            
-                                                                            
+                                                                         
                                                                             
                                                                             break;
 
@@ -327,9 +297,7 @@
                                                                                 $contador_Ojena[]=$final3;
                                                         
                                                                                                                                                              
-                                                                                $img_Ojena[]=$con_img;                 
-                                                                                $img_Ojena[]=$con_img2; 
-                                                                                
+                                                                              
                                                                                 
                                                                                 break;
 
@@ -344,9 +312,7 @@
                                                                                     $contador_Puecruz[]=$final3;
                                                             
                                                                                                                                                                        
-                                                                                    $img_Puecruz[]=$con_img;                 
-                                                                                    $img_Puecruz[]=$con_img2; 
-                                                                                    
+                                                                                   
                                                                                     
                                                                                     break;
 
@@ -360,10 +326,7 @@
                                                                                         $contador_Acari[]=$final2;
                                                                                         $contador_Acari[]=$final3;
                                                                                         
-                                                                                        $img_Acari[]=$con_img;                 
-                                                                                        $img_Acari[]=$con_img2; 
-                                                                                                                                                                         
-                                                                                     
+                                                                                       
                                                                                      
                                                                                      
                                                                                         break;
@@ -378,9 +341,7 @@
                                                                                             $contador_Catica_II[]=$final2;
                                                                                             $contador_Catica_II[]=$final3;
 
-                                                                                            $img_Catica_II[]=$con_img;                 
-                                                                                            $img_Catica_II[]=$con_img2; 
-                                                                                                                                                                                        
+                                                                                                                                                                                    
                                                                                             
                                                                                             
                                                                                             
