@@ -81,7 +81,7 @@
   
     
   <br>
-  <center><legend>Buscar Contadores</legend></center>
+  <center><legend>Con imagenes *PDF*</legend></center>
 
 
   <div class="form-group">

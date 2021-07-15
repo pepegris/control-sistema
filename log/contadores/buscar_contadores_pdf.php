@@ -172,8 +172,7 @@ if (isset($_POST)) {
      }}
  
  
- echo "	<center><input type='button' name='imprimir' value='Imprimir' onclick='window.print();'> </center>
- <br>"
+ 
  mysqli_close($conn);
  
 }
@@ -183,7 +182,8 @@ if (isset($_POST)) {
 
  </div>
 
-
+ <center><input type="button" name="imprimir" value="Imprimir" onclick="window.print();"> </center>
+	<br>
 
 
 
