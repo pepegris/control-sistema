@@ -103,7 +103,7 @@ if (isset($_POST)) {
             if ($impresora2 == null ) {
 
                 
-
+                require 'includes/contador.php';
                 echo "
                 <tr>
                 <td>$tienda</td>
@@ -114,14 +114,12 @@ if (isset($_POST)) {
                 
                 <td>$inicial1</td>
                 <td>$con_des</td>
-
-                <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
-                <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>
                 
                 </tr>
                 <tr>
                 <td>$tienda</td>
-                <td><img src='../uploads/img/$con_img' style='height: 590px;' alt=''></td></tr>";
+                <td><img src='../uploads/img/$img[0]' style='height: 590px;' alt=''></td>
+                <td><img src='../uploads/img/$img[1]' style='height: 590px;' alt=''></td></tr>";
                 
                 
 
@@ -148,14 +146,13 @@ if (isset($_POST)) {
                 <td>$con_des</td>
 
                 
-
-                <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
-               <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>
-                
                 </tr>
+
                 <tr>
                 <td>$tienda</td>
-                <td><img src='../uploads/img/$con_img' style='height: 590px;' alt=''></td></tr>
+                <td><img src='../uploads/img/$img[0]' style='height: 590px;' alt=''></td>
+                <td><img src='../uploads/img/$img[1]' style='height: 590px;' alt=''></td>
+                <td><img src='../uploads/img/$img[2]' style='height: 590px;' alt=''></td></tr>
                   ";
 
             }
