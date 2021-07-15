@@ -172,7 +172,8 @@ if (isset($_POST)) {
      }}
  
  
- include '../includes/excel.php';
+ echo "	<center><input type='button' name='imprimir' value='Imprimir' onclick='window.print();'> </center>
+ <br>"
  mysqli_close($conn);
  
 }
