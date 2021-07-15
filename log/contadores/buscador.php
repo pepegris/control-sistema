@@ -77,7 +77,7 @@
 
 <!-- BETA -->
 
-<form action="buscar_contadores.php" method="POST"  >
+<form action="buscar_contadores_pdf.php" method="POST"  >
   
     
   <br>
