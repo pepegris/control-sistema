@@ -9,7 +9,7 @@
 $cuenta_on=$_SESSION['username'];
 
 if (!isset($cuenta_on)) {
-    header("location:../loginjorinacha/autentica.php");
+    header("location:salir.php");
 }
 
 $cuenta_on = ucwords($cuenta_on); 
