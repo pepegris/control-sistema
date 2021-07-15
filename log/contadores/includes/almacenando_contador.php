@@ -33,9 +33,9 @@
 
          $final3=$res['inicial3'];
 
-         $con_img=$res['con_img'];
+       /*   $con_img=$res['con_img'];
          $con_img2=$res['con_img2'];  
-         $con_img3=$res['con_img3'];
+         $con_img3=$res['con_img3']; */
         
 
 
@@ -52,9 +52,7 @@
                  $contador_Boleita[]=$final2;
                  $contador_Boleita[]=$final3;
 
-                $img_Boleita[]=$con_img;                 
-                $img_Boleita[]=$con_img2;
-                $img_Boleita[]=$con_img3;
+                
                  
                  break;
 
