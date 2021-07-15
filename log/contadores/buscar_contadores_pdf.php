@@ -115,10 +115,11 @@ if (isset($_POST)) {
                 <td>$inicial1</td>
                 <td>$con_des</td>
 
-                
+                <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
+                <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>
                 
                 </tr>
-                <tr><td><img src='../uploads/img/$con_img' style='height: 190px;' alt=''></td></tr>";
+                <tr><td><img src='../uploads/img/$con_img' style='height: 290px;' alt=''></td></tr>";
                 
                 
 
@@ -147,9 +148,12 @@ if (isset($_POST)) {
                 
 
                 <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
-                <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>
+               <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>
                 
                 </tr>
+                <tr>
+                <td>$tienda</td>
+                <td><img src='../uploads/img/$con_img' style='height: 290px;' alt=''></td></tr>
                   ";
 
             }
