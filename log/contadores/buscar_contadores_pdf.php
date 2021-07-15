@@ -85,6 +85,8 @@ if (isset($_POST)) {
             $id=$res['id'];
             $tienda=$res['tienda'];
             $con_img=$res['con_img'];
+            $con_img2=$res['con_img2'];
+            $con_img3=$res['con_img3'];
             $impresora1=$res['impresora1'];
             $impresora2=$res['impresora2'];
             $impresora3=$res['impresora3'];
@@ -103,7 +105,8 @@ if (isset($_POST)) {
             if ($impresora2 == null ) {
 
                 
-                require 'includes/contador.php';
+                
+                
                 echo "
                 <tr>
                 <td>$tienda</td>
@@ -118,8 +121,8 @@ if (isset($_POST)) {
                 </tr>
                 <tr>
                 <td>$tienda</td>
-                <td><img src='../uploads/img/$img[0]' style='height: 590px;' alt=''></td>
-                <td><img src='../uploads/img/$img[1]' style='height: 590px;' alt=''></td></tr>";
+                <td><img src='../uploads/img/$con_img' style='height: 590px;' alt=''></td>
+                <td><img src='../uploads/img/$con_img2' style='height: 590px;' alt=''></td></tr>";
                 
                 
 
@@ -132,8 +135,9 @@ if (isset($_POST)) {
                 
 
                 require 'includes/contador.php';
-                
 
+
+                
                 echo "
                 <tr>
                 <td>$tienda</td>
@@ -150,9 +154,9 @@ if (isset($_POST)) {
 
                 <tr>
                 <td>$tienda</td>
-                <td><img src='../uploads/img/$img[0]' style='height: 590px;' alt=''></td>
-                <td><img src='../uploads/img/$img[1]' style='height: 590px;' alt=''></td>
-                <td><img src='../uploads/img/$img[2]' style='height: 590px;' alt=''></td></tr>
+                <td><img src='../uploads/img/$con_img' style='height: 590px;' alt=''></td>
+                <td><img src='../uploads/img/$con_img2' style='height: 590px;' alt=''></td>
+                <td><img src='../uploads/img/$con_img3' style='height: 590px;' alt=''></td></tr>
                   ";
 
             }
