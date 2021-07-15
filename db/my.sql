@@ -83,6 +83,8 @@ CREATE TABLE contador (
     tienda VARCHAR(85) NOT NULL,
     con_des VARCHAR(255),
     con_img VARCHAR(255),
+    con_img2 VARCHAR(255),
+    con_img3 VARCHAR(255),
     impresora1 varchar (150) not null,
     impresora2 varchar (150),
     impresora3 varchar (150),
