@@ -77,7 +77,7 @@
                         /* echo "<br>estoy en $indice $final1 - $final2 - $final3<br>"; */
 
                         $contador_Merina=array();
-                        $img_Merina=array()
+                        $img_Merina=array();
    
                         $contador_Merina[]=$final1;
                         $contador_Merina[]=$final2;
