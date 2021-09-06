@@ -14,15 +14,6 @@ if (isset($_FILES) && isset($_POST)) {
         $nombre_imagen = $_FILES['imagen']['name'];
         $tipo_imagen   = $_FILES['imagen']['type'];
         $tam_imagen    = $_FILES['imagen']['size'];
-
-        $nombre_imagen2 = $_FILES['imagen2']['name'];
-        $tipo_imagen2   = $_FILES['imagen2']['type'];
-        $tam_imagen2    = $_FILES['imagen2']['size'];
-
-
-        $nombre_imagen3 = $_FILES['imagen3']['name'];
-        $tipo_imagen3   = $_FILES['imagen3']['type'];
-        $tam_imagen3    = $_FILES['imagen3']['size'];
         
         //informacion para la base de dato
         $sede=isset ($_POST ['sede']) ? mysqli_real_escape_string($conn,$_POST ['sede'] ): false ;
@@ -59,38 +50,15 @@ if (isset($_FILES) && isset($_POST)) {
             //ruta del destino del servidor
             $carpeta = $_SERVER['DOCUMENT_ROOT'] . '/php/control/log/uploads/img/';
 
-         
+            //almacenando nombre y direccion de la imagen
 
-            if ($nombre_imagen3==null ) {
+            $contador_img=$sede.'_'.$fecha.'_'.$nombre_imagen;
 
-                //almacenando nombre y direccion de la imagen
-                $contador_img=$sede.'_'.$fecha.'_'.$nombre_imagen;
-                $contador_img2=$sede.'_'.$fecha.'_'.$nombre_imagen2;
-                
- 
-                //mover imagen a directorio temporal
-            
-                move_uploaded_file($_FILES['imagen']['tmp_name'],$carpeta.$contador_img);
-                move_uploaded_file($_FILES['imagen2']['tmp_name'],$carpeta.$contador_img2);
-                
-
-                
-            } else {
-
-                 //almacenando nombre y direccion de la imagen
-                 $contador_img=$sede.'_'.$fecha.'_'.$nombre_imagen;
-                 $contador_img2=$sede.'_'.$fecha.'_'.$nombre_imagen2;
-                 $contador_img3=$sede.'_'.$fecha.'_'.$nombre_imagen3;
-  
-                 //mover imagen a directorio temporal
-             
-                 move_uploaded_file($_FILES['imagen']['tmp_name'],$carpeta.$contador_img);
-                 move_uploaded_file($_FILES['imagen2']['tmp_name'],$carpeta.$contador_img2);
-                 move_uploaded_file($_FILES['imagen3']['tmp_name'],$carpeta.$contador_img3);
-
-                 
-            }
-            
+            //echo $contador_img;
+        
+            //mover imagen a directorio temporal
+        
+            move_uploaded_file($_FILES['imagen']['tmp_name'],$carpeta.$contador_img);
 
             
 
@@ -101,7 +69,7 @@ if (isset($_FILES) && isset($_POST)) {
 
                     if ($impresora2 == null) {
 
-                        $sql= "INSERT INTO contador VALUES (null,'$sede','$con_des','$contador_img','$contador_img2','$contador_img3',
+                        $sql= "INSERT INTO contador VALUES (null,'$sede','$con_des','$contador_img',
                                                         '$impresora1',null,null,
                                                         '$serial1',null,null,
                                                         $inicial1,null,null,
@@ -110,7 +78,7 @@ if (isset($_FILES) && isset($_POST)) {
             
                     } else {
                         
-                        $sql= "INSERT INTO contador VALUES (null,'$sede','$con_des','$contador_img','$contador_img2','$contador_img3',
+                        $sql= "INSERT INTO contador VALUES (null,'$sede','$con_des','$contador_img',
                                                         '$impresora1','$impresora2','$impresora3',
                                                         '$serial1','$serial2','$serial3',
                                                         $inicial1,$inicial2,$inicial3,
