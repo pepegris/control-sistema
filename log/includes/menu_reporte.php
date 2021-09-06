@@ -66,7 +66,7 @@
               ></path>
             </g>
           </svg>
-          <span class="link-text">Equipos</span>
+          <span class="link-text">Nota de Entrega</span>
         </a>
       </li>
 
