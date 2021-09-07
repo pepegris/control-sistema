@@ -74,6 +74,61 @@
   <br>
   
 </form>
+
+<!-- BETA -->
+
+<form action="buscar_contadores_pdf.php" method="POST"  >
+  
+    
+  <br>
+  <center><legend>Con imagenes *PDF*</legend></center>
+
+
+  <div class="form-group">
+    <label for="sedes_nom" class="form-label mt-2">Sede</label>
+    <select name="sedes_nom" id=""  >
+
+    <option value="todos">Todas las Tiendas</option>
+    <?php 
+      
+
+      $sql = "SELECT sedes_nom FROM sedes  ";
+      $consulta = mysqli_query($conn,$sql);
+
+      while ($res=mysqli_fetch_array($consulta)) {
+          
+          $sede=$res['sedes_nom'];
+          
+      ?>
+          <option value="<?=$sede?>"><?=$sede?></option>
+
+      <?php } ?>
+    
+    </select>
+    
+  </div>
+
+
+
+  <label for="fecha_desde">Desde</label>
+  <input type="date" name="fecha_desde" id="" required class="form-control">
+
+  <label for="fecha_hasta">Hasta</label>
+  <input type="date" name="fecha_hasta" id="" required  class="form-control">
+
+  
+
+ 
+
+  <br>
+ 
+  <center><button type="submit" class="btn btn-primary">Buscar</button></center>
+  <br>
+  
+</form>
+
+<!-- BETA -->
+
       </div>
      </div>
 

@@ -99,6 +99,11 @@ if (isset($_POST)) {
                         <label for='imagen' class='form-label mt-2'>Contador Imagen</label>
                         <input type='file' class='form-control' name='imagen' size='100' id='' required>
                       </div>
+
+                      <div class='form-group'>
+                        <label for='imagen2' class='form-label mt-2'>Contador Imagen</label>
+                        <input type='file' class='form-control' name='imagen2' size='100' id='' required>
+                      </div>
                       
                       <div class='form-group'>
                         <label for='con_des' class='form-label mt-2'>Comentario</label>
@@ -151,7 +156,13 @@ if (isset($_POST)) {
                         <div class='form-group'>
                           <label for='imagen' class='form-label mt-2'>Contador Imagen</label>
                           <input type='file' class='form-control' name='imagen' size='100' id='' required>
+                          <label for='imagen2' class='form-label mt-2'>Contador Imagen 2</label>
+                          <input type='file' class='form-control' name='imagen2' size='100' id='' required>
+                          <label for='imagen3' class='form-label mt-2'>Contador Imagen 3</label>
+                          <input type='file' class='form-control' name='imagen3' size='100' id=''>
                         </div>
+
+                       
   
   
                         <div class='form-group'>
@@ -208,9 +219,13 @@ if (isset($_POST)) {
 
                     
                       <div class='form-group'>
-                        <label for='imagen' class='form-label mt-2'>Contador Imagen</label>
-                        <input type='file' class='form-control' name='imagen' size='100' id='' required>
-                      </div>
+                      <label for='imagen' class='form-label mt-2'>Contador Imagen</label>
+                      <input type='file' class='form-control' name='imagen' size='100' id='' required>
+                      <label for='imagen2' class='form-label mt-2'>Contador Imagen 2</label>
+                      <input type='file' class='form-control' name='imagen2' size='100' id='' required>
+                      <label for='imagen3' class='form-label mt-2'>Contador Imagen 3</label>
+                      <input type='file' class='form-control' name='imagen3' size='100' id='' required>
+                    </div>
 
 
                       <div class='form-group'>
