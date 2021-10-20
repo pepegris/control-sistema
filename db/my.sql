@@ -78,7 +78,7 @@ CREATE TABLE fiscal (
 );
 
 
-CREATE TABLE servidor (
+CREATE TABLE servidor_auditoria (
   id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
   tienda VARCHAR(85) NOT NULL,
   serv_des VARCHAR(255),
@@ -87,25 +87,55 @@ CREATE TABLE servidor (
   fecha datetime NOT NULL DEFAULT CURRENT_TIMESTAMP 
 );
 
-    INSERT INTO  servidor VALUES (null,'Sede Boleita',null,null,now(),now());
-    INSERT INTO  servidor VALUES  ( null,'Sede Sabana Grande',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Merina',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Merina III',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Corina I',null,null,now(),now());
-    INSERT INTO  servidor VALUES   (null,'Comercial Corina II',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Punto Fijo',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Matur',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Valena',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Trina',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Kagu',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Nachari',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Higue',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Turme',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Apura',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Vallepa',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Ojena',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Puecruz',null,null,now(),now());
-    INSERT INTO  servidor VALUES(null,'Comercial Acari',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES (null,'Sede Boleita',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES  ( null,'Sede Sabana Grande',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Merina',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Merina III',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Corina I',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES   (null,'Comercial Corina II',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Punto Fijo',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Matur',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Valena',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Trina',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Kagu',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Nachari',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Higue',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Turme',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Apura',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Vallepa',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Ojena',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Puecruz',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Acari',null,null,now(),now());
+
+
+    CREATE TABLE fiscal_auditoria (
+  id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  tienda VARCHAR(85) NOT NULL,
+  fis_des VARCHAR(255),
+  fis_img VARCHAR(255),
+  fis_fecha DATE NOT NULL,
+  fecha datetime NOT NULL DEFAULT CURRENT_TIMESTAMP 
+
+    INSERT INTO  fiscal_auditoria VALUES (null,'Sede Boleita',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES  ( null,'Sede Sabana Grande',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Merina',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Merina III',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Corina I',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES   (null,'Comercial Corina II',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Punto Fijo',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Matur',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Valena',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Trina',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Kagu',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Nachari',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Higue',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Turme',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Apura',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Vallepa',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Ojena',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Puecruz',null,null,now(),now());
+    INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Acari',null,null,now(),now());
+);
 
 CREATE TABLE contador (
 

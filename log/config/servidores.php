@@ -32,12 +32,12 @@
       <?php 
         require '../includes/conexion_control.php';
 
-        $sql = "SELECT sedes_nom FROM sedes  ";
+        $sql = "SELECT tienda FROM servidor  ";
         $consulta = mysqli_query($conn,$sql);
 
         while ($res=mysqli_fetch_array($consulta)) {
             
-            $sede=$res['sedes_nom'];
+            $sede=$res['tienda'];
             
         ?>
             <option value="<?=$sede?>"><?=$sede?></option>
@@ -58,7 +58,7 @@
       <input type="file" class="form-control" name="imagen" size="100" id="">
     </div>
     <div class="form-group">
-      <label for="serv_des" class="form-label mt-2">Comentario</label>
+      <label for="serv_des" class="form-label mt-2">Detalles del Servidor</label>
       <textarea name="serv_des" id="" class="form-control"cols="15" rows="3" required ></textarea>
     </div>
    
