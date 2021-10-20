@@ -115,7 +115,7 @@ CREATE TABLE servidor_auditoria (
   fis_img VARCHAR(255),
   fis_fecha DATE NOT NULL,
   fecha datetime NOT NULL DEFAULT CURRENT_TIMESTAMP 
-
+);
     INSERT INTO  fiscal_auditoria VALUES (null,'Sede Boleita',null,null,now(),now());
     INSERT INTO  fiscal_auditoria VALUES  ( null,'Sede Sabana Grande',null,null,now(),now());
     INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Merina',null,null,now(),now());
@@ -135,7 +135,7 @@ CREATE TABLE servidor_auditoria (
     INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Ojena',null,null,now(),now());
     INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Puecruz',null,null,now(),now());
     INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Acari',null,null,now(),now());
-);
+
 
 CREATE TABLE contador (
 
