@@ -1,6 +1,6 @@
 
 <?php
-
+require_once '../includes/log.php';
 if ( isset($_POST)) {
 
     include '../includes/loading.php';
@@ -19,7 +19,8 @@ if ( isset($_POST)) {
    if ($nombre_imagen == ''  ) {
         if ($conn) {
 
-    $sql= "INSERT INTO servidor VALUES (null,'$tienda','$serv_des',null,'$serv_fecha',now())";
+  // $sql= "INSERT INTO servidor_auditoria VALUES (null,'$tienda','$serv_des',null,'$serv_fecha',now())";
+    $sql= "UPDATE servidor_auditoria SET  serv_des='$serv_des', serv_fecha='$serv_fecha' WHERE tienda ='$tienda' ";
                     
     $guardar = mysqli_query($conn,$sql);
     echo "<br><center><h3>Cargando Servidor sin imagen</h3></center>";
@@ -33,12 +34,12 @@ if ( isset($_POST)) {
         echo "<h4>$error</h4>";
                                 
                                             
-        echo "<a href='servidores.php' class='btn btn-danger'>Salir</a>";
+        echo "<a href='servidores_buscar.php' class='btn btn-danger'>Salir</a>";
         die();
                                         
                                             
             }else {
-                header('refresh:2;url= servidores.php');
+                header('refresh:2;url= servidores_buscar.php');
                 exit;
             }
                     
@@ -47,7 +48,7 @@ if ( isset($_POST)) {
     } else {
                             
                                             
-         echo "<a href='servidores.php' class='btn btn-danger'>Salir</a>";
+         echo "<a href='servidores_buscar.php' class='btn btn-danger'>Salir</a>";
          die("La conexión ha fallado: " . mysqli_connect_error());
     }
         
@@ -75,7 +76,8 @@ if ( isset($_POST)) {
 
         if ($conn) {
 
-            $sql= "INSERT INTO fiscal VALUES (null,'$tienda','$serv_des','$imagen','$serv_fecha',now())";
+            //$sql= "INSERT INTO fiscal VALUES (null,'$tienda','$serv_des','$imagen','$serv_fecha',now())";
+            $sql= "UPDATE servidor_auditoria SET  serv_des='$serv_des', serv_img='$imagen' , serv_fecha='$serv_fecha' WHERE tienda ='$tienda' ";
                             
             $guardar = mysqli_query($conn,$sql);
                             
@@ -89,12 +91,12 @@ if ( isset($_POST)) {
                 echo "<h4>$error</h4>";
                                         
                                                     
-                echo "<a href='servidores.php' class='btn btn-danger'>Salir</a>";
+                echo "<a href='servidores_buscar.php' class='btn btn-danger'>Salir</a>";
                 die();
                                                 
                                                     
                     }else {
-                        header('refresh:2;url= servidores.php');
+                        header('refresh:2;url= servidores_buscar.php');
                         exit;
                     }
                             
@@ -103,7 +105,7 @@ if ( isset($_POST)) {
             } else {
                                     
                                                     
-                 echo "<a href='servidores.php' class='btn btn-danger'>Salir</a>";
+                 echo "<a href='servidores_buscar.php' class='btn btn-danger'>Salir</a>";
                  die("La conexión ha fallado: " . mysqli_connect_error());
             }
 
@@ -114,7 +116,7 @@ if ( isset($_POST)) {
 
         //REDIRECCIONAR 
         echo "<br><center><h3>sube un archivo con un formato permitido:</h3> $tipo_imagen </center>";
-        echo "<a href='servidores.php' class='btn btn-danger'>Salir</a>";
+        echo "<a href='servidores_buscar.php' class='btn btn-danger'>Salir</a>";
         die();
     
    }

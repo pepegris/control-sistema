@@ -1,4 +1,4 @@
-<?php //require '../includes/log.php';?>
+<?php require '../includes/log.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
