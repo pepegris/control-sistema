@@ -58,10 +58,73 @@
       <label for="imagen" class="form-label mt-2">imagen</label>
       <input type="file" class="form-control" name="imagen" size="100" id="">
     </div>
+   
+
+    <div class="form-group">
+      <label for="serv_mac" class="form-label mt-2">Mac</label> 
+      <input type="text" name="serv_mac" id="" class="form-control"  required>
+    </div>
+
+    <div class="form-group">
+      <label for="serv_procesador" class="form-label mt-2">procesador</label> 
+      <input type="text" name="serv_procesador" id="" class="form-control"  required>
+    </div>
+
+    <div class="form-group">
+      <label for="serv_memoria_s" class="form-label mt-2">memoria ram serial</label> 
+      <input type="text" name="serv_memoria_s" id="" class="form-control"  required>
+    </div>
+
+    <div class="form-group">
+      <label for="serv_memoria_cp" class="form-label mt-2">memoria capacidad</label> 
+      <input type="text" name="serv_memoria_cp" id="" class="form-control"  required>
+    </div>
+
+    <div class="form-group">
+      <label for="serv_memoria_c" class="form-label mt-2">memoria cantidad</label> 
+      <input type="number" name="serv_memoria_c" id="" class="form-control"  required>
+    </div>
+
+
+    <div class="form-group">
+      <label for="serv_serial_s" class="form-label mt-2">disco duro serial</label> 
+      <input type="text" name="serv_serial_s" id="" class="form-control"  required>
+    </div>
+
+
+    <div class="form-group">
+      <label for="serv_disco_cp" class="form-label mt-2">disco duro capacidad</label> 
+      <input type="text" name="serv_disco_cp" id="" class="form-control"  required>
+    </div>
+
+    <div class="form-group">
+      <label for="serv_disco_c" class="form-label mt-2">disco duro cantidad</label> 
+      <input type="number" name="serv_disco_c" id="" class="form-control"  required>
+    </div>
+
+    <div class="form-group">
+      <label for="serv_fuente" class="form-label mt-2">fuente de poder</label> 
+      <input type="text" name="serv_fuente" id="" class="form-control"  required>
+    </div>
+
+    <div class="form-group">
+      <label for="serv_tarjeta_v" class="form-label mt-2">tarjeta de video</label> 
+      <input type="text" name="serv_tarjeta_v" id="" class="form-control"  required>
+    </div>
+
+    <div class="form-group">
+      <label for="serv_tarjeta_r" class="form-label mt-2">tarjeta de red</label> 
+      <input type="text" name="serv_tarjeta_r" id="" class="form-control"  required>
+    </div>
+
+
     <div class="form-group">
       <label for="serv_des" class="form-label mt-2">Detalles del Servidor</label>
-      <textarea name="serv_des" id="" class="form-control"cols="15" rows="3" required ></textarea>
+      <textarea name="serv_des" id="" class="form-control"cols="15" rows="3" ></textarea>
     </div>
+
+    
+
    
    
     
