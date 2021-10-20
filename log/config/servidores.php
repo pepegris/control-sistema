@@ -16,7 +16,10 @@
        include 'includes/icono.php';
     
  ?>
-
+<br> 
+<br>
+<br>
+<br>
 <div id="body" >
 <form action="up_servidores.php" method="POST" enctype="multipart/form-data"  >
   
