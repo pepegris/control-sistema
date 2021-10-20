@@ -87,6 +87,26 @@ CREATE TABLE servidor (
   fecha datetime NOT NULL DEFAULT CURRENT_TIMESTAMP 
 );
 
+    INSERT INTO  sedes VALUES (null,'Sede Boleita',null,null,now(),now());
+    INSERT INTO  sedes VALUES  ( null,'Sede Sabana Grande',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Merina',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Merina III',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Corina I',null,null,now(),now());
+    INSERT INTO  sedes VALUES   (null,'Comercial Corina II',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Punto Fijo',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Matur',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Valena',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Trina',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Kagu',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Nachari',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Higue',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Turme',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Apura',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Vallepa',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Ojena',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Puecruz',null,null,now(),now());
+    INSERT INTO  sedes VALUES(null,'Comercial Acari',null,null,now(),now());
+
 CREATE TABLE contador (
 
     id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
