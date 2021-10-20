@@ -30,7 +30,7 @@ include '../includes/menu.php';
 <div class="menu">
 
         <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="menu_sedes.php">Sede</a>
-        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="#">Servidores</a>
+        <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="servidores.php">Servidores</a>
         <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="#">Fiscales</a>
         <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="menu_impresora.php">Impresora</a>
         <a class="item" style="font-family:Arial, Helvetica, sans-serif; font-size: 16px;" href="registrar.php" >Registrar Usuario</a>
