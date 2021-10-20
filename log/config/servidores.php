@@ -69,42 +69,17 @@
       <label for="serv_procesador" class="form-label mt-2">procesador</label> 
       <input type="text" name="serv_procesador" id="" class="form-control"  required>
     </div>
+ 
 
     <div class="form-group">
-      <label for="serv_memoria_s" class="form-label mt-2">memoria ram serial</label> 
-      <input type="text" name="serv_memoria_s" id="" class="form-control"  required>
-    </div>
-
-    <div class="form-group">
-      <label for="serv_memoria_cp" class="form-label mt-2">memoria capacidad</label> 
-      <input type="text" name="serv_memoria_cp" id="" class="form-control"  required>
-    </div>
-
-    <div class="form-group">
-      <label for="serv_memoria_c" class="form-label mt-2">memoria cantidad</label> 
-      <input type="number" name="serv_memoria_c" id="" class="form-control"  required>
+      <label for="serv_memoria" class="form-label mt-2">memoria ram</label> 
+      <input type="text" name="serv_memoria" id="" class="form-control"  required>
     </div>
 
 
     <div class="form-group">
-      <label for="serv_serial_s" class="form-label mt-2">disco duro serial</label> 
-      <input type="text" name="serv_serial_s" id="" class="form-control"  required>
-    </div>
-
-
-    <div class="form-group">
-      <label for="serv_disco_cp" class="form-label mt-2">disco duro capacidad</label> 
-      <input type="text" name="serv_disco_cp" id="" class="form-control"  required>
-    </div>
-
-    <div class="form-group">
-      <label for="serv_disco_c" class="form-label mt-2">disco duro cantidad</label> 
-      <input type="number" name="serv_disco_c" id="" class="form-control"  required>
-    </div>
-
-    <div class="form-group">
-      <label for="serv_fuente" class="form-label mt-2">fuente de poder</label> 
-      <input type="text" name="serv_fuente" id="" class="form-control"  required>
+      <label for="serv_seriat" class="form-label mt-2">disco duro</label> 
+      <input type="text" name="serv_serial" id="" class="form-control"  required>
     </div>
 
     <div class="form-group">
