@@ -32,7 +32,7 @@
       <?php 
         require '../includes/conexion_control.php';
 
-        $sql = "SELECT tienda FROM servidor  ";
+        $sql = "SELECT tienda FROM servidor_auditoria  ";
         $consulta = mysqli_query($conn,$sql);
 
         while ($res=mysqli_fetch_array($consulta)) {
