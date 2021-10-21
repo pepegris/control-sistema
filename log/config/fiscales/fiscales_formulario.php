@@ -18,7 +18,7 @@ if ( isset($_POST)) {
     <link rel='stylesheet' href='../css/formulario/bootstrap.min.css'>
 
     
-    <title>Conf Fiscales</title>
+    <title>Cargar Fiscales</title>
 </head>
 <style>
 
