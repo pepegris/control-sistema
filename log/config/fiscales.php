@@ -89,7 +89,7 @@
       <select name="estado1" id="">
           <option value="OPERATIVA">OPERATIVA</option>
           <option value="AVERIADA">AVERIADA</option>
-          <option value="REPARANDO">REPARANDO</option>
+          <option value="INEXISTENTE">INEXISTENTE</option>
       </select>
     </div>
 
@@ -97,22 +97,22 @@
 
      <div class="form-group">
       <label for="fis_marca2" class="form-label mt-2">Marca Fiscal 2</label> 
-      <input type="text" name="fis_marca2" id="" class="form-control"  required>
+      <input type="text" name="fis_marca2" id="" class="form-control"  >
     </div>
 
     <div class="form-group">
       <label for="fis_modelo2" class="form-label mt-2">Modelo Fiscal 2</label> 
-      <input type="text" name="fis_modelo2" id="" class="form-control"  required>
+      <input type="text" name="fis_modelo2" id="" class="form-control"  >
     </div>
 
     <div class="form-group">
       <label for="fis_serial2" class="form-label mt-2">Serial Fiscal 2</label> 
-      <input type="text" name="fis_serial2" id="" class="form-control"  required>
+      <input type="text" name="fis_serial2" id="" class="form-control"  >
     </div>
 
     <div class="form-group">
       <label for="fis_nregistro2" class="form-label mt-2">Nº Registro Fiscal 2</label> 
-      <input type="text" name="fis_nregistro2" id="" class="form-control"  required>
+      <input type="text" name="fis_nregistro2" id="" class="form-control"  >
     </div>
 
    
@@ -121,29 +121,29 @@
       <select name="estado2" id="">
           <option value="OPERATIVA">OPERATIVA</option>
           <option value="AVERIADA">AVERIADA</option>
-          <option value="REPARANDO">REPARANDO</option>
+          <option value="INEXISTENTE">INEXISTENTE</option>
       </select>
     </div>
     <!-- FISCAL NUMERO TRHEE 3-->
 
     <div class="form-group">
       <label for="fis_marca3" class="form-label mt-2">Marca Fiscal 3</label> 
-      <input type="text" name="fis_marca3" id="" class="form-control"  required>
+      <input type="text" name="fis_marca3" id="" class="form-control"  >
     </div>
 
     <div class="form-group">
       <label for="fis_modelo3" class="form-label mt-2">Modelo Fiscal 3</label> 
-      <input type="text" name="fis_modelo3" id="" class="form-control"  required>
+      <input type="text" name="fis_modelo3" id="" class="form-control"  >
     </div>
 
     <div class="form-group">
       <label for="fis_serial3" class="form-label mt-2">Serial Fiscal 3</label> 
-      <input type="text" name="fis_serial3" id="" class="form-control"  required>
+      <input type="text" name="fis_serial3" id="" class="form-control"  >
     </div>
 
     <div class="form-group">
       <label for="fis_nregistro3" class="form-label mt-2">Nº Registro Fiscal 3</label> 
-      <input type="text" name="fis_nregistro3" id="" class="form-control"  required>
+      <input type="text" name="fis_nregistro3" id="" class="form-control"  >
     </div>
 
    
@@ -152,29 +152,29 @@
       <select name="estado3" id="">
           <option value="OPERATIVA">OPERATIVA</option>
           <option value="AVERIADA">AVERIADA</option>
-          <option value="REPARANDO">REPARANDO</option>
+          <option value="INEXISTENTE">INEXISTENTE</option>
       </select>
     </div>
     <!-- FISCAL NUMERO FOUR 4-->
 
     <div class="form-group">
       <label for="fis_marca4" class="form-label mt-2">Marca Fiscal 4</label> 
-      <input type="text" name="fis_marca4" id="" class="form-control"  required>
+      <input type="text" name="fis_marca4" id="" class="form-control"  >
     </div>
 
     <div class="form-group">
       <label for="fis_modelo4" class="form-label mt-2">Modelo Fiscal 4</label> 
-      <input type="text" name="fis_modelo4" id="" class="form-control"  required>
+      <input type="text" name="fis_modelo4" id="" class="form-control"  >
     </div>
 
     <div class="form-group">
       <label for="fis_serial4" class="form-label mt-2">Serial Fiscal 4</label> 
-      <input type="text" name="fis_serial4" id="" class="form-control"  required>
+      <input type="text" name="fis_serial4" id="" class="form-control"  >
     </div>
 
     <div class="form-group">
       <label for="fis_nregistro4" class="form-label mt-2">Nº Registro Fiscal 4</label> 
-      <input type="text" name="fis_nregistro4" id="" class="form-control"  required>
+      <input type="text" name="fis_nregistro4" id="" class="form-control"  >
     </div>
 
    
@@ -183,7 +183,7 @@
       <select name="estado4" id="">
           <option value="OPERATIVA">OPERATIVA</option>
           <option value="AVERIADA">AVERIADA</option>
-          <option value="REPARANDO">REPARANDO</option>
+          <option value="INEXISTENTE">INEXISTENTE</option>
       </select>
     </div>
 
