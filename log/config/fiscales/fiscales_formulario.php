@@ -28,7 +28,7 @@ if ( isset($_POST)) {
  
     
  ?>
- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+ <br>
 <div id='body' >
 <form action='fiscales_post.php' method='POST' enctype='multipart/form-data'  >
   
@@ -497,9 +497,7 @@ $consulta = mysqli_query($conn,$sql);
 
 <!-- BUSCADOR -->
 
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
+<br>
     <div id='buscador'>
     <center><h2>Buscar</h2></center>
 <div class='container mt-2'>
