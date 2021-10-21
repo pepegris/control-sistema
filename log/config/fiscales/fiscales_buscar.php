@@ -112,8 +112,9 @@ if (isset($_POST)) {
 
         while ($res=mysqli_fetch_array($consulta)) {
 
+        
 
-
+            $id=$res['id'];
             $tienda=$res['tienda'] ;
         $fis_marca1=$res['fis_marca1'];
         $fis_marca2=$res['fis_marca2'];
@@ -145,122 +146,59 @@ if (isset($_POST)) {
     
     <tr>
 
-    <th scope='col' abbr='Starter'>Tienda</th>
-                <th scope='col' abbr='Starter'>Fiscal1</th>
-                <th scope='col' abbr='Starter'>Fiscal2</th>
-                <th scope='col' abbr='Starter'>Fiscal3</th>
-                <th scope='col' abbr='Starter'>Fiscal4</th>
-                <th scope='col' abbr='Starter'>Fecha</th>
-                <th scope='col' abbr='Starter'>Imagen</th>
-                <th scope='col' abbr='Starter'>Accion</th>
+
         <td><?=$tienda?></td>
         <!-- FISCAL1 -->
         <td>
         <?=$fis_marca1;?><br>
-        <?=$fis_marca2;?><br>
-        <?=$fis_marca3;?><br>
-        <?= $fis_marca4;?><br>
-
+       
         <?=$fis_modelo1;?><br>
-        <?=$fis_modelo2;?><br>
-        <?=$fis_modelo3;?><br>
-        <?=$fis_modelo4;?><br>
+
 
         <?=$fis_serial1;?><br>
-        <?=$fis_serial2;?><br>
-        <?=$fis_serial3;?><br>
-        <?=$fis_serial4;?><br>
+
 
         <?=$fis_nregistro1;?><br>
-        <?=$fis_nregistro2;?><br>
-        <?=$fis_nregistro3;?><br>
-        <?=$fis_nregistro4;?><br>
 
-        <?=$estado1;?><br>
-        <?=$estado2;?><br>
-        <?=$estado3;?><br>
-        <?=$estado4;?>
+
+        <?=$estado1;?>
+       
         </td>
              <!-- FISCAL2 -->
         <td>
-        <?=$fis_marca1;?><br>
         <?=$fis_marca2;?><br>
-        <?=$fis_marca3;?><br>
-        <?= $fis_marca4;?><br>
-
-        <?=$fis_modelo1;?><br>
+   
         <?=$fis_modelo2;?><br>
-        <?=$fis_modelo3;?><br>
-        <?=$fis_modelo4;?><br>
 
-        <?=$fis_serial1;?><br>
         <?=$fis_serial2;?><br>
-        <?=$fis_serial3;?><br>
-        <?=$fis_serial4;?><br>
 
-        <?=$fis_nregistro1;?><br>
         <?=$fis_nregistro2;?><br>
-        <?=$fis_nregistro3;?><br>
-        <?=$fis_nregistro4;?><br>
 
-        <?=$estado1;?><br>
-        <?=$estado2;?><br>
-        <?=$estado3;?><br>
-        <?=$estado4;?>
+        <?=$estado2;?>
         </td>
 
             <!-- FISCAL 3 -->
         <td>
-        <?=$fis_marca1;?><br>
-        <?=$fis_marca2;?><br>
         <?=$fis_marca3;?><br>
-        <?= $fis_marca4;?><br>
 
-        <?=$fis_modelo1;?><br>
-        <?=$fis_modelo2;?><br>
         <?=$fis_modelo3;?><br>
-        <?=$fis_modelo4;?><br>
 
-        <?=$fis_serial1;?><br>
-        <?=$fis_serial2;?><br>
         <?=$fis_serial3;?><br>
-        <?=$fis_serial4;?><br>
 
-        <?=$fis_nregistro1;?><br>
-        <?=$fis_nregistro2;?><br>
         <?=$fis_nregistro3;?><br>
-        <?=$fis_nregistro4;?><br>
 
-        <?=$estado1;?><br>
-        <?=$estado2;?><br>
-        <?=$estado3;?><br>
-        <?=$estado4;?>
+        <?=$estado3;?>
         </td>
         <!-- FISCAL 4 -->
         <td>
-        <?=$fis_marca1;?><br>
-        <?=$fis_marca2;?><br>
-        <?=$fis_marca3;?><br>
         <?= $fis_marca4;?><br>
 
-        <?=$fis_modelo1;?><br>
-        <?=$fis_modelo2;?><br>
-        <?=$fis_modelo3;?><br>
         <?=$fis_modelo4;?><br>
 
-        <?=$fis_serial1;?><br>
-        <?=$fis_serial2;?><br>
-        <?=$fis_serial3;?><br>
         <?=$fis_serial4;?><br>
 
-        <?=$fis_nregistro1;?><br>
-        <?=$fis_nregistro2;?><br>
-        <?=$fis_nregistro3;?><br>
         <?=$fis_nregistro4;?><br>
 
-        <?=$estado1;?><br>
-        <?=$estado2;?><br>
-        <?=$estado3;?><br>
         <?=$estado4;?>
         </td>
 
