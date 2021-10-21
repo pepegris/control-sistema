@@ -32,6 +32,9 @@ if (isset($_POST)) {
     
     
  ?>
+ 
+ <br>
+ <br><br><br><br><br>
 
  <center><h2>Servidores <?=$sedes_nom?></h2></center>
 <table  class='table table-hover' id="tblData" >
