@@ -21,7 +21,7 @@
  ?>
  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div id="body" >
-<form action="fiscales/fiscales_post.php" method="POST" enctype="multipart/form-data"  >
+<form action="fiscales/fiscales_tiendas.php" method="POST" enctype="multipart/form-data"  >
   
     <div class="fieldset">
     <br>
@@ -51,139 +51,15 @@
       </select>
       
     </div>
-    <div class="form-group">
-      <label for="serv_fecha" class="form-label mt-2">Fecha</label>
-      
-      <input type="date" name="serv_fecha" id="" class="form-control"  required>
-    </div>
-   
-    <div class="form-group">
-      <label for="imagen" class="form-label mt-2">Cargar imagen</label>
-      <input type="file" class="form-control" name="imagen" size="100" id="">
-    </div>
-   
-         <!-- FISCAL NUMERO ONE 1 -->
-    <div class="form-group">
-      <label for="fis_marca1" class="form-label mt-2">Marca Fiscal 1</label> 
-      <input type="text" name="fis_marca1" id="" class="form-control"  required>
-    </div>
 
     <div class="form-group">
-      <label for="fis_modelo1" class="form-label mt-2">Modelo Fiscal 1</label> 
-      <input type="text" name="fis_modelo1" id="" class="form-control"  required>
-    </div>
-
-    <div class="form-group">
-      <label for="fis_serial1" class="form-label mt-2">Serial Fiscal 1</label> 
-      <input type="text" name="fis_serial1" id="" class="form-control"  required>
-    </div>
-
-    <div class="form-group">
-      <label for="fis_nregistro1" class="form-label mt-2">Nº Registro Fiscal 1</label> 
-      <input type="text" name="fis_nregistro1" id="" class="form-control"  required>
-    </div>
-
-   
-    <div class="form-group">
-      <label for="estado1" class="form-label mt-2">Estado Fiscal 1</label> 
-      <select name="estado1" id="">
-          <option value="OPERATIVA">OPERATIVA</option>
-          <option value="AVERIADA">AVERIADA</option>
-          <option value="INEXISTENTE">INEXISTENTE</option>
-      </select>
-    </div>
-
-     <!-- FISCAL NUMERO TWOO 2-->
-
-     <div class="form-group">
-      <label for="fis_marca2" class="form-label mt-2">Marca Fiscal 2</label> 
-      <input type="text" name="fis_marca2" id="" class="form-control"  >
-    </div>
-
-    <div class="form-group">
-      <label for="fis_modelo2" class="form-label mt-2">Modelo Fiscal 2</label> 
-      <input type="text" name="fis_modelo2" id="" class="form-control"  >
-    </div>
-
-    <div class="form-group">
-      <label for="fis_serial2" class="form-label mt-2">Serial Fiscal 2</label> 
-      <input type="text" name="fis_serial2" id="" class="form-control"  >
-    </div>
-
-    <div class="form-group">
-      <label for="fis_nregistro2" class="form-label mt-2">Nº Registro Fiscal 2</label> 
-      <input type="text" name="fis_nregistro2" id="" class="form-control"  >
-    </div>
-
-   
-    <div class="form-group">
-      <label for="estado2" class="form-label mt-2">Estado Fiscal 2</label> 
-      <select name="estado2" id="">
-          <option value="OPERATIVA">OPERATIVA</option>
-          <option value="AVERIADA">AVERIADA</option>
-          <option value="INEXISTENTE">INEXISTENTE</option>
-      </select>
-    </div>
-    <!-- FISCAL NUMERO TRHEE 3-->
-
-    <div class="form-group">
-      <label for="fis_marca3" class="form-label mt-2">Marca Fiscal 3</label> 
-      <input type="text" name="fis_marca3" id="" class="form-control"  >
-    </div>
-
-    <div class="form-group">
-      <label for="fis_modelo3" class="form-label mt-2">Modelo Fiscal 3</label> 
-      <input type="text" name="fis_modelo3" id="" class="form-control"  >
-    </div>
-
-    <div class="form-group">
-      <label for="fis_serial3" class="form-label mt-2">Serial Fiscal 3</label> 
-      <input type="text" name="fis_serial3" id="" class="form-control"  >
-    </div>
-
-    <div class="form-group">
-      <label for="fis_nregistro3" class="form-label mt-2">Nº Registro Fiscal 3</label> 
-      <input type="text" name="fis_nregistro3" id="" class="form-control"  >
-    </div>
-
-   
-    <div class="form-group">
-      <label for="estado3" class="form-label mt-2">Estado Fiscal 3</label> 
-      <select name="estado3" id="">
-          <option value="OPERATIVA">OPERATIVA</option>
-          <option value="AVERIADA">AVERIADA</option>
-          <option value="INEXISTENTE">INEXISTENTE</option>
-      </select>
-    </div>
-    <!-- FISCAL NUMERO FOUR 4-->
-
-    <div class="form-group">
-      <label for="fis_marca4" class="form-label mt-2">Marca Fiscal 4</label> 
-      <input type="text" name="fis_marca4" id="" class="form-control"  >
-    </div>
-
-    <div class="form-group">
-      <label for="fis_modelo4" class="form-label mt-2">Modelo Fiscal 4</label> 
-      <input type="text" name="fis_modelo4" id="" class="form-control"  >
-    </div>
-
-    <div class="form-group">
-      <label for="fis_serial4" class="form-label mt-2">Serial Fiscal 4</label> 
-      <input type="text" name="fis_serial4" id="" class="form-control"  >
-    </div>
-
-    <div class="form-group">
-      <label for="fis_nregistro4" class="form-label mt-2">Nº Registro Fiscal 4</label> 
-      <input type="text" name="fis_nregistro4" id="" class="form-control"  >
-    </div>
-
-   
-    <div class="form-group">
-      <label for="estado4" class="form-label mt-2">Estado Fiscal 4</label> 
-      <select name="estado4" id="">
-          <option value="OPERATIVA">OPERATIVA</option>
-          <option value="AVERIADA">AVERIADA</option>
-          <option value="INEXISTENTE">INEXISTENTE</option>
+      <label for="fiscal" class="form-label mt-2">Cantidad de Fiscales</label>
+      <select name="fiscal" id="">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
       </select>
     </div>
 
