@@ -203,14 +203,14 @@ if (isset($_POST)) {
         </td>
 
         <td><?=$fis_fecha?></td>
-        <td><img src="/log/uploads/img/servidores/<?=$imagen?>" style="height: 90px;" alt=""></td>
+        <td><img src="/log/uploads/img/fiscales/<?=$imagen?>" style="height: 90px;" alt=""></td>
 
         <td><?php
 
 
         if ($cuenta_on=='sistema') {
             
-            echo "<a href='edit_servidor.php?id=<?php echo $id?>' class='btn btn-info'>
+            echo "<a href='edit_fiscales.php?id=<?php echo $id?>' class='btn btn-info'>
             <i class='fas fa-marker'></i></a>";
         }else {
             echo "<a href='#' class='btn btn-info'>
@@ -221,7 +221,7 @@ if (isset($_POST)) {
         
         
         ?>
-            <!-- <a href='delete_servidor.php?id=<?php echo $id?>' class='btn btn-danger'>
+            <!-- <a href='delete_fiscales.php?id=<?php echo $id?>' class='btn btn-danger'>
                     <i class='far fa-trash-alt'></i>
             </a> -->
         </td>
