@@ -40,12 +40,12 @@ if ( isset($_POST)) {
         echo "<h4>$error</h4>";
                                 
                                             
-        echo "<a href='servidores_buscar.php' class='btn btn-danger'>Salir</a>";
+        echo "<a href='servidores.php' class='btn btn-danger'>Salir</a>";
         die();
                                         
                                             
             }else {
-                header('refresh:2;url= servidores_buscar.php');
+                header('refresh:2;url= servidores.php');
                 exit;
             }
                     
@@ -54,7 +54,7 @@ if ( isset($_POST)) {
     } else {
                             
                                             
-         echo "<a href='servidores_buscar.php' class='btn btn-danger'>Salir</a>";
+         echo "<a href='servidores.php' class='btn btn-danger'>Salir</a>";
          die("La conexión ha fallado: " . mysqli_connect_error());
     }
         
@@ -97,12 +97,12 @@ if ( isset($_POST)) {
                 echo "<h4>$error</h4>";
                                         
                                                     
-                echo "<a href='servidores_buscar.php' class='btn btn-danger'>Salir</a>";
+                echo "<a href='servidores.php' class='btn btn-danger'>Salir</a>";
                 die();
                                                 
                                                     
                     }else {
-                        header('refresh:2;url= servidores_buscar.php');
+                        header('refresh:2;url= servidores.php');
                         exit;
                     }
                             
@@ -111,7 +111,7 @@ if ( isset($_POST)) {
             } else {
                                     
                                                     
-                 echo "<a href='servidores_buscar.php' class='btn btn-danger'>Salir</a>";
+                 echo "<a href='servidores.php' class='btn btn-danger'>Salir</a>";
                  die("La conexión ha fallado: " . mysqli_connect_error());
             }
 
@@ -122,7 +122,7 @@ if ( isset($_POST)) {
 
         //REDIRECCIONAR 
         echo "<br><center><h3>sube un archivo con un formato permitido:</h3> $tipo_imagen </center>";
-        echo "<a href='servidores_buscar.php' class='btn btn-danger'>Salir</a>";
+        echo "<a href='servidores.php' class='btn btn-danger'>Salir</a>";
         die();
     
    }

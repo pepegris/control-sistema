@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/formulario/bootstrap.min.css">
 
     
-    <title>Servidoreses</title>
+    <title>Conf Servidores</title>
 </head>
 <body>
 <?php include '../includes/menu.php';
@@ -22,7 +22,7 @@
 <br>
 <br>
 <div id="body" >
-<form action="up_servidores.php" method="POST" enctype="multipart/form-data"  >
+<form action="servidores_post.php" method="POST" enctype="multipart/form-data"  >
   
     <div class="fieldset">
     <br>
