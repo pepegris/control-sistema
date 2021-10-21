@@ -19,7 +19,7 @@
  
     
  ?>
- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+ 
 <div id="body" >
 <form action="fiscales/fiscales_formulario.php" method="POST" enctype="multipart/form-data"  >
   
