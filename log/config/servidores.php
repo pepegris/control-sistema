@@ -59,7 +59,7 @@
     </div>
    
     <div class="form-group">
-      <label for="imagen" class="form-label mt-2">imagen</label>
+      <label for="imagen" class="form-label mt-2">Cargar imagen</label>
       <input type="file" class="form-control" name="imagen" size="100" id="">
     </div>
    

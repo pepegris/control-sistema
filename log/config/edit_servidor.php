@@ -36,7 +36,7 @@ if  (isset($_GET['id'])) {
 }
 
 if (isset($_POST['update'])) {
-  
+
   $id = $_GET['id'];
     $serv_des=$_POST['serv_des'];
     $serv_mac=$_POST['serv_mac'];
@@ -113,40 +113,48 @@ if (isset($_POST['update'])) {
       <form action="edit_servidor.php?id=<?php echo $_GET['id']; ?>" method="POST">
 
         <div class="form-group">
+        <label for="serv_mac" class="form-label mt-2">Mac del equipo</label>
           <input type="text" name="serv_mac"  class="form-control" value="<?php echo $serv_mac; ?>" placeholder="Update">
         </div>
 
         <div class="form-group">
+        <label for="serv_proc" class="form-label mt-2">Procesador</label>
           <input type="text" name="serv_proc"  class="form-control" value="<?php echo $serv_proc; ?>" placeholder="Update">
         </div>
 
         <div class="form-group">
+        <label for="serv_ram" class="form-label mt-2">Memoria Ram</label>
           <input type="text" name="serv_ram"  class="form-control" value="<?php echo $serv_ram; ?>" placeholder="Update">
         </div>
 
         <div class="form-group">
+        <label for="serv_disc" class="form-label mt-2">Disco Duro</label>
           <input type="text" name="serv_disc"  class="form-control" value="<?php echo $serv_disc; ?>" placeholder="Update">
         </div>
 
         <div class="form-group">
+        <label for="serv_vid" class="form-label mt-2">Tarjeta de Video</label>
           <input type="text" name="serv_vid"  class="form-control" value="<?php echo $serv_vid; ?>" placeholder="Update">
         </div>
 
         <div class="form-group">
+        <label for="serv_red" class="form-label mt-2">Tarjeta de Red</label>
           <input type="text" name="serv_red"  class="form-control" value="<?php echo $serv_red; ?>" placeholder="Update">
         </div>
 
         <div class="form-group">
+        <label for="serv_fecha" class="form-label mt-2">Fecha</label>
         <input type="date" name="serv_fecha"   class="form-control" value="<?php echo $serv_fecha;?>" placeholder="Update">
         </div>
 
         <div class="form-group">
-        <label for="imagen" class="form-label mt-2">imagen</label>
+        <label for="imagen" class="form-label mt-2">Cargar imagen</label>
         <input type="file" class="form-control" name="imagen" size="100" id="">
         </div>
    
 
         <div class="form-group">
+        <label for="serv_des" class="form-label mt-2">Descripcion del servidor</label>
         <textarea name="serv_des" id="" class="form-control" cols="5" rows="3"><?php echo $serv_des;?></textarea>
         </div>
         
