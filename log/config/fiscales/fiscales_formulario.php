@@ -33,6 +33,8 @@ if ( isset($_POST)) {
  <br> <br> <br> <br>
  <br> <br> <br> <br>
  <br> <br> <br> <br>
+ <br> <br> <br> <br>
+ <br> <br> <br> <br>
 <div id='body' >
 <form action='fiscales_post.php' method='POST' enctype='multipart/form-data'  >
   
