@@ -1,4 +1,6 @@
 <?php
+
+require_once 'includes/log.php';
 require '../includes/conexion_control.php';
  $tienda=''; 
  $serv_des='';

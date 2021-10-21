@@ -1,7 +1,7 @@
 <?php
 
 
-include '../includes/loading.php';
+include 'includes/loading.php';
 
 if (isset($_POST)) {
    // require '../includes/log.php';

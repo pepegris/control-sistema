@@ -1,5 +1,5 @@
 <?php
-
+require_once 'includes/log.php';
 require '../includes/conexion_control.php';
 
 if(isset($_GET['id'])) {

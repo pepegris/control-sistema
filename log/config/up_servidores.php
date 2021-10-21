@@ -1,6 +1,6 @@
 
 <?php
-require_once '../includes/log.php';
+require_once 'includes/log.php';
 if ( isset($_POST)) {
 
     include '../includes/loading.php';
