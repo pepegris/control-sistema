@@ -18,6 +18,7 @@
  ?>
 <br> 
 <br>
+
 <br>
 <br>
 <div id="body" >
@@ -120,6 +121,7 @@
 
 <br>
 <br>
+<center><h2>Buscar</h2></center>
 <br>
 <br>
 
