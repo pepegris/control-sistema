@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/formulario/formulario.css">
     <link rel="stylesheet" href="../css/formulario/bootstrap.min.css">
-    <title>Contadores</title>
+    <title>Servidores</title>
 </head>
 <style>
     #contadores {
