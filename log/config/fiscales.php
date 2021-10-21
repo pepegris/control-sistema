@@ -11,16 +11,15 @@
     
     <title>Conf Fiscales</title>
 </head>
+<style>
+
+</style>
 <body>
 <?php include '../includes/menu.php';
  
     
  ?>
-<br> 
-<br>
-
-<br>
-<br>
+ <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div id="body" >
 <form action="fiscales/fiscales_post.php" method="POST" enctype="multipart/form-data"  >
   
@@ -209,11 +208,9 @@
 
 <!-- BUSCADOR -->
 
-<br>
-<br>
-
-<br>
-<br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
     <div id="buscador">
     <center><h2>Buscar</h2></center>
 <div class="container mt-2">
