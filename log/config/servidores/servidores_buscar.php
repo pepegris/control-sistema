@@ -1,4 +1,4 @@
-<?php require_once 'includes/log.php';?>
+<?php require_once '../includes/log.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +19,7 @@
     
 </style>
 <body>
+¡
 <?php 
 if (isset($_POST)) {
 
@@ -131,7 +132,7 @@ if (isset($_POST)) {
         <td><?=$video?></td>
         <td><?=$red?></td>
         <td><?=$serv_fecha?></td>
-        <td><img src="../uploads/img/servidores/<?=$imagen?>" style="height: 90px;" alt=""></td>
+        <td><img src="/log/uploads/img/servidores/<?=$imagen?>" style="height: 90px;" alt=""></td>
 
         <td><?php
 

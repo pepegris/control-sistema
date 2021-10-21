@@ -13,7 +13,7 @@
 </head>
 <body>
 <?php include '../includes/menu.php';
-       include 'includes/icono.php';
+ 
     
  ?>
 <br> 

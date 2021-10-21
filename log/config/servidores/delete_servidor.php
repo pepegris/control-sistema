@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/log.php';
+require_once '../includes/log.php';
 require '../includes/conexion_control.php';
 
 if(isset($_GET['id'])) {
@@ -12,7 +12,7 @@ if(isset($_GET['id'])) {
 
   $_SESSION['message'] = 'fiscal Removed Successfully';
   $_SESSION['message_type'] = 'danger';
-  header('Location: servidor.php');
+  header('Location: ../servidor.php');
 }
 
 ?>

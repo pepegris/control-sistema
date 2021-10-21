@@ -155,11 +155,11 @@ CREATE TABLE servidor_auditoria (
   fis_des VARCHAR(255),
   fis_img VARCHAR(255),
   fis_fecha DATE NOT NULL,
-  fecha datetime NOT NULL DEFAULT CURRENT_TIMESTAMP 
+  fecha datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   estado1 VARCHAR(25) NOT NULL,
   estado2 VARCHAR(25) NOT NULL,
   estado3 VARCHAR(25) NOT NULL,
-  estado4 VARCHAR(25) NOT NULL,
+  estado4 VARCHAR(25) NOT NULL
 
 
 );

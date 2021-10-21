@@ -1,6 +1,6 @@
 <?php
 
-require_once 'includes/log.php';
+require_once '../includes/log.php';
 require '../includes/conexion_control.php';
  $tienda=''; 
  $serv_des='';
@@ -95,7 +95,7 @@ if (isset($_POST['update'])) {
         mysqli_query($conn, $query);
         $_SESSION['message'] = 'Edit Updated Successfully';
         $_SESSION['message_type'] = 'warning *EDITANDO*';
-        header('Location: servidores.php');
+        header('Location: ../servidores.php');
         }
           
         }
@@ -105,8 +105,7 @@ if (isset($_POST['update'])) {
 }
 
 ?>
-<?php  
-      include '../includes/menu.php'; ?>
+
 <div class="container p-4">
   <div class="row">
     <div class="col-md-4 mx-auto">
