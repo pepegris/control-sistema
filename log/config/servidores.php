@@ -140,7 +140,7 @@
     <h2>Por Fecha</h2>
       <div class="card-body">
 
-      <form action="servidores_buscar.php" method="POST"  >
+      <form action="servidores/servidores_buscar.php" method="POST"  >
   
     
   <br>
@@ -172,7 +172,7 @@
      <h2>Por Sede</h2>
       <div class="card-body">
 
-      <form action="servidores_buscar.php" method="POST"  >
+      <form action="servidores/servidores_buscar.php" method="POST"  >
   
   
   <br>
