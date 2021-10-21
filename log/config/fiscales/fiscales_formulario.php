@@ -495,6 +495,20 @@ $consulta = mysqli_query($conn,$sql);
 
 </div>
 
+<!-- BUSCADOR -->
+
+<br> <br> <br> <br>
+    <div id='buscador'>
+   
+
+      </div>
+     </div>
+    
+
+    </div>
+
+    </div>
+  
 
 
 
