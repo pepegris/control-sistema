@@ -70,30 +70,30 @@
     </div>
 
     <div class="form-group">
-      <label for="serv_procesador" class="form-label mt-2">Procesador</label> 
-      <input type="text" name="serv_procesador" id="" class="form-control"  required>
+      <label for="serv_proc" class="form-label mt-2">Procesador</label> 
+      <input type="text" name="serv_proc" id="" class="form-control"  required>
     </div>
  
 
     <div class="form-group">
-      <label for="serv_memoria" class="form-label mt-2">Memoria Ram</label> 
-      <input type="text" name="serv_memoria" id="" class="form-control"  required>
+      <label for="serv_ram" class="form-label mt-2">Memoria Ram</label> 
+      <input type="text" name="serv_ram" id="" class="form-control"  required>
     </div>
 
 
     <div class="form-group">
-      <label for="serv_seriat" class="form-label mt-2">Disco Duro</label> 
-      <input type="text" name="serv_serial" id="" class="form-control"  required>
+      <label for="serv_disc" class="form-label mt-2">Disco Duro</label> 
+      <input type="text" name="serv_disc" id="" class="form-control"  required>
     </div>
 
     <div class="form-group">
-      <label for="serv_tarjeta_v" class="form-label mt-2">Tarjeta de Video</label> 
-      <input type="text" name="serv_tarjeta_v" id="" class="form-control"  required>
+      <label for="serv_vid class="form-label mt-2">Tarjeta de Video</label> 
+      <input type="text" name="serv_vid" id="" class="form-control"  required>
     </div>
 
     <div class="form-group">
-      <label for="serv_tarjeta_r" class="form-label mt-2">Tarjeta de Red</label> 
-      <input type="text" name="serv_tarjeta_r" id="" class="form-control"  required>
+      <label for="serv_red" class="form-label mt-2">Tarjeta de Red</label> 
+      <input type="text" name="serv_red" id="" class="form-control"  required>
     </div>
 
 

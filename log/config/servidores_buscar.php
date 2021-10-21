@@ -34,9 +34,14 @@ if (isset($_POST)) {
         <thead>
         
             <tr class='table-primary'>
-                <th scope='col' abbr='Starter'>Nº</th>
+  
                 <th scope='col' abbr='Starter'>Tienda</th>
-                <th scope='col' abbr='Starter'>Descripcion</th>
+                <th scope='col' abbr='Starter'>Mac</th>
+                <th scope='col' abbr='Starter'>Memoria Ram</th>
+                <th scope='col' abbr='Starter'>Procesador</th>
+                <th scope='col' abbr='Starter'>Disco Duro</th>
+                <th scope='col' abbr='Starter'>Tarjeta Video</th>
+                <th scope='col' abbr='Starter'>Tarjeta Red</th>
                 <th scope='col' abbr='Starter'>Fecha</th>
                 <th scope='col' abbr='Starter'>Imagen</th>
                 <th scope='col' abbr='Starter'>Accion</th>
@@ -102,7 +107,13 @@ if (isset($_POST)) {
 
             $id=$res['id'];
             $tienda=$res['tienda'];
-            $descripcion=$res['serv_des'];
+       //     $descripcion=$res['serv_des'];
+            $mac=$res['serv_mac'];
+            $procesador=$res['serv_proc'];
+            $ram=$res['serv_ram'];
+            $disco=$res['serv_disc'];
+            $video=$res['serv_vid'];
+            $red=$res['serv_red'];
             $imagen=$res['serv_img'];
             $serv_fecha=$res['serv_fecha']; ?>
     
@@ -110,9 +121,14 @@ if (isset($_POST)) {
 
         <td><?=$id?></td>
         <td><?=$tienda?></td>
-        <td><?=$descripcion?></td>
+        <td><?=$mac?></td>
+        <td><?=$procesador?></td>
+        <td><?=$ram?></td>
+        <td><?=$disco?></td>
+        <td><?=$video?></td>
+        <td><?=$red?></td>
         <td><?=$serv_fecha?></td>
-        <td><img src="../uploads/img/<?=$imagen?>" style="height: 90px;" alt=""></td>
+        <td><img src="../uploads/img/servidores/<?=$imagen?>" style="height: 90px;" alt=""></td>
 
         <td><a href='edit.php?id=<?php echo $id?>' class='btn btn-info'>
                     <i class='fas fa-marker'></i>
