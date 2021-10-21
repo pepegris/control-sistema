@@ -22,7 +22,7 @@
 <br>
 <br>
 <div id="body" >
-<form action="servidores_post.php" method="POST" enctype="multipart/form-data"  >
+<form action="servidores/servidores_post.php" method="POST" enctype="multipart/form-data"  >
   
     <div class="fieldset">
     <br>

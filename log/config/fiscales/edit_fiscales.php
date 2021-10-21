@@ -2,17 +2,34 @@
 
 require_once '../includes/log.php';
 require '../includes/conexion_control.php';
- $tienda=''; 
- $serv_des='';
- $serv_mac='';
- $serv_proc='';
- $serv_ram='';
- $serv_disc='';
- $serv_vid='';
- $serv_red='';
- $serv_img='';
- $serv_fecha='';
- $nombre_imagen=''; 
+$tienda='';
+$fis_marca1='';
+$fis_marca2='';
+$fis_marca3='';
+$fis_marca4='';
+
+$fis_modelo1='';
+$fis_modelo2='';
+$fis_modelo3='';
+$fis_modelo4='';
+
+$fis_serial1='';
+$fis_serial2='';
+$fis_serial3='';
+$fis_serial4='';
+
+$fis_nregistro1='';
+$fis_nregistro2='';
+$fis_nregistro3='';
+$fis_nregistro4='';
+
+$estado1='';
+$estado2='';
+$estado3='';
+$estado4='';
+
+$imagen='';
+$fis_fecha='';
  
 
 if  (isset($_GET['id'])) {
@@ -21,16 +38,34 @@ if  (isset($_GET['id'])) {
   $result = mysqli_query($conn, $query);
   if (mysqli_num_rows($result) == 1) {
     $row = mysqli_fetch_array($result);
-            $tienda=$row['tienda'];
-            $serv_des=$row['serv_des'];
-            $serv_mac=$row['serv_mac'];
-            $serv_proc=$row['serv_proc'];
-            $serv_ram=$row['serv_ram'];
-            $serv_disc=$row['serv_disc'];
-            $serv_vid=$row['serv_vid'];
-            $serv_red=$row['serv_red'];
-            $serv_img=$row['serv_img'];
-            $serv_fecha=$row['serv_fecha'];
+      $tienda=$row['tienda'] ;
+      $fis_marca1=$row['fis_marca1'];
+      $fis_marca2=$row['fis_marca2'];
+      $fis_marca3=$row['fis_marca3'];
+      $fis_marca4=$row['fis_marca4'];
+
+      $fis_modelo1=$row['fis_modelo1'];
+      $fis_modelo2=$row['fis_modelo2'];
+      $fis_modelo3=$row['fis_modelo3'];
+      $fis_modelo4=$row['fis_modelo4'];
+
+      $fis_serial1=$row['fis_serial1'];
+      $fis_serial2=$row['fis_serial2'];
+      $fis_serial3=$row['fis_serial3'];
+      $fis_serial4=$row['fis_serial4'];
+
+      $fis_nregistro1=$row['fis_nregistro1'];
+      $fis_nregistro2=$row['fis_nregistro2'];
+      $fis_nregistro3=$row['fis_nregistro3'];
+      $fis_nregistro4=$row['fis_nregistro4'];
+
+      $estado1=$row['estado1'];
+      $estado2=$row['estado2'];
+      $estado3=$row['estado3'];
+      $estado4=$row['estado4'];
+
+      $imagen=$row['fis_img'];
+      $fis_fecha=$row['fis_fecha'];
             $nombre_imagen = $_FILES['imagen']['name'];
     
     
@@ -40,15 +75,33 @@ if  (isset($_GET['id'])) {
 if (isset($_POST['update'])) {
 
   $id = $_GET['id'];
-    $serv_des=$_POST['serv_des'];
-    $serv_mac=$_POST['serv_mac'];
-    $serv_proc=$_POST['serv_proc'];
-    $serv_ram=$_POST['serv_ram'];
-    $serv_disc=$_POST['serv_disc'];
-    $serv_vid=$_POST['serv_vid'];
-    $serv_red=$_POST['serv_red'];
-    $serv_img=$_POST['serv_img'];
-    $serv_fecha=$_POST['serv_fecha'];
+  $fis_marca1=$_POST['fis_marca1'];
+  $fis_marca2=$_POST['fis_marca2'];
+  $fis_marca3=$_POST['fis_marca3'];
+  $fis_marca4=$_POST['fis_marca4'];
+
+  $fis_modelo1=$_POST['fis_modelo1'];
+  $fis_modelo2=$_POST['fis_modelo2'];
+  $fis_modelo3=$_POST['fis_modelo3'];
+  $fis_modelo4=$_POST['fis_modelo4'];
+
+  $fis_serial1=$_POST['fis_serial1'];
+  $fis_serial2=$_POST['fis_serial2'];
+  $fis_serial3=$_POST['fis_serial3'];
+  $fis_serial4=$_POST['fis_serial4'];
+
+  $fis_nregistro1=$_POST['fis_nregistro1'];
+  $fis_nregistro2=$_POST['fis_nregistro2'];
+  $fis_nregistro3=$_POST['fis_nregistro3'];
+  $fis_nregistro4=$_POST['fis_nregistro4'];
+
+  $estado1=$_POST['estado1'];
+  $estado2=$_POST['estado2'];
+  $estado3=$_POST['estado3'];
+  $estado4=$_POST['estado4'];
+
+  $imagen=$_POST['fis_img'];
+  $fis_fecha=$_POST['fis_fecha'];
     // DATOS DE IMAGEN
     $nombre_imagen = $_FILES['imagen']['name'];
     $tipo_imagen   = $_FILES['imagen']['type'];
@@ -62,7 +115,7 @@ if (isset($_POST['update'])) {
         mysqli_query($conn, $query);
         $_SESSION['message'] = 'Edit Updated Successfully';
         $_SESSION['message_type'] = 'warning *EDITANDO*';
-        header('Location: ../servidores.php');
+        header('Location: ../fiscales.php');
             
 
         
@@ -95,7 +148,7 @@ if (isset($_POST['update'])) {
         mysqli_query($conn, $query);
         $_SESSION['message'] = 'Edit Updated Successfully';
         $_SESSION['message_type'] = 'warning *EDITANDO*';
-        header('Location: ../servidores.php');
+        header('Location: ../fiscales.php');
         }
           
         }
