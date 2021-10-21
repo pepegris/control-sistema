@@ -37,12 +37,12 @@
       <?php 
         require '../includes/conexion_control.php';
 
-        $sql = "SELECT tienda FROM servidor_auditoria  ";
+        $sql = "SELECT sedes_nom FROM sedes  ";
         $consulta = mysqli_query($conn,$sql);
 
         while ($res=mysqli_fetch_array($consulta)) {
             
-            $sede=$res['tienda'];
+            $sede=$res['sedes_nom'];
             
         ?>
             <option value="<?=$sede?>"><?=$sede?></option>
@@ -70,29 +70,29 @@
     </div>
 
     <div class="form-group">
-      <label for="serv_procesador" class="form-label mt-2">procesador</label> 
+      <label for="serv_procesador" class="form-label mt-2">Procesador</label> 
       <input type="text" name="serv_procesador" id="" class="form-control"  required>
     </div>
  
 
     <div class="form-group">
-      <label for="serv_memoria" class="form-label mt-2">memoria ram</label> 
+      <label for="serv_memoria" class="form-label mt-2">Memoria Ram</label> 
       <input type="text" name="serv_memoria" id="" class="form-control"  required>
     </div>
 
 
     <div class="form-group">
-      <label for="serv_seriat" class="form-label mt-2">disco duro</label> 
+      <label for="serv_seriat" class="form-label mt-2">Disco Duro</label> 
       <input type="text" name="serv_serial" id="" class="form-control"  required>
     </div>
 
     <div class="form-group">
-      <label for="serv_tarjeta_v" class="form-label mt-2">tarjeta de video</label> 
+      <label for="serv_tarjeta_v" class="form-label mt-2">Tarjeta de Video</label> 
       <input type="text" name="serv_tarjeta_v" id="" class="form-control"  required>
     </div>
 
     <div class="form-group">
-      <label for="serv_tarjeta_r" class="form-label mt-2">tarjeta de red</label> 
+      <label for="serv_tarjeta_r" class="form-label mt-2">Tarjeta de Red</label> 
       <input type="text" name="serv_tarjeta_r" id="" class="form-control"  required>
     </div>
 
