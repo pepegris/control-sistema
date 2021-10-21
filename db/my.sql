@@ -81,31 +81,37 @@ CREATE TABLE fiscal (
 CREATE TABLE servidor_auditoria (
   id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
   tienda VARCHAR(85) NOT NULL,
+  serv_mac VARCHAR(85) NOT NULL,
+  serv_proc VARCHAR(85) NOT NULL,
+  serv_ram VARCHAR(85) NOT NULL,
+  serv_disc VARCHAR(85) NOT NULL
+  serv_vid VARCHAR(85) NOT NULL,
+  serv_red VARCHAR(85),
   serv_des VARCHAR(255),
   serv_img VARCHAR(255),
   serv_fecha DATE NOT NULL,
   fecha datetime NOT NULL DEFAULT CURRENT_TIMESTAMP 
 );
 
-    INSERT INTO  servidor_auditoria VALUES (null,'Sede Boleita',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES  ( null,'Sede Sabana Grande',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Merina',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Merina III',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Corina I',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES   (null,'Comercial Corina II',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Punto Fijo',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Matur',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Valena',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Trina',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Kagu',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Nachari',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Higue',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Turme',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Apura',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Vallepa',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Ojena',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Puecruz',null,null,now(),now());
-    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Acari',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES (null,'Sede Boleita','dir mac','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES  ( null,'Sede Sabana Grande','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Merina','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Merina III','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Corina I','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES   (null,'Comercial Corina II','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Punto Fijo','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Matur','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Valena','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Trina','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Kagu','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Nachari','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Higue','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Turme','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Apura','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Vallepa','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Ojena','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Puecruz','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
+    INSERT INTO  servidor_auditoria VALUES(null,'Comercial Acari','direccion mac','procesador','memoria ram','disco duro','tarjeta de video','tarjeta de red',null,null,now(),now());
 
 
     CREATE TABLE fiscal_auditoria (

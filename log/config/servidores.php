@@ -65,7 +65,7 @@
    
 
     <div class="form-group">
-      <label for="serv_mac" class="form-label mt-2">Mac</label> 
+      <label for="serv_mac" class="form-label mt-2">Dir Mac</label> 
       <input type="text" name="serv_mac" id="" class="form-control"  required>
     </div>
 
