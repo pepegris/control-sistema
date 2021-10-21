@@ -186,12 +186,12 @@
     <?php 
       
 
-      $sql = "SELECT tienda FROM servidor_auditoria  ";
+      $sql = "SELECT sedes_nom FROM sedes ";
       $consulta = mysqli_query($conn,$sql);
 
       while ($res=mysqli_fetch_array($consulta)) {
           
-          $sede=$res['tienda'];
+          $sede=$res['sedes_nom'];
           
       ?>
           <option value="<?=$sede?>"><?=$sede?></option>
