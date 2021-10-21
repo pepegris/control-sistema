@@ -96,6 +96,10 @@ if (isset($_POST)) {
 
 
                     $sql="SELECT * from fiscal_auditoria WHERE fis_fecha <='$fecha_hasta'  order by fis_fecha desc ";
+                }else {
+
+                    $sql="SELECT * from fiscal_auditoria";
+
                 }
 
 
