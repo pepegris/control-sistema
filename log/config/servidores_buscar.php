@@ -13,6 +13,9 @@
     #contadores {
         margin-left: 95px;
     }
+    table td{
+        color: black;
+    }
     
 </style>
 <body>
