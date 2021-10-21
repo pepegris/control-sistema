@@ -136,9 +136,10 @@ if (isset($_POST)) {
         <td><a href='edit_servidor.php?id=<?php echo $id?>' class='btn btn-info'>
                     <i class='fas fa-marker'></i>
         </a>
-            <a href='delete_servidor.php?id=<?php echo $id?>' class='btn btn-danger'>
+            <!-- <a href='delete_servidor.php?id=<?php echo $id?>' class='btn btn-danger'>
                     <i class='far fa-trash-alt'></i>
-            </a></td>
+            </a> -->
+        </td>
         
      
     </tr>
