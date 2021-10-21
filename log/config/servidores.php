@@ -121,14 +121,16 @@
 
 <br>
 <br>
-<center><h2>Buscar</h2></center>
+
 <br>
 <br>
 
 </div>
 
 <!-- BUSCADOR -->
-    
+
+    <div id="buscador">
+    <center><h2>Buscar</h2></center>
 <div class="container mt-2">
   <div class="row">
 
@@ -211,7 +213,7 @@
 
     </div>
 
-    
+    </div>
   
 
 
