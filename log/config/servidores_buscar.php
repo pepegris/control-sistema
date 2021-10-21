@@ -133,9 +133,22 @@ if (isset($_POST)) {
         <td><?=$serv_fecha?></td>
         <td><img src="../uploads/img/servidores/<?=$imagen?>" style="height: 90px;" alt=""></td>
 
-        <td><a href='edit_servidor.php?id=<?php echo $id?>' class='btn btn-info'>
-                    <i class='fas fa-marker'></i>
-        </a>
+        <td><?php
+
+
+        if ($cuenta_on=='sistema') {
+            
+            echo "<a href='edit_servidor.php?id=<?php echo $id?>' class='btn btn-info'>
+            <i class='fas fa-marker'></i></a>";
+        }else {
+            echo "<a href='#' class='btn btn-info'>
+            <i class='fas fa-marker'></i></a>";
+        }
+
+        
+        
+        
+        ?>
             <!-- <a href='delete_servidor.php?id=<?php echo $id?>' class='btn btn-danger'>
                     <i class='far fa-trash-alt'></i>
             </a> -->
