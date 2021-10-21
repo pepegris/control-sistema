@@ -84,7 +84,7 @@ CREATE TABLE servidor_auditoria (
   serv_mac VARCHAR(85) NOT NULL,
   serv_proc VARCHAR(85) NOT NULL,
   serv_ram VARCHAR(85) NOT NULL,
-  serv_disc VARCHAR(85) NOT NULL
+  serv_disc VARCHAR(85) NOT NULL,
   serv_vid VARCHAR(85) NOT NULL,
   serv_red VARCHAR(85),
   serv_des VARCHAR(255),
