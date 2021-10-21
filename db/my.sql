@@ -159,7 +159,9 @@ CREATE TABLE servidor_auditoria (
   estado1 VARCHAR(25) NOT NULL,
   estado2 VARCHAR(25) NOT NULL,
   estado3 VARCHAR(25) NOT NULL,
-  estado4 VARCHAR(25) NOT NULL
+  estado4 VARCHAR(25) NOT NULL,
+
+
 );
 
     INSERT INTO  fiscal_auditoria VALUES (null,'Sede Boleita',null,null,null,null,null,null, null,null,null,null,null,null,null,null, null,null,null,null,now(),now(),'OPERATIVO','DAÑADO','OPERATIVO','DAÑADO');
