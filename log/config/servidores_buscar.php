@@ -119,7 +119,7 @@ if (isset($_POST)) {
     
     <tr>
 
-        <td><?=$id?></td>
+   
         <td><?=$tienda?></td>
         <td><?=$mac?></td>
         <td><?=$procesador?></td>
@@ -130,10 +130,10 @@ if (isset($_POST)) {
         <td><?=$serv_fecha?></td>
         <td><img src="../uploads/img/servidores/<?=$imagen?>" style="height: 90px;" alt=""></td>
 
-        <td><a href='edit.php?id=<?php echo $id?>' class='btn btn-info'>
+        <td><a href='edit_servidor.php?id=<?php echo $id?>' class='btn btn-info'>
                     <i class='fas fa-marker'></i>
         </a>
-            <a href='delete.php?id=<?php echo $id?>' class='btn btn-danger'>
+            <a href='delete_servidor.php?id=<?php echo $id?>' class='btn btn-danger'>
                     <i class='far fa-trash-alt'></i>
             </a></td>
         

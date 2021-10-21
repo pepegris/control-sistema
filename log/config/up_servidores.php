@@ -83,7 +83,7 @@ if ( isset($_POST)) {
         if ($conn) {
 
             //$sql= "INSERT INTO fiscal VALUES (null,'$tienda','$serv_des','$imagen','$serv_fecha',now())";
-            $sql= "UPDATE servidor_auditoria SET serv_mac='$serv_mac', serv_proc='$serv_proc', serv_ram='$serv_ram', serv_disc='$serv_disc', serv_vid='$serv_vid', serv_red='$serv_red', serv_des='$serv_des', serv_fecha='$serv_fecha' WHERE tienda ='$tienda' ";
+            $sql= "UPDATE servidor_auditoria SET serv_mac='$serv_mac', serv_proc='$serv_proc', serv_ram='$serv_ram', serv_disc='$serv_disc', serv_vid='$serv_vid', serv_red='$serv_red', serv_des='$serv_des',serv_img='$imagen', serv_fecha='$serv_fecha' WHERE tienda ='$tienda' ";
                             
             $guardar = mysqli_query($conn,$sql);
                             
