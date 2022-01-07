@@ -45,29 +45,113 @@ if ( isset($_POST)) {
         if ($conn) {
 
   // $sql= "INSERT INTO servidor_auditoria VALUES (null,'$tienda','$serv_des',null,'$serv_fecha',now())";
-    $sql= "UPDATE fiscal_auditoria SET fis_marca1 ='$fis_marca1',
+
+  // VALIDAR Y REGISTRAR LA CANTIDAD DE FISCALES QUE INGRESO
+  // LOS DATOOS Y SERIALES DE LA TABLA FISCAL_AUDITORIA SON UNICOS 
+  // POR ESO SE HACEN DIVERSON UPDATE DEPENDIENDO DE LA CANTIDAD INGRESADA
+  
+  if ($fis_serial2 =='' ) {
+      // si la tienda tiene una sola Fiscal
+    $sql= "UPDATE fiscal_auditoria SET 
+    fis_marca1 ='$fis_marca1',
+
+    fis_modelo1 ='$fis_modelo1',
+
+    fis_serial1 ='$fis_serial1' ,
+
+    fis_nregistro1 ='$fis_nregistro1' ,
+    
+    fis_fecha='$fis_fecha' ,
+    
+    estado1 ='$estado1'
+  
+     WHERE tienda ='$tienda' ";
+
+
+
+  }if ($fis_serial3=='') {
+      // si la tienda tiene dos Fiscales
+    $sql= "UPDATE fiscal_auditoria SET 
+    fis_marca1 ='$fis_marca1',
+    fis_marca2 ='$fis_marca2',
+
+    fis_modelo1 ='$fis_modelo1',
+    fis_modelo2 ='$fis_modelo2',
+
+    fis_serial1 ='$fis_serial1' ,
+    fis_serial2 ='$fis_serial2' ,
+
+    fis_nregistro1 ='$fis_nregistro1' ,
+    fis_nregistro2 ='$fis_nregistro2' ,
+    
+    fis_fecha='$fis_fecha' ,
+    
+    estado1 ='$estado1',
+    estado2 ='$estado2'
+  
+     WHERE tienda ='$tienda' ";
+
+  }if ($fis_serial4=='') {
+      // si la tienda tiene tres Fiscales
+    $sql= "UPDATE fiscal_auditoria SET 
+    fis_marca1 ='$fis_marca1',
+    fis_marca2 ='$fis_marca2',
+    fis_marca3 ='$fis_marca3',
+
+    fis_modelo1 ='$fis_modelo1',
+    fis_modelo2 ='$fis_modelo2',
+    fis_modelo3 ='$fis_modelo3',
+
+    fis_serial1 ='$fis_serial1' ,
+    fis_serial2 ='$fis_serial2' ,
+    fis_serial3 ='$fis_serial3' ,
+
+    fis_nregistro1 ='$fis_nregistro1' ,
+    fis_nregistro2 ='$fis_nregistro2' ,
+    fis_nregistro3 ='$fis_nregistro3' ,
+    
+    fis_fecha='$fis_fecha' ,
+    
+    estado1 ='$estado1',
+    estado2 ='$estado2',
+    estado3 ='$estado3'
+  
+     WHERE tienda ='$tienda' ";
+
+  }
+  
+  else {
+      // si la tienda tiene cuatro Fiscales Maximo
+    $sql= "UPDATE fiscal_auditoria SET 
+    fis_marca1 ='$fis_marca1',
     fis_marca2 ='$fis_marca2',
     fis_marca3 ='$fis_marca3',
     fis_marca4 ='$fis_marca4',
+
     fis_modelo1 ='$fis_modelo1',
     fis_modelo2 ='$fis_modelo2',
     fis_modelo3 ='$fis_modelo3',
     fis_modelo4 ='$fis_modelo4',
+
     fis_serial1 ='$fis_serial1' ,
     fis_serial2 ='$fis_serial2' ,
     fis_serial3 ='$fis_serial3' ,
     fis_serial4 ='$fis_serial4' ,
+
     fis_nregistro1 ='$fis_nregistro1' ,
     fis_nregistro2 ='$fis_nregistro2' ,
     fis_nregistro3 ='$fis_nregistro3' ,
     fis_nregistro4 ='$fis_nregistro4' ,
+    
     fis_fecha='$fis_fecha' ,
+    
     estado1 ='$estado1',
     estado2 ='$estado2',
     estado3 ='$estado3',
     estado4 ='$estado4'
   
      WHERE tienda ='$tienda' ";
+  }
                     
     $guardar = mysqli_query($conn,$sql);
     echo "<br><center><h3>Cargando Servidor sin imagen</h3></center>";
@@ -125,7 +209,7 @@ if ( isset($_POST)) {
 
             //$sql= "INSERT INTO fiscal VALUES (null,'$tienda','$serv_des','$imagen','$serv_fecha',now())";
 
-            $sql= "UPDATE fiscal_auditoria SET fis_marca1 ='$fis_marca1',
+       /*      $sql= "UPDATE fiscal_auditoria SET fis_marca1 ='$fis_marca1',
                     fis_marca2 ='$fis_marca2',
                     fis_marca3 ='$fis_marca3',
                     fis_marca4 ='$fis_marca4',
@@ -150,7 +234,117 @@ if ( isset($_POST)) {
                     estado3 ='$estado3',
                     estado4 ='$estado4'
                 
-                    WHERE tienda ='$tienda' ";
+                    WHERE tienda ='$tienda' "; */
+
+
+                    if ($fis_serial2 =='' ) {
+                        // si la tienda tiene una sola Fiscal
+                      $sql= "UPDATE fiscal_auditoria SET 
+                      fis_marca1 ='$fis_marca1',
+                  
+                      fis_modelo1 ='$fis_modelo1',
+                  
+                      fis_serial1 ='$fis_serial1' ,
+                  
+                      fis_nregistro1 ='$fis_nregistro1' ,
+                      
+                      fis_img='$imagen',
+                      fis_fecha='$fis_fecha' ,
+                      
+                      estado1 ='$estado1'
+                    
+                       WHERE tienda ='$tienda' ";
+                  
+                  
+                  
+                    }if ($fis_serial3=='') {
+                        // si la tienda tiene dos Fiscales
+                      $sql= "UPDATE fiscal_auditoria SET 
+                      fis_marca1 ='$fis_marca1',
+                      fis_marca2 ='$fis_marca2',
+                  
+                      fis_modelo1 ='$fis_modelo1',
+                      fis_modelo2 ='$fis_modelo2',
+                  
+                      fis_serial1 ='$fis_serial1' ,
+                      fis_serial2 ='$fis_serial2' ,
+                  
+                      fis_nregistro1 ='$fis_nregistro1' ,
+                      fis_nregistro2 ='$fis_nregistro2' ,
+                      
+                      fis_img='$imagen',
+                      fis_fecha='$fis_fecha' ,
+                      
+                      estado1 ='$estado1',
+                      estado2 ='$estado2'
+                    
+                       WHERE tienda ='$tienda' ";
+                  
+                    }if ($fis_serial4=='') {
+                        // si la tienda tiene tres Fiscales
+                      $sql= "UPDATE fiscal_auditoria SET 
+                      fis_marca1 ='$fis_marca1',
+                      fis_marca2 ='$fis_marca2',
+                      fis_marca3 ='$fis_marca3',
+                  
+                      fis_modelo1 ='$fis_modelo1',
+                      fis_modelo2 ='$fis_modelo2',
+                      fis_modelo3 ='$fis_modelo3',
+                  
+                      fis_serial1 ='$fis_serial1' ,
+                      fis_serial2 ='$fis_serial2' ,
+                      fis_serial3 ='$fis_serial3' ,
+                  
+                      fis_nregistro1 ='$fis_nregistro1' ,
+                      fis_nregistro2 ='$fis_nregistro2' ,
+                      fis_nregistro3 ='$fis_nregistro3' ,
+                      
+                      fis_img='$imagen',
+                      fis_fecha='$fis_fecha' ,
+                      
+                      estado1 ='$estado1',
+                      estado2 ='$estado2',
+                      estado3 ='$estado3'
+                    
+                       WHERE tienda ='$tienda' ";
+                  
+                    }
+                    
+                    else {
+                        // si la tienda tiene cuatro Fiscales Maximo
+                      $sql= "UPDATE fiscal_auditoria SET 
+                      fis_marca1 ='$fis_marca1',
+                      fis_marca2 ='$fis_marca2',
+                      fis_marca3 ='$fis_marca3',
+                      fis_marca4 ='$fis_marca4',
+                  
+                      fis_modelo1 ='$fis_modelo1',
+                      fis_modelo2 ='$fis_modelo2',
+                      fis_modelo3 ='$fis_modelo3',
+                      fis_modelo4 ='$fis_modelo4',
+                  
+                      fis_serial1 ='$fis_serial1' ,
+                      fis_serial2 ='$fis_serial2' ,
+                      fis_serial3 ='$fis_serial3' ,
+                      fis_serial4 ='$fis_serial4' ,
+                  
+                      fis_nregistro1 ='$fis_nregistro1' ,
+                      fis_nregistro2 ='$fis_nregistro2' ,
+                      fis_nregistro3 ='$fis_nregistro3' ,
+                      fis_nregistro4 ='$fis_nregistro4' ,
+                      
+                      fis_img='$imagen',
+                      fis_fecha='$fis_fecha' ,
+                      
+                      estado1 ='$estado1',
+                      estado2 ='$estado2',
+                      estado3 ='$estado3',
+                      estado4 ='$estado4'
+                    
+                       WHERE tienda ='$tienda' ";
+                    }
+
+
                             
             $guardar = mysqli_query($conn,$sql);
                             
