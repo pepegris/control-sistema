@@ -164,8 +164,8 @@ CREATE TABLE servidor_auditoria (
 
 );
 
-    INSERT INTO  fiscal_auditoria VALUES (null,'Sede Boleita',null,null,null,null,null,null, null,null,null,null,null,null,null,null, null,null,null,null,now(),now(),'OPERATIVO','DAÑADO','OPERATIVO','DAÑADO');
-    INSERT INTO  fiscal_auditoria VALUES  ( null,'Sede Sabana Grande',null,null,null,null,null,null, null,null,null,null,null,null,null,null, null,null,null,null,now(),now(),'OPERATIVO','DAÑADO','OPERATIVO','DAÑADO');
+/*     INSERT INTO  fiscal_auditoria VALUES (null,'Sede Boleita',null,null,null,null,null,null, null,null,null,null,null,null,null,null, null,null,null,null,now(),now(),'OPERATIVO','DAÑADO','OPERATIVO','DAÑADO');
+    INSERT INTO  fiscal_auditoria VALUES  ( null,'Sede Sabana Grande',null,null,null,null,null,null, null,null,null,null,null,null,null,null, null,null,null,null,now(),now(),'OPERATIVO','DAÑADO','OPERATIVO','DAÑADO'); */
     INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Merina',null,null,null,null,null,null, null,null,null,null,null,null,null,null, null,null,null,null,now(),now(),'OPERATIVO','DAÑADO','OPERATIVO','DAÑADO');
     INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Merina III',null,null,null,null,null,null, null,null,null,null,null,null,null,null, null,null,null,null,now(),now(),'OPERATIVO','DAÑADO','OPERATIVO','DAÑADO');
     INSERT INTO  fiscal_auditoria VALUES(null,'Comercial Corina I',null,null,null,null,null,null, null,null,null,null,null,null,null,null, null,null,null,null,now(),now(),'OPERATIVO','DAÑADO','OPERATIVO','DAÑADO');

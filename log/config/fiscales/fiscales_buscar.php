@@ -19,7 +19,7 @@
     
 </style>
 <body>
-¡
+
 <?php 
 if (isset($_POST)) {
 
