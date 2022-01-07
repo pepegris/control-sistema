@@ -105,7 +105,8 @@ $consulta = mysqli_query($conn,$sql);
                 <label for='imagen' class='form-label mt-2'>Cargar imagen</label>
                 <input type='file' class='form-control' name='imagen' size='100' id=''>
                 </div>
-
+                <hr>
+                <h4>Fiscal 1</h4>
                 <!-- FISCAL NUMERO ONE 1 -->
                 <div class='form-group'>
                 <label for='fis_marca1' class='form-label mt-2'>Marca Fiscal 1</label> 
@@ -155,6 +156,8 @@ $consulta = mysqli_query($conn,$sql);
                                <label for='imagen' class='form-label mt-2'>Cargar imagen</label>
                                <input type='file' class='form-control' name='imagen' size='100' id=''>
                                </div>
+                               <hr>
+                                  <h4>Fiscal 1</h4>
                
                                <!-- FISCAL NUMERO ONE 1 -->
                                <div class='form-group'>
@@ -186,6 +189,9 @@ $consulta = mysqli_query($conn,$sql);
                                    <option value='INEXISTENTE'>INEXISTENTE</option>
                                </select>
                                </div>
+
+                               <hr>
+                              <h4>Fiscal 2</h4>
                
                                <!-- FISCAL NUMERO TWOO 2-->
                
@@ -238,7 +244,9 @@ $consulta = mysqli_query($conn,$sql);
                                     <label for='imagen' class='form-label mt-2'>Cargar imagen</label>
                                     <input type='file' class='form-control' name='imagen' size='100' id=''>
                                     </div>
-                
+                                    
+                                    <hr>
+                                    <h4>Fiscal 1</h4>
                                     <!-- FISCAL NUMERO ONE 1 -->
                                     <div class='form-group'>
                                     <label for='fis_marca1' class='form-label mt-2'>Marca Fiscal 1</label> 
@@ -269,6 +277,8 @@ $consulta = mysqli_query($conn,$sql);
                                         <option value='INEXISTENTE'>INEXISTENTE</option>
                                     </select>
                                     </div>
+                                    <hr>
+                                          <h4>Fiscal 2</h4>
                 
                                     <!-- FISCAL NUMERO TWOO 2-->
                 
@@ -301,6 +311,10 @@ $consulta = mysqli_query($conn,$sql);
                                         <option value='INEXISTENTE'>INEXISTENTE</option>
                                     </select>
                                     </div>
+
+
+                                    <hr>
+                                    <h4>Fiscal 3</h4>
                                     <!-- FISCAL NUMERO TRHEE 3-->
                 
                                     <div class='form-group'>
@@ -353,6 +367,9 @@ $consulta = mysqli_query($conn,$sql);
                     <input type='file' class='form-control' name='imagen' size='100' id=''>
                     </div>
 
+                    <hr>
+                  <h4>Fiscal 1</h4>
+
                     <!-- FISCAL NUMERO ONE 1 -->
                     <div class='form-group'>
                     <label for='fis_marca1' class='form-label mt-2'>Marca Fiscal 1</label> 
@@ -383,6 +400,9 @@ $consulta = mysqli_query($conn,$sql);
                         <option value='INEXISTENTE'>INEXISTENTE</option>
                     </select>
                     </div>
+
+                    <hr>
+                <h4>Fiscal 2</h4>
 
                     <!-- FISCAL NUMERO TWOO 2-->
 
@@ -415,6 +435,10 @@ $consulta = mysqli_query($conn,$sql);
                         <option value='INEXISTENTE'>INEXISTENTE</option>
                     </select>
                     </div>
+
+
+                    <hr>
+                <h4>Fiscal 3</h4>
                     <!-- FISCAL NUMERO TRHEE 3-->
 
                     <div class='form-group'>
@@ -446,6 +470,10 @@ $consulta = mysqli_query($conn,$sql);
                         <option value='INEXISTENTE'>INEXISTENTE</option>
                     </select>
                 </div>
+
+
+                <hr>
+                <h4>Fiscal 4</h4>
                     <!-- FISCAL NUMERO FOUR 4-->
 
                     <div class='form-group'>

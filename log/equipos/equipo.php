@@ -157,9 +157,9 @@
     <br>
     <label for="estado" >Estado:</label>
     <select name="estado" id="" >
-    <option value="Operativo">Operativo</option>
-    <option value="Averiado">Averiado</option>
-    <option value="Espera">Espera</option>
+    <option value="Equipo">Equipo</option>
+    <option value="Fiscal">Fiscal</option>
+    <option value="Otros">Otros</option>
     </select>
 
     <label for="eq_fecha" >Fecha:</label>
@@ -210,6 +210,7 @@
 <div class="col-sm-4">
     <div class="card">
       <div class="card-body">
+        <p class="card-text" >Nota: <?=$id?></p>
         <h5 class="card-title"><?=$usuario?></h5>
         <p class="card-text"><?=$equipo?></p>
         <p class="card-text"><?=$eq_fecha?></p>
@@ -229,7 +230,7 @@
       </div>
     </div>
   </div>
-  
+  <br>
 
 
 
