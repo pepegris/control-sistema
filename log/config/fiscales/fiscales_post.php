@@ -39,7 +39,8 @@ if ( isset($_POST)) {
         $fis_fecha=isset ($_POST ['fis_fecha']) ? mysqli_real_escape_string($conn,$_POST ['fis_fecha'] ): false ;
       
       
-        
+        $er=var_dump($fis_serial4);
+        echo "$er";
 
    if ($nombre_imagen == ''  ) {
         if ($conn) {
