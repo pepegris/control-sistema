@@ -39,9 +39,7 @@ if ( isset($_POST)) {
         $fis_fecha=isset ($_POST ['fis_fecha']) ? mysqli_real_escape_string($conn,$_POST ['fis_fecha'] ): false ;
       
       
-        $er=var_dump($fis_serial4);
-        echo "$er";
-
+    
    if ($nombre_imagen == ''  ) {
         if ($conn) {
 
@@ -210,32 +208,7 @@ if ( isset($_POST)) {
 
             //$sql= "INSERT INTO fiscal VALUES (null,'$tienda','$serv_des','$imagen','$serv_fecha',now())";
 
-       /*      $sql= "UPDATE fiscal_auditoria SET fis_marca1 ='$fis_marca1',
-                    fis_marca2 ='$fis_marca2',
-                    fis_marca3 ='$fis_marca3',
-                    fis_marca4 ='$fis_marca4',
-                    fis_modelo1 ='$fis_modelo1',
-                    fis_modelo2 ='$fis_modelo2',
-                    fis_modelo3 ='$fis_modelo3',
-                    fis_modelo4 ='$fis_modelo4',
-                    fis_serial1 ='$fis_serial1' ,
-                    fis_serial2 ='$fis_serial2' ,
-                    fis_serial3 ='$fis_serial3' ,
-                    fis_serial4 ='$fis_serial4' ,
-                    fis_nregistro1 ='$fis_nregistro1' ,
-                    fis_nregistro2 ='$fis_nregistro2' ,
-                    fis_nregistro3 ='$fis_nregistro3' ,
-                    fis_nregistro4 ='$fis_nregistro4' ,
-                    null,
-                    fis_img='$imagen',
-                    fis_fecha='$fis_fecha' ,
-                    now(), 
-                    estado1 ='$estado1',
-                    estado2 ='$estado2',
-                    estado3 ='$estado3',
-                    estado4 ='$estado4'
-                
-                    WHERE tienda ='$tienda' "; */
+       
 
 
                     if ($fis_serial2 =='' ) {
