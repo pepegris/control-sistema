@@ -45,9 +45,9 @@ if (isset($_POST)) {
                 <th scope='col' abbr='Starter'>Fiscal2</th>
                 <th scope='col' abbr='Starter'>Fiscal3</th>
                 <th scope='col' abbr='Starter'>Fiscal4</th>
-                <th scope='col' abbr='Starter'>Fecha</th>
+                <!-- <th scope='col' abbr='Starter'>Fecha</th> -->
                 <th scope='col' abbr='Starter'>Imagen</th>
-                <th scope='col' abbr='Starter'>Accion</th>
+                <!-- <th scope='col' abbr='Starter'>Accion</th> -->
                 
                
 				
@@ -176,29 +176,29 @@ if (isset($_POST)) {
         <?=$estado4;?>
         </td>
 
-        <td><?=$fis_fecha?></td>
+        <!-- <td><?=$fis_fecha?></td> -->
         <td><img src="/log/uploads/img/fiscales/<?=$imagen?>" style="height: 90px;" alt=""></td>
 
-        <td><?php
+      <!--   <td><?php
 
 
-        if ($cuenta_on=='sistema') {
+     /*    if ($cuenta_on=='sistema') {
             
             echo "<a href='edit_fiscales.php?id=<?php echo $id?>' class='btn btn-info'>
             <i class='fas fa-marker'></i></a>";
         }else {
             echo "<a href='#' class='btn btn-info'>
             <i class='fas fa-marker'></i></a>";
-        }
+        } */
 
         
         
         
         ?>
-            <!-- <a href='delete_fiscales.php?id=<?php echo $id?>' class='btn btn-danger'>
+            <a href='delete_fiscales.php?id=<?php echo $id?>' class='btn btn-danger'>
                     <i class='far fa-trash-alt'></i>
-            </a> -->
-        </td>
+            </a> 
+        </td> -->
         
      
     </tr>
