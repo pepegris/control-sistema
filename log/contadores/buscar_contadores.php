@@ -153,8 +153,8 @@ if (isset($_POST)) {
 
                 
 
-                <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
-                <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>
+                <!--   <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
+                <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>-->
                 
                 </tr>
                   ";
