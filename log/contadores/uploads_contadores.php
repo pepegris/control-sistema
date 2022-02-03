@@ -48,12 +48,10 @@ if (isset($_FILES) && isset($_POST)) {
         
        
 
-    /*     var_dump($_FILES); */
-     //  var_dump($_POST); 
         
-    if ($tam_imagen <= 10000000) {
+  //  if ($tam_imagen <= 10000000) {
 
-        if ($tipo_imagen=="image/jpeg" or $tipo_imagen=="image/jpg" or $tipo_imagen=="image/png" or $tipo_imagen=="image/gif"  ) {
+      //  if ($tipo_imagen=="image/jpeg" or $tipo_imagen=="image/jpg" or $tipo_imagen=="image/png" or $tipo_imagen=="image/gif"  ) {
 
         
             //ruta del destino del servidor
@@ -152,19 +150,19 @@ if (isset($_FILES) && isset($_POST)) {
 
 
     
-            
+       
+/*IMAGENES IMAGENES IMAGENES IMAGENES         
             }else {
                 echo "<center><h3>Por favor suba una imagen valida /JPG/JPEG/PNG/GIF: </h3> <p>$tipo_imagen</p></center>";
                 echo "<a href='contadores.php' class='btn btn-danger'>Salir</a>";
                                 die();
             }
     
-    
-    }else {
+     }else {
         echo "<center><h3>Ingrese una imagen de un tamnaño inferior a 10MB: </h3> <p>$tam_imagen</p></center>";
         echo "<a href='contadores.php' class='btn btn-danger'>Salir</a>";
                         die();
-    }
+    } */
 
 
 }else{
