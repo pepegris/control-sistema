@@ -9,5 +9,5 @@
 <a href="../config/fiscales/fiscales_buscar.php" class="btn btn-dark" style="position: fixed;
     bottom: 90%;
     right: 10%;
-    top:10%;
-    font-size:30px;" >Estado de Fiscales</a>
+    top:12%;
+    font-size:20px;" >Estado de Fiscales</a>
