@@ -93,7 +93,7 @@
           <option value="<?=$sede?>"><?=$sede?></option>
 
       <?php } ?>
-      <option value="Empleado">Empleado</option>
+      <option value="Proveedor">Proveedor Externo</option>
     </select>
     
   </div>
