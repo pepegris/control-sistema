@@ -64,7 +64,7 @@ if (isset($_POST)) {
     if ($conn) {
 
         $sql;
-        if ($sedes_nom=="Todos") {
+        if ($sedes_nom=="Todos" or $sedes_nom==null ) {
 
 
            
