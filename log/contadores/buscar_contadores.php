@@ -40,7 +40,7 @@ if (isset($_POST)) {
                 <th scope='col' abbr='Starter'>Inicial</th>
                 <th scope='col' abbr='Starter'>Final</th>
                 <th scope='col' abbr='Starter'>Observacion</th>
-                <th scope='col' abbr='Starter'>Contador</th>
+                <!-- <th scope='col' abbr='Starter'>IMAGEN</th>-->
                 
                 
                
@@ -84,7 +84,7 @@ if (isset($_POST)) {
 
             $id=$res['id'];
             $tienda=$res['tienda'];
-            $con_img=$res['con_img'];
+           // $con_img=$res['con_img'];
             $impresora1=$res['impresora1'];
             $impresora2=$res['impresora2'];
             $impresora3=$res['impresora3'];
@@ -116,8 +116,8 @@ if (isset($_POST)) {
                 <td>$con_des</td>
 
                 
-                <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
-                <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>
+                <!--  <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
+                <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td> -->
                 </tr>";
                 
                 
