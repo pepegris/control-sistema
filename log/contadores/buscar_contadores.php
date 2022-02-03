@@ -12,6 +12,9 @@
     #contadores {
         margin-left: 95px;
     }
+    body{
+        background-color: white;
+    }
     
 </style>
 <body>
