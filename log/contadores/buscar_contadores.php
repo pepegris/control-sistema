@@ -39,6 +39,7 @@ if (isset($_POST)) {
                 <th scope='col' abbr='Starter'>Numero de Serie</th>
                 <th scope='col' abbr='Starter'>Inicial</th>
                 <th scope='col' abbr='Starter'>Final</th>
+                <th scope='col' abbr='Starter'>Impreso</th>
                 <th scope='col' abbr='Starter'>Observacion</th>
                 <!-- <th scope='col' abbr='Starter'>IMAGEN</th>-->
                 
@@ -102,7 +103,7 @@ if (isset($_POST)) {
              
             if ($impresora2 == null ) {
 
-                
+               $impreso= $inicial1-$final;
 
                 echo "
                 <tr>
@@ -113,6 +114,7 @@ if (isset($_POST)) {
                 <td>$final</td>
                 
                 <td>$inicial1</td>
+                <td>$impreso</td>
                 <td>$con_des</td>
 
                 
@@ -131,6 +133,10 @@ if (isset($_POST)) {
                 
 
                 require 'includes/contador.php';
+
+                $impreso1= $inicial1-$contador[0];
+                $impreso2= $inicial2-$contador[1];
+                $impreso3= $inicial3-$contador[2];
                 
 
                 echo "
@@ -142,6 +148,7 @@ if (isset($_POST)) {
                 <td>$contador[0] <br> $contador[1] <br> $contador[2] </td>
 
                 <td>$inicial1 <br> $inicial2 <br> $inicial3 </td>
+                <td>$impreso1 <br> $impreso2 <br> $impreso3 </td>
                 <td>$con_des</td>
 
                 
