@@ -54,7 +54,7 @@ if (isset($_FILES) && isset($_POST)) {
       //  if ($tipo_imagen=="image/jpeg" or $tipo_imagen=="image/jpg" or $tipo_imagen=="image/png" or $tipo_imagen=="image/gif"  ) {
 
         
-            //ruta del destino del servidor
+         /*    //ruta del destino del servidor
             $carpeta = $_SERVER['DOCUMENT_ROOT'] . '/php/control/log/uploads/img/';
 
          
@@ -88,7 +88,7 @@ if (isset($_FILES) && isset($_POST)) {
 
                  
             }
-            
+             */
 
             
 
