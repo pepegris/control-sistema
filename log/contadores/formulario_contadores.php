@@ -97,12 +97,12 @@ if (isset($_POST)) {
                     
                       <div class='form-group'>
                         <label for='imagen' class='form-label mt-2'>Contador Imagen</label>
-                        <input type='file' class='form-control' name='imagen' size='100' id='' required>
+                        <input type='file' class='form-control' name='imagen' size='100' id=''>
                       </div>
 
                       <div class='form-group'>
                         <label for='imagen2' class='form-label mt-2'>Contador Imagen</label>
-                        <input type='file' class='form-control' name='imagen2' size='100' id='' required>
+                        <input type='file' class='form-control' name='imagen2' size='100' id=''>
                       </div>
                       
                       <div class='form-group'>
