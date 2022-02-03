@@ -90,36 +90,7 @@
 
     
     <div class="row">
-    <div class="col">
-    <h2>Por Fecha</h2>
-      <div class="card-body">
 
-      <form action="fiscales/fiscales_buscar.php" method="POST"  >
-  
-    
-  <br>
-  <center><legend>Buscar Fiscales</legend></center>
-
-
-
-  <label for="fecha_desde">Desde</label>
-  <input type="date" name="fecha_desde" id=""  class="form-control">
-
-  <label for="fecha_hasta">Hasta</label>
-  <input type="date" name="fecha_hasta" id=""   class="form-control">
-
-  
-
- 
-
-  <br>
- 
-  <center><button type="submit" class="btn btn-primary">Buscar</button></center>
-  <br>
-  
-</form>
-      </div>
-     </div>
 
      
      <div class="col">
