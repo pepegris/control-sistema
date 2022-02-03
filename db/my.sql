@@ -80,6 +80,7 @@ CREATE TABLE sedes (
     INSERT INTO  sedes VALUES(null,'Comercial Acari','j-31147177-4','XeroxPhaser3250 P',null,null,null,'MXX9766102',null,null,null,null,null,null,null, null,null,null,null,null,null,null,null, null,null,null,null,'0255-6238590',250);
         INSERT INTO  sedes VALUES(null,'Comercial Catica II','J-30691040-9','XeroxPhaser3250 P',null,null,null,'LA4229121',null,null,null,null,null,null,null, null,null,null,null,null,null,null,null, null,null,null,null,'',150);
 
+        INSERT INTO  sedes VALUES(null,'Comercial Catica I','J-31451524-1','XeroxPhaser3250 P',null,null,null,'MXX9765821',null,null,null,null,null,null,null, null,null,null,null,null,null,null,null, null,null,null,null,'',150);
 
  
 

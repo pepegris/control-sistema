@@ -89,6 +89,50 @@ $cuenta_on = ucwords($cuenta_on);
 
 
 
+<div class="fieldset">
+    <br>
+    <center><legend>Registrar Contador</legend></center>
+
+    
+    <div class="form-group">
+      <label for="sede" class="form-label mt-2" >Seleccionar Sede</label>
+      <select name="sede" id="" required  class="form-control" style="height: 50px;">
+
+      <?php 
+        require '../includes/conexion_control.php';
+
+        $sql = "SELECT sedes_nom FROM sedes  ";
+        $consulta = mysqli_query($conn,$sql);
+
+        while ($res=mysqli_fetch_array($consulta)) {
+            
+            $sede=$res['sedes_nom'];
+            
+        ?>
+            <option value="<?=$sede?>" ><?=$sede?></option>
+
+        <?php } ?>
+      
+      </select>
+      
+    </div>
+     
+    
+   
+ 
+    <br>
+   
+    
+    
+    <center><button type="submit" class="btn btn-primary">Registrar</button></center>
+    <br>
+    
+    
+</form>
+
+</div>
+
+
 
 
 
