@@ -27,8 +27,8 @@ if (isset($_POST)) {
     include '../includes/cabecera.php';
 
     $sedes_nom=isset ($_POST ['sedes_nom']) ? mysqli_real_escape_string($conn,$_POST ['sedes_nom'] ): false ;
-    $fecha_desde=isset($_POST ['fecha_desde']) ? mysqli_real_escape_string($conn,$_POST['fecha_desde']):false ;
-    $fecha_hasta=isset($_POST ['fecha_hasta']) ? mysqli_real_escape_string($conn,$_POST['fecha_hasta']):false ;
+ /*    $fecha_desde=isset($_POST ['fecha_desde']) ? mysqli_real_escape_string($conn,$_POST['fecha_desde']):false ;
+    $fecha_hasta=isset($_POST ['fecha_hasta']) ? mysqli_real_escape_string($conn,$_POST['fecha_hasta']):false ; */
     
     
  ?>
@@ -64,44 +64,18 @@ if (isset($_POST)) {
     if ($conn) {
 
         $sql;
-        if ($sedes_nom) {
+        if ($sedes_nom=="Todos") {
 
 
-                if ($fecha_desde && $fecha_hasta) {
-                    $sql="SELECT * from fiscal_auditoria WHERE tienda='$sedes_nom' and fis_fecha BETWEEN '$fecha_desde' and '$fecha_hasta' order by fis_fecha desc ";
-
-                } elseif ($fecha_desde==null && !$fecha_hasta) {
-
-                    $sql="SELECT * from fiscal_auditoria WHERE tienda='$sedes_nom'  order by fis_fecha desc ";
-
-                } elseif ($fecha_desde && !$fecha_hasta) {
-
-                    $sql="SELECT * from fiscal_auditoria WHERE tienda='$sedes_nom' and fis_fecha >='$fecha_desde'  order by fis_fecha desc ";
-
-                }elseif (!$fecha_desde && $fecha_hasta) {
-
-                    $sql="SELECT * from fiscal_auditoria WHERE tienda='$sedes_nom' and fis_fecha  <= '$fecha_hasta' order by fis_fecha desc ";
-
-                    
-                }
            
-        }elseif ($sedes_nom==null) {
+             $sql="SELECT * from fiscal_auditoria  ";
+
+               
+           
+        }else{
 
 
-                $sql="SELECT * from fiscal_auditoria WHERE fis_fecha BETWEEN '$fecha_desde' and '$fecha_hasta' order by fis_fecha desc ";
-
-                if ($fecha_desde && $fecha_hasta==null) {
-
-                    $sql="SELECT * from fiscal_auditoria WHERE fis_fecha >='$fecha_desde'  order by fis_fecha desc ";
-                }elseif ($fecha_desde==null && $fecha_hasta) {
-
-
-                    $sql="SELECT * from fiscal_auditoria WHERE fis_fecha <='$fecha_hasta'  order by fis_fecha desc ";
-                }else {
-
-                    $sql="SELECT * from fiscal_auditoria";
-
-                }
+            $sql="SELECT * from fiscal_auditoria WHERE tienda='$sedes_nom' ";
 
 
         }

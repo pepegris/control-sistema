@@ -108,6 +108,8 @@
     <label for="sedes_nom" class="form-label mt-2">Sede</label>
     <select name="sedes_nom" id=""  >
 
+    <option value="Todos">Todas</option>
+
     <?php 
       
 
