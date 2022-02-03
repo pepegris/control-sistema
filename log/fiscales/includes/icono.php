@@ -6,7 +6,7 @@
     font-size:30px;" >Buscar Reporte Fiscales</a>
 
 
-<a href="../config/fiscales/fiscales_buscar.php" class="btn btn-dark" style="position: fixed;
+<a href="../config/fiscales/fiscales_buscar.php" class="btn btn-success" style="position: fixed;
     bottom: 90%;
     right: 10%;
     top:12%;
