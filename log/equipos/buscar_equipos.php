@@ -57,13 +57,15 @@ if (isset($_POST)) {
         
 
         $sql;
-        if ($sedes_nom) {
+        if ($sedes_nom=='todos') {
+
+            $sql="SELECT * from equipos WHERE eq_fecha BETWEEN '$fecha_desde' and '$fecha_hasta' order by eq_fecha desc ";
+
+        }else {
 
             $sql="SELECT * from equipos WHERE usuario='$sedes_nom' and eq_fecha BETWEEN '$fecha_desde' and '$fecha_hasta' order by eq_fecha desc ";
 
-        }elseif ($sedes_nom==null) {
-
-            $sql="SELECT * from equipos WHERE eq_fecha BETWEEN '$fecha_desde' and '$fecha_hasta' order by eq_fecha desc ";
+            
         }
         
 
