@@ -78,6 +78,7 @@
   <div class="form-group">
     <label for="sedes_nom" class="form-label mt-2">Usuario</label>
     <select name="sedes_nom" id=""  >
+    <option value="todos">Todas</option>
 
     <?php 
       require '../includes/conexion_control.php';
