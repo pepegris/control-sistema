@@ -56,7 +56,7 @@ $cuenta_on = ucwords($cuenta_on);
       <?php 
         require '../includes/conexion_control.php';
 
-        $sql = "SELECT sedes_nom FROM sedes  ";
+        $sql = "SELECT sedes_nom, serial_imp1  FROM sedes WHERE   serial_imp1 <> 'NO'  ";
         $consulta = mysqli_query($conn,$sql);
 
         while ($res=mysqli_fetch_array($consulta)) {
