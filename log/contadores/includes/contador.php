@@ -172,6 +172,15 @@ switch ($tienda) {
                                                                                    
                                                                                    
                                                                                    break;
+
+                                                                                   case 'Comercial Catica I':
+                                                                                                                                                                                  
+                                                                                    $contador[]=$contador_Catica_I[$i];    
+                                                                                                                                                   
+                                                                                
+                                                                                       
+                                                                                       
+                                                                                       break;
             
         
     
