@@ -26,7 +26,7 @@ include '../includes/menu.php';
 
 <center><h2 id="titulo">Configuracion Impresora</h2></center>
 
-<div class="centrado">
+<div class="container">
     
 <div class="accordion" id="accordionExample">
   <div class="accordion-item">
