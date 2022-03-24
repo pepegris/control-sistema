@@ -131,7 +131,7 @@ if (isset($_POST)) {
                 
 
 
-
+                $total_impreso+=$impreso;
 
 
             } else {
@@ -144,6 +144,7 @@ if (isset($_POST)) {
                 $impreso2= $inicial2-$contador[1];
                 $impreso3= $inicial3-$contador[2];
                 
+                $total_impreso+=$impreso1+$impreso2+$impreso3;
 
                 echo "
                 <tr>
@@ -166,7 +167,7 @@ if (isset($_POST)) {
                   ";
 
             }
-            $total_impreso=$impreso+$impreso1+$impreso2+$impreso3;
+            
               
             
 
