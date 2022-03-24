@@ -68,8 +68,8 @@ require_once '../includes/cabecera.php';
         <label for="estado" >Estado Actual: </label>
     <select name="estado" id="" class="form-control">
       <option value="<?php echo $estado_sede; ?>"><?php echo $estado_sede; ?></option>
-      <option value="activo">Activo</option>
-      <option value="inactivo">Inactivo</option>
+      <option value="activo">activo</option>
+      <option value="inactivo">inactivo</option>
     </select>
           
         
