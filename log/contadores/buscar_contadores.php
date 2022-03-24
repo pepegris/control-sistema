@@ -82,7 +82,8 @@ if (isset($_POST)) {
 
 
       $consulta= mysqli_query($conn,$sql);
-        
+    
+      $total_impreso=0;
         
         while ($res=mysqli_fetch_array($consulta)) {
 
@@ -101,7 +102,7 @@ if (isset($_POST)) {
             $inicial2=$res ['inicial2'];
             $inicial3=$res ['inicial3'];
 
-            $total_inicial=$inicial1+$inicial2+$inicial3;
+            
 
             //almacenando los contadores del mes anterior en la variable $final
             require 'includes/contador_inicial.php';
@@ -165,7 +166,7 @@ if (isset($_POST)) {
                   ";
 
             }
-            
+            $total_impreso=$impreso+$impreso1+$impreso2+$impreso3;
               
             
 
@@ -186,8 +187,8 @@ if (isset($_POST)) {
                 <td></td>
 
                 <td>TOTAL:</td>
+                <td>$total_impreso</td>
                 <td></td>
-                <td>$total_inicial</td>
 
                 
 
