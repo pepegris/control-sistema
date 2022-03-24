@@ -64,7 +64,7 @@ if (isset($_POST)) {
         $sql;
         if ($sedes_nom=='todos') {
 
-            $sql="SELECT * from contador WHERE con_fecha BETWEEN '$fecha_desde' and '$fecha_hasta'  "; 
+            $sql="SELECT * from contador WHERE con_fecha BETWEEN '$fecha_desde' and '$fecha_hasta'   "; 
 
         }else {
 
@@ -174,7 +174,27 @@ if (isset($_POST)) {
 
         
      }}
- 
+
+     echo "
+                <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+
+                <td></td>
+                <td>TOTAL</td>
+                <td>$con_des</td>
+
+                
+
+                <!--   <td><img src='../uploads/img/$con_img' style='height: 90px;' alt=''>
+                <a href='../uploads/img/$con_img' download='$tienda' class='btn btn-success'>Descargar</a></td>-->
+                
+                </tr>
+                  ";
+     
  
  include '../includes/excel.php';
  mysqli_close($conn);
