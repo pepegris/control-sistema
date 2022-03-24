@@ -52,7 +52,9 @@ CREATE TABLE sedes (
     fiscal_nregistro4 varchar (150) unique,
 
     numero varchar (150),
-    contadores INT
+    contadores INT,
+
+    estado_sede ENUM('activo','inactivo') NOT NULL DEFAULT 'activo'
 
  );
 

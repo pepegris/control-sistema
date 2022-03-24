@@ -64,11 +64,11 @@ if (isset($_POST)) {
         $sql;
         if ($sedes_nom=='todos') {
 
-            $sql="SELECT * from contador WHERE con_fecha BETWEEN '$fecha_desde' and '$fecha_hasta' AND  estado_sede <> 'cerrado' "; 
+            $sql="SELECT * from contador WHERE con_fecha BETWEEN '$fecha_desde' and '$fecha_hasta' AND  estado_sede <> 'inactivo'  "; 
 
         }else {
 
-            $sql="SELECT * from contador WHERE tienda='$sedes_nom' and con_fecha BETWEEN '$fecha_desde' and '$fecha_hasta'  AND  estado_sede <> 'cerrado'  ";
+            $sql="SELECT * from contador WHERE tienda='$sedes_nom' and con_fecha BETWEEN '$fecha_desde' and '$fecha_hasta'  AND  estado_sede <> 'inactivo'   ";
             
         }
 

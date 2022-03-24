@@ -40,7 +40,7 @@
     <?php 
       
 
-      $sql = "SELECT sedes_nom FROM sedes   where  estado_sede <> 'cerrado'  ";
+      $sql = "SELECT sedes_nom FROM sedes   where  estado_sede <> 'inactivo'  ";
       $consulta = mysqli_query($conn,$sql);
 
       while ($res=mysqli_fetch_array($consulta)) {
