@@ -12,10 +12,10 @@ if  (isset($_GET['id'])) {
     $row = mysqli_fetch_array($result);
 
                 
-                $sedes_nom=$res['sedes_nom'];
-                $rif=$res['rif'];
-                $numero=$res['numero'];
-                $estado_sede = $res['estado_sede'];
+                $sedes_nom=$row['sedes_nom'];
+                $rif=$row['rif'];
+                $numero=$row['numero'];
+                $estado_sede = $row['estado_sede'];
 
     
     
