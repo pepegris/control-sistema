@@ -346,6 +346,22 @@
                                                                                             
                                                                                             
                                                                                             break;
+
+                                                                                            case 'Comercial Catica I':
+                                                                                                /* echo "<br>estoy en $indice/ $final1 - $final2 - $final3<br>"; */
+    
+                                                                                                $contador_Catica_I=array();
+                                                                                                $img_Catica_I=array();
+                                                                        
+                                                                                                $contador_Catica_I[]=$final1;
+                                                                                                $contador_Catica_I[]=$final2;
+                                                                                                $contador_Catica_I[]=$final3;
+    
+                                                                                                                                                                                        
+                                                                                                
+                                                                                                
+                                                                                                
+                                                                                                break;
                      
                  
              
