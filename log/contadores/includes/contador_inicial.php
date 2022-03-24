@@ -20,6 +20,7 @@
                              $contador_Puecruz[]=0;     
                              $contador_Acari[]=0;       
                              $contador_Catica_II[]=0;
+                             $contador_Catica_I[]=0;
 
 
 switch ($tienda) {
@@ -203,6 +204,15 @@ switch ($tienda) {
                                                                                                                                                                    
                                                                                    
                                                                                    break;
+
+                                                                                   case 'Comercial Catica I':
+                                                                                    /* echo "<br>estoy en $indice/ $final1 - $final2 - $final3<br>"; */
+ 
+                                                                                    $final= $contador_Catica_I[0];
+                                                            
+                                                                                                                                                                    
+                                                                                    
+                                                                                    break;
             
         
     
