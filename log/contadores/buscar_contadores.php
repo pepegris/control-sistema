@@ -101,6 +101,8 @@ if (isset($_POST)) {
             $inicial2=$res ['inicial2'];
             $inicial3=$res ['inicial3'];
 
+            $total_inicial=$inicial1+$inicial2+$inicial3;
+
             //almacenando los contadores del mes anterior en la variable $final
             require 'includes/contador_inicial.php';
              
@@ -183,9 +185,9 @@ if (isset($_POST)) {
 
                 <td></td>
 
+                <td>TOTAL:</td>
                 <td></td>
-                <td>TOTAL</td>
-                <td>$con_des</td>
+                <td>$total_inicial</td>
 
                 
 
