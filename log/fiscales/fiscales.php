@@ -32,7 +32,7 @@
       <?php 
         require '../includes/conexion_control.php';
 
-        $sql = "SELECT sedes_nom FROM sedes  ";
+        $sql = "SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'cerrado'   ";
         $consulta = mysqli_query($conn,$sql);
 
         while ($res=mysqli_fetch_array($consulta)) {
