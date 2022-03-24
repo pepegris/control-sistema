@@ -53,6 +53,8 @@ require_once '../includes/cabecera.php';
                         <th scope='col' abbr='Starter'>Sede</th>
                         <th scope='col' abbr='Starter'>Rif</th>
                         <th scope='col' abbr='Starter'>Numero</th>
+                        <th scope='col' abbr='Starter'>Estado</th>
+                        <th scope='col' abbr='Starter'>Accion</th>
                 
                         
                     
@@ -63,19 +65,25 @@ require_once '../includes/cabecera.php';
             <?php
             require '../includes/conexion_control.php';
 
-            $sql="SELECT sedes_nom,rif,numero from sedes";
+            $sql="SELECT sedes_nom,rif,numero,estado_sede from sedes";
             $query=mysqli_query($conn,$sql);
 
             while ($res=mysqli_fetch_array($query)) {
 
+                $id=$res['id'];
                 $sedes_nom=$res['sedes_nom'];
                 $rif=$res['rif'];
-                $numero=$res['numero'];?>
+                $numero=$res['numero'];
+                $estado = $res['estado_sede'] ?>
 
 <tr>
         <td><?=$sedes_nom?></td>
         <td><?=$rif?></td>
         <td><?=$numero?></td>
+        <td><?=$estado?></td>
+        <td><a href="edit.php?id=<?=$id?>" class="btn btn-warning"><i class='fas fa-marker'></i></a></td>
+
+
         
 
         </tr>

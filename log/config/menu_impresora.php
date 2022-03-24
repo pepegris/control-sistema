@@ -20,12 +20,12 @@ include '../includes/menu.php';
 
    
    
-<br><br><br><br><br><br><br>
+<br><br><br><br><br>
 
 
 
 <center><h2 id="titulo">Configuracion Impresora</h2></center>
-
+<br>
 <div class="container">
     
 <div class="accordion" id="accordionExample">
