@@ -65,7 +65,7 @@ require_once '../includes/cabecera.php';
             <?php
             require '../includes/conexion_control.php';
 
-            $sql="SELECT sedes_nom,rif,numero,estado_sede from sedes";
+            $sql="SELECT id,sedes_nom,rif,numero,estado_sede from sedes";
             $query=mysqli_query($conn,$sql);
 
             while ($res=mysqli_fetch_array($query)) {
