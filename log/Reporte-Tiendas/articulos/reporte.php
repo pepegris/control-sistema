@@ -42,7 +42,7 @@ if (isset($_POST)) {
     
     for ($i=5; $i <= $tienda_total; $i+=10) { 
 
-
+        var_dump($tienda_total);
     /*    echo $bd[$i].$tiendas_seleccionadas[$i].'<br>'; */
         $base_dato=$bd[$i];
    
