@@ -66,7 +66,7 @@ $linea=$_POST['linea'];
 
             $solicitud_linea = "SELECT lin_des FROM lin_art WHERE co_lin='$linea'";
             $consulta_linea= sqlsrv_query($conn,$solicitud_linea);
-            $datos=sqlsrv_fetch_assoc($consulta_linea);
+            $datos=sqlsrv_fetch_array($consulta_linea);
             $linea_des=$datos[lin_des];
 
         }
