@@ -100,7 +100,8 @@ $bd = array (
     155=> 'TRAINA21',
     165=> 'TURME21',
     175=> 'VALENA21',
-    185=> 'VALLEP21'
+    185=> 'VALLEP21',
+    195=>'nada'
  )
     
 /*     echo "<br>";
