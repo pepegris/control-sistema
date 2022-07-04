@@ -21,6 +21,8 @@ include '../includes/icono.php';
 
 
 if (isset($_POST)) {
+
+    echo "post";
 /*     $linea=$_POST['linea'];
     $almacen=$_POST['almacen'];
     $fecha=$_POST['fecha']; */
