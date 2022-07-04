@@ -21,9 +21,9 @@ include '../includes/icono.php';
 
 
 if (isset($_POST)) {
-    $linea=$_POST['linea'];
+/*     $linea=$_POST['linea'];
     $almacen=$_POST['almacen'];
-    $fecha=$_POST['fecha'];
+    $fecha=$_POST['fecha']; */
 
 
     require '../includes/tiendas.php';
