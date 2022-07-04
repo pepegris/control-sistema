@@ -95,7 +95,7 @@ $bd = array (
     165=> 'TURME21',
     175=> 'VALENA21',
     185=> 'VALLEP21'
- )
+);
 
 
     $serv_tiendas= array(15=>'SRVPREV',
