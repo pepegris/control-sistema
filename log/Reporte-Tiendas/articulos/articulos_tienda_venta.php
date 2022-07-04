@@ -77,11 +77,11 @@ include '../includes/cabecera.php';
       <?php
     require '../includes/conexion_previa.php';
 
-    $sql = "SELECT co_lin from art  group by co_lin ";
-    $consulta= sqlsrv_query($conn,$sql);
+    $sql_co_lin = "SELECT co_lin from art  group by co_lin ";
+    $consulta_co_lin= sqlsrv_query($conn,$sql_co_lin);
 
 
-    while ($row=sqlsrv_fetch_array($consulta)) {
+    while ($row=sqlsrv_fetch_array($consulta_co_lin)) {
       $co_lin=$row['co_lin'];
 
       ?>
