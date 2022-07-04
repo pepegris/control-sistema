@@ -55,7 +55,7 @@ $tiendas_seleccionadas=array(
 
 
 
-    $bd= array(15=>'ACARI_A',
+    $bd_tienda= array(15=>'ACARI_A',
     25=>'APURA_A',
     35=>'CATICA2A',
     45=>'CORINA_A',
@@ -97,7 +97,7 @@ $tiendas_seleccionadas=array(
         195=>'SQL',);
 
 // SERV BOLEITA
-$serv = array (
+$bd = array (
    15=> 'ACARI21',
    25=>'APURA21',
    35=> 'CATICA21',
