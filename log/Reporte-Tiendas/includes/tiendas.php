@@ -16,10 +16,10 @@ $tienda12=$_POST['Comercial_Ojena'];
 $tienda13=$_POST['Comercial_Puecruz'];
 $tienda14=$_POST['Comercial_Punto_Fijo'];
 $tienda15=$_POST['Comercial_Trina'];
-$tienda16=$_POST['Comercial_Turme'];
-$tienda17=$_POST['Comercial_Valena'];
-$tienda18=$_POST['Comercial_Vallepa'];
-$tienda19=$_POST['Sede_Boleita'];
+/* $tienda16=$_POST['Comercial_Turme']; */
+$tienda16=$_POST['Comercial_Valena'];
+$tienda17=$_POST['Comercial_Vallepa'];
+$tienda18=$_POST['Sede_Boleita'];
 
 
 
@@ -30,8 +30,10 @@ $tienda19=$_POST['Sede_Boleita'];
 // var_dump($_POST);
 
 $tienda_total=0;
-$tienda_total=$tienda1+$tienda2+$tienda3+$tienda4+$tienda5+$tienda6+$tienda7+$tienda8+$tienda9+$tienda10+$tienda11+$tienda12+$tienda13+$tienda14+$tienda15+$tienda16+$tienda17+$tienda18+$tienda19;
+/* $tienda_total=$tienda1+$tienda2+$tienda3+$tienda4+$tienda5+$tienda6+$tienda7+$tienda8+$tienda9+$tienda10+$tienda11+$tienda12+$tienda13+$tienda14+$tienda15+$tienda16+$tienda17+$tienda18+$tienda19;
+ */
 
+$tienda_total=$tienda1+$tienda2+$tienda3+$tienda4+$tienda5+$tienda6+$tienda7+$tienda8+$tienda9+$tienda10+$tienda11+$tienda12+$tienda13+$tienda14+$tienda15+$tienda16+$tienda17+$tienda18;
 $tiendas_seleccionadas=array(
     15=>$tienda1,
     25=>$tienda2,
@@ -50,8 +52,7 @@ $tiendas_seleccionadas=array(
     155=>$tienda15,
     165=>$tienda16,
     175=>$tienda17,
-    185=>$tienda18,
-    195=>$tienda19,);
+    185=>$tienda18,);
 
 
 
