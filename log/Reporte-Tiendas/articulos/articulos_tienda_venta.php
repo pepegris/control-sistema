@@ -27,7 +27,7 @@ include '../includes/cabecera.php';
 
 <div id="body" class="stretchLeft">
 
-  <form action="reporte_articulos_venta.php" method="post" id="formulario" >
+  <form action="reporte.php" method="post" id="formulario" >
   <center><h2>Stock de Articulos con su Precio Tiendas</h2></center>
   <p>Tiendas</p>
 
@@ -55,7 +55,7 @@ include '../includes/cabecera.php';
 
         <div class='form-group'>
                         <label for='fecha' class='form-label mt-2'>Fecha</label> 
-                        <input type='date' name='fecha' id='' class='form-control'  required>
+                        <input type='date' name='fecha' id='' class='form-control' >
         </div>
 
         <div class="form-group">
