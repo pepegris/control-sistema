@@ -88,7 +88,10 @@ include '../includes/cabecera.php';
           <option><?php $co_lin;  ?></option>
 
           
-      <?php  } ?>
+      <?php  }
+      
+      echo "$co_lin";
+      ?>
       </select>
 
  
