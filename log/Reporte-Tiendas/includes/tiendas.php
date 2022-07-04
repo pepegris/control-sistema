@@ -75,6 +75,28 @@ $tiendas_seleccionadas=array(
     185=>'VALLEPAA',
     195=>'PREVIA_A',);
 
+// SERV BOLEITA
+$bd = array (
+    15=> 'ACARI21',
+    25=>'APURA21',
+    35=> 'CATICA21',
+    45=>'CORINA21',
+    55=>'CORI2_21',
+    65=> 'HIGUE21',
+    75=> 'KAGUA21',
+    85=> 'MATURA21',
+    95=> 'MERINA21',
+    105=> 'MRIA3A21',
+    115=> 'NACHAR21',
+    125=> 'OJENA21',
+    135=> 'PUECRU21',
+    145=> 'PUFIJO21',
+    155=> 'TRAINA21',
+    165=> 'TURME21',
+    175=> 'VALENA21',
+    185=> 'VALLEP21'
+ )
+
 
     $serv_tiendas= array(15=>'SRVPREV',
         25=>'APURA',
@@ -96,28 +118,7 @@ $tiendas_seleccionadas=array(
         185=>'VALLEPA',
         195=>'SQL',);
 
-// SERV BOLEITA
-$bd = array (
-   15=> 'ACARI21',
-   25=>'APURA21',
-   35=> 'CATICA21',
-   45=>'CORI2_21',
-   55=>'CORINA21',
-   65=> 'HIGUE21',
-   75=> 'JORINA21',
-   85=> 'KAGUA21',
-   95=> 'MATURA21',
-   105=> 'MERCE21',
-   115=> 'MERINA21',
-   125=> 'MRIA3A21',
-   135=> 'NACHAR21',
-   145=> 'OJENA21',
-   155=> 'PUECRU21',
-   165=> 'PUFIJO21',
-   175=> 'TURME21',
-   185=> 'VALENA21',
-   195=> 'VALLEP21'
-)
+
 
 
 

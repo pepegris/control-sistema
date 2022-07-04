@@ -34,7 +34,7 @@ include '../includes/cabecera.php';
           <?php 
           require '../includes/conexion_control.php';
 
-          $sql = "SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'  AND  sedes_nom <> 'Sede Boleita' AND sedes_nom <> 'Sede Sabana Grande' ";
+          $sql = "SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'  AND sedes_nom <> 'Sede Sabana Grande' ";
           $consulta = mysqli_query($conn,$sql);
 
           $i=5;
