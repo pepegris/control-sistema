@@ -43,7 +43,7 @@ if (isset($_POST)) {
 
     /*    echo $bd[$i].$tiendas_seleccionadas[$i].'<br>'; */
         $base_dato=$bd[$i];
-        $servidor=$serv[$i];
+   
         $proceso=$tiendas_seleccionadas[$i];
 
 
@@ -52,7 +52,7 @@ if (isset($_POST)) {
     $conexion=0;
         
         if ($i == $proceso) {
-           /*  echo 'este es el if '.$bd[$i].'<br>'; */
+             echo 'este es el if '.$bd[$i].'<br>'; 
            
            $serverName = "172.16.1.19"; 
            $connectionInfo = array( "Database"=>"$base_dato", "UID"=>"Mezcla", "PWD"=>"Zeus33$");
