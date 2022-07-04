@@ -1,26 +1,54 @@
 <?php
 
-
-$tienda1=$_POST['Comercial_Acari'];
-$tienda2=$_POST['Comercial_Apura'];
-$tienda3=$_POST['Comercial_Catica_II'];
+$tienda1=$_POST['Sede_Boleita'];
+$tienda2=$_POST['Comercial_Merina'];
+$tienda3=$_POST['Comercial_Merina_III'];
 $tienda4=$_POST['Comercial_Corina_I'];
 $tienda5=$_POST['Comercial_Corina_II'];
-$tienda6=$_POST['Comercial_Higue'];
-$tienda7=$_POST['Comercial_Kagu'];
-$tienda8=$_POST['Comercial_Matur'];
-$tienda9=$_POST['Comercial_Merina'];
-$tienda10=$_POST['Comercial_Merina_III'];
+$tienda6=$_POST['Comercial_Punto_Fijo'];
+$tienda7=$_POST['Comercial_Matur'];
+$tienda8=$_POST['Comercial_Valena'];
+$tienda9=$_POST['Comercial_Trina'];
+$tienda10=$_POST['Comercial_Kagu'];
 $tienda11=$_POST['Comercial_Nachari'];
-$tienda12=$_POST['Comercial_Ojena'];
-$tienda13=$_POST['Comercial_Puecruz'];
-$tienda14=$_POST['Comercial_Punto_Fijo'];
-$tienda15=$_POST['Comercial_Trina'];
-/* $tienda16=$_POST['Comercial_Turme']; */
-$tienda16=$_POST['Comercial_Valena'];
-$tienda17=$_POST['Comercial_Vallepa'];
-$tienda18=$_POST['Sede_Boleita'];
+$tienda12=$_POST['Comercial_Higue'];
+$tienda13=$_POST['Comercial_Apura'];
+$tienda14=$_POST['Comercial_Vallepa'];
+$tienda15=$_POST['Comercial_Ojena'];
+$tienda16=$_POST['Comercial_Puecruz'];
+$tienda17=$_POST['Comercial_Acari'];
+$tienda18=$_POST['Comercial_Catica_II'];
 
+
+
+/* $tienda16=$_POST['Comercial_Turme']; */
+
+
+
+// SERV BOLEITA
+$bd = array (
+
+    15=> 'PREVIA_A',
+    25=> 'MERINA21',
+    35=> 'MRIA3A21',
+    45=>'CORINA21',
+    55=>'CORI2_21',
+    65=> 'PUFIJO21',
+    75=> 'MATURA21',
+    85=> 'VALENA21',
+    95=> 'TRAINA21',
+    105=> 'KAGUA21',
+    115=> 'NACHAR21',
+    125=> 'HIGUE21',
+    135=>'APURA21',
+    145=> 'VALLEP21',
+    155=> 'OJENA21',
+    165=> 'PUECRU21',
+    175=> 'ACARI21',
+    185=> 'CATICA21',
+
+
+);
 
 
 
