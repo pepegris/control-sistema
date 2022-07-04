@@ -34,7 +34,7 @@ include '../includes/cabecera.php';
           <?php 
           require '../includes/conexion_control.php';
 
-          $sql = "SELECT sedes_nom FROM sedes  ";
+          $sql = "SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'  ";
           $consulta = mysqli_query($conn,$sql);
 
           $i=5;
