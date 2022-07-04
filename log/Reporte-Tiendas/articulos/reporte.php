@@ -58,30 +58,7 @@ if (isset($_POST)) {
            $connectionInfo = array( "Database"=>"$base_dato", "UID"=>"Mezcla", "PWD"=>"Zeus33$");
            $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
-           if ($base_dato == 'PREVIA_A') {
-
-            if ($linea=='Todos') {
-
-                $solicitud="SELECT art.co_art,art_des,prec_vta1,prec_vta5,prec_vta4,art.stock_act from st_almac inner join art on st_almac.co_art=art.co_art where  st_almac.stock_act > 0 and st_almac.co_alma='$almacen'";
-    
-               }else {
-    
-                $solicitud="SELECT art.co_art,art_des,prec_vta1,prec_vta5,prec_vta4,art.stock_act from st_almac inner join art on st_almac.co_art=art.co_art where art.co_lin='$linea' and st_almac.stock_act > 0 and st_almac.co_alma='$almacen'";
-    
-               }
-           }else {
-
-            if ($linea=='Todos') {
-
-                $solicitud="SELECT art.co_art,art_des,prec_vta1,prec_vta5,prec_vta4,art.stock_act from st_almac inner join art on st_almac.co_art=art.co_art where  st_almac.stock_act > 0 and st_almac.co_alma=1";
-    
-               }else {
-    
-                $solicitud="SELECT art.co_art,art_des,prec_vta1,prec_vta5,prec_vta4,art.stock_act from st_almac inner join art on st_almac.co_art=art.co_art where art.co_lin='$linea' and st_almac.stock_act > 0 and st_almac.co_alma=1";
-    
-               }
-
-           }
+           $solicitud="SELECT art.co_art,art_des,prec_vta1,prec_vta5,prec_vta4,art.stock_act from st_almac inner join art on st_almac.co_art=art.co_art where  st_almac.stock_act > 0 and st_almac.co_alma='1'";
 
 
 $consulta= sqlsrv_query($conn,$solicitud);
