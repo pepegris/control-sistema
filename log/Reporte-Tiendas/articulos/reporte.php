@@ -42,6 +42,7 @@ $tienda16=$_POST['Comercial_Valena'];
 $tienda17=$_POST['Comercial_Vallepa'];
 $tienda18=$_POST['Sede_Boleita'];
 
+var_dump($_POST);
 
     echo "post";
 /*     $linea=$_POST['linea'];
