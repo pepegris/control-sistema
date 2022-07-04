@@ -49,8 +49,8 @@ if (isset($_POST)) {
         $proceso=$tiendas_seleccionadas[$i];
 
         var_dump($i);
-        echo "tiendas <br>";
-        var_dump($proceso);
+        echo "tiendas";
+        echo "$proceso";
             
 /* variable para la validacion si hay conexion al servidor */
     $conexion=0;
