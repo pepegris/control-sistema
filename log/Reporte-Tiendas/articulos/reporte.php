@@ -24,8 +24,7 @@ if (isset($_POST)) {
 
 
 $linea=$_POST['linea'];
-echo $linea;
-var_dump($linea);
+
 /*     $linea=$_POST['linea'];
     $almacen=$_POST['almacen'];
     $fecha=$_POST['fecha']; */
@@ -60,7 +59,17 @@ var_dump($linea);
            $connectionInfo = array( "Database"=>"$base_dato", "UID"=>"Mezcla", "PWD"=>"Zeus33$");
            $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
-           $solicitud="SELECT art.co_art,art_des,prec_vta1,prec_vta5,prec_vta4,art.stock_act from st_almac inner join art on st_almac.co_art=art.co_art where  st_almac.stock_act > 0 and st_almac.co_alma='1'";
+        if ($linea='Todos') {
+            $solicitud="SELECT art.co_art,art_des,prec_vta1,prec_vta5,prec_vta4,art.stock_act from st_almac inner join art on st_almac.co_art=art.co_art where  st_almac.stock_act > 0 and st_almac.co_alma='1'";
+        }else {
+            $solicitud="SELECT art.co_art,art_des,prec_vta1,prec_vta5,prec_vta4,art.stock_act from st_almac inner join art on st_almac.co_art=art.co_art where art.co_lin='$linea' and   st_almac.stock_act > 0 and st_almac.co_alma='1'";
+
+            $solicitud_linea = "SELECT lin_des FROM lin_art WHERE co_lin='$linea'";
+            $consulta_linea= sqlsrv_query($conn,$solicitud_linea);
+            $datos=sqlsrv_fetch_assoc($consulta_linea);
+            $linea_des=$datos[lin_des];
+
+        }
 
 
         $consulta= sqlsrv_query($conn,$solicitud);
@@ -169,7 +178,7 @@ var_dump($linea);
         }else {
 
             echo "<tr><td ></td><td class='text-right ' >Total</td><td >Bs. $total_bol</td><td ></td><td>$ $suma_4</td><td >Bs. $total_ult</td><td>$total </td> </tr>";
-            echo "<center><h2>".$base_dato."</h2></center>";
+            echo "<center><h2>".$base_dato. " / " .$linea_des."</h2></center>";
 
             sqlsrv_close($conn);
             include '../includes/excel.php';
