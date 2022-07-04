@@ -58,6 +58,16 @@ include '../includes/cabecera.php';
                         <input type='date' name='fecha' id='' class='form-control'  required>
         </div>
 
+        <div class="form-group">
+        <label for="linea">Origen de la Data</label>
+      <select class="linea" name='linea' id="linea">
+
+      <option>Boleita</option>
+      <option>Tiendas</option>
+     
+      </select>
+
+        </div>
 
 <!-- 
     <label for="linea">Linea del Articulo:</label>
