@@ -102,7 +102,7 @@ $bd = array (
     175=> 'VALENA21',
     185=> 'VALLEP21',
     195=>'nada'
- )
+);
     
 /*     echo "<br>";
     echo $tienda_total;
