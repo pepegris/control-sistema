@@ -24,7 +24,7 @@ if (isset($_POST)) {
 
 
 
-    echo "post";
+
 /*     $linea=$_POST['linea'];
     $almacen=$_POST['almacen'];
     $fecha=$_POST['fecha']; */
@@ -33,26 +33,21 @@ if (isset($_POST)) {
     require '../includes/tiendas.php';
 
 
-   var_dump($tiendas_seleccionadas);
     
 /*     echo "<br>";
     echo $tienda_total;
     */
  
-    var_dump($tienda_total);
-   
+
     
     for ($i=5; $i <= $tienda_total; $i+=10) { 
 
-        var_dump($tienda_total);
+
     /*    echo $bd[$i].$tiendas_seleccionadas[$i].'<br>'; */
         $base_dato=$bd[$i];
    
         $proceso=$tiendas_seleccionadas[$i];
 
-        var_dump($i);
-        echo "tiendas";
-        echo "$proceso";
             
 /* variable para la validacion si hay conexion al servidor */
     $conexion=0;
