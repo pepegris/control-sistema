@@ -23,8 +23,9 @@ include '../includes/icono.php';
 if (isset($_POST)) {
 
 
-
-
+$linea=$_POST['linea'];
+echo $linea;
+var_dump($linea);
 /*     $linea=$_POST['linea'];
     $almacen=$_POST['almacen'];
     $fecha=$_POST['fecha']; */
