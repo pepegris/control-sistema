@@ -78,24 +78,27 @@ $tiendas_seleccionadas=array(
 
 // SERV BOLEITA
 $bd = array (
-    15=> 'ACARI21',
-    25=>'APURA21',
-    35=> 'CATICA21',
+
+    15=> 'PREVIA_A',
+    25=> 'MERINA21',
+    35=> 'MRIA3A21',
     45=>'CORINA21',
     55=>'CORI2_21',
-    65=> 'HIGUE21',
-    75=> 'KAGUA21',
-    85=> 'MATURA21',
-    95=> 'MERINA21',
-    105=> 'MRIA3A21',
+    65=> 'PUFIJO21',
+    75=> 'MATURA21',
+    85=> 'VALENA21',
+    95=> 'TRAINA21',
+    105=> 'KAGUA21',
     115=> 'NACHAR21',
-    125=> 'OJENA21',
-    135=> 'PUECRU21',
-    145=> 'PUFIJO21',
-    155=> 'TRAINA21',
-    165=> 'TURME21',
-    175=> 'VALENA21',
-    185=> 'VALLEP21'
+    125=> 'HIGUE21',
+    135=>'APURA21',
+    145=> 'VALLEP21',
+    155=> 'OJENA21',
+    165=> 'PUECRU21',
+    175=> 'ACARI21',
+    185=> 'CATICA21',
+
+
 );
 
 
