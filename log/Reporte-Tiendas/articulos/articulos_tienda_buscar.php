@@ -22,6 +22,11 @@ include '../includes/cabecera.php';
   include '../includes/icono.php';
 
   $todos='Todos';
+
+  require '../includes/conexion_previa.php';
+
+    $sql = "SELECT co_lin from art  group by co_lin ";
+    $consulta= sqlsrv_query($conn,$sql);
          
 ?>
 
@@ -67,10 +72,7 @@ include '../includes/cabecera.php';
 
       <option><?= $todos  ?></option>
       <?php
-      require '../includes/conexion_previa.php';
-
-    $sql = "SELECT co_lin from art  group by co_lin ";
-    $consulta= sqlsrv_query($conn,$sql);
+      
 
 
     while ($row=sqlsrv_fetch_array($consulta)) {
