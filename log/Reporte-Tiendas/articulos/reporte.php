@@ -37,7 +37,7 @@ if (isset($_POST)) {
     echo $tienda_total;
     */
  
-
+    var_dump($tienda_total);
    
     
     for ($i=5; $i <= $tienda_total; $i+=10) { 
