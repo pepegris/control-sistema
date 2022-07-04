@@ -85,7 +85,7 @@ include '../includes/cabecera.php';
       $co_lin=$row[co_lin];
 
       ?>
-          <option><?php $co_lin;  ?></option>
+          <option><?=$co_lin;?></option>
 
           
       <?php  }
