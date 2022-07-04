@@ -82,7 +82,7 @@ include '../includes/cabecera.php';
 
 
     while ($row=sqlsrv_fetch_array($consulta_co_lin)) {
-      $co_lin=$row['co_lin'];
+      $co_lin=$row[co_lin];
 
       ?>
           <option><?php $co_lin;  ?></option>
@@ -90,7 +90,6 @@ include '../includes/cabecera.php';
           
       <?php  }
       
-      echo "$co_lin";
       ?>
       </select>
 
