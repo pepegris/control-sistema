@@ -3,12 +3,13 @@ require '../../includes/log.php';
 include '../../includes/header.php';
 $servername = "localhost";
 $database = "control_sistema";
-$username = "roasasot";
+$username = "root";
 $password = "";
 
 
 $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password );
-var_dump($conn);
+$res = $conn->query("SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'");
+var_dump($res);
 
 ?>
 
