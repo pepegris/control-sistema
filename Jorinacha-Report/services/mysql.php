@@ -5,7 +5,6 @@ class Tiendas
     private $database = "control_sistema";
     private $username = "root";
     private $password = "";
-    private $conn;
     private $conn2 = mysqli_connect($this->servername, $this->username, $this->password, $this->database);
 
     private function Conexion()
@@ -13,7 +12,8 @@ class Tiendas
 
         try {
 
-            return $this->conn = new PDO("mysql:host=$this->servername;dbname=$this->database", $this->username, $this->password );
+            $conn= new PDO("mysql:host=$this->servername;dbname=$this->database", $this->username, $this->password );
+            return $conn;
             /* $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); */
 
         } catch (PDOException $err) {
@@ -26,8 +26,8 @@ class Tiendas
 
         try {
 
-            $conn=$this->Conexion();
-            $res = $conn->query("SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'");
+            $conexion=$this->Conexion();
+            $res = $conexion->query("SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'");
             return $res;
 
         } catch (PDOException $err) {
