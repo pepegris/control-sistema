@@ -3,7 +3,7 @@ require '../../includes/log.php';
 include '../../includes/header.php';
 $servername = "localhost";
 $database = "control_sistema";
-$username = "root";
+$username = "roasasot";
 $password = "";
 
 
