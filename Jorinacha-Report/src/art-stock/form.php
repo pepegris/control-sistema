@@ -1,17 +1,20 @@
 <?php
 require '../../includes/log.php';
 include '../../includes/header.php';
-$servername = "localhost";
+require '../../services/mysql.php';
+$service=new Tiendas();
+$res=$service->getTiendas();
+/* $servername = "localhost";
 $database = "control_sistema";
 $username = "root";
 $password = "";
 
 
 $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password );
-$res = $conn->query("SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'");
+$res = $conn->query("SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'");*/
 foreach ($res as $key ) {
   var_dump($key['sedes_nom']);
-}
+} 
 ?>
 
 <div id="body">

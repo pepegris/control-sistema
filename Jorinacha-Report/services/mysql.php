@@ -28,6 +28,7 @@ class Tiendas
 
             $conn=$this->Conexion();
             $res = $conn->query("SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'");
+            return $res;
 
         } catch (PDOException $err) {
             return "Falla de Conexion $err->getMessage()";
