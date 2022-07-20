@@ -60,13 +60,7 @@ foreach ($res2 as $key ) {
 
           <?php
 
-            $res2= getCo_lin();
-            echo $res2;
-            var_dump($res2);
-            foreach ($res2 as $key => $value) {
-              echo $value;
-            }
-          
+
            
          /*   while ($row2 = sqlsrv_fetch_array(getCo_lin())) {
 

@@ -31,7 +31,14 @@ function getCo_lin(){
     $sql = "SELECT co_lin from art group by co_lin ";
     $res = sqlsrv_query($conn,$sql);
 
+    
+    while ($row2 = sqlsrv_fetch_array(getCo_lin())) {
 
-    return $res;
+    $co_lin []= $row2[co_lin]; 
+
+}
+
+
+    return $co_lin;
 
 }
