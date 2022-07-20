@@ -17,6 +17,7 @@ include '../../services/sqlserver.php';
 
       <div class="form-group">
       <label for="sede" class="form-label ">Sedes</label>
+      <div class="form-check">
       <?php 
           
           $res1 =getTiendas();
@@ -27,14 +28,15 @@ include '../../services/sqlserver.php';
               $i+=10;
               
           ?>
-          <div class="form-check">
+          
             <input class="form-check-input" type="checkbox" name='<?=$sede?>' value="<?=$i?>"  >
             <label class="form-check-label" for="<?=$sede?>">
             <?=$sede?>
             </label>
-            </div>
+            
 
         <?php } ?>
+        </div>
       </div>
       
       <div class="form-group">
@@ -46,9 +48,9 @@ include '../../services/sqlserver.php';
 
           
             $res2 =getCo_lin();
-          while ($row2 = mysqli_fetch_array($res2)) {
+          while ($row2 = sqlsrv_fetch_array($res2)) {
 
-            $co_lin= $row2[co_lin];
+            $co_lin= $row2['co_lin'];
 
           ?>
             <option value="<?= $co_lin?>"><?= $co_lin?></option>
