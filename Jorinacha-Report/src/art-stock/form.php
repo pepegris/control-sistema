@@ -2,6 +2,7 @@
 require '../../includes/log.php';
 include '../../includes/header.php';
 include '../../services/mysql.php';
+include '../../services/sqlserver.php';
 
 ?>
 
@@ -15,20 +16,42 @@ include '../../services/mysql.php';
       </center>
 
       <div class="form-group">
-        <label for="tasa" class="form-label ">Tienda</label>
+      <label for="sede" class="form-label ">Sedes</label>
+      <?php 
+          
+
+          $i=5;
+          while ($res=mysqli_fetch_array(getTiendas())) {
+              
+              $sede=$res['sedes_nom'];
+              $i+=10;
+              
+          ?>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name='<?=$sede?>' value="<?=$i?>"  >
+            <label class="form-check-label" for="<?=$sede?>">
+            <?=$sede?>
+            </label>
+            </div>
+
+        <?php } ?>
+      </div>
+      
+      <div class="form-group">
+        <label for="linea" class="form-label ">Linea</label>
         <select name="sedes_nom" id="">
           <option value="todos">Todas</option>
 
           <?php
 
-          $res = getTiendas();
+          
 
-          while ($row = mysqli_fetch_array($res)) {
+          while ($row = mysqli_fetch_array(getCo_lin())) {
 
-            $sede = $row['sedes_nom'];
+            $co_lin= $row['co_lin'];
 
           ?>
-            <option value="<?= $sede ?>"><?= $sede ?></option>
+            <option value="<?= $co_lin?>"><?= $co_lin?></option>
 
           <?php } ?>
 
