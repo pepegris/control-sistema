@@ -1,6 +1,15 @@
 <?php
 require '../../includes/log.php';
 include '../../includes/header.php';
+$servername = "localhost";
+$database = "control_sistema";
+$username = "root";
+$password = "";
+
+
+$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password );
+var_dump($conn);
+
 ?>
 
 <div id="body">
@@ -18,14 +27,6 @@ include '../../includes/header.php';
           <option value="todos">Todas</option>
 
           <?php
-          $servername = "localhost";
-          $database = "control_sistema";
-          $username = "root";
-          $password = "";
-
-
-          $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password );
-          var_dump($conn);
 
 
           ?>
