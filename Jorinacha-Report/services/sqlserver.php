@@ -39,6 +39,6 @@ function getLin_art()
         $i++;
     }
 
-    $res = utf8_encode("$co_lin");
+    $res = $co_lin;
     return $res ;
 }
