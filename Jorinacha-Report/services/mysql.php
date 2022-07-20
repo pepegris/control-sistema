@@ -14,7 +14,10 @@ class Mysql{
         try {
 
             $conn = mysqli_connect($this->servername, $this->username, $this->password, $this->database);
-            return $conn;
+            if (!$conn) {
+    
+                die("Connection failed: " . mysqli_connect_error());
+            }
             
         } catch (mysqli_sql_exception $e) {
             echo "$e";
@@ -28,5 +31,7 @@ class Mysql{
 
 }
 
+$conexion= new Mysql();
+$this->conexion->conexion();
 
 ?>
