@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
 <style>
    body{
     height: 100vh;
