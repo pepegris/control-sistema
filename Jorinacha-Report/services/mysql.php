@@ -39,3 +39,7 @@ class Tiendas
         }
     } */
 }
+
+$service=new Tiendas();
+
+?>
