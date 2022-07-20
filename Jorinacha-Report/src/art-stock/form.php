@@ -47,7 +47,7 @@ include '../../services/sqlserver.php';
 
 <?php
 $res2=getLin_art();
-var_dump($res2[0]);
+var_dump($res2[0]["co_lin"]);
 echo "<br>";
 var_dump($res2["lin_des"]);
 ?>
