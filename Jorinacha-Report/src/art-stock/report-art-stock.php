@@ -6,12 +6,15 @@ include '../../services/sqlserver.php';
 
 if ($_POST) {
 
-    var_dump($_POST);
+
+    
     $linea=$_POST['linea'];
-    $almacen=$_POST['sedes'];
+    for ($i=5; $i < count($_POST) ; $i+=10) { 
+        $sedes [] = $_POST[$i];
+    }
 
     var_dump($linea);
-    var_dump($almacen);
+    var_dump( $sedes);
 ?>
 
 
