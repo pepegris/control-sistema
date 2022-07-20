@@ -21,8 +21,16 @@ include '../../services/mysql.php';
 
           <?php
 
+          $res = getTiendas();
+
+          while ($row = mysqli_fetch_array($res)) {
+
+            $sede = $row['sedes_nom'];
 
           ?>
+            <option value="<?= $sede ?>"><?= $sede ?></option>
+
+          <?php } ?>
 
         </select>
       </div>
