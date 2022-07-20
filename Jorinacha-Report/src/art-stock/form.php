@@ -21,6 +21,7 @@ include '../../includes/header.php';
           require '../../services/mysql.php';
 
           $service = new Tiendas();
+          var_dump($service);
           $res=$service->getTiendas();
           var_dump($service->getTiendas());
 
