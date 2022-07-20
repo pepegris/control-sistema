@@ -1,6 +1,6 @@
 <?php 
 echo "incio";
-/* class Mysql{
+class Mysql{
 
     private $servername = "localhost";
     private $database = "control_sistema";
@@ -31,7 +31,7 @@ echo "incio";
 
 }
 
-$conexion= new Mysql();
+/* $conexion= new Mysql();
 $this->conexion->conexion(); */
 echo "fin";
 ?>
