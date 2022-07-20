@@ -19,7 +19,7 @@ class Mysql{
                 die("Connection failed: " . mysqli_connect_error());
             }
             
-        } catch (mysqli_sql_exception $e) {
+        } catch (Exception $e) {
             echo "$e";
         }
 
