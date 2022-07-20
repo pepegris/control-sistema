@@ -20,17 +20,13 @@ include '../../includes/header.php';
           <?php
           require '../../services/mysql.php';
 
-/*           $service = new Tiendas();
+          $service = new Tiendas();
           $res=$service->getTiendas();
-          var_dump($service->getTiendas()); */
-/*           while ($row = mysqli_fetch_array($service->getTiendas())) {
+          var_dump($service->getTiendas());
 
-            $sede = $row['sedes_nom']; */
 
           ?>
-      <!--       <option value="<?= $sede ?>"><?= $sede ?></option> -->
 
-          <?php /* } */ ?>
         </select>
       </div>
 
