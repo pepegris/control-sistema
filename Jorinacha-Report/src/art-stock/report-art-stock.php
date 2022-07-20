@@ -13,8 +13,29 @@ if ($_POST) {
         $sedes [] = $_POST[$i];
     }
 
-    var_dump($linea);
-    var_dump( $sedes);
+    $bd = array (
+        "Previa Shop"=> 'PREVIA_A',
+        "Comercial Merina"=> 'MERINA21',
+        "Comercial Merina III"=> 'MRIA3A21',
+        "Comercial Corina I"=>'CORINA21',
+        "Comercial Corina II"=>'CORI2_21',
+        "Comercial Punto Fijo"=> 'PUFIJO21',
+        "Comercial Matur"=> 'MATURA21',
+        "Comercial Valena"=> 'VALENA21',
+        "Comercial Trina"=> 'TRAINA21',
+        "Comercial Kagu"=> 'KAGUA21',
+        "Comercial Nachari"=> 'NACHAR21',
+        "Comercial Higue"=> 'HIGUE21',
+        "Comercial Apura"=>'APURA21',
+        "Comercial Vallepa"=> 'VALLEP21',
+        "Comercial Ojena"=> 'OJENA21',
+        "Comercial Puecruz"=> 'PUECRU21',
+        "Comercial Acari"=> 'ACARI21',
+        "Comercial Catica II" => 'CATICA21',
+    );
+
+    var_dump($bd["Comercial Catica II"]);
+
 ?>
 
 
