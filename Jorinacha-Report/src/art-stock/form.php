@@ -2,7 +2,7 @@
 require '../../includes/log.php';
 include '../../includes/header.php';
 include '../../services/mysql.php';
-use Conn\Mysql;
+
 ?>
 
 <div id="body">

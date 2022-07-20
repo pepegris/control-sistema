@@ -31,7 +31,7 @@ class Mysql{
 
 
 }
-namespace Conn;
+/* namespace Conn; */
 /* $conexion= new Mysql();
 $this->conexion->conexion(); */
 echo "fin";
