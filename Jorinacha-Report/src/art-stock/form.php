@@ -24,6 +24,7 @@ include '../../includes/header.php';
           var_dump($service);
           $res=$service->getTiendas();
           var_dump($service->getTiendas());
+          echo ($res);
 
 
           ?>
