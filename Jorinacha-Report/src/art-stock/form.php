@@ -45,8 +45,11 @@ include '../../services/sqlserver.php';
       </div>
 
 
-
-
+<?php
+$res2= getCo_lin();
+echo $res2;
+var_dump($res2);
+?>
       <div class="form-group">
         <label for="linea" class="form-label ">Linea</label>
         <select name="sedes_nom" id="">
