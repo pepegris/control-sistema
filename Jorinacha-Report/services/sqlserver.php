@@ -22,19 +22,20 @@ function getCat_art(){
 
 }
 
-function getCo_lin(){
+function getLin_art(){
 
     
     $serverName = "172.16.1.19"; 
     $connectionInfo = array( "Database"=>"PREVIA_A", "UID"=>"mezcla", "PWD"=>"Zeus33$");
     $conn = sqlsrv_connect( $serverName, $connectionInfo);
-    $sql = "SELECT co_lin from art group by co_lin ";
+    $sql = "SELECT co_lin,lin_des from lin_art";
     $res = sqlsrv_query($conn,$sql);
 
     
     while ($row2 = sqlsrv_fetch_array($res)) {
 
     $co_lin []= $row2[co_lin]; 
+    $co_lin []= $row2[lin_des]; 
 
 }
 

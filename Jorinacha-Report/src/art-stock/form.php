@@ -46,12 +46,8 @@ include '../../services/sqlserver.php';
 
 
 <?php
-$res2= getCo_lin();
-echo $res2;
+$res2=getLin_art();
 var_dump($res2);
-foreach ($res2 as $key ) {
-  echo $key;
-}
 ?>
       <div class="form-group">
         <label for="linea" class="form-label ">Linea</label>
@@ -61,15 +57,17 @@ foreach ($res2 as $key ) {
           <?php
 
 
+       /*  $res2=getLin_art(); */
            
-         /*   while ($row2 = sqlsrv_fetch_array(getCo_lin())) {
+/*          for ($i=0; $i < count($res2); $i++) { 
+
 
             $co_lin = $row2[co_lin]; */
 
           ?>
-            <!-- <option value="<?= $co_lin ?>"><?= $co_lin ?></option> -->
+             <!-- <option value="<?= $res2 ?>"><?= $res2 ?></option>  -->
 
-          <?php /* } */ ?> 
+          <?php  /* }  */?> 
 
         </select>
       </div>
