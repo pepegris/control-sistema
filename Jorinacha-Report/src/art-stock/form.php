@@ -1,6 +1,7 @@
 <?php
 require '../../includes/log.php';
 include '../../includes/header.php';
+phpinfo();
 ?>
 
 <div id="body">
