@@ -32,7 +32,7 @@ function getCo_lin(){
     $res = sqlsrv_query($conn,$sql);
 
     
-    while ($row2 = sqlsrv_fetch_array(getCo_lin())) {
+    while ($row2 = sqlsrv_fetch_array($res)) {
 
     $co_lin []= $row2[co_lin]; 
 
