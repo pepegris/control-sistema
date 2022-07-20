@@ -9,8 +9,8 @@ class Mysql{
     // Create connection
     private $conna = mysqli_connect($servername, $username, $password, $database); 
 
-    function conexion(){
-
+    public function __construct()
+    {
         try {
 
             $conn = mysqli_connect($this->servername, $this->username, $this->password, $this->database);
@@ -23,9 +23,9 @@ class Mysql{
             echo "$e";
         }
 
-
-
+        
     }
+
 
 
 
