@@ -19,7 +19,7 @@ $cuenta_on = ucwords($cuenta_on);
 ?>
 
 
-<a href="#" class="btn btn-dark" style="position: fixed;
+<!-- <a href="#" class="btn btn-dark" style="position: fixed;
     bottom: 90%;
     right: 5%;
-    font-size:30px;" >Usuario: <?=$cuenta_on?></a>
+    font-size:30px;" >Usuario: <?=$cuenta_on?></a> -->
