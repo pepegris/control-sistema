@@ -35,7 +35,7 @@ function getLin_art()
     $i=0;
     while ($row = sqlsrv_fetch_array($consulta)) {
         
-        $co_lin[] =  utf8_encode("$row");
+        $co_lin[] =  $row;
         $i++;
     }
 
