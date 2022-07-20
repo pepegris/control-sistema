@@ -6,7 +6,7 @@ include '../../services/sqlserver.php';
 
 if ($_POST) {
 
-
+    var_dump($_POST);
     $linea=$_POST['linea'];
     $almacen=$_POST['sedes'];
 
