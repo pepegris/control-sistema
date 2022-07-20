@@ -36,7 +36,7 @@ include '../../services/sqlserver.php';
           $i += 10;
         ?>
 
-          <input class="form-check-input" type="checkbox" value="<?= $sede ?>" name="?= $sede ?"  checked>
+          <input class="form-check-input" type="checkbox" value="<?= $sede ?>" name="<?= $sede ?>"  checked>
           <label class="form-check-label" for="<?= $sede ?>">
             <?= $sede ?>
           </label>
