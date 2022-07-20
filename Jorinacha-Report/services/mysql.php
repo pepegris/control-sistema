@@ -26,8 +26,9 @@ class Tiendas
 
             $sql = "SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'";
             $res = $this->conn->prepare($sql);
+            $res->execute();
             /* $res = mysqli_query($this->conn, $sql); */
-            return $res;
+            return $res->fetchAll();
         } catch (PDOException $err) {
             return "Falla de Conexion $err";
         }
