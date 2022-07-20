@@ -10,7 +10,7 @@ $password = "";
 $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password );
 $res = $conn->query("SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'");
 foreach ($res as $key ) {
-  var_dump($key);
+  var_dump($key['sedes_nom']);
 }
 ?>
 
