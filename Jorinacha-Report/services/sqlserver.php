@@ -30,6 +30,7 @@ function getCo_lin(){
     $conn = sqlsrv_connect( $serverName, $connectionInfo);
     $sql = "SELECT co_lin from art group by co_lin ";
     $res = sqlsrv_query($conn,$sql);
+    
 
     return $res;
 

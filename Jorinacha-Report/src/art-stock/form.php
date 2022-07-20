@@ -19,11 +19,11 @@ include '../../services/sqlserver.php';
       <label for="sede" class="form-label ">Sedes</label>
       <?php 
           
-          $res =getTiendas();
+          $res1 =getTiendas();
           $i=5;
-          while ($res=mysqli_fetch_array($res)) {
+          while ($row1=mysqli_fetch_array($res1)) {
               
-              $sede=$res['sedes_nom'];
+              $sede=$row1['sedes_nom'];
               $i+=10;
               
           ?>
@@ -45,10 +45,10 @@ include '../../services/sqlserver.php';
           <?php
 
           
-            $res =getCo_lin();
-          while ($row = mysqli_fetch_array($res)) {
+            $res2 =getCo_lin();
+          while ($row2 = mysqli_fetch_array($res2)) {
 
-            $co_lin= $row['co_lin'];
+            $co_lin= $row2['co_lin'];
 
           ?>
             <option value="<?= $co_lin?>"><?= $co_lin?></option>
