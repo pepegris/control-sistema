@@ -16,6 +16,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Jorinacha Report</title>
 </head>
+<style>
+  body{
+    background: #242943;
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+</style>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
