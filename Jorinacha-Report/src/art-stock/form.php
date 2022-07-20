@@ -15,7 +15,7 @@ include '../../services/sqlserver.php';
         <legend>Reporte</legend>
       </center>
 
-      <div class="form-group">
+      
       <label for="sede" class="form-label ">Sedes</label>
       <div class="form-check">
       <?php 
@@ -37,7 +37,7 @@ include '../../services/sqlserver.php';
 
         <?php } ?>
         </div>
-      </div>
+      
       
       <div class="form-group">
         <label for="linea" class="form-label ">Linea</label>
