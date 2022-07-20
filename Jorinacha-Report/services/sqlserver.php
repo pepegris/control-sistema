@@ -35,8 +35,7 @@ function getLin_art()
     $i=0;
     while ($row2 = sqlsrv_fetch_array($res)) {
         
-        $co_lin[$i] = $row2[co_lin];
-        $co_lin[$i] = $row2[lin_des];
+        $co_lin[] = $row2;
         $i++;
     }
 
