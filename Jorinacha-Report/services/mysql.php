@@ -10,7 +10,16 @@ class Tiendas
 
     public function __construct()
     {
-        $inf = "mysql:host=$this->servername;dbname=$this->database;charset=utf8"; 
+
+        $res=$this->conn2;
+
+        if (!$res) {
+    
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+
+/*         $inf = "mysql:host=$this->servername;dbname=$this->database;charset=utf8"; 
         try {
 
             $this->conn= new PDO($inf, $this->username, $this->password );
@@ -20,7 +29,7 @@ class Tiendas
 
             return "Falla de Conexion $err->getMessage()";
 
-        }
+        } */
         
     }
 
