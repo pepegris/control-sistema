@@ -22,15 +22,15 @@ include '../../includes/header.php';
 
           $service = new Tiendas();
           $res=$service->getTiendas();
-          var_dump($res);
-          while ($row = mysqli_fetch_array($service->getTiendas())) {
+          var_dump($service->getTiendas());
+/*           while ($row = mysqli_fetch_array($service->getTiendas())) {
 
-            $sede = $row['sedes_nom'];
+            $sede = $row['sedes_nom']; */
 
           ?>
-            <option value="<?= $sede ?>"><?= $sede ?></option>
+      <!--       <option value="<?= $sede ?>"><?= $sede ?></option> -->
 
-          <?php } ?>
+          <?php /* } */ ?>
         </select>
       </div>
 

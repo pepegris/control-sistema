@@ -7,7 +7,7 @@ class Tiendas
     private $password = "";
     private $conn =mysqli_connect($this->servername, $this->username, $this->password, $this->database) ;
 
-/*     public function __construct()
+     public function __construct()
     {
 
         try {
@@ -16,7 +16,7 @@ class Tiendas
             return "Falla de Conexion $th";
         }
         
-    } */
+    } 
 
     public function getTiendas()
     {
