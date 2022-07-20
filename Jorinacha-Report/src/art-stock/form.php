@@ -55,13 +55,9 @@ include '../../services/sqlserver.php';
           <?php
 
 
-          $serverName = "172.16.1.19"; 
-          $connectionInfo = array( "Database"=>"PREVIA_A", "UID"=>"mezcla", "PWD"=>"Zeus33$");
-          $conn = sqlsrv_connect( $serverName, $connectionInfo);
-          $sql = "SELECT co_lin from art group by co_lin ";
-          $res2 = sqlsrv_query($conn,$sql);
+          
 
-          while ($row2 = sqlsrv_fetch_array($res2)) {
+          while ($row2 = sqlsrv_fetch_array(getCo_lin())) {
 
             $co_lin = $row2[co_lin];
 
