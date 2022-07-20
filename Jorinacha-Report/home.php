@@ -1,3 +1,21 @@
+<?php
+
+ 
+
+
+
+ session_start();
+
+$cuenta_on=$_SESSION['username'];
+
+if (!isset($cuenta_on)) {
+    header("location:../salir.php");
+}
+
+$cuenta_on = ucwords($cuenta_on); 
+
+ 
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,20 +25,18 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
   <!-- ICONOS -->
     <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
-
+    
+    <link rel="stylesheet" href="css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+    
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Jorinacha Report</title>
 </head>
 <style>
-  body{
-    background: #242943;
-    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+
 </style>
 <body>
 
