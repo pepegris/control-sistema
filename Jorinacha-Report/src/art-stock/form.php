@@ -49,6 +49,9 @@ include '../../services/sqlserver.php';
 $res2= getCo_lin();
 echo $res2;
 var_dump($res2);
+foreach ($res2 as $key => $value) {
+  echo $value;
+}
 ?>
       <div class="form-group">
         <label for="linea" class="form-label ">Linea</label>
