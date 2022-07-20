@@ -1,6 +1,6 @@
 <?php
 
-$servername = "localhost";
+/* $servername = "localhost";
 $database = "control_sistema";
 $username = "root";
 $password = "";
@@ -11,7 +11,7 @@ if (!$conn) {
     
     die("Connection failed: " . mysqli_connect_error());
 }
-
+ */
 
 function getTiendas(){
 
@@ -21,7 +21,7 @@ function getTiendas(){
     $username = "root";
     $password = "";
     $conn = mysqli_connect($servername, $username, $password, $database);
-    $sql = "SELECT sedes_nom FROM sedes WHERE estado_sede <> 'inactivo'";
+    $sql = "SELECT sedes_nom FROM sedes WHERE estado_sede <> 'inactivo' and sedes_nom<>'Sede Boleita' and sedes_nom<>'Sede Sabana Grande'";
     $res = mysqli_query($conn,$sql);
 
     return $res;
