@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
  
 
@@ -105,7 +105,7 @@ $cuenta_on = ucwords($cuenta_on);
 										<img src="images/pic03.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="#" class="link">Contadores</a></h3>
+										<h3><a href="../control/log/contadores/buscador.php" class="link">Contadores</a></h3>
 										<p>Estado de Contadores</p>
 									</header>
 								</article>
@@ -114,7 +114,7 @@ $cuenta_on = ucwords($cuenta_on);
 										<img src="images/pic04.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="#" class="link">Asistencia</a></h3>
+										<h3><a href="../../Jorinacha-Report/" class="link">Reporte</a></h3>
 										<p>Sistema de gestion de Asistencias</p>
 									</header>
 								</article>
