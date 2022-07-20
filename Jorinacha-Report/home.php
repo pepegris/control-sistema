@@ -51,7 +51,7 @@ $cuenta_on = ucwords($cuenta_on);
         <ul class="navbar-nav ml-auto">
 
           <li class="nav-item">
-            <a class="nav-link" href="/report/art-stock" >Articulos</a>
+            <a class="nav-link" href="#" >Articulos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
@@ -75,7 +75,7 @@ $cuenta_on = ucwords($cuenta_on);
 <h1>Reportes</h1>
 
 <div class="container__box">
-    <a href="src">
+    <a href="src/art-stock/form.php">
     <div class="box">
             <i class="lni lni-write"></i>
             <h5>Stock</h5>
