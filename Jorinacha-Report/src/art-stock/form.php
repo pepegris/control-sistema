@@ -30,12 +30,12 @@ include '../../services/sqlserver.php';
 
           $sede = $row1['sedes_nom'];
           if ($sede=='Sede Boleita') {
-            $sede = 'Previa';
+            $sede = 'Previa Shop';
           }
           $i += 10;
         ?>
 
-          <input class="form-check-input" type="checkbox" value="<?= $i ?>" id="<?= $sede ?>">
+          <input class="form-check-input" type="checkbox" value="<?= $i ?>" id="<?= $sede ?>" checked>
           <label class="form-check-label" for="<?= $sede ?>">
             <?= $sede ?>
           </label>
@@ -59,7 +59,7 @@ include '../../services/sqlserver.php';
           var_dump($res2);
           while ($row2 = sqlsrv_fetch_array($res2)) {
 
-            $co_lin = $row2 ^ [co_lin];
+            $co_lin = $row2[co_lin];
 
           ?>
             <option value="<?= $co_lin ?>"><?= $co_lin ?></option>
