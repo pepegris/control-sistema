@@ -5,16 +5,15 @@ class Tiendas
     private $database = "control_sistema";
     private $username = "root";
     private $password = "";
-    private $inf = "mysql:host=$this->servername;dbname=$this->database;charset=utf8"; 
     private $conn;
     private $conn2 = mysqli_connect($this->servername, $this->username, $this->password, $this->database);
 
     public function __construct()
     {
-
+        $inf = "mysql:host=$this->servername;dbname=$this->database;charset=utf8"; 
         try {
 
-            $this->conn= new PDO($this->inf, $this->username, $this->password );
+            $this->conn= new PDO($inf, $this->username, $this->password );
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             echo "CONEXION";
         } catch (PDOException $err) {
