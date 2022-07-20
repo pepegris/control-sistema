@@ -5,15 +5,17 @@ class Tiendas
     private $database = "control_sistema";
     private $username = "root";
     private $password = "";
-    private $conn =mysqli_connect($this->servername, $this->username, $this->password, $this->database) ;
+    private $conn  ;
+    private $conn2 =mysqli_connect($this->servername, $this->username, $this->password, $this->database) ;
 
      public function __construct()
     {
 
         try {
-            $this->conn= mysqli_connect($this->servername, $this->username, $this->password, $this->database);
-        } catch (\Throwable $th) {
-            return "Falla de Conexion $th";
+            $this->conn=new PDO($this->servername, $this->username, $this->password, $this->database);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $err) {
+            return "Falla de Conexion $err";
         }
         
     } 
@@ -22,11 +24,14 @@ class Tiendas
     {
 
         try {
+
             $sql = "SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'";
-            $res = mysqli_query($this->conn, $sql);
+            $res = $this->conn->exec($sql);
+            /* $res = mysqli_query($this->conn, $sql); */
             return $res;
-        } catch (\Throwable $th) {
-            return "Falla de Conexion $th";
+            
+        } catch (PDOException $err) {
+            return "Falla de Conexion $err";
         }
     }
 }
