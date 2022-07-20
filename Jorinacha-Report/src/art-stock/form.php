@@ -14,14 +14,14 @@ include '../../services/sqlserver.php';
 </style>
 
 <div id="body">
-  <form action="tasa_post.php" method="POST">
+  <form action="report-art-stock.php" method="POST">
 
     <div class="fieldset">
       <br>
       <center>
         <legend>Reporte</legend>
       </center>
-      <label for="linea" class="form-label ">Sedes</label>
+      <label for="sedes" class="form-label ">Sedes</label>
       <div class="form-check">
         <?php
         $res1 = getTiendas();
