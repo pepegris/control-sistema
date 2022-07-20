@@ -3,6 +3,7 @@ require '../../includes/log.php';
 include '../../includes/header.php';
 require '../../services/mysql.php';
 $service=new Tiendas();
+var_dump($service);
 /* $res=$service->getTiendas(); */
 /* $servername = "localhost";
 $database = "control_sistema";
