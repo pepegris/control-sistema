@@ -55,6 +55,7 @@ include '../../services/sqlserver.php';
           <?php
 
             $res2= getCo_lin();
+            echo $res2;
             var_dump($res2);
           
            

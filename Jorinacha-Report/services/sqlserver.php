@@ -32,6 +32,6 @@ function getCo_lin(){
     $res = sqlsrv_query($conn,$sql);
 
 
-    return $res;
+    echo "$res";
 
 }
