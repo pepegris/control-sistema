@@ -19,9 +19,9 @@ include '../../services/sqlserver.php';
       <label for="sede" class="form-label ">Sedes</label>
       <?php 
           
-
+          $res =getTiendas();
           $i=5;
-          while ($res=mysqli_fetch_array(getTiendas())) {
+          while ($res=mysqli_fetch_array($res)) {
               
               $sede=$res['sedes_nom'];
               $i+=10;
@@ -45,8 +45,8 @@ include '../../services/sqlserver.php';
           <?php
 
           
-
-          while ($row = mysqli_fetch_array(getCo_lin())) {
+            $res =getCo_lin();
+          while ($row = mysqli_fetch_array($res)) {
 
             $co_lin= $row['co_lin'];
 
