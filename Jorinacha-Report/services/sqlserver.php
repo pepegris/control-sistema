@@ -32,11 +32,12 @@ function getLin_art()
     $sql = "SELECT co_lin,lin_des from lin_art";
     $res = sqlsrv_query($conn, $sql);
 
-
+    $i=0;
     while ($row2 = sqlsrv_fetch_array($res)) {
-        $i=0;
+        
         $co_lin[$i] = $row2[co_lin];
         $co_lin[$i] = $row2[lin_des];
+        $i++;
     }
 
 
