@@ -30,15 +30,15 @@ function getLin_art()
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT co_lin,lin_des from lin_art";
-    $res = sqlsrv_query($conn, $sql);
+    $consulta = sqlsrv_query($conn, $sql);
 
     $i=0;
-    while ($row2 = sqlsrv_fetch_array($res)) {
+    while ($row2 = sqlsrv_fetch_array($consulta)) {
         
         $co_lin[] = $row2;
         $i++;
     }
 
-
-    return $co_lin;
+    $res = utf8_encode("$co_lin");
+    return $res ;
 }
