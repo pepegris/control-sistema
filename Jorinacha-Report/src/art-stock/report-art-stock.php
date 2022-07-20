@@ -9,7 +9,7 @@ if ($_POST) {
 
     
     $linea=$_POST['linea'];
-    for ($i=5; $i < 200 ; $i+=10) { 
+    for ($i=0; $i < 20 ; $i+=1) { 
         $sedes [] = $_POST[$i];
     }
 

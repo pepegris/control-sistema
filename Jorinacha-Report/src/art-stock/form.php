@@ -26,14 +26,14 @@ include '../../services/sqlserver.php';
       <div class="form-check">
         <?php
         $res1 = getTiendas();
-        $i = 5;
+        $i = 0;
         while ($row1= mysqli_fetch_array($res1)) {
 
           $sede = $row1['sedes_nom'];
           if ($sede=='Sede Boleita') {
             $sede = 'Previa Shop';
           }
-          $i += 10;
+          
         ?>
 
           <input class="form-check-input" type="checkbox" value="<?= $sede ?>" name="<?= $i ?>"  checked>
@@ -41,7 +41,7 @@ include '../../services/sqlserver.php';
             <?= $sede ?>
           </label>
 
-        <?php } ?>
+        <?php  $i ++; } ?>
 
       </div>
 
