@@ -35,28 +35,6 @@ include '../../services/sqlserver.php';
         </label>
       </div>
 
-      <label for="sede" class="form-label ">Sedes</label>
-      <?php
-
-      $res1 = getTiendas();
-      $i = 5;
-      while ($row1 = mysqli_fetch_array($res1)) {
-
-        $sede = $row1['sedes_nom'];
-        $i += 10;
-
-      ?>
-
-
-
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="<?= $i ?>" id="">
-          <label class="form-check-label" for="<?= $sede ?>">
-            <?= $sede ?>
-          </label>
-        </div>
-      <?php } ?>
-
 
 
       <div class="form-group">
