@@ -20,13 +20,20 @@ include '../../services/sqlserver.php';
         <label class="form-check-label" for="flexCheckDefault">
           Default checkbox
         </label>
-      </div>
-      <div class="form-check">
+
+
         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
         <label class="form-check-label" for="flexCheckChecked">
           Checked checkbox
         </label>
+
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+          Checked checkbox
+        </label>
+
       </div>
+
 
 
 
@@ -40,13 +47,13 @@ include '../../services/sqlserver.php';
         $i += 10;
 
       ?>
-        <label for="sede" class="form-label ">Sedes</label>
+<!--         <label for="sede" class="form-label ">Sedes</label>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" name='<?= $sede ?>' value="<?= $i ?>">
           <label class="form-check-label" for="<?= $sede ?>">
             <?= $sede ?>
           </label>
-          </div>
+          </div> -->
 
         <?php } ?>
         
