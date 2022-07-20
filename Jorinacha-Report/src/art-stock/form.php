@@ -60,7 +60,7 @@ include '../../services/sqlserver.php';
  
           $lin_des=utf8_encode("$res2[$i]['lin_des']")
           ?>
-             <option value="<?= $res2[$i]["co_lin"] ?>"><?= $lin_des ?></option>  
+             <option value="<?= $res2[$i]["co_lin"] ?>"><?= utf8_encode("$res2[$i]['lin_des']") ?></option>  
 
           <?php   }  ?> 
 
