@@ -60,8 +60,8 @@ var_dump($res2);
             $res2= getCo_lin();
             echo $res2;
             var_dump($res2);
-            foreach ($res2 as $key ) {
-              echo $key;
+            foreach ($res2 as $key => $value) {
+              echo $value;
             }
           
            
