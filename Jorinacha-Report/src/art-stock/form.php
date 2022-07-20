@@ -23,15 +23,22 @@ include '../../services/sqlserver.php';
       </center>
       <label for="linea" class="form-label ">Sedes</label>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-          Default checkbox
-        </label>
+        <?php
+        $res1 = getTiendas();
+        $i = 5;
+        while ($row1= mysqli_fetch_array($res1)) {
 
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-        <label class="form-check-label" for="flexCheckChecked">
-          Checked checkbox
-        </label>
+          $sede = $row1['sedes_nom'];
+          $i += 10;
+        ?>
+
+          <input class="form-check-input" type="checkbox" value="<?= $i ?>" id="<?= $sede ?>">
+          <label class="form-check-label" for="<?= $sede ?>">
+            <?= $sede ?>
+          </label>
+
+        <?php } ?>
+
       </div>
 
 
