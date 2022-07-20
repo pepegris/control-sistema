@@ -47,7 +47,7 @@ include '../../services/sqlserver.php';
 
 <?php
 $res2=getLin_art();
-var_dump($res2);
+var_dump($res2[1]);
 ?>
       <div class="form-group">
         <label for="linea" class="form-label ">Linea</label>
