@@ -46,10 +46,10 @@ include '../../services/sqlserver.php';
           <label class="form-check-label" for="<?= $sede ?>">
             <?= $sede ?>
           </label>
-
+          </div>
 
         <?php } ?>
-        </div>
+        
 
 
         <div class="form-group">
