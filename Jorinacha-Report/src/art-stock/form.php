@@ -58,9 +58,9 @@ include '../../services/sqlserver.php';
            
          for ($i=0; $i < count($res2); $i++) { 
  
-
+          $lin_des=utf8_encode("$res2[$i]['lin_des']")
           ?>
-             <option value="<?= $res2[$i]["co_lin"] ?>"><?= $res2[$i]["lin_des"] ?></option>  
+             <option value="<?= $res2[$i]["co_lin"] ?>"><?= $lin_des ?></option>  
 
           <?php   }  ?> 
 
