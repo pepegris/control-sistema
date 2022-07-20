@@ -6,6 +6,13 @@ include '../../services/sqlserver.php';
 
 ?>
 
+<style>
+  .form-check{
+    display: flexbox;
+    
+  }
+</style>
+
 <div id="body">
   <form action="tasa_post.php" method="POST">
 
@@ -29,7 +36,7 @@ include '../../services/sqlserver.php';
 
 
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="<?= $i ?>" name='<?= $sede ?>' id="">
+          <input class="form-check-input" type="checkbox" value="<?= $i ?>"  id="">
           <label class="form-check-label" for="<?= $sede ?>">
             <?= $sede ?>
           </label>
