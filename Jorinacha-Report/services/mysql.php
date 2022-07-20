@@ -5,23 +5,27 @@ class Tiendas
     private $database = "control_sistema";
     private $username = "root";
     private $password = "";
+    private $inf = "mysql:host=$this->servername;dbname=$this->database;charset=utf8"; 
+    private $conn;
     private $conn2 = mysqli_connect($this->servername, $this->username, $this->password, $this->database);
 
-    private function Conexion()
+    private function __construct()
     {
 
         try {
 
-            $conn= new PDO("mysql:host=$this->servername;dbname=$this->database", $this->username, $this->password );
-            return $conn;
-            /* $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); */
+            $this->conn= new PDO($this->inf, $this->username, $this->password );
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         } catch (PDOException $err) {
+
             return "Falla de Conexion $err->getMessage()";
+
         }
+        
     }
 
-    public function getTiendas()
+/*     public function getTiendas()
     {
 
         try {
@@ -33,5 +37,5 @@ class Tiendas
         } catch (PDOException $err) {
             return "Falla de Conexion $err->getMessage()";
         }
-    }
+    } */
 }
