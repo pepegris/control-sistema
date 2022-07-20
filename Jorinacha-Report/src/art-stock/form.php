@@ -15,45 +15,32 @@ include '../../services/sqlserver.php';
         <legend>Reporte</legend>
       </center>
       <label for="sede" class="form-label ">Sedes</label>
+
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
         <label class="form-check-label" for="flexCheckDefault">
           Default checkbox
         </label>
       </div>
-
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefaault">
-          Default checkbox
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+          Checked checkbox
         </label>
       </div>
 
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefawult">
-          Default checkbox
+        <label class="form-check-label" for="flexCheckDefault1">
+          Default checkbox1
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefqault">
-          Default checkbox
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        <label class="form-check-label" for="flexCheckChecked2">
+          Checked checkbox2
         </label>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefarult">
-          Default checkbox
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefauwlt">
-          Default checkbox
-        </label>
-      </div>
-
 
 
 
@@ -67,7 +54,7 @@ include '../../services/sqlserver.php';
         $i += 10;
 
       ?>
-<!--         <label for="sede" class="form-label ">Sedes</label>
+        <!--         <label for="sede" class="form-label ">Sedes</label>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" name='<?= $sede ?>' value="<?= $i ?>">
           <label class="form-check-label" for="<?= $sede ?>">
@@ -75,35 +62,35 @@ include '../../services/sqlserver.php';
           </label>
           </div> -->
 
-        <?php } ?>
-        
+      <?php } ?>
 
 
-        <div class="form-group">
-          <label for="linea" class="form-label ">Linea</label>
-          <select name="sedes_nom" id="">
-            <option value="todos">Todas</option>
 
-            <?php
+      <div class="form-group">
+        <label for="linea" class="form-label ">Linea</label>
+        <select name="sedes_nom" id="">
+          <option value="todos">Todas</option>
+
+          <?php
 
 
-            $res2 = getCo_lin();
-            var_dump($res2);
-            while ($row2 = sqlsrv_fetch_array($res2)) {
+          $res2 = getCo_lin();
+          var_dump($res2);
+          while ($row2 = sqlsrv_fetch_array($res2)) {
 
-              $co_lin = $row2 ^ [co_lin];
+            $co_lin = $row2 ^ [co_lin];
 
-            ?>
-              <option value="<?= $co_lin ?>"><?= $co_lin ?></option>
+          ?>
+            <option value="<?= $co_lin ?>"><?= $co_lin ?></option>
 
-            <?php } ?>
+          <?php } ?>
 
-          </select>
-        </div>
+        </select>
+      </div>
 
-        <br>
-        <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
-        <br>
+      <br>
+      <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
+      <br>
     </div>
   </form>
 </div>
