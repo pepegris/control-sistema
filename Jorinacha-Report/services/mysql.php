@@ -3,7 +3,7 @@ class Tiendas
 {
     private $servername = "localhost";
     private $database = "control_sistema";
-    private $username = "root";
+    private $username = "roaot";
     private $password = "";
     private $conn;
     private $conn2 = mysqli_connect($this->servername, $this->username, $this->password, $this->database);
