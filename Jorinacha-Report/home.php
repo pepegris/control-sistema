@@ -25,7 +25,7 @@ $cuenta_on = ucwords($cuenta_on);
     <link rel="icon" type="image/x-icon" href="favicon.ico">
   <!-- ICONOS -->
     <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/home.css">
@@ -35,9 +35,7 @@ $cuenta_on = ucwords($cuenta_on);
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Jorinacha Report</title>
 </head>
-<style>
 
-</style>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -75,15 +73,15 @@ $cuenta_on = ucwords($cuenta_on);
 <h1>Reportes</h1>
 
 <div class="container__box">
-    <a routerLink="/report/art-stock">
-        <div class="box">
+    <a href="src">
+    <div class="box">
             <i class="lni lni-write"></i>
             <h5>Stock</h5>
             <h4>Articulos vendidos a una fecha y stock Actual</h4>
         </div>
     </a>
 
-    <a (click)="showModel()">
+    <a  >
         <div class="box">
             <i class="lni lni-coffee-cup"></i>
             <h5>Pronto</h5>
