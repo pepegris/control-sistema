@@ -36,7 +36,7 @@ include '../../services/sqlserver.php';
         ?>
 
           <input class="form-check-input" type="checkbox" value="<?= $i ?>" id="<?= $sede ?>" checked>
-          <label class="form-check-label" for="<?= $sede ?>">
+          <label class="form-check-label" for="sedes">
             <?= $sede ?>
           </label>
 
@@ -48,7 +48,7 @@ include '../../services/sqlserver.php';
 
       <div class="form-group">
         <label for="linea" class="form-label ">Linea</label>
-        <select name="sedes_nom" id="">
+        <select name="linea" id="">
           <option value="todos">Todas</option>
 
           <?php
