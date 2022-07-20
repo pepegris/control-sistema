@@ -45,12 +45,7 @@ include '../../services/sqlserver.php';
       </div>
 
 
-<?php
-$res2=getLin_art();
-var_dump($res2[0]["co_lin"]);
-echo "<br>";
-var_dump($res2[0]["lin_des"]);
-?>
+
       <div class="form-group">
         <label for="linea" class="form-label ">Linea</label>
         <select name="sedes_nom" id="">
@@ -59,17 +54,15 @@ var_dump($res2[0]["lin_des"]);
           <?php
 
 
-       /*  $res2=getLin_art(); */
+         $res2=getLin_art(); 
            
-/*          for ($i=0; $i < count($res2); $i++) { 
-
-
-            $co_lin = $row2[co_lin]; */
+         for ($i=0; $i < count($res2); $i++) { 
+ 
 
           ?>
-             <!-- <option value="<?= $res2 ?>"><?= $res2 ?></option>  -->
+             <option value="<?= $res2[$i]["co_lin"] ?>"><?= $res2[$i]["lin_des"] ?></option>  
 
-          <?php  /* }  */?> 
+          <?php   }  ?> 
 
         </select>
       </div>
