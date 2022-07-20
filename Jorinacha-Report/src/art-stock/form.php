@@ -15,35 +15,6 @@ include '../../services/sqlserver.php';
         <legend>Reporte</legend>
       </center>
       <label for="sede" class="form-label ">Sedes</label>
-
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-          Default checkbox
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-        <label class="form-check-label" for="flexCheckChecked">
-          Checked checkbox
-        </label>
-      </div>
-
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-        <label class="form-check-label" for="flexCheckDefault1">
-          Default checkbox1
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" checked>
-        <label class="form-check-label" for="flexCheckChecked2">
-          Checked checkbox2
-        </label>
-      </div>
-
-
-
       <?php
 
       $res1 = getTiendas();
@@ -54,14 +25,15 @@ include '../../services/sqlserver.php';
         $i += 10;
 
       ?>
-        <!--         <label for="sede" class="form-label ">Sedes</label>
+
+
+
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" name='<?= $sede ?>' value="<?= $i ?>">
+          <input class="form-check-input" type="checkbox" value="<?= $i ?>" name='<?= $sede ?>' id="">
           <label class="form-check-label" for="<?= $sede ?>">
             <?= $sede ?>
           </label>
-          </div> -->
-
+        </div>
       <?php } ?>
 
 
