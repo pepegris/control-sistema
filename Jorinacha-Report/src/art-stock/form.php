@@ -51,7 +51,7 @@ include '../../services/sqlserver.php';
             var_dump($res2);
           while ($row2 = sqlsrv_fetch_array($res2)) {
 
-            $co_lin= $row2['co_lin'];
+            $co_lin= $row2^[co_lin];
 
           ?>
             <option value="<?= $co_lin?>"><?= $co_lin?></option>
