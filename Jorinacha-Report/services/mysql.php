@@ -22,7 +22,7 @@ class Tiendas
     {
 
         try {
-            $sql = "SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'   ";
+            $sql = "SELECT sedes_nom FROM sedes WHERE    estado_sede <> 'inactivo'";
             $res = mysqli_query($this->conn, $sql);
             return $res;
         } catch (\Throwable $th) {

@@ -22,7 +22,7 @@ include '../../includes/header.php';
 
           $service = new Tiendas();
           $res=$service->getTiendas();
-        
+          var_dump($res);
           while ($row = mysqli_fetch_array($res)) {
 
             $sede = $row['sedes_nom'];
