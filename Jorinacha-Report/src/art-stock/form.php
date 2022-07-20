@@ -18,13 +18,14 @@ include '../../includes/header.php';
           <option value="todos">Todas</option>
 
           <?php
-          require '../../services/mysql.php';
+          $servername = "localhost";
+          $database = "control_sistema";
+          $username = "root";
+          $password = "";
 
-          $service = new Tiendas();
-          var_dump($service);
-          $res=$service->getTiendas();
-          var_dump($service->getTiendas());
-          echo ($res);
+
+          $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password );
+          var_dump($conn);
 
 
           ?>
