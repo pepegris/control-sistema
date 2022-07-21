@@ -18,11 +18,11 @@ if ($_POST) {
 
 ?>
 
-    
-<style>
+
+  <style>
 
 
-</style>
+  </style>
 
   <table class="table table-dark table-striped" id="tblData">
     <thead>
@@ -92,7 +92,7 @@ if ($_POST) {
               $total_vendido += round($res2);
             }
             $f++;
-          } 
+          }
 
 
           ?>
@@ -111,7 +111,7 @@ if ($_POST) {
 
               $res3 = getArt_stock_tiendas($sedes[$f], $co_art);
               $stock_act_tienda = round($res3[0]['stock_act']);
-              $total_stock_act_tienda [$sedes[$f]] += $stock_act_tienda;
+              $total_stock_act_tienda[$sedes[$f]] += $stock_act_tienda;
 
 
           ?>
@@ -127,32 +127,38 @@ if ($_POST) {
 
       <?php  } ?>
       <tr>
-          <th></th>
-          <td colspan="7"></td>
-          <td><h4>Total</h4></td>
-          <td><?=$total_stock_act_previa?></td>
-          <?php 
+        <th></th>
+        <td colspan="7"></td>
+        <td>
+          <h4>Total</h4>
+        </td>
+        <td><?= $total_stock_act_previa ?></td>
+        <?php
 
-          var_dump($total_stock_act_tienda);
+        var_dump($total_stock_act_tienda);
+        $h = 1;
+        for ($i = 0; $i < count($total_stock_act_tienda); $i++) {
 
-            for ($i=0; $i < count($total_stock_act_tienda) ; $i++) { 
+        ?>
+          <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
 
+          <?php
 
-              
-            }
-          
-            ?>
+          $h++;
+        }
+
+          ?>
       </tr>
 
     </tbody>
   </table>
   <script src="../../assets/js/excel.js"></script>
-<center>
-<button id="submitExport" class="btn btn-success">Exportar Reporte a EXCEL</button>
-</center>
+  <center>
+    <button id="submitExport" class="btn btn-success">Exportar Reporte a EXCEL</button>
+  </center>
 
 
-    
+
 
 <?php
 } else {
