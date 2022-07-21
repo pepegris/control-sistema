@@ -111,8 +111,7 @@ if ($_POST) {
 
               $res3 = getArt_stock_tiendas($sedes[$f], $co_art);
               $stock_act_tienda = round($res3[0]['stock_act']);
-              $total_stock_act_tienda [] = $sedes[$f];
-              $total_stock_act_tienda [] = $stock_act_tienda;
+              $total_stock_act_tienda [$sedes[$f]] = $stock_act_tienda;
 
 
           ?>
@@ -129,9 +128,20 @@ if ($_POST) {
       <?php  } ?>
       <tr>
           <th></th>
-          <td colspan="8">Total</td>
+          <td colspan="7"></td>
+          <td><h4>Total</h4></td>
           <td><?=$total_stock_act_previa?></td>
-          <?php  var_dump($total_stock_act_tienda); ?>
+          <?php 
+
+          var_dump($total_stock_act_tienda);
+
+            for ($i=0; $i < count($total_stock_act_tienda) ; $i++) { 
+
+
+              
+            }
+          
+            ?>
       </tr>
 
     </tbody>
