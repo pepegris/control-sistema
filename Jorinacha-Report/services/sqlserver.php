@@ -39,27 +39,34 @@ function Database($sede)
 
 
 /* CONSULTAR TALLA DE ARTICULOS */
-function getCat_art()
+function getCat_art($co_cat)
 {
 
 
     $serverName = "172.16.1.19";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $sql = "SELECT co_cat,cat_des FROM cat_art ";
+    $sql = "SELECT cat_des FROM cat_art WHERE co_cat = '$co_cat'";
     $res = sqlsrv_query($conn, $sql);
+    while ($row = sqlsrv_fetch_array($consulta)) {
+
+        $cat_art[] =  $row;
+    }
+
+    $res = $cat_art;
 
     return $res;
 }
+
 /* CONSULTAR LINEA DE ARTICULOS*/
-function getLin_art()
+function getLin_art($co_lin)
 {
 
 
     $serverName = "172.16.1.19";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $sql = "SELECT co_lin,lin_des from lin_art";
+    $sql = "SELECT lin_des from lin_art WHERE co_lin='$co_lin' ";
     $consulta = sqlsrv_query($conn, $sql);
 
 
@@ -69,6 +76,27 @@ function getLin_art()
     }
 
     $res = $lin_art;
+    return $res;
+}
+
+/* CONSULTAR COLOR DE ARTICULOS*/
+function getColores($co_col)
+{
+
+
+    $serverName = "172.16.1.19";
+    $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $sql = "SELECT des_col FROM colores WHERE co_col='$co_col'";
+    $consulta = sqlsrv_query($conn, $sql);
+
+
+    while ($row = sqlsrv_fetch_array($consulta)) {
+
+        $co_col[] =  $row;
+    }
+
+    $res = $co_col;
     return $res;
 }
 
@@ -91,7 +119,7 @@ function getArt($sede, $linea)
                     $sql = "SELECT LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.art_des)) as  art_des,prec_vta1,prec_vta5,st_almac.stock_act, co_color , co_cat , co_lin
                     from st_almac inner join art on st_almac.co_art=art.co_art 
                     where  st_almac.stock_act > 0 and st_almac.co_alma='BOLE' AND art.prec_vta5 >=1";
-                    
+
                 } else {
 
                     $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(art_des)) as  art_des  , 

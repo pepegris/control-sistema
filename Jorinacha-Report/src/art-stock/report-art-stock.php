@@ -52,10 +52,10 @@ if ($_POST) {
       for ($e = 0; $e < count($res1); $e++) {
 
         $co_art = $res1[$e]['co_art'];
-        $co_lin = $res1[$e]['co_lin'];
+        $co_lin = getLin_art($res1[$e]['co_lin']);
         $art_des = $res1[$e]['art_des'];
-        $co_cat = $res1[$e]['co_cat'];
-        $co_color = $res1[$e]['co_color'];
+        $co_cat = getCat_art($res1[$e]['co_cat']);
+        $co_color = getColores($res1[$e]['co_color']);
 
         $stock_act = round($res1[$e]['stock_act']);
         $totak_stock+=$stock_act;
@@ -70,10 +70,10 @@ if ($_POST) {
         <tr>
           <th scope='row'><?= $n ?></th>
           <td><?= $co_art ?></td>
-          <td><?= $co_lin ?></td>
+          <td><?= $co_lin[0]['co_lin'] ?></td>
           <td><?= $art_des ?></td>
-          <td><?= $co_cat ?></td>
-          <td><?= $co_color ?></td>
+          <td><?= $co_cat[0]['co_cat'] ?></td>
+          <td><?= $co_color[0]['co_color'] ?></td>
           <?php 
           $f = 1;
           for ($i=0; $i < count($sedes) ; $i++) {
