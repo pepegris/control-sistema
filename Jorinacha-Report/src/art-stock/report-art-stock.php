@@ -22,9 +22,9 @@ if ($_POST) {
     height: 450px;
     overflow-y: auto;
   }
-   #table-fixed tbody,
+   ,#table-fixed tbody,
   #table-fixed td ,#table-fixed th{
-    display: block;
+    display: flexbox;
   }
   #table-fixed tbody td,
   #table-fixed thead > tr > th{
