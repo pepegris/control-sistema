@@ -13,6 +13,7 @@ if ($_POST) {
     }
     $res = Database($sedes ['Previa Shop']);
     echo "$res";
+    echo"$sedes ['Previa Shop']";
 
 
 ?>
