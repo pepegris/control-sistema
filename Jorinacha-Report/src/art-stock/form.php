@@ -55,7 +55,7 @@ include '../../services/sqlserver.php';
           <?php
 
 
-         $res2=getLin_art(); 
+         $res2=getLin_art_all(); 
            
          for ($i=0; $i < count($res2); $i++) { 
  

@@ -99,6 +99,27 @@ function getLin_art($co_lin)
     $res = $lin_art;
     return $res;
 }
+/* CONSULTAR TODAS LAS LINEA DE ARTICULOS*/
+function getLin_art_all()
+{
+
+
+    $serverName = "172.16.1.19";
+    $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $sql = "SELECT lin_des from lin_art  ";
+    $consulta = sqlsrv_query($conn, $sql);
+
+
+    while ($row = sqlsrv_fetch_array($consulta)) {
+
+        $lin_art[] =  $row;
+    }
+
+    $res = $lin_art;
+    return $res;
+}
+
 
 /* CONSULTAR COLOR DE ARTICULOS*/
 function getColores($co_col)
