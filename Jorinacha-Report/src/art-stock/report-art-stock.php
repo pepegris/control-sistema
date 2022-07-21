@@ -76,13 +76,13 @@ if ($_POST) {
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
           <?php
-          $f = 1;
+          $g = 1;
           $total_vendido = 0;
           for ($i = 0; $i < count($sedes); $i++) {
 
             if ($sedes[$f] != null) {
 
-              $res2 = getReng_fac($sedes[$f],  $co_art, $fecha1, $fecha2);
+              $res2 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
               $total_vendido += round($res2);
             }
             $f++;
