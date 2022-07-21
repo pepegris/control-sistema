@@ -33,7 +33,7 @@ function Database($sede)
         "Comercial Catica II" => 'CATICA21',
     );
 
-    echo "$bd[$sede]";
+    return $bd[$sede];
 }
 
 
