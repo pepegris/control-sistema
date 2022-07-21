@@ -12,8 +12,6 @@ if ($_POST) {
     $sedes[] = $_POST[$i];
   }
 
-
-
 ?>
 
 
@@ -31,6 +29,9 @@ if ($_POST) {
         <th scope='col'>Precio Bs</th>
         <th scope='col'>Ref</th>
         <?php
+        if ($sedes[0]=='Previa Shop') {
+          # code...
+        }
         for ($i = 0; $i < count($sedes); $i++) {
 
           $sede = $sedes[$i];

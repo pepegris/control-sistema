@@ -81,7 +81,7 @@ function getArt($sede, $linea)
         try {
 
             $serverName = "172.16.1.19";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$");
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$","CharacterSet" =>"UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             if ($linea = 'todos') {
