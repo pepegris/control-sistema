@@ -70,10 +70,10 @@ if ($_POST) {
         <tr>
           <th scope='row'><?= $n ?></th>
           <td><?= $co_art ?></td>
-          <td><?= $co_lin ?></td>
+          <td><?= $co_lin[0] ?></td>
           <td><?= $art_des ?></td>
-          <td><?= $co_cat ?></td>
-          <td><?= $co_color ?></td>
+          <td><?= $co_cat[0] ?></td>
+          <td><?= $co_color[0] ?></td>
           <?php 
           $f = 1;
           for ($i=0; $i < count($sedes) ; $i++) {
