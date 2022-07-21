@@ -78,7 +78,7 @@ include '../../services/sqlserver.php';
           <input type="date" name="fecha2" id="">
       </div>
       <br>
-      <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
+      <center><button type="submit" onclick="alerta()" class="btn btn-primary">Ingresar</button></center>
       <br>
     </div>
   </form>
