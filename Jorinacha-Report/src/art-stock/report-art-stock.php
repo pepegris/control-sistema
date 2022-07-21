@@ -32,11 +32,13 @@ if ($_POST) {
 
         for ($i = 0; $i < count($sedes); $i++) {
 
-          $sede = $sedes[$i];
+          if ($sedes[$i] != null) {
+
+            $sede = $sedes[$i];
 
         ?>
-          <th scope='col'><?= $sede ?></th>
-        <?php } ?>
+            <th scope='col'><?= $sede ?></th>
+        <?php } } ?>
 
       </tr>
     </thead>
@@ -76,19 +78,20 @@ if ($_POST) {
           <?php
           $f = 1;
           for ($i = 0; $i < count($sedes); $i++) {
-            
 
-            if ($sedes[$f]==null) {
+
+            if ($sedes[$f] == null) {
               $f++;
-            }else {
+            } else {
 
               $res2 = getArt_stock_tiendas($sedes[$f], $co_art);
               $stock_act_tienda = round($res2[0]['stock_act']);
-    
+
           ?>
-            <td><?= $sedes[$f] ?></td>
+              <td><?= $sedes[$f] ?></td>
           <?php $f++;
-         } }   ?>
+            }
+          }   ?>
         </tr>
 
 
