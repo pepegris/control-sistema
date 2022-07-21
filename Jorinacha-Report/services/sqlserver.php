@@ -88,13 +88,13 @@ function getArt($sede, $linea)
 
                 $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(art_des)) as  art_des  , 
                 co_color , co_cat , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
-                from art ";
+                from art
+                WHERE prec_vta5 >= 1 ";
             } else {
 
                 $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(art_des)) as  art_des  ,
                 co_color , co_cat , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
-                from art  where co_lin= '$linea' AND prec_vta1 > 1
-                order by co_art";
+                from art  where co_lin= '$linea' AND prec_vta5 >= 1";
             }
 
 
@@ -115,6 +115,49 @@ function getArt($sede, $linea)
         return null;
     }
 }
+
+
+function getArt_stock_tiendas($sede,$linea,$co_art){
+
+    $database = Database($sede);
+    if ($database) {
+        try {
+
+            $serverName = "172.16.1.19";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$","CharacterSet" =>"UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            if ($linea === 'todos') {
+
+                $sql = "SELECT  stock_act from art WHERE prec_vta5 >= 1 AND co_art='$co_art' AND prec_vta5 >= 1 ";
+            } else {
+
+                $sql = "SELECT  stock_act from art  where co_lin= '$linea' AND co_art='$co_art' AND prec_vta5 >= 1";
+            }
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            while ($row = sqlsrv_fetch_array($consulta)) {
+
+                $art[] = $row;
+            }
+            $res = $art;
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return null;
+    }
+
+}
+
+
+
+
 
 /* CONSULTAR ARTICULOS VENDIDOS*/
 function getReng_fac($sede, $linea, $fecha1, $fecha2)

@@ -11,8 +11,8 @@ if ($_POST) {
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
   }
-var_dump($linea);
-echo $linea;
+  var_dump($linea);
+  echo $linea;
 ?>
 
 
@@ -26,7 +26,6 @@ echo $linea;
         <th scope='col'>Talla</th>
         <th scope='col'>Color</th>
         <th scope='col'>Total Vendido</th>
-        <th scope='col'>Stock Actual</th>
         <th scope='col'>Precio Bs</th>
         <th scope='col'>Ref</th>
         <?php
@@ -36,7 +35,7 @@ echo $linea;
           $sede = $sedes[$i];
 
         ?>
-          <th scope='col'><?=$sede?></th>
+          <th scope='col'><?= $sede ?></th>
         <?php } ?>
 
       </tr>
@@ -44,37 +43,51 @@ echo $linea;
     <tbody>
       <?php
 
-        for ($i = 0; $i < count($sedes); $i++) {
+      $res1 = getArt('Previa Shop', $linea);
 
-        $res1 = getArt($sedes[$i], $linea);
+      for ($e = 0; $e < count($res1); $e++) {
 
-        for ($e = 0; $e < count($res1); $e++) {
+        $co_art = $res1[$e]['co_art'];
+        $co_lin = $res1[$e]['co_lin'];
+        $art_des = $res1[$e]['art_des'];
+        $co_cat = $res1[$e]['co_cat'];
+        $co_color = $res1[$e]['co_color'];
 
-          $co_art=$res1[$e]['co_art'];
-          $co_lin=$res1[$e]['co_lin'];
-          $art_des=$res1[$e]['art_des'];
-          $co_cat=$res1[$e]['co_cat'];
-          $co_color=$res1[$e]['co_color'];
-          $stock_act=$res1[$e]['stock_act'];
-          $prec_vta1=$res1[$e]['prec_vta1'];
-          $prec_vta5=$res1[$e]['prec_vta5'];  
+        $stock_act = round($res1[$e]['stock_act']);
 
-      
+        $precio = round($res1[$e]['prec_vta1']);
+        $prec_vta1 = number_format($precio, 2, ',', '.');
+
+        $prec_vta5 = round($res1[$e]['prec_vta5']);
 
       ?>
-      <tr>
-         <th scope="row"><?=$n++?></th>
-        <td><?=$co_art?></td>
-        <td><?=$co_lin?></td>
-        <td><?=$art_des?></td>
-        <td><?=$co_cat?></td>
-        <td><?=$co_color?></td>
-        <td>vendido</td>
-        <td><?=$stock_act?></td>
-        <td><?=$prec_vta1?></td>
-        <td><?=$prec_vta5?></td>  
-      </tr>
-      <?php    } }    ?>
+
+        <tr>
+          <th scope='row'><?= $n ?></th>
+          <td><?= $co_art ?></td>
+          <td><?= $co_lin ?></td>
+          <td><?= $art_des ?></td>
+          <td><?= $co_cat ?></td>
+          <td><?= $co_color ?></td>
+          <td>vendido?></td>
+          <td>Bs <?= $prec_vta1 ?></td>
+          <td>$ <?= $prec_vta5 ?></td>
+          <td><?= $stock_act ?></td>
+          <?php
+          for ($i = 0; $i < count($sedes); $i++) {
+            $f = 1;
+            $res2 = getArt_stock_tiendas($sedes[$f], $linea,$co_art);
+            $stock_act_tienda = round($res2[0]['stock_act']);
+          ?>
+            <td><?= $stock_act_tienda ?></td>
+          <?php $f++;
+          }   ?>
+        </tr>
+
+
+
+
+      <?php  }    ?>
     </tbody>
   </table>
 
