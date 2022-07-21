@@ -126,10 +126,12 @@ if ($_POST) {
   </table>
 
 <center>
-<button onclick="exportReportToExcel()" class="btn btn-success">Exportar Repore a EXCEL</button>
+<button id="btnExportar" class="btn btn-success">Exportar Reporte a EXCEL</button>
 </center>
 
-  <script src="../../assets/js/excel.js"></script>
+  <script src="../../assets/js/xlsx.full.min.js"></script>
+    <script src="../../assets/js/FileSaver.min.js"></script>
+    <script src="../../assets/js/tableexport.min.js"></script>
 
 <?php
 } else {
