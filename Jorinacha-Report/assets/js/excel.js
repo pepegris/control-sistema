@@ -1,10 +1,6 @@
+const $btnExportar = document.querySelector("#btnExportar"),
+    $tabla = document.querySelector("#tblData");
 
-function exportReportToExcel() {
-    let table = document.getElementsByID("tblData");
-    TableToExcel.convert(table[0], { 
-      name: `file.xlsx`,
-      sheet: {
-        name: 'Sheet 1'
-      }
-    });
-  }
+$btnExportar.addEventListener("click", function() {
+    // Aquí exportar la tabla
+});
