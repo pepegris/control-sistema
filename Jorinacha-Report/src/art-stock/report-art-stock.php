@@ -80,7 +80,7 @@ if ($_POST) {
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
           <?php
-/*           $g = 1;
+          $g = 1;
           $total_vendido = 0;
           for ($i = 0; $i < count($sedes); $i++) {
 
@@ -90,11 +90,11 @@ if ($_POST) {
               $total_vendido += round($res2);
             }
             $f++;
-          } */
+          } 
 
 
           ?>
-          <td>vendido</td>
+          <td><?= $total_vendido ?></td>
           <td><?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
