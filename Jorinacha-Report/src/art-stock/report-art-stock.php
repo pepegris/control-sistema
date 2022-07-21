@@ -24,7 +24,7 @@ if ($_POST) {
         <th scope="col">#</th>
         <th scope='col'>Codigo</th>
         <th scope='col'>Linea</th>
-        <th scope='col'>Descripcion</th>
+        <th scope='col'>Marca</th>
         <th scope='col'>Talla</th>
         <th scope='col'>Color</th>
         <th scope='col'>Total Vendido</th>
@@ -54,7 +54,7 @@ if ($_POST) {
         $co_art = $res1[$e]['co_art'];
         $co_lin = getLin_art($res1[$e]['co_lin']);
         $co_subl = $res1[$e]['co_subl'];
-        $co_cat = getCat_art($res1[$e]['co_cat']);
+        $co_cat = $res1[$e]['co_cat'];
         $co_color = getColores($res1[$e]['co_color']);
 
         $stock_act = round($res1[$e]['stock_act']);
@@ -72,7 +72,7 @@ if ($_POST) {
           <td><?= $co_art ?></td>
           <td><?= $co_lin[0] ?></td>
           <td><?= $co_subl ?></td>
-          <td><?= $co_cat[0] ?></td>
+          <td><?= $co_cat ?></td>
           <td><?= $co_color[0] ?></td>
           <?php 
           $f = 1;
