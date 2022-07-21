@@ -116,13 +116,14 @@ function getArt($sede, $linea)
 
                 if ($database == 'PREVIA_A') {
 
-                    $sql = "SELECT LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.art_des)) as  art_des,prec_vta1,prec_vta5,st_almac.stock_act, co_color , co_cat , co_lin
+                    $sql = "SELECT LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.sub_lin)) as  sub_lin,LTRIM(RTRIM(art.co_cat)) as  co_cat,
+                    prec_vta1,prec_vta5,st_almac.stock_act, co_color , co_lin
                     from st_almac inner join art on st_almac.co_art=art.co_art 
                     where  st_almac.stock_act > 0 and st_almac.co_alma='BOLE' AND art.prec_vta5 >=1";
 
                 } else {
 
-                    $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(art_des)) as  art_des  , 
+                    $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(sub_lin)) as  sub_lin  ,LTRIM(RTRIM(co_cat) as  co_cat  , 
                     co_color , co_cat , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
                     from art WHERE prec_vta5 >= 1 ORDER BY stock_act DESC";
 
@@ -131,14 +132,15 @@ function getArt($sede, $linea)
 
                 if ($database == 'PREVIA_A') {
 
-                    $sql = "SELECT LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.art_des)) as  art_des,prec_vta1,prec_vta5,st_almac.stock_act , co_color , co_cat , co_lin
+                    $sql = "SELECT LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.sub_lin)) as  sub_lin,LTRIM(RTRIM(art.co_cat)) as  co_cat,
+                    prec_vta1,prec_vta5,st_almac.stock_act , co_color, co_lin
                     from st_almac inner join art on st_almac.co_art=art.co_art 
                     where art.co_lin='$linea' and st_almac.stock_act > 0 and st_almac.co_alma='BOLE' AND art.prec_vta5 >=1";
 
                 } else {
 
-                    $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(art_des)) as  art_des  ,
-                    co_color , co_cat , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
+                    $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(sub_lin)) as  sub_lin  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
+                    co_color , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
                     from art  where co_lin= '$linea' AND prec_vta5 >= 1 ORDER BY stock_act DESC";
 
                 }
