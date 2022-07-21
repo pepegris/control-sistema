@@ -6,60 +6,56 @@ include '../../services/sqlserver.php';
 
 if ($_POST) {
 
-    
-    $linea=$_POST['linea'];
-    for ($i=0; $i < 20 ; $i+=1) { 
-        $sedes [] = $_POST[$i];
-    }
-    $res = Database($sedes[0]);
-    echo "$res";
-    echo "<hr>";
-    var_dump($sedes[0]);
-    echo $sedes[0];
+
+  $linea = $_POST['linea'];
+  for ($i = 0; $i < 20; $i += 1) {
+    $sedes[] = $_POST[$i];
+  }
+
 
 
 ?>
 
 
-<table class="table table-dark table-striped">
-  <thead >
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope='col'>Codigo</th>
+        <th scope='col'>Linea</th>
+        <th scope='col'>Descripcion</th>
+        <th scope='col'>Talla</th>
+        <th scope='col'>Color</th>
+        <th scope='col'>Total Vendido</th>
+        <th scope='col'>Stock Actual</th>
+        <th scope='col'>Precio Bs</th>
+        <th scope='col'>Ref</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php 
+         $res = getArt($sedes[0],$linea);
+         var_dump($res);
+
+      ?>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+    </tbody>
+  </table>
 
 
 
 
 <?php
-}else {
-    header("location: form.php");
+} else {
+  header("location: form.php");
 }
 
 
 
 
-include '../../includes/footer.php';?>
+include '../../includes/footer.php'; ?>
