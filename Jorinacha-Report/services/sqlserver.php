@@ -274,6 +274,6 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
         }
     } else {
 
-        return null;
+        return 0;
     }
 }
