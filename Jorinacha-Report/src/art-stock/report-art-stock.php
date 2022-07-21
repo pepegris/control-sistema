@@ -34,7 +34,7 @@ if ($_POST) {
 
 </style>
 
-  <table class="table table-dark table-striped" id="table-fixed">
+  <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -137,8 +137,9 @@ if ($_POST) {
     </tbody>
   </table>
 
+  <button onclick="exportTableToExcel('tblData', 'members-data')">Export Table Data To Excel File</button>
 
-
+  <script src="../../assets/js/excel.js"></script>
 
 <?php
 } else {
