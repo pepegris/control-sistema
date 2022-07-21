@@ -18,9 +18,8 @@ if ($_POST) {
 
 ?>
 <style>
-  #table-fixed {
-    height: 450px;
-    overflow-y: auto;
+  thead {
+    position: fixed;
   }
 /*   #table-fixed thead,#table-fixed tbody,
   #table-fixed td ,#table-fixed th{
