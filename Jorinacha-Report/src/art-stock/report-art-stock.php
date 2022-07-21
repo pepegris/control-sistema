@@ -13,6 +13,7 @@ if ($_POST) {
     }
     $res = Database($sedes[0]);
     echo "$res";
+    echo "<hr>";
     var_dump($sedes[0]);
     echo $sedes[0];
 
