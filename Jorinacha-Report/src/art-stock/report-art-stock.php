@@ -20,6 +20,7 @@ if ($_POST) {
     <script src="../../assets/js/xlsx.full.min.js"></script>
     <script src="../../assets/js/FileSaver.min.js"></script>
     <script src="../../assets/js/tableexport.min.js"></script>
+    <script src="../../assets/js/excel.js"></script>
 <style>
 
 
@@ -133,7 +134,7 @@ if ($_POST) {
 </center>
 
 
-    <script src="../../assets/js/excel.js"></script>
+    
 
 <?php
 } else {
