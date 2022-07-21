@@ -44,7 +44,7 @@ function getCat_art()
 
 
     $serverName = "172.16.1.19";
-    $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$","CharacterSet" =>"UTF-8");
+    $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT co_cat,cat_des FROM cat_art ";
     $res = sqlsrv_query($conn, $sql);
@@ -57,7 +57,7 @@ function getLin_art()
 
 
     $serverName = "172.16.1.19";
-    $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$","CharacterSet" =>"UTF-8");
+    $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT co_lin,lin_des from lin_art";
     $consulta = sqlsrv_query($conn, $sql);
@@ -81,7 +81,7 @@ function getArt($sede, $linea)
         try {
 
             $serverName = "172.16.1.19";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$","CharacterSet" =>"UTF-8");
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             if ($linea === 'todos') {
@@ -117,24 +117,18 @@ function getArt($sede, $linea)
 }
 
 
-function getArt_stock_tiendas($sede,$linea,$co_art){
+function getArt_stock_tiendas($sede,  $co_art)
+{
 
     $database = Database($sede);
     if ($database) {
         try {
 
             $serverName = "172.16.1.19";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$","CharacterSet" =>"UTF-8");
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($linea === 'todos') {
-
-                $sql = "SELECT  stock_act from art WHERE prec_vta5 >= 1 AND co_art='$co_art' AND prec_vta5 >= 1 ";
-            } else {
-
-                $sql = "SELECT  stock_act from art  where co_lin= '$linea' AND co_art='$co_art' AND prec_vta5 >= 1";
-            }
-
+            $sql = "SELECT  stock_act from art WHERE prec_vta5 >= 1 AND co_art='$co_art' AND prec_vta5 >= 1 ";
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -152,7 +146,6 @@ function getArt_stock_tiendas($sede,$linea,$co_art){
 
         return null;
     }
-
 }
 
 
@@ -169,7 +162,7 @@ function getReng_fac($sede, $linea, $fecha1, $fecha2)
         try {
 
             $serverName = "172.16.1.19";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$","CharacterSet" =>"UTF-8");
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             if ($linea = 'todos') {

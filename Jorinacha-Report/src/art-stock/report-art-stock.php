@@ -74,14 +74,15 @@ if ($_POST) {
           <td>$ <?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
           <?php
+          $f = 1;
           for ($i = 0; $i < count($sedes); $i++) {
-            $f = 1;
+            
 
             if ($sedes[$f]==null) {
               $f++;
             }else {
 
-              $res2 = getArt_stock_tiendas($sedes[$f], $linea,$co_art);
+              $res2 = getArt_stock_tiendas($sedes[$f], $co_art);
               $stock_act_tienda = round($res2[0]['stock_act']);
     
           ?>
