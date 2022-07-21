@@ -16,7 +16,7 @@ if ($_POST) {
 ?>
 
 
-<table class="table">
+<table class="table table-dark table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -45,9 +45,6 @@ if ($_POST) {
     </tr>
   </tbody>
 </table>
-
-
-
 
 
 
