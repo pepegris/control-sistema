@@ -18,10 +18,11 @@ if ($_POST) {
 
 ?>
 <style>
-  thead {
-    position: fixed;
+  #table-fixed tbody{
+    height: 450px;
+    overflow-y: auto;
   }
-/*   #table-fixed thead,#table-fixed tbody,
+   #table-fixed tbody,
   #table-fixed td ,#table-fixed th{
     display: block;
   }
@@ -29,7 +30,7 @@ if ($_POST) {
   #table-fixed thead > tr > th{
     float: left;
     border-bottom-width:0 ;
-  } */
+  } 
 
 </style>
 
