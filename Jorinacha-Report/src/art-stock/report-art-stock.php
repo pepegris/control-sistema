@@ -58,6 +58,7 @@ if ($_POST) {
         $co_color = $res1[$e]['co_color'];
 
         $stock_act = round($res1[$e]['stock_act']);
+        $totak_stock+=$stock_act;
 
         $precio = round($res1[$e]['prec_vta1']);
         $prec_vta1 = number_format($precio, 2, ',', '.');
@@ -126,5 +127,5 @@ if ($_POST) {
 
 
 
-var_dump($res2);
+
 include '../../includes/footer.php'; ?>
