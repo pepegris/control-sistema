@@ -83,7 +83,7 @@ include '../../services/sqlserver.php';
     </div>
   </form>
 </div>
-
+<button type="" onclick="alerta()" class="btn btn-primary">Ingresar</button>
 
 
 
