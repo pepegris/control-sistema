@@ -22,10 +22,10 @@ if ($_POST) {
     height: 450px;
    
   }
-  #table-fixed thead,#table-fixed tbody,
+/*   #table-fixed thead,#table-fixed tbody,
   #table-fixed td ,#table-fixed th{
     display: block;
-  }
+  } */
 /*   #table-fixed tbody td,
   #table-fixed thead > tr > th{
     float: left;
