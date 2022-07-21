@@ -32,6 +32,9 @@ function Tiendas ($sede){
         "Comercial Catica II" => 'CATICA21',
     );
 
+    return $bd[$sede];
+
+
 }
 
 
@@ -73,18 +76,25 @@ function getLin_art()
 
 function getArt ($sede,$linea){
 
+    $database=Tiendas($sede);
+    if ($database != null) {
+        try {
 
-    try {
+            $serverName = "172.16.1.19";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+            $sql = "SELECT co_lin,lin_des from lin_art";
+            $consulta = sqlsrv_query($conn, $sql);
+    
+        } catch (\Throwable $th) {
+            
+            throw $th;
+        }
 
-        $serverName = "172.16.1.19";
-        $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$");
-        $conn = sqlsrv_connect($serverName, $connectionInfo);
-        $sql = "SELECT co_lin,lin_des from lin_art";
-        $consulta = sqlsrv_query($conn, $sql);
+    }else{
 
-    } catch (\Throwable $th) {
-        
-        throw $th;
+        return null;
+
     }
 
 

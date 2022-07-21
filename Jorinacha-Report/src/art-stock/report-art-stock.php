@@ -34,7 +34,7 @@ if ($_POST) {
         "Comercial Catica II" => 'CATICA21',
     );
 
-    var_dump($bd["Comercial Catica II"]);
+    var_dump($bd["dsadadsa"]);
 
 ?>
 
