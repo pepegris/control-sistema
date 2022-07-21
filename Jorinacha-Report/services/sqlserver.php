@@ -32,7 +32,7 @@ function Database ($sede){
         "Comercial Catica II" => 'CATICA21',
     );
 
-    return $bd[$sede];
+    echo "$bd[$sede]";
 
 
 }
