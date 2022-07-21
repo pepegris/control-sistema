@@ -135,7 +135,6 @@ if ($_POST) {
         <td><?= $total_stock_act_previa ?></td>
         <?php
 
-        var_dump($total_stock_act_tienda);
         $h = 1;
         for ($i = 0; $i < count($total_stock_act_tienda); $i++) {
 
