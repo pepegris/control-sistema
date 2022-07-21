@@ -107,7 +107,7 @@ function getLin_art_all()
     $serverName = "172.16.1.19";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $sql = "SELECT lin_des from lin_art  ";
+    $sql = "SELECT co_lin,lin_des from lin_art  ";
     $consulta = sqlsrv_query($conn, $sql);
 
 
