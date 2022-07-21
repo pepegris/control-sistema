@@ -29,9 +29,7 @@ if ($_POST) {
         <th scope='col'>Precio Bs</th>
         <th scope='col'>Ref</th>
         <?php
-        if ($sedes[0]=='Previa Shop') {
-          # code...
-        }
+
         for ($i = 0; $i < count($sedes); $i++) {
 
           $sede = $sedes[$i];
@@ -44,16 +42,38 @@ if ($_POST) {
     </thead>
     <tbody>
       <?php
-      $res = getArt($sedes[0], $linea);
-      var_dump($res);
+      $n=1;
+      for ($i = 0; $i < count($sedes); $i++) {
+
+        $res1 = getArt($sedes[$i], $linea);
+
+        for ($e = 0; $e < count($res1); $e++) {
+
+          $co_art=$res1['co_art'];
+          $co_lin=$res1['co_lin'];
+          $art_des=$res1['art_des'];
+          $co_cat=$res1['co_cat'];
+          $co_color=$res1['co_color'];
+          $stock_act=$res1['stock_act'];
+          $prec_vta1=$res1['prec_vta1'];
+          $prec_vta5=$res1['prec_vta5'];
+
+      
 
       ?>
       <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <th scope="row"><?=$n?></th>
+        <td><?=$co_art?></td>
+        <td><?=$co_lin?></td>
+        <td><?=$art_des?></td>
+        <td><?=$co_cat?></td>
+        <td><?=$co_color?></td>
+        <td>vendido</td>
+        <td><?=$stock_act?></td>
+        <td><?=$prec_vta1?></td>
+        <td><?=$prec_vta5?></td>
       </tr>
+      <?php $n++; } }  ?>
     </tbody>
   </table>
 
