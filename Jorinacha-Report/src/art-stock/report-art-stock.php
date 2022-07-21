@@ -54,7 +54,7 @@ if ($_POST) {
         $co_art = $res1[$e]['co_art'];
         $co_lin = getLin_art($res1[$e]['co_lin']);
         $co_subl = getSub_lin($res1[$e]['co_subl']);
-        $co_cat = $res1[$e]['co_cat'];
+        $co_cat = getCat_art($res1[$e]['co_cat']);
         $co_color = getColores($res1[$e]['co_color']);
 
         $stock_act = round($res1[$e]['stock_act']);
