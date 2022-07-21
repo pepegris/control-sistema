@@ -71,7 +71,7 @@ if ($_POST) {
           <th scope='row'><?= $n ?></th>
           <td><?= $co_art ?></td>
           <td><?= $co_lin[0] ?></td>
-          <td><?= $co_subl[0] ?></td>
+          <td><?= $co_subl ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color[0] ?></td>
           <?php 
