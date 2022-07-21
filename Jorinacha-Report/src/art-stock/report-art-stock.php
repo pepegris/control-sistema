@@ -11,7 +11,7 @@ if ($_POST) {
     for ($i=0; $i < 20 ; $i+=1) { 
         $sedes [] = $_POST[$i];
     }
-    $res = Database($sedes ['Previa Shop']);
+    $res = Database($sedes[0]);
     echo "$res";
     var_dump($sedes[0]);
     echo $sedes[0];
