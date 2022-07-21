@@ -8,8 +8,8 @@ if ($_POST) {
 
 
   $linea = $_POST['linea'];
-  $fecha1= $_POST['fecha1'];
-  $fecha2= $_POST['fecha2'];
+  $fecha1 = $_POST['fecha1'];
+  $fecha2 = $_POST['fecha2'];
 
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
@@ -40,7 +40,8 @@ if ($_POST) {
 
         ?>
             <th scope='col'><?= $sede ?></th>
-        <?php } } ?>
+        <?php }
+        } ?>
 
       </tr>
     </thead>
@@ -48,7 +49,7 @@ if ($_POST) {
       <?php
 
       $res1 = getArt('Previa Shop', $linea);
-      $n=1;
+      $n = 1;
       for ($e = 0; $e < count($res1); $e++) {
 
         $co_art = $res1[$e]['co_art'];
@@ -58,7 +59,7 @@ if ($_POST) {
         $co_color = getColores($res1[$e]['co_color']);
 
         $stock_act = round($res1[$e]['stock_act']);
-        $totak_stock+=$stock_act;
+        $totak_stock += $stock_act;
 
         $precio = round($res1[$e]['prec_vta1']);
         $prec_vta1 = number_format($precio, 2, ',', '.');
@@ -74,20 +75,22 @@ if ($_POST) {
           <td><?= $co_subl ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
-          <?php 
+          <?php
           $f = 1;
-          for ($i=0; $i < count($sedes) ; $i++) {
+          $total_vendido = 0;
+          for ($i = 0; $i < count($sedes); $i++) {
 
             if ($sedes[$f] != null) {
 
-              $res2 []= getReng_fac($sedes[$f],  $co_art, $fecha1, $fecha2);
-            } 
+              $res2 = getReng_fac($sedes[$f],  $co_art, $fecha1, $fecha2);
+              $total_vendido += round($res2);
+            }
             $f++;
           }
 
 
           ?>
-          <td>vendido</td>
+          <td><?= $total_vendido ?></td>
           <td><?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
@@ -107,7 +110,8 @@ if ($_POST) {
               <td><?= $stock_act_tienda  ?></td>
           <?php $f++;
             }
-          }   $n++?>
+          }
+          $n++ ?>
         </tr>
 
 
