@@ -90,7 +90,7 @@ if ($_POST) {
 
 
           ?>
-          <td><?= $total_vendido ?></td>
+          <td>vendido</td>
           <td><?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
