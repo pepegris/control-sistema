@@ -20,6 +20,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../assets/js/jquery-3.6.0.min.js"></script>
     <title>Jorinacha Report</title>
 </head>
 <body>

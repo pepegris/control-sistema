@@ -65,7 +65,7 @@ if ($_POST) {
         $co_color = getColores($res1[$e]['co_color']);
 
         $stock_act = round($res1[$e]['stock_act']);
-        $totak_stock += $stock_act;
+        $total_stock_act_previa += $stock_act;
 
         $precio = round($res1[$e]['prec_vta1']);
         $prec_vta1 = number_format($precio, 2, ',', '.');
@@ -111,6 +111,9 @@ if ($_POST) {
 
               $res3 = getArt_stock_tiendas($sedes[$f], $co_art);
               $stock_act_tienda = round($res3[0]['stock_act']);
+              $total_stock_act_tienda [] = $sedes[$f];
+              $total_stock_act_tienda [] = $stock_act_tienda;
+
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
@@ -123,7 +126,14 @@ if ($_POST) {
 
 
 
-      <?php  }    ?>
+      <?php  } ?>
+      <tr>
+          <th></th>
+          <td colspan="8">Total</td>
+          <td><?=$total_stock_act_previa?></td>
+          <?php  var_dump($total_stock_act_tienda); ?>
+      </tr>
+
     </tbody>
   </table>
   <script src="../../assets/js/excel.js"></script>
