@@ -88,7 +88,7 @@ if ($_POST) {
               $stock_act_tienda = round($res2[0]['stock_act']);
 
           ?>
-              <td><?= $sedes[$f] ?></td>
+              <td><?= $stock_act_tienda  ?></td>
           <?php $f++;
             }
           }   ?>
