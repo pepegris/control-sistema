@@ -44,7 +44,7 @@ if ($_POST) {
       <?php
 
       $res1 = getArt($sedes[0], $linea);
-      echo $res1[0];
+      echo $res1[0]['co_lin'];
       $n=1;
 /*       for ($i = 0; $i < count($sedes); $i++) {
 
