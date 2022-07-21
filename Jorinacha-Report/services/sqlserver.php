@@ -47,7 +47,7 @@ function getCat_art($co_cat)
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT cat_des FROM cat_art WHERE co_cat = '$co_cat'";
-    $res = sqlsrv_query($conn, $sql);
+    $consulta = sqlsrv_query($conn, $sql);
     while ($row = sqlsrv_fetch_array($consulta)) {
 
         $cat_art =  $row;
@@ -67,7 +67,7 @@ function getSub_lin($co_subl)
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT subl_des from sub_lin where co_subl ='$co_subl'";
-    $res = sqlsrv_query($conn, $sql);
+    $consulta = sqlsrv_query($conn, $sql);
     while ($row = sqlsrv_fetch_array($consulta)) {
 
         $sub_lin =  $row['subl_des'];
