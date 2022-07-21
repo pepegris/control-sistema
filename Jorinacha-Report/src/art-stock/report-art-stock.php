@@ -13,6 +13,7 @@ if ($_POST) {
   var_dump($fecha1);
   var_dump($fecha2); 
   var_dump($linea) ;
+  echo "<br>";
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
   }
