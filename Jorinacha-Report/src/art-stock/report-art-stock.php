@@ -43,29 +43,26 @@ if ($_POST) {
     <tbody>
       <?php
 
-      $res1 = getArt($sedes[0], $linea);
-      echo $res1[0]['co_lin'];
-      $n=1;
-/*       for ($i = 0; $i < count($sedes); $i++) {
+       for ($i = 0; $i < count($sedes); $i++) {
 
         $res1 = getArt($sedes[$i], $linea);
 
         for ($e = 0; $e < count($res1); $e++) {
 
-          $co_art=$res1['co_art'];
-          $co_lin=$res1['co_lin'];
-          $art_des=$res1['art_des'];
-          $co_cat=$res1['co_cat'];
-          $co_color=$res1['co_color'];
-          $stock_act=$res1['stock_act'];
-          $prec_vta1=$res1['prec_vta1'];
-          $prec_vta5=$res1['prec_vta5']; */
+          $co_art=$res1[$e]['co_art'];
+          $co_lin=$res1[$e]['co_lin'];
+          $art_des=$res1[$e]['art_des'];
+          $co_cat=$res1[$e]['co_cat'];
+          $co_color=$res1[$e]['co_color'];
+          $stock_act=$res1[$e]['stock_act'];
+          $prec_vta1=$res1[$e]['prec_vta1'];
+          $prec_vta5=$res1[$e]['prec_vta5']; 
 
       
 
       ?>
       <tr>
-<!--         <th scope="row"><?=$n?></th>
+        <th scope="row"><?=$n?></th>
         <td><?=$co_art?></td>
         <td><?=$co_lin?></td>
         <td><?=$art_des?></td>
@@ -74,9 +71,9 @@ if ($_POST) {
         <td>vendido</td>
         <td><?=$stock_act?></td>
         <td><?=$prec_vta1?></td>
-        <td><?=$prec_vta5?></td> -->
+        <td><?=$prec_vta5?></td> 
       </tr>
-      <?php /* $n++; } }  */ ?>
+      <?php  $n++; } }   ?>
     </tbody>
   </table>
 
