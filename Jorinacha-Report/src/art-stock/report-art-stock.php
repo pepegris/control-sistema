@@ -8,11 +8,13 @@ if ($_POST) {
 
 
   $linea = $_POST['linea'];
+  $fecha1= $_POST['fecha1'];
+  $fecha2= $_POST['fecha2'];
+  
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
   }
-  var_dump($sedes);
-  echo $sedes[1];
+
 ?>
 
 
@@ -46,7 +48,7 @@ if ($_POST) {
       <?php
 
       $res1 = getArt('Previa Shop', $linea);
-
+      $n=1;
       for ($e = 0; $e < count($res1); $e++) {
 
         $co_art = $res1[$e]['co_art'];
@@ -72,8 +74,8 @@ if ($_POST) {
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
           <td>vendido</td>
-          <td>Bs <?= $prec_vta1 ?></td>
-          <td>$ <?= $prec_vta5 ?></td>
+          <td><?= $prec_vta1 ?></td>
+          <td><?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
           <?php
           $f = 1;
@@ -91,7 +93,7 @@ if ($_POST) {
               <td><?= $stock_act_tienda  ?></td>
           <?php $f++;
             }
-          }   ?>
+          }   $n++?>
         </tr>
 
 
