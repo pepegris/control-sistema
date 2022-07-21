@@ -34,7 +34,7 @@ if ($_POST) {
     </thead>
     <tbody>
       <?php 
-         $res = getArt($sedes[0],$linea);
+         $res = getArt("Previa Shop",$linea);
          var_dump($res);
 
       ?>
