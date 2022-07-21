@@ -1,13 +1,7 @@
-const $btnExportar = document.querySelector("#btnExportar"),
-    $tabla = document.querySelector("#tblData");
-
-$btnExportar.addEventListener("click", function() {
-    let tableExport = new TableExport($tabla, {
-        exportButtons: false, // No queremos botones
-        filename: "Mi tabla de Excel", //Nombre del archivo de Excel
-        sheetname: "Mi tabla de Excel", //Título de la hoja
-    });
-    let datos = tableExport.getExportData();
-    let preferenciasDocumento = datos.tabla.xlsx;
-    tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType, preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento.merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);
+document.getElementById('submitExport').addEventListener('click', function(e) {
+    e.preventDefault();
+    let export_to_excel = document.getElementById('tblData');
+    let data_to_send = document.getElementById('data_to_send');
+    data_to_send.value = export_to_excel.outerHTML;
+    document.getElementById('formExport').submit();
 });
