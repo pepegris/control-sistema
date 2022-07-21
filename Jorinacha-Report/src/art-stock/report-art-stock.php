@@ -111,7 +111,7 @@ if ($_POST) {
 
               $res3 = getArt_stock_tiendas($sedes[$f], $co_art);
               $stock_act_tienda = round($res3[0]['stock_act']);
-              $total_stock_act_tienda [$sedes[$f]] = $stock_act_tienda;
+              $total_stock_act_tienda [$sedes[$f]] += $stock_act_tienda;
 
 
           ?>
