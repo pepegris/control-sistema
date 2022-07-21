@@ -76,7 +76,7 @@ function getArt($sede, $linea)
 {
 
     $database = Database($sede);
-    if ($database != null) {
+    if ($database) {
         try {
 
             $serverName = "172.16.1.19";
