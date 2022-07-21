@@ -10,7 +10,8 @@ if ($_POST) {
   $linea = $_POST['linea'];
   $fecha1 = $_POST['fecha1'];
   $fecha2 = $_POST['fecha2'];
-
+  var_dump($fecha1);
+  var_dump($fecha2);  
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
   }
@@ -76,7 +77,7 @@ if ($_POST) {
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
           <?php
-          $g = 1;
+/*           $g = 1;
           $total_vendido = 0;
           for ($i = 0; $i < count($sedes); $i++) {
 
@@ -86,7 +87,7 @@ if ($_POST) {
               $total_vendido += round($res2);
             }
             $f++;
-          }
+          } */
 
 
           ?>
