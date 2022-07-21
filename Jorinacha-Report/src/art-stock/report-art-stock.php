@@ -11,6 +11,8 @@ if ($_POST) {
     for ($i=0; $i < 20 ; $i+=1) { 
         $sedes [] = $_POST[$i];
     }
+    $res = Database($sedes ['Previa Shop']);
+    echo "$res";
 
 
 ?>

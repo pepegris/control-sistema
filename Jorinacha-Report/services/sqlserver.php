@@ -9,7 +9,7 @@ if (!$conn) {
 }
 
  */
-function Tiendas ($sede){
+function Database ($sede){
 
     $bd = array (
         "Previa Shop"=> 'PREVIA_A',
