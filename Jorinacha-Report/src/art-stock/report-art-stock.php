@@ -10,7 +10,7 @@ if ($_POST) {
   $linea = $_POST['linea'];
   $fecha1= $_POST['fecha1'];
   $fecha2= $_POST['fecha2'];
-  
+
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
   }
@@ -73,6 +73,19 @@ if ($_POST) {
           <td><?= $art_des ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
+          <?php 
+          $f = 1;
+          for ($i=0; $i < count($sedes) ; $i++) {
+
+            if ($sedes[$f] != null) {
+
+              $res2 []= getReng_fac($sedes[$f],  $co_art, $fecha1, $fecha2);
+            } 
+            $f++;
+          }
+
+
+          ?>
           <td>vendido</td>
           <td><?= $prec_vta1 ?></td>
           <td><?= $prec_vta5 ?></td>
@@ -86,8 +99,8 @@ if ($_POST) {
               $f++;
             } else {
 
-              $res2 = getArt_stock_tiendas($sedes[$f], $co_art);
-              $stock_act_tienda = round($res2[0]['stock_act']);
+              $res3 = getArt_stock_tiendas($sedes[$f], $co_art);
+              $stock_act_tienda = round($res3[0]['stock_act']);
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
@@ -113,5 +126,5 @@ if ($_POST) {
 
 
 
-
+var_dump($res2);
 include '../../includes/footer.php'; ?>

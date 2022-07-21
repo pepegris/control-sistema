@@ -152,7 +152,7 @@ function getArt_stock_tiendas($sede,  $co_art)
 
 
 /* CONSULTAR ARTICULOS VENDIDOS*/
-function getReng_fac($sede, $linea, $fecha1, $fecha2)
+function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
 {
 
 
@@ -164,23 +164,7 @@ function getReng_fac($sede, $linea, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($linea = 'todos') {
-
-                $sql = "SELECT LTRIM(RTRIM(reng_fac.co_art)) AS  co_art, sum (reng_fac.total_art ) as  total_art
-                FROM reng_fac left join art
-                ON reng_fac.co_art = art.co_art  
-                WHERE reng_fac.fec_lote BETWEEN '$fecha1'  AND '$fecha2' 
-                GROUP BY  reng_fac.co_art
-                order by reng_fac.co_art ";
-            } else {
-
-                $sql = "SELECT LTRIM(RTRIM(reng_fac.co_art)) AS  co_art, sum (reng_fac.total_art ) as  total_art
-                FROM reng_fac left join art
-                ON reng_fac.co_art = art.co_art  
-                WHERE reng_fac.fec_lote BETWEEN '$fecha1'  AND '$fecha2' AND art.co_lin = '$linea'
-                GROUP BY  reng_fac.co_art";
-            }
-
+            $sql = "SELECT co_art,sum(total_art) as total_art from reng_fac where co_art='$co_art' and fec_lote BETWEEN '$fecha1'  AND '$fecha2' GROUP BY co_art";
 
             $consulta = sqlsrv_query($conn, $sql);
 
