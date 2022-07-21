@@ -76,12 +76,18 @@ if ($_POST) {
           <?php
           for ($i = 0; $i < count($sedes); $i++) {
             $f = 1;
-            $res2 = getArt_stock_tiendas($sedes[$f], $linea,$co_art);
-            $stock_act_tienda = round($res2[0]['stock_act']);
+
+            if ($sedes[$f]==null) {
+              $f++;
+            }else {
+
+              $res2 = getArt_stock_tiendas($sedes[$f], $linea,$co_art);
+              $stock_act_tienda = round($res2[0]['stock_act']);
+    
           ?>
             <td><?= $stock_act_tienda ?></td>
           <?php $f++;
-          }   ?>
+         } }   ?>
         </tr>
 
 
