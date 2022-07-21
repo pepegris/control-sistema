@@ -53,7 +53,7 @@ if ($_POST) {
 
         $co_art = $res1[$e]['co_art'];
         $co_lin = getLin_art($res1[$e]['co_lin']);
-        $co_subl = $res1[$e]['co_subl'];
+        $co_subl = getSub_lin($res1[$e]['co_subl']);
         $co_cat = $res1[$e]['co_cat'];
         $co_color = getColores($res1[$e]['co_color']);
 
@@ -71,7 +71,7 @@ if ($_POST) {
           <th scope='row'><?= $n ?></th>
           <td><?= $co_art ?></td>
           <td><?= $co_lin[0] ?></td>
-          <td><?= $co_subl ?></td>
+          <td><?= $co_subl[0] ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color[0] ?></td>
           <?php 
