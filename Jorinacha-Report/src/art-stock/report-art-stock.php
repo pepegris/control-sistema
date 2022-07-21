@@ -17,7 +17,7 @@ if ($_POST) {
 
 
 <table class="table table-dark table-striped">
-  <thead>
+  <thead >
     <tr>
       <th scope="col">#</th>
       <th scope="col">First</th>
