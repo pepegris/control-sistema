@@ -66,11 +66,11 @@ function getSub_lin($co_subl)
     $serverName = "172.16.1.19";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $sql = "SELECT * from sub_lin where co_subl ='$co_subl'";
+    $sql = "SELECT subl_des from sub_lin where co_subl ='$co_subl'";
     $res = sqlsrv_query($conn, $sql);
     while ($row = sqlsrv_fetch_array($consulta)) {
 
-        $sub_lin =  $row;
+        $sub_lin =  $row['subl_des'];
     }
 
     $res = $sub_lin;
