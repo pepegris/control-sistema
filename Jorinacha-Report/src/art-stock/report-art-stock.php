@@ -13,7 +13,7 @@ if ($_POST) {
     }
     $res = Database($sedes ['Previa Shop']);
     echo "$res";
-    var_dump($sedes);
+    var_dump($sedes[0]);
 
 
 ?>
