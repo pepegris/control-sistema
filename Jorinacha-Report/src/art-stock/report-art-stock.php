@@ -18,19 +18,7 @@ if ($_POST) {
 
 ?>
 <style>
-  #table-fixed tbody{
-    height: 450px;
-    overflow-y: auto;
-  }
-   ,#table-fixed tbody,
-  #table-fixed td ,#table-fixed th{
-    display: flexbox;
-  }
-  #table-fixed tbody td,
-  #table-fixed thead > tr > th{
-    float: left;
-    border-bottom-width:0 ;
-  } 
+
 
 </style>
 
@@ -138,7 +126,7 @@ if ($_POST) {
   </table>
 
 <center>
-<button onclick="exportTableToExcel('tblData', 'members-data')" class="btn btn-success">Export Table Data To Excel File</button>
+<button onclick="exportTableToExcel('tblData', 'members-data')" class="btn btn-success">Exportar Repore a EXCEL</button>
 </center>
 
   <script src="../../assets/js/excel.js"></script>
