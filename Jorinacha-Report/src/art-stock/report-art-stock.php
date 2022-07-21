@@ -126,7 +126,7 @@ if ($_POST) {
   </table>
 
 <center>
-<button onclick="exportTableToExcel('tblData', 'members-data')" class="btn btn-success">Exportar Repore a EXCEL</button>
+<button onclick="exportReportToExcel()" class="btn btn-success">Exportar Repore a EXCEL</button>
 </center>
 
   <script src="../../assets/js/excel.js"></script>
