@@ -63,7 +63,7 @@ echo $linea;
 
       ?>
       <tr>
-<!--         <th scope="row"><?=$n?></th>
+<!--         <th scope="row"><?=$n++?></th>
         <td><?=$co_art?></td>
         <td><?=$co_lin?></td>
         <td><?=$art_des?></td>
@@ -74,7 +74,7 @@ echo $linea;
         <td><?=$prec_vta1?></td>
         <td><?=$prec_vta5?></td>  -->
       </tr>
-      <?php /*  $n++; } }  */  ?>
+      <?php /*   } }  */  ?>
     </tbody>
   </table>
 

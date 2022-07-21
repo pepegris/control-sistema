@@ -84,7 +84,7 @@ function getArt($sede, $linea)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$","CharacterSet" =>"UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($linea = 'todos') {
+            if ($linea === 'todos') {
 
                 $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(art_des)) as  art_des  , 
                 co_color , co_cat , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
