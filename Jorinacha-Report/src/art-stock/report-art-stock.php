@@ -11,10 +11,12 @@ if ($_POST) {
   $fecha1 = $_POST['fecha1'];
   $fecha2 = $_POST['fecha2'];
   var_dump($fecha1);
-  var_dump($fecha2);  
+  var_dump($fecha2); 
+  var_dump($linea) ;
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
   }
+  var_dump($sedes) ;
 
 ?>
 
