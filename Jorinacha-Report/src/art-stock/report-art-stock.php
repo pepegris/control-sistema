@@ -11,8 +11,8 @@ if ($_POST) {
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
   }
-  var_dump($linea);
-  echo $linea;
+  var_dump($sedes);
+  echo $sedes[1];
 ?>
 
 
@@ -69,7 +69,7 @@ if ($_POST) {
           <td><?= $art_des ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
-          <td>vendido?></td>
+          <td>vendido</td>
           <td>Bs <?= $prec_vta1 ?></td>
           <td>$ <?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
