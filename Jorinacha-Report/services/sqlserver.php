@@ -50,7 +50,7 @@ function getCat_art($co_cat)
     $res = sqlsrv_query($conn, $sql);
     while ($row = sqlsrv_fetch_array($consulta)) {
 
-        $cat_art[] =  $row;
+        $cat_art =  $row;
     }
 
     $res = $cat_art;
@@ -72,7 +72,7 @@ function getLin_art($co_lin)
 
     while ($row = sqlsrv_fetch_array($consulta)) {
 
-        $lin_art[] =  $row;
+        $lin_art =  $row;
     }
 
     $res = $lin_art;
@@ -93,7 +93,7 @@ function getColores($co_col)
 
     while ($row = sqlsrv_fetch_array($consulta)) {
 
-        $co_col[] =  $row;
+        $co_col =  $row;
     }
 
     $res = $co_col;
