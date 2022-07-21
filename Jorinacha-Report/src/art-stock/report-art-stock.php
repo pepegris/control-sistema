@@ -11,7 +11,8 @@ if ($_POST) {
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
   }
-
+var_dump($linea);
+echo $linea;
 ?>
 
 
@@ -43,7 +44,7 @@ if ($_POST) {
     <tbody>
       <?php
 
-       for ($i = 0; $i < count($sedes); $i++) {
+/*        for ($i = 0; $i < count($sedes); $i++) {
 
         $res1 = getArt($sedes[$i], $linea);
 
@@ -56,13 +57,13 @@ if ($_POST) {
           $co_color=$res1[$e]['co_color'];
           $stock_act=$res1[$e]['stock_act'];
           $prec_vta1=$res1[$e]['prec_vta1'];
-          $prec_vta5=$res1[$e]['prec_vta5']; 
+          $prec_vta5=$res1[$e]['prec_vta5'];  */
 
       
 
       ?>
       <tr>
-        <th scope="row"><?=$n?></th>
+<!--         <th scope="row"><?=$n?></th>
         <td><?=$co_art?></td>
         <td><?=$co_lin?></td>
         <td><?=$art_des?></td>
@@ -71,9 +72,9 @@ if ($_POST) {
         <td>vendido</td>
         <td><?=$stock_act?></td>
         <td><?=$prec_vta1?></td>
-        <td><?=$prec_vta5?></td> 
+        <td><?=$prec_vta5?></td>  -->
       </tr>
-      <?php  $n++; } }   ?>
+      <?php /*  $n++; } }  */  ?>
     </tbody>
   </table>
 
