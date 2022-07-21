@@ -19,13 +19,13 @@ if ($_POST) {
 ?>
 <style>
   #table-fixed tbody{
-    height: 330px;
+    height: 450px;
     overflow-y: auto;
   }
-  #table-fixed thead,#table-fixed tbody,
+/*   #table-fixed thead,#table-fixed tbody,
   #table-fixed td ,#table-fixed th{
     display: block;
-  }
+  } */
   #table-fixed tbody td,
   #table-fixed thead > tr > th{
     float: left;
