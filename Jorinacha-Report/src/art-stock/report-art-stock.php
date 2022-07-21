@@ -30,12 +30,21 @@ if ($_POST) {
         <th scope='col'>Stock Actual</th>
         <th scope='col'>Precio Bs</th>
         <th scope='col'>Ref</th>
+        <?php
+        for ($i = 0; $i < count($sedes); $i++) {
+
+          $sede = $sedes[$i];
+
+        ?>
+          <th scope='col'><?=$sede?></th>
+        <?php } ?>
+
       </tr>
     </thead>
     <tbody>
-      <?php 
-         $res = getArt($sedes[0],$linea);
-         var_dump($res);
+      <?php
+      $res = getArt($sedes[0], $linea);
+      var_dump($res);
 
       ?>
       <tr>

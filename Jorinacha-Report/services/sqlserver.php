@@ -9,6 +9,7 @@ if (!$conn) {
 }
 
  */
+/* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA*/
 function Database($sede)
 {
 
@@ -37,7 +38,7 @@ function Database($sede)
 }
 
 
-
+/* CONSULTAR TALLA DE ARTICULOS */
 function getCat_art()
 {
 
@@ -50,7 +51,7 @@ function getCat_art()
 
     return $res;
 }
-
+/* CONSULTAR LINEA DE ARTICULOS*/
 function getLin_art()
 {
 
@@ -71,7 +72,7 @@ function getLin_art()
     return $res;
 }
 
-
+/* CONSULTAR ARTICULOS */
 function getArt($sede, $linea)
 {
 
@@ -115,7 +116,7 @@ function getArt($sede, $linea)
     }
 }
 
-
+/* CONSULTAR ARTICULOS VENDIDOS*/
 function getReng_fac($sede, $linea, $fecha1, $fecha2)
 {
 
