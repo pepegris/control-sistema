@@ -35,7 +35,7 @@ if ($_POST) {
         <th scope='col'>Color</th>
         <th scope='col'>Factura de Compra</th>
         <th scope='col'>Cantidad</th>
-        <th scope='col'>Fecha</th>
+
         <?php
 
         for ($i = 0; $i < count($sedes); $i++) {
@@ -82,23 +82,20 @@ if ($_POST) {
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
           <?php
-          $g = 1;
-          /* $total_vendido = 0; */
-          for ($i = 0; $i < count($sedes); $i++) {
 
-            if ($sedes[$f] != null) {
 
-              $res2 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
-              $total_vendido += round($res2);
-            }
-            $f++;
-          }
+              $res2 = getCompras($co_art);
+
+              $fact_num =  $res2['fact_num'];
+              //$res3 =  $res['fec_lote'];
+              $fec_lote =date( "Y/d/m", strtotime($res2['fec_lote']));
+              $total_art =  $res2['total_art'];
+
 
 
           ?>
-          <td><?= $total_vendido ?></td>
-          <td><?= $prec_vta1 ?></td>
-          <td>$<?= $prec_vta5 ?></td>
+          <td><?= $fact_num  ?></td>
+          <td><?= $total_art ?></td>
           <td><?= $stock_act ?></td>
           <?php
           $f = 1;
