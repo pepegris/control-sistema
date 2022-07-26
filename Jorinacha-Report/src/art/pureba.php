@@ -1026,13 +1026,17 @@ $n=1;
 for ($i=0; $i < count($chontel); $i++) {
     
     $res = getCompra($chontel[$i]);
+    $res1 =  $res['co_art'];
+    $res2 =  $res['fact_num'];
+    $res3 =  $res['fec_lite'];
+    $res4 =  $res['total_art'];
     
     echo "        <tr>
     <th scope='row'> $n </th>
-    <td> $res[0] </td>
-    <td> $res[1]  </td>
-    <td> $res[2]  </td>
-    <td> $res[3]  </td>
+    <td> $res1 </td>
+    <td> $res2  </td>
+    <td> $res3  </td>
+    <td> $res4  </td>
     </tr>";
     
     $n++;
