@@ -1001,6 +1001,7 @@ function getCompra($co_art)
     $res = $co_col;
     return $res;
 }
+echo "$chontel[427]";
 $res = getCompra($chontel[427]);
 var_dump($res);
 
