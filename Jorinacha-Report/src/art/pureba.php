@@ -997,9 +997,11 @@ function getCompra($co_art)
 
             $co_col ['co_art']=  $row['co_art'];
             $co_col ['fact_num']=  $row['fact_num'];
-            $co_col ['fec_lite']=  sqlsrv_fetch($row['fec_lote']);
+            $co_col ['fec_lite']=  date_format( $row['fec_lote'],"Y-m-d H:i:s") ;
             $co_col ['total_art']=  $row['total_art'];
             break;
+            
+
         }
         $res = $co_col;
     }else {
