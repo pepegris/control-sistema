@@ -992,19 +992,20 @@ function getCompra($co_art)
     $sql = "SELECT top 1  co_art,fact_num,fec_lote,total_art from reng_com  where co_art ='$co_art' order by fec_lote desc";
     $consulta = sqlsrv_query($conn, $sql);
 
-    if ($consulta == null) {
-        $res = 0;
-    }else {
+    if ($consulta ) {
         while ($row = sqlsrv_fetch_array($consulta)) {
 
             $co_col ['co_art']=  $row['co_art'];
             $co_col ['fact_num']=  $row['fact_num'];
-            $co_col ['fec_lite']=  $row['fec_lite'];
+            $co_col ['fec_lite']=  $row['fec_lote'];
             $co_col ['total_art']=  $row['total_art'];
             break;
         }
-    
         $res = $co_col;
+    }else {
+
+    
+        $res = 0;
     }
 
     return $res;
@@ -1028,9 +1029,18 @@ for ($i=0; $i < count($chontel); $i++) {
     $res = getCompra($chontel[$i]);
     $res1 =  $res['co_art'];
     $res2 =  $res['fact_num'];
-    $res3 =  $res['fec_lite'];
+    $res3 =  $res['fec_lote'];
     $res4 =  $res['total_art'];
     
+if ($res==0) {
+    echo "        <tr>
+    <th scope='row'> $n </th>
+    <td> 0 </td>
+    <td> 0  </td>
+    <td> null  </td>
+    <td> 0  </td>
+    </tr>";
+}else {
     echo "        <tr>
     <th scope='row'> $n </th>
     <td> $res1 </td>
@@ -1038,6 +1048,7 @@ for ($i=0; $i < count($chontel); $i++) {
     <td> $res3  </td>
     <td> $res4  </td>
     </tr>";
+}
     
     $n++;
 }
