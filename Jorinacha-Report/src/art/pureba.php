@@ -997,7 +997,7 @@ function getCompra($co_art)
 
             $co_col ['co_art']=  $row['co_art'];
             $co_col ['fact_num']=  $row['fact_num'];
-            $co_col ['fec_lite']=   $row['fec_lote'];
+            $co_col ['fec_lote']=   $row['fec_lote'];
             $co_col ['total_art']=  $row['total_art'];
             break;
             
