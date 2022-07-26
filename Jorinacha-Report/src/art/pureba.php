@@ -997,7 +997,7 @@ function getCompra($co_art)
 
             $co_col ['co_art']=  $row['co_art'];
             $co_col ['fact_num']=  $row['fact_num'];
-            $co_col ['fec_lite']=  date_format( $row['fec_lote'],"Y-m-d H:i:s") ;
+            $co_col ['fec_lite']=   $row['fec_lote'];
             $co_col ['total_art']=  $row['total_art'];
             break;
             
@@ -1029,7 +1029,8 @@ for ($i=0; $i < count($chontel); $i++) {
     $res = getCompra($chontel[$i]);
     $res1 =  $res['co_art'];
     $res2 =  $res['fact_num'];
-    $res3 =  $res['fec_lote'];
+    //$res3 =  $res['fec_lote'];
+    $res3 =date( "m/d/Y", strtotime($res['fec_lote']));
     $res4 =  $res['total_art'];
     
 if ($res==0) {
