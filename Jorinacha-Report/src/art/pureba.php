@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-
+<table class="table table-dark table-striped" id="tblData">
 <?php
 
 $chontel = array ('6013216206738'	,
@@ -1009,7 +1009,8 @@ echo "      <tr>
 <th scope='col'>fecha</th>
 <th scope='col'>total</th>
 </tr>
-</thead>";
+</thead>
+<tbody>";
 $n=1;
 for ($i=0; $i < count($chontel); $i++) {
     
@@ -1029,6 +1030,7 @@ for ($i=0; $i < count($chontel); $i++) {
 
 
 ?>
-    
+      </tbody>
+  </table>
 </body>
 </html>
