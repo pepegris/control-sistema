@@ -997,7 +997,7 @@ function getCompra($co_art)
 
             $co_col ['co_art']=  $row['co_art'];
             $co_col ['fact_num']=  $row['fact_num'];
-            $co_col ['fec_lite']=  $row['fec_lote'];
+            $co_col ['fec_lite']=  sqlsrv_fetch($row['fec_lote']);
             $co_col ['total_art']=  $row['total_art'];
             break;
         }
@@ -1010,9 +1010,7 @@ function getCompra($co_art)
 
     return $res;
 }
-echo "$chontel[427]<br>";
-$res = getCompra($chontel[427]);
-var_dump($res);
+
 
 echo "      <tr>
 <th scope='col'>#</th>
