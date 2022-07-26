@@ -1030,7 +1030,7 @@ for ($i=0; $i < count($chontel); $i++) {
     $res1 =  $res['co_art'];
     $res2 =  $res['fact_num'];
     //$res3 =  $res['fec_lote'];
-    $res3 =date( "m/d/Y", strtotime($res['fec_lote']));
+    $res3 =date( "Y/d/m", strtotime($res['fec_lote']));
     $res4 =  $res['total_art'];
     
 if ($res==0) {
