@@ -1001,6 +1001,8 @@ function getCompra($co_art)
     $res = $co_col;
     return $res;
 }
+$res = getCompra($chontel[427]);
+var_dump($res);
 
 echo "      <tr>
 <th scope='col'>#</th>
@@ -1015,7 +1017,7 @@ $n=1;
 for ($i=0; $i < count($chontel); $i++) {
     
     $res = getCompra($chontel[$i]);
-
+    
     echo "        <tr>
     <th scope='row'> $n </th>
     <td> $res[0] </td>
