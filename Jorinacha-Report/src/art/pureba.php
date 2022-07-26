@@ -1003,7 +1003,7 @@ function getCompra($co_art)
 }
 echo "$chontel[427]";
 $res = getCompra($chontel[427]);
-var_dump($res[0]['co_lin']);
+var_dump($res['co_lin']);
 
 echo "      <tr>
 <th scope='col'>#</th>
