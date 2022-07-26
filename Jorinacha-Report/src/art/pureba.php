@@ -989,7 +989,7 @@ function getCompra($co_art)
     $serverName = "172.16.1.19";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $sql = "SELECT  co_art,fact_num,fec_lote,total_art from reng_com  where co_art ='$co_art'";
+    $sql = "SELECT top 1  co_art,fact_num,fec_lote,total_art from reng_com  where co_art ='$co_art' order by fec_lote desc";
     $consulta = sqlsrv_query($conn, $sql);
 
 
