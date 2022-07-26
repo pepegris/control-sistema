@@ -992,13 +992,21 @@ function getCompra($co_art)
     $sql = "SELECT top 1  co_art,fact_num,fec_lote,total_art from reng_com  where co_art ='$co_art' order by fec_lote desc";
     $consulta = sqlsrv_query($conn, $sql);
 
+    if ($consulta == null) {
+        $res = 0;
+    }else {
+        while ($row = sqlsrv_fetch_array($consulta)) {
 
-    while ($row = sqlsrv_fetch_array($consulta)) {
-
-        $co_col []=  $row;
+            $co_col ['co_art']=  $row['co_art'];
+            $co_col ['fact_num']=  $row['fact_num'];
+            $co_col ['fec_lite']=  $row['fec_lite'];
+            $co_col ['total_art']=  $row['total_art'];
+            break;
+        }
+    
+        $res = $co_col;
     }
 
-    $res = $co_col;
     return $res;
 }
 echo "$chontel[427]<br>";
