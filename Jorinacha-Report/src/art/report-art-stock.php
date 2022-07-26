@@ -89,7 +89,7 @@ if ($_POST) {
               $fact_num =  $res2['fact_num'];
               //$res3 =  $res['fec_lote'];
               $fec_lote =date( "Y/d/m", strtotime($res2['fec_lote']));
-              $total_art = number_format($res2['total_art'], 2, ',', '.');
+              $total_art = number_format($res2['total_art'], 0, ',', '.');
 
 
 
