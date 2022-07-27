@@ -157,7 +157,8 @@ if ($_POST) {
           <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
           <?php  
           if ($sedes[$i] != 'Previa Shop') {
-            echo "<th scope='col'>$total_vendido_tienda [$sedes[$h]]</th>";
+            var_dump($total_vendido_tienda);
+            //echo "<th scope='col'>$total_vendido_tienda [$sedes[$h]]</th>";
           }
             
         ?>
