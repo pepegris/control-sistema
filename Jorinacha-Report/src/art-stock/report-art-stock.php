@@ -94,9 +94,10 @@ if ($_POST) {
             $g++;
           }
 
-
+          $mDate = DateTime::createFromFormat('Y m d', $fecha1);
+             # 2011-06-30
           ?>
-          <td><?= var_dump($fecha1) ?></td>
+          <td><?php echo $mDate->format('Ymd'); ?></td>
           <td><?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
