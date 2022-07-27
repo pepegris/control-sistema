@@ -91,11 +91,8 @@ var_dump($fecha1);
             if ($sedes[$g] != null) {
 
               $res2 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
-              if ($res2 != null) {
-                $total_vendido = round($res2);
-              }else{
-                $total_vendido = 0;
-              }
+              $total_vendido += round($res2);
+
             }
             $g++;
           }
