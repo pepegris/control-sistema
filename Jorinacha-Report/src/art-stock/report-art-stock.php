@@ -94,10 +94,10 @@ if ($_POST) {
             $g++;
           }
 
-          $mDate = number_format($fech1,  0,'', '-');
+          $newDate = date("Ymd", strtotime($fecha1));
              # 2011-06-30
           ?>
-          <td><?= $mDate ?></td>
+          <td><?= $newDate ?></td>
           <td><?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
