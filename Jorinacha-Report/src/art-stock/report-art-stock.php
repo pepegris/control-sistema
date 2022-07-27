@@ -12,7 +12,7 @@ if ($_POST) {
   $fecha2 = $_POST['fecha2']; */
   $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
   $fecha2 = date("Ymd", strtotime($_POST['fecha3']));  
-
+var_dump($fecha1);
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
   }
@@ -91,14 +91,18 @@ if ($_POST) {
             if ($sedes[$g] != null) {
 
               $res2 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
-              $total_vendido += round($res2);
+              if ($res2 != null) {
+                $total_vendido = round($res2);
+              }else{
+                $total_vendido = 0;
+              }
             }
             $g++;
           }
 
 
           ?>
-          <td><?php var_dump($res2); ?></td>
+          <td><?php var_dump($total_vendido); ?></td>
           <td><?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>

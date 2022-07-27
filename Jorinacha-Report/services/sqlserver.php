@@ -262,13 +262,19 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
 
             $consulta = sqlsrv_query($conn, $sql);
 
-            while ($row = sqlsrv_fetch_array($consulta)) {
+            if ($consulta != null) {
+                while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $reng_fac = $row['total_art'];
-                break;
+                    $reng_fac = $row['total_art'];
+                    break;
+                }
+                $res = $reng_fac;
+                return $res;
+            }else{
+                return 0;
             }
-            $res = $reng_fac;
-            return $res;
+
+
         } catch (\Throwable $th) {
 
             throw $th;
