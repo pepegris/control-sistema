@@ -48,7 +48,12 @@ if ($_POST) {
 
         ?>
             <th scope='col'><?= $sede ?></th>
-            <th scope='col'>Total Vendido</th>
+        <?php  
+          if ($sedes[$i] != 'Previa Shop') {
+            echo "<th scope='col'>Total Vendido</th>";
+          }
+            
+        ?>
         <?php }
         } ?>
 
@@ -92,7 +97,7 @@ if ($_POST) {
             if ($sedes[$g] != null) {
 
               $res2 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
-              $total_vendido = round($res2);
+              $total_vendido += round($res2);
 
             }
             $g++;
