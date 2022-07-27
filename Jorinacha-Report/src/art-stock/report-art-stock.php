@@ -8,8 +8,10 @@ if ($_POST) {
 
 
   $linea = $_POST['linea'];
-  $fecha1 = $_POST['fecha1'];
-  $fecha2 = $_POST['fecha2'];
+/*   $fecha1 = $_POST['fecha1'];
+  $fecha2 = $_POST['fecha2']; */
+  $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
+  $fecha2 = date("Ymd", strtotime($_POST['fecha3']));  
 
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
@@ -94,8 +96,7 @@ if ($_POST) {
             $g++;
           }
 
-          $newDate = date("Ymd", strtotime($fecha1));
-             # 2011-06-30
+
           ?>
           <td><?= $newDate ?></td>
           <td><?= $prec_vta1 ?></td>
