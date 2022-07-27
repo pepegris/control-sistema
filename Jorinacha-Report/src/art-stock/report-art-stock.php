@@ -94,7 +94,7 @@ if ($_POST) {
             $g++;
           }
 
-          $mDate = DateTime::createFromFormat('Ymd', $fecha1);
+          $mDate = number_format($fech1,  0,'', '-');
              # 2011-06-30
           ?>
           <td><?= $mDate ?></td>
