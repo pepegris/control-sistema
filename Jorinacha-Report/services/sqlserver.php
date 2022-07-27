@@ -269,11 +269,11 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
                     break;
                 }
                 $res = $reng_fac;
-                return $res;
+                
             }else{
-                return 0;
+                $res = 1;
             }
-
+            return $res;
 
         } catch (\Throwable $th) {
 

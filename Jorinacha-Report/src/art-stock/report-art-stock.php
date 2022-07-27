@@ -85,7 +85,7 @@ var_dump($fecha1);
           <td><?= $co_color ?></td>
           <?php
           $g = 1;
-          /* $total_vendido = 0; */
+          $total_vendido = 0; 
           for ($i = 0; $i < count($sedes); $i++) {
 
             if ($sedes[$g] != null) {
