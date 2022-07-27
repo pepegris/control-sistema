@@ -186,7 +186,7 @@ if ($_POST) {
   header("location: form.php");
 }
 
-var_dump($total_vendido_tienda);
+var_dump($total_vendido_tienda['Comercial Merina']);
 
 
 include '../../includes/footer.php'; ?>
