@@ -265,6 +265,7 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
             while ($row = sqlsrv_fetch_array($consulta)) {
 
                 $reng_fac = $row['total_art'];
+                break;
             }
             $res = $reng_fac;
             return $res;
