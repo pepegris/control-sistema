@@ -98,7 +98,7 @@ if ($_POST) {
 
 
           ?>
-          <td><?= $res2 ?></td>
+          <td><?php var_dump($res2); ?></td>
           <td><?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
