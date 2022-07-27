@@ -157,8 +157,8 @@ if ($_POST) {
           <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
           <?php  
           if ($sedes[$i] != 'Previa Shop') {
-            var_dump($total_vendido_tienda);
-            //echo "<th scope='col'>$total_vendido_tienda [$sedes[$h]]</th>";
+
+            echo "<th scope='col'>$total_vendido_tienda [$sedes[$h]]</th>";
           }
             
         ?>
@@ -186,7 +186,7 @@ if ($_POST) {
   header("location: form.php");
 }
 
-var_dump($total_vendido);
+var_dump($total_vendido_tienda);
 
 
 include '../../includes/footer.php'; ?>
