@@ -94,10 +94,10 @@ if ($_POST) {
             $g++;
           }
 
-          $mDate = DateTime::createFromFormat('Y m d', $fecha1);
+          $mDate = DateTime::createFromFormat('Ymd', $fecha1);
              # 2011-06-30
           ?>
-          <td><?php echo $mDate->format('Ymd'); ?></td>
+          <td><?= $mDate ?></td>
           <td><?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
