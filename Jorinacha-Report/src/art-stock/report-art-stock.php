@@ -12,7 +12,7 @@ if ($_POST) {
   $fecha2 = $_POST['fecha2']; */
   $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
   $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
-var_dump($fecha1);
+
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
   }
@@ -31,9 +31,9 @@ var_dump($fecha1);
       <tr>
         <th scope="col">#</th>
         <th scope='col'>Codigo</th>
-        <th scope='col'>Linea</th>
         <th scope='col'>Marca</th>
-        <th scope='col'>Talla</th>
+        <th scope='col'>Modelo</th>
+        <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
         <th scope='col'>Total Vendido</th>
         <th scope='col'>Precio Bs</th>
@@ -48,6 +48,7 @@ var_dump($fecha1);
 
         ?>
             <th scope='col'><?= $sede ?></th>
+            <th scope='col'>Total Vendido</th>
         <?php }
         } ?>
 
@@ -91,7 +92,7 @@ var_dump($fecha1);
             if ($sedes[$g] != null) {
 
               $res2 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
-              $total_vendido += round($res2);
+              $total_vendido = round($res2);
 
             }
             $g++;
@@ -116,9 +117,15 @@ var_dump($fecha1);
               $stock_act_tienda = round($res3[0]['stock_act']);
               $total_stock_act_tienda[$sedes[$f]] += $stock_act_tienda;
 
+              $res4 = getReng_fac($sedes[$f],  $co_art, $fecha1, $fecha2);
+              $vendido_tienda = round($res4);
+              $total_vendido_tienda [$sedes[$f]] += $vendido_tienda;
+
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
+              <td><?= $vendido_tienda ?></td>
+
           <?php $f++;
             }
           }
