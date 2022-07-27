@@ -86,12 +86,12 @@ if ($_POST) {
           /* $total_vendido = 0; */
           for ($i = 0; $i < count($sedes); $i++) {
 
-            if ($sedes[$f] != null) {
+            if ($sedes[$g] != null) {
 
               $res2 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
               $total_vendido += round($res2);
             }
-            $f++;
+            $g++;
           }
 
 
