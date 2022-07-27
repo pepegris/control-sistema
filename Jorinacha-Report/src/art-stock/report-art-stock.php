@@ -152,18 +152,11 @@ if ($_POST) {
 
         $h = 1;
         for ($i = 0; $i < count($total_stock_act_tienda); $i++) {
+          $vendido = $total_vendido_tienda[$sedes[$h]];
 
         ?>
           <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
-          <?php  
-          if ($sedes[$i] != 'Previa Shop') {
-
-            $vendido = $total_vendido_tienda[$sedes[$h]];
-
-            echo "<th scope='col'>$vendido</th>";
-          }
-            
-        ?>
+          <td><?= $vendido  ?></td>
 
           <?php
 
