@@ -271,7 +271,7 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
                 $res = $reng_fac;
                 
             }else{
-                $res = 1;
+                $res = 0;
             }
             return $res;
 
@@ -281,7 +281,7 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
         }
     } else {
 
-        return 2;
+        return 0;
     }
 }
 
