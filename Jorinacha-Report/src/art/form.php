@@ -50,7 +50,7 @@ include '../../services/sqlserver.php';
       <div class="form-group">
         <label for="linea" class="form-label ">Linea</label>
         <select name="linea" id="">
-          <option value="todos">Todas</option>
+<!--           <option value="todos">Todas</option> -->
 
           <?php
 
