@@ -96,7 +96,7 @@ if ($_POST) {
 
           ?>
           <td><?= $fact_num  ?></td>
-          <td><?php var_dump($fec_lote[1]['date']);  ?></td>
+          <td><?php var_dump($fec_lote);  ?></td>
           <td><?= $total_art ?></td>
           <td><?= $stock_act ?></td>
           <?php
