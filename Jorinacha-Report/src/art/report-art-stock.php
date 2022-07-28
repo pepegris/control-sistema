@@ -34,6 +34,7 @@ if ($_POST) {
         <th scope='col'>Talla</th>
         <th scope='col'>Color</th>
         <th scope='col'>Factura de Compra</th>
+        <th scope='col'>Fecha Factura</th>     
         <th scope='col'>Cantidad</th>
 
         <?php
@@ -88,13 +89,14 @@ if ($_POST) {
 
               $fact_num =  $res2['fact_num'];
               //$res3 =  $res['fec_lote'];
-              $fec_lote =date( "Y/d/m", strtotime($res2['fec_lote']));
+              $fec_lote =date( "Ymd", strtotime($res2['fec_lote']));
               $total_art = $res2['total_art'];
 
 
 
           ?>
           <td><?= $fact_num  ?></td>
+          <td><?= $fec_lote  ?></td>
           <td><?= $total_art ?></td>
           <td><?= $stock_act ?></td>
           <?php
