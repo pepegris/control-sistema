@@ -285,7 +285,7 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
     }
 }
 
-
+/* CONSULTAR FACTURA DE COMPRA DE LOS ARTTICULOS*/
 function getCompras($co_art)
 {
 

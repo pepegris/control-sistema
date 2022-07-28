@@ -42,6 +42,9 @@ if ($_POST) {
 
         for ($i = 0; $i < count($sedes); $i++) {
 
+          
+          
+
           if ($sedes[$i] != null) {
 
             $sede = $sedes[$i];
@@ -161,7 +164,7 @@ if ($_POST) {
           <?php
 
           $h++;
-        }
+         }
 
           ?>
       </tr>
