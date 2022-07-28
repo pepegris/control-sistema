@@ -89,7 +89,7 @@ if ($_POST) {
 
               $fact_num =  $res2['fact_num'];
               //$res3 =  $res['fec_lote'];
-              $fec_lote =new ArrayObject($res2['fec_lote']);
+              $fec_lote =$res2['fec_lote'];
               $total_art = $res2['total_art'];
 
 
