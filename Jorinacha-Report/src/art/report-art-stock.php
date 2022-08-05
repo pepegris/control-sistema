@@ -99,7 +99,7 @@ if ($_POST) {
 
           ?>
           <td><?= $fact_num  ?></td>
-          <td><?php var_dump($fec);  ?></td>
+          <td><?php $fec_lote->format('Y-m-d\TH:i:s.u');  ?></td>
           <td><?= $total_art ?></td>
           <td><?= $stock_act ?></td>
           <?php
