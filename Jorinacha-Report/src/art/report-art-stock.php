@@ -91,6 +91,7 @@ if ($_POST) {
               //$res3 =  $res['fec_lote'];
               $fec_lote = $res2['fec_lote'];
               $total_art = $res2['total_art'];
+              $fec = new DateTime();
 
 
 
@@ -98,7 +99,7 @@ if ($_POST) {
 
           ?>
           <td><?= $fact_num  ?></td>
-          <td><?php var_dump($res2);  ?></td>
+          <td><?php var_dump($fec);  ?></td>
           <td><?= $total_art ?></td>
           <td><?= $stock_act ?></td>
           <?php
