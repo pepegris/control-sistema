@@ -92,9 +92,6 @@ if ($_POST) {
               $fec_lote = $res2['fec_lote'];
               $total_art = $res2['total_art'];
 
-              $o = new ReflectionObject($fec_lote);
-              $p = $o->getProperty('date');
-              $date = $p->getValue($fec_lote);
 
 
 
