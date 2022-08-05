@@ -91,13 +91,13 @@ if ($_POST) {
               //$res3 =  $res['fec_lote'];
               $fec_lote = $res2['fec_lote'];
               $total_art = $res2['total_art'];
-               
+              [$date, $dos] = $fec_lote;
 
 
 
           ?>
           <td><?= $fact_num  ?></td>
-          <td><?php var_dump(extract($fec_lote));  ?></td>
+          <td><?php var_dump($date);  ?></td>
           <td><?= $total_art ?></td>
           <td><?= $stock_act ?></td>
           <?php
