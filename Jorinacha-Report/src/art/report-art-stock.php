@@ -92,7 +92,7 @@ if ($_POST) {
               $fec_lote = $res2['fec_lote'];
               $total_art = $res2['total_art'];
                
-              foreach ($fec_lote as $prueba){
+              foreach ($fec_lote as &$prueba){
                 $prueba=$prueba;
               }
 
