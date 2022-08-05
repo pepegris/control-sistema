@@ -92,12 +92,16 @@ if ($_POST) {
               $fec_lote = $res2['fec_lote'];
               $total_art = $res2['total_art'];
 
+              $o = new ReflectionObject($fec_lote);
+              $p = $o->getProperty('date');
+              $date = $p->getValue($fec_lote);
+
 
 
 
           ?>
           <td><?= $fact_num  ?></td>
-          <td><?php var_dump($fec_lote);  ?></td>
+          <td><?php var_dump($date);  ?></td>
           <td><?= $total_art ?></td>
           <td><?= $stock_act ?></td>
           <?php
