@@ -91,12 +91,16 @@ if ($_POST) {
               //$res3 =  $res['fec_lote'];
               $fec_lote = $res2['fec_lote'];
               $total_art = $res2['total_art'];
+               
+              foreach ($fec_lote as $prueba){
+                $prueba=$prueba;
+              }
 
 
 
           ?>
           <td><?= $fact_num  ?></td>
-          <td><?php var_dump($fec_lote);  ?></td>
+          <td><?php var_dump($prueba);  ?></td>
           <td><?= $total_art ?></td>
           <td><?= $stock_act ?></td>
           <?php
