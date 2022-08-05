@@ -91,15 +91,15 @@ if ($_POST) {
               //$res3 =  $res['fec_lote'];
               $fec_lote = $res2['fec_lote'];
               $total_art = $res2['total_art'];
-              $fec = new DateTime();
-
-
-
-
 
           ?>
           <td><?= $fact_num  ?></td>
-          <td><?php echo $fec_lote->format('Y-m-d');  ?></td>
+          <td><?php 
+          if ($fec_lote == null) {
+            echo "N/A";
+          }else{
+            echo $fec_lote->format('Y-m-d'); 
+          } ?></td>
           <td><?= $total_art ?></td>
           <td><?= $stock_act ?></td>
           <?php
