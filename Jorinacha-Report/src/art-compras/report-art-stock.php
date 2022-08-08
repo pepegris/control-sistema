@@ -157,8 +157,9 @@ form , td {
 
     </tbody>
   </table>
-  <script>
-    let filename='';
+  <script type="text/javascript">
+
+
 function exportTableToExcel(tableID, filename='' ){
     var downloadLink;
     var dataType = 'application/vnd.ms-excel';
@@ -169,7 +170,7 @@ function exportTableToExcel(tableID, filename='' ){
     filename = filename?filename+'.xls':'excel_data.xls';
     
     // Create download link element
-    downloadLink = document.createElement('a');
+    downloadLink = document.createElement("a");
     
     document.body.appendChild(downloadLink);
     
@@ -189,7 +190,10 @@ function exportTableToExcel(tableID, filename='' ){
         downloadLink.click();
     }
 }
-  </script>
+
+    
+</script>
+
   <script src="../../assets/js/excel.js"></script>
   <center>
     <button id="submitExport" onclick="exportTableToExcel('tblData')" class="btn btn-success">Exportar Reporte a EXCEL</button>
