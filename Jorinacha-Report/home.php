@@ -1,57 +1,58 @@
 <?php
 
- 
 
 
 
- session_start();
 
-$cuenta_on=$_SESSION['username'];
+session_start();
+
+$cuenta_on = $_SESSION['username'];
 
 if (!isset($cuenta_on)) {
-    header("location:../salir.php");
+  header("location:../salir.php");
 }
 
-$cuenta_on = ucwords($cuenta_on); 
+$cuenta_on = ucwords($cuenta_on);
 
- 
- ?>
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <!-- ICONOS -->
-    <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+  <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/home.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
-    
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Jorinacha Report</title>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Jorinacha Report</title>
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="/">Jorinacha</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-  
+
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav ml-auto">
 
           <li class="nav-item">
-            <a class="nav-link" href="#" >Articulos</a>
+            <a class="nav-link" href="#">Articulos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
@@ -61,7 +62,7 @@ $cuenta_on = ucwords($cuenta_on);
           </li>
 
         </ul>
-<!--          <form class="d-flex">
+        <!--          <form class="d-flex">
           <input class="form-control me-sm-2" type="text" placeholder="Search">
           <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>  -->
@@ -70,68 +71,70 @@ $cuenta_on = ucwords($cuenta_on);
   </nav>
 
 
-<main>
+  <main>
 
-<h1>Reportes</h1>
+    <h1>Reportes</h1>
 
-<div class="container__box">
-    <a href="src/art-stock/form.php">
-    <div class="box">
-            <i class="lni lni-write"></i>
-            <h5>Reporte de Fallas</h5>
-            <h4>Articulos vendidos a una fecha y stock Actual</h4>
-        </div>
-    </a>
-
-    <a href="src/art/form.php" >
+    <div class="container__box">
+      <a href="src/art-stock/form.php">
         <div class="box">
-            <i class="lni lni-write"></i>
-            <h5>Factura de Compra</h5>
-            <h4>Articulos comprados, cantidad y Stock</h4>
+          <i class="lni lni-write"></i>
+          <h5>Reporte de Fallas</h5>
+          <h4>Articulos vendidos a una fecha y stock Actual</h4>
         </div>
-    </a>
-    <div class="box">
-        <i class="lni lni-construction"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-    </div>
-    <div class="box">
-        <i class="lni lni-coffee-cup"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-    </div>
-    <div class="box">
-        <i class="lni lni-construction"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-    </div>
-    <div class="box">
-        <i class="lni lni-coffee-cup"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-    </div>
-    <div class="box">
-        <i class="lni lni-construction"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-    </div>
-    <div class="box">
-        <i class="lni lni-coffee-cup"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-    </div>
-    <div class="box">
-        <i class="lni lni-construction"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-    </div>
-    <div class="box">
-        <i class="lni lni-coffee-cup"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-    </div> 
-</div>
+      </a>
 
-</main>
+      <a href="src/art/form.php">
+        <div class="box">
+          <i class="lni lni-write"></i>
+          <h5>Factura de Compra</h5>
+          <h4>Articulos comprados, cantidad y Stock</h4>
+        </div>
+      </a>
+      <a href="">
+        <div class="box">
+          <i class="lni lni-coffee-cup"></i>
+          <h5>Pronto</h5>
+          <h4>Pronto aun En Desarrollo</h4>
+        </div>
+      </a>
+      <div class="box">
+        <i class="lni lni-construction"></i>
+        <h5>Pronto</h5>
+        <h4>Pronto aun En Desarrollo</h4>
+      </div>
+      <div class="box">
+        <i class="lni lni-construction"></i>
+        <h5>Pronto</h5>
+        <h4>Pronto aun En Desarrollo</h4>
+      </div>
+      <div class="box">
+        <i class="lni lni-construction"></i>
+        <h5>Pronto</h5>
+        <h4>Pronto aun En Desarrollo</h4>
+      </div>
+      <div class="box">
+        <i class="lni lni-construction"></i>
+        <h5>Pronto</h5>
+        <h4>Pronto aun En Desarrollo</h4>
+      </div>
+      <div class="box">
+        <i class="lni lni-construction"></i>
+        <h5>Pronto</h5>
+        <h4>Pronto aun En Desarrollo</h4>
+      </div>
+      <div class="box">
+        <i class="lni lni-construction"></i>
+        <h5>Pronto</h5>
+        <h4>Pronto aun En Desarrollo</h4>
+      </div>
+      <div class="box">
+        <i class="lni lni-construction"></i>
+        <h5>Pronto</h5>
+        <h4>Pronto aun En Desarrollo</h4>
+      </div>
+    </div>
 
-<?php  include 'includes/footer.php'; ?>
+  </main>
+
+  <?php include 'includes/footer.php'; ?>
