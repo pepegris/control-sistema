@@ -21,7 +21,7 @@ if ($_POST) {
 
   <style>
 
-form{
+form , td {
     font-size: 1px;
   }
 
