@@ -10,6 +10,11 @@ include '../../services/sqlserver.php';
   .form-check {
     display: flexbox;
 
+    
+
+  }
+  form{
+    font-size: 1px;
   }
 </style>
 
