@@ -84,7 +84,7 @@ $cuenta_on = ucwords($cuenta_on);
         </div>
       </a>
 
-      <a href="src/art/form.php">
+      <a href="src/art-compras/form.php">
         <div class="box">
           <i class="lni lni-write"></i>
           <h5>Factura de Compra</h5>
