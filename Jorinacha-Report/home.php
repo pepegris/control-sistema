@@ -78,7 +78,7 @@ $cuenta_on = ucwords($cuenta_on);
     <a href="src/art-stock/form.php">
     <div class="box">
             <i class="lni lni-write"></i>
-            <h5>Stock</h5>
+            <h5>Reporte de Fallas</h5>
             <h4>Articulos vendidos a una fecha y stock Actual</h4>
         </div>
     </a>
