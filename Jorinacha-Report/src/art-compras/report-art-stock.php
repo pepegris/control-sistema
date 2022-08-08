@@ -20,13 +20,10 @@ if ($_POST) {
 
 
   <style>
-
-form , td {
-  font-size: 12px;
-}
-
-
-
+    form,
+    td {
+      font-size: 12px;
+    }
   </style>
 
   <table class="table table-dark table-striped" id="tblData">
@@ -39,7 +36,7 @@ form , td {
         <th scope='col'>Talla</th>
         <th scope='col'>Color</th>
         <th scope='col'>Factura de Compra</th>
-        <th scope='col'>Fecha Factura</th>     
+        <th scope='col'>Fecha Factura</th>
         <th scope='col'>Cantidad</th>
 
         <?php
@@ -89,21 +86,21 @@ form , td {
           <td><?= $co_color ?></td>
           <?php
 
-              $res2 = getCompras($co_art);
+          $res2 = getCompras($co_art);
 
-              $fact_num =  $res2['fact_num'];
-              //$res3 =  $res['fec_lote'];
-              $fec_lote = $res2['fec_lote'];
-              $total_art = $res2['total_art'];
+          $fact_num =  $res2['fact_num'];
+          //$res3 =  $res['fec_lote'];
+          $fec_lote = $res2['fec_lote'];
+          $total_art = $res2['total_art'];
 
           ?>
           <td><?= $fact_num  ?></td>
-          <td><?php 
-          if ($fec_lote == null) {
-            echo "N/A";
-          }else{
-            echo $fec_lote->format('Y-m-d'); 
-          } ?></td>
+          <td><?php
+              if ($fec_lote == null) {
+                echo "N/A";
+              } else {
+                echo $fec_lote->format('Y-m-d');
+              } ?></td>
           <td><?= $total_art ?></td>
           <td><?= $stock_act ?></td>
           <?php
@@ -147,56 +144,52 @@ form , td {
         ?>
           <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
 
-          <?php
+        <?php
 
           $h++;
         }
 
-          ?>
+        ?>
       </tr>
 
     </tbody>
   </table>
   <script type="text/javascript">
+    function exportTableToExcel(tableID, filename = '') {
+      var downloadLink;
+      var dataType = 'application/vnd.ms-excel';
+      var tableSelect = document.getElementById(tableID);
+      var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
+      // Specify file name
+      filename = filename ? filename + '.xls' : 'excel_data.xls';
 
-function exportTableToExcel(tableID, filename='' ){
-    var downloadLink;
-    var dataType = 'application/vnd.ms-excel';
-    var tableSelect = document.getElementById(tableID);
-    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-    
-    // Specify file name
-    filename = filename?filename+'.xls':'excel_data.xls';
-    
-    // Create download link element
-    downloadLink = document.createElement("a");
-    
-    document.body.appendChild(downloadLink);
-    
-    if(navigator.msSaveOrOpenBlob){
+      // Create download link element
+      downloadLink = document.createElement("a");
+
+      document.body.appendChild(downloadLink);
+
+      if (navigator.msSaveOrOpenBlob) {
         var blob = new Blob(['ufeff', tableHTML], {
-            type: dataType
+          type: dataType
         });
-        navigator.msSaveOrOpenBlob( blob, filename);
-    }else{
+        navigator.msSaveOrOpenBlob(blob, filename);
+      } else {
         // Create a link to the file
         downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-    
+
         // Setting the file name
         downloadLink.download = filename;
-        
+
         //triggering the function
         downloadLink.click();
+      }
     }
-}
-
-    
-</script>
-
-  <script src="../../assets/js/excel.js"></script>
+  </script>
+<!-- 
+  <script src="../../assets/js/excel.js"></script> -->
   <center>
-    <button id="submitExport" onclick="exportTableToExcel('tblData')" class="btn btn-success">Exportar Reporte a EXCEL</button>
+    <button onclick="exportTableToExcel('tblData')" class="btn btn-success">Exportar Reporte a EXCEL</button>
   </center>
 
 
