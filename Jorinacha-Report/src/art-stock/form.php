@@ -13,9 +13,7 @@ include '../../services/sqlserver.php';
     
 
   }
-  form{
-    font-size: 1px;
-  }
+
 </style>
 
 <div id="body">

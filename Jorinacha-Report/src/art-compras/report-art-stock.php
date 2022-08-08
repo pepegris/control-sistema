@@ -21,6 +21,10 @@ if ($_POST) {
 
   <style>
 
+form{
+    font-size: 1px;
+  }
+
 
   </style>
 
