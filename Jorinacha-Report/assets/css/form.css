@@ -25,7 +25,7 @@ form .fieldset .form-group span{
   color: red;
 }
 #body,.fieldset  {
-  @media (min-width:768px){
+  @media (max-width:508px){
 
     display:none;
 
