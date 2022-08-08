@@ -86,8 +86,8 @@ $cuenta_on = ucwords($cuenta_on);
     <a href="src/art/form.php" >
         <div class="box">
             <i class="lni lni-coffee-cup"></i>
-            <h5>Pronto</h5>
-            <h4>Pronto aun En Desarrollo</h4>
+            <h5>Factura de Compra</h5>
+            <h4>Articulos comprados, cantidad y Stock</h4>
         </div>
     </a>
     <div class="box">
