@@ -24,3 +24,12 @@ form .fieldset .form-group input{
 form .fieldset .form-group span{
   color: red;
 }
+#body,.fieldset  {
+  @media (min-width:768px){
+
+    display:none;
+
+
+  }
+
+}
