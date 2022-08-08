@@ -162,7 +162,7 @@ if ($_POST) {
       var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
       // Specify file name
-      filename = filename ? filename + '.xls' : 'excel_data.xls';
+      filename = filename ? filename + '.txt' : 'excel_data.txt';
 
       // Create download link element
       downloadLink = document.createElement("a");
