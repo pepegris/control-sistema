@@ -24,7 +24,7 @@ form .fieldset .form-group input{
 form .fieldset .form-group span{
   color: red;
 }
-#body,.fieldset  {
+.fieldset  {
   @media (max-width:508px){
 
     display:none;
