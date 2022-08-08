@@ -84,7 +84,6 @@ if ($_POST) {
           <td><?= $co_color ?></td>
           <?php
 
-
               $res2 = getCompras($co_art);
 
               $fact_num =  $res2['fact_num'];

@@ -68,7 +68,7 @@ include '../../services/sqlserver.php';
         </select>
       </div>
 
-      <div class="form-group">
+<!--       <div class="form-group">
         <label for="fecha1" class="form-label ">Desde</label>
           <input type="date" name="fecha1" id="">
       </div>
@@ -76,7 +76,7 @@ include '../../services/sqlserver.php';
       <div class="form-group">
         <label for="fecha2" class="form-label ">Hasta</label>
           <input type="date" name="fecha2" id="">
-      </div>
+      </div> -->
       <br>
       <center><button type="submit"  class="btn btn-primary">Ingresar</button></center>
       <br>
