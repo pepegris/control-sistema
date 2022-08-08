@@ -22,7 +22,7 @@ if ($_POST) {
   <style>
 
 form , td {
-    font-size: 10px;
+    font-size: 12px;
   }
 
 
