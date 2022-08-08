@@ -5,6 +5,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1px;
+    
     
 
 }
@@ -23,13 +25,4 @@ form .fieldset .form-group input{
 }
 form .fieldset .form-group span{
   color: red;
-}
-.fieldset  {
-  @media (max-width:508px){
-
-    display:none;
-
-
-  }
-
 }
