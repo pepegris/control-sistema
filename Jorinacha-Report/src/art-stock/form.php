@@ -23,7 +23,7 @@ include '../../services/sqlserver.php';
       </center>
       
       
-      <div class="form-check">
+      
         <?php
         $res1 = getTiendas();
         $i = 0;
@@ -35,15 +35,15 @@ include '../../services/sqlserver.php';
           }
           
         ?>
-
+<div class="form-check">
           <input class="form-check-input" type="checkbox" value="<?= $sede ?>" name="<?= $i ?>"  checked>
           <label class="form-check-label" for="<?= $sede ?>">
             <?= $sede ?>
           </label>
-
+          </div>
         <?php  $i ++; } ?>
 
-      </div>
+
 
 
 
