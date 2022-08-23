@@ -189,7 +189,7 @@ function getArt($sede, $linea)
                     prec_vta1,prec_vta5,st_almac.stock_act, co_color , co_lin
                     from st_almac inner join art on st_almac.co_art=art.co_art 
                     where   st_almac.co_alma='BOLE' AND art.prec_vta5 >=1
-                    order by art.co_subl ,st_almac.stock_act  desc ";
+                    order by art.co_subl ,st_almac.stock_act , st_almac.stock_act desc ";
                 } else {
 
                     $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat) as  co_cat  , 
