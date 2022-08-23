@@ -37,7 +37,7 @@ if ($_POST) {
         <th scope='col'>Color</th>
         <th scope='col'>Factura de Compra</th>
         <th scope='col'>Fecha Factura</th>
-        <th scope='col'>Cant Comp/th>
+        <th scope='col'>Cant Comp</th>
 
         <?php
 
@@ -117,13 +117,14 @@ if ($_POST) {
               $stock_act_tienda = round($res3[0]['stock_act']);
               $total_stock_act_tienda[$sedes[$f]] += $stock_act_tienda;
 
-              $res4 = getFactura($sedes[$i], $co_art);
+              $res4 = getFactura($sedes[$f], $co_art);
               $total_enviado = round($res4['total_art']);
               $total_enviado_tienda[$sedes[$f]] += $total_enviado;
 
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
+              <td><?= $total_enviado  ?></td>
           <?php $f++;
             }
           }
@@ -148,6 +149,8 @@ if ($_POST) {
 
         ?>
           <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
+          <td><?= $total_enviado_tienda[$sedes[$h]] ?></td>
+          
 
         <?php
 
