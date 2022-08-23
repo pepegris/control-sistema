@@ -109,7 +109,7 @@ form , td {
               $res2 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
               $total_vendido += round($res2);
               $res0= getCompras($co_art);
-              $prec_vta = $res2['prec_vta'];
+              $prec_vta = $res0['prec_vta'];
 
             }
             $g++;
