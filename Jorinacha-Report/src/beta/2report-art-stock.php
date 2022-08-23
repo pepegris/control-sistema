@@ -37,8 +37,7 @@ if ($_POST) {
         <th scope='col'>Color</th>
         <th scope='col'>Factura de Compra</th>
         <th scope='col'>Fecha Factura</th>
-        <th scope='col'>Cantidad</th>
-        <th scope='col'>Costo</th>
+        <th scope='col'>Cant Comp</th>
 
         <?php
 
@@ -50,8 +49,16 @@ if ($_POST) {
 
         ?>
             <th scope='col'><?= $sede ?></th>
-        <?php }
-        } ?>
+            <?php
+            if ($sedes[$i] != 'Previa Shop') {
+            ?>
+              <th scope='col'>Cant Env</th>
+
+        <?php
+            }
+          }
+        } 
+        ?>
 
       </tr>
     </thead>
@@ -93,7 +100,6 @@ if ($_POST) {
           //$res3 =  $res['fec_lote'];
           $fec_lote = $res2['fec_lote'];
           $total_art = $res2['total_art'];
-          $prec_vta = $res2['prec_vta'];
 
           ?>
           <td><?= $fact_num  ?></td>
@@ -104,7 +110,6 @@ if ($_POST) {
                 echo $fec_lote->format('Y-m-d');
               } ?></td>
           <td><?= $total_art ?></td>
-          <td><?= $prec_vta ?></td>
           <td><?= $stock_act ?></td>
           <?php
           $f = 1;
@@ -119,9 +124,14 @@ if ($_POST) {
               $stock_act_tienda = round($res3[0]['stock_act']);
               $total_stock_act_tienda[$sedes[$f]] += $stock_act_tienda;
 
+              $res4 = getFactura($sedes[$f], $co_art);
+              $total_enviado = round($res4['total_art']);
+              $total_enviado_tienda[$sedes[$f]] += $total_enviado;
+
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
+              <td><?= $total_enviado  ?></td>
           <?php $f++;
             }
           }
@@ -134,7 +144,7 @@ if ($_POST) {
       <?php  } ?>
       <tr>
         <th></th>
-        <td colspan="6"></td>
+        <td colspan="7"></td>
         <td>
           <h4>Total</h4>
         </td>
@@ -146,6 +156,8 @@ if ($_POST) {
 
         ?>
           <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
+          <td><?= $total_enviado_tienda[$sedes[$h]] ?></td>
+
 
         <?php
 
@@ -189,7 +201,7 @@ if ($_POST) {
       }
     }
   </script>
-<!-- 
+  <!-- 
   <script src="../../assets/js/excel.js"></script> -->
   <center>
     <button onclick="exportTableToExcel('tblData')" class="btn btn-success">Exportar Reporte a EXCEL</button>
