@@ -134,7 +134,7 @@ form , td {
               $vendido_tienda = round($res4);
               $total_vendido_tienda [$sedes[$f]] += $vendido_tienda;
 
-              $res5 = getFactura($sedes[$f], $co_art);
+              $res5 = getFactura($sedes[$f], $co_art,$fecha1, $fecha2);
               $total_enviado = round($res5['total_art']);
               $total_enviado_tienda[$sedes[$f]] += $total_enviado;
 
