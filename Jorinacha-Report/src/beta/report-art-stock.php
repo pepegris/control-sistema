@@ -131,7 +131,7 @@ if ($_POST) {
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
-              <td>env <?= $total_enviado  ?></td>
+              <td><?= $total_enviado  ?></td>
           <?php $f++;
             }
           }
