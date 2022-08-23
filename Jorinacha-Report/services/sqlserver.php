@@ -37,6 +37,33 @@ function Database($sede)
     return $bd[$sede];
 }
 
+function Cliente($sede)
+{
+
+    $bd = array(
+        "Comercial Merina"    =>     'T20',
+        "Comercial Merina III"    =>     'T23',
+        "Comercial Corina I"    =>     'T18',
+        "Comercial Corina II"    =>     'T22',
+        "Comercial Punto Fijo"    =>     'T13',
+        "Comercial Matur"    =>     'T07',
+        "Comercial Valena"    =>     'T10',
+        "Comercial Trina"    =>     'T16',
+        "Comercial Kagu"    =>     'T03',
+        "Comercial Nachari"    =>     'T19',
+        "Comercial Higue"    =>     'T09',
+        "Comercial Apura"    =>     'T17',
+        "Comercial Vallepa"    =>     'T06',
+        "Comercial Ojena"    =>     'T12',
+        "Comercial Puecruz"    =>     'T05',
+        "Comercial Acari"    =>     'T04',
+        "Comercial Catica II"    =>     'T24',
+
+    );
+
+    return $bd[$sede];
+}
+
 
 /* CONSULTAR TALLA DE ARTICULOS */
 function getCat_art($co_cat)
@@ -163,13 +190,11 @@ function getArt($sede, $linea)
                     from st_almac inner join art on st_almac.co_art=art.co_art 
                     where   st_almac.co_alma='BOLE' AND art.prec_vta5 >=1
                     order by art.co_subl ,st_almac.stock_act  desc ";
-
                 } else {
 
                     $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat) as  co_cat  , 
                     co_color , co_cat , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
                     from art WHERE prec_vta5 >= 1 ORDER BY co_subl , stock_act DESC";
-
                 }
             } else {
 
@@ -180,13 +205,11 @@ function getArt($sede, $linea)
                     from st_almac inner join art on st_almac.co_art=art.co_art 
                     where art.co_lin='$linea' and st_almac.co_alma='BOLE' AND art.prec_vta5 >=1
                     order by art.co_subl ,st_almac.stock_act  desc";
-
                 } else {
 
                     $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
                     co_color , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
                     from art  where co_lin= '$linea' AND prec_vta5 >= 1 ORDER BY co_subl , stock_act DESC";
-
                 }
             }
 
@@ -269,12 +292,10 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
                     break;
                 }
                 $res = $reng_fac;
-                
-            }else{
+            } else {
                 $res = 0;
             }
             return $res;
-
         } catch (\Throwable $th) {
 
             throw $th;
@@ -296,23 +317,65 @@ function getCompras($co_art)
     $sql = "SELECT top 1  co_art,fact_num,fec_lote,total_art from reng_com  where co_art ='$co_art' order by fec_lote desc";
     $consulta = sqlsrv_query($conn, $sql);
 
-    if ($consulta ) {
+    if ($consulta) {
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-            $co_col ['co_art']=  $row['co_art'];
-            $co_col ['fact_num']=  $row['fact_num'];
-            $co_col ['fec_lote']=   $row['fec_lote'];
-            $co_col ['total_art']=   number_format($row['total_art'], 2, ',', '.');
+            $co_col['co_art'] =  $row['co_art'];
+            $co_col['fact_num'] =  $row['fact_num'];
+            $co_col['fec_lote'] =   $row['fec_lote'];
+            $co_col['total_art'] =   number_format($row['total_art'], 2, ',', '.');
             break;
-            
-
         }
         $res = $co_col;
-    }else {
+    } else {
 
-    
+
         $res = 0;
     }
 
     return $res;
+}
+
+/* FACTURA DE EL ULTIMO ARTICULOS VENDIDO EN PREVIA */
+
+function getFactura($sede, $co_art)
+{
+    $database = Cliente($sede);
+
+    if ($database != null) {
+        try {
+
+            $serverName = "172.16.1.19";
+            $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT top 1  factura.fact_num,total_art 
+            FROM reng_fac
+            INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
+            WHERE reng_fac.co_art='$co_art' and factura.co_cli='$database'
+            ORDER BY fe_us_in DESC";
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $total_art = number_format($row['total_art'], 2, ',', '.');
+                    break;
+                }
+                $res = $total_art;
+
+            } else {
+                $res = 0;
+            }
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
 }
