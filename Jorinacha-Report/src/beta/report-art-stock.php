@@ -49,9 +49,16 @@ if ($_POST) {
 
         ?>
             <th scope='col'><?= $sede ?></th>
-            <th scope='col'>Cant Env</th>
-        <?php }
-        } ?>
+            <?php
+            if ($sedes != 'Previa Shop') {
+            ?>
+              <th scope='col'>Cant Env</th>
+
+        <?php
+            }
+          }
+        } 
+        ?>
 
       </tr>
     </thead>
@@ -150,7 +157,7 @@ if ($_POST) {
         ?>
           <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
           <td><?= $total_enviado_tienda[$sedes[$h]] ?></td>
-          
+
 
         <?php
 
@@ -194,7 +201,7 @@ if ($_POST) {
       }
     }
   </script>
-<!-- 
+  <!-- 
   <script src="../../assets/js/excel.js"></script> -->
   <center>
     <button onclick="exportTableToExcel('tblData')" class="btn btn-success">Exportar Reporte a EXCEL</button>
