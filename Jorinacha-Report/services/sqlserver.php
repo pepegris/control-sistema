@@ -323,7 +323,7 @@ function getCompras($co_art)
             $co_col['co_art'] =  $row['co_art'];
             $co_col['fact_num'] =  $row['fact_num'];
             $co_col['fec_lote'] =   $row['fec_lote'];
-            $co_col['total_art'] =   number_format($row['total_art'], 2, ',', '.');
+            $co_col['total_art'] =   number_format($row['total_art'], 0, ',', '.');
             $co_col['prec_vta'] =   number_format($row['prec_vta'], 2, ',', '.');
             break;
         }
