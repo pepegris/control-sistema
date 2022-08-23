@@ -57,7 +57,8 @@ form , td {
             <th scope='col'><?= $sede ?></th>
         <?php  
           if ($sedes[$i] != 'Previa Shop') {
-            echo "<th scope='col'>Total Vendido</th>";
+            echo "<th scope='col'>Cant Env $i</th>";
+            echo "<th scope='col'>Total Vendido $i</th>";
           }
             
         ?>
@@ -133,9 +134,13 @@ form , td {
               $vendido_tienda = round($res4);
               $total_vendido_tienda [$sedes[$f]] += $vendido_tienda;
 
+              $res5 = getFactura($sedes[$f], $co_art);
+              $total_enviado = round($res5['total_art']);
+              $total_enviado_tienda[$sedes[$f]] += $total_enviado;
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
+              <td><?= $total_enviado  ?></td>
               <td><?= $vendido_tienda ?></td>
 
           <?php $f++;
@@ -163,6 +168,7 @@ form , td {
 
         ?>
           <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
+          <td><?= $total_enviado_tienda[$sedes[$h]] ?></td>
           <td><?= $vendido  ?></td>
 
           <?php
