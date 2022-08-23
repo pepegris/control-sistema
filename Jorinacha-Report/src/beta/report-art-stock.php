@@ -144,7 +144,7 @@ if ($_POST) {
       <?php  } ?>
       <tr>
         <th></th>
-        <td colspan="6"></td>
+        <td colspan="7"></td>
         <td>
           <h4>Total</h4>
         </td>
