@@ -40,6 +40,7 @@ form , td {
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
         <th scope='col'>Total Vendido</th>
+        <th scope='col'>Costo Bs</th>
         <th scope='col'>Precio Bs</th>
         <th scope='col'>Ref</th>
         <?php
@@ -71,6 +72,7 @@ form , td {
       <?php
 
       $res1 = getArt('Previa Shop', $linea);
+      
       $n = 1;
       for ($e = 0; $e < count($res1); $e++) {
 
@@ -106,6 +108,8 @@ form , td {
 
               $res2 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
               $total_vendido += round($res2);
+              $res0= getCompras($co_art);
+              $prec_vta = $res2['prec_vta'];
 
             }
             $g++;
@@ -114,6 +118,7 @@ form , td {
 
           ?>
           <td><?= $total_vendido ?></td>
+          <td><?= $prec_vta ?></td>
           <td><?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
