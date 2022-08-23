@@ -50,7 +50,7 @@ if ($_POST) {
         ?>
             <th scope='col'><?= $sede ?></th>
             <?php
-            if ($sedes != 'Previa Shop') {
+            if ($sedes[$i] != 'Previa Shop') {
             ?>
               <th scope='col'>Cant Env</th>
 
