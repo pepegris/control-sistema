@@ -485,8 +485,8 @@ function getCotizacion ($sede, $co_art)
 
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $total_art = number_format($row['total_art'], 0, ',', '.');
-                    $total_art = $row['status'];
+                    $total_art['total_art'] = number_format($row['total_art'], 0, ',', '.');
+                    $total_art['status'] = $row['status'];
                     break;
                 }
                 $res = $total_art;
