@@ -122,8 +122,20 @@ if ($_POST) {
 
           ?>
           <td><?= $total_vendido ?></td>
-          <td>Bs<?= $prec_vta ?></td>
-          <td><?= $fec_lote->format('Y-m-d'); ?></td>
+          <td>Bs<?php
+                if ($prec_vta == null) {
+                  echo 0;
+                } else {
+                  echo $prec_vta ;
+                }
+                ?></td>
+          <td><?php
+              if ($fec_lote == null) {
+                echo "N/A";
+              } else {
+                echo $fec_lote->format('Y-m-d');
+              }
+              ?></td>
           <td>Bs<?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
@@ -178,21 +190,21 @@ if ($_POST) {
                       case 2:
                         echo "Procesada $documento";
                         break;
-  
+
                       default:
-                        echo "segundo";
+                        echo "Sin Pedido";
                         break;
                     }
                   }
 
                   ?></td>
               <td><?php
-                    if ($res7 == 0) {
-                      echo 0;
-                    } else {
-                      echo "$total_pedido";
-                    }
-                    ?></td>
+                  if ($res7 == 0) {
+                    echo 0;
+                  } else {
+                    echo "$total_pedido";
+                  }
+                  ?></td>
               <td></td>
 
 
@@ -246,7 +258,7 @@ if ($_POST) {
 
 
 <?php
-var_dump($res7);
+  var_dump($res7);
 } else {
   header("location: form.php");
 }
