@@ -554,3 +554,21 @@ function getCot_Ped($sede, $co_art)
     }
 } */
 
+
+
+
+
+
+
+
+
+
+
+
+function Cerrar()
+{
+    $connectionInfo = array( "Database"=>"PREVIA_A", "UID"=>"mezcla", "PWD"=>"Zeus33$");
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+    sqlsrv_close( $conn );
+}

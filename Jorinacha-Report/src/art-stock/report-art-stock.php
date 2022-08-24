@@ -270,7 +270,7 @@ if ($_POST) {
 
 
 <?php
-  var_dump($res7);
+  Cerrar();
 } else {
   header("location: form.php");
 }
