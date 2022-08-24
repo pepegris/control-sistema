@@ -180,7 +180,7 @@ if ($_POST) {
                         break;
   
                       default:
-                      var_dump($res7);
+                        echo "segundo";
                         break;
                     }
                   }
