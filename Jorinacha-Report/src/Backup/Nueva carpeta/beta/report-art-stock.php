@@ -25,7 +25,7 @@ if ($_POST) {
       font-size: 12px;
     }
   </style>
-  <center><h1>Compras</h1></center>
+  <center><h1>Fallas</h1></center>
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>
@@ -38,7 +38,6 @@ if ($_POST) {
         <th scope='col'>Factura de Compra</th>
         <th scope='col'>Fecha Factura</th>
         <th scope='col'>Cantidad</th>
-        <th scope='col'>Costo</th>
 
         <?php
 
@@ -58,7 +57,7 @@ if ($_POST) {
     <tbody>
       <?php
 
-      $res1 = getArt('Previa Shop', $linea,0);
+      $res1 = getArt('Previa Shop', $linea , 0);
       $n = 1;
       for ($e = 0; $e < count($res1); $e++) {
 
@@ -93,7 +92,6 @@ if ($_POST) {
           //$res3 =  $res['fec_lote'];
           $fec_lote = $res2['fec_lote'];
           $total_art = $res2['total_art'];
-          $prec_vta = $res2['prec_vta'];
 
           ?>
           <td><?= $fact_num  ?></td>
@@ -104,7 +102,6 @@ if ($_POST) {
                 echo $fec_lote->format('Y-m-d');
               } ?></td>
           <td><?= $total_art ?></td>
-          <td><?= $prec_vta ?></td>
           <td><?= $stock_act ?></td>
           <?php
           $f = 1;
