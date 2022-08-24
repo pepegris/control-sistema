@@ -167,6 +167,7 @@ if ($_POST) {
               $res6 = getArt($sedes[$f], $linea, $co_art);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
 
+              /* REVISANDO SI TIENE COTIZACION O PEDIDO */
               $test1 = getCotizacion($sedes[$f], $co_art);
               if ($test1 == null) {
                 $test2=getPedidos($sedes[$f], $co_art);
@@ -192,17 +193,17 @@ if ($_POST) {
                   } else {
                     switch ($status) {
                       case 0:
-                        echo "<p style='color:red'>Sin Procesar $documento</p>";
+                        echo "<p style='color:red'>Sin Procesar</p> $documento";
                         break;
                       case 1:
-                        echo "<p style='color:yellow'>Parc/Procesada $documento</p>";
+                        echo "<p style='color:yellow'>Parc/Procesada</p> $documento";
                         break;
                       case 2:
-                        echo "<p style='color:green'>Procesada $documento</p>";
+                        echo "<p style='color:green'>Procesada</p> $documento";
                         break;
 
                       default:
-                        echo "Sin Pedido";
+                        echo "<p>Sin Pedido</p>";
                         break;
                     }
                   }
