@@ -476,7 +476,7 @@ function getCotizacion ($sede, $co_art)
 
             $sql = "SELECT top 1 cotiz_c.fact_num,reng_cac.total_art,cotiz_c.status  
             FROM reng_cac INNER JOIN cotiz_c ON reng_cac.fact_num=cotiz_c.fact_num
-            WHERE reng_cac.co_art ='3272657820525' and cotiz_c.co_cli='T02'
+            WHERE reng_cac.co_art ='321' and cotiz_c.co_cli='T02'
             ORDER BY fe_us_in DESC";
 
             $consulta = sqlsrv_query($conn, $sql);
