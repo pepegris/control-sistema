@@ -169,7 +169,7 @@ if ($_POST) {
 
               $res7 = getCotizacion($sedes[$f], $co_art);
               $total_pedido = round($res7[0]['total_art']);
-              $status = $res7['status'];
+              $status = $res7[1]['status'];
               $documento = 'Cot'
 
           ?>
