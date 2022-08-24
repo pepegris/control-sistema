@@ -153,7 +153,7 @@ form , td {
               <td><?= $stock_act_tienda  ?></td>
               <td><?= $total_enviado  ?></td>
               <td><?= $vendido_tienda ?></td>
-              <td><?= $prec_vta5_tienda ?></td>
+              <td>$<?= $prec_vta5_tienda ?></td>
 
           <?php $f++;
             }
@@ -167,7 +167,7 @@ form , td {
       <?php  } ?>
       <tr>
         <th></th>
-        <td colspan="7"></td>
+        <td colspan="8"></td>
         <td>
           <h4>Total</h4>
         </td>
