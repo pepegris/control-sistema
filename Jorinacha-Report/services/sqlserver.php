@@ -480,13 +480,13 @@ function getCotizacion ($sede, $co_art)
             ORDER BY fe_us_in DESC";
 
             $consulta = sqlsrv_query($conn, $sql);
-            $total_art= array();
+
             if ($consulta != null) {
 
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $total_art = number_format($row['total_art'], 0, ',', '.');
-                    $total_art = $row['status'];
+                    $total_art['total_art'] = number_format($row['total_art'], 0, ',', '.');
+                    $total_art['status'] = $row['status'];;
                     break;
                 }
                 $res = $total_art;
@@ -532,7 +532,7 @@ function getPedidos ($sede, $co_art)
 
                     $total_art['total_art'] = number_format($row['total_art'], 0, ',', '.');
                     $total_art['status'] = $row['status'];
-                    $total_art['doc'] = 'Ped';
+
                     break;
                 }
                 $res = $total_art;

@@ -167,9 +167,17 @@ if ($_POST) {
               $res6 = getArt($sedes[$f], $linea, $co_art);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
 
-              $res7 = getCotizacion($sedes[$f], $co_art);
-              $total_pedido = round($res7[0]['total_art']);
-              $status = $res7[1]['status'];
+              $test1 = getCotizacion($sedes[$f], $co_art);
+              if ($test1 == null) {
+                $test2=getPedidos($sedes[$f], $co_art);
+                if ($test2 != null) {
+                  $res7=$test2;
+                }
+              }else {
+                $res7=$test1;
+              }
+              $total_pedido = $res7['total_art'];
+              $status = $res7['status'];
               $documento = 'Cot'
 
           ?>
@@ -179,7 +187,7 @@ if ($_POST) {
               <td>$<?= $prec_vta5_tienda ?></td>
               <td><?php
                   if ($status== null) {
-                    var_dump($status);
+                    var_dump($res7);
                   } else {
                     switch ($status) {
                       case 0:
