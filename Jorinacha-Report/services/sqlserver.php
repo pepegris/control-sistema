@@ -480,7 +480,7 @@ function getCotizacion ($sede, $co_art)
             ORDER BY fe_us_in DESC";
 
             $consulta = sqlsrv_query($conn, $sql);
-
+            $total_art= array();
             if ($consulta != null) {
 
                 while ($row = sqlsrv_fetch_array($consulta)) {
