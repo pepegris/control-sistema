@@ -246,6 +246,7 @@ if ($_POST) {
 
 
 <?php
+var_dump($res7);
 } else {
   header("location: form.php");
 }
