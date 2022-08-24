@@ -170,13 +170,13 @@ if ($_POST) {
                   } else {
                     switch ($status) {
                       case 0:
-                        echo "Sin Procesar $doc";
+                        echo "Sin Procesar $documento";
                         break;
                       case 1:
-                        echo "Parc/Procesada $doc";
+                        echo "Parc/Procesada $documento";
                         break;
                       case 2:
-                        echo "Procesada $doc";
+                        echo "Procesada $documento";
                         break;
   
                       default:
