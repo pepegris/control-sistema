@@ -176,6 +176,7 @@ if ($_POST) {
               }else {
                 $res7=$test1;
               }
+              
               $total_pedido = $res7['total_art'];
               $status = $res7['status'];
               $documento = $res7['doc'];
