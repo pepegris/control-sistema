@@ -146,7 +146,7 @@ form , td {
               $vendido_tienda = round($res5);
               $total_vendido_tienda [$sedes[$f]] += $vendido_tienda;
 
-              $res6= getArt($sedes[$g],$co_art);
+              $res6= getArt($sedes[$f],$co_art);
               $prec_vta5_tienda = round($res6[$i]['prec_vta5']);
 
           ?>
