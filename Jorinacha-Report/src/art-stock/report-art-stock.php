@@ -187,10 +187,11 @@ if ($_POST) {
   
                       $total_art['total_art'] = number_format($row['total_art'], 0, ',', '.');
                       $total_art['status'] = $row['status'];
-                      $total_art['doc'] = 'Cot';
                       break;
                   }
                   $res7 = $total_art;
+                  $total_pedido = $res7['total_art'];
+                  $status = $res7['status'];
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
