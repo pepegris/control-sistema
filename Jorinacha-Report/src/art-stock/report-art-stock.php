@@ -179,7 +179,7 @@ if ($_POST) {
               <td>$<?= $prec_vta5_tienda ?></td>
               <td><?php
                   if ($res7 == null) {
-                    var_dump($consulta);
+                    var_dump($res7);
                   } else {
                     switch ($status) {
                       case 0:
