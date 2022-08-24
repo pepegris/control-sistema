@@ -10,7 +10,11 @@ include '../../services/sqlserver.php';
   .form-check {
     display: flexbox;
 
+    
+
   }
+  
+
 </style>
 
 <div id="body">
@@ -50,7 +54,7 @@ include '../../services/sqlserver.php';
       <div class="form-group">
         <label for="linea" class="form-label ">Linea</label>
         <select name="linea" id="">
-<!--           <option value="todos">Todas</option> -->
+<!--           <option value="todos">Todas las marcas</option> -->
 
           <?php
 
@@ -67,8 +71,8 @@ include '../../services/sqlserver.php';
 
         </select>
       </div>
-<!-- FORMULAIO DE FECHAS -->
-<!--       <div class="form-group">
+
+      <div class="form-group">
         <label for="fecha1" class="form-label ">Desde</label>
           <input type="date" name="fecha1" id="">
       </div>
@@ -76,7 +80,7 @@ include '../../services/sqlserver.php';
       <div class="form-group">
         <label for="fecha2" class="form-label ">Hasta</label>
           <input type="date" name="fecha2" id="">
-      </div> -->
+      </div>
       <br>
       <center><button type="submit"  class="btn btn-primary">Ingresar</button></center>
       <br>
