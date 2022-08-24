@@ -487,7 +487,6 @@ function getCotizacion ($sede, $co_art)
 
                     $total_art['total_art'] = number_format($row['total_art'], 0, ',', '.');
                     $total_art['status'] = $row['status'];
-                    $total_art['doc'] = 'Cot';
                     break;
                 }
                 $res = $total_art;
