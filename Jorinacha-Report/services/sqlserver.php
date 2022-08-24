@@ -407,7 +407,8 @@ function getCot_Ped($sede, $co_art)
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql_pedido = "SELECT pedidos.fact_num , reng_ped.total_art,pedidos.status 
+            /* consulto pedidos primero a ver si existe un pedido */
+            $sql_pedido = "SELECT top 1 pedidos.fact_num , reng_ped.total_art,pedidos.status 
             FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.total_art
             WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'
             ORDER BY fe_us_in DESC";
@@ -425,8 +426,8 @@ function getCot_Ped($sede, $co_art)
                 }
                 $res = $total_art;
             } else {
-
-                $sql_cotizacion = "SELECT cotiz_c.fact_num,reng_cac.total_art,cotiz_c.status  
+                /* si no existe un pedido consulto si hay una cotizacion */
+                $sql_cotizacion = "SELECT top 1 cotiz_c.fact_num,reng_cac.total_art,cotiz_c.status  
                 FROM reng_cac INNER JOIN cotiz_c ON reng_cac.fact_num=cotiz_c.fact_num
                 WHERE reng_cac.co_art ='$co_art' and cotiz_c.co_cli='$cliente'
                 ORDER BY fe_us_in DESC";
