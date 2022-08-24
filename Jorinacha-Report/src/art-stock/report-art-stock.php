@@ -176,7 +176,7 @@ if ($_POST) {
               }else {
                 $res7=$test1;
               }
-              
+
               $total_pedido = $res7['total_art'];
               $status = $res7['status'];
               $documento = $res7['doc'];
@@ -192,13 +192,13 @@ if ($_POST) {
                   } else {
                     switch ($status) {
                       case 0:
-                        echo "Sin Procesar $documento";
+                        echo "<p style='color:red'>Sin Procesar $documento</p>";
                         break;
                       case 1:
-                        echo "Parc/Procesada $documento";
+                        echo "<p style='color:yellow'>Parc/Procesada $documento</p>";
                         break;
                       case 2:
-                        echo "Procesada $documento";
+                        echo "<p style='color:green'>Procesada $documento</p>";
                         break;
 
                       default:
@@ -229,7 +229,7 @@ if ($_POST) {
 
       <?php  } ?>
       <tr>
-        <th></th>
+        <th ></th>
         <td colspan="9"></td>
         <td>
           <h4>Total</h4>
