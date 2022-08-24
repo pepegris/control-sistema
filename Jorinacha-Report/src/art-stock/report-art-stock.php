@@ -8,10 +8,8 @@ if ($_POST) {
 
 
   $linea = $_POST['linea'];
-  /*   $fecha1 = $_POST['fecha1'];
-  $fecha2 = $_POST['fecha2']; */
-  $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
-  $fecha2 = date("Ymd", strtotime($_POST['fecha2']));
+  $fecha1 = $_POST['fecha1'];
+  $fecha2 = $_POST['fecha2'];
 
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
@@ -33,21 +31,18 @@ if ($_POST) {
       <tr>
         <th scope="col">#</th>
         <th scope='col'>Codigo</th>
+        <th scope='col'>Linea</th>
         <th scope='col'>Marca</th>
-        <th scope='col'>Modelo</th>
-        <th scope='col'>Escala</th>
+        <th scope='col'>Talla</th>
         <th scope='col'>Color</th>
-        <th scope='col'>Costo Bs</th>
-        <th scope='col'>Fecha ult Costo</th>
-        <th scope='col'>Precio Bs</th>
-        <th scope='col'>Ref</th>
-        <th scope='col'>Total Vendido</th>
+        <th scope='col'>Factura de Compra</th>
+        <th scope='col'>Fecha Factura</th>
+        <th scope='col'>Cantidad</th>
+        <th scope='col'>Costo</th>
+
         <?php
 
         for ($i = 0; $i < count($sedes); $i++) {
-
-
-
 
           if ($sedes[$i] != null) {
 
@@ -55,17 +50,6 @@ if ($_POST) {
 
         ?>
             <th scope='col'><?= $sede ?></th>
-            <?php
-            if ($sedes[$i] != 'Previa Shop') {
-              echo "<th scope='col'>Cant Env $i</th>";
-              echo "<th scope='col'>Total Vendido $i</th>";
-              echo "<th scope='col'>Ref $i</th>";
-              echo "<th scope='col'>Status $i</th>";
-              echo "<th scope='col'>Pedido $i</th>";
-              echo "<th scope='col'>Fallas $i</th>";
-            }
-
-            ?>
         <?php }
         } ?>
 
@@ -74,24 +58,23 @@ if ($_POST) {
     <tbody>
       <?php
 
-      $res0 = getArt('Previa Shop', $linea, 0);
-
+      $res1 = getArt('Previa Shop', $linea,0);
       $n = 1;
-      for ($e = 0; $e < count($res0); $e++) {
+      for ($e = 0; $e < count($res1); $e++) {
 
-        $co_art = $res0[$e]['co_art'];
-        $co_lin = getLin_art($res0[$e]['co_lin']);
-        $co_subl = getSub_lin($res0[$e]['co_subl']);
-        $co_cat = getCat_art($res0[$e]['co_cat']);
-        $co_color = getColores($res0[$e]['co_color']);
+        $co_art = $res1[$e]['co_art'];
+        $co_lin = getLin_art($res1[$e]['co_lin']);
+        $co_subl = getSub_lin($res1[$e]['co_subl']);
+        $co_cat = getCat_art($res1[$e]['co_cat']);
+        $co_color = getColores($res1[$e]['co_color']);
 
-        $stock_act = round($res0[$e]['stock_act']);
+        $stock_act = round($res1[$e]['stock_act']);
         $total_stock_act_previa += $stock_act;
 
-        $precio = round($res0[$e]['prec_vta1']);
+        $precio = round($res1[$e]['prec_vta1']);
         $prec_vta1 = number_format($precio, 2, ',', '.');
 
-        $prec_vta5 = round($res0[$e]['prec_vta5']);
+        $prec_vta5 = round($res1[$e]['prec_vta5']);
 
       ?>
 
@@ -103,46 +86,26 @@ if ($_POST) {
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
           <?php
-          $g = 1;
-          $total_vendido = 0;
-          for ($i = 0; $i < count($sedes); $i++) {
-
-            if ($sedes[$g] != null) {
-
-              $res1 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
-              $total_vendido += round($res1);
-            }
-            $g++;
-          }
 
           $res2 = getCompras($co_art);
-          $prec_vta = $res2['prec_vta'];
-          $fec_lote = $res2['fec_lote'];
 
+          $fact_num =  $res2['fact_num'];
+          //$res3 =  $res['fec_lote'];
+          $fec_lote = $res2['fec_lote'];
+          $total_art = $res2['total_art'];
+          $prec_vta = $res2['prec_vta'];
 
           ?>
-
-          <td>Bs<?php
-                if ($prec_vta == null) {
-                  echo 0;
-                } else {
-                  echo $prec_vta ;
-                }
-                ?></td>
+          <td><?= $fact_num  ?></td>
           <td><?php
               if ($fec_lote == null) {
                 echo "N/A";
               } else {
                 echo $fec_lote->format('Y-m-d');
-              }
-              ?></td>
-          <td>Bs<?= $prec_vta1 ?></td>
-          <td>$<?= $prec_vta5 ?></td>
-          <td><?= $total_vendido ?></td>
+              } ?></td>
+          <td><?= $total_art ?></td>
+          <td><?= $prec_vta ?></td>
           <td><?= $stock_act ?></td>
-
-
-          <!-- TIENDAS -->
           <?php
           $f = 1;
           for ($i = 0; $i < count($sedes); $i++) {
@@ -156,69 +119,9 @@ if ($_POST) {
               $stock_act_tienda = round($res3[0]['stock_act']);
               $total_stock_act_tienda[$sedes[$f]] += $stock_act_tienda;
 
-              $res4 = getFactura($sedes[$f], $co_art, $fecha1, $fecha2);
-              $total_enviado = round($res4['total_art']);
-              $total_enviado_tienda[$sedes[$f]] += $total_enviado;
-
-              $res5 = getReng_fac($sedes[$f],  $co_art, $fecha1, $fecha2);
-              $vendido_tienda = round($res5);
-              $total_vendido_tienda[$sedes[$f]] += $vendido_tienda;
-
-              $res6 = getArt($sedes[$f], $linea, $co_art);
-              $prec_vta5_tienda = round($res6[0]['prec_vta5']);
-
-              /* REVISANDO SI TIENE COTIZACION O PEDIDO */
-              $test1 = getPedidos($sedes[$f], $co_art);
-              if ($test1 == null) {
-                $test2=getCotizacion($sedes[$f], $co_art);
-                if ($test2 != null) {
-                  $res7=$test2;
-                }
-              }else {
-                $res7=$test1;
-              }
-
-              $total_pedido = $res7['total_art'];
-              $status = $res7['status'];
-              $documento = $res7['doc'];
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
-              <td><?= $total_enviado  ?></td>
-              <td><?= $vendido_tienda ?></td>
-              <td>$<?= $prec_vta5_tienda ?></td>
-              <td><?php
-                  if ($status== null) {
-                    echo "Sin Pedido";
-                  } else {
-                    switch ($status) {
-                      case 0:
-                        echo "<p style='color:red'>Sin Procesar</p> $documento";
-                        break;
-                      case 1:
-                        echo "<p style='color:yellow'>Parc/Procesada</p> $documento";
-                        break;
-                      case 2:
-                        echo "<p style='color:green'>Procesada</p> $documento";
-                        break;
-
-                      default:
-                        echo "<p>Sin Pedido</p>";
-                        break;
-                    }
-                  }
-
-                  ?></td>
-              <td><?php
-                  if ($total_pedido == null) {
-                    echo 0;
-                  } else {
-                    echo "$total_pedido";
-                  }
-                  ?></td>
-              <td></td>
-
-
           <?php $f++;
             }
           }
@@ -230,8 +133,8 @@ if ($_POST) {
 
       <?php  } ?>
       <tr>
-        <th ></th>
-        <td colspan="9"></td>
+        <th></th>
+        <td colspan="6"></td>
         <td>
           <h4>Total</h4>
         </td>
@@ -240,16 +143,9 @@ if ($_POST) {
 
         $h = 1;
         for ($i = 0; $i < count($total_stock_act_tienda); $i++) {
-          $vendido = $total_vendido_tienda[$sedes[$h]];
 
         ?>
           <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
-          <td><?= $total_enviado_tienda[$sedes[$h]] ?></td>
-          <td><?= $vendido  ?></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
 
         <?php
 
@@ -261,21 +157,53 @@ if ($_POST) {
 
     </tbody>
   </table>
-  <script src="../../assets/js/excel.js"></script>
+  <script type="text/javascript">
+    function exportTableToExcel(tableID, filename = '') {
+      var downloadLink;
+      var dataType = 'application/vnd.ms-excel';
+      var tableSelect = document.getElementById(tableID);
+      var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+      // Specify file name
+      filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+      // Create download link element
+      downloadLink = document.createElement("a");
+
+      document.body.appendChild(downloadLink);
+
+      if (navigator.msSaveOrOpenBlob) {
+        var blob = new Blob(['ufeff', tableHTML], {
+          type: dataType
+        });
+        navigator.msSaveOrOpenBlob(blob, filename);
+      } else {
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+        // Setting the file name
+        downloadLink.download = filename;
+
+        //triggering the function
+        downloadLink.click();
+      }
+    }
+  </script>
+<!-- 
+  <script src="../../assets/js/excel.js"></script> -->
   <center>
-    <button id="submitExport" class="btn btn-success">Exportar Reporte a EXCEL</button>
+    <button onclick="exportTableToExcel('tblData')" class="btn btn-success">Exportar Reporte a EXCEL</button>
   </center>
 
 
 
 
 <?php
-  Cerrar();
 } else {
   header("location: form.php");
 }
 
-
+var_dump($total_vendido);
 
 
 include '../../includes/footer.php'; ?>
