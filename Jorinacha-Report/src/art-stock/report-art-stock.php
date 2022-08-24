@@ -166,7 +166,7 @@ if ($_POST) {
               <td>$<?= $prec_vta5_tienda ?></td>
               <td><?php
                   if ($res7 == 0) {
-                    echo "Sin Pedido";
+                    var_dump($res7);
                   } else {
                     switch ($status) {
                       case 0:
@@ -180,7 +180,7 @@ if ($_POST) {
                         break;
   
                       default:
-                        echo "Sin Pedido";
+                      var_dump($res7);
                         break;
                     }
                   }
