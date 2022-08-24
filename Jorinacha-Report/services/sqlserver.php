@@ -433,14 +433,19 @@ function getCot_Ped($sede, $co_art)
 
                 $consulta_cotizacion = sqlsrv_query($conn, $sql_cotizacion);
 
-                while ($row = sqlsrv_fetch_array($consulta_cotizacion)) {
+                if ($consulta_cotizacion) {
+                    while ($row = sqlsrv_fetch_array($consulta_cotizacion)) {
 
-                    $total_art['total_art'] = number_format($row['total_art'], 2, ',', '.');
-                    $total_art['status'] = $row['status'];
-                    $total_art['doc'] = 'Cot';
-                    break;
+                        $total_art['total_art'] = number_format($row['total_art'], 2, ',', '.');
+                        $total_art['status'] = $row['status'];
+                        $total_art['doc'] = 'Cot';
+                        break;
+                    }
+                    $res = $total_art;
+                }else{
+                    return 0;
                 }
-                $res = $total_art;
+
             }
 
             return $res;

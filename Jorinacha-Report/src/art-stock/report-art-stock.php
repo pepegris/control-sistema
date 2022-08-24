@@ -8,10 +8,10 @@ if ($_POST) {
 
 
   $linea = $_POST['linea'];
-/*   $fecha1 = $_POST['fecha1'];
+  /*   $fecha1 = $_POST['fecha1'];
   $fecha2 = $_POST['fecha2']; */
   $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
-  $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
+  $fecha2 = date("Ymd", strtotime($_POST['fecha2']));
 
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
@@ -22,12 +22,10 @@ if ($_POST) {
 
 
   <style>
-
-form , td {
-  font-size: 12px;
-}
-
-
+    form,
+    td {
+      font-size: 12px;
+    }
   </style>
 
   <table class="table table-dark table-striped" id="tblData">
@@ -48,8 +46,8 @@ form , td {
 
         for ($i = 0; $i < count($sedes); $i++) {
 
-          
-          
+
+
 
           if ($sedes[$i] != null) {
 
@@ -57,17 +55,17 @@ form , td {
 
         ?>
             <th scope='col'><?= $sede ?></th>
-        <?php  
-          if ($sedes[$i] != 'Previa Shop') {
-            echo "<th scope='col'>Cant Env $i</th>";
-            echo "<th scope='col'>Total Vendido $i</th>";
-            echo "<th scope='col'>Ref $i</th>";
-            echo "<th scope='col'>Status $i</th>";
-            echo "<th scope='col'>Pedido $i</th>";
-            echo "<th scope='col'>Fallas $i</th>";
-          }
-            
-        ?>
+            <?php
+            if ($sedes[$i] != 'Previa Shop') {
+              echo "<th scope='col'>Cant Env $i</th>";
+              echo "<th scope='col'>Total Vendido $i</th>";
+              echo "<th scope='col'>Ref $i</th>";
+              echo "<th scope='col'>Status $i</th>";
+              echo "<th scope='col'>Pedido $i</th>";
+              echo "<th scope='col'>Fallas $i</th>";
+            }
+
+            ?>
         <?php }
         } ?>
 
@@ -76,8 +74,8 @@ form , td {
     <tbody>
       <?php
 
-      $res0 = getArt('Previa Shop', $linea , 0);
-      
+      $res0 = getArt('Previa Shop', $linea, 0);
+
       $n = 1;
       for ($e = 0; $e < count($res0); $e++) {
 
@@ -106,7 +104,7 @@ form , td {
           <td><?= $co_color ?></td>
           <?php
           $g = 1;
-          $total_vendido = 0; 
+          $total_vendido = 0;
           for ($i = 0; $i < count($sedes); $i++) {
 
             if ($sedes[$g] != null) {
@@ -114,12 +112,9 @@ form , td {
               $res1 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
               $total_vendido += round($res1);
 
-              $res2= getCompras($co_art);
+              $res2 = getCompras($co_art);
               $prec_vta = $res2['prec_vta'];
               $fec_lote = $res2['fec_lote'];
-              
-
-
             }
             $g++;
           }
@@ -147,19 +142,19 @@ form , td {
               $res3 = getArt_stock_tiendas($sedes[$f], $co_art);
               $stock_act_tienda = round($res3[0]['stock_act']);
               $total_stock_act_tienda[$sedes[$f]] += $stock_act_tienda;
-           
-              $res4 = getFactura($sedes[$f], $co_art,$fecha1, $fecha2);
+
+              $res4 = getFactura($sedes[$f], $co_art, $fecha1, $fecha2);
               $total_enviado = round($res4['total_art']);
               $total_enviado_tienda[$sedes[$f]] += $total_enviado;
 
               $res5 = getReng_fac($sedes[$f],  $co_art, $fecha1, $fecha2);
               $vendido_tienda = round($res5);
-              $total_vendido_tienda [$sedes[$f]] += $vendido_tienda;
+              $total_vendido_tienda[$sedes[$f]] += $vendido_tienda;
 
-              $res6= getArt($sedes[$f],$linea,$co_art);
+              $res6 = getArt($sedes[$f], $linea, $co_art);
               $prec_vta5_tienda = round($res6[$i]['prec_vta5']);
 
-              $res7=getCot_Ped($sedes[$f], $co_art);
+              $res7 = getCot_Ped($sedes[$f], $co_art);
               $total_pedido = $res7['total_art'];
               $status = $res7['status'];
               $documento = $res7['doc'];
@@ -169,25 +164,36 @@ form , td {
               <td><?= $total_enviado  ?></td>
               <td><?= $vendido_tienda ?></td>
               <td>$<?= $prec_vta5_tienda ?></td>
-              <td><?php 
-              switch ($status) {
-                case 0:
-                  echo "Sin Procesar $doc";
-                  break;
-                  case 1:
-                    echo "Parc/Procesada $doc";
-                    break;
-                    case 2:
-                      echo "Procesada $doc";
-                      break;
-                
-                default:
+              <td><?php
+                  if ($res7 == 0) {
+                    echo "Sin Pedido";
+                  } else {
+                    switch ($status) {
+                      case 0:
+                        echo "Sin Procesar $doc";
+                        break;
+                      case 1:
+                        echo "Parc/Procesada $doc";
+                        break;
+                      case 2:
+                        echo "Procesada $doc";
+                        break;
+  
+                      default:
                         echo "Sin Pedido";
-                  break;
-              }
-               ?></td>
-               <td>$<?= $total_pedido ?></td>
-               <td></td>
+                        break;
+                    }
+                  }
+
+                  ?></td>
+              <td>$<?php
+                    if ($res7 == 0) {
+                      echo 0;
+                    } else {
+                      echo "$total_pedido";
+                    }
+                    ?></td>
+              <td></td>
 
 
           <?php $f++;
@@ -221,12 +227,12 @@ form , td {
           <td></td>
           <td></td>
 
-          <?php
+        <?php
 
           $h++;
-         }
+        }
 
-          ?>
+        ?>
       </tr>
 
     </tbody>
