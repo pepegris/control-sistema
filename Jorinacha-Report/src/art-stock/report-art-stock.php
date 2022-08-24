@@ -186,7 +186,7 @@ if ($_POST) {
                   }
 
                   ?></td>
-              <td>$<?php
+              <td><?php
                     if ($res7 == 0) {
                       echo 0;
                     } else {
