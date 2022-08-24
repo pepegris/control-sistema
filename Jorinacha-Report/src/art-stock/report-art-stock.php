@@ -165,10 +165,10 @@ if ($_POST) {
               $total_vendido_tienda[$sedes[$f]] += $vendido_tienda;
 
               $res6 = getArt($sedes[$f], $linea, $co_art);
-              $prec_vta5_tienda = round($res6[$i]['prec_vta5']);
+              $prec_vta5_tienda = round($res6[0]['prec_vta5']);
 
-              $res7 = getCotizacion($sedes[$i], $co_art);
-              $total_pedido = $res7['total_art'];
+              $res7 = getCotizacion($sedes[$f], $co_art);
+              $total_pedido = round($res7[0]['total_art']);
               $status = $res7['status'];
               $documento = 'Cot'
 
