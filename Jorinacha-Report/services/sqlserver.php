@@ -189,12 +189,12 @@ function getArt($sede, $linea, $co_art)
                     prec_vta1,prec_vta5,st_almac.stock_act, co_color , co_lin
                     from st_almac inner join art on st_almac.co_art=art.co_art 
                     where   st_almac.co_alma='BOLE' AND art.prec_vta5 >=1
-                    order by art.co_subl ,st_almac.stock_act  desc ";
+                    order by art.co_subl  desc ";
                 } else {
 
                     $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat) as  co_cat  , 
                     co_color , co_cat , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
-                    from art WHERE prec_vta5 >= 1 ORDER BY co_subl , stock_act DESC";
+                    from art WHERE prec_vta5 >= 1 ORDER BY co_subl  DESC";
                 }
             } elseif ($co_art == 0) {
 
@@ -204,12 +204,12 @@ function getArt($sede, $linea, $co_art)
                     prec_vta1,prec_vta5,st_almac.stock_act , co_color, co_lin
                     from st_almac inner join art on st_almac.co_art=art.co_art 
                     where art.co_lin='$linea' and st_almac.co_alma='BOLE' AND art.prec_vta5 >=1
-                    order by art.co_subl ,st_almac.stock_act  desc";
+                    order by art.co_subl   desc";
                 } else {
 
                     $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
                     co_color , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
-                    from art  where co_lin= '$linea' AND prec_vta5 >= 1 ORDER BY co_subl , stock_act DESC";
+                    from art  where co_lin= '$linea' AND prec_vta5 >= 1 ORDER BY co_subl  DESC";
                 }
             } else {
 

@@ -177,7 +177,7 @@ if ($_POST) {
               <td><?= $vendido_tienda ?></td>
               <td>$<?= $prec_vta5_tienda ?></td>
               <td><?php
-                  if ($res7 == 0) {
+                  if ($res7 == null) {
                     var_dump($res7);
                   } else {
                     switch ($status) {
@@ -199,7 +199,7 @@ if ($_POST) {
 
                   ?></td>
               <td><?php
-                  if ($res7 == 0) {
+                  if ($res7 == null) {
                     echo 0;
                   } else {
                     echo "$total_pedido";
