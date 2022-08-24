@@ -41,6 +41,7 @@ form , td {
         <th scope='col'>Color</th>
         <th scope='col'>Total Vendido</th>
         <th scope='col'>Costo Bs</th>
+        <th scope='col'>Fecha ult Costo</th>
         <th scope='col'>Precio Bs</th>
         <th scope='col'>Ref</th>
         <?php
@@ -61,6 +62,9 @@ form , td {
             echo "<th scope='col'>Cant Env $i</th>";
             echo "<th scope='col'>Total Vendido $i</th>";
             echo "<th scope='col'>Ref $i</th>";
+            echo "<th scope='col'>Status $i</th>";
+            echo "<th scope='col'>Pedido $i</th>";
+            echo "<th scope='col'>Fallas $i</th>";
           }
             
         ?>
@@ -112,6 +116,8 @@ form , td {
 
               $res2= getCompras($co_art);
               $prec_vta = $res2['prec_vta'];
+              $fec_lote = $res2['fec_lote'];
+              
 
 
             }
@@ -122,9 +128,13 @@ form , td {
           ?>
           <td><?= $total_vendido ?></td>
           <td>Bs<?= $prec_vta ?></td>
+          <td><?= $fec_lote->format('Y-m-d'); ?></td>
           <td>Bs<?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
+
+
+          <!-- TIENDAS -->
           <?php
           $f = 1;
           for ($i = 0; $i < count($sedes); $i++) {
@@ -149,11 +159,36 @@ form , td {
               $res6= getArt($sedes[$f],$linea,$co_art);
               $prec_vta5_tienda = round($res6[$i]['prec_vta5']);
 
+              $res7=getCot_Ped($sedes[$f], $co_art);
+              $total_pedido = $res7['total_art'];
+              $status = $res7['status'];
+              $documento = $res7['doc'];
+
           ?>
               <td><?= $stock_act_tienda  ?></td>
               <td><?= $total_enviado  ?></td>
               <td><?= $vendido_tienda ?></td>
               <td>$<?= $prec_vta5_tienda ?></td>
+              <td><?php 
+              switch ($status) {
+                case 0:
+                  echo "Sin Procesar $doc";
+                  break;
+                  case 1:
+                    echo "Parc/Procesada $doc";
+                    break;
+                    case 2:
+                      echo "Procesada $doc";
+                      break;
+                
+                default:
+                        echo "Sin Pedido";
+                  break;
+              }
+               ?></td>
+               <td>$<?= $total_pedido ?></td>
+               <td></td>
+
 
           <?php $f++;
             }
@@ -182,6 +217,8 @@ form , td {
           <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
           <td><?= $total_enviado_tienda[$sedes[$h]] ?></td>
           <td><?= $vendido  ?></td>
+          <td></td>
+          <td></td>
           <td></td>
 
           <?php

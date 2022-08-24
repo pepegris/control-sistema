@@ -170,7 +170,7 @@ function getColores($co_col)
 }
 
 /* CONSULTAR ARTICULOS */
-function getArt($sede, $linea ,$co_art)
+function getArt($sede, $linea, $co_art)
 {
 
     $database = Database($sede);
@@ -196,7 +196,7 @@ function getArt($sede, $linea ,$co_art)
                     co_color , co_cat , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
                     from art WHERE prec_vta5 >= 1 ORDER BY co_subl , stock_act DESC";
                 }
-            } elseif($co_art == 0 ){
+            } elseif ($co_art == 0) {
 
                 if ($database == 'PREVIA_A') {
 
@@ -211,14 +211,11 @@ function getArt($sede, $linea ,$co_art)
                     co_color , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
                     from art  where co_lin= '$linea' AND prec_vta5 >= 1 ORDER BY co_subl , stock_act DESC";
                 }
-
-            }else {
+            } else {
 
                 $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
                 co_color , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 
                 from art  where co_lin= '$linea' AND prec_vta5 >= 1 AND co_art='$co_art'";
-
-
             }
 
 
@@ -347,11 +344,11 @@ function getCompras($co_art)
 
 /* FACTURA DE EL ULTIMO ARTICULOS VENDIDO EN PREVIA */
 
-function getFactura($sede, $co_art ,$fecha1, $fecha2)
+function getFactura($sede, $co_art, $fecha1, $fecha2)
 {
-    $database = Cliente($sede);
+    $cliente = Cliente($sede);
 
-    if ($database != null) {
+    if ($cliente != null) {
         try {
 
             $serverName = "172.16.1.19";
@@ -361,7 +358,7 @@ function getFactura($sede, $co_art ,$fecha1, $fecha2)
             $sql = "SELECT top 1  factura.fact_num,total_art 
             FROM reng_fac
             INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
-            WHERE reng_fac.co_art='$co_art' and factura.co_cli='$database' and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'
+            WHERE reng_fac.co_art='$co_art' and factura.co_cli='$cliente' and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'
             ORDER BY fe_us_in DESC";
 
             $consulta = sqlsrv_query($conn, $sql);
@@ -374,10 +371,78 @@ function getFactura($sede, $co_art ,$fecha1, $fecha2)
                     break;
                 }
                 $res = $total_art;
-
             } else {
                 $res = 0;
             }
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
+
+/* OBTENER LAS COTIZACIONES Y PEDIDOS DE LOS ARTICULOS POR DESPACHAR */
+
+function getCot_Ped($sede, $co_art)
+{
+
+    /*
+    ESTATUS DE LOS PEDIDOS Y COTIZACION
+0 sin procesar
+1 Parc/Procesada
+2 Procesada
+*/
+
+    #$database = Database($sede);
+    $cliente = Cliente($sede);
+
+    if ($cliente != null) {
+        try {
+
+            $serverName = "172.16.1.19";
+            $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql_pedido = "SELECT pedidos.fact_num , reng_ped.total_art,pedidos.status 
+            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.total_art
+            WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'
+            ORDER BY fe_us_in DESC";
+
+            $consulta_pedido = sqlsrv_query($conn, $sql_pedido);
+
+            if ($consulta_pedido != null) {
+
+                while ($row = sqlsrv_fetch_array($consulta_pedido)) {
+
+                    $total_art['total_art'] = number_format($row['total_art'], 2, ',', '.');
+                    $total_art['status'] = $row['status'];
+                    $total_art['doc'] = 'Ped';
+                    break;
+                }
+                $res = $total_art;
+            } else {
+
+                $sql_cotizacion = "SELECT cotiz_c.fact_num,reng_cac.total_art,cotiz_c.status  
+                FROM reng_cac INNER JOIN cotiz_c ON reng_cac.fact_num=cotiz_c.fact_num
+                WHERE reng_cac.co_art ='$co_art' and cotiz_c.co_cli='$cliente'
+                ORDER BY fe_us_in DESC";
+
+                $consulta_cotizacion = sqlsrv_query($conn, $sql_cotizacion);
+
+                while ($row = sqlsrv_fetch_array($consulta_cotizacion)) {
+
+                    $total_art['total_art'] = number_format($row['total_art'], 2, ',', '.');
+                    $total_art['status'] = $row['status'];
+                    $total_art['doc'] = 'Cot';
+                    break;
+                }
+                $res = $total_art;
+            }
+
             return $res;
         } catch (\Throwable $th) {
 
