@@ -25,7 +25,7 @@ if ($_POST) {
       font-size: 12px;
     }
   </style>
-
+  <center><head>Compras</head></center>
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>

@@ -25,7 +25,7 @@ if ($_POST) {
       font-size: 12px;
     }
   </style>
-
+  <center><h1>Fallas</h1></center>
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>
