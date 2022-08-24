@@ -168,9 +168,9 @@ if ($_POST) {
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
 
               /* REVISANDO SI TIENE COTIZACION O PEDIDO */
-              $test1 = getCotizacion($sedes[$f], $co_art);
+              $test1 = getPedidos($sedes[$f], $co_art);
               if ($test1 == null) {
-                $test2=getPedidos($sedes[$f], $co_art);
+                $test2=getCotizacion($sedes[$f], $co_art);
                 if ($test2 != null) {
                   $res7=$test2;
                 }
