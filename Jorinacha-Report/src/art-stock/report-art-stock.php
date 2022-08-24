@@ -72,7 +72,7 @@ form , td {
     <tbody>
       <?php
 
-      $res0 = getArt('Previa Shop', $linea);
+      $res0 = getArt('Previa Shop', $linea , 0);
       
       $n = 1;
       for ($e = 0; $e < count($res0); $e++) {
