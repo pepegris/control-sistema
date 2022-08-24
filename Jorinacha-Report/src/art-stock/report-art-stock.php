@@ -37,11 +37,11 @@ if ($_POST) {
         <th scope='col'>Modelo</th>
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
-        <th scope='col'>Total Vendido</th>
         <th scope='col'>Costo Bs</th>
         <th scope='col'>Fecha ult Costo</th>
         <th scope='col'>Precio Bs</th>
         <th scope='col'>Ref</th>
+        <th scope='col'>Total Vendido</th>
         <?php
 
         for ($i = 0; $i < count($sedes); $i++) {
@@ -111,17 +111,17 @@ if ($_POST) {
 
               $res1 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
               $total_vendido += round($res1);
-
-              $res2 = getCompras($co_art);
-              $prec_vta = $res2['prec_vta'];
-              $fec_lote = $res2['fec_lote'];
             }
             $g++;
           }
 
+          $res2 = getCompras($co_art);
+          $prec_vta = $res2['prec_vta'];
+          $fec_lote = $res2['fec_lote'];
+
 
           ?>
-          <td><?= $total_vendido ?></td>
+
           <td>Bs<?php
                 if ($prec_vta == null) {
                   echo 0;
@@ -138,6 +138,7 @@ if ($_POST) {
               ?></td>
           <td>Bs<?= $prec_vta1 ?></td>
           <td>$<?= $prec_vta5 ?></td>
+          <td><?= $total_vendido ?></td>
           <td><?= $stock_act ?></td>
 
 
@@ -166,7 +167,7 @@ if ($_POST) {
               $res6 = getArt($sedes[$f], $linea, $co_art);
               $prec_vta5_tienda = round($res6[$i]['prec_vta5']);
 
-              $res7 = getCot_Ped($sedes[$f], $co_art);
+              $res7 = getCotizacion($sedes[$f], $co_art);
               $total_pedido = $res7['total_art'];
               $status = $res7['status'];
               $documento = $res7['doc'];
@@ -220,7 +221,7 @@ if ($_POST) {
       <?php  } ?>
       <tr>
         <th></th>
-        <td colspan="8"></td>
+        <td colspan="9"></td>
         <td>
           <h4>Total</h4>
         </td>
