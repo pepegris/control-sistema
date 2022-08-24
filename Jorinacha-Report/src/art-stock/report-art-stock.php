@@ -178,7 +178,7 @@ if ($_POST) {
               }
               $total_pedido = $res7['total_art'];
               $status = $res7['status'];
-              $documento = 'Cot'
+              $documento = $res7['doc'];
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
