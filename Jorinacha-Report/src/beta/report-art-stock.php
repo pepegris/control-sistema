@@ -172,13 +172,15 @@ if ($_POST) {
 
               /* REVISANDO SI TIENE COTIZACION O PEDIDO */
               $test1 = getPedidos($sedes[$f], $co_art);
-              if ($test1 == null) {
+              if ($test1 != null) {
+                $res7=$test1;
+
+              }else {
                 $test2=getCotizacion($sedes[$f], $co_art);
                 if ($test2 != null) {
                   $res7=$test2;
                 }
-              }else {
-                $res7=$test1;
+
               }
 
               $total_pedido = $res7['total_art'];
