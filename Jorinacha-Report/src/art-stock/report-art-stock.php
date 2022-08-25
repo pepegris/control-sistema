@@ -121,9 +121,9 @@ form , td {
 
           ?>
           <td><?= $total_vendido ?></td>
-          <td>Bs<?= $prec_vta ?></td>
-          <td>Bs<?= $prec_vta1 ?></td>
-          <td>$<?= $prec_vta5 ?></td>
+          <td><?= $prec_vta ?></td>
+          <td><?= $prec_vta1 ?></td>
+          <td><?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
           <?php
           $f = 1;

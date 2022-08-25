@@ -139,8 +139,8 @@ if ($_POST) {
                 echo $fec_lote->format('Y-m-d');
               }
               ?></td>
-          <td>Bs<?= $prec_vta1 ?></td>
-          <td>$<?= $prec_vta5 ?></td>
+          <td><?= $prec_vta1 ?></td>
+          <td><?= $prec_vta5 ?></td>
           <td><?= $total_vendido ?></td>
           <td><?= $stock_act ?></td>
 
