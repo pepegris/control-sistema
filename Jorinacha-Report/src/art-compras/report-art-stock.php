@@ -39,6 +39,7 @@ if ($_POST) {
         <th scope='col'>Fecha Factura</th>
         <th scope='col'>Cantidad</th>
         <th scope='col'>Costo</th>
+        <th scope='col'>Ref</th>
 
         <?php
 
@@ -105,6 +106,7 @@ if ($_POST) {
               } ?></td>
           <td><?= $total_art ?></td>
           <td><?= $prec_vta ?></td>
+          <td><?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
           <?php
           $f = 1;
