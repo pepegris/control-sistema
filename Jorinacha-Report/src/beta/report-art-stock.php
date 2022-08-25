@@ -210,7 +210,7 @@ if ($_POST) {
                         break;
 
                       default:
-                        echo "<p style='color:red'>Sin Pedido</p>";
+                        echo "<p style='color:red'>Sin ningun Pedido</p>";
                         break;
                     }
                   }
