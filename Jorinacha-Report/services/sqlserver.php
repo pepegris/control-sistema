@@ -453,8 +453,8 @@ function getPedidos ($sede, $co_art)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT top 1 pedidos.fact_num , reng_ped.total_art,pedidos.status 
-            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.total_art
-            WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'
+            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
+            WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente' 
             ORDER BY fe_us_in DESC";
 
             $consulta = sqlsrv_query($conn, $sql);
