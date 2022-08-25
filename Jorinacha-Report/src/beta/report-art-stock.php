@@ -29,6 +29,7 @@ if ($_POST) {
     td {
       font-size: 12px;
 
+
     }
   </style>
 <center><h1>Fallas Beta</h1></center>
@@ -199,7 +200,7 @@ if ($_POST) {
                   } else {
                     switch ($status) {
                       case 0:
-                        echo "<p style='color:oranged'>Sin Procesar</p> $documento";
+                        echo "<p style='color:orangered'>Sin Procesar</p> $documento";
                         break;
                       case 1:
                         echo "<p style='color:yellow'>Parc/Procesada</p> $documento";
