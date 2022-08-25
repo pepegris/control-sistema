@@ -31,9 +31,9 @@ if ($_POST) {
       <tr>
         <th scope="col">#</th>
         <th scope='col'>Codigo</th>
-        <th scope='col'>Linea</th>
         <th scope='col'>Marca</th>
-        <th scope='col'>Talla</th>
+        <th scope='col'>Modelo</th>
+        <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
         <th scope='col'>Factura de Compra</th>
         <th scope='col'>Fecha Factura</th>
