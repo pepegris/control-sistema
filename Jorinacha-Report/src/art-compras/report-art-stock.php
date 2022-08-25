@@ -105,9 +105,9 @@ if ($_POST) {
                 echo $fec_lote->format('Y-m-d');
               } ?></td>
           <td><?= $total_art ?></td>
-          <td><?= $prec_vta ?></td>
-          <td>Bs<?= $prec_vta5 ?></td>
-          <td>$<?= $stock_act ?></td>
+          <td>Bs<?= $prec_vta ?></td>
+          <td>$<?= $prec_vta5 ?></td>
+          <td><?= $stock_act ?></td>
           <?php
           $f = 1;
           for ($i = 0; $i < count($sedes); $i++) {
