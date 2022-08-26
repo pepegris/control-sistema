@@ -13,14 +13,12 @@ $Day = date("d", strtotime($fecha2));
 $Month = date("m", strtotime($fecha2));
 $Year = date("Y", strtotime($fecha2));
 
-
-$fecha = $Day .$Month.$Year; 
-echo $fecha ;
 for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
 }
 
 ?>
+<center><h1>Ordenes</h1></center>
 <table class="table table-dark table-striped" id="tblData">
     <thead>
         <tr>
@@ -83,7 +81,7 @@ for ($i = 0; $i < 20; $i += 1) {
 
                             for ($i = 0; $i <= $Day; $i++) {
 
-                                $fecha = $e + $Month + $Year;
+                                $fecha = $e . $Month . $Year;
                                 $res0 = getOrdenes_Pag($sedes[$f], $fecha);
                                 $monto = $res0['monto'];
                                 # SUMANDO TIENDA
