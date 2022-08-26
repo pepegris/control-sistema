@@ -501,12 +501,27 @@ function getOrdenes_Pag($sede, $fecha)
 
             $consulta = sqlsrv_query($conn, $sql);
 
-            while ($row = sqlsrv_fetch_array($consulta)) {
+            if ($consulta != null) {
 
-                $ordenes['monto'] = number_format($row['monto'], 2, ',', '.');
-                break;
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $ordenes['monto'] = number_format($row['monto'], 2, ',', '.');
+                    break;
+                }
+                $res = $ordenes;
+            } else {
+
+                $sql = "SELECT monto from ord_pago where cod_ben ='47' and fecha ='$fecha'";
+
+                $consulta = sqlsrv_query($conn, $sql);
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $ordenes['monto'] = number_format($row['monto'], 2, ',', '.');
+                    break;
+                }
+                $res = $ordenes;
             }
-            $res = $ordenes;
+
             return $res;
         } catch (\Throwable $th) {
 
