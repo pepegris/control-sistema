@@ -78,7 +78,7 @@ for ($i = 0; $i < 20; $i += 1) {
 
         $e = 1;
         for ($i = 0; $i < count($sedes); $i++) {
-
+            if ($sedes[$i] != null) {
             $sede = $sedes[$e];
 
         ?>
@@ -120,9 +120,10 @@ for ($i = 0; $i < 20; $i += 1) {
                 ?>
             </tr>
         <?php
+            }
             $e++;
         }
-        echo $e++;
+
         ?>
 
     </tbody>
