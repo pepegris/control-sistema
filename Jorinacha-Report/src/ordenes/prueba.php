@@ -27,7 +27,7 @@ for ($i = 0; $i < 20; $i += 1) {
             $e = 1;
             for ($i = 0; $i <= $Day; $i++) {
 
-                if ($i < $Day) {
+                if ($i > $Day) {
 
                     echo "<th>Total</th>";
                     
