@@ -497,31 +497,21 @@ function getOrdenes_Pag($sede, $fecha)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "SELECT monto from ord_pago where cod_ben ='65' and fecha ='$fecha'";
+            if ($database=='MRIA3A21' OR $database == 'MERINA21' ) {
+                $sql = "SELECT monto from ord_pago where cod_ben ='47' and fecha ='$fecha'";
+            } else {
+                $sql = "SELECT monto from ord_pago where cod_ben ='65' and fecha ='$fecha'";
+            }
+            
 
             $consulta = sqlsrv_query($conn, $sql);
 
-            if ($consulta != null) {
+            while ($row = sqlsrv_fetch_array($consulta)) {
 
-                while ($row = sqlsrv_fetch_array($consulta)) {
-
-                    $ordenes['monto'] = number_format($row['monto'], 2, ',', '.');
-                    break;
-                }
-                $res = $ordenes;
-            } else {
-
-                $sql2 = "SELECT monto from ord_pago where cod_ben ='47' and fecha ='$fecha'";
-
-                $consulta2 = sqlsrv_query($conn, $sql2);
-                while ($row = sqlsrv_fetch_array($consulta2)) {
-
-                    $ordenes['monto'] = number_format($row['monto'], 2, ',', '.');
-                    break;
-                }
-                $res = $ordenes;
+                $ordenes['monto'] = number_format($row['monto'], 2, ',', '.');
+                break;
             }
-
+            $res = $ordenes;
             return $res;
         } catch (\Throwable $th) {
 
