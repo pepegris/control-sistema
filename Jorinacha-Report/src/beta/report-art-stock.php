@@ -277,7 +277,7 @@ if ($_POST) {
 
 
 <?php
-  Cerrar();
+  Cerrar(null);
 } else {
   header("location: form.php");
 }

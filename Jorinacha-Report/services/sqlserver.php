@@ -300,13 +300,14 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
             } else {
                 $res = 0;
             }
+            Cerrar($database);
             return $res;
         } catch (\Throwable $th) {
 
             throw $th;
         }
     } else {
-
+        Cerrar($database);
         return 0;
     }
 }
@@ -606,10 +607,18 @@ function getCot_Ped($sede, $co_art)
 
 
 
-function Cerrar()
+function Cerrar($database)
 {
-    $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$");
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    if ($database !=null) {
+        $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
+    
+        sqlsrv_close($conn);
+    }else {
+        $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
+    
+        sqlsrv_close($conn);
+    }
 
-    sqlsrv_close($conn);
 }
