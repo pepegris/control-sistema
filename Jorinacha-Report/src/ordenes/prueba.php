@@ -13,7 +13,10 @@ $Day = date("d", strtotime($fecha2));
 $Month = date("m", strtotime($fecha2));
 $Year = date("Y", strtotime($fecha2));
 
-$fecha = strval($Day)+ strval($Month) + strval($Year);
+$a=strval($Day);
+$b=strval($Month);
+$c=strval($Year);
+$fecha = $a+ $b + $c;
 echo $fecha ;
 for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
