@@ -143,7 +143,7 @@ for ($i = 0; $i < 20; $i += 1) {
                     $total+=$total_dia_monto[$i][$fecha];
                 }
 
-                echo"<td>$total</td>";
+                echo"<td>$total_dia_monto[$fecha]</td>";
                 $y++;
             }
 
