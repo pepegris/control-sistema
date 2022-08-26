@@ -138,9 +138,10 @@ for ($i = 0; $i < 20; $i += 1) {
                     $d = $y;
                 }
                 $fecha =  $Year . $Month . $d;
-
+                $e=1;
                 for ($i=0; $i < count($total_dia_monto[$fecha]) ; $i++) { 
-                    $total+=$total_dia_monto[$i][$fecha];
+                    $total+=$total_monto[$sedes[$e]];
+                    $e++;
                 }
 
                 echo"<td>$total_dia_monto[$fecha]</td>";
