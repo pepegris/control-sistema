@@ -7,7 +7,7 @@ $ordenes = $_POST['ordenes'];
 $fecha1 = $_POST['fecha1'];
 $fecha2 = $_POST['fecha2'];
 
-echo $fecha2->format('d');
+echo $fecha2->format('Y-m-d');
 ?>
 <table class="table table-dark table-striped" id="tblData">
 <thead>
