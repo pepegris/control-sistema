@@ -81,7 +81,7 @@ for ($i = 0; $i < 20; $i += 1) {
 
                                 $fecha = $e . $Month . $Year;
                                 $res0 = getOrdenes_Pag($sedes[$f], $fecha);
-                                $monto = $res0['monto'];
+                                $monto = round($res0['monto']);
                                 # SUMANDO TIENDA
                                 $total_monto[$sedes[$f]] +=$monto;
 
