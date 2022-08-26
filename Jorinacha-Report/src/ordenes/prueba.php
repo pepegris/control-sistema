@@ -139,7 +139,12 @@ for ($i = 0; $i < 20; $i += 1) {
                 }
                 $fecha =  $Year . $Month . $d;
 
-                echo"<td>$total_dia_monto[$fecha]</td>";
+                for ($i=0; $i < count($total_dia_monto[$fecha]) ; $i++) { 
+                    $total+=$total_dia_monto[$i][$fecha];
+                }
+
+                echo"<td>$total</td>";
+                $y++;
             }
 
             ?>
