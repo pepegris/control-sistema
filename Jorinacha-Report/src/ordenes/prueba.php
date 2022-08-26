@@ -10,8 +10,9 @@ echo $fecha2 = $_POST['fecha2'];
 
 $newDate = date("d", strtotime($fecha2));
 echo $newDate;
-echo "<br>";
-echo count($sedes);
+for ($i = 0; $i < 20; $i += 1) {
+    $sedes[] = $_POST[$i];
+  }
 ?>
 <table class="table table-dark table-striped" id="tblData">
     <thead>
