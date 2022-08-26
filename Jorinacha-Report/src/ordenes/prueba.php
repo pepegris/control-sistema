@@ -77,14 +77,10 @@ for ($i = 0; $i < 20; $i += 1) {
                     <td scope='col'><?= $sede ?></td>
 
                     <?php
-                    $f = 1;
-                    for ($i = 0; $i < count($sedes); $i++) {
 
-                        if ($sedes[$f] != null) {
-                            $g = 1;
                             for ($i = 0; $i <= $Day; $i++) {
 
-                                $fecha = $g + $Month + $Year;
+                                $fecha = $e + $Month + $Year;
                                 $res0 = getOrdenes_Pag($sedes[$f], $fecha);
                                 $monto = $res0['monto'];
                                 # SUMANDO TIENDA
@@ -96,16 +92,15 @@ for ($i = 0; $i < 20; $i += 1) {
 
                     <?php
 
-                                $g++;
+
                             }
                         }
-                        $f++;
+
+                        $e++;
                     }
                     ?>
                 </tr>
-        <?php }
-            $e++;
-        } ?>
+ 
 
 
     </tbody>
