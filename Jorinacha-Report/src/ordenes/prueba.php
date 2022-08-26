@@ -12,7 +12,7 @@ $newDate = date("d", strtotime($fecha2));
 echo $newDate;
 for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
-  }
+}
 ?>
 <table class="table table-dark table-striped" id="tblData">
     <thead>
@@ -25,19 +25,26 @@ for ($i = 0; $i < 20; $i += 1) {
         </tr>
         <tr>
             <th>Tienda</th>
-            <?php
-
-            for ($i = 0; $i < count($sedes); $i++) {
-
-                if ($sedes[$i] != null) {
-
-                    $sede = $sedes[$i];
-
-            ?>
-                    <th scope='col'><?= $sede ?></th>
-            <?php }
-            } ?>
         </tr>
     </thead>
 
 </table>
+
+
+
+<tr>
+    <th scope='row'><?= $n ?></th>
+    <?php
+
+    for ($i = 0; $i < count($sedes); $i++) {
+
+        if ($sedes[$i] != null) {
+
+            $sede = $sedes[$i];
+
+    ?>
+            <td scope='col'><?= $sede ?></td>
+    <?php }
+    } ?>
+
+</tr>
