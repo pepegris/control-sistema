@@ -1,6 +1,6 @@
 <?php
-ini_set('memory_limit','4096M');
-ini_set('max_execution_time',3600);
+ini_set('memory_limit', '4096M');
+ini_set('max_execution_time', 3600);
 
 require "../../includes/log.php";
 include '../../includes/header.php';
@@ -78,47 +78,47 @@ for ($i = 0; $i < 20; $i += 1) {
 
         $e = 1;
         for ($i = 0; $i < count($sedes); $i++) {
-            if ($sedes[$i] != null) {
-            $sede = $sedes[$e];
+            if ($sedes[$e] != null) {
+                $sede = $sedes[$e];
 
         ?>
-            <tr>
-                <td><?= $sede ?></td>
+                <tr>
+                    <td><?= $sede ?></td>
 
-                <?php
+                    <?php
 
-                $y = 1;
-                for ($r = 0; $r <= $Day; $r++) {
+                    $y = 1;
+                    for ($r = 0; $r <= $Day; $r++) {
 
-                    if ($y < 10) {
+                        if ($y < 10) {
 
-                        $d = 0 . $y;
-                    } else {
-                        $d = $y;
-                    }
-                    $fecha =  $Year . $Month . $d;
-                    $res0 = getOrdenes_Pag($sedes[$e], $fecha);
-                    $monto = $res0['monto'];
-                    $total_dia_monto[$fecha] = $monto;
-                    # SUMANDO TIENDA
-                    $total_monto[$sedes[$e]] += $monto;
-
-                    if ($r >= $Day) {
-
-                        $total = $total_monto[$sedes[$e]];
-                        echo "<td>$total</td>";
-                    } else {
-                        if ($monto==null) {
-                            echo "<td>0</td>";
-                        }else{
-                            echo "<td>$monto</td>";
+                            $d = 0 . $y;
+                        } else {
+                            $d = $y;
                         }
-                    }
-                    $y++;
-                }
+                        $fecha =  $Year . $Month . $d;
+                        $res0 = getOrdenes_Pag($sedes[$e], $fecha);
+                        $monto = $res0['monto'];
+                        $total_dia_monto[$fecha] = $monto;
+                        # SUMANDO TIENDA
+                        $total_monto[$sedes[$e]] += $monto;
 
-                ?>
-            </tr>
+                        if ($r >= $Day) {
+
+                            $total = $total_monto[$sedes[$e]];
+                            echo "<td>$total</td>";
+                        } else {
+                            if ($monto == null) {
+                                echo "<td>0</td>";
+                            } else {
+                                echo "<td>$monto</td>";
+                            }
+                        }
+                        $y++;
+                    }
+
+                    ?>
+                </tr>
         <?php
             }
             $e++;
