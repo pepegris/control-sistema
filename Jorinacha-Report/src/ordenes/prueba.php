@@ -18,7 +18,9 @@ for ($i = 0; $i < 20; $i += 1) {
 }
 
 ?>
-<center><h1>Ordenes</h1></center>
+<center>
+    <h1>Ordenes</h1>
+</center>
 <table class="table table-dark table-striped" id="tblData">
     <thead>
         <tr>
@@ -30,11 +32,10 @@ for ($i = 0; $i < 20; $i += 1) {
                 if ($i >= $Day) {
 
                     echo "<th>Total</th>";
-                    
-                }else {
+                } else {
                     echo "<th>$e/$Month/$Year</th>";
 
-                $e++;
+                    $e++;
                 }
             }
 
@@ -75,45 +76,44 @@ for ($i = 0; $i < 20; $i += 1) {
         $e = 1;
         for ($i = 0; $i < count($sedes); $i++) {
 
-                $sede = $sedes[$e];
+            $sede = $sedes[$e];
 
         ?>
-                <tr>
-                    <td ><?= $sede ?></td>
+            <tr>
+                <td><?= $sede ?></td>
 
-                    <?php
+            <?php
 
-                            for ($i = 0; $i <= $Day; $i++) {
-                                
-                                if ($e < 10) {
-                                    
-                                    $d=0 . $e;
-                                }else {
-                                    $d=$e;
-                                }
-                                $fecha =  $Year . $Month . $d ;
-                                $res0 = getOrdenes_Pag($sedes[$e], $fecha);
-                                $monto = $res0['monto'];
-                                # SUMANDO TIENDA
-                                $total_monto[$sedes[$e]] +=$monto;
+            $y = 1;
+            for ($i = 0; $i <= $Day; $i++) {
 
-                                if ($i >= $Day) {
+                if ($y < 10) {
 
-                                    $total=$total_monto[$sedes[$e]];
-                                    echo "<td>$total</td>";
-                                    
-                                }else{
-                                    echo "<td>$monto</td>";
-                                }
+                    $d = 0 . $y;
+                } else {
+                    $d = $y;
+                }
+                $fecha =  $Year . $Month . $d;
+                $res0 = getOrdenes_Pag($sedes[$e], $fecha);
+                $monto = $res0['monto'];
+                # SUMANDO TIENDA
+                $total_monto[$sedes[$e]] += $monto;
 
+                if ($i >= $Day) {
 
-                            }
+                    $total = $total_monto[$sedes[$e]];
+                    echo "<td>$total</td>";
+                } else {
+                    echo "<td>$monto</td>";
+                }
+                $y++;
+            }
 
-                        $e++;
-                    }
-                    ?>
-                </tr>
- 
+            $e++;
+        }
+            ?>
+            </tr>
+
 
 
     </tbody>
