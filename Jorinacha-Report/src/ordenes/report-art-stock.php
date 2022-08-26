@@ -111,7 +111,7 @@ for ($i = 0; $i < 20; $i += 1) {
 
                         if ($r >= $Day) {
 
-                            $total = $total_monto;
+                            $total = number_format($total_monto, 2, ',', '.') ;
                             echo "<td>$total</td>";
                         } else {
                             if ($monto == null) {
