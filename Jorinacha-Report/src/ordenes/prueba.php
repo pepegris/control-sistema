@@ -69,8 +69,6 @@ for ($i = 0; $i < 20; $i += 1) {
         $e = 1;
         for ($i = 0; $i < count($sedes); $i++) {
 
-            if ($sedes[$e] != null) {
-
                 $sede = $sedes[$e];
 
         ?>
@@ -95,7 +93,6 @@ for ($i = 0; $i < 20; $i += 1) {
 
 
                             }
-                        }
 
                         $e++;
                     }
