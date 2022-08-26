@@ -300,14 +300,14 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
             } else {
                 $res = 0;
             }
-            Cerrar($database);
+
             return $res;
         } catch (\Throwable $th) {
 
             throw $th;
         }
     } else {
-        Cerrar($database);
+
         return 0;
     }
 }
@@ -513,13 +513,14 @@ function getOrdenes_Pag($sede, $fecha)
                 break;
             }
             $res = $ordenes;
+            Cerrar($database);
             return $res;
         } catch (\Throwable $th) {
-
+            Cerrar($database);
             throw $th;
         }
     } else {
-
+        Cerrar($database);
         return 0;
     }
 }
