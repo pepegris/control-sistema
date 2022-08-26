@@ -13,9 +13,6 @@ $Day = date("d", strtotime($fecha2));
 $Month = date("m", strtotime($fecha2));
 $Year = date("Y", strtotime($fecha2));
 
-echo $a=settype($Day ,"string");
-echo $b=settype($Month ,"string");
-echo $c=settype($Year ,"string");
 
 $fecha = $Day .$Month.$Year; 
 echo $fecha ;
