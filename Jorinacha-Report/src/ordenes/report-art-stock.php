@@ -152,7 +152,7 @@ for ($i = 0; $i < 20; $i += 1) {
                         $e++;
                     }
      
-                    echo var_dump($total_monto);
+                    echo "<td>$total</td>";
                 } else {
                     echo"<td>$total_dia_monto[$fecha]</td>";
                 }
