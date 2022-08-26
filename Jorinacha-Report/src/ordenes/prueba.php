@@ -7,6 +7,9 @@ echo $ordenes = $_POST['ordenes'];
 echo $fecha1 = $_POST['fecha1'];
 echo $fecha2 = $_POST['fecha2'];
 
+$newDate = date("d-m-Y", strtotime($fecha2));
+echo $newDate;
+
 
 ?>
 <table class="table table-dark table-striped" id="tblData">
