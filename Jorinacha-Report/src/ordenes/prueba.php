@@ -61,7 +61,7 @@ for ($i = 0; $i < 20; $i += 1) {
     </thead>
 
     <tbody>
-        <tr>
+
             <?php
 
             for ($i = 0; $i < count($sedes); $i++) {
@@ -71,11 +71,13 @@ for ($i = 0; $i < 20; $i += 1) {
                     $sede = $sedes[$i];
 
             ?>
+                    <tr>
                     <td scope='col'><?= $sede ?></td>
+                    </tr>
             <?php }
             } ?>
 
-        </tr>
+
     </tbody>
 
 </table>
