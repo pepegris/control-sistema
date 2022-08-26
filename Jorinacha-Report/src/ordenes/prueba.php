@@ -10,8 +10,8 @@ echo $fecha2 = $_POST['fecha2'];
 
 $newDate = date("d", strtotime($fecha2));
 echo $newDate;
-
-
+echo "<br>";
+echo count($sedes);
 ?>
 <table class="table table-dark table-striped" id="tblData">
     <thead>
