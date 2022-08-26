@@ -15,7 +15,7 @@ $Year = date("Y", strtotime($fecha2));
 
 echo $a=settype($Day ,"string");
 echo $b=settype($Month ,"string");
-echo $c=settype($Year ,"string");
+echo $c=settype(2022 ,"string");
 
 $fecha = $a+$b+$c; 
 echo $fecha ;
