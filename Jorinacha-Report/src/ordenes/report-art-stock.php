@@ -148,7 +148,7 @@ for ($i = 0; $i < 20; $i += 1) {
 
                 if ($r >= $Day) {
                     $e=1;
-                     for ($i=0; $i < count($total_dia_monto[$fecha]) ; $i++) { 
+                     for ($i=0; $i < count($total_dia_monto) ; $i++) { 
                         $total_t+=$total_monto[$sedes[$e]];
                         $e++;
                     }
