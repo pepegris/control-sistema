@@ -7,7 +7,7 @@ include '../../includes/header.php';
 include '../../services/mysql.php';
 include '../../services/sqlserver.php';
 
-
+if ($_POST) {
 $ordenes = $_POST['ordenes'];
 $fecha1 = $_POST['fecha1'];
 $fecha2 = $_POST['fecha2'];
@@ -21,6 +21,12 @@ for ($i = 0; $i < 20; $i += 1) {
 }
 
 ?>
+  <style>
+    form,
+    td {
+      font-size: 12px;
+    }
+  </style>
 <center>
     <h1>Ordenes de Pago</h1>
 </center>
@@ -162,7 +168,7 @@ for ($i = 0; $i < 20; $i += 1) {
 
     <?php
 
-    var_dump($total_dia_monto);
+ 
     ?>
 
 </table>

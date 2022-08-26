@@ -20,7 +20,7 @@ include '../../services/sqlserver.php';
 </style>
 
 <div id="body">
-  <form action="prueba.php" method="POST">
+  <form action="report-art-stock.php" method="POST">
 
     <div class="fieldset">
       <br>
