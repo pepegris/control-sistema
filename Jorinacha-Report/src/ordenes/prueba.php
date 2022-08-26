@@ -62,22 +62,22 @@ for ($i = 0; $i < 20; $i += 1) {
 
     <tbody>
 
-            <?php
+        <?php
 
-                $e=1;
-            for ($i = 0; $i < count($sedes); $i++) {
+        $e = 1;
+        for ($i = 0; $i < count($sedes); $i++) {
 
-                if ($sedes[$e] != null) {
+            if ($sedes[$e] != null) {
 
-                    $sede = $sedes[$i];
+                $sede = $sedes[$e];
 
-            ?>
-                    <tr>
+        ?>
+                <tr>
                     <td scope='col'><?= $sede ?></td>
-                    </tr>
-            <?php }
+                </tr>
+        <?php }
             $e++;
-            } ?>
+        } ?>
 
 
     </tbody>
