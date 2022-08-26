@@ -21,36 +21,61 @@ for ($i = 0; $i < 20; $i += 1) {
     <thead>
         <tr>
             <th>Fecha</th>
-            <?php 
-            $e=1;
-            for ($i=0; $i <= $Day ; $i++) { 
-                
+            <?php
+            $e = 1;
+            for ($i = 0; $i <= $Day; $i++) {
+
                 echo "<th>$e/$Month/$Year</th>";
 
                 $e++;
             }
-             
+
             ?>
 
         </tr>
-<!--         <tr>
-            <th>Tasa</th>
-        </tr> -->
         <tr>
-            <th>Tienda</th>
-            <?php 
-            $e=1;
-            for ($i=0; $i <= $Day ; $i++) { 
-                
+            <th>Tasa</th>
+            <?php
+            $e = 1;
+            for ($i = 0; $i <= $Day; $i++) {
+
                 echo "<th></th>";
 
                 $e++;
             }
-             
+            ?>
+        </tr>
+        <tr>
+            <th>Tienda</th>
+            <?php
+            $e = 1;
+            for ($i = 0; $i <= $Day; $i++) {
+
+                echo "<th>Bs</th>";
+
+                $e++;
+            }
+
             ?>
         </tr>
     </thead>
 
+    <tbody>
+        <tr>
+            <?php
+
+            for ($i = 0; $i < count($sedes); $i++) {
+
+                if ($sedes[$i] != null) {
+
+                    $sede = $sedes[$i];
+
+            ?>
+                    <td scope='col'><?= $sede ?></td>
+            <?php }
+            } ?>
+
+        </tr>
+    </tbody>
+
 </table>
-
-
