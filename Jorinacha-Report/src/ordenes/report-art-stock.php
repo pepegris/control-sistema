@@ -112,7 +112,7 @@ for ($i = 0; $i < 20; $i += 1) {
                         if ($r >= $Day) {
 
                             $total = $total_monto;
-                            echo "<td>$total</td>";
+                            echo "<td>$total_monto</td>";
                         } else {
                             if ($monto == null) {
                                 echo "<td>0</td>";
