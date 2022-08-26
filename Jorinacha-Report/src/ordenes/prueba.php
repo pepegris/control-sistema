@@ -1,4 +1,7 @@
 <?php
+ini_set('memory_limit','4096M');
+ini_set('max_execution_time',3600);
+
 require "../../includes/log.php";
 include '../../includes/header.php';
 include '../../services/mysql.php';
@@ -19,7 +22,7 @@ for ($i = 0; $i < 20; $i += 1) {
 
 ?>
 <center>
-    <h1>Ordenes</h1>
+    <h1>Ordenes de Pago</h1>
 </center>
 <table class="table table-dark table-striped" id="tblData">
     <thead>
