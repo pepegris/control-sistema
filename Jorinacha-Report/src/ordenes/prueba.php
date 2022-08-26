@@ -6,12 +6,13 @@ include '../../includes/header.php';
 <thead>
     <tr>
         <th>Fecha</th>
+        
     </tr>
     <tr>
         <th>Tasa</th>
     </tr>
     <tr>
-        <th>Tienda/th>
+        <th>Tienda</th>
     </tr>
 </thead>
 
