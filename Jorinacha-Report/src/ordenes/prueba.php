@@ -8,8 +8,10 @@ echo $ordenes = $_POST['ordenes'];
 echo $fecha1 = $_POST['fecha1'];
 echo $fecha2 = $_POST['fecha2'];
 
-$newDate = date("d", strtotime($fecha2));
-echo $newDate;
+$Day = date("d", strtotime($fecha2));
+$Month = date("m", strtotime($fecha2));
+$Year = date("Y", strtotime($fecha2));
+
 for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
 }
@@ -21,8 +23,8 @@ for ($i = 0; $i < 20; $i += 1) {
             <th>Fecha</th>
             <?php 
 
-            for ($i=0; $i < $newDate ; $i++) { 
-                echo "<th>$i</th>";
+            for ($i=0; $i <= $Day ; $i++) { 
+                echo "<th>$i/$Month/$Year</th>";
             }
              
             ?>
