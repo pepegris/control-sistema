@@ -17,7 +17,7 @@ echo $a=settype($Day ,"string");
 echo $b=settype($Month ,"string");
 echo $c=settype($Year ,"string");
 
-$fecha = $a+$b+$c; 
+$fecha = $Day .$Month.$Year; 
 echo $fecha ;
 for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_POST[$i];
