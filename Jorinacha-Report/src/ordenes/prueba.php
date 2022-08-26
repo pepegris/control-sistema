@@ -64,9 +64,10 @@ for ($i = 0; $i < 20; $i += 1) {
 
             <?php
 
+                $e=1;
             for ($i = 0; $i < count($sedes); $i++) {
 
-                if ($sedes[$i] != null) {
+                if ($sedes[$e] != null) {
 
                     $sede = $sedes[$i];
 
@@ -75,6 +76,7 @@ for ($i = 0; $i < 20; $i += 1) {
                     <td scope='col'><?= $sede ?></td>
                     </tr>
             <?php }
+            $e++;
             } ?>
 
 
