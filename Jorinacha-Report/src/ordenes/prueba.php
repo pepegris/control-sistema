@@ -82,39 +82,39 @@ for ($i = 0; $i < 20; $i += 1) {
             <tr>
                 <td><?= $sede ?></td>
 
-            <?php
+                <?php
 
-            $y = 1;
-            for ($i = 0; $i <= $Day; $i++) {
+                $y = 1;
+                for ($i = 0; $i <= $Day; $i++) {
 
-                if ($y < 10) {
+                    if ($y < 10) {
 
-                    $d = 0 . $y;
-                } else {
-                    $d = $y;
+                        $d = 0 . $y;
+                    } else {
+                        $d = $y;
+                    }
+                    $fecha =  $Year . $Month . $d;
+                    $res0 = getOrdenes_Pag($sedes[$e], $fecha);
+                    $monto = $res0['monto'];
+                    # SUMANDO TIENDA
+                    $total_monto[$sedes[$e]] += $monto;
+
+                    if ($i >= $Day) {
+
+                        $total = $total_monto[$sedes[$e]];
+                        echo "<td>$total</td>";
+                    } else {
+                        echo "<td>$monto</td>";
+                    }
+                    $y++;
                 }
-                $fecha =  $Year . $Month . $d;
-                $res0 = getOrdenes_Pag($sedes[$e], $fecha);
-                $monto = $res0['monto'];
-                # SUMANDO TIENDA
-                $total_monto[$sedes[$e]] += $monto;
 
-                if ($i >= $Day) {
-
-                    $total = $total_monto[$sedes[$e]];
-                    echo "<td>$total</td>";
-                } else {
-                    echo "<td>$monto</td>";
-                }
-                $y++;
-            }
-
+                ?>
+            </tr>
+        <?php
             $e++;
         }
-            ?>
-            </tr>
-
-
+        ?>
 
     </tbody>
 
