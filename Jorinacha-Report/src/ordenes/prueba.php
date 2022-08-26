@@ -22,19 +22,32 @@ for ($i = 0; $i < 20; $i += 1) {
         <tr>
             <th>Fecha</th>
             <?php 
-
+            $e=1;
             for ($i=0; $i <= $Day ; $i++) { 
-                echo "<th>$i/$Month/$Year</th>";
+                
+                echo "<th>$e/$Month/$Year</th>";
+
+                $e++;
             }
              
             ?>
 
         </tr>
-        <tr>
+<!--         <tr>
             <th>Tasa</th>
-        </tr>
+        </tr> -->
         <tr>
             <th>Tienda</th>
+            <?php 
+            $e=1;
+            for ($i=0; $i <= $Day ; $i++) { 
+                
+                echo "<th></th>";
+
+                $e++;
+            }
+             
+            ?>
         </tr>
     </thead>
 
