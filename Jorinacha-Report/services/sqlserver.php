@@ -513,14 +513,14 @@ function getOrdenes_Pag($sede, $fecha)
                 break;
             }
             $res = $ordenes;
-            Cerrar($database);
+
             return $res;
         } catch (\Throwable $th) {
-            Cerrar($database);
+
             throw $th;
         }
     } else {
-        Cerrar($database);
+
         return 0;
     }
 }
