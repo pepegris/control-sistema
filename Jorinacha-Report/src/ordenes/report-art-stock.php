@@ -107,7 +107,7 @@ for ($i = 0; $i < 20; $i += 1) {
                         $monto = $res0['monto'];
                         $total_dia_monto [$fecha] += $monto;
                         # SUMANDO TIENDA
-                        $total_monto += $monto;
+                        $total_monto [$sedes[$e]] +=  number_format($monto, 2, ',', '.') ;
 
                         if ($r >= $Day) {
 
@@ -147,12 +147,12 @@ for ($i = 0; $i < 20; $i += 1) {
 
                 if ($r >= $Day) {
                     $e=1;
-/*                     for ($i=0; $i < count($total_dia_monto[$fecha]) ; $i++) { 
+                     for ($i=0; $i < count($total_dia_monto[$fecha]) ; $i++) { 
                         $total+=$total_monto[$sedes[$e]];
                         $e++;
                     }
-     */
-                    echo "<td>0</td>";
+     
+                    echo "<td>$total</td>";
                 } else {
                     echo"<td>$total_dia_monto[$fecha]</td>";
                 }
