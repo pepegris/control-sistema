@@ -25,7 +25,7 @@ for ($i = 0; $i < 20; $i += 1) {
             <th>Fecha</th>
             <?php
             $e = 1;
-            for ($i = 0; $i <= $Day; $i++) {
+            for ($i = 0; $i >= $Day; $i++) {
 
                 echo "<th>$e/$Month/$Year</th>";
 
