@@ -3,11 +3,11 @@ require "../../includes/log.php";
 include '../../includes/header.php';
 
 
-$ordenes = $_POST['ordenes'];
-$fecha1 = $_POST['fecha1'];
-$fecha2 = $_POST['fecha2'];
+echo $ordenes = $_POST['ordenes'];
+echo $fecha1 = $_POST['fecha1'];
+echo $fecha2 = $_POST['fecha2'];
 
-echo $fecha2->format('Y-m-d');
+
 ?>
 <table class="table table-dark table-striped" id="tblData">
 <thead>
