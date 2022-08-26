@@ -155,7 +155,9 @@ for ($i = 0; $i < 20; $i += 1) {
                     $total=number_format($total_t, 2, ',', '.');
                     echo "<td>$total</td>";
                 } else {
-                    echo"<td>$total_dia_monto[$fecha]</td>";
+
+                  $total_fecha=number_format($total_dia_monto[$fecha], 2, ',', '.');
+                    echo"<td>$total_fech</td>";
                 }
 
 
