@@ -88,7 +88,7 @@ for ($i = 0; $i < 20; $i += 1) {
                 <?php
 
                 $y = 1;
-                for ($i = 0; $i <= $Day; $i++) {
+                for ($r = 0; $r <= $Day; $r++) {
 
                     if ($y < 10) {
 
@@ -102,7 +102,7 @@ for ($i = 0; $i < 20; $i += 1) {
                     # SUMANDO TIENDA
                     $total_monto[$sedes[$e]] += $monto;
 
-                    if ($i >= $Day) {
+                    if ($r >= $Day) {
 
                         $total = $total_monto[$sedes[$e]];
                         echo "<td>$total</td>";
