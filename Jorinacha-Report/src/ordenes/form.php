@@ -4,6 +4,11 @@ include '../../includes/header.php';
 include '../../services/mysql.php';
 include '../../services/sqlserver.php';
 
+var_dump($_POST);
+$ordenes = $_POST['ordenes'];
+$fecha1 = $_POST['fecha1'];
+$fecha2 = $_POST['fecha2'];
+
 ?>
 
 <style>
