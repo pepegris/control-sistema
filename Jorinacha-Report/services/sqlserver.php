@@ -519,7 +519,7 @@ function getOrdenes_Pag($sede, $fecha)
         }
     } else {
 
-        return "N/A";
+        return 0;
     }
 }
 
