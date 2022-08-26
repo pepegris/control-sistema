@@ -386,14 +386,14 @@ function getFactura($sede, $co_art, $fecha1, $fecha2)
 }
 
 /* OBTENER LAS COTIZACIONES Y PEDIDOS DE LOS ARTICULOS POR DESPACHAR */
-    /*
+/*
     ESTATUS DE LOS PEDIDOS Y COTIZACION
 0 sin procesar
 1 Parc/Procesada
 2 Procesada
 */
 
-function getCotizacion ($sede, $co_art)
+function getCotizacion($sede, $co_art)
 {
 
     #$database = Database($sede);
@@ -419,7 +419,7 @@ function getCotizacion ($sede, $co_art)
 
                     $total_art['total_art'] = number_format($row['total_art'], 0, ',', '.');
                     $total_art['status'] = $row['status'];
-                    $total_art['doc'] ='Cot';
+                    $total_art['doc'] = 'Cot';
                     break;
                 }
                 $res = $total_art;
@@ -435,11 +435,10 @@ function getCotizacion ($sede, $co_art)
 
         return 0;
     }
-
 }
 
 
-function getPedidos ($sede, $co_art)
+function getPedidos($sede, $co_art)
 {
 
     #$database = Database($sede);
@@ -465,7 +464,7 @@ function getPedidos ($sede, $co_art)
 
                     $total_art['total_art'] = number_format($row['total_art'], 0, ',', '.');
                     $total_art['status'] = $row['status'];
-                    $total_art['doc'] ='Ped';
+                    $total_art['doc'] = 'Ped';
 
                     break;
                 }
@@ -482,8 +481,45 @@ function getPedidos ($sede, $co_art)
 
         return 0;
     }
-
 }
+
+
+function getOrdenes_Pag($sede, $fecha)
+{
+
+    $database = Database($sede);
+
+
+    if ($database) {
+        try {
+
+            $serverName = "172.16.1.19";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT monto from ord_pago where cod_ben ='65' and fecha ='$fecha'";
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            while ($row = sqlsrv_fetch_array($consulta)) {
+
+                $ordenes['monto'] = number_format($row['monto'], 2, ',', '.');
+                break;
+            }
+            $res = $ordenes;
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return null;
+    }
+}
+
+
+
 
 /* 
 function getCot_Ped($sede, $co_art)
@@ -567,8 +603,8 @@ function getCot_Ped($sede, $co_art)
 
 function Cerrar()
 {
-    $connectionInfo = array( "Database"=>"PREVIA_A", "UID"=>"mezcla", "PWD"=>"Zeus33$");
-    $conn = sqlsrv_connect( $serverName, $connectionInfo);
+    $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-    sqlsrv_close( $conn );
+    sqlsrv_close($conn);
 }
