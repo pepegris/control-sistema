@@ -28,10 +28,11 @@ if ($_POST) {
   <center><h1>Ordenes</h1></center>
   <table class="table table-dark table-striped" id="tblData">
     <thead>
+      
       <tr>
         <th scope="col">#</th>
-        <th scope='col'>Codigo</th>
-        <th scope='col'>Linea</th>
+        <th scope='col'>Fecha</th>
+        <th scope='col'>Tasa</th>
         <th scope='col'>Marca</th>
         <th scope='col'>Talla</th>
         <th scope='col'>Color</th>
