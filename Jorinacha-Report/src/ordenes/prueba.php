@@ -152,4 +152,9 @@ for ($i = 0; $i < 20; $i += 1) {
 
     </tbody>
 
+    <?php
+
+    var_dump($total_dia_monto);
+    ?>
+
 </table>
