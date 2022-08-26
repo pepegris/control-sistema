@@ -1,12 +1,17 @@
 <?php
 require "../../includes/log.php";
 include '../../includes/header.php';
+
+var_dump($_POST);
+$ordenes = $_POST['ordenes'];
+$fecha1 = $_POST['fecha1'];
+$fecha2 = $_POST['fecha2'];
 ?>
 <table class="table table-dark table-striped" id="tblData">
 <thead>
     <tr>
         <th>Fecha</th>
-        
+
     </tr>
     <tr>
         <th>Tasa</th>
