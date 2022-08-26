@@ -104,10 +104,10 @@ for ($i = 0; $i < 20; $i += 1) {
                         }
                         $fecha =  $Year . $Month . $d;
                         $res0 = getOrdenes_Pag($sedes[$e], $fecha);
-                        $monto = $res0['monto'];
-                        $total_dia_monto [$fecha] += $monto;
+                        $monto = number_format($res0['monto'], 2, ',', '.');
+                        $total_dia_monto [$fecha] += $res0['monto'];
                         # SUMANDO TIENDA
-                        $total_monto [$sedes[$e]] += $monto;
+                        $total_monto [$sedes[$e]] += $res0['monto'];
 
                         if ($r >= $Day) {
 
@@ -117,6 +117,7 @@ for ($i = 0; $i < 20; $i += 1) {
                             if ($monto == null) {
                                 echo "<td>0</td>";
                             } else {
+                              
                                 echo "<td>$monto</td>";
                             }
                         }

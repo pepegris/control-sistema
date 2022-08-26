@@ -511,7 +511,7 @@ function getOrdenes_Pag($sede, $fecha)
 
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $ordenes['monto'] = number_format($row['monto'], 2, ',', '.');
+                $ordenes['monto'] = $row['monto'];
                 break;
             }
             $res = $ordenes;
