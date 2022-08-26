@@ -77,7 +77,7 @@ for ($i = 0; $i < 20; $i += 1) {
         <?php
 
         $e = 1;
-        for ($i = 0; $i < count($sedes); $i++) {
+        for ($i = 0; $i < 16; $i++) {
 
             $sede = $sedes[$e];
 
