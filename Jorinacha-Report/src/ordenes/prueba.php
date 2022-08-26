@@ -31,7 +31,7 @@ for ($i = 0; $i < 20; $i += 1) {
 </table>
 
 
-
+<tbody>
 <tr>
     <th scope='row'><?= $n ?></th>
     <?php
@@ -48,3 +48,4 @@ for ($i = 0; $i < 20; $i += 1) {
     } ?>
 
 </tr>
+</tbody>
