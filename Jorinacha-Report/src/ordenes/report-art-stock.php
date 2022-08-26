@@ -107,11 +107,11 @@ for ($i = 0; $i < 20; $i += 1) {
                         $monto = $res0['monto'];
                         $total_dia_monto [$fecha] += $monto;
                         # SUMANDO TIENDA
-                        $total_monto += $monto;
+                        $total_monto [$sedes[$e]] += $monto;
 
                         if ($r >= $Day) {
 
-                            $total = number_format($total_monto, 2, ',', '.') ;
+                            $total = number_format($total_monto[$sedes[$e]], 2, ',', '.') ;
                             echo "<td>$total</td>";
                         } else {
                             if ($monto == null) {
