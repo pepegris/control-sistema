@@ -79,7 +79,7 @@ for ($i = 0; $i < 20; $i += 1) {
 
         ?>
                 <tr>
-                    <td scope='col'><?= $sede ?></td>
+                    <td ><?= $sede ?></td>
 
                     <?php
 
@@ -93,7 +93,7 @@ for ($i = 0; $i < 20; $i += 1) {
 
 
                     ?>
-                                <td scope='col'><?= $monto ?></td>
+                                <td ><?= $monto ?></td>
 
                     <?php
 
