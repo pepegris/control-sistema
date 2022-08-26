@@ -86,16 +86,19 @@ for ($i = 0; $i < 20; $i += 1) {
                             for ($i = 0; $i <= $Day; $i++) {
 
                                 $fecha = $e . $Month . $Year;
-                                $res0 = getOrdenes_Pag($sedes[$f], $fecha);
+                                $res0 = getOrdenes_Pag($sedes[$e], $fecha);
                                 $monto = round($res0['monto']);
                                 # SUMANDO TIENDA
-                                $total_monto[$sedes[$f]] +=$monto;
+                                $total_monto[$sedes[$e]] +=$monto;
 
+                                if ($i >= $Day) {
 
-                    ?>
-                                <td ><?= $monto ?></td>
-
-                    <?php
+                                    $total=$total_monto[$sedes[$e]];
+                                    echo "<td>$total</td>";
+                                    
+                                }else{
+                                    echo "<td>$monto</td>";
+                                }
 
 
                             }
