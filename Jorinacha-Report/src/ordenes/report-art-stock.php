@@ -111,8 +111,8 @@ for ($i = 0; $i < 20; $i += 1) {
 
                         if ($r >= $Day) {
 
-                            $total = $total_monto;
-                            echo "<td>$total_monto</td>";
+                            #$total = $total_monto;
+                            echo "<td>$total_monto [$sedes[$e]]</td>";
                         } else {
                             if ($monto == null) {
                                 echo "<td>0</td>";
@@ -152,7 +152,7 @@ for ($i = 0; $i < 20; $i += 1) {
                         $e++;
                     }
      
-                    echo "<td>$total</td>";
+                    echo var_dump($total_monto);
                 } else {
                     echo"<td>$total_dia_monto[$fecha]</td>";
                 }
