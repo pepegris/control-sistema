@@ -126,6 +126,25 @@ for ($i = 0; $i < 20; $i += 1) {
 
         ?>
 
+        <tr>
+            <td><b>TOTAL</b></td>
+            <?php
+            $y = 1;
+            for ($r = 0; $r <= $Day; $r++) {
+                if ($y < 10) {
+
+                    $d = 0 . $y;
+                } else {
+                    $d = $y;
+                }
+                $fecha =  $Year . $Month . $d;
+
+                echo"<td>$total_dia_monto[$fecha]</td>";
+            }
+
+            ?>
+        </tr>
+
     </tbody>
 
 </table>
