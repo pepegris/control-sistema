@@ -2,10 +2,12 @@
 require "../../includes/log.php";
 include '../../includes/header.php';
 
-var_dump($_POST);
+
 $ordenes = $_POST['ordenes'];
 $fecha1 = $_POST['fecha1'];
 $fecha2 = $_POST['fecha2'];
+
+echo $fecha2->format('d');
 ?>
 <table class="table table-dark table-striped" id="tblData">
 <thead>
