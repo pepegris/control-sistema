@@ -498,12 +498,14 @@ function getOrdenes_Pag($sede, $fecha)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($database=='MRIA3A21' OR $database == 'MERINA21' ) {
+            if ($database == 'MRIA3A21' or $database == 'MERINA21') {
                 $sql = "SELECT monto from ord_pago where cod_ben ='47' and fecha ='$fecha'";
+            } elseif ($database == 'KAGUA21' or $database == 'TRAINA21' or $database == 'CORINA21' or $database == 'CORI2_21') {
+                $sql = "SELECT monto from ord_pago where cod_ben ='95' and fecha ='$fecha'";
             } else {
                 $sql = "SELECT monto from ord_pago where cod_ben ='65' and fecha ='$fecha'";
             }
-            
+
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -610,16 +612,15 @@ function getCot_Ped($sede, $co_art)
 
 function Cerrar($database)
 {
-    if ($database !=null) {
+    if ($database != null) {
         $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$");
         $conn = sqlsrv_connect($serverName, $connectionInfo);
-    
+
         sqlsrv_close($conn);
-    }else {
+    } else {
         $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$");
         $conn = sqlsrv_connect($serverName, $connectionInfo);
-    
+
         sqlsrv_close($conn);
     }
-
 }
