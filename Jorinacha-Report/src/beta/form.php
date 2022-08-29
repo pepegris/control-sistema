@@ -74,12 +74,12 @@ include '../../services/sqlserver.php';
 
       <div class="form-group">
         <label for="fecha1" class="form-label ">Desde</label>
-          <input type="date" name="fecha1" id="">
+          <input type="date" name="fecha1" id="" require>
       </div>
 
       <div class="form-group">
         <label for="fecha2" class="form-label ">Hasta</label>
-          <input type="date" name="fecha2" id="">
+          <input type="date" name="fecha2" id="" require>
       </div>
       <br>
       <center><button type="submit"  class="btn btn-primary">Ingresar</button></center>
