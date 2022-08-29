@@ -102,7 +102,7 @@ $cuenta_on = ucwords($cuenta_on);
         <div class="box">
           <i class="lni lni-write"></i>
           <h5>Ordenes de Compra</h5>
-          <h4>Reportes de ordenes de compras de todas las tiendas generadas a Previa Shop</h4>
+          <h4>Reportes de ordenes de compras de todas las tiendas</h4>
         </div>
       </a>
       <div class="box">
