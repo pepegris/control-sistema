@@ -17,7 +17,7 @@ if (isset($_POST)) {
         $sedes[] = $_POST[$i];
       }
     
-      $sedes = serialize($sedes);
+      #$sedes = serialize($sedes);
       $sedes = urlencode($sedes);
     if ($pedidos=='con') {
         header("refresh:5;url= report-art-stock-completo.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
