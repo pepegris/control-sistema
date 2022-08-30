@@ -12,7 +12,7 @@ if (isset($_GET)) {
 
   $linea = $_GET['linea'];
   $sedes= $_GET['sedes'];
-  var_dump($linea);
+  var_dump($sedes);
 /*   $fecha1 = $_GET['fecha1'];
   $fecha2 = $_GET['fecha2']; */
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
