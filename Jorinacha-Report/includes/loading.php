@@ -4,6 +4,7 @@
     height: 100vh;
     background-image: url('thumb-1920-12453.jpg');
     background-size: cover;
+    background-color: #242943;
     display: flex;
     flex-direction: column;
     align-items: center;
