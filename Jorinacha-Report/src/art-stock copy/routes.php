@@ -7,9 +7,9 @@ if (isset($_POST)) {
     $pedidos=$_POST['pedidos'];
 
     if ($pedidos=='con') {
-        header("refresh:5;url= report-art-stock-completo.php ,$_POST");
+        header("refresh:5;url= report-art-stock-completo.php?form=$_POST");
     }elseif ($pedidos=='sin') {
-        header("refresh:5;url= report-art-stock.php;$_POST");
+        header("refresh:5;url= report-art-stock.php?form=$_POST");
     }else {
         header('refresh:5;url= form.php');
     }
