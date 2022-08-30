@@ -132,11 +132,15 @@ $cuenta_on = ucwords($cuenta_on);
         <h5>Pronto</h5>
         <h4>Pronto aun En Desarrollo</h4>
       </div>
+
+      <a href="src/art-stock copy/form.php">
       <div class="box">
         <i class="lni lni-coffee-cup"></i>
-        <h5>Pronto</h5>
+        <h5>Desarrollo</h5>
         <h4>Pronto aun En Desarrollo</h4>
       </div>
+      </a>
+
     </div>
 
   </main>
