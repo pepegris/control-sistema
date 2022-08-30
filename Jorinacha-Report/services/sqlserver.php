@@ -1,14 +1,6 @@
 <?php
 
-/* $serverName = "172.16.1.19"; 
-$connectionInfo = array( "Database"=>"PREVIA_A", "UID"=>"mezcla", "PWD"=>"Zeus33$");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
 
-if (!$conn) {
-    die("Connection failed: " . sqlsrv_connect_error());
-}
-
- */
 /* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA*/
 
 
