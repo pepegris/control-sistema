@@ -15,7 +15,7 @@ if (isset($_GET)) {
   var_dump($sedes);
   echo "<hr>";
   for ($i = 0; $i < 20; $i += 1) {
-    echo "$sedes[$i] <br>";
+    echo "$sedes[$i][$i] <br>";
   }
 
 /*   $fecha1 = $_GET['fecha1'];
