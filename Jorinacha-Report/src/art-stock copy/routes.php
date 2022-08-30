@@ -3,6 +3,7 @@
 if (isset($_POST)) {
 
     include '../../includes/loading.php';
+    include '../../services/sqlserver.php';
 
     $pedidos=$_POST['pedidos'];
 
@@ -18,9 +19,9 @@ if (isset($_POST)) {
     
 
     if ($pedidos=='con') {
-        header("refresh:5;url= report-art-stock-completo.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2");
+        header("refresh:5;url= report-art-stock-completo.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
     }elseif ($pedidos=='sin') {
-        header("refresh:5;url= report-art-stock.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2");
+        header("refresh:5;url= report-art-stock.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
     }else {
         header('refresh:5;url= form.php');
     }
