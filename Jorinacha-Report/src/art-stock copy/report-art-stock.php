@@ -9,7 +9,7 @@ include '../../services/sqlserver.php';
 
 if (isset($_GET)) {
 
-
+  var_dump($_GET);
   $linea = $_GET['linea'];
 /*   $fecha1 = $_GET['fecha1'];
   $fecha2 = $_GET['fecha2']; */
