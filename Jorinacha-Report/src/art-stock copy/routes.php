@@ -20,14 +20,14 @@ if (isset($_POST)) {
       $sedes = serialize($sedes);
       $sedes = urlencode($sedes);
     if ($pedidos=='con') {
-        header("refresh:5;url= report-art-stock-completo.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+        header("refresh:2;url= report-art-stock-completo.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
     }elseif ($pedidos=='sin') {
-        header("refresh:5;url= report-art-stock.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&sedes=" . $sedes);
+        header("refresh:2;url= report-art-stock.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&sedes=" . $sedes);
     }else {
-        header('refresh:5;url= form.php');
+        header('refresh:1;url= form.php');
     }
 
 } else {
-    header('refresh:5;url= form.php');
+    header('refresh:1;url= form.php');
     exit;
 }
