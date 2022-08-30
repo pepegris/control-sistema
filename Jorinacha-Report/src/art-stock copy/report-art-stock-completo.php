@@ -35,9 +35,9 @@ if (isset($_GET)) {
         <th scope='col'>Codigo</th>
         <th scope='col'>Marca</th>
         <th scope='col'>Modelo</th>
+        <th scope='col'>Desc</th>
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
-        <th scope='col'>Desc</th>
         <th scope='col'>Costo Bs</th>
         <th scope='col'>Fecha ult Costo</th>
         <th scope='col'>Precio Bs</th>
@@ -102,9 +102,10 @@ if (isset($_GET)) {
           <td><?= $co_art ?></td>
           <td><?= $co_lin ?></td>
           <td><?= $co_subl ?></td>
+          <td><?= $desc ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
-          <td><?= $desc ?></td>
+
           <?php
           $g = 1;
           $total_vendido = 0;
