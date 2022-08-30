@@ -1,19 +1,21 @@
 <?php
-ini_set('memory_limit','4096M');
-ini_set('max_execution_time',3600);
-
 require "../../includes/log.php";
 include '../../includes/header.php';
 include '../../services/mysql.php';
 include '../../services/sqlserver.php';
 
-if (isset($_GET)) {
+if ($_POST) {
 
 
-  $linea = $_GET['linea'];
+  $linea = $_POST['linea'];
+/*   $fecha1 = $_POST['fecha1'];
+  $fecha2 = $_POST['fecha2']; */
+  $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
+  $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
 
-  $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
-  $fecha2 = date("Ymd", strtotime($_GET['fecha2']));  
+  for ($i = 0; $i < 20; $i += 1) {
+    $sedes[] = $_POST[$i];
+  }
 
 
 ?>
@@ -27,7 +29,7 @@ form , td {
 
 
   </style>
-  <center><h1>Fallas Sin Pedidos</h1></center>
+  <center><h1>Fallas</h1></center>
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>
@@ -35,7 +37,6 @@ form , td {
         <th scope='col'>Codigo</th>
         <th scope='col'>Marca</th>
         <th scope='col'>Modelo</th>
-        <th scope='col'>Desc</th>
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
         <th scope='col'>Total Vendido</th>
@@ -44,19 +45,19 @@ form , td {
         <th scope='col'>Ref</th>
         <?php
 
-        for ($i = 0; $i < count($sedes_ar); $i++) {
+        for ($i = 0; $i < count($sedes); $i++) {
 
           
           
 
-          if ($sedes_ar[$i] != null) {
+          if ($sedes[$i] != null) {
 
-            $sede = $sedes_ar[$i];
+            $sede = $sedes[$i];
 
         ?>
             <th scope='col'><?= $sede ?></th>
         <?php  
-          if ($sedes_ar[$i] != 'Previa Shop') {
+          if ($sedes[$i] != 'Previa Shop') {
             echo "<th scope='col'>Cant Env $i</th>";
             echo "<th scope='col'>Total Vendido $i</th>";
           }
@@ -80,7 +81,6 @@ form , td {
         $co_subl = getSub_lin($res0[$e]['co_subl']);
         $co_cat = getCat_art($res0[$e]['co_cat']);
         $co_color = getColores($res0[$e]['co_color']);
-        $desc = $res0[$e]['ubicacion'];
 
         $stock_act = round($res0[$e]['stock_act']);
         $total_stock_act_previa += $stock_act;
@@ -97,17 +97,16 @@ form , td {
           <td><?= $co_art ?></td>
           <td><?= $co_lin ?></td>
           <td><?= $co_subl ?></td>
-          <td><?= $desc ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
           <?php
           $g = 1;
           $total_vendido = 0; 
-          for ($i = 0; $i < count($sedes_ar); $i++) {
+          for ($i = 0; $i < count($sedes); $i++) {
 
-            if ($sedes_ar[$g] != null) {
+            if ($sedes[$g] != null) {
 
-              $res1 = getReng_fac($sedes_ar[$g],  $co_art, $fecha1, $fecha2);
+              $res1 = getReng_fac($sedes[$g],  $co_art, $fecha1, $fecha2);
               $total_vendido += round($res1);
 
 
@@ -128,24 +127,24 @@ form , td {
           <td><?= $stock_act ?></td>
           <?php
           $f = 1;
-          for ($i = 0; $i < count($sedes_ar); $i++) {
+          for ($i = 0; $i < count($sedes); $i++) {
 
 
-            if ($sedes_ar[$f] == null) {
+            if ($sedes[$f] == null) {
               $f++;
             } else {
 
-              $res3 = getArt_stock_tiendas($sedes_ar[$f], $co_art);
+              $res3 = getArt_stock_tiendas($sedes[$f], $co_art);
               $stock_act_tienda = round($res3[0]['stock_act']);
-              $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
+              $total_stock_act_tienda[$sedes[$f]] += $stock_act_tienda;
 
-              $res4 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
+              $res4 = getReng_fac($sedes[$f],  $co_art, $fecha1, $fecha2);
               $vendido_tienda = round($res4);
-              $total_vendido_tienda [$sedes_ar[$f]] += $vendido_tienda;
+              $total_vendido_tienda [$sedes[$f]] += $vendido_tienda;
 
-              $res5 = getFactura($sedes_ar[$f], $co_art,$fecha1, $fecha2);
+              $res5 = getFactura($sedes[$f], $co_art,$fecha1, $fecha2);
               $total_enviado = round($res5['total_art']);
-              $total_enviado_tienda[$sedes_ar[$f]] += $total_enviado;
+              $total_enviado_tienda[$sedes[$f]] += $total_enviado;
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
@@ -173,11 +172,11 @@ form , td {
 
         $h = 1;
         for ($i = 0; $i < count($total_stock_act_tienda); $i++) {
-          $vendido = $total_vendido_tienda[$sedes_ar[$h]];
+          $vendido = $total_vendido_tienda[$sedes[$h]];
 
         ?>
-          <td><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></td>
-          <td><?= $total_enviado_tienda[$sedes_ar[$h]] ?></td>
+          <td><?= $total_stock_act_tienda[$sedes[$h]] ?></td>
+          <td><?= $total_enviado_tienda[$sedes[$h]] ?></td>
           <td><?= $vendido  ?></td>
 
           <?php

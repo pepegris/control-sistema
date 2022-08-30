@@ -35,6 +35,7 @@ form , td {
         <th scope='col'>Codigo</th>
         <th scope='col'>Marca</th>
         <th scope='col'>Modelo</th>
+        <th scope='col'>Desc</th>
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
         <th scope='col'>Total Vendido</th>
@@ -79,6 +80,7 @@ form , td {
         $co_subl = getSub_lin($res0[$e]['co_subl']);
         $co_cat = getCat_art($res0[$e]['co_cat']);
         $co_color = getColores($res0[$e]['co_color']);
+        $desc = $res0[$e]['ubicacion'];
 
         $stock_act = round($res0[$e]['stock_act']);
         $total_stock_act_previa += $stock_act;
@@ -95,6 +97,7 @@ form , td {
           <td><?= $co_art ?></td>
           <td><?= $co_lin ?></td>
           <td><?= $co_subl ?></td>
+          <td><?= $desc ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
           <?php
