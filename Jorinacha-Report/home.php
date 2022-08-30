@@ -62,7 +62,8 @@ $cuenta_on = ucwords($cuenta_on);
           </li>
 
         </ul>
-        <!--          <form class="d-flex">
+        <!--          
+          <form class="d-flex">
           <input class="form-control me-sm-2" type="text" placeholder="Search">
           <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>  -->
@@ -99,7 +100,7 @@ $cuenta_on = ucwords($cuenta_on);
           <h4>Reportes de ordenes de compras de todas las tiendas</h4>
         </div>
       </a>
-      
+
       <div class="box">
         <i class="lni lni-construction"></i>
         <h5>Pronto</h5>
