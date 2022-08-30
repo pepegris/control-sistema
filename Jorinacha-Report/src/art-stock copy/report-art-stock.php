@@ -27,7 +27,7 @@ form , td {
 
 
   </style>
-  <center><h1>Fallas</h1></center>
+  <center><h1>Fallas Sin Pedidos</h1></center>
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>

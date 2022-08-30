@@ -27,7 +27,7 @@ if (isset($_GET)) {
 
     }
   </style>
-<center><h1>Fallas Beta</h1></center>
+<center><h1>Fallas Con Pedidos</h1></center>
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>
