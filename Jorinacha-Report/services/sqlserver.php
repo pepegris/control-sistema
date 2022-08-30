@@ -10,6 +10,31 @@ if (!$conn) {
 
  */
 /* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA*/
+
+
+    $sedes_ar = array(
+        "Previa Shop",
+        "Comercial Merina" ,
+        "Comercial Merina III" ,
+        "Comercial Corina I" ,
+        "Comercial Corina II" ,
+        "Comercial Punto Fijo" ,
+        "Comercial Matur" ,
+        "Comercial Valena" ,
+        "Comercial Trina" ,
+        "Comercial Kagu" ,
+        "Comercial Nachari" ,
+        "Comercial Higue" ,
+        "Comercial Apura",
+        "Comercial Vallepa",
+        "Comercial Ojena",
+        "Comercial Puecruz",
+        "Comercial Acari",
+        "Comercial Catica II",
+    );
+
+
+
 function Database($sede)
 {
 
