@@ -9,8 +9,9 @@ include '../../services/sqlserver.php';
 
 if (isset($_GET)) {
 
-  var_dump($_GET['form']['fecha1']);
+
   $linea = $_GET['linea'];
+  var_dump($linea);
 /*   $fecha1 = $_GET['fecha1'];
   $fecha2 = $_GET['fecha2']; */
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
