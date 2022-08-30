@@ -75,8 +75,8 @@ include '../../services/sqlserver.php';
       </div>
 
       <div class="form-group">
-        <label for="number" class="form-label ">Cantidad</label>
-        <input type="number" name="number" id="" require>
+        <label for="cantidad" class="form-label ">Cantidad</label>
+        <input type="number" name="cantidad" id="" require>
       </div>
 
       <div class="form-group">
