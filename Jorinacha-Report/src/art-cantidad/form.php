@@ -71,12 +71,12 @@ include '../../services/sqlserver.php';
       <!-- FORMULAIO DE cantidades -->
       <div class="form-group">
         <label for="art" class="form-label ">Articulo</label>
-        <input type="art" name="art" id="">
+        <input type="text" name="art" id="">
       </div>
 
       <div class="form-group">
         <label for="number" class="form-label ">Cantidad</label>
-        <input type="number" name="number" id="">
+        <input type="number" name="number" id="" require>
       </div>
 
       <div class="form-group">
