@@ -18,9 +18,9 @@ if (isset($_POST)) {
     
 
     if ($pedidos=='con') {
-        header("refresh:5;url= report-art-stock-completo.php?linea=$linea?fecha1=$fecha1?fecha2=$fecha2");
+        header("refresh:5;url= report-art-stock-completo.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2");
     }elseif ($pedidos=='sin') {
-        header("refresh:5;url= report-art-stock.php?linea=$linea?fecha1=$fecha1?fecha2=$fecha2");
+        header("refresh:5;url= report-art-stock.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2");
     }else {
         header('refresh:5;url= form.php');
     }
