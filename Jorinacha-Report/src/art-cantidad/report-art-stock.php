@@ -57,7 +57,7 @@ if ($_POST) {
     <tbody>
       <?php
 
-      $res1 = getArt('Previa Shop', $linea);
+      $res1 = getArt('Previa Shop', $linea , 0);
       $n = 1;
       for ($e = 0; $e < count($res1); $e++) {
 

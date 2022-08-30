@@ -68,7 +68,12 @@ include '../../services/sqlserver.php';
 
         </select>
       </div>
-      <!-- FORMULAIO DE FECHAS -->
+      <!-- FORMULAIO DE cantidades -->
+      <div class="form-group">
+        <label for="art" class="form-label ">Articulo</label>
+        <input type="art" name="art" id="">
+      </div>
+
       <div class="form-group">
         <label for="number" class="form-label ">Cantidad</label>
         <input type="number" name="number" id="">
@@ -77,9 +82,10 @@ include '../../services/sqlserver.php';
       <div class="form-group">
         <label for="condicional" class="form-label ">Condicional</label>
         <select name="linea" id="">
-        <option value="mayor">Mayor</option>
+
         <option value="menor">Menor</option>
-        <option value="igual">Igual</option>
+        <option value="mayor">Mayor</option>
+
         </select>
       </div>
       <br>
