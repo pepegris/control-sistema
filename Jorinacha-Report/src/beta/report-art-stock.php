@@ -42,6 +42,7 @@ if ($_POST) {
         <th scope='col'>Modelo</th>
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
+        <th scope='col'>Desc</th>
         <th scope='col'>Costo Bs</th>
         <th scope='col'>Fecha ult Costo</th>
         <th scope='col'>Precio Bs</th>
@@ -89,6 +90,7 @@ if ($_POST) {
         $co_subl = getSub_lin($res0[$e]['co_subl']);
         $co_cat = getCat_art($res0[$e]['co_cat']);
         $co_color = getColores($res0[$e]['co_color']);
+        $desc = $res0[$e]['ubicacion'];
 
         $stock_act = round($res0[$e]['stock_act']);
         $total_stock_act_previa += $stock_act;
@@ -107,6 +109,7 @@ if ($_POST) {
           <td><?= $co_subl ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
+          <td><?= $desc ?></td>
           <?php
           $g = 1;
           $total_vendido = 0;

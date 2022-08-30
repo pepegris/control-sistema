@@ -84,6 +84,14 @@ $cuenta_on = ucwords($cuenta_on);
         </div>
       </a>
 
+      <a href="src/beta/form.php">
+        <div class="box">
+          <i class="lni lni-coffee-cup"></i>
+          <h5>Reporte de Fallas 2</h5>
+          <h4>Articulos vendidos a una fecha, stock Actual y Pedidos</h4>
+        </div>
+      </a>
+
       <a href="src/art-compras/form.php">
         <div class="box">
           <i class="lni lni-write"></i>
@@ -91,13 +99,7 @@ $cuenta_on = ucwords($cuenta_on);
           <h4>Articulos comprados, cantidad y Stock</h4>
         </div>
       </a>
-      <a href="src/beta/form.php">
-        <div class="box">
-          <i class="lni lni-coffee-cup"></i>
-          <h5>Desarrollo</h5>
-          <h4>Pronto aun En Desarrollo</h4>
-        </div>
-      </a>
+
       <a href="src/ordenes/form.php">
         <div class="box">
           <i class="lni lni-write"></i>
