@@ -12,7 +12,7 @@ if (!$conn) {
 /* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA*/
 
 
-    $sedes_ar = array(
+    $sedes = array(
         "Previa Shop",
         "Comercial Merina" ,
         "Comercial Merina III" ,

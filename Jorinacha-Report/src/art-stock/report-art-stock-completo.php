@@ -205,7 +205,8 @@ if (isset($_GET)) {
                         echo "<p style='color:yellow'>Parc/Procesada</p> $documento";
                         break;
                       case 2:
-                        echo "<p style='color:green'>Procesada</p> $documento";
+                        echo "<p style='color:red'>Sin ningun Pedido</p>";
+                        #echo "<p style='color:green'>Procesada</p> $documento";
                         break;
 
                       default:

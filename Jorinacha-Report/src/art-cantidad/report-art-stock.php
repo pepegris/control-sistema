@@ -102,8 +102,8 @@ form , td {
               $f++;
             } else {
 
-              $res3 = getArt_stock_tiendas($sedes_ar[$f], $co_art);
-              $stock_act_tienda = round($res3[0]['stock_act']);
+              $res2 = getArt_stock_tiendas($sedes_ar[$f], $co_art);
+              $stock_act_tienda = round($res2[0]['stock_act']);
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
 
