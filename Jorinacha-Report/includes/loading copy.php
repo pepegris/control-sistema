@@ -20,6 +20,7 @@ h1{
 }
 img{
   width: 100px;
+  border-radius: 100%;
 }
 .preloader {
   width: 100px;
