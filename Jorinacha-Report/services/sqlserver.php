@@ -4,7 +4,7 @@
 /* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA*/
 
 
-    $sedes = array(
+    $sedes_ar = array(
         "Previa Shop",
         "Comercial Merina" ,
         "Comercial Merina III" ,
