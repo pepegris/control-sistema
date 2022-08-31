@@ -16,11 +16,9 @@
 
 }
 h1{
-  width: 10px;
+  color: white;
 }
-img{
-  width: 1px;
-}
+
 .preloader {
   width: 100px;
   height: 100px;
