@@ -391,7 +391,7 @@ function getFactura($sede, $co_art, $fecha1, $fecha2)
 
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $total_art = number_format($row['total_art'], 2, ',', '.');
+                    $total_art = $row['total_art'];
                     break;
                 }
                 $res = $total_art;
