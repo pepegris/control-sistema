@@ -728,6 +728,9 @@ pulse
 */
 
 .pulse{
+
+	animation-delay: 3s;
+
 	animation-name: pulse;
 	-webkit-animation-name: pulse;	
 
@@ -737,7 +740,7 @@ pulse
 	animation-iteration-count: infinite;
 	-webkit-animation-iteration-count: infinite;
 
-	animation-delay: 3s;
+
 }
 
 @keyframes pulse {
