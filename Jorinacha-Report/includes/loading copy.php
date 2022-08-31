@@ -57,14 +57,6 @@
 
 
 </body>
-<script>
-  $(document).ready(function() {
 
-    $('#slideUp').fadeOut(3500);
-
-  });
-
-
-</script>
 
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
