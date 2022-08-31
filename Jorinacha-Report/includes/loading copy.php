@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../assets/css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/animations.css">
 <style>
    body{
     height: 100vh;
@@ -19,7 +20,7 @@ h1{
   color:white;
 }
 img{
-  width: 100px;
+  width: 110px;
   border-radius: 100%;
 }
 .preloader {
@@ -48,7 +49,10 @@ img{
 
 <h1>Revisando Datos</h1>
 <div class="preloader"></div>
- <img src="../assets/giphy.gif" alt="" srcset="">
+ <img class="slideUp" src="../assets/giphy.gif" alt="" srcset="">
  
     
 </body>
+
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
