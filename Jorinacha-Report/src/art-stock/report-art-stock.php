@@ -137,7 +137,7 @@ form , td {
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
               $res4 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
-              $vendido_tienda = number_format($res4, 2, ',', '.');
+              $vendido_tienda = number_format($res4, 0, ',', '.');
               $total_vendido_tienda [$sedes_ar[$f]] += $vendido_tienda;
 
               $res5 = getFactura($sedes_ar[$f], $co_art,$fecha1, $fecha2);

@@ -165,7 +165,7 @@ if (isset($_GET)) {
               $total_enviado_tienda[$sedes_ar[$f]] += $total_enviado;
 
               $res5 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
-              $vendido_tienda = number_format($res4, 2, ',', '.');
+              $vendido_tienda = number_format($res4, 0, ',', '.');
               $total_vendido_tienda[$sedes_ar[$f]] += $vendido_tienda;
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art);
