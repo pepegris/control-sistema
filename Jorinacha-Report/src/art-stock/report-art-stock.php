@@ -46,9 +46,6 @@ form , td {
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
 
-          
-          
-
           if ($sedes_ar[$i] != null) {
 
             $sede = $sedes_ar[$i];

@@ -79,7 +79,7 @@ $cuenta_on = ucwords($cuenta_on);
     <div class="container__box">
       <a href="src/art-stock/form.php">
         <div class="box">
-          <i class="lni lni-write"></i>
+          <i class="lni lni-dropbox"></i>
           <h5>Reporte de Fallas</h5>
           <h4>Articulos vendidos a una fecha y stock Actual y Pedidos</h4>
         </div>
@@ -95,7 +95,7 @@ $cuenta_on = ucwords($cuenta_on);
 
       <a href="src/ordenes/form.php">
         <div class="box">
-          <i class="lni lni-write"></i>
+          <i class="lni lni-dollar"></i>
           <h5>Ordenes de Compra</h5>
           <h4>Reportes de ordenes de compras de todas las tiendas</h4>
         </div>
