@@ -83,7 +83,9 @@ slideUp
 
 .slideUp{
 
+	display: none;
 	animation-delay: 3s;
+	display: block ;
 
 	animation-name: slideUp;
 	-webkit-animation-name: slideUp;	
