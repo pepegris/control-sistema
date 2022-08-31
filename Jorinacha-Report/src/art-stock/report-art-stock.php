@@ -161,7 +161,7 @@ form , td {
       <?php  } ?>
       <tr>
         <th></th>
-        <td colspan="7"></td>
+        <td colspan="9"></td>
         <td>
           <h4>Total</h4>
         </td>

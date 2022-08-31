@@ -379,6 +379,12 @@ function getFactura($sede, $co_art, $fecha1, $fecha2)
             WHERE reng_fac.co_art='$co_art' and factura.co_cli='$cliente' and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'
             ORDER BY fe_us_in DESC";
 
+/*             $sql = "SELECT top 1  factura.fact_num,total_art 
+            FROM reng_fac
+            INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
+            WHERE reng_fac.co_art='$co_art' and factura.co_cli='$cliente' and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'
+            ORDER BY fe_us_in DESC"; */
+
             $consulta = sqlsrv_query($conn, $sql);
 
             if ($consulta != null) {
