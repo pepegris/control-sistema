@@ -19,7 +19,7 @@ h1{
   color:white;
 }
 img{
-  width: 20px;
+  width: 100px;
 }
 .preloader {
   width: 100px;
