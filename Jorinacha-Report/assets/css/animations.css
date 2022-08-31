@@ -82,6 +82,9 @@ slideUp
 
 
 .slideUp{
+
+	animation-delay: 3s;
+
 	animation-name: slideUp;
 	-webkit-animation-name: slideUp;	
 
@@ -729,7 +732,7 @@ pulse
 
 .pulse{
 
-	animation-delay: 3s;
+
 
 	animation-name: pulse;
 	-webkit-animation-name: pulse;	
