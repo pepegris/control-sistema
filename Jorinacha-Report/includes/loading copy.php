@@ -59,25 +59,14 @@
 </body>
 
 <script type="text/javascript">
-  function miFuncion() {
-    document.getElementsByClassName('pulse').style.display = 'block';
+  const divs = document.querySelectorAll('.pulse');
 
-   //llamas a la funcion 2 luego de 3 segundos
-    setTimeout(mifuncion2,3000);
-  }
-
-function mifuncion2(){
-    document.getElementById('pulse').style.display = 'none';
-    document.getElementById('pulse').style.display = 'block';
-
-//llamas a la funcion 3 luego de 3 segundos
-    setTimeout(mifuncion3,3000);
-}
-
-function mifuncion3(){
-    document.getElementById('pulse').style.display = 'none';
-    document.getElementById('pulse').style.display = 'block';
-}
+  let i = 0;
+  let interval = setInterval(() => {
+    divs[i++].style.display = 'block';
+    if (i == divs.length)
+      clearInterval(interval);
+  }, 2500);
 </script>
 
 
