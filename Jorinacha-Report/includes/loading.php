@@ -16,7 +16,7 @@
 
 }
 h1{
-  color:white;
+  width: 10px;
 }
 img{
   width: 1px;
