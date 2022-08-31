@@ -18,6 +18,9 @@
 h1{
   color:white;
 }
+img{
+  width: 1px;
+}
 .preloader {
   width: 100px;
   height: 100px;
@@ -44,7 +47,7 @@ h1{
 
 <h1>Revisando Datos</h1>
 <div class="preloader"></div>
-<img src="../../assets/giphy.gif" alt="" srcset="">
-
+<!-- <img src="../../assets/giphy.gif" alt="" srcset="">
+ -->
     
 </body>
