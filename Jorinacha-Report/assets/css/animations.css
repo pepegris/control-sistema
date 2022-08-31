@@ -85,13 +85,14 @@ slideUp
 	animation-name: slideUp;
 	-webkit-animation-name: slideUp;	
 
-	animation-duration: 10s;	
+	animation-duration: 1s;	
 	-webkit-animation-duration: 1s;
 
 	animation-timing-function: ease;	
 	-webkit-animation-timing-function: ease;
 
-	visibility: visible !important;			
+	visibility: visible !important;	
+	
 }
 
 @keyframes slideUp {
