@@ -161,11 +161,11 @@ if (isset($_GET)) {
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
               $res4 = getFactura($sedes_ar[$f], $co_art, $fecha1, $fecha2);
-              $total_enviado = $res4['total_art'];
+              $total_enviado = round($res4['total_art']);
               $total_enviado_tienda[$sedes_ar[$f]] += $total_enviado;
 
               $res5 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
-              $vendido_tienda = round($res5);
+              $vendido_tienda = number_format($res4, 2, ',', '.');
               $total_vendido_tienda[$sedes_ar[$f]] += $vendido_tienda;
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art);
