@@ -47,7 +47,7 @@ img{
 
 <h1>Revisando Datos</h1>
 <div class="preloader"></div>
- <img src="../../assets/giphy.gif" alt="" srcset="">
+ <img src="../assets/giphy.gif" alt="" srcset="">
  
     
 </body>
