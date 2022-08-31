@@ -54,13 +54,13 @@ img{
     
 </body>
 <script>
-  
+
 	$(window).scroll(function() {
 		$('#animatedElement').each(function(){
 		var imagePos = $(this).offset().top;
 
 		var topOfWindow = $(window).scrollTop();
-			if (imagePos < topOfWindow+400) {
+			if (imagePos < topOfWindow+8000) {
 				$(this).addClass("slideUp");
 			}
 		});
