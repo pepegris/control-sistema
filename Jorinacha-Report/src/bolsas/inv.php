@@ -33,15 +33,13 @@ include '../../services/sqlserver.php';
                 while ($row1 = mysqli_fetch_array($res1)) {
 
                     $sede = $row1['sedes_nom'];
-                    if ($sede == 'Sede Boleita') {
-                        $sede = 'Previa Shop';
+
+                    if ($sede != 'Sede Boleita') {
+                        
+                        echo "<option value='$sede'> $sede </option>";
                     }
 
-                ?>
-                    <option value="<?= $sede ?>"><?= $sede ?></option>
-
-
-                <?php $i++;
+                    $i++;
                 } ?>
             </select>
         </div>
