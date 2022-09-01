@@ -66,7 +66,7 @@ if ($_POST) {
                     
                     $fecha =  $Year . $Month . $d;
                     $res = getTasa($sedes[$e], $fecha);
-                    $tasa = number_format($res, 2, ',', '.');
+                    $tasa = number_format($res['tasa_v'], 2, ',', '.');
 
                     echo "<th>$tasa</th>";
 
