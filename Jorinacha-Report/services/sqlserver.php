@@ -517,7 +517,7 @@ function getOrdenes_Pag($sede, $fecha)
         try {
 
             $serverName = "172.16.1.19";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "KAGUA21", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             if ($database == 'MRIA3A21' or $database == 'MERINA21') {
