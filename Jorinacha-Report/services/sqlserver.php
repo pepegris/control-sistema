@@ -564,7 +564,7 @@ function getTasa($sede, $fecha)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-            $sql = "SELECT TOP 1 tasa_v,fecha from tasas where fecha ='$fecha' order by fecha desc";
+            $sql = "SELECT TOP 1 tasa_v,fecha from tasas where fecha >='$fecha' order by fecha";
 
 
             $consulta = sqlsrv_query($conn, $sql);
