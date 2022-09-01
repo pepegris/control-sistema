@@ -4,26 +4,26 @@
 /* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA*/
 
 
-    $sedes_ar = array(
-        "Previa Shop",
-        "Comercial Merina" ,
-        "Comercial Merina III" ,
-        "Comercial Corina I" ,
-        "Comercial Corina II" ,
-        "Comercial Punto Fijo" ,
-        "Comercial Matur" ,
-        "Comercial Valena" ,
-        "Comercial Trina" ,
-        "Comercial Kagu" ,
-        "Comercial Nachari" ,
-        "Comercial Higue" ,
-        "Comercial Apura",
-        "Comercial Vallepa",
-        "Comercial Ojena",
-        "Comercial Puecruz",
-        "Comercial Acari",
-        "Comercial Catica II",
-    );
+$sedes_ar = array(
+    "Previa Shop",
+    "Comercial Merina",
+    "Comercial Merina III",
+    "Comercial Corina I",
+    "Comercial Corina II",
+    "Comercial Punto Fijo",
+    "Comercial Matur",
+    "Comercial Valena",
+    "Comercial Trina",
+    "Comercial Kagu",
+    "Comercial Nachari",
+    "Comercial Higue",
+    "Comercial Apura",
+    "Comercial Vallepa",
+    "Comercial Ojena",
+    "Comercial Puecruz",
+    "Comercial Acari",
+    "Comercial Catica II",
+);
 
 
 
@@ -378,7 +378,7 @@ function getFactura($sede, $co_art, $fecha1, $fecha2)
             INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
             WHERE reng_fac.co_art='$co_art' and factura.co_cli='$cliente' and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'";
 
-/*             $sql = "SELECT top 1  factura.fact_num,total_art 
+            /*             $sql = "SELECT top 1  factura.fact_num,total_art 
             FROM reng_fac
             INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
             WHERE reng_fac.co_art='$co_art' and factura.co_cli='$cliente' and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'
@@ -550,6 +550,42 @@ function getOrdenes_Pag($sede, $fecha)
 }
 
 
+function getTasa($sede, $fecha)
+{
+
+    $database = Database($sede);
+
+
+    if ($database) {
+        try {
+
+            $serverName = "172.16.1.19";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+
+            $sql = "SELECT TOP 1 tasa_v,fecha from tasas where fecha ='$fecha' order by fecha desc";
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            while ($row = sqlsrv_fetch_array($consulta)) {
+
+                $tasa['tasa_v'] = $row['tasa_v'];
+                break;
+            }
+            $res = $tasa;
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
 
 
 /* 
