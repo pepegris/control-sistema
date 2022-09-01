@@ -46,9 +46,6 @@ form , td {
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
 
-          
-          
-
           if ($sedes_ar[$i] != null) {
 
             $sede = $sedes_ar[$i];
@@ -140,7 +137,7 @@ form , td {
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
               $res4 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
-              $vendido_tienda = round($res4);
+              $vendido_tienda = number_format($res4, 0, ',', '.');
               $total_vendido_tienda [$sedes_ar[$f]] += $vendido_tienda;
 
               $res5 = getFactura($sedes_ar[$f], $co_art,$fecha1, $fecha2);
@@ -164,7 +161,7 @@ form , td {
       <?php  } ?>
       <tr>
         <th></th>
-        <td colspan="7"></td>
+        <td colspan="9"></td>
         <td>
           <h4>Total</h4>
         </td>

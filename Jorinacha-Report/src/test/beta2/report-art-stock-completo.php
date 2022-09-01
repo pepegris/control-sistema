@@ -165,7 +165,7 @@ if (isset($_GET)) {
               $total_enviado_tienda[$sedes_ar[$f]] += $total_enviado;
 
               $res5 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
-              $vendido_tienda = round($res5);
+              $vendido_tienda = number_format($res4, 0, ',', '.');
               $total_vendido_tienda[$sedes_ar[$f]] += $vendido_tienda;
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art);
@@ -205,7 +205,8 @@ if (isset($_GET)) {
                         echo "<p style='color:yellow'>Parc/Procesada</p> $documento";
                         break;
                       case 2:
-                        echo "<p style='color:green'>Procesada</p> $documento";
+                        echo "<p style='color:red'>Sin ningun Pedido</p>";
+                        #echo "<p style='color:green'>Procesada</p> $documento";
                         break;
 
                       default:
@@ -237,7 +238,7 @@ if (isset($_GET)) {
       <?php  } ?>
       <tr>
         <th ></th>
-        <td colspan="9"></td>
+        <td colspan="10"></td>
         <td>
           <h4>Total</h4>
         </td>
