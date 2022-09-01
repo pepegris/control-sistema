@@ -66,7 +66,7 @@
     divs[i++].style.display = 'block';
     if (i == divs.length)
       clearInterval(interval);
-  }, 120000);
+  }, 180000);
 </script>
 
 
