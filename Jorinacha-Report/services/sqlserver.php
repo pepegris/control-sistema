@@ -373,7 +373,7 @@ function getFactura($sede, $co_art, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "SELECT SUM(total_art )
+            $sql = "SELECT SUM(total_art ) as total_art
             FROM reng_fac
             INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
             WHERE reng_fac.co_art='$co_art' and factura.co_cli='$cliente' and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'";
