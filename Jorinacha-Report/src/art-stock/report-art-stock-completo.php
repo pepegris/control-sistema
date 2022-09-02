@@ -161,7 +161,7 @@ if (isset($_GET)) {
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
               $res4 = getFactura($sedes_ar[$f], $co_art, $fecha1, $fecha2);
-              $total_enviado = round($res4['total_art']);
+              $total_enviado = number_format($res4['total_art'], 0, ',', '.');
               $total_enviado_tienda[$sedes_ar[$f]] += $total_enviado;
 
               $res5 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
@@ -199,13 +199,13 @@ if (isset($_GET)) {
                   } else {
                     switch ($status) {
                       case 0:
-                        echo "<p style='color:orangered'>Sin Procesar</p> $documento";
+                        echo "<p style='color:red'>Sin Procesar</p> $documento";
                         break;
                       case 1:
                         echo "<p style='color:yellow'>Parc/Procesada</p> $documento";
                         break;
                       case 2:
-                        echo "<p style='color:red'>Sin ningun Pedido</p>";
+                        echo "<p style='color:orangered'>Sin Pedido nuevo</p>";
                         #echo "<p style='color:green'>Procesada</p> $documento";
                         break;
 
