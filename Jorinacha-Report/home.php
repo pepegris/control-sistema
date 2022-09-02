@@ -135,7 +135,7 @@ $cuenta_on = ucwords($cuenta_on);
         </div>
       </a>
 
-      <a href="src/art-cantidad/form.php">
+      <a href="src/beta2/form.php">
         <div class="box">
           <i class="lni lni-coffee-cup"></i>
           <h5>Desarrollo</h5>
