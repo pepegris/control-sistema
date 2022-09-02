@@ -190,7 +190,7 @@ if (isset($_GET)) {
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
-              <td><?= $total_enviado  ?></td>
+              <td style='color:yellow'><?= $total_enviado  ?></td>
               <td><?= $vendido_tienda ?></td>
               <td>$<?= $prec_vta5_tienda ?></td>
               <td><?php
