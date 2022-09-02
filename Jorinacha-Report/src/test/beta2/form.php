@@ -1,8 +1,8 @@
 <?php
-require '../../includes/log.php';
-include '../../includes/header.php';
+require '../../../includes/log.php';
+include '../../../includes/header.php';
 include '../../services/mysql.php';
-include '../../services/sqlserver.php';
+include '../../../services/sqlserver.php';
 
 ?>
 
@@ -100,4 +100,4 @@ include '../../services/sqlserver.php';
 
 
 
-<?php include '../../includes/footer.php'; ?>
+<?php include '../../../includes/footer.php'; ?>
