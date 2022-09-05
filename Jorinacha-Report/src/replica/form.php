@@ -21,8 +21,9 @@ include '../../services/sqlserver.php';
       $res1= $res['fe_us_in'];
       $fecha =$res1->format('Y-m-d');
       
-      
+      echo "<br>";
       echo "<p>$sede</p>";
+      echo "<br>";
       echo "<p>$fecha</p>";
       echo "<br>";
 
