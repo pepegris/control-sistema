@@ -5,7 +5,7 @@ include '../../services/mysql.php';
 include '../../services/sqlserver.php';
 
 ?>
-
+<h1>Replica</h1>
 
 <div id="body">
 
