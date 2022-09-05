@@ -18,10 +18,11 @@ include '../../services/sqlserver.php';
 
       if ($sedes_ar[$i] != 'Previa Shop') {
 
-        $res = Replica($sedes_ar[$i]);
         $sede = $sedes_ar[$i];
+
+        $res = Replica($sedes_ar[$i]);
         $res1 = $res['fe_us_in'];
-        $fecha = $res1->format('Y-m-d');
+        $fecha = $res1->format('d-m-Y');
     ?>
 
         <li class="list-group-item"><b style="color:black" ><?= $sede ?></b> / <?=$fecha ?></li>
