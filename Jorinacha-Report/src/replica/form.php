@@ -8,7 +8,7 @@ include '../../services/sqlserver.php';
 
 
 <div id="body">
-  <h1>Replica</h1>
+
   <ul class="list-group">
     <?php
 
@@ -22,7 +22,7 @@ include '../../services/sqlserver.php';
         $fecha = $res1->format('Y-m-d');
     ?>
 
-        <li class="list-group-item"><b>$sede</b> / $fecha </li>
+        <li class="list-group-item"><b><?= $sede ?></b> / <?=$fecha ?></li>
 
 
 
