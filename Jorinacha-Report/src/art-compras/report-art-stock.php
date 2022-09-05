@@ -96,8 +96,8 @@ if ($_POST) {
           $fact_num =  $res2['fact_num'];
           //$res3 =  $res['fec_lote'];
           $fec_lote = $res2['fec_lote'];
-          $total_art = $res2['total_art'];
-          $prec_vta = $res2['prec_vta'];
+          $total_art = round($res2['total_art']);
+          $prec_vta =  number_format($res2['prec_vta'], 2, ',', '.');
 
           ?>
           <td><?= $fact_num  ?></td>
