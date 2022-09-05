@@ -35,7 +35,7 @@ include '../../services/sqlserver.php';
                     $sede = $row1['sedes_nom'];
 
                     if ($sede != 'Sede Boleita') {
-                        
+
                         echo "<option value='$sede'> $sede </option>";
                     }
 
@@ -43,6 +43,15 @@ include '../../services/sqlserver.php';
                 } ?>
             </select>
         </div>
+
+        <label for="pedidos" class="form-label ">Pedidos</label>
+        <select name="pedidos" id="">
+
+            <option value="sin">Sin pedidos</option>
+            <option value="con">Con pedidos</option>
+
+
+        </select>
 
 
         <br>
