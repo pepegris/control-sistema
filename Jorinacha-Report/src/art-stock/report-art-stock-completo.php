@@ -90,7 +90,7 @@ if (isset($_GET)) {
         $stock_act = round($res0[$e]['stock_act']);
         $total_stock_act_previa += $stock_act;
 
-        $precio = round($res0[$e]['prec_vta1']);
+        $precio = $res0[$e]['prec_vta3'];
         $prec_vta1 = number_format($precio, 2, ',', '.');
 
         $prec_vta5 = round($res0[$e]['prec_vta5']);
