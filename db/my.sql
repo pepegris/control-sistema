@@ -242,8 +242,41 @@ create table reporte (
 );
 
 
+create table bolsas (
+  id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+  tienda VARCHAR(85) NOT NULL,
+  bolsa_1 VARCHAR (85) not null,
+  bolsa_2 VARCHAR (85) not null,
+  bolsa_3 VARCHAR (85) not null,
+  bolsa_4 VARCHAR (85) ,
+  bolsa_5 VARCHAR (85) ,
+  cantidad_1 VARCHAR (85) not null,
+  cantidad_2 VARCHAR (85) not null,
+  cantidad_3 VARCHAR (85) not null,
+  cantidad_4 VARCHAR (85) not null,
+  cantidad_5 VARCHAR (85) not null,
+  fecha datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 
+  
+);
 
-
-
+    INSERT INTO  sedes VALUES(null,'Comercial Merina', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Merina III', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Corina I', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Corina II', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Punto Fijo', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Matur', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Valena', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Trina', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Kagu', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Nachari', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Higue', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Turme', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Apura', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Vallepa', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Ojena', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Puecruz', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Acari', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
+    INSERT INTO  sedes VALUES(null,'Comercial Catica II', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0); 
+    INSERT INTO  sedes VALUES(null,'Comercial Catica I', 'Grande','Mediana','Pequeña',null,null,0,0,0,0,0);
 

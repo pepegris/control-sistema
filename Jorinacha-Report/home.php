@@ -101,11 +101,13 @@ $cuenta_on = ucwords($cuenta_on);
         </div>
       </a>
 
-      <div class="box">
-        <i class="lni lni-construction"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-      </div>
+      <a href="src/replica/form.php">
+        <div class="box">
+          <i class="lni lni-write"></i>
+          <h5>Replica/h5>
+          <h4>...</h4>
+        </div>
+      </a>
       <div class="box">
         <i class="lni lni-construction"></i>
         <h5>Pronto</h5>

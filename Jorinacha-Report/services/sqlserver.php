@@ -659,6 +659,44 @@ function getCot_Ped($sede, $co_art)
 } */
 
 
+function Replica($sede){
+
+
+    $database = Database($sede);
+
+
+    if ($database) {
+        try {
+
+            $serverName = "172.16.1.19";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+
+            $sql = "SELECT top 1 fe_us_in from factura order by fe_us_in desc";
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            while ($row = sqlsrv_fetch_array($consulta)) {
+
+                $fecha['fe_us_in'] = $row['fe_us_in'];
+                break;
+            }
+            $res = $fecha;
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+
+}
+
 
 
 
