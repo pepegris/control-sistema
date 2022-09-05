@@ -104,7 +104,7 @@ $cuenta_on = ucwords($cuenta_on);
       <a href="src/replica/form.php">
         <div class="box">
           <i class="lni lni-write"></i>
-          <h5>Replica/h5>
+          <h5>Replica</h5>
           <h4>...</h4>
         </div>
       </a>
