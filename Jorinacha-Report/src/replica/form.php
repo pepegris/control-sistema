@@ -6,14 +6,6 @@ include '../../services/sqlserver.php';
 
 ?>
 
-<style>
-  .form-check {
-    display: flexbox;
-
-
-
-  }
-</style>
 
 <div id="body">
   <h1>Replica</h1>
@@ -29,8 +21,10 @@ include '../../services/sqlserver.php';
       $res1= $res['fe_us_in'];
       $fecha =$res1->format('Y-m-d');
       
+      
       echo "<p>$sede</p>";
       echo "<p>$fecha</p>";
+      echo "<br>";
 
 
 
