@@ -103,7 +103,7 @@ $cuenta_on = ucwords($cuenta_on);
 
       <a href="src/replica/form.php">
         <div class="box">
-          <i class="lni lni-database"></i>
+          <i class="lni lni-rss-feed"></i>
           <h5>Replica</h5>
           <h4>Fechas de las Replicas</h4>
         </div>
