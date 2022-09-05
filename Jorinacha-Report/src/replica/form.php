@@ -9,32 +9,31 @@ include '../../services/sqlserver.php';
 
 <div id="body">
   <h1>Replica</h1>
+  <ul class="list-group">
+    <?php
 
-  <?php
+    for ($i = 0; $i < count($sedes_ar); $i++) {
 
-  for ($i=0; $i < count($sedes_ar) ; $i++) { 
+      if ($sedes_ar[$i] != 'Previa Shop') {
 
-    if ($sedes_ar[$i] != 'Previa Shop') {
+        $res = Replica($sedes_ar[$i]);
+        $sede = $sedes_ar[$i];
+        $res1 = $res['fe_us_in'];
+        $fecha = $res1->format('Y-m-d');
+    ?>
 
-      $res = Replica($sedes_ar[$i]);
-      $sede = $sedes_ar[$i];
-      $res1= $res['fe_us_in'];
-      $fecha =$res1->format('Y-m-d');
-      
-      echo "<br>";
-      echo "<p>$sede</p>";
-      echo "<br>";
-      echo "<p>$fecha</p>";
-      echo "<br>";
+        <li class="list-group-item"><b>$sede</b> / $fecha </li>
 
 
+
+    <?php
 
       }
-  }
+    }
 
-  ?>
+    ?>
 
-
+  </ul>
 
 
 </div>
