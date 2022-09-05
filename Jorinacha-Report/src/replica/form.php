@@ -5,11 +5,13 @@ include '../../services/mysql.php';
 include '../../services/sqlserver.php';
 
 ?>
-<center><h1>Replica</h1></center>
+
 
 <div id="body">
 
   <ul class="list-group">
+  <li class="list-group-item disabled" aria-disabled="true"><center><b>Replica</b></center></li>
+
     <?php
 
     for ($i = 0; $i < count($sedes_ar); $i++) {
