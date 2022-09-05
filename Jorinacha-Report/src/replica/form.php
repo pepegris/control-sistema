@@ -22,7 +22,7 @@ include '../../services/sqlserver.php';
         $fecha = $res1->format('Y-m-d');
     ?>
 
-        <li class="list-group-item"><b><?= $sede ?></b> / <?=$fecha ?></li>
+        <li class="list-group-item"><b style="color:black" ><?= $sede ?></b> / <?=$fecha ?></li>
 
 
 
