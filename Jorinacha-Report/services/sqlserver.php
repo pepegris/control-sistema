@@ -673,7 +673,7 @@ function Replica($sede){
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-            $sql = "SELECT top 1 fe_us_in from factura order by fe_us_in desc";
+            $sql = "SELECT top 1 fec_emis from factura order by fec_emis desc";
 
 
             $consulta = sqlsrv_query($conn, $sql);
