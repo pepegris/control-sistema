@@ -680,7 +680,7 @@ function Replica($sede){
 
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $fecha['fe_us_in'] = $row['fe_us_in'];
+                $fecha['fec_emis'] = $row['fec_emis'];
                 break;
             }
             $res = $fecha;

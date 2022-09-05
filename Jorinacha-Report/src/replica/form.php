@@ -21,7 +21,7 @@ include '../../services/sqlserver.php';
         $sede = $sedes_ar[$i];
 
         $res = Replica($sedes_ar[$i]);
-        $res1 = $res['fe_us_in'];
+        $res1 = $res['fec_emis'];
         $fecha = $res1->format('d-m-Y');
     ?>
 
