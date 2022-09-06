@@ -11,6 +11,13 @@ include '../../services/sqlserver.php';
 
     width: 23px;
   }
+  @media (max-width: 900px){
+
+ p{
+  size: 5px;
+ }
+}
+
 </style>
 
 
@@ -18,7 +25,7 @@ include '../../services/sqlserver.php';
 
   <ul class="list-group">
     <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
-      <center><b>Replica</b></center>
+      <center><p><b>Replica</b></p></center>
 
     </li>
     <?php
@@ -47,11 +54,11 @@ include '../../services/sqlserver.php';
 
         if ($past  >= $now_1) {
 
-          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-check.svg' alt=''> </li>";
+          echo "<li class='list-group-item'><p><b style='color:black'> $sede </b> /  $fecha</p>  <img src='./img/cloud-check.svg' alt=''> </li>";
         } elseif ($past  >= $now_2) {
-          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-sync.svg' alt=''> </li>";
+          echo "<li class='list-group-item'><p><b style='color:black'> $sede </b> /  $fecha</p>  <img src='./img/cloud-sync.svg' alt=''> </li>";
         } else {
-          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-upload.svg' alt=''> </li>";
+          echo "<li class='list-group-item'><p><b style='color:black'> $sede </b> /  $fecha</p>  <img src='./img/cloud-upload.svg' alt=''> </li>";
         }
       }
     }
