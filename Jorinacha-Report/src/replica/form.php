@@ -27,38 +27,25 @@ include '../../services/sqlserver.php';
         $fecha = $res1->format('d-m-Y');
 
         $fecha_actual = date("d-m-Y");
-        $fecha_entrada = date("d-m-Y", strtotime($fecha));
 
         $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 3 day"));
         $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 7 day"));
 
 
         $past = new DateTime($fecha);
-        $now = new DateTime($fecha1 );
-        $dist_past = new DateTime($fecha);
-        $dist_future = new DateTime( $fecha2);
-
-        if ($past >= $now ) {
-          echo "$sede <br>";
-          echo "$fecha <br>";
-          echo "$fecha_actual <br>";
-          echo "$fecha_entrada <br>";
-          echo "$fecha1 <br>";
-          echo "$fecha2 <br>";
-        }
+        $now_1 = new DateTime($fecha1 );
+        $now_2 = new DateTime( $fecha2);
 
 
 
-
-
-        /*         if ( $fecha >= $fecha_actual) {
+       if ( $past  >= $now_1) {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-check'></i></li>";
-        }elseif (    $fecha >= $fecha2) {
+        }elseif (    $past  >= $now_2) {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-sync'></i></li>";
         }
          else {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-upload'></i></li>";
-        } */
+        } 
       }
     }
 
