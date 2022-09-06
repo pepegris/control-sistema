@@ -27,13 +27,19 @@ include '../../services/sqlserver.php';
         $fecha = $res1->format('d-m-Y');
 
         $fecha_actual = date("d-m-Y");
-        $fecha_entrada = date("d-m-Y",strtotime($fecha)) ;
+        $fecha_entrada = date("d-m-Y", strtotime($fecha));
 
-        $fecha1= date("d-m-Y",strtotime($fecha_actual."- 3 day"));
-        $fecha2= date("d-m-Y",strtotime($fecha_actual."- 7 day"));
+        $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 3 day"));
+        $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 7 day"));
 
-        if ($fecha >= $fecha1) {
-          echo "$sede <br>"; 
+
+        $past = new DateTime($fecha);
+        $now = new DateTime($fecha1 );
+        $dist_past = new DateTime($fecha);
+        $dist_future = new DateTime( $fecha2);
+
+        if ($past >= $now ) {
+          echo "$sede <br>";
           echo "$fecha <br>";
           echo "$fecha_actual <br>";
           echo "$fecha_entrada <br>";
@@ -41,11 +47,11 @@ include '../../services/sqlserver.php';
           echo "$fecha2 <br>";
         }
 
-        
 
 
 
-/*         if ( $fecha >= $fecha_actual) {
+
+        /*         if ( $fecha >= $fecha_actual) {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-check'></i></li>";
         }elseif (    $fecha >= $fecha2) {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-sync'></i></li>";
@@ -53,8 +59,6 @@ include '../../services/sqlserver.php';
          else {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-upload'></i></li>";
         } */
-
-
       }
     }
 
@@ -65,8 +69,8 @@ include '../../services/sqlserver.php';
 
   </ul>
 
-  
-  
+
+
 
 
 </div>
