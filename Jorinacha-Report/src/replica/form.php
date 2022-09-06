@@ -38,7 +38,7 @@ include '../../services/sqlserver.php';
 
 
 
-    $fecha_actual = strtotime(date("d-m-Y", time()));
+    $fecha_actual = date("d-m-Y");
     $fecha_entrada = date("d-m-Y",strtotime($fecha)) ;
 
     //sumo 1 mes
