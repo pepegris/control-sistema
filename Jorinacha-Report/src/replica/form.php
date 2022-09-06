@@ -36,14 +36,24 @@ include '../../services/sqlserver.php';
       }
     }
 
-    echo $hoy = date("dmY");
+
 
     $fecha_actual = strtotime(date("d-m-Y", time()));
     $fecha_entrada = strtotime($fecha);
 
+    //sumo 1 mes
+    //echo date("d-m-Y",strtotime($fecha_actual."+ 1 month")); 
+    //resto 1 mes
+    $fecha2= date("d-m-Y",strtotime($fecha_actual."- 1 month"));
+
+    echo "$fecha2 <br>";
+
     if ($fecha_actual > $fecha_entrada) {
       echo "La fecha actual es mayor a la comparada.";
-    } else {
+    }elseif ($fecha2 > $fecha_entrada) {
+      echo "2La fecha comparada es igual o menor2";
+    }
+     else {
       echo "La fecha comparada es igual o menor";
     }
     ?>
