@@ -7,7 +7,7 @@ include '../../services/sqlserver.php';
 ?>
 <style>
 img{
-  display: flexbox;
+  display: flex;
   width: 15px;
 }
 </style>
