@@ -11,7 +11,9 @@ include '../../services/sqlserver.php';
 
     width: 23px;
   }
-  @media (max-width: 1100px){
+
+
+  @media (max-width: 900px){
 
  ul li{
   font-size: 1px;
