@@ -9,7 +9,7 @@ include '../../services/sqlserver.php';
 img{
 
   display: block;
-  width: 35px;
+  width: 25px;
 }
 
 </style>
