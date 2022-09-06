@@ -26,16 +26,21 @@ include '../../services/sqlserver.php';
         $res1 = $res['fec_emis'];
         $fecha = $res1->format('d-m-Y');
 
+        $fecha_actual = date("d-m-Y");
+        $fecha_entrada = date("d-m-Y",strtotime($fecha)) ;
 
-        #<li class="list-group-item"><b style="color:black"> $sede </b> /  $fecha </li>
+        $fecha1= date("d-m-Y",strtotime($fecha_actual."- 3 day"));
+        $fecha2= date("d-m-Y",strtotime($fecha_actual."- 7 day"));
+
+
 
         if ( $fecha_entrada >= $fecha1) {
-          echo '<i class="lni lni-cloud-check"></i>';
+          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-check'></i></li>";
         }elseif (    $fecha_entrada >= $fecha2) {
-          echo '<i class="lni lni-cloud-sync"></i>';
+          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-sync'></i></li>";
         }
          else {
-          echo '<i class="lni lni-cloud-upload"></i>';
+          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-upload'></i></li>";
         }
 
 
@@ -43,21 +48,6 @@ include '../../services/sqlserver.php';
     }
 
 
-
-    $fecha_actual = date("d-m-Y");
-    $fecha_entrada = date("d-m-Y",strtotime($fecha)) ;
-
-    //sumo 1 mes
-    //echo date("d-m-Y",strtotime($fecha_actual."+ 1 month")); 
-    //resto 1 mes
-
-    $fecha1= date("d-m-Y",strtotime($fecha_actual."- 3 day"));
-    $fecha2= date("d-m-Y",strtotime($fecha_actual."- 7 day"));
-
-    echo "$fecha_actual <br>";
-    echo "$fecha_entrada <br>";
-    echo "$fecha1 <br>";
-    echo "$fecha2 <br>";
 
 
     ?>
