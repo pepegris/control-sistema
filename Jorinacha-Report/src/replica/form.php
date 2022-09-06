@@ -44,25 +44,28 @@ include '../../services/sqlserver.php';
     //sumo 1 mes
     //echo date("d-m-Y",strtotime($fecha_actual."+ 1 month")); 
     //resto 1 mes
-    $fecha2= date("d-m-Y",strtotime($fecha_actual."- 1 month"));
+
+    $fecha1= date("d-m-Y",strtotime($fecha_actual."- 3 day"));
+    $fecha2= date("d-m-Y",strtotime($fecha_actual."- 7 day"));
+
 
     echo "$fecha2 <br>";
 
-    if ($fecha2 > $fecha_entrada ) {
-      echo "La fecha actual es mayor a la comparada.";
-    }elseif ($fecha_actual > $fecha_entrada) {
-      echo "2La fecha comparada es igual o menor2";
+    if ( $fecha_entrada >= $fecha1) {
+      echo '<i class="lni lni-cloud-check"></i>';
+    }elseif (    $fecha_entrada > $fecha2) {
+      echo '<i class="lni lni-cloud-sync"></i>';
     }
      else {
-      echo "La fecha comparada es igual o menor";
+      echo '<i class="lni lni-cloud-upload"></i>';
     }
     ?>
 
   </ul>
 
-  <i class="lni lni-cloud-check"></i>
-  <i class="lni lni-cloud-sync"></i>
-  <i class="lni lni-cloud-sync"></i>
+  
+  
+
 
 </div>
 
