@@ -14,8 +14,12 @@ include '../../services/sqlserver.php';
   }
 </style>
 
+<center>
+  <h1>Reporte de Fallas</h1>
+</center>
+
 <div id="body">
-  <center><h1>Reporte de Fallas</h1></center>
+
   <form action="routes.php" method="POST">
 
     <div class="fieldset">
