@@ -13,7 +13,7 @@ include '../../services/sqlserver.php';
   }
   @media (max-width: 900px){
 
- p{
+ span{
   size: 5px;
  }
 }
