@@ -8,7 +8,7 @@ include '../../services/sqlserver.php';
 <style>
   i{
     color: greenyellow;
-    background-color: black;
+
   }
 </style>
 
