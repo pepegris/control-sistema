@@ -9,8 +9,9 @@ include '../../services/sqlserver.php';
 img{
 
 
-
-  width: 25px;
+  display: block;
+  text-align: right;
+  width: 5px;
 }
 
 </style>
@@ -22,7 +23,7 @@ img{
     <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
       <center><b>Replica</b></center>
    
-
+      </li>
     <?php
 
     for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -62,7 +63,7 @@ img{
 
 
     ?>
- </li>
+
   </ul>
 
 
