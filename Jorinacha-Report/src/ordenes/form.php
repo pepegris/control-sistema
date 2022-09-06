@@ -15,9 +15,7 @@ include '../../services/sqlserver.php';
 
   }
 
-  h1 {
-    display: block;
-  }
+
 </style>
 <center>
   <h1>Reporte de Ordenes de Pagos</h1>
