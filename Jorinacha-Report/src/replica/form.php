@@ -8,7 +8,7 @@ include '../../services/sqlserver.php';
 <style>
 img{
   display: flex;
-  width: 15px;
+  width: 35px;
 }
 </style>
 
