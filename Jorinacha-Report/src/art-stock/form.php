@@ -9,10 +9,8 @@ include '../../services/sqlserver.php';
 <style>
   .form-check {
     display: flexbox;
-
-
-
   }
+  
 </style>
 
 <div id="body">
