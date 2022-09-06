@@ -49,12 +49,12 @@ img{
 
 
        if ( $past  >= $now_1) {
-          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <span><img src='./img/cloud-check.svg' alt='></span></li>";
+          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-check.svg' alt=''> </li>";
         }elseif (    $past  >= $now_2) {
-          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <span><img src='./img/cloud-sync.svg' alt=''></span></li>";
+          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-sync.svg' alt=''> </li>";
         }
          else {
-          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <span><img src='./img/cloud-upload.svg' alt=''></span></li>";
+          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-upload.svg' alt=''> </li>";
         } 
       }
     }
@@ -76,7 +76,7 @@ img{
 <ul class="list-group list-group-horizontal">
   <li class="list-group-item">An item</li>
   <li class="list-group-item">A second item</li>
-  <li class="list-group-item">A third item</li>
+  <li class="list-group-item"><img src='./img/cloud-check.svg' alt=''> </li>
 </ul>
 <ul class="list-group list-group-horizontal-sm">
   <li class="list-group-item">An item</li>
