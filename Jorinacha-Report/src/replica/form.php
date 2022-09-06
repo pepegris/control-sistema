@@ -22,7 +22,7 @@ img{
   <ul class="list-group">
     <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
       <center><b>Replica</b></center>
-    </li>
+   
 
     <?php
 
@@ -63,7 +63,7 @@ img{
 
 
     ?>
-
+ </li>
   </ul>
 
 
