@@ -11,7 +11,7 @@ img{
 
   display: block;
   text-align: right;
-  width: 5px;
+  width: 21px;
 }
 
 </style>
