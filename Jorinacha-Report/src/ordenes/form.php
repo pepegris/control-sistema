@@ -17,6 +17,7 @@ include '../../services/sqlserver.php';
 </style>
 
 <div id="body">
+  <center><h1>Reporte de Ordenes de Pagos</h1></center>
   <form action="report-art-stock.php" method="POST">
 
     <div class="fieldset">
