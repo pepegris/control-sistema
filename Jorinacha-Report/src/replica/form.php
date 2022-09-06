@@ -13,7 +13,7 @@ include '../../services/sqlserver.php';
   }
   @media (min-width: 1000px){
 
- li{
+ ul li{
   size: 1px;
  }
  img {
