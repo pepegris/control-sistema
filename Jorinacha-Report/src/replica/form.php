@@ -46,13 +46,13 @@ include '../../services/sqlserver.php';
 
 
         if ($past  >= $now_1) {
-          echo "
+/*           echo "
           <ul class='list-group list-group-horizontal-sm'>
         <li class='list-group-item'>$sede</li>
         <li class='list-group-item'>$fecha</li>
         <li class='list-group-item'><img src='./img/cloud-check.svg' alt=''></li>
-      </ul>";
-          #echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-check.svg' alt=''> </li>";
+      </ul>"; */
+          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-check.svg' alt=''> </li>";
         } elseif ($past  >= $now_2) {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-sync.svg' alt=''> </li>";
         } else {
