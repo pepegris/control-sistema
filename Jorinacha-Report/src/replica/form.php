@@ -48,6 +48,7 @@ include '../../services/sqlserver.php';
     $fecha1= date("d-m-Y",strtotime($fecha_actual."- 3 month"));
     $fecha2= date("d-m-Y",strtotime($fecha_actual."- 7 month"));
 
+    echo "$fecha_actual <br>";
     echo "$fecha_entrada <br>";
     echo "$fecha1 <br>";
     echo "$fecha2 <br>";
