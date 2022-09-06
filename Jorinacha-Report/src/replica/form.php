@@ -6,14 +6,13 @@ include '../../services/sqlserver.php';
 
 ?>
 <style>
-img{
+  img {
 
 
-  display: block;
-  text-align: right;
-  width: 21px;
-}
-
+    display: block;
+    text-align: right;
+    width: 21px;
+  }
 </style>
 
 
@@ -22,8 +21,8 @@ img{
   <ul class="list-group">
     <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
       <center><b>Replica</b></center>
-   
-      </li>
+
+    </li>
     <?php
 
     for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -43,19 +42,24 @@ img{
 
 
         $past = new DateTime($fecha);
-        $now_1 = new DateTime($fecha1 );
-        $now_2 = new DateTime( $fecha2);
+        $now_1 = new DateTime($fecha1);
+        $now_2 = new DateTime($fecha2);
 
 
 
-       if ( $past  >= $now_1) {
-          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-check.svg' alt=''> </li>";
-        }elseif (    $past  >= $now_2) {
+        if ($past  >= $now_1) {
+          echo "
+          <ul class='list-group list-group-horizontal-sm'>
+        <li class='list-group-item'>$sede</li>
+        <li class='list-group-item'>$fecha</li>
+        <li class='list-group-item'><img src='./img/cloud-check.svg' alt=''></li>
+      </ul>";
+          #echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-check.svg' alt=''> </li>";
+        } elseif ($past  >= $now_2) {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-sync.svg' alt=''> </li>";
-        }
-         else {
+        } else {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha  <img src='./img/cloud-upload.svg' alt=''> </li>";
-        } 
+        }
       }
     }
 
@@ -73,15 +77,11 @@ img{
 
 </div>
 
-<ul class="list-group list-group-horizontal">
-  <li class="list-group-item">An item</li>
-  <li class="list-group-item">A second item</li>
-  <li class="list-group-item"><img src='./img/cloud-check.svg' alt=''> </li>
-</ul>
-<ul class="list-group list-group-horizontal-sm">
-  <li class="list-group-item">An item</li>
-  <li class="list-group-item">A second item</li>
-  <li class="list-group-item">A third item</li>
+
+<ul class='list-group list-group-horizontal-sm'>
+  <li class='list-group-item'>An item</li>
+  <li class='list-group-item'>A second item</li>
+  <li class='list-group-item'>A third item</li>
 </ul>
 <ul class="list-group list-group-horizontal-md">
   <li class="list-group-item">An item</li>
