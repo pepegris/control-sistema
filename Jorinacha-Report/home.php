@@ -97,7 +97,7 @@ $cuenta_on = ucwords($cuenta_on);
         <div class="box">
           <i class="lni lni-investment"></i>
           <h5>Ordenes de Pagos</h5>
-          <h4>Reportes de ordenes de compras de todas las tiendas</h4>
+          <h4>Reportes de ordenes de pagos a PREVIA de todas las tiendas</h4>
         </div>
       </a>
 
