@@ -34,9 +34,9 @@ include '../../services/sqlserver.php';
 
 
 
-        if ( $fecha_entrada >= $fecha1) {
+        if ( $fecha >= $fecha1) {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-check'></i></li>";
-        }elseif (    $fecha_entrada >= $fecha2) {
+        }elseif (    $fecha >= $fecha2) {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-sync'></i></li>";
         }
          else {
