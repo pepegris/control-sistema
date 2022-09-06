@@ -39,7 +39,8 @@ ul{
 
 <div id="body">
 
-  <ul class="list-group slideUp" >
+  <div class="slideUp">
+  <ul class="list-group" >
     <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
       <center><b>Replica</b></center>
 
@@ -85,6 +86,7 @@ ul{
     ?>
 
   </ul>
+  </div>
 
 
 
