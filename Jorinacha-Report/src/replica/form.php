@@ -49,12 +49,12 @@ img{
 
 
        if ( $past  >= $now_1) {
-          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <img src='./img/cloud-check.svg' alt='></li>";
+          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <span><img src='./img/cloud-check.svg' alt='></span></li>";
         }elseif (    $past  >= $now_2) {
-          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <img src='./img/cloud-sync.svg' alt=''></li>";
+          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <span><img src='./img/cloud-sync.svg' alt=''></span></li>";
         }
          else {
-          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <img src='./img/cloud-upload.svg' alt=''></li>";
+          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <span><img src='./img/cloud-upload.svg' alt=''></span></li>";
         } 
       }
     }
