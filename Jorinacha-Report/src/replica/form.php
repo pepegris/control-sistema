@@ -14,7 +14,7 @@ include '../../services/sqlserver.php';
   @media (max-width: 900px){
 
  p{
-  size: 5px;
+  size: 1px;
  }
 }
 
