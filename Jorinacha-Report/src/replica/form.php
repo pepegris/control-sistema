@@ -11,6 +11,9 @@ img{
   display: inline-flex;
   width: 35px;
 }
+li{
+  display: block;
+}
 </style>
 
 
