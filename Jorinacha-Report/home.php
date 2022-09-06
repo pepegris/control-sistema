@@ -96,7 +96,7 @@ $cuenta_on = ucwords($cuenta_on);
       <a href="src/ordenes/form.php">
         <div class="box">
           <i class="lni lni-investment"></i>
-          <h5>Ordenes de Compra</h5>
+          <h5>Ordenes de Pagos</h5>
           <h4>Reportes de ordenes de compras de todas las tiendas</h4>
         </div>
       </a>
