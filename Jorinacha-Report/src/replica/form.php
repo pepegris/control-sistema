@@ -29,6 +29,15 @@ include '../../services/sqlserver.php';
 
         #<li class="list-group-item"><b style="color:black"> $sede </b> /  $fecha </li>
 
+        if ( $fecha_entrada >= $fecha1) {
+          echo '<i class="lni lni-cloud-check"></i>';
+        }elseif (    $fecha_entrada >= $fecha2) {
+          echo '<i class="lni lni-cloud-sync"></i>';
+        }
+         else {
+          echo '<i class="lni lni-cloud-upload"></i>';
+        }
+
 
       }
     }
@@ -42,22 +51,15 @@ include '../../services/sqlserver.php';
     //echo date("d-m-Y",strtotime($fecha_actual."+ 1 month")); 
     //resto 1 mes
 
-    $fecha1= date("d-m-Y",strtotime($fecha_actual."- 3 month"));
-    $fecha2= date("d-m-Y",strtotime($fecha_actual."- 7 month"));
+    $fecha1= date("d-m-Y",strtotime($fecha_actual."- 3 day"));
+    $fecha2= date("d-m-Y",strtotime($fecha_actual."- 7 day"));
 
     echo "$fecha_actual <br>";
     echo "$fecha_entrada <br>";
     echo "$fecha1 <br>";
     echo "$fecha2 <br>";
 
-    if ( $fecha_entrada >= $fecha1) {
-      echo '<i style:"color:green" class="lni lni-cloud-check"></i>';
-    }elseif (    $fecha_entrada >= $fecha2) {
-      echo '<i class="lni lni-cloud-sync"></i>';
-    }
-     else {
-      echo '<i class="lni lni-cloud-upload"></i>';
-    }
+
     ?>
 
   </ul>
