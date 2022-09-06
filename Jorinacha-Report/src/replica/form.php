@@ -16,6 +16,11 @@ include '../../services/sqlserver.php';
  span{
   size: 5px;
  }
+ img {
+
+
+width: 5px;
+}
 }
 
 </style>
