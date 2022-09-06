@@ -25,7 +25,7 @@ include '../../services/sqlserver.php';
         $fecha = $res1->format('d-m-Y');
     ?>
 
-        <li class="list-group-item"><b style="color:black" ><?= $sede ?></b> / <?=$fecha ?><i class="lni lni-cross-circle"></i></li>
+        <li class="list-group-item"><b style="color:black" ><?= $sede ?></b> / <?=$fecha ?></i></li>
 
 
 
@@ -34,10 +34,11 @@ include '../../services/sqlserver.php';
       }
     }
 
+    echo $hoy = date("Ymd");
     ?>
 
   </ul>
-  <i class="lni lni-checkmark-circle"></i>
+
   <i class="lni lni-cloud-check"></i>
   <i class="lni lni-cloud-sync"></i>
   <i class="lni lni-cloud-sync"></i>
