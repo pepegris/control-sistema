@@ -5,6 +5,11 @@ include '../../services/mysql.php';
 include '../../services/sqlserver.php';
 
 ?>
+<style>
+  .lni{
+    width: 100px;
+  }
+</style>
 
 
 <div id="body">
