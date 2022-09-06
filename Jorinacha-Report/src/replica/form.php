@@ -6,7 +6,7 @@ include '../../services/sqlserver.php';
 
 ?>
 <style>
-  .lni{
+  i{
     width: 100px;
   }
 </style>
