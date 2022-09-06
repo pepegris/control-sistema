@@ -53,7 +53,7 @@
 
   <h1>Revisando Datos</h1>
   <div class="preloader"></div>
-  <img class="pulse" src="../assets/giphy.gif" alt="" srcset="">
+  <img class="pulse" src="../../assets/giphy.gif" alt="" srcset="">
 
 
 </body>
@@ -66,7 +66,7 @@
     divs[i++].style.display = 'block';
     if (i == divs.length)
       clearInterval(interval);
-  }, 60000);
+  }, 120000);
 </script>
 
 
