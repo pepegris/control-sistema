@@ -672,8 +672,8 @@ function Replica($sede){
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-
-            $sql = "SELECT top 1 fec_emis from factura order by fec_emis desc";
+            $fecha_actual = date("Ymd");
+            $sql = "SELECT top 1 fec_emis from factura where fec_emis>='$fecha_actual' order by fec_emis desc";
 
 
             $consulta = sqlsrv_query($conn, $sql);
