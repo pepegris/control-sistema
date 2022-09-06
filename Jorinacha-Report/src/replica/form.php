@@ -48,9 +48,9 @@ include '../../services/sqlserver.php';
 
     echo "$fecha2 <br>";
 
-    if ($fecha_actual > $fecha_entrada) {
+    if ($fecha2 > $fecha_entrada ) {
       echo "La fecha actual es mayor a la comparada.";
-    }elseif ($fecha2 > $fecha_entrada) {
+    }elseif ($fecha_actual > $fecha_entrada) {
       echo "2La fecha comparada es igual o menor2";
     }
      else {
