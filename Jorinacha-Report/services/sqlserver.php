@@ -673,7 +673,7 @@ function Replica($sede){
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $fecha_actual = date("Ymd");
-            $sql = "SELECT top 1 fec_emis from factura where fec_emis>='$fecha_actual' order by fec_emis desc";
+            $sql = "SELECT top 1 fec_emis from factura where fec_emis <='$fecha_actual' order by fec_emis desc";
 
 
             $consulta = sqlsrv_query($conn, $sql);
