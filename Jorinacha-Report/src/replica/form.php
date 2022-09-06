@@ -48,7 +48,8 @@ include '../../services/sqlserver.php';
     $fecha1= date("d-m-Y",strtotime($fecha_actual."- 3 day"));
     $fecha2= date("d-m-Y",strtotime($fecha_actual."- 7 day"));
 
-
+    echo "$fecha_entrada <br>";
+    echo "$fecha1 <br>";
     echo "$fecha2 <br>";
 
     if ( $fecha_entrada >= $fecha1) {
