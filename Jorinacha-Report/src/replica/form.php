@@ -25,13 +25,10 @@ include '../../services/sqlserver.php';
         $res = Replica($sedes_ar[$i]);
         $res1 = $res['fec_emis'];
         $fecha = $res1->format('d-m-Y');
-    ?>
-
-        <li class="list-group-item"><b style="color:black"><?= $sede ?></b> / <?= $fecha ?></i></li>
 
 
+        #<li class="list-group-item"><b style="color:black"> $sede </b> /  $fecha </li>
 
-    <?php
 
       }
     }
@@ -54,7 +51,7 @@ include '../../services/sqlserver.php';
     echo "$fecha2 <br>";
 
     if ( $fecha_entrada >= $fecha1) {
-      echo '<i class="lni lni-cloud-check"></i>';
+      echo '<i style:"color:green" class="lni lni-cloud-check"></i>';
     }elseif (    $fecha_entrada >= $fecha2) {
       echo '<i class="lni lni-cloud-sync"></i>';
     }
