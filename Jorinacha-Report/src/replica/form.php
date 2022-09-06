@@ -10,7 +10,9 @@ include '../../services/sqlserver.php';
 <div id="body">
 
   <ul class="list-group">
-  <li class="list-group-item disabled" style="background-color:black"  aria-disabled="true"><center><b >Replica</b></center></li>
+    <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
+      <center><b>Replica</b></center>
+    </li>
 
     <?php
 
@@ -25,7 +27,7 @@ include '../../services/sqlserver.php';
         $fecha = $res1->format('d-m-Y');
     ?>
 
-        <li class="list-group-item"><b style="color:black" ><?= $sede ?></b> / <?=$fecha ?></i></li>
+        <li class="list-group-item"><b style="color:black"><?= $sede ?></b> / <?= $fecha ?></i></li>
 
 
 
@@ -34,7 +36,16 @@ include '../../services/sqlserver.php';
       }
     }
 
-    echo $hoy = date("Ymd");
+    echo $hoy = date("dmY");
+
+    $fecha_actual = strtotime(date("d-m-Y", time()));
+    $fecha_entrada = strtotime($fecha);
+
+    if ($fecha_actual > $fecha_entrada) {
+      echo "La fecha actual es mayor a la comparada.";
+    } else {
+      echo "La fecha comparada es igual o menor";
+    }
     ?>
 
   </ul>
