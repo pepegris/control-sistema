@@ -39,7 +39,7 @@ ul{
 
 <div id="body">
 
-  <div class="bounce">
+  <div class="pullUp">
   <ul class="list-group" >
     <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
       <center><b>Replica</b></center>
