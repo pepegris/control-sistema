@@ -45,7 +45,7 @@ include '../../services/sqlserver.php';
 
 
        if ( $past  >= $now_1) {
-          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-check'></i></li>";
+          echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <img src='./img/cloud-check.svg' alt='></li>";
         }elseif (    $past  >= $now_2) {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-sync'></i></li>";
         }
