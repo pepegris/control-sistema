@@ -11,7 +11,7 @@ include '../../services/sqlserver.php';
 
     width: 23px;
   }
-  @media (max-width: 20px){
+  @media (min-width: 20px){
 
  span{
   size: 1px;
