@@ -87,7 +87,7 @@ $cuenta_on = ucwords($cuenta_on);
 
       <a href="src/art-compras/form.php">
         <div class="box">
-          <i class="lni lni-write"></i>
+          <i class="lni lni-tag"></i>
           <h5>Factura de Compra</h5>
           <h4>Articulos comprados, cantidad y Stock</h4>
         </div>
@@ -95,7 +95,7 @@ $cuenta_on = ucwords($cuenta_on);
 
       <a href="src/ordenes/form.php">
         <div class="box">
-          <i class="lni lni-dollar"></i>
+          <i class="lni lni-investment"></i>
           <h5>Ordenes de Compra</h5>
           <h4>Reportes de ordenes de compras de todas las tiendas</h4>
         </div>
@@ -103,7 +103,7 @@ $cuenta_on = ucwords($cuenta_on);
 
       <a href="src/replica/form.php">
         <div class="box">
-        <i class="lni lni-signal"></i>
+          <i class="lni lni-signal"></i>
           <h5>Replica</h5>
           <h4>Fechas de las Replicas</h4>
         </div>
