@@ -32,16 +32,24 @@ include '../../services/sqlserver.php';
         $fecha1= date("d-m-Y",strtotime($fecha_actual."- 3 day"));
         $fecha2= date("d-m-Y",strtotime($fecha_actual."- 7 day"));
 
+        echo "$fecha <br>";
+        echo "$fecha_actual <br>";
+        echo "$fecha_entrada <br>";
+        echo "$fecha1 <br>";
+        echo "$fecha2 <br>";
+
+        
 
 
-        if ( $fecha >= $fecha_actual) {
+
+/*         if ( $fecha >= $fecha_actual) {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-check'></i></li>";
         }elseif (    $fecha >= $fecha2) {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-sync'></i></li>";
         }
          else {
           echo "<li class='list-group-item'><b style='color:black'> $sede </b> /  $fecha <i class='lni lni-cloud-upload'></i></li>";
-        }
+        } */
 
 
       }
