@@ -23,6 +23,9 @@ include '../../services/sqlserver.php';
 
 width: 19px;
 }
+ul{
+  margin-top: 10px;
+}
 
 }
 
@@ -85,6 +88,6 @@ width: 19px;
 
 </div>
 
-
+<br><br><br>
 
 <?php include '../../includes/footer.php'; ?>
