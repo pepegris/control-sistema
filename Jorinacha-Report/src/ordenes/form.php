@@ -14,6 +14,9 @@ include '../../services/sqlserver.php';
     display: flexbox;
 
   }
+  h1{
+    display: block;
+  }
 </style>
 
 <div id="body">
