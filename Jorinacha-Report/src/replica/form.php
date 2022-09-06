@@ -53,7 +53,7 @@ include '../../services/sqlserver.php';
 
     if ( $fecha_entrada >= $fecha1) {
       echo '<i class="lni lni-cloud-check"></i>';
-    }elseif (    $fecha_entrada > $fecha2) {
+    }elseif (    $fecha_entrada >= $fecha2) {
       echo '<i class="lni lni-cloud-sync"></i>';
     }
      else {
