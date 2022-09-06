@@ -5,6 +5,7 @@ include '../../services/mysql.php';
 include '../../services/sqlserver.php';
 
 ?>
+<link rel="stylesheet" href="../../assets/css/animations.css">
 <style>
   img {
 
@@ -38,7 +39,7 @@ ul{
 
 <div id="body">
 
-  <ul class="list-group">
+  <ul class="list-group slideUp" >
     <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
       <center><b>Replica</b></center>
 
@@ -91,7 +92,7 @@ ul{
 
 
 </div>
-
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <br><br><br>
 
 <?php include '../../includes/footer.php'; ?>
