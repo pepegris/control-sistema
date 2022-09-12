@@ -177,7 +177,7 @@ if (isset($_POST)) {
       <?php  } ?>
       <tr>
         <th ></th>
-        <td colspan="8"></td>
+        <td colspan="7"></td>
         <td>
           <h4>Total</h4>
         </td>
