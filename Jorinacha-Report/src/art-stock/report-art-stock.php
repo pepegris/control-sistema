@@ -113,7 +113,7 @@ form , td {
           }
 
           $res2= getCompras($co_art);
-          $prec_vta = $res2['prec_vta'];
+          $prec_vta = number_format($res2['prec_vta'], 2, ',', '.'); 
 
 
 
