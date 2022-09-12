@@ -32,7 +32,7 @@ if (isset($_POST)) {
 
     }
   </style>
-<center><h1>Fallas Con Pedidos</h1></center>
+<center><h1>Articulos con su Precio</h1></center>
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>
@@ -43,9 +43,7 @@ if (isset($_POST)) {
         <th scope='col'>Desc</th>
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
-        <th scope='col'>Costo Bs</th>
-        <th scope='col'>Fecha ult Costo</th>
-        <th scope='col'>Precio Bs</th>
+ 
         <th scope='col'>Ref</th>
         <th scope='col'>Total Vendido</th>
         <?php
@@ -127,22 +125,7 @@ if (isset($_POST)) {
 
 
           ?>
-
-          <td>Bs<?php
-                if ($prec_vta == null) {
-                  echo 0;
-                } else {
-                  echo $prec_vta ;
-                }
-                ?></td>
-          <td><?php
-              if ($fec_lote == null) {
-                echo "N/A";
-              } else {
-                echo $fec_lote->format('Y-m-d');
-              }
-              ?></td>
-          <td><?= $prec_vta1 ?></td>
+ 
           <td>$<?= $prec_vta5 ?></td>
           <td><?= $total_vendido ?></td>
           <td><?= $stock_act ?></td>
@@ -173,29 +156,13 @@ if (isset($_POST)) {
               $res6 = getArt($sedes_ar[$f], $linea, $co_art);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
 
-              /* REVISANDO SI TIENE COTIZACION O PEDIDO */
-              $test1 = getPedidos($sedes_ar[$f], $co_art);
-              if ($test1 != null) {
-                $res7=$test1;
 
-              }else {
-                $test2=getCotizacion($sedes_ar[$f], $co_art);
-                if ($test2 != null) {
-                  $res7=$test2;
-                }
-
-              }
-
-              $total_pedido = $res7['total_art'];
-              $status = $res7['status'];
-              $documento = $res7['doc'];
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
 
               <td>$<?= $prec_vta5_tienda ?></td>
 
-              <td></td>
 
 
           <?php $f++;
@@ -210,7 +177,7 @@ if (isset($_POST)) {
       <?php  } ?>
       <tr>
         <th ></th>
-        <td colspan="10"></td>
+        <td colspan="6"></td>
         <td>
           <h4>Total</h4>
         </td>
