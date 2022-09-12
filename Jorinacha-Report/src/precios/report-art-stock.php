@@ -143,7 +143,7 @@ if (isset($_POST)) {
               }
               ?></td>
           <td><?= $prec_vta1 ?></td>
-          <td><?= $prec_vta5 ?></td>
+          <td>$<?= $prec_vta5 ?></td>
           <td><?= $total_vendido ?></td>
           <td><?= $stock_act ?></td>
 
@@ -194,36 +194,7 @@ if (isset($_POST)) {
               <td><?= $stock_act_tienda  ?></td>
 
               <td>$<?= $prec_vta5_tienda ?></td>
-              <td><?php
-                  if ($status== null) {
-                    echo "Sin Pedido";
-                  } else {
-                    switch ($status) {
-                      case 0:
-                        echo "<p style='color:red'>Sin Procesar</p> $documento";
-                        break;
-                      case 1:
-                        echo "<p style='color:yellow'>Parc/Procesada</p> $documento";
-                        break;
-                      case 2:
-                        echo "<p style='color:orangered'>Sin Pedido nuevo</p>";
-                        #echo "<p style='color:green'>Procesada</p> $documento";
-                        break;
 
-                      default:
-                        echo "<p style='color:red'>Sin ningun Pedido</p>";
-                        break;
-                    }
-                  }
-
-                  ?></td>
-              <td><?php
-                  if ($total_pedido == null) {
-                    echo 0;
-                  } else {
-                    echo "$total_pedido";
-                  }
-                  ?></td>
               <td></td>
 
 
