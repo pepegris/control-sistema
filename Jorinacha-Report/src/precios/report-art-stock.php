@@ -177,7 +177,7 @@ if (isset($_POST)) {
       <?php  } ?>
       <tr>
         <th ></th>
-        <td colspan="6"></td>
+        <td colspan="8"></td>
         <td>
           <h4>Total</h4>
         </td>
@@ -191,11 +191,7 @@ if (isset($_POST)) {
         ?>
           <td><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></td>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+
 
         <?php
 
