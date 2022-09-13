@@ -204,7 +204,7 @@ function getArt($sede, $linea, $co_art, $almacen)
 
                     if ($almacen == 'todos') {
                         $sql="SELECT LTRIM(RTRIM(co_art)) as  co_art ,LTRIM(RTRIM(co_subl)) as  co_subl,LTRIM(RTRIM(co_cat)) as  co_cat,
-                        prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art WHERE prec_vta5 >=1 order by co_subl  desc";
+                        prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art  WHERE prec_vta5 >=1 AND co_lin='$linea' order by co_subl  desc";
 
                     } else {
                         $sql = "SELECT LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.co_subl)) as  co_subl,LTRIM(RTRIM(art.co_cat)) as  co_cat,
@@ -226,7 +226,7 @@ function getArt($sede, $linea, $co_art, $almacen)
 
                     if ($almacen == 'todos') {
                         $sql="SELECT LTRIM(RTRIM(co_art)) as  co_art ,LTRIM(RTRIM(co_subl)) as  co_subl,LTRIM(RTRIM(co_cat)) as  co_cat,
-                        prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art WHERE prec_vta5 >=1  order by co_subl  desc";
+                        prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art  WHERE prec_vta5 >=1 AND co_lin='$linea' order by co_subl  desc";
                         
                     } else {
                     $sql = "SELECT LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.co_subl)) as  co_subl,LTRIM(RTRIM(art.co_cat)) as  co_cat,
