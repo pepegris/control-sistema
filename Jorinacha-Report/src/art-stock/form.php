@@ -94,14 +94,14 @@ include '../../services/sqlserver.php';
 
       </select>
 
-      <label for="almacen" class="form-label ">Almacen</label>
+<!--       <label for="almacen" class="form-label ">Almacen</label>
       <select name="almacen" id="">
 
         <option value="solo">Solo con Almacen</option>
         <option value="todos">Todos</option>
 
       </select>
-
+ -->
 
 
 
