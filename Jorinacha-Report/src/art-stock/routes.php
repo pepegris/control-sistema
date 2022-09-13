@@ -6,6 +6,7 @@ if (isset($_POST)) {
     include '../../services/sqlserver.php';
 
     $pedidos=$_POST['pedidos'];
+    $almacen=$_POST['almacen'];
 
     $linea = $_POST['linea'];
     /*   $fecha1 = $_POST['fecha1'];
@@ -19,10 +20,11 @@ if (isset($_POST)) {
     
       $sedes = serialize($sedes);
       $sedes = urlencode($sedes);
+
     if ($pedidos=='con') {
-        header("refresh:2;url= report-art-stock-completo.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+        header("refresh:2;url= report-art-stock-completo.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&almacen=$almacen&sedes=$sedes");
     }elseif ($pedidos=='sin') {
-        header("refresh:2;url= report-art-stock.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&sedes=" . $sedes);
+        header("refresh:2;url= report-art-stock.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&almacen=$almacen&sedes=" . $sedes);
     }else {
         header('refresh:1;url= form.php');
     }

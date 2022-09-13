@@ -11,6 +11,7 @@ if (isset($_GET)) {
 
 
   $linea = $_GET['linea'];
+  $almacen =$_GET['almacen'];
 
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));  
@@ -67,7 +68,7 @@ form , td {
     <tbody>
       <?php
 
-      $res0 = getArt('Previa Shop', $linea,0);
+      $res0 = getArt('Previa Shop', $linea,0 ,$almacen );
       
       $n = 1;
       for ($e = 0; $e < count($res0); $e++) {

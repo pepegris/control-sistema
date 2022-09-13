@@ -88,11 +88,22 @@ include '../../services/sqlserver.php';
       <label for="pedidos" class="form-label ">Pedidos</label>
       <select name="pedidos" id="">
 
-        <option value="sin">Sin pedidos</option>
-        <option value="con">Con pedidos</option>
+        <option value="sin">Sin Pedidos</option>
+        <option value="con">Con Pedidos</option>
 
 
       </select>
+
+      <label for="almacen" class="form-label ">Almacen</label>
+      <select name="almacen" id="">
+
+        <option value="solo">Solo con Almacen</option>
+        <option value="todos">Todos</option>
+
+      </select>
+
+
+
 
       <br>
       <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
