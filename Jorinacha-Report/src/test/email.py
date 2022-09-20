@@ -21,7 +21,7 @@ try:
 
     email_emisor = 'soporte.it.jorinacha@gmail.com'
     email_pass ='rcnkchteocmgcaoe'
-    email_receptor ='irwingduran@hotmail.com'
+    email_receptor ='salcedop816@hotmail.com'
 
 
     asunto = 'PRObANDO CORREOS'
