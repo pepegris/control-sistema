@@ -75,7 +75,7 @@ if (isset($_POST)) {
     <tbody>
       <?php
 
-      $res0 = getArt('Previa Shop', $linea, 0);
+      $res0 = getArt('Previa Shop', $linea, 0,null);
 
       $n = 1;
       for ($e = 0; $e < count($res0); $e++) {
@@ -153,7 +153,7 @@ if (isset($_POST)) {
               $vendido_tienda = number_format($res4, 0, ',', '.');
               $total_vendido_tienda[$sedes_ar[$f]] += $vendido_tienda;
 
-              $res6 = getArt($sedes_ar[$f], $linea, $co_art);
+              $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
 
 
