@@ -213,7 +213,7 @@ if (isset($_POST)) {
   let tablaHTML = tablaDatos.outerHTML.replace(/ /g, '%20');
 
   // Nombre del archivo
-  nombreArchivo = nombreArchivo ? nombreArchivo + '.xlsx' : 'Reporte_Puntos_Canjeados.xlsx';
+  nombreArchivo = nombreArchivo ? nombreArchivo + '.xls' : 'Reporte_Puntos_Canjeados.xls';
 
   // Crear el link de descarga
   linkDescarga = document.createElement("a");
