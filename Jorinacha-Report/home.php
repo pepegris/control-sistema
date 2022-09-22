@@ -113,7 +113,7 @@ $cuenta_on = ucwords($cuenta_on);
       <div class="box">
       <i class="lni lni-dollar"></i>
         <h5>Articulos con su Precio</h5>
-        <h4>Reporte de todos lo articulos con sus precio y cantidad vendida</h4>
+        <h4>Articulos con sus precio y cantidad vendida</h4>
       </div>
       </a>
 
