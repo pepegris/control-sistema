@@ -75,7 +75,7 @@ if (isset($_POST)) {
     <tbody>
       <?php
 
-      $res0 = getArt_todos('Previa Shop', $linea, 0,null);
+      $res0 = getArt('Previa Shop', $linea, 0,null);
 
       $n = 1;
       for ($e = 0; $e < count($res0); $e++) {
