@@ -268,6 +268,85 @@ function getArt($sede, $linea, $co_art, $almacen)
 }
 
 
+
+function getArt_todos($sede, $linea, $co_art, $almacen)
+{
+
+    $database = Database($sede);
+    if ($database) {
+        try {
+
+            $serverName = "172.16.1.19";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            if ($linea === 'todos') {
+
+                if ($database == 'PREVIA_A') {
+
+/*                     if ($almacen == 'todos') {
+                        $sql="SELECT LTRIM(RTRIM(co_art)) as  co_art ,LTRIM(RTRIM(co_subl)) as  co_subl,LTRIM(RTRIM(co_cat)) as  co_cat,
+                        prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art  WHERE prec_vta5 >=1 AND co_lin='$linea' order by co_subl  desc";
+
+                    } else { */
+                        $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
+                        co_color , co_lin , stock_act , prec_vta3 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 ,art.ubicacion
+                        from art  where co_lin= '$linea' AND prec_vta5 >= 1 AND co_art='$co_art'";
+/*                     } */
+                } else {
+
+                    $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat) as  co_cat  , 
+                    co_color , co_cat , co_lin , stock_act , prec_vta3 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5,art.ubicacion 
+                    from art WHERE prec_vta5 >= 1 ORDER BY co_subl  DESC";
+                }
+            } elseif ($co_art == 0) {
+
+                if ($database == 'PREVIA_A') {
+
+
+/*                     if ($almacen == 'todos') {
+                        $sql="SELECT LTRIM(RTRIM(co_art)) as  co_art ,LTRIM(RTRIM(co_subl)) as  co_subl,LTRIM(RTRIM(co_cat)) as  co_cat,
+                        prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art  WHERE prec_vta5 >=1 AND co_lin='$linea' order by co_subl  desc";
+                        
+                    } else { */
+                        $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
+                        co_color , co_lin , stock_act , prec_vta3 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 ,art.ubicacion
+                        from art  where co_lin= '$linea' AND prec_vta5 >= 1 AND co_art='$co_art'";
+/*                     } */
+                } else {
+
+                    $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
+                    co_color , co_lin , stock_act , prec_vta3 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5,art.ubicacion 
+                    from art  where co_lin= '$linea' AND prec_vta5 >= 1 ORDER BY co_subl  DESC";
+                }
+            } else {
+
+                $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
+                co_color , co_lin , stock_act , prec_vta3 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 ,art.ubicacion
+                from art  where co_lin= '$linea' AND prec_vta5 >= 1 AND co_art='$co_art'";
+            }
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            while ($row = sqlsrv_fetch_array($consulta)) {
+
+                $art[] = $row;
+            }
+            $res = $art;
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return null;
+    }
+}
+
+
+
 function getArt_stock_tiendas($sede,  $co_art)
 {
 
