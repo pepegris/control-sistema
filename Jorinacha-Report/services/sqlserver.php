@@ -567,10 +567,19 @@ function getPedidos($sede, $co_art)
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "SELECT top 1 pedidos.fact_num , reng_ped.total_art,pedidos.status 
-            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
-            WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente' 
-            ORDER BY fe_us_in DESC";
+            if ($sede != null) {
+                $sql = "SELECT top 1 pedidos.fact_num ,CONVERT(numeric(10,0), reng_ped.total_art) ,pedidos.status 
+                FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
+                WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente' 
+                ORDER BY fe_us_in DESC";
+            }else{
+                $sql = "SELECT top 1 pedidos.fact_num ,CONVERT(numeric(10,0), reng_ped.total_art) ,pedidos.status 
+                FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
+                WHERE reng_ped.co_art ='$co_art'   
+                ORDER BY fe_us_in DESC";
+            }
+
+
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -578,7 +587,7 @@ function getPedidos($sede, $co_art)
 
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $total_art['total_art'] = number_format($row['total_art'], 0, ',', '.');
+                    $total_art['total_art'] = $row['total_art'];
                     $total_art['status'] = $row['status'];
                     $total_art['doc'] = 'Ped';
 

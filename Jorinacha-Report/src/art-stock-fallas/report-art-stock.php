@@ -76,14 +76,22 @@ form , td {
       $n = 1;
       for ($e = 0; $e < count($res0); $e++) {
 
+
+
         $co_art = $res0[$e]['co_art'];
         $co_lin = getLin_art($res0[$e]['co_lin']);
         $co_subl = getSub_lin($res0[$e]['co_subl']);
         $co_cat = getCat_art($res0[$e]['co_cat']);
         $co_color = getColores($res0[$e]['co_color']);
         $desc = $res0[$e]['ubicacion'];
+        
+        $test1 = getPedidos(null, $co_art);
 
-        $stock_act = round($res0[$e]['stock_act']);
+
+        $pedido = $test1['total_art'];
+
+        $stock_act_1 = round($res0[$e]['stock_act']);
+        $stock_act =  $stock_act_1 - $pedido; 
         $total_stock_act_previa += $stock_act;
 
 

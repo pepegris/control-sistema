@@ -140,7 +140,7 @@ $cuenta_on = ucwords($cuenta_on);
 
 
 
-      <a href="src/bolsas/inv.php">
+      <a href="src/art-stock-fallas/form.php">
         <div class="box">
           <i class="lni lni-shopify"></i>
           <h5>Desarrollo</h5>
