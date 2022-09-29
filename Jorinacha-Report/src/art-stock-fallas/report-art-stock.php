@@ -152,7 +152,7 @@ form , td {
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
-              <td><?= $prec_vta5_tienda  ?></td>
+              <td>$<?= $prec_vta5_tienda  ?></td>
               <td><?= $vendido_tienda ?></td>
 
           <?php $f++;
