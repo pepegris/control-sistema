@@ -40,7 +40,6 @@ form , td {
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
         
-        <th scope='col'>Fecha Factura</th>
         <th scope='col'>Cantidad</th>
 
         <th scope='col'>Total Vendido</th>
