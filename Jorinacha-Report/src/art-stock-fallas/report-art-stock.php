@@ -59,7 +59,7 @@ form , td {
             <th scope='col'><?= $sede ?></th>
         <?php  
           if ($sedes_ar[$i] != 'Previa Shop') {
-
+            echo "<th scope='col'>Ref $i</th>";
             echo "<th scope='col'>Total Vendido $i</th>";
           }
             
