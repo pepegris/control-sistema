@@ -180,6 +180,7 @@ form , td {
 
         ?>
           <td><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></td>
+          <td></td>
           <td><?= $vendido  ?></td>
 
           <?php
