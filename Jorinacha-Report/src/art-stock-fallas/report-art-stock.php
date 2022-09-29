@@ -109,7 +109,7 @@ form , td {
           <td><?= $desc ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
-          <td><?= $prec_vta5 ?></td>
+          <td>$<?= $prec_vta5 ?></td>
           <?php
           $g = 1;
           $total_vendido = 0; 
@@ -146,10 +146,13 @@ form , td {
               $vendido_tienda = number_format($res4, 0, ',', '.');
               $total_vendido_tienda [$sedes_ar[$f]] += $vendido_tienda;
 
+              $res5 = getArt($sedes_ar[$f], $linea, $co_art,null);
+              $prec_vta5_tienda = round($res5[0]['prec_vta5']);
+
 
           ?>
               <td><?= $stock_act_tienda  ?></td>
-
+              <td><?= $prec_vta5_tienda  ?></td>
               <td><?= $vendido_tienda ?></td>
 
           <?php $f++;
