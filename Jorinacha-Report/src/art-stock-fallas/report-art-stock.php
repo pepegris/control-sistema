@@ -127,7 +127,7 @@ form , td {
 
           ?>
 
-
+          <td><?= $total_vendido ?></td>
           <td><?= $stock_act ?></td>
           <?php
           $f = 1;
