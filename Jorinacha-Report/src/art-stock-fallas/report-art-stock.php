@@ -40,11 +40,13 @@ form , td {
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
         
-        <th scope='col'>Cantidad</th>
+
+
+        <th scope='col'>Ref</th>
 
         <th scope='col'>Total Vendido</th>
         
-        <th scope='col'>Ref</th>
+
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -107,6 +109,7 @@ form , td {
           <td><?= $desc ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
+          <td><?= $prec_vta5 ?></td>
           <?php
           $g = 1;
           $total_vendido = 0; 
@@ -124,7 +127,7 @@ form , td {
 
           ?>
 
-          <td><?= $prec_vta5 ?></td>
+
           <td><?= $stock_act ?></td>
           <?php
           $f = 1;
