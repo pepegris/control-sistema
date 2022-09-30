@@ -90,6 +90,7 @@ include '../../services/sqlserver.php';
 
         <option value="sin">Sin Pedidos</option>
         <option value="con">Con Pedidos</option>
+        <option value="fallas">Fallas</option>
 
 
       </select>

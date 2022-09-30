@@ -25,7 +25,11 @@ if (isset($_POST)) {
         header("refresh:2;url= report-art-stock-completo.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&almacen=$almacen&sedes=$sedes");
     }elseif ($pedidos=='sin') {
         header("refresh:2;url= report-art-stock.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&almacen=$almacen&sedes=" . $sedes);
-    }else {
+    }elseif ($pedidos=='fallas'){
+        header("refresh:2;url= report-art-stock-fallas.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&almacen=$almacen&sedes=" . $sedes);
+
+    }
+    else {
         header('refresh:1;url= form.php');
     }
 
