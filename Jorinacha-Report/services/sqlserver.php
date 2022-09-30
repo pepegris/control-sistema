@@ -568,7 +568,7 @@ function getPedidos($sede, $co_art)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT top 1 pedidos.fact_num ,CONVERT(numeric(10,0), reng_ped.total_art) as total_art ,pedidos.status 
-            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
+            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=pedidos.fact_num
             WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'  and  pedidos.anulada = 0 
             ORDER BY fe_us_in DESC";
 
@@ -602,7 +602,7 @@ function getPedidos($sede, $co_art)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT SUM(CONVERT(numeric(10,0), reng_ped.total_art)) as total_art 
-            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
+            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=pedidos.fact_num
             WHERE reng_ped.co_art ='$co_art' and   pedidos.status <=1 and  pedidos.anulada = 0
             GROUP BY  pedidos.status ";
 
