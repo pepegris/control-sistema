@@ -202,17 +202,17 @@ function getArt($sede, $linea, $co_art, $almacen)
 
                 if ($database == 'PREVIA_A') {
 
-/*                     if ($almacen == 'todos') {
+                    /*                     if ($almacen == 'todos') {
                         $sql="SELECT LTRIM(RTRIM(co_art)) as  co_art ,LTRIM(RTRIM(co_subl)) as  co_subl,LTRIM(RTRIM(co_cat)) as  co_cat,
                         prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art  WHERE prec_vta5 >=1 AND co_lin='$linea' order by co_subl  desc";
 
                     } else { */
-                        $sql = "SELECT LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.co_subl)) as  co_subl,LTRIM(RTRIM(art.co_cat)) as  co_cat,
+                    $sql = "SELECT LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.co_subl)) as  co_subl,LTRIM(RTRIM(art.co_cat)) as  co_cat,
                         prec_vta3,prec_vta5,st_almac.stock_act, co_color , co_lin,art.ubicacion
                         from st_almac inner join art on st_almac.co_art=art.co_art 
                         where   st_almac.co_alma='BOLE' AND art.prec_vta5 >=1
                         order by art.co_subl  desc ";
-/*                     } */
+                    /*                     } */
                 } else {
 
                     $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat) as  co_cat  , 
@@ -224,7 +224,7 @@ function getArt($sede, $linea, $co_art, $almacen)
                 if ($database == 'PREVIA_A') {
 
 
-/*                     if ($almacen == 'todos') {
+                    /*                     if ($almacen == 'todos') {
                         $sql="SELECT LTRIM(RTRIM(co_art)) as  co_art ,LTRIM(RTRIM(co_subl)) as  co_subl,LTRIM(RTRIM(co_cat)) as  co_cat,
                         prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art  WHERE prec_vta5 >=1 AND co_lin='$linea' order by co_subl  desc";
                         
@@ -234,7 +234,7 @@ function getArt($sede, $linea, $co_art, $almacen)
                     from st_almac inner join art on st_almac.co_art=art.co_art 
                     where art.co_lin='$linea' and st_almac.co_alma='BOLE' AND art.prec_vta5 >=1
                     order by art.co_subl   desc";
-/*                     } */
+                    /*                     } */
                 } else {
 
                     $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
@@ -284,15 +284,15 @@ function getArt_todos($sede, $linea, $co_art, $almacen)
 
                 if ($database == 'PREVIA_A') {
 
-/*                     if ($almacen == 'todos') {
+                    /*                     if ($almacen == 'todos') {
                         $sql="SELECT LTRIM(RTRIM(co_art)) as  co_art ,LTRIM(RTRIM(co_subl)) as  co_subl,LTRIM(RTRIM(co_cat)) as  co_cat,
                         prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art  WHERE prec_vta5 >=1 AND co_lin='$linea' order by co_subl  desc";
 
                     } else { */
-                        $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
+                    $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
                         co_color , co_lin , stock_act , prec_vta3 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 ,art.ubicacion
                         from art  where co_lin= '$linea' AND prec_vta5 >= 1 ORDER BY co_subl  DESC";
-/*                     } */
+                    /*                     } */
                 } else {
 
                     $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat) as  co_cat  , 
@@ -304,15 +304,15 @@ function getArt_todos($sede, $linea, $co_art, $almacen)
                 if ($database == 'PREVIA_A') {
 
 
-/*                     if ($almacen == 'todos') {
+                    /*                     if ($almacen == 'todos') {
                         $sql="SELECT LTRIM(RTRIM(co_art)) as  co_art ,LTRIM(RTRIM(co_subl)) as  co_subl,LTRIM(RTRIM(co_cat)) as  co_cat,
                         prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art  WHERE prec_vta5 >=1 AND co_lin='$linea' order by co_subl  desc";
                         
                     } else { */
-                        $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
+                    $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
                         co_color , co_lin , stock_act , prec_vta3 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 ,art.ubicacion
                         from art  where co_lin= '$linea' AND prec_vta5 >= 1 ORDER BY co_subl  DESC";
-/*                     } */
+                    /*                     } */
                 } else {
 
                     $sql = "SELECT LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
@@ -567,19 +567,10 @@ function getPedidos($sede, $co_art)
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($sede != 'Previa Shop') {
-                $sql = "SELECT top 1 pedidos.fact_num ,CONVERT(numeric(10,0), reng_ped.total_art) as total_art ,pedidos.status 
-                FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
-                WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'  and  pedidos.anulada = 0 
-                ORDER BY fe_us_in DESC";
-            }else{
-                $sql = "SELECT SUM(CONVERT(numeric(10,0), reng_ped.total_art)) as total_art 
-                FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
-                WHERE reng_ped.co_art ='$co_art' and   pedidos.status <=1 and  pedidos.anulada = 0
-                GROUP BY  pedidos.status ";
-            }
-
-
+            $sql = "SELECT top 1 pedidos.fact_num ,CONVERT(numeric(10,0), reng_ped.total_art) as total_art ,pedidos.status 
+            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
+            WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'  and  pedidos.anulada = 0 
+            ORDER BY fe_us_in DESC";
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -604,7 +595,38 @@ function getPedidos($sede, $co_art)
         }
     } else {
 
-        return 0;
+        try {
+
+            $serverName = "172.16.1.19";
+            $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT SUM(CONVERT(numeric(10,0), reng_ped.total_art)) as total_art 
+            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
+            WHERE reng_ped.co_art ='$co_art' and   pedidos.status <=1 and  pedidos.anulada = 0
+            GROUP BY  pedidos.status ";
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $total_art['total_art'] = $row['total_art'];
+                    $total_art['status'] = $row['status'];
+                    $total_art['doc'] = 'Ped';
+
+                    break;
+                }
+                $res = $total_art;
+            } else {
+                $res = 0;
+            }
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
     }
 }
 
