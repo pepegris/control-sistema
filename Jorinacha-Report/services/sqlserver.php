@@ -395,7 +395,10 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "SELECT co_art,sum(total_art) as total_art from reng_fac where co_art='$co_art' and fec_lote BETWEEN '$fecha1'  AND '$fecha2' GROUP BY co_art";
+            $sql = "SELECT reng_fac.co_art,sum(reng_fac.total_art) as total_art 
+            from reng_fac INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
+            where reng_fac.co_art='$co_art' and reng_fac.fec_lote BETWEEN '$fecha1'  AND '$fecha2' AND factura.anulada=0
+            GROUP BY reng_fac.co_art";
 
             $consulta = sqlsrv_query($conn, $sql);
 
