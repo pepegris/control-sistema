@@ -88,8 +88,15 @@ if (isset($_GET)) {
         $co_color = getColores($res0[$e]['co_color']);
         $desc = $res0[$e]['ubicacion'];
 
-        $stock_act = round($res0[$e]['stock_act']);
+        $test1 = getPedidos(null, $co_art);
+
+
+        $pedido = $test1['total_art'];
+
+        $stock_act_1 = round($res0[$e]['stock_act']);
+        $stock_act =  $stock_act_1 - $pedido; 
         $total_stock_act_previa += $stock_act;
+
 
         $precio = $res0[$e]['prec_vta3'];
         $prec_vta1 = number_format($precio, 2, ',', '.');
