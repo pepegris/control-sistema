@@ -129,6 +129,7 @@ form , td {
 
           <td><?= $total_vendido ?></td>
           <td><?= $stock_act ?></td>
+          <td><?= $pedido ?></td>
           <?php
           $f = 1;
           for ($i = 0; $i < count($sedes_ar); $i++) {
