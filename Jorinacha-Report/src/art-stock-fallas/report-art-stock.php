@@ -86,7 +86,7 @@ form , td {
         $co_color = getColores($res0[$e]['co_color']);
         $desc = $res0[$e]['ubicacion'];
         
-        $test1 = getPedidos(null, $co_art);
+        $test1 = getPedidos('Previa Shop', $co_art);
 
 
         $pedido = $test1['total_art'];
