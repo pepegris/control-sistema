@@ -567,7 +567,7 @@ function getPedidos($sede, $co_art)
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($sede != null) {
+            if ($sede != 'Previa Shop') {
                 $sql = "SELECT top 1 pedidos.fact_num ,CONVERT(numeric(10,0), reng_ped.total_art) as total_art ,pedidos.status 
                 FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
                 WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'  and  pedidos.anulada = 0 
