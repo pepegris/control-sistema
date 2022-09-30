@@ -429,7 +429,7 @@ function getCompras($co_art)
     $serverName = "172.16.1.19";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $sql = "SELECT top 1  co_art,fact_num,fec_lote,total_art,prec_vta from reng_com  where co_art ='$co_art' order by fec_lote desc";
+    $sql = "SELECT top 1  co_art,fact_num,fec_lote,total_art,prec_vta from reng_com  where co_art ='$co_art'  order by fec_lote desc";
     $consulta = sqlsrv_query($conn, $sql);
 
     if ($consulta) {
@@ -469,7 +469,7 @@ function getFactura($sede, $co_art, $fecha1, $fecha2)
             $sql = "SELECT CONVERT(numeric(10,0), SUM(total_art ) )as total_art
             FROM reng_fac
             INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
-            WHERE reng_fac.co_art='$co_art' and factura.co_cli='$cliente' and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'";
+            WHERE reng_fac.co_art='$co_art' and factura.co_cli='$cliente' and anulada = 0  and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'";
 
             /*             $sql = "SELECT top 1  factura.fact_num,total_art 
             FROM reng_fac
@@ -568,15 +568,14 @@ function getPedidos($sede, $co_art)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             if ($sede != null) {
-                $sql = "SELECT top 1 pedidos.fact_num ,CONVERT(numeric(10,0), reng_ped.total_art) ,pedidos.status 
+                $sql = "SELECT top 1 pedidos.fact_num ,CONVERT(numeric(10,0), reng_ped.total_art) as total_art ,pedidos.status 
                 FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
-                WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente' 
+                WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'  and  pedidos.anulada = 0 
                 ORDER BY fe_us_in DESC";
             }else{
-                $sql = "SELECT top 1 pedidos.fact_num ,CONVERT(numeric(10,0), reng_ped.total_art) ,pedidos.status 
+                $sql = "SELECT SUM(CONVERT(numeric(10,0), reng_ped.total_art)) as total_art 
                 FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=reng_ped.fact_num
-                WHERE reng_ped.co_art ='$co_art'   
-                ORDER BY fe_us_in DESC";
+                WHERE reng_ped.co_art ='$co_art' and   pedidos.status <=1 and  pedidos.anulada = 0 ";
             }
 
 
