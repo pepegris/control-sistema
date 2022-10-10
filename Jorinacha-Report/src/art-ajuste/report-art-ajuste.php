@@ -85,7 +85,7 @@ if (isset($_GET)) {
           $g++;
         }   ?>
 
-<th><?= $total_enviado_tienda[$sedes_ar[$g]] ?></th>
+        <th><?= $total_enviado_tienda[$sedes_ar[$g]] ?></th>
 
       </tr>
 
@@ -118,7 +118,7 @@ if (isset($_GET)) {
           $g++;
         }   ?>
 
-<th><?= $total_entradas_sobrantes[$sedes_ar[$g]] ?></th>
+        <th><?= $total_entradas_sobrantes[$sedes_ar[$g]] ?></th>
       </tr>
 
 
@@ -183,19 +183,12 @@ if (isset($_GET)) {
 
     </tbody>
   </table>
-  <?php
-  var_dump($res0);
-  var_dump($res1);
-  var_dump($res2);
-  var_dump($linea);
-  var_dump($fecha1);
-  var_dump($fecha2);
-  ?>
-  <script src="../../assets/js/excel.js"></script>
+
+<!--   <script src="../../assets/js/excel.js"></script>
   <center>
     <button id="submitExport" class="btn btn-success">Exportar Reporte a EXCEL</button>
   </center>
-
+ -->
 
 
 
