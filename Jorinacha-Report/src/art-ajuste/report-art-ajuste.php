@@ -89,6 +89,7 @@ if (isset($_GET)) {
   </table>
   <?php 
   var_dump($res0);
+  var_dump($linea);
   ?>
   <script src="../../assets/js/excel.js"></script>
   <center>
