@@ -162,15 +162,17 @@ if (isset($_GET)) {
           if ($sedes_ar[$g] != null) {
 
             $total = $total_salidas_faltantes[$sedes_ar[$g]] + $total_entradas_sobrantes[$sedes_ar[$g]] + $total_enviado_tienda[$sedes_ar[$g]];
+            $totales += $total;
 
         ?>
 
-            <td><?= $total ?></td>
+            <th><?= $total ?></th>
 
         <?php }
           $total = 0;
           $g++;
         }   ?>
+        <th><?= $totales ?></th>
       </tr>
 
     </tbody>
