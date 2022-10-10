@@ -117,7 +117,21 @@ $cuenta_on = ucwords($cuenta_on);
       </div>
       </a>
 
-      
+      <a href="src/art-ajuste/form.php">
+      <div class="box">
+        <i class="lni lni-consulting"></i>
+        <h5>Reporte J</h5>
+        <h4>Pronto aun En Desarrollo</h4>
+      </div>
+      </a>
+
+
+      <div class="box">
+        <i class="lni lni-construction"></i>
+        <h5>Pronto</h5>
+        <h4>Pronto aun En Desarrollo</h4>
+      </div>
+
       <a href="src/art-stock-2/form.php">
         <div class="box">
           <i class="lni lni-coffee-cup"></i>
@@ -125,18 +139,6 @@ $cuenta_on = ucwords($cuenta_on);
           <h4>Pronto aun En Desarrollo</h4>
         </div>
       </a>
-
-      <div class="box">
-        <i class="lni lni-construction"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-      </div>
-      <div class="box">
-        <i class="lni lni-construction"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-      </div>
-
 
 
 
