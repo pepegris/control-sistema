@@ -98,6 +98,10 @@ if (isset($_GET)) {
 
             $res1 = getAjustes($sedes_ar[$g], $fecha1, $fecha2, $linea , 'EN');
 
+            if ($res1 == null) {
+              $res1 = 0;
+            }
+
             $total_entradas_sobrantes[$sedes_ar[$g]] += $res1;
 
 
@@ -125,6 +129,10 @@ if (isset($_GET)) {
           if ($sedes_ar[$g] != null) {
 
             $res2 = getAjustes($sedes_ar[$g], $fecha1, $fecha2, $linea , 'SAL');
+
+            if ($res2 == null) {
+              $res2 = 0;
+            }
 
             $total_salidas_faltantes[$sedes_ar[$g]] += $res2;
 
