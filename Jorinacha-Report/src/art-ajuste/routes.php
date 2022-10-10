@@ -22,7 +22,7 @@ if (isset($_POST)) {
       $sedes = urlencode($sedes);
 
 
-    header("refresh:2;url= report-art-stock.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&almacen=$almacen&sedes=" . $sedes);
+    header("refresh:2;url= report-art-ajuste.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&almacen=$almacen&sedes=" . $sedes);
 
 
 } else {

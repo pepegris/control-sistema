@@ -141,7 +141,7 @@ form , td {
               $vendido_tienda = number_format($res4, 0, ',', '.');
               $total_vendido_tienda [$sedes_ar[$f]] += $vendido_tienda;
 
-              $res5 = getFactura($sedes_ar[$f], $co_art,$fecha1, $fecha2);
+              $res5 = getFactura($sedes_ar[$f], $co_art,$fecha1, $fecha2 , null );
               $total_enviado = round($res5['total_art']);
               $total_enviado_tienda[$sedes_ar[$f]] += $total_enviado;
 

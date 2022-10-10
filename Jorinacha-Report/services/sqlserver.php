@@ -457,7 +457,7 @@ function getCompras($co_art)
 
 /* FACTURA DE EL ULTIMO ARTICULOS VENDIDO EN PREVIA */
 
-function getFactura($sede, $co_art, $fecha1, $fecha2)
+function getFactura($sede, $co_art, $fecha1, $fecha2 , $co_lin)
 {
     $cliente = Cliente($sede);
 
@@ -469,16 +469,26 @@ function getFactura($sede, $co_art, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "SELECT CONVERT(numeric(10,0), SUM(total_art ) )as total_art
-            FROM reng_fac
-            INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
-            WHERE reng_fac.co_art='$co_art' and factura.co_cli='$cliente' and anulada = 0  and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'";
 
-            /*             $sql = "SELECT top 1  factura.fact_num,total_art 
-            FROM reng_fac
-            INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
-            WHERE reng_fac.co_art='$co_art' and factura.co_cli='$cliente' and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'
-            ORDER BY fe_us_in DESC"; */
+
+            if ($co_lin ) {
+
+                $sql = "SELECT CONVERT(numeric(10,0), SUM(reng_fac.total_art ) )as total_art
+                FROM reng_fac
+                JOIN factura ON reng_fac.fact_num=factura.fact_num 
+                JOIN art ON art.co_art = reng_fac.co_art
+                WHERE art.co_lin='$co_lin'  AND  factura.fec_emis BETWEEN '$fecha1'  AND '$fecha2'  AND factura.co_cli='$cliente' AND factura.anulada=0";
+
+            }else {
+
+                $sql = "SELECT CONVERT(numeric(10,0), SUM(total_art ) )as total_art
+                FROM reng_fac
+                INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
+                WHERE reng_fac.co_art='$co_art' and factura.co_cli='$cliente' and anulada = 0  and factura.fe_us_in BETWEEN '$fecha1'  AND '$fecha2'";
+                
+            }
+
+
 
             $consulta = sqlsrv_query($conn, $sql);
 

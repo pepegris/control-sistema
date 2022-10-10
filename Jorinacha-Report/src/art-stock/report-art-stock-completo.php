@@ -168,7 +168,7 @@ if (isset($_GET)) {
               $stock_act_tienda = round($res3[0]['stock_act']);
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
-              $res4 = getFactura($sedes_ar[$f], $co_art, $fecha1, $fecha2);
+              $res4 = getFactura($sedes_ar[$f], $co_art, $fecha1, $fecha2 , null);
               $total_enviado = number_format($res4['total_art'], 0, ',', '.');
               $total_enviado_tienda[$sedes_ar[$f]] += $total_enviado;
 
