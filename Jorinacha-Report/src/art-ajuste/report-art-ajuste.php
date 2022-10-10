@@ -59,7 +59,6 @@ if (isset($_GET)) {
 
         <?php
         $g = 1;
-        $total_vendido = 0;
         for ($i = 0; $i < count($sedes_ar); $i++) {
 
 
@@ -68,6 +67,11 @@ if (isset($_GET)) {
           if ($sedes_ar[$g] != null) {
 
             $res0 = getFactura($sedes_ar[$g], null, $fecha1, $fecha2, $linea);
+
+            if ($res0 == null) {
+              $res0 = 0;
+            }
+
 
             $total_enviado_tienda[$sedes_ar[$g]] += $res0;
 
@@ -88,7 +92,6 @@ if (isset($_GET)) {
 
         <?php
         $g = 1;
-        $total_vendido = 0;
         for ($i = 0; $i < count($sedes_ar); $i++) {
 
 
@@ -96,7 +99,7 @@ if (isset($_GET)) {
 
           if ($sedes_ar[$g] != null) {
 
-            $res1 = getAjustes($sedes_ar[$g], $fecha1, $fecha2, $linea , 'EN');
+            $res1 = getAjustes($sedes_ar[$g], $fecha1, $fecha2, $linea, 'EN');
 
             if ($res1 == null) {
               $res1 = 0;
@@ -116,11 +119,11 @@ if (isset($_GET)) {
 
 
       <tr>
-        <th scope='row'>AJUSTES  SALIDAS X FALTANTES</th>
+        <th scope='row'>AJUSTES SALIDAS X FALTANTES</th>
 
         <?php
         $g = 1;
-        $total_vendido = 0;
+
         for ($i = 0; $i < count($sedes_ar); $i++) {
 
 
@@ -128,7 +131,7 @@ if (isset($_GET)) {
 
           if ($sedes_ar[$g] != null) {
 
-            $res2 = getAjustes($sedes_ar[$g], $fecha1, $fecha2, $linea , 'SAL');
+            $res2 = getAjustes($sedes_ar[$g], $fecha1, $fecha2, $linea, 'SAL');
 
             if ($res2 == null) {
               $res2 = 0;
@@ -142,6 +145,30 @@ if (isset($_GET)) {
             <td><?= $res2 ?></td>
 
         <?php }
+          $g++;
+        }   ?>
+      </tr>
+
+
+      <tr>
+        <th scope='row'>TOTALES</th>
+
+        <?php
+        $g = 1;
+        $total = 0;
+        for ($i = 0; $i < count($sedes_ar); $i++) {
+
+
+          if ($sedes_ar[$g] != null) {
+
+            $total = $total_salidas_faltantes[$sedes_ar[$g]] + $total_entradas_sobrantes[$sedes_ar[$g]] + $total_enviado_tienda[$sedes_ar[$g]];
+
+        ?>
+
+            <td><?= $total ?></td>
+
+        <?php }
+          $total = 0;
           $g++;
         }   ?>
       </tr>
