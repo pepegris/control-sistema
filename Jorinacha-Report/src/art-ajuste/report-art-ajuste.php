@@ -32,7 +32,7 @@ if (isset($_GET)) {
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>
-        <th scope="col">Tienda</th>
+        <th scope="col">TIENDAS</th>
 
         <?php
 
@@ -48,6 +48,7 @@ if (isset($_GET)) {
             }
           }
         } ?>
+        <th scope="col">TOTALES</th>
 
       </tr>
     </thead>
@@ -84,6 +85,7 @@ if (isset($_GET)) {
           $g++;
         }   ?>
 
+<th><?= $total_enviado_tienda[$sedes_ar[$g]] ?></th>
 
       </tr>
 
@@ -115,6 +117,8 @@ if (isset($_GET)) {
         <?php }
           $g++;
         }   ?>
+
+<th><?= $total_entradas_sobrantes[$sedes_ar[$g]] ?></th>
       </tr>
 
 
@@ -147,6 +151,8 @@ if (isset($_GET)) {
         <?php }
           $g++;
         }   ?>
+
+        <th><?= $total_salidas_faltantes[$sedes_ar[$g]] ?></th>
       </tr>
 
 
