@@ -480,7 +480,7 @@ function getFactura($sede, $co_art, $fecha1, $fecha2 , $co_lin)
 
             }else {
 
-                $sql = "SELECT CONVERT(numeric(10,0), SUM(reng_fac.total_art ) )as total_art
+                $sql = "SELECT SUM(reng_fac.total_art ) as total_art
                 FROM reng_fac
                 JOIN factura ON reng_fac.fact_num=factura.fact_num 
                 JOIN art ON art.co_art = reng_fac.co_art
