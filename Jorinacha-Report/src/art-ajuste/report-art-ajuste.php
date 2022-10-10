@@ -68,7 +68,7 @@ if (isset($_GET)) {
           if ($sedes_ar[$g] != null) {
 
             $res0 = getFactura($sedes_ar[$g], null , $fecha1, $fecha2, $linea);
-            $total_enviado = $res0['total_art'];
+            $total_enviado = round($res0['total_art']);
             $total_enviado_tienda[$sedes_ar[$g]] += $total_enviado;
 
 
