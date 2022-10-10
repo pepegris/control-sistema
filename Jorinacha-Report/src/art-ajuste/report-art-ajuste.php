@@ -142,6 +142,8 @@ if (isset($_GET)) {
   </table>
   <?php
   var_dump($res0);
+  var_dump($res1);
+  var_dump($res2);
   var_dump($linea);
   var_dump($fecha1);
   var_dump($fecha2);
