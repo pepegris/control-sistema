@@ -67,9 +67,9 @@ if (isset($_GET)) {
 
           if ($sedes_ar[$g] != null) {
 
-            $res0 = getFactura($sedes_ar[$g], null , $fecha1, $fecha2, $linea);
+            $res0 = getFactura($sedes_ar[$g], null, $fecha1, $fecha2, $linea);
 
-            $total_enviado_tienda[$sedes_ar[$g]] += $res0 ;
+            $total_enviado_tienda[$sedes_ar[$g]] += $res0;
 
 
         ?>
@@ -80,9 +80,13 @@ if (isset($_GET)) {
           $g++;
         }   ?>
 
-      <th scope='row'>AJUSTES ENTRADAS X SOBRANTES</th>
 
-      <?php
+      </tr>
+
+      <tr>
+        <th scope='row'>AJUSTES ENTRADAS X SOBRANTES</th>
+
+        <?php
         $g = 1;
         $total_vendido = 0;
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -92,9 +96,9 @@ if (isset($_GET)) {
 
           if ($sedes_ar[$g] != null) {
 
-            $res0 = getFactura($sedes_ar[$g], null , $fecha1, $fecha2, $linea);
+            $res0 = getFactura($sedes_ar[$g], null, $fecha1, $fecha2, $linea);
 
-            $total_enviado_tienda[$sedes_ar[$g]] += $res0 ;
+            $total_enviado_tienda[$sedes_ar[$g]] += $res0;
 
 
         ?>
@@ -104,14 +108,11 @@ if (isset($_GET)) {
         <?php }
           $g++;
         }   ?>
-
-
-
       </tr>
 
     </tbody>
   </table>
-  <?php 
+  <?php
   var_dump($res0);
   var_dump($linea);
   var_dump($fecha1);
