@@ -74,7 +74,7 @@ if (isset($_GET)) {
 
         ?>
 
-            <td><?= $total_enviado ?></td>
+            <td><?= $res0 ?></td>
 
         <?php }
           $g++;
