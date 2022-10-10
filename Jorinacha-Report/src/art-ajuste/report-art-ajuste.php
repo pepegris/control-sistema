@@ -74,7 +74,7 @@ if (isset($_GET)) {
 
         ?>
 
-            <th scope='row'><?= $total_enviado ?></th>
+            <th><?= $total_enviado ?></th>
 
         <?php }
           $g++;
