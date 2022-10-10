@@ -54,33 +54,35 @@ if (isset($_GET)) {
     <tbody>
 
 
-        <tr>
-          <th scope='row'><?= $n ?></th>
+      <tr>
+        <th scope='row'>Facturado desde Previa</th>
 
-          <?php
-          $g = 1;
-          $total_vendido = 0;
-          for ($i = 0; $i < count($sedes_ar); $i++) {
-
-
-    
-
-            if ($sedes_ar[$g] != null) {
-
-              $res0 = getFactura($sedes_ar[$g], $co_art, $fecha1, $fecha2 , $linea);
-              $total_enviado = round($res0['total_art']);
-              $total_enviado_tienda[$sedes_ar[$g]] += $total_enviado;
-
-            }
-            $g++;
-          }
+        <?php
+        $g = 1;
+        $total_vendido = 0;
+        for ($i = 0; $i < count($sedes_ar); $i++) {
 
 
-          ?>
-          <th scope='row'>$total_enviado</th>
 
 
-        
+          if ($sedes_ar[$g] != null) {
+
+            $res0 = getFactura($sedes_ar[$g], $co_art, $fecha1, $fecha2, $linea);
+            $total_enviado = round($res0['total_art']);
+            $total_enviado_tienda[$sedes_ar[$g]] += $total_enviado;
+
+
+        ?>
+
+            <th scope='row'><?= $total_enviado ?></th>
+
+        <?php }
+          $g++;
+        }   ?>
+
+
+
+
       </tr>
 
     </tbody>
