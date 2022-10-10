@@ -90,6 +90,8 @@ if (isset($_GET)) {
   <?php 
   var_dump($res0);
   var_dump($linea);
+  var_dump($fecha1);
+  var_dump($fecha2);
   ?>
   <script src="../../assets/js/excel.js"></script>
   <center>
