@@ -55,7 +55,7 @@ if (isset($_GET)) {
 
 
       <tr>
-        <th scope='row'>Facturado desde Previa</th>
+        <th scope='row'>FACTURADO DESDE PREVIA</th>
 
         <?php
         $g = 1;
@@ -80,6 +80,30 @@ if (isset($_GET)) {
           $g++;
         }   ?>
 
+      <th scope='row'>AJUSTES ENTRADAS X SOBRANTES</th>
+
+      <?php
+        $g = 1;
+        $total_vendido = 0;
+        for ($i = 0; $i < count($sedes_ar); $i++) {
+
+
+
+
+          if ($sedes_ar[$g] != null) {
+
+            $res0 = getFactura($sedes_ar[$g], null , $fecha1, $fecha2, $linea);
+
+            $total_enviado_tienda[$sedes_ar[$g]] += $res0 ;
+
+
+        ?>
+
+            <td><?= $res0 ?></td>
+
+        <?php }
+          $g++;
+        }   ?>
 
 
 
