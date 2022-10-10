@@ -96,14 +96,42 @@ if (isset($_GET)) {
 
           if ($sedes_ar[$g] != null) {
 
-            $res0 = getFactura($sedes_ar[$g], null, $fecha1, $fecha2, $linea);
+            $res1 = getAjustes($sedes_ar[$g], $fecha1, $fecha2, $linea , 'EN');
 
-            $total_enviado_tienda[$sedes_ar[$g]] += $res0;
+            $total_entradas_sobrantes[$sedes_ar[$g]] += $res1;
 
 
         ?>
 
-            <td><?= $res0 ?></td>
+            <td><?= $res1 ?></td>
+
+        <?php }
+          $g++;
+        }   ?>
+      </tr>
+
+
+      <tr>
+        <th scope='row'>AJUSTES  SALIDAS X FALTANTES</th>
+
+        <?php
+        $g = 1;
+        $total_vendido = 0;
+        for ($i = 0; $i < count($sedes_ar); $i++) {
+
+
+
+
+          if ($sedes_ar[$g] != null) {
+
+            $res2 = getAjustes($sedes_ar[$g], $fecha1, $fecha2, $linea , 'SAL');
+
+            $total_salidas_faltantes[$sedes_ar[$g]] += $res2;
+
+
+        ?>
+
+            <td><?= $res2 ?></td>
 
         <?php }
           $g++;
