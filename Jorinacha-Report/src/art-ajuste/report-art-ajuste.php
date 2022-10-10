@@ -87,6 +87,9 @@ if (isset($_GET)) {
 
     </tbody>
   </table>
+  <?php 
+  var_dump($res0);
+  ?>
   <script src="../../assets/js/excel.js"></script>
   <center>
     <button id="submitExport" class="btn btn-success">Exportar Reporte a EXCEL</button>
