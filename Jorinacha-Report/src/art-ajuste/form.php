@@ -15,7 +15,7 @@ include '../../services/sqlserver.php';
 </style>
 
 <center>
-  <h1>Reporte de Aj</h1>
+  <h1>Reporte de AJ</h1>
 </center>
 
 <div id="body">
@@ -74,9 +74,6 @@ include '../../services/sqlserver.php';
 
         </select>
       </div>
-
-
-      
 
       <div class="form-group">
         <label for="fecha1" class="form-label " require>Desde</label>
