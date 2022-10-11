@@ -254,10 +254,30 @@ for ($i = 0; $i < count($sedes_ar); $i++) {
         }   ?>
         <th><?= $totales ?></th>
       </tr>
+
       <tr>
-        <th colspan="17"></th>
-        <th>Diferencia PREVIA y TIENDAS</th>
-        <th><?= $diferencias ?></th></th>
+        <th scope='row'>DIFERENCIAS</th>
+
+        <?php
+        $g = 1;
+        $total = 0;
+        for ($i = 0; $i < count($sedes_ar); $i++) {
+
+
+          if ($sedes_ar[$g] != null) {
+
+            $total = $total_desde_tienda[$sedes_ar[$g]] -  $total_enviado_tienda[$sedes_ar[$g]];
+            $diferencias += $total;
+
+        ?>
+
+            <th><?= $total ?></th>
+
+        <?php }
+          $total = 0;
+          $g++;
+        }   ?>
+        <th><?= $diferencias ?></th>
       </tr>
 
     </tbody>
