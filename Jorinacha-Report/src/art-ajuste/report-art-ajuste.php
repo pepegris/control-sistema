@@ -232,6 +232,7 @@ for ($i = 0; $i < count($sedes_ar); $i++) {
         <?php
         $g = 1;
         $total = 0;
+        $total2 = 0;
         for ($i = 0; $i < count($sedes_ar); $i++) {
 
 
@@ -239,6 +240,9 @@ for ($i = 0; $i < count($sedes_ar); $i++) {
 
             $total = $total_desde_tienda[$sedes_ar[$g]]  + $total_entradas_sobrantes[$sedes_ar[$g]] - $total_salidas_faltantes[$sedes_ar[$g]] - $total_DevProveedor[$sedes_ar[$g]];
             $totales += $total;
+
+            $total2 = $total_desde_tienda[$sedes_ar[$g]] -  $total_enviado_tienda[$sedes_ar[$g]];
+            $diferencias += $total2;
 
         ?>
 
@@ -249,6 +253,10 @@ for ($i = 0; $i < count($sedes_ar); $i++) {
           $g++;
         }   ?>
         <th><?= $totales ?></th>
+      </tr>
+      <tr>
+        <th colspan="17">Diferencia PREVIA y TIENDAS</th>
+        <th><?= $diferencias ?></th></th>
       </tr>
 
     </tbody>
