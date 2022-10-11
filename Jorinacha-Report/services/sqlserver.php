@@ -585,7 +585,7 @@ function getAjustes($sede,  $fecha1, $fecha2, $co_lin, $tipo)
                 FROM ajuste 
                 JOIN reng_aju ON ajuste.ajue_num = reng_aju.ajue_num
                 JOIN art ON art.co_art = reng_aju.co_art
-                WHERE  ajuste.fecha BETWEEN '$fecha1' AND '$fecha2' AND art.co_lin='$co_lin'  AND reng_aju.tipo='EN' AND ajuste.anulada =0";
+                WHERE  ajuste.fecha BETWEEN '$fecha1' AND '$fecha2' AND art.co_lin='$co_lin'  AND reng_aju.tipo='SAL' AND ajuste.anulada =0";
 
             }
 
