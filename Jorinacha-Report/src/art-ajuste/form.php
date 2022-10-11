@@ -75,6 +75,9 @@ include '../../services/sqlserver.php';
         </select>
       </div>
 
+
+      
+
       <div class="form-group">
         <label for="fecha1" class="form-label " require>Desde</label>
         <input type="date" name="fecha1" id="">

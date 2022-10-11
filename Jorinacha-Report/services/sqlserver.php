@@ -1,4 +1,4 @@
-<?php
+<?phpT15
 
 
 /* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA*/
@@ -58,7 +58,7 @@ function Cliente($sede)
 {
 
     $bd = array(
-        "Comercial Merina"    =>     'T20',
+        "Comercial Merina"    =>     'T15',
         "Comercial Merina III"    =>     'T23',
         "Comercial Corina I"    =>     'T18',
         "Comercial Corina II"    =>     'T22',
@@ -511,6 +511,51 @@ function getFactura($sede, $co_art, $fecha1, $fecha2, $co_lin)
         return 0;
     }
 }
+
+
+function getFacturaCompras($sede,  $fecha1, $fecha2, $co_lin)
+{
+    $cliente = Cliente($sede);
+    $database = Database($sede);
+
+
+    if ($cliente != null) {
+        try {
+
+            $serverName = "172.16.1.19";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT CONVERT(numeric(10,0), SUM(reng_com.total_art)) as total_art
+            FROM reng_com
+            JOIN compras ON reng_com.fact_num=compras.fact_num
+            JOIN art ON art.co_art = reng_com.co_art
+            WHERE compras.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND compras.anulada=0 AND art.co_lin = '$co_lin'";
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $total_art = $row['total_art'];
+                    break;
+                }
+                $res = $total_art;
+            } else {
+                $res = 0;
+            }
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
+
 
 
 function getAjustes($sede,  $fecha1, $fecha2, $co_lin, $tipo)

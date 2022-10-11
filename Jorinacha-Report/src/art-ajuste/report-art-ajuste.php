@@ -50,6 +50,43 @@ if (isset($_GET)) {
     <tbody>
 
 
+
+    <tr>
+        <th scope='row'>FACTURADO DESDE TIENDA</th>
+
+        <?php
+        $g = 1;
+        for ($i = 0; $i < count($sedes_ar); $i++) {
+
+
+
+
+          if ($sedes_ar[$g] != null) {
+
+            $res = getFacturaCompras($sedes_ar[$g], $fecha1, $fecha2, $linea);
+
+            if ($res == null) {
+              $res = 0;
+            }
+
+
+            $total_desde_tienda[$sedes_ar[$g]] += $res;
+            $total += $res
+
+
+        ?>
+
+            <td><?= $res ?></td>
+
+        <?php }
+          $g++;
+        }   ?>
+
+        <th><?= $total ?></th>
+
+      </tr>
+
+
       <tr>
         <th scope='row'>FACTURADO DESDE PREVIA</th>
 
