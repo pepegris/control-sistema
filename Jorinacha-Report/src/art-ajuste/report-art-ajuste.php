@@ -180,7 +180,7 @@ if (isset($_GET)) {
 
         ?>
 
-            <td><?= $res2 ?></td>
+            <td>-<?= $res2 ?></td>
 
         <?php }
           $g++;
@@ -223,7 +223,7 @@ for ($i = 0; $i < count($sedes_ar); $i++) {
   $g++;
 }   ?>
 
-<th><?= $total3 ?></th>
+<th>-<?= $total3 ?></th>
 </tr>
 
       <tr>
