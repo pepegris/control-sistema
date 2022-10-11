@@ -237,7 +237,7 @@ for ($i = 0; $i < count($sedes_ar); $i++) {
 
           if ($sedes_ar[$g] != null) {
 
-            $total = $total_enviado_tienda[$sedes_ar[$g]]  + $total_entradas_sobrantes[$sedes_ar[$g]] - $total_salidas_faltantes[$sedes_ar[$g]] - $total_DevProveedor[$sedes_ar[$g]];
+            $total = $total_desde_tienda[$sedes_ar[$g]]  + $total_entradas_sobrantes[$sedes_ar[$g]] - $total_salidas_faltantes[$sedes_ar[$g]] - $total_DevProveedor[$sedes_ar[$g]];
             $totales += $total;
 
         ?>
