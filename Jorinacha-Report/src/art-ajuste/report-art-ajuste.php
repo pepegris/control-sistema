@@ -255,7 +255,8 @@ for ($i = 0; $i < count($sedes_ar); $i++) {
         <th><?= $totales ?></th>
       </tr>
       <tr>
-        <th colspan="17">Diferencia PREVIA y TIENDAS</th>
+        <th colspan="17"></th>
+        <th>Diferencia PREVIA y TIENDAS</th>
         <th><?= $diferencias ?></th></th>
       </tr>
 
