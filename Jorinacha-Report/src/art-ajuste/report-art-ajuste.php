@@ -256,7 +256,7 @@ for ($i = 0; $i < count($sedes_ar); $i++) {
       </tr>
 
       <tr>
-        <th scope='row'>DIFERENCIAS</th>
+        <th scope='row'>DIFERENCIAS PREVIA Y TIENDA</th>
 
         <?php
         $g = 1;
