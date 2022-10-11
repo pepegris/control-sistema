@@ -20,12 +20,7 @@ if (isset($_GET)) {
 ?>
 
 
-  <style>
-    form,
-    td {
-      font-size: 12px;
-    }
-  </style>
+
   <center>
     <h1>Reporte de Aj</h1>
   </center>
