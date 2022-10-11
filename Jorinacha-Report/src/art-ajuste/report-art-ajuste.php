@@ -75,6 +75,7 @@ if (isset($_GET)) {
 
 
             $total_enviado_tienda[$sedes_ar[$g]] += $res0;
+            $total0 += $res0
 
 
         ?>
@@ -85,7 +86,7 @@ if (isset($_GET)) {
           $g++;
         }   ?>
 
-        <th><?= $total_enviado_tienda[$sedes_ar[$g]] ?></th>
+        <th><?= $total0 ?></th>
 
       </tr>
 
@@ -108,7 +109,7 @@ if (isset($_GET)) {
             }
 
             $total_entradas_sobrantes[$sedes_ar[$g]] += $res1;
-
+            $total1 += $res1
 
         ?>
 
@@ -118,7 +119,7 @@ if (isset($_GET)) {
           $g++;
         }   ?>
 
-        <th><?= $total_entradas_sobrantes[$sedes_ar[$g]] ?></th>
+        <th><?= $total1 ?></th>
       </tr>
 
 
@@ -142,6 +143,7 @@ if (isset($_GET)) {
             }
 
             $total_salidas_faltantes[$sedes_ar[$g]] += $res2;
+            $total2 += $res2
 
 
         ?>
@@ -152,9 +154,45 @@ if (isset($_GET)) {
           $g++;
         }   ?>
 
-        <th><?= $total_salidas_faltantes[$sedes_ar[$g]] ?></th>
+        <th><?= $total2 ?></th>
       </tr>
 
+
+
+
+
+      <th scope='row'>DEVOLUCION AL PROVEEDOR PREVIA</th>
+
+<?php
+$g = 1;
+
+for ($i = 0; $i < count($sedes_ar); $i++) {
+
+
+
+
+  if ($sedes_ar[$g] != null) {
+
+    $res3 = getDevProveedor($sedes_ar[$g], $fecha1, $fecha2, $linea, 'SAL');
+
+    if ($res3 == null) {
+      $res3 = 0;
+    }
+
+    $total_DevProveedor[$sedes_ar[$g]] += $res3;
+    $total3 += $res3
+
+
+?>
+
+    <td><?= $res3 ?></td>
+
+<?php }
+  $g++;
+}   ?>
+
+<th><?= $total3 ?></th>
+</tr>
 
       <tr>
         <th scope='row'>TOTALES</th>
@@ -167,7 +205,7 @@ if (isset($_GET)) {
 
           if ($sedes_ar[$g] != null) {
 
-            $total = $total_salidas_faltantes[$sedes_ar[$g]] + $total_entradas_sobrantes[$sedes_ar[$g]] + $total_enviado_tienda[$sedes_ar[$g]];
+            $total = $total_enviado_tienda[$sedes_ar[$g]]  + $total_entradas_sobrantes[$sedes_ar[$g]] - $total_salidas_faltantes[$sedes_ar[$g]] - $total_DevProveedor[$sedes_ar[$g]];
             $totales += $total;
 
         ?>
@@ -184,11 +222,7 @@ if (isset($_GET)) {
     </tbody>
   </table>
 
-<!--   <script src="../../assets/js/excel.js"></script>
-  <center>
-    <button id="submitExport" class="btn btn-success">Exportar Reporte a EXCEL</button>
-  </center>
- -->
+
 
 
 
