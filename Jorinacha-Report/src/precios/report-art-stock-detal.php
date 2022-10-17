@@ -36,7 +36,7 @@ if (isset($_GET)) {
   <table class="table table-dark table-striped" border='1' width='95%' id='tblNeedsScrolling'>
     <thead>
       <tr>
-        <th scope="col" nowrap>#</th>
+        <th  scope="col" nowrap>#</th>
         <th scope='col' nowrap>Codigo</th>
         <th scope='col' nowrap>Marca</th>
         <th scope='col' nowrap>Modelo</th>
@@ -60,7 +60,7 @@ if (isset($_GET)) {
             $sede = $sedes_ar[$i];
 
         ?>
-            <th scope='col'>Stock <?= $sede ?></th>
+            <th scope='col' nowrap>Stock <?= $sede ?></th>
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
