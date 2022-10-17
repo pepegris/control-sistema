@@ -21,8 +21,8 @@ thead
 
 tbody {
     display: block;
-    height: 550px;
-    width: 500px;
+    height: 600px;
+    width: 1200px;
     overflow-x: scroll;
     overflow-y: scroll;
 }

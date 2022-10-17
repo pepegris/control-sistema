@@ -39,7 +39,7 @@ if (isset($_GET)) {
     <thead>
       <tr>
         <th scope='col'>#</th>
-        <th scope='col'>Codigo</th>
+        <th >Codigo</th>
         <th>Marca</th>
         <th>Modelo</th>
         <th>Desc</th>
