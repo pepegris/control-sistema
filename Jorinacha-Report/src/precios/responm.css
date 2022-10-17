@@ -10,13 +10,12 @@ th {
     font-size: 9px/1.2;
     border-left: 1px solid #fff;
     white-space: nowrap;
+
+    
 }
 
 
-thead {
-    display: block;
-    overflow: auto;
-}
+
 
 tbody {
     display: block;
