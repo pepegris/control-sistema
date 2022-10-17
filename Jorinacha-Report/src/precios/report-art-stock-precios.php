@@ -225,7 +225,7 @@ if (isset($_GET)) {
     </tbody>
   </table>
 
-
+<!-- 
   <script>
     function htmlExcel(idTabla, nombreArchivo = '') {
   let linkDescarga;
@@ -265,7 +265,7 @@ if (isset($_GET)) {
   <center>
     <button id="submitExport" class="btn btn-success">Exportar Reporte a EXCEL</button>
   </center>
-
+ -->
 
 
 

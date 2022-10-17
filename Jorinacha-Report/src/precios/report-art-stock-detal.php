@@ -213,7 +213,7 @@ if (isset($_GET)) {
   </table>
 
 
-  <script>
+<!--   <script>
     function htmlExcel(idTabla, nombreArchivo = '') {
   let linkDescarga;
   let tipoDatos = 'application/vnd.ms-excel';
@@ -252,7 +252,7 @@ if (isset($_GET)) {
   <center>
     <button id="submitExport" class="btn btn-success">Exportar Reporte a EXCEL</button>
   </center>
-
+ -->
 
 
 

@@ -89,8 +89,9 @@ include '../../services/sqlserver.php';
       <label for="reporte" class="form-label ">Reporte</label>
       <select name="reporte" id="">
 
-        <option value="detal">Detallado</option>
+        
         <option value="precios">Valor de Stock</option>
+        <option value="detal">Detallado</option>
         <option value="global">Global</option>
 
       </select>
