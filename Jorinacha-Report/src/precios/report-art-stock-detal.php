@@ -23,11 +23,7 @@ if (isset($_GET)) {
 
 ?>
 
-  <style>
-
-
-
-  </style>
+<link rel='stylesheet' href='responm.css'>
   <center>
     <h1>Valor de Inventario</h1>
   </center>
