@@ -24,24 +24,16 @@ if (isset($_GET)) {
 ?>
 
   <style>
-    td {
-
-      font-size: 12px;
-      padding: 6px;
-      border: 1px solid #ccc;
-      border-left: 1px solid #fff;
-
-
+    * {
+      margin: 0;
+      padding: 0;
     }
 
-    th {
-
-      font-size: 11px;
+    td,th {
       padding: 6px;
       border: 1px solid #ccc;
+      font: 12px/1.2;
       border-left: 1px solid #fff;
-
-
     }
 
     thead {
