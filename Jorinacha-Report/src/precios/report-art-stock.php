@@ -156,7 +156,7 @@ if (isset($_POST)) {
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
-              $prec_vta1_tienda = round($res6[0]['prec_vta1']);
+              $prec_vta1_tienda = $res6[0]['prec_vta1'];
 
 
 
@@ -164,8 +164,8 @@ if (isset($_POST)) {
               <td><?= $stock_act_tienda  ?></td>
 
               <td>$<?= $prec_vta5_tienda ?></td>
-              <td>$<?= $prec_vta1_tienda ?></td>
-              <td>$<?= $prec_vta1_tienda ?></td>
+              <td>Bs<?= $prec_vta1_tienda ?></td>
+              <td>Bs<?= $prec_vta1_tienda ?></td>
 
 
 
@@ -194,6 +194,8 @@ if (isset($_POST)) {
 
         ?>
           <td><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></td>
+          <td></td>
+          <td></td>
           <td></td>
 
 
