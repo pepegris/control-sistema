@@ -192,9 +192,9 @@ if (isset($_GET)) {
           <h4>Total</h4>
         </td>
         <td></td>
-        <td><?= $total_prec_vta5_todo ?></td>
+        <td>$<?= $total_prec_vta5_todo ?></td>
         <td></td>
-        <td><?= $total_prec_vta1_todo ?></td>
+        <td>Bs<?= $total_prec_vta1_todo ?></td>
         <td><?= $total_stock_act_previa ?></td>
 
         <?php
@@ -206,9 +206,9 @@ if (isset($_GET)) {
         ?>
           <td><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></td>
           <td></td>
-          <td><?= $total_prec_vta5_tienda_todo ?></td>
+          <td>$<?= $total_prec_vta5_tienda_todo ?></td>
           <td></td>
-          <td><?= $total_prec_vta1_tienda_todo ?></td>
+          <td>Bs<?= $total_prec_vta1_tienda_todo ?></td>
           <td></td>
           
 
