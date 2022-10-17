@@ -14,16 +14,13 @@ table {
 
 td,
 th {
-    padding: 6px;
+    padding: 0px;
     border: 1px solid #ccc;
-    font: 10px/1.2;
+    font: 10px;
     border-left: 1px solid #fff;
 }
 
-td {
-    font: 7px/1.2;
-    padding: 0;
-}
+
 
 thead {
     display: block;
