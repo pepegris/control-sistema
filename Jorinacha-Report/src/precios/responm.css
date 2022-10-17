@@ -11,7 +11,8 @@ table {
     padding: 0;
     margin: 0 0 20px 0;
     border-collapse: collapse;
-	overflow:scroll;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: scroll; /* Add vertical scrollbar */
 }
 
 	td, th { 
