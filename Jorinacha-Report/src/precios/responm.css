@@ -1,25 +1,22 @@
-* {
-    margin: 0;
-    padding: 0;
-}
+
 
 
 table {
-    border: 0;
-    padding: 0;
-    margin: 0 0 20px 0;
+
     border-collapse: collapse;
     overflow: scroll;
 }
 
 td,
 th {
-    padding: 0px;
+
     border: 1px solid #ccc;
     font-size: 9px/1.2;
     border-left: 1px solid #fff;
 }
-
+td {
+    font-size: 9px/1.2;
+}
 
 
 thead {
