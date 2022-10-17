@@ -42,7 +42,7 @@ if (isset($_GET)) {
 
 
         <th style='padding-right: 10px;'>Ref</th>
-        <th style='padding-right: 30px;'>Total Ref</th>
+        <th style='padding-right: 20px;'>Total Ref</th>
         <th style='padding-right: 50px;'>Bs</th>
         <th style='padding-right: 53px;'>Total Bs</th>
         <?php
