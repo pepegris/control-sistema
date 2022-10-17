@@ -17,6 +17,9 @@ thead
 {
 	display: block;
 	font-size: 10px ; 
+    
+}
+thead,th{
     text-align: center;
 }
 

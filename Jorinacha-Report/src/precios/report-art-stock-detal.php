@@ -34,7 +34,7 @@ if (isset($_GET)) {
       <tr>
         <th  >#</th>
 
-        <th style="padding-right: 500px;">Desc</th>
+        <th style="padding-right: 950px;">Desc</th>
 
 
         <th>Ref</th>
