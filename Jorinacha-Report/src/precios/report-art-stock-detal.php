@@ -36,7 +36,7 @@ if (isset($_GET)) {
 
     th {
 
-      font-size: 13px;
+      font-size: 11px;
       padding: 6px;
       border: 1px solid #ccc;
       border-left: 1px solid #fff;
