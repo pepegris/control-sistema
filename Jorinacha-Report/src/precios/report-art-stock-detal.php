@@ -32,19 +32,19 @@ if (isset($_GET)) {
   <table class="table table-dark table-striped">
     <thead>
       <tr>
-        <th style="padding-right: 15px;" >#</th>
-        <th style="padding-right: 70px;">Codigo</th>
-        <th style="padding-right: 65px;">Marca</th>
-        <th style="padding-right: 30px;">Modelo</th>
-        <th style="padding-right: 265px;">Desc</th>
+        <th style='padding-right: 15px;' >#</th>
+        <th style='padding-right: 70px;'>Codigo</th>
+        <th style='padding-right: 65px;'>Marca</th>
+        <th style='padding-right: 30px;'>Modelo</th>
+        <th style='padding-right: 265px;'>Desc</th>
         <th scope='col'>Escala</th>
-        <th style="padding-right: 80px;">Color</th>
+        <th style='padding-right: 80px;'>Color</th>
 
 
-        <th style="padding-right: 10px;">Ref</th>
-        <th style="padding-right: 17px;">Total Ref</th>
-        <th style="padding-right: 50px;">Bs</th>
-        <th style="padding-right: 40px;">Total Bs</th>
+        <th style='padding-right: 10px;'>Ref</th>
+        <th style='padding-right: 17px;'>Total Ref</th>
+        <th style='padding-right: 50px;'>Bs</th>
+        <th style='padding-right: 40px;'>Total Bs</th>
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -61,12 +61,12 @@ if (isset($_GET)) {
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
-              echo "<th >Ref $i</th>";
-              echo "<th >Total Ref $i</th>";
-              echo "<th >PVP $i</th>";
-              echo "<th >Total PVP $i</th>";
-              echo "<th >Costo $i</th>";
-              echo "<th >Total Costo $i</th>";
+              echo "<th style='padding-right: 10px;'>Ref $i</th>";
+              echo "<th style='padding-right: 17px;'>Total Ref $i</th>";
+              echo "<th style='padding-right: 50px;'>PVP $i</th>";
+              echo "<th style='padding-right: 40px;'>Total PVP $i</th>";
+              echo "<th style='padding-right: 50px;'>Costo $i</th>";
+              echo "<th style='padding-right: 40px;'>Total Costo $i</th>";
             }
 
             ?>
