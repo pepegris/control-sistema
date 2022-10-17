@@ -32,9 +32,9 @@ if (isset($_GET)) {
   <table class="table table-dark table-striped">
     <thead>
       <tr>
-        <th style="padding-right: 10px;" >#</th>
+        <th style="padding-right: 15px;" >#</th>
 
-        <th style="padding-right: 850px;">Desc</th>
+        <th style="padding-right: 700px;">Desc</th>
 
 
         <th>Ref</th>
