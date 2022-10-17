@@ -44,7 +44,7 @@ if (isset($_GET)) {
         <th style='padding-right: 10px;'>Ref</th>
         <th style='padding-right: 25px;'>Total Ref</th>
         <th style='padding-right: 50px;'>Bs</th>
-        <th style='padding-right: 50px;'>Total Bs</th>
+        <th style='padding-right: 53px;'>Total Bs</th>
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -57,7 +57,7 @@ if (isset($_GET)) {
             $sede = $sedes_ar[$i];
 
         ?>
-            <th style='padding-right: 50px;'>Stock <?= $sede ?></th>
+            <th style='padding-right: 55px;'>Stock <?= $sede ?></th>
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
