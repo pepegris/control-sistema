@@ -23,7 +23,7 @@ if (isset($_GET)) {
 
 ?>
 
-<link rel='stylesheet' href='responm.css'>
+  <link rel='stylesheet' href='responm.css'>
   <center>
     <h1>Valor de Inventario</h1>
   </center>
@@ -31,7 +31,12 @@ if (isset($_GET)) {
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope='col'>Descripcion</th>
+        <th scope='col'>Codigo</th>
+        <th scope='col'>Marca</th>
+        <th scope='col'>Modelo</th>
+        <th scope='col'>Desc</th>
+        <th scope='col'>Escala</th>
+        <th scope='col'>Color</th>
 
 
         <th scope='col'>Ref</th>
