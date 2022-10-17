@@ -63,7 +63,8 @@ if (isset($_POST)) {
             if ($sedes_ar[$i] != 'Previa Shop') {
 
               echo "<th scope='col'>Ref $i</th>";
-
+              echo "<th scope='col'>PVP $i</th>";
+              echo "<th scope='col'>Costo $i</th>";
             }
 
             ?>
@@ -155,6 +156,7 @@ if (isset($_POST)) {
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
+              $prec_vta1_tienda = round($res6[0]['prec_vta1']);
 
 
 
@@ -162,6 +164,8 @@ if (isset($_POST)) {
               <td><?= $stock_act_tienda  ?></td>
 
               <td>$<?= $prec_vta5_tienda ?></td>
+              <td>$<?= $prec_vta1_tienda ?></td>
+              <td>$<?= $prec_vta1_tienda ?></td>
 
 
 
