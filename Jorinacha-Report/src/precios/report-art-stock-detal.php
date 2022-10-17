@@ -32,19 +32,19 @@ if (isset($_GET)) {
   <table class="table table-dark table-striped">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope='col'>Codigo</th>
-        <th scope='col'>Marca</th>
-        <th scope='col'>Modelo</th>
-        <th scope='col'>Desc</th>
-        <th scope='col'>Escala</th>
-        <th scope='col'>Color</th>
+        <th >#</th>
+        <th >Codigo</th>
+        <th >Marca</th>
+        <th >Modelo</th>
+        <th >Desc</th>
+        <th >Escala</th>
+        <th >Color</th>
 
 
-        <th scope='col'>Ref</th>
-        <th scope='col'>Total Ref</th>
-        <th scope='col'>Bs</th>
-        <th scope='col'>Total Bs</th>
+        <th >Ref</th>
+        <th >Total Ref</th>
+        <th >Bs</th>
+        <th >Total Bs</th>
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -57,16 +57,16 @@ if (isset($_GET)) {
             $sede = $sedes_ar[$i];
 
         ?>
-            <th scope='col'>Stock <?= $sede ?></th>
+            <th >Stock <?= $sede ?></th>
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
-              echo "<th  scope='col'  >Ref $i</th>";
-              echo "<th  scope='col'  >Total Ref $i</th>";
-              echo "<th  scope='col'  >PVP $i</th>";
-              echo "<th  scope='col'  >Total PVP $i</th>";
-              echo "<th  scope='col'  >Costo $i</th>";
-              echo "<th  scope='col'  >Total Costo $i</th>";
+              echo "<th    >Ref $i</th>";
+              echo "<th    >Total Ref $i</th>";
+              echo "<th    >PVP $i</th>";
+              echo "<th    >Total PVP $i</th>";
+              echo "<th    >Costo $i</th>";
+              echo "<th    >Total Costo $i</th>";
             }
 
             ?>
