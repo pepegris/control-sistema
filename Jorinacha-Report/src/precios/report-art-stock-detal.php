@@ -33,7 +33,7 @@ if (isset($_GET)) {
     }
   </style>
 <center><h1>Valor de Inventario</h1></center>
-  <table class="table table-dark table-striped" border='1' id='tblNeedsScrolling'  >
+  <table class="table table-dark table-striped"  id='tblNeedsScrolling'  >
     <thead>
       <tr>
         <th  scope="col"  >#</th>
