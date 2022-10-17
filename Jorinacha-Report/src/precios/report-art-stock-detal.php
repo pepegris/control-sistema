@@ -32,7 +32,7 @@ if (isset($_GET)) {
   <table class="table table-dark table-striped">
     <thead>
       <tr>
-        <th scope='col'>#</th>
+        <th  >#</th>
         <th >Codigo</th>
         <th>Marca</th>
         <th>Modelo</th>
