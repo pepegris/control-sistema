@@ -19,14 +19,14 @@ table {
 
 thead
 {
-
+	display: block;
 	overflow: auto;
 
 }
 
 tbody
 {
-
+	display: block;
 	height: 620px;
 	overflow: auto;
 }
