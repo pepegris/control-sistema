@@ -41,8 +41,8 @@ if (isset($_GET)) {
         <th style="padding-right: 80px;">Color</th>
 
 
-        <th style="padding-right: 5px;">Ref</th>
-        <th style="padding-right: 20px;">Total Ref</th>
+        <th style="padding-right: 15px;">Ref</th>
+        <th style="padding-right: 10px;">Total Ref</th>
         <th style="padding-right: 45px;">Bs</th>
         <th style="padding-right: 50px;">Total Bs</th>
         <?php
