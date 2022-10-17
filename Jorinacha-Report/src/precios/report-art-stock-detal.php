@@ -57,16 +57,16 @@ if (isset($_GET)) {
             $sede = $sedes_ar[$i];
 
         ?>
-            <th style='padding-right: 55px;'>Stock <?= $sede ?></th>
+            <th >Stock <?= $sede ?></th>
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
-              echo "<th style='padding-right: 10px;'>Ref $i</th>";
-              echo "<th style='padding-right: 20px;'>Total Ref $i</th>";
-              echo "<th style='padding-right: 30px;'>PVP $i</th>";
-              echo "<th style='padding-right: 40px;'>Total PVP $i</th>";
-              echo "<th style='padding-right: 50px;'>Costo $i</th>";
-              echo "<th style='padding-right: 40px;'>Total Costo $i</th>";
+              echo "<th >Ref $i</th>";
+              echo "<th >Total Ref $i</th>";
+              echo "<th >PVP $i</th>";
+              echo "<th >Total PVP $i</th>";
+              echo "<th >Costo $i</th>";
+              echo "<th >Total Costo $i</th>";
             }
 
             ?>
