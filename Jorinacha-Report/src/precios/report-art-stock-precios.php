@@ -24,16 +24,6 @@ if (isset($_GET)) {
 ?>
 
 
-  <style>
-
-    td,th {
-
-    border: 1px solid #fff;
-    font-size: 12px;
-
-    }
-
-  </style>
 <center><h1>Valor de Inventario</h1></center>
   <table class="table table-dark table-striped" id="tblData">
     <thead>
@@ -80,7 +70,9 @@ if (isset($_GET)) {
 
       </tr>
     </thead>
+    
     <tbody>
+
       <?php
 
       $res0 = getArt('Previa Shop', $linea, 0,null);

@@ -1,0 +1,10 @@
+td,th {
+
+    font-size: 12px;
+    white-space: nowrap;
+    text-align: center;
+
+    }
+    td{
+      border: 1px solid #fff;
+    }
