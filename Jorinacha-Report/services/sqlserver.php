@@ -153,7 +153,7 @@ function getLin_art_all()
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT lin_art.co_lin, lin_art.lin_des from lin_art 
             INNER JOIN art ON lin_art.co_lin=art.co_lin
-            WHERE art.stock_act >0
+            WHERE art.fe_us_in >='20180101'
             GROUP BY lin_art.co_lin,lin_art.lin_des";
 
     $consulta = sqlsrv_query($conn, $sql);
