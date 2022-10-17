@@ -7,7 +7,7 @@ td,
 th {
 
     border: 1px solid #fff;
-    white-space: nowrap;
+    
     
 
     
@@ -17,6 +17,7 @@ thead
 {
 	display: block;
 	font-size: 10px ; 
+    text-align: center;
 }
 
 
@@ -26,4 +27,5 @@ tbody {
     font-size: 12px;
     overflow-x: scroll;
     overflow-y: scroll;
+    white-space: nowrap;
 }
