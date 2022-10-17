@@ -18,5 +18,7 @@ th {
 tbody {
     display: block;
     height: 550px;
-    overflow: scroll;
+    width: 90px;
+    overflow-x: scroll;
+    overflow-y: scroll;
 }
