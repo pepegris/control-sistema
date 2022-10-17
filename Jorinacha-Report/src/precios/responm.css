@@ -12,7 +12,11 @@ th {
     
 }
 
-
+thead
+{
+	display: block;
+	font: 12px Georgia, Serif; 
+}
 
 
 tbody {
