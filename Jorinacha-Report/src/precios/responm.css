@@ -13,21 +13,20 @@ table {
 }
 
 	td, th { 
-		border: 1px solid #ccc; 
-		font: 12px/1.2 Georgia, Serif; 
+		border: 1px solid #ccc;  
 		border-left: 1px solid #fff;
 	}
 
 thead
 {
-	display: block;
+
 	overflow: auto;
 
 }
 
 tbody
 {
-	display: block;
+
 	height: 620px;
 	overflow: auto;
 }
