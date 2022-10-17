@@ -69,6 +69,7 @@ if (isset($_GET)) {
               echo "<th scope='col'>PVP $i</th>";
               echo "<th scope='col'>Total PVP $i</th>";
               echo "<th scope='col'>Costo $i</th>";
+              echo "<th scope='col'>Total Costo $i</th>";
             }
 
             ?>
@@ -142,13 +143,6 @@ if (isset($_GET)) {
               $stock_act_tienda = round($res3[0]['stock_act']);
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
-              $res4 = getFactura($sedes_ar[$f], $co_art, $fecha1, $fecha2 , null);
-              $total_enviado = number_format($res4['total_art'], 0, ',', '.');
-              $total_enviado_tienda[$sedes_ar[$f]] += $total_enviado;
-
-              $res5 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
-              $vendido_tienda = number_format($res4, 0, ',', '.');
-              $total_vendido_tienda[$sedes_ar[$f]] += $vendido_tienda;
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
@@ -156,9 +150,11 @@ if (isset($_GET)) {
 
               $total_prec_vta5_tienda = $stock_act_tienda * $prec_vta5_tienda;
               $total_prec_vta1_tienda = $stock_act_tienda * $prec_vta1_tienda;
+              $prec_vta3_costo_tienda = $stock_act_tienda * $prec_vta3_costo;
 
               $total_prec_vta5_tienda_todo +=  $prec_vta5_tienda;
               $total_prec_vta1_tienda_todo +=  $prec_vta1_tienda;
+              $prec_vta3_costo_tienda_todo +=  $prec_vta3_costo_tienda;
 
 
 
@@ -172,6 +168,7 @@ if (isset($_GET)) {
               <td>Bs<?= $total_prec_vta1_tienda ?></td>
 
               <td>Bs<?= $prec_vta3_costo ?></td>
+              <td>Bs<?= $prec_vta3_costo_tienda ?></td>
 
 
 
@@ -210,6 +207,8 @@ if (isset($_GET)) {
           <td></td>
           <td>Bs<?= number_format($total_prec_vta1_tienda_todo, 2, ',', '.'); ?></td>
           <td></td>
+          <td>Bs<?=number_format( $prec_vta3_costo_tienda_todo); ?></td>
+          
           
 
 
