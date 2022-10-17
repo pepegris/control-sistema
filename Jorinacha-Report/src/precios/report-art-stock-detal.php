@@ -28,7 +28,7 @@ if (isset($_GET)) {
 
     td {
 
-      font: 12px;
+      font: 12px/1.2;
       padding: 6px;
       border: 1px solid #ccc;
       border-left: 1px solid #fff;
