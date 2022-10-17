@@ -33,8 +33,12 @@ if (isset($_GET)) {
     <thead>
       <tr>
         <th style="padding-right: 15px;" >#</th>
-
-        <th style="padding-right: 700px;">Desc</th>
+        <th scope='col'>Codigo</th>
+        <th scope='col'>Marca</th>
+        <th scope='col'>Modelo</th>
+        <th scope='col'>Desc</th>
+        <th scope='col'>Escala</th>
+        <th scope='col'>Color</th>
 
 
         <th>Ref</th>

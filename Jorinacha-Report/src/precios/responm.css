@@ -19,7 +19,7 @@ thead
 	font-size: 10px ; 
     
 }
-thead,th{
+thead,tr,th{
     text-align: center;
 }
 
