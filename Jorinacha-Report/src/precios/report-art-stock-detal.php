@@ -43,8 +43,8 @@ if (isset($_GET)) {
 
         <th style="padding-right: 10px;">Ref</th>
         <th style="padding-right: 15px;">Total Ref</th>
-        <th style="padding-right: 45px;">Bs</th>
-        <th style="padding-right: 50px;">Total Bs</th>
+        <th style="padding-right: 50px;">Bs</th>
+        <th style="padding-right: 40px;">Total Bs</th>
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
