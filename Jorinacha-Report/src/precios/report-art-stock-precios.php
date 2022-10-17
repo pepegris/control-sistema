@@ -165,10 +165,10 @@ if (isset($_GET)) {
               <td>$<?= $total_prec_vta5_tienda ?></td>
 
               <td>Bs<?= $prec_vta1_tienda ?></td>
-              <td>Bs<?= $total_prec_vta1_tienda ?></td>
+              <td>Bs<?= number_format($total_prec_vta1_tienda, 2, ',', '.'); ?></td>
 
               <td>Bs<?= $prec_vta3_costo ?></td>
-              <td>Bs<?= $prec_vta3_costo_tienda ?></td>
+              <td>Bs<?= number_format($prec_vta3_costo_tienda, 2, ',', '.'); ?></td>
 
 
 
