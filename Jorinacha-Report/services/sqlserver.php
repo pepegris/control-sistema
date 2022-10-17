@@ -211,7 +211,7 @@ function getArt($sede, $linea, $co_art, $almacen)
                         prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art  WHERE prec_vta5 >=1 AND co_lin='$linea' order by co_subl  desc";
 
                     } else { */
-                    $sql = "SELECT TOP 1 LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.co_subl)) as  co_subl,LTRIM(RTRIM(art.co_cat)) as  co_cat,
+                    $sql = "SELECT TOP 10 LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.co_subl)) as  co_subl,LTRIM(RTRIM(art.co_cat)) as  co_cat,
                         prec_vta3,prec_vta5,st_almac.stock_act, co_color , co_lin,art.ubicacion
                         from st_almac inner join art on st_almac.co_art=art.co_art 
                         where   st_almac.co_alma='BOLE' AND art.prec_vta5 >=1
@@ -219,7 +219,7 @@ function getArt($sede, $linea, $co_art, $almacen)
                     /*                     } */
                 } else {
 
-                    $sql = "SELECT TOP 1 LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat) as  co_cat  , 
+                    $sql = "SELECT TOP 10 LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat) as  co_cat  , 
                     co_color , co_cat , co_lin , stock_act , prec_vta3 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5,art.ubicacion 
                     from art WHERE prec_vta5 >= 1 ORDER BY co_subl  DESC";
                 }
@@ -233,7 +233,7 @@ function getArt($sede, $linea, $co_art, $almacen)
                         prec_vta3,prec_vta5,stock_act, co_color , co_lin,art.ubicacion from art  WHERE prec_vta5 >=1 AND co_lin='$linea' order by co_subl  desc";
                         
                     } else { */
-                    $sql = "SELECT TOP 1 LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.co_subl)) as  co_subl,LTRIM(RTRIM(art.co_cat)) as  co_cat,
+                    $sql = "SELECT TOP 10 LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(art.co_subl)) as  co_subl,LTRIM(RTRIM(art.co_cat)) as  co_cat,
                     prec_vta3,prec_vta5,st_almac.stock_act , co_color, co_lin,art.ubicacion
                     from st_almac inner join art on st_almac.co_art=art.co_art 
                     where art.co_lin='$linea' and st_almac.co_alma='BOLE' AND art.prec_vta5 >=1
@@ -241,13 +241,13 @@ function getArt($sede, $linea, $co_art, $almacen)
                     /*                     } */
                 } else {
 
-                    $sql = "SELECT TOP 1 LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
+                    $sql = "SELECT TOP 10 LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
                     co_color , co_lin , stock_act , prec_vta3 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5,art.ubicacion 
                     from art  where co_lin= '$linea' AND prec_vta5 >= 1 ORDER BY co_subl  DESC";
                 }
             } else {
 
-                $sql = "SELECT TOP 1 LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
+                $sql = "SELECT TOP 10 LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
                 co_color , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 ,art.ubicacion
                 from art  where co_lin= '$linea' AND prec_vta5 >= 1 AND co_art='$co_art'";
             }
