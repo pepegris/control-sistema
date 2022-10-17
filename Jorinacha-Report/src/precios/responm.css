@@ -15,14 +15,14 @@ th {
 thead
 {
 	display: block;
-	font: 12px Georgia, Serif; 
+	font: 11px ; 
 }
 
 
 tbody {
     display: block;
     height: 600px;
-    width: 1200px;
+    font-size: 12px;
     overflow-x: scroll;
     overflow-y: scroll;
 }
