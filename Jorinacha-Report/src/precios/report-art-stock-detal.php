@@ -24,23 +24,36 @@ if (isset($_GET)) {
 ?>
 
   <style>
-    form,
     td {
+
       font-size: 12px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-left: 1px solid #fff;
+
+
+    }
+
+    th {
+
+      font-size: 13px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-left: 1px solid #fff;
 
 
     }
 
     thead {
       display: block;
-      overflow: auto;
+
 
     }
 
     tbody {
       display: block;
       height: 620px;
-      overflow: auto;
+
     }
   </style>
   <center>
