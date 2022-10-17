@@ -156,7 +156,7 @@ if (isset($_GET)) {
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
-              $prec_vta1_tienda = number_format($res6[0]['prec_vta1'], 0, ',', '.')
+              $prec_vta1_tienda = number_format($res6[0]['prec_vta1'], 2, ',', '.')
 
 
 
