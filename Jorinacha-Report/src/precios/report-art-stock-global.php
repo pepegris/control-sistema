@@ -7,16 +7,16 @@ include '../../includes/header.php';
 include '../../services/mysql.php';
 include '../../services/sqlserver.php';
 
-if (isset($_POST)) {
+if (isset($_GET)) {
 
 
-  $linea = $_POST['linea'];
+  $linea = $_GET['linea'];
 
-  $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
-  $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
+  $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
+  $fecha2 = date("Ymd", strtotime($_GET['fecha2']));  
 
   for ($i = 0; $i < 20; $i += 1) {
-    $sedes[] = $_POST[$i];
+    $sedes[] = $_GET[$i];
   }
 
 
