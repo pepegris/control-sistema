@@ -25,12 +25,14 @@ if (isset($_GET)) {
 
 
   <style>
-    form,
-    td {
-      font-size: 12px;
 
+    td,th {
+
+    border: 1px solid #fff;
+    font-size: 12px;
 
     }
+
   </style>
 <center><h1>Valor de Inventario</h1></center>
   <table class="table table-dark table-striped" id="tblData">

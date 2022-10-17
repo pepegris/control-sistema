@@ -42,9 +42,9 @@ if (isset($_GET)) {
 
 
         <th style='padding-right: 10px;'>Ref</th>
-        <th style='padding-right: 20px;'>Total Ref</th>
+        <th style='padding-right: 12px;'>Total Ref</th>
         <th style='padding-right: 50px;'>Bs</th>
-        <th style='padding-right: 53px;'>Total Bs</th>
+        <th style='padding-right: 40px;'>Total Bs</th>
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -63,7 +63,7 @@ if (isset($_GET)) {
 
               echo "<th >Ref $i</th>";
               echo "<th >Total Ref $i</th>";
-              echo "<th >PVP $i</th>";
+              echo "<th style='padding-right: 50px;'>PVP $i</th>";
               echo "<th >Total PVP $i</th>";
               echo "<th >Costo $i</th>";
               echo "<th >Total Costo $i</th>";
@@ -123,7 +123,7 @@ if (isset($_GET)) {
           <td>Bs<?= $prec_vta3_costo ?></td>
           <td>Bs<?= number_format($total_prec_vta3, 2, ',', '.'); ?></td>
 
-          <td style="padding-right: 70px;"><?= $stock_act ?></td>
+          <td style="padding-right: 85px;"><?= $stock_act ?></td>
 
 
           <!-- TIENDAS -->
@@ -156,10 +156,10 @@ if (isset($_GET)) {
 
 
           ?>
-              <td style="padding-right: 90px;"><?= $stock_act_tienda  ?></td>
+              <td style="padding-right: 110px;"><?= $stock_act_tienda  ?></td>
 
-              <td style='padding-right: 10px;'>$<?= $prec_vta5_tienda ?></td>
-              <td>$<?= $total_prec_vta5_tienda ?></td>
+              <td style='padding-right: 15px;'>$<?= $prec_vta5_tienda ?></td>
+              <td style='padding-right: 20px;'>$<?= $total_prec_vta5_tienda ?></td>
 
               <td>Bs<?= $prec_vta1_tienda ?></td>
               <td>Bs<?= number_format($total_prec_vta1_tienda, 2, ',', '.'); ?></td>
