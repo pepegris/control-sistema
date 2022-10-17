@@ -24,6 +24,15 @@ if (isset($_GET)) {
 ?>
 
   <link rel='stylesheet' href='responm.css'>
+  <style>
+    form,
+    td {
+      font-size: 12px;
+
+
+    }
+  </style>
+  
   <center>
     <h1>Valor de Inventario</h1>
   </center>
