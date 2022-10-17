@@ -32,19 +32,19 @@ if (isset($_GET)) {
   <table class="table table-dark table-striped">
     <thead>
       <tr>
-        <th >#</th>
-        <th >Codigo</th>
-        <th >Marca</th>
-        <th >Modelo</th>
-        <th >Desc</th>
-        <th >Escala</th>
-        <th >Color</th>
+        <th nowrap>#</th>
+        <th nowrap>Codigo</th>
+        <th nowrap>Marca</th>
+        <th nowrap>Modelo</th>
+        <th nowrap>Desc</th>
+        <th nowrap>Escala</th>
+        <th nowrap>Color</th>
 
 
-        <th >Ref</th>
-        <th >Total Ref</th>
-        <th >Bs</th>
-        <th >Total Bs</th>
+        <th nowrap>Ref</th>
+        <th nowrap>Total Ref</th>
+        <th nowrap>Bs</th>
+        <th nowrap>Total Bs</th>
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -57,16 +57,16 @@ if (isset($_GET)) {
             $sede = $sedes_ar[$i];
 
         ?>
-            <th >Stock <?= $sede ?></th>
+            <th nowrap>Stock <?= $sede ?></th>
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
-              echo "<th    >Ref $i</th>";
-              echo "<th    >Total Ref $i</th>";
-              echo "<th    >PVP $i</th>";
-              echo "<th    >Total PVP $i</th>";
-              echo "<th    >Costo $i</th>";
-              echo "<th    >Total Costo $i</th>";
+              echo "<th nowrap >Ref $i</th>";
+              echo "<th nowrap >Total Ref $i</th>";
+              echo "<th nowrap >PVP $i</th>";
+              echo "<th nowrap >Total PVP $i</th>";
+              echo "<th nowrap >Costo $i</th>";
+              echo "<th nowrap >Total Costo $i</th>";
             }
 
             ?>
@@ -109,13 +109,13 @@ if (isset($_GET)) {
       ?>
 
         <tr>
-          <th scope='row'><?= $n ?></th>
-          <td><?= $co_art ?></td>
-          <td><?= $co_lin ?></td>
-          <td><?= $co_subl ?></td>
-          <td><?= $desc ?></td>
-          <td><?= $co_cat ?></td>
-          <td><?= $co_color ?></td>
+          <th scope='row' nowrap><?= $n ?></th>
+          <td nowrap><?= $co_art ?></td>
+          <td nowrap><?= $co_lin ?></td>
+          <td nowrap><?= $co_subl ?></td>
+          <td nowrap><?= $desc ?></td>
+          <td nowrap><?= $co_cat ?></td>
+          <td nowrap><?= $co_color ?></td>
 
           <td>$<?= $prec_vta5 ?></td>
           <td>$<?= number_format($total_prec_vta5, 0, ',', '.'); ?></td>
