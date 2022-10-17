@@ -16,7 +16,7 @@ td,
 th {
     padding: 0px;
     border: 1px solid #ccc;
-    font: 9px;
+    font-size: 9px/1.2;
     border-left: 1px solid #fff;
 }
 
