@@ -92,7 +92,7 @@ if (isset($_POST)) {
         $total_stock_act_previa += $stock_act;
 
         $precio = $res0[$e]['prec_vta3'];
-        $prec_vta1 = number_format($precio, 2, ',', '.');
+        $prec_vta3_costo = number_format($precio, 2, ',', '.');
 
         $prec_vta5 = round($res0[$e]['prec_vta5']);
 
@@ -156,7 +156,9 @@ if (isset($_POST)) {
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
-              $prec_vta1_tienda = number_format($res6[0]['prec_vta1'], 2, ',', '.');
+              $prec_vta1_tienda = round($res6[0]['prec_vta1']);
+
+
 
 
 
@@ -165,7 +167,7 @@ if (isset($_POST)) {
 
               <td>$<?= $prec_vta5_tienda ?></td>
               <td>Bs<?= $prec_vta1_tienda ?></td>
-              <td>Bs<?= $prec_vta1_tienda ?></td>
+              <td>Bs<?= $prec_vta3_costo ?></td>
 
 
 
