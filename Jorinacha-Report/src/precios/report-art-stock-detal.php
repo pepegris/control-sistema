@@ -29,11 +29,24 @@ if (isset($_GET)) {
       padding: 0;
     }
 
-    td,th {
+    td {
+
+      font: 12px/1.2;
       padding: 6px;
       border: 1px solid #ccc;
-      font: 12px/1.2;
       border-left: 1px solid #fff;
+
+
+    }
+
+    th {
+
+      font: 12px/1.2;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-left: 1px solid #fff;
+
+
     }
 
     thead {
