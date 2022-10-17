@@ -42,7 +42,7 @@ if (isset($_GET)) {
 
 
         <th style="padding-right: 10px;">Ref</th>
-        <th style="padding-right: 15px;">Total Ref</th>
+        <th style="padding-right: 17px;">Total Ref</th>
         <th style="padding-right: 50px;">Bs</th>
         <th style="padding-right: 40px;">Total Bs</th>
         <?php
@@ -123,7 +123,7 @@ if (isset($_GET)) {
           <td>Bs<?= $prec_vta3_costo ?></td>
           <td>Bs<?= number_format($total_prec_vta3, 2, ',', '.'); ?></td>
 
-          <td style="padding-right: 50px;"><?= $stock_act ?></td>
+          <td style="padding-right: 65px;"><?= $stock_act ?></td>
 
 
           <!-- TIENDAS -->
@@ -156,7 +156,7 @@ if (isset($_GET)) {
 
 
           ?>
-              <td style="padding-right: 50px;"><?= $stock_act_tienda  ?></td>
+              <td style="padding-right: 65px;"><?= $stock_act_tienda  ?></td>
 
               <td>$<?= $prec_vta5_tienda ?></td>
               <td>$<?= $total_prec_vta5_tienda ?></td>
