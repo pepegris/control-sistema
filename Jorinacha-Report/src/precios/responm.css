@@ -1,6 +1,6 @@
-* { 
-	margin: 0; 
-	padding: 0; 
+* {
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -9,31 +9,33 @@ table {
     padding: 0;
     margin: 0 0 20px 0;
     border-collapse: collapse;
-	overflow:scroll;
+    overflow: scroll;
 }
 
-	td, th { 
-		padding: 6px; 
-		border: 1px solid #ccc; 
-		font: 10px/1.2 ; 
-		border-left: 1px solid #fff;
-	}
-
-thead
-{
-	display: block;
-	overflow: auto;
-	color: white; 
-	background: #333; 
-	font-weight: bold; 
-	font: 15px/1.5 ; 
+td,
+th {
+    padding: 6px;
+    border: 1px solid #ccc;
+    font: 10px/1.2;
+    border-left: 1px solid #fff;
 }
 
-tbody
-{
-	display: block;
-	height: 500px;
-	overflow: auto;
+td {
+    font: 9px/1.2;
+    padding: 0;
 }
 
+thead {
+    display: block;
+    overflow: auto;
+    color: white;
+    background: #333;
+    font-weight: bold;
+    font: 15px/1.5;
+}
 
+tbody {
+    display: block;
+    height: 500px;
+    overflow: auto;
+}
