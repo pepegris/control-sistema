@@ -121,10 +121,10 @@ if (isset($_GET)) {
           <td><?= $co_color ?></td>
  
           <td>$<?= $prec_vta5 ?></td>
-          <td>$<?= $total_prec_vta5 ?></td>
+          <td>$<?= number_format($total_prec_vta5, 0, ',', '.'); ?></td>
 
           <td>Bs<?= $prec_vta3_costo ?></td>
-          <td>Bs<?= $total_prec_vta3 ?></td>
+          <td>Bs<?= number_format($total_prec_vta3, 2, ',', '.'); ?></td>
 
           <td><?= $stock_act ?></td>
 
@@ -189,7 +189,7 @@ if (isset($_GET)) {
           <h4>Total</h4>
         </td>
         <td></td>
-        <td>$<?= $total_prec_vta5_todo ?></td>
+        <td>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></td>
         <td></td>
         <td>Bs<?= number_format($total_prec_vta3_todo, 2, ',', '.'); ?></td>
         <td><?= $total_stock_act_previa ?></td>
@@ -203,7 +203,7 @@ if (isset($_GET)) {
         ?>
           <td><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></td>
           <td></td>
-          <td>$<?= $total_prec_vta5_tienda_todo ?></td>
+          <td>$<?= number_format($total_prec_vta5_tienda_todo, 0, ',', '.');  ?></td>
           <td></td>
           <td>Bs<?= number_format($total_prec_vta1_tienda_todo, 2, ',', '.'); ?></td>
           <td></td>
