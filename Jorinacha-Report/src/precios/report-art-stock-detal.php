@@ -33,21 +33,21 @@ if (isset($_GET)) {
     }
   </style>
 <center><h1>Valor de Inventario</h1></center>
-  <table class="table table-dark table-striped" border='1' width='95%' id='tblNeedsScrolling'>
+  <table class="table table-dark table-striped" border='1'  id='tblNeedsScrolling'>
     <thead>
       <tr>
-        <th width='7px' scope="col" nowrap>#</th>
-        <th width='7px' scope='col' nowrap>Codigo</th>
-        <th width='7px' scope='col' nowrap>Marca</th>
-        <th width='7px' scope='col' nowrap>Modelo</th>
-        <th width='7px' scope='col' nowrap>Desc</th>
-        <th width='7px' scope='col' nowrap>Escala</th>
-        <th width='7px' scope='col' nowrap>Color</th>
+        <th  scope="col" nowrap>#</th>
+        <th  scope='col' nowrap>Codigo</th>
+        <th  scope='col' nowrap>Marca</th>
+        <th  scope='col' nowrap>Modelo</th>
+        <th  scope='col' nowrap>Desc</th>
+        <th  scope='col' nowrap>Escala</th>
+        <th  scope='col' nowrap>Color</th>
  
-        <th width='7px' scope='col' nowrap>Ref</th>
-        <th width='7px' scope='col' nowrap>Total Ref</th>
-        <th width='7px' scope='col' nowrap>Bs</th>
-        <th width='7px' scope='col' nowrap>Total Bs</th>
+        <th  scope='col' nowrap>Ref</th>
+        <th  scope='col' nowrap>Total Ref</th>
+        <th  scope='col' nowrap>Bs</th>
+        <th  scope='col' nowrap>Total Bs</th>
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -60,16 +60,16 @@ if (isset($_GET)) {
             $sede = $sedes_ar[$i];
 
         ?>
-            <th width='7px' scope='col' nowrap>Stock <?= $sede ?></th>
+            <th  scope='col' nowrap>Stock <?= $sede ?></th>
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
-              echo "<th width='7px' scope='col' nowrap>Ref $i</th>";
-              echo "<th width='7px' scope='col' nowrap>Total Ref $i</th>";
-              echo "<th width='7px' scope='col' nowrap>PVP $i</th>";
-              echo "<th width='7px' scope='col' nowrap>Total PVP $i</th>";
-              echo "<th width='7px' scope='col' nowrap>Costo $i</th>";
-              echo "<th width='7px' scope='col' nowrap>Total Costo $i</th>";
+              echo "<th  scope='col' nowrap>Ref $i</th>";
+              echo "<th  scope='col' nowrap>Total Ref $i</th>";
+              echo "<th  scope='col' nowrap>PVP $i</th>";
+              echo "<th  scope='col' nowrap>Total PVP $i</th>";
+              echo "<th  scope='col' nowrap>Costo $i</th>";
+              echo "<th  scope='col' nowrap>Total Costo $i</th>";
             }
 
             ?>
