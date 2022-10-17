@@ -32,7 +32,7 @@ if (isset($_GET)) {
 
     }
   </style>
-<center><h1>Articulos con su Precio</h1></center>
+<center><h1>Valor de Inventario</h1></center>
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>

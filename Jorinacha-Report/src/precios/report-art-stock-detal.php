@@ -22,7 +22,7 @@ if (isset($_GET)) {
 
 
 ?>
-
+<link rel='stylesheet' href='responm.css'>
 
   <style>
     form,
@@ -32,20 +32,22 @@ if (isset($_GET)) {
 
     }
   </style>
-<center><h1>Articulos con su Precio</h1></center>
-  <table class="table table-dark table-striped" id="tblData">
+<center><h1>Valor de Inventario</h1></center>
+  <table class="table table-dark table-striped" border='1' width='95%' id='tblNeedsScrolling'>
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope='col'>Codigo</th>
-        <th scope='col'>Marca</th>
-        <th scope='col'>Modelo</th>
-        <th scope='col'>Desc</th>
-        <th scope='col'>Escala</th>
-        <th scope='col'>Color</th>
+        <th scope="col" nowrap>#</th>
+        <th scope='col' nowrap>Codigo</th>
+        <th scope='col' nowrap>Marca</th>
+        <th scope='col' nowrap>Modelo</th>
+        <th scope='col' nowrap>Desc</th>
+        <th scope='col' nowrap>Escala</th>
+        <th scope='col' nowrap>Color</th>
  
-        <th scope='col'>Ref</th>
-        <th scope='col'>Total Vendido</th>
+        <th scope='col' nowrap>Ref</th>
+        <th scope='col' nowrap>Total Ref</th>
+        <th scope='col' nowrap>Bs</th>
+        <th scope='col' nowrap>Total Bs</th>
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -58,13 +60,16 @@ if (isset($_GET)) {
             $sede = $sedes_ar[$i];
 
         ?>
-            <th scope='col'><?= $sede ?></th>
+            <th scope='col'>Stock <?= $sede ?></th>
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
-              echo "<th scope='col'>Ref $i</th>";
-              echo "<th scope='col'>PVP $i</th>";
-              echo "<th scope='col'>Costo $i</th>";
+              echo "<th scope='col' nowrap>Ref $i</th>";
+              echo "<th scope='col' nowrap>Total Ref $i</th>";
+              echo "<th scope='col' nowrap>PVP $i</th>";
+              echo "<th scope='col' nowrap>Total PVP $i</th>";
+              echo "<th scope='col' nowrap>Costo $i</th>";
+              echo "<th scope='col' nowrap>Total Costo $i</th>";
             }
 
             ?>
@@ -96,40 +101,32 @@ if (isset($_GET)) {
 
         $prec_vta5 = round($res0[$e]['prec_vta5']);
 
+        $total_prec_vta5 = $stock_act * $prec_vta5;
+        $total_prec_vta3 = $stock_act * $prec_vta3_costo;
+
+        $total_prec_vta5_todo +=  $total_prec_vta5;
+        $total_prec_vta3_todo +=  $total_prec_vta3;
+
+        
+
       ?>
 
         <tr>
-          <th scope='row'><?= $n ?></th>
-          <td><?= $co_art ?></td>
-          <td><?= $co_lin ?></td>
-          <td><?= $co_subl ?></td>
-          <td><?= $desc ?></td>
-          <td><?= $co_cat ?></td>
-          <td><?= $co_color ?></td>
-
-          <?php
-          $g = 1;
-          $total_vendido = 0;
-          for ($i = 0; $i < count($sedes_ar); $i++) {
-
-            if ($sedes_ar[$g] != null) {
-
-              $res1 = getReng_fac($sedes_ar[$g],  $co_art, $fecha1, $fecha2);
-              $total_vendido += round($res1);
-            }
-            $g++;
-          }
-
-          $res2 = getCompras($co_art);
-          $prec_vta =  number_format($res2['prec_vta'], 2, ',', '.');
-          $fec_lote = $res2['fec_lote'];
-
-
-          ?>
+          <th scope='row' nowrap><?= $n ?></th>
+          <td nowrap><?= $co_art ?></td>
+          <td nowrap><?= $co_lin ?></td>
+          <td nowrap><?= $co_subl ?></td>
+          <td nowrap><?= $desc ?></td>
+          <td nowrap><?= $co_cat ?></td>
+          <td nowrap><?= $co_color ?></td>
  
-          <td>$<?= $prec_vta5 ?></td>
-          <td><?= $total_vendido ?></td>
-          <td><?= $stock_act ?></td>
+          <td nowrap>$<?= $prec_vta5 ?></td>
+          <td nowrap>$<?= number_format($total_prec_vta5, 0, ',', '.'); ?></td>
+
+          <td nowrap>Bs<?= $prec_vta3_costo ?></td>
+          <td nowrap>Bs<?= number_format($total_prec_vta3, 2, ',', '.'); ?></td>
+
+          <td nowrap><?= $stock_act ?></td>
 
 
           <!-- TIENDAS -->
@@ -146,28 +143,32 @@ if (isset($_GET)) {
               $stock_act_tienda = round($res3[0]['stock_act']);
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
-              $res4 = getFactura($sedes_ar[$f], $co_art, $fecha1, $fecha2 , null);
-              $total_enviado = number_format($res4['total_art'], 0, ',', '.');
-              $total_enviado_tienda[$sedes_ar[$f]] += $total_enviado;
-
-              $res5 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
-              $vendido_tienda = number_format($res4, 0, ',', '.');
-              $total_vendido_tienda[$sedes_ar[$f]] += $vendido_tienda;
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
-              $prec_vta1_tienda = number_format($res6[0]['prec_vta1'], 2, ',', '.')
+              $prec_vta1_tienda = number_format($res6[0]['prec_vta1'], 2, ',', '.');
 
+              $total_prec_vta5_tienda = $stock_act_tienda * $prec_vta5_tienda;
+              $total_prec_vta1_tienda = $stock_act_tienda * $prec_vta1_tienda;
+              $prec_vta3_costo_tienda = $stock_act_tienda * $prec_vta3_costo;
 
+              $total_prec_vta5_tienda_todo +=  $prec_vta5_tienda;
+              $total_prec_vta1_tienda_todo +=  $prec_vta1_tienda;
+              $prec_vta3_costo_tienda_todo +=  $prec_vta3_costo_tienda;
 
 
 
           ?>
-              <td><?= $stock_act_tienda  ?></td>
+              <td nowrap><?= $stock_act_tienda  ?></td>
 
-              <td>$<?= $prec_vta5_tienda ?></td>
-              <td>Bs<?= $prec_vta1_tienda ?></td>
-              <td>Bs<?= $prec_vta3_costo ?></td>
+              <td nowrap>$<?= $prec_vta5_tienda ?></td>
+              <td nowrap>$<?= $total_prec_vta5_tienda ?></td>
+
+              <td nowrap>Bs<?= $prec_vta1_tienda ?></td>
+              <td nowrap>Bs<?= number_format($total_prec_vta1_tienda, 2, ',', '.'); ?></td>
+
+              <td nowrap>Bs<?= $prec_vta3_costo ?></td>
+              <td nowrap>Bs<?= number_format($prec_vta3_costo_tienda, 2, ',', '.'); ?></td>
 
 
 
@@ -182,12 +183,17 @@ if (isset($_GET)) {
 
       <?php  } ?>
       <tr>
-        <th ></th>
-        <td colspan="7"></td>
-        <td>
+        <th nowrap ></th>
+        <td colspan="5" nowrap></td>
+        <td nowrap>
           <h4>Total</h4>
         </td>
-        <td><?= $total_stock_act_previa ?></td>
+        <td nowrap></td>
+        <td nowrap>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></td>
+        <td nowrap></td>
+        <td nowrap>Bs<?= number_format($total_prec_vta3_todo, 2, ',', '.'); ?></td>
+        <td nowrap><?= $total_stock_act_previa ?></td>
+
         <?php
 
         $h = 1;
@@ -195,10 +201,16 @@ if (isset($_GET)) {
           $vendido = $total_vendido_tienda[$sedes_ar[$h]];
 
         ?>
-          <td><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td nowrap><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></td>
+          <td nowrap></td>
+          <td nowrap>$<?= number_format($total_prec_vta5_tienda_todo, 0, ',', '.');  ?></td>
+          <td nowrap></td>
+          <td nowrap>Bs<?= number_format($total_prec_vta1_tienda_todo, 2, ',', '.'); ?></td>
+          <td nowrap></td>
+          <td nowrap>Bs<?=number_format( $prec_vta3_costo_tienda_todo); ?></td>
+          
+          
+
 
 
         <?php
@@ -212,8 +224,8 @@ if (isset($_GET)) {
     </tbody>
   </table>
 
-
-<!--   <script>
+<!-- 
+  <script>
     function htmlExcel(idTabla, nombreArchivo = '') {
   let linkDescarga;
   let tipoDatos = 'application/vnd.ms-excel';
