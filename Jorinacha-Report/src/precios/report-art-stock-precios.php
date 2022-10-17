@@ -102,7 +102,7 @@ if (isset($_GET)) {
         $prec_vta5 = round($res0[$e]['prec_vta5']);
 
         $total_prec_vta5 = $stock_act * $prec_vta5;
-        $total_prec_vta3 = $stock_act * $prec_vta3;
+        $total_prec_vta3 = $stock_act * $prec_vta3_costo;
 
         $total_prec_vta5_todo +=  $total_prec_vta5;
         $total_prec_vta3_todo +=  $total_prec_vta3;
