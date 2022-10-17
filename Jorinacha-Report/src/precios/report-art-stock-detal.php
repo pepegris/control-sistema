@@ -26,38 +26,7 @@ if (isset($_GET)) {
   <style>
 
 
-    td {
 
-      font: 12px/1.2;
-      padding: 6px;
-      border: 1px solid #ccc;
-      border-left: 1px solid #fff;
-
-
-    }
-
-    th {
-
-      font: 10px/1.2;
-      padding: 6px;
-      border: 1px solid #ccc;
-      border-left: 1px solid #fff;
-
-
-    }
-
-    thead {
-      display: block;
-      overflow: auto;
-
-    }
-
-    tbody {
-      display: block;
-      height: 620px;
-      width: 100%;
-      overflow: auto;
-    }
   </style>
   <center>
     <h1>Valor de Inventario</h1>
