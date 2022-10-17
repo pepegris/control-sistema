@@ -7,7 +7,6 @@ td,
 th {
 
     border: 1px solid #fff;
-    font-size: 9px/1.2;
     white-space: nowrap;
 
     
@@ -17,7 +16,7 @@ th {
 
 
 tbody {
-    
+    display: block;
     height: 550px;
     overflow: scroll;
 }
