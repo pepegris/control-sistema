@@ -60,7 +60,7 @@ if (isset($_GET)) {
             $sede = $sedes_ar[$i];
 
         ?>
-            <th scope='col'><?= $sede ?></th>
+            <th scope='col'>Stock <?= $sede ?></th>
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
@@ -120,10 +120,10 @@ if (isset($_GET)) {
           <td><?= $co_color ?></td>
  
           <td>$<?= $prec_vta5 ?></td>
-          <td><?= $total_prec_vta5 ?></td>
+          <td>$<?= $total_prec_vta5 ?></td>
 
-          <td>$<?= $prec_vta3 ?></td>
-          <td><?= $prec_vta3_costo ?></td>
+          <td>Bs<?= $prec_vta3_costo ?></td>
+          <td>Bs<?= $total_prec_vta3 ?></td>
 
           <td><?= $stock_act ?></td>
 
@@ -152,7 +152,7 @@ if (isset($_GET)) {
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
-              $prec_vta1_tienda = number_format($res6[0]['prec_vta1'], 0, ',', '.');
+              $prec_vta1_tienda = number_format($res6[0]['prec_vta1'], 2, ',', '.');
 
               $total_prec_vta5_tienda = $stock_act_tienda * $prec_vta5_tienda;
               $total_prec_vta1_tienda = $stock_act_tienda * $prec_vta1_tienda;
@@ -191,7 +191,12 @@ if (isset($_GET)) {
         <td>
           <h4>Total</h4>
         </td>
+        <td></td>
+        <td><?= $total_prec_vta5_todo ?></td>
+        <td></td>
+        <td><?= $total_prec_vta1_todo ?></td>
         <td><?= $total_stock_act_previa ?></td>
+
         <?php
 
         $h = 1;
