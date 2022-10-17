@@ -61,8 +61,8 @@ if (isset($_GET)) {
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
-              echo "<th style='padding-right: 10px;'>Ref $i</th>";
-              echo "<th style='padding-right: 17px;'>Total Ref $i</th>";
+              echo "<th style='padding-right: 20px;'>Ref $i</th>";
+              echo "<th style='padding-right: 20px;'>Total Ref $i</th>";
               echo "<th style='padding-right: 50px;'>PVP $i</th>";
               echo "<th style='padding-right: 40px;'>Total PVP $i</th>";
               echo "<th style='padding-right: 50px;'>Costo $i</th>";
@@ -156,9 +156,9 @@ if (isset($_GET)) {
 
 
           ?>
-              <td style="padding-right: 85px;"><?= $stock_act_tienda  ?></td>
+              <td style="padding-right: 90px;"><?= $stock_act_tienda  ?></td>
 
-              <td>$<?= $prec_vta5_tienda ?></td>
+              <td >$<?= $prec_vta5_tienda ?></td>
               <td>$<?= $total_prec_vta5_tienda ?></td>
 
               <td>Bs<?= $prec_vta1_tienda ?></td>
