@@ -24,10 +24,7 @@ if (isset($_GET)) {
 ?>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
+
 
     td {
 
