@@ -41,10 +41,10 @@ if (isset($_GET)) {
         <th style="padding-right: 80px;">Color</th>
 
 
-        <th>Ref</th>
+        <th style="padding-right: 5px;">Ref</th>
         <th style="padding-right: 20px;">Total Ref</th>
-        <th style="padding-right: 30px;">Bs</th>
-        <th style="padding-right: 30px;">Total Bs</th>
+        <th style="padding-right: 45px;">Bs</th>
+        <th style="padding-right: 50px;">Total Bs</th>
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -123,7 +123,7 @@ if (isset($_GET)) {
           <td>Bs<?= $prec_vta3_costo ?></td>
           <td>Bs<?= number_format($total_prec_vta3, 2, ',', '.'); ?></td>
 
-          <td><?= $stock_act ?></td>
+          <td style="padding-right: 50px;"><?= $stock_act ?></td>
 
 
           <!-- TIENDAS -->
@@ -156,7 +156,7 @@ if (isset($_GET)) {
 
 
           ?>
-              <td><?= $stock_act_tienda  ?></td>
+              <td style="padding-right: 50px;"><?= $stock_act_tienda  ?></td>
 
               <td>$<?= $prec_vta5_tienda ?></td>
               <td>$<?= $total_prec_vta5_tienda ?></td>
