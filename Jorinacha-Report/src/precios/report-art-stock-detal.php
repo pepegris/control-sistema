@@ -31,7 +31,7 @@ if (isset($_GET)) {
 
     td {
 
-      font: 12px/1.2;
+      font: 12px;
       padding: 6px;
       border: 1px solid #ccc;
       border-left: 1px solid #fff;
@@ -41,7 +41,7 @@ if (isset($_GET)) {
 
     th {
 
-      font: 12px/1.2;
+      font: 10px/1.2;
       padding: 6px;
       border: 1px solid #ccc;
       border-left: 1px solid #fff;
