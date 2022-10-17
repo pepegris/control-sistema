@@ -187,7 +187,7 @@ if (isset($_GET)) {
       <?php  } ?>
       <tr>
         <th ></th>
-        <td colspan="4"></td>
+        <td colspan="5"></td>
         <td>
           <h4>Total</h4>
         </td>
