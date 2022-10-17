@@ -45,7 +45,9 @@ if (isset($_GET)) {
         <th scope='col'>Color</th>
  
         <th scope='col'>Ref</th>
-        <th scope='col'>Total Vendido</th>
+        <th scope='col'>Total Ref</th>
+        <th scope='col'>Bs</th>
+        <th scope='col'>Total Bs</th>
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -63,7 +65,9 @@ if (isset($_GET)) {
             if ($sedes_ar[$i] != 'Previa Shop') {
 
               echo "<th scope='col'>Ref $i</th>";
+              echo "<th scope='col'>Total Ref $i</th>";
               echo "<th scope='col'>PVP $i</th>";
+              echo "<th scope='col'>Total PVP $i</th>";
               echo "<th scope='col'>Costo $i</th>";
             }
 
@@ -96,6 +100,14 @@ if (isset($_GET)) {
 
         $prec_vta5 = round($res0[$e]['prec_vta5']);
 
+        $total_prec_vta5 = $stock_act * $prec_vta5;
+        $total_prec_vta3 = $stock_act * $prec_vta3;
+
+        $total_prec_vta5_todo +=  $total_prec_vta5;
+        $total_prec_vta3_todo +=  $total_prec_vta3;
+
+        
+
       ?>
 
         <tr>
@@ -106,29 +118,13 @@ if (isset($_GET)) {
           <td><?= $desc ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
-
-          <?php
-          $g = 1;
-          $total_vendido = 0;
-          for ($i = 0; $i < count($sedes_ar); $i++) {
-
-            if ($sedes_ar[$g] != null) {
-
-              $res1 = getReng_fac($sedes_ar[$g],  $co_art, $fecha1, $fecha2);
-              $total_vendido += round($res1);
-            }
-            $g++;
-          }
-
-          $res2 = getCompras($co_art);
-          $prec_vta =  number_format($res2['prec_vta'], 2, ',', '.');
-          $fec_lote = $res2['fec_lote'];
-
-
-          ?>
  
           <td>$<?= $prec_vta5 ?></td>
-          <td><?= $total_vendido ?></td>
+          <td><?= $total_prec_vta5 ?></td>
+
+          <td>$<?= $prec_vta3 ?></td>
+          <td><?= $prec_vta3_costo ?></td>
+
           <td><?= $stock_act ?></td>
 
 
@@ -156,9 +152,13 @@ if (isset($_GET)) {
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
-              $prec_vta1_tienda = number_format($res6[0]['prec_vta1'], 0, ',', '.')
+              $prec_vta1_tienda = number_format($res6[0]['prec_vta1'], 0, ',', '.');
 
+              $total_prec_vta5_tienda = $stock_act * $prec_vta5_tienda;
+              $total_prec_vta1_tienda = $stock_act * $prec_vta1_tienda;
 
+              $total_prec_vta5_tienda_todo +=  $prec_vta5_tienda;
+              $total_prec_vta3_tienda_todo +=  $prec_vta3_tienda;
 
 
 
@@ -166,7 +166,11 @@ if (isset($_GET)) {
               <td><?= $stock_act_tienda  ?></td>
 
               <td>$<?= $prec_vta5_tienda ?></td>
+              <td>$<?= $total_prec_vta5_tienda ?></td>
+
               <td>Bs<?= $prec_vta1_tienda ?></td>
+              <td>Bs<?= $total_prec_vta1_tienda ?></td>
+
               <td>Bs<?= $prec_vta3_costo ?></td>
 
 
