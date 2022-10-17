@@ -20,7 +20,7 @@ include '../../services/sqlserver.php';
 
 <div id="body">
 
-  <form action="report-art-stock.php" method="POST">
+  <form action="routes.php" method="POST">
 
     <div class="fieldset">
       <br>
@@ -85,6 +85,16 @@ include '../../services/sqlserver.php';
         <label for="fecha2" class="form-label ">Hasta</label>
           <input type="date" name="fecha2" id="">
       </div>
+
+      <label for="reporte" class="form-label ">Reporte</label>
+      <select name="reporte" id="">
+
+        <option value="detal">Detallado</option>
+        <option value="precios">Valor de Stock</option>
+        <option value="global">Global</option>
+
+      </select>
+
       <br>
       <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
       <br>
