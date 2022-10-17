@@ -151,7 +151,11 @@ function getLin_art_all()
     $serverName = "172.16.1.19";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $sql = "SELECT co_lin,lin_des from lin_art  ";
+    $sql = "SELECT lin_art.co_lin, lin_art.lin_des from lin_art 
+            INNER JOIN art ON lin_art.co_lin=art.co_lin
+            WHERE art.stock_act >0
+            GROUP BY lin_art.co_lin,lin_art.lin_des";
+
     $consulta = sqlsrv_query($conn, $sql);
 
 
