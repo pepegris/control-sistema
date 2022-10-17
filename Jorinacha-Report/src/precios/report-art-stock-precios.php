@@ -154,11 +154,11 @@ if (isset($_GET)) {
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
               $prec_vta1_tienda = number_format($res6[0]['prec_vta1'], 0, ',', '.');
 
-              $total_prec_vta5_tienda = $stock_act * $prec_vta5_tienda;
-              $total_prec_vta1_tienda = $stock_act * $prec_vta1_tienda;
+              $total_prec_vta5_tienda = $stock_act_tienda * $prec_vta5_tienda;
+              $total_prec_vta1_tienda = $stock_act_tienda * $prec_vta1_tienda;
 
               $total_prec_vta5_tienda_todo +=  $prec_vta5_tienda;
-              $total_prec_vta3_tienda_todo +=  $prec_vta3_tienda;
+              $total_prec_vta1_tienda_todo +=  $prec_vta1_tienda;
 
 
 
@@ -201,8 +201,12 @@ if (isset($_GET)) {
         ?>
           <td><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></td>
           <td></td>
+          <td><?= $total_prec_vta5_tienda_todo ?></td>
           <td></td>
+          <td><?= $total_prec_vta1_tienda_todo ?></td>
           <td></td>
+          
+
 
 
         <?php
