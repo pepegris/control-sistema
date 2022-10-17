@@ -38,8 +38,8 @@ if (isset($_GET)) {
   <table class="table table-dark table-striped">
     <thead>
       <tr>
-        <th>#</th>
-        <th>Codigo</th>
+        <th scope='row'>#</th>
+        <th scope='row'>Codigo</th>
         <th>Marca</th>
         <th>Modelo</th>
         <th>Desc</th>
