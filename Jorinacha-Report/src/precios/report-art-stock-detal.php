@@ -38,11 +38,11 @@ if (isset($_GET)) {
         <th style="padding-right: 30px;">Modelo</th>
         <th style="padding-right: 265px;">Desc</th>
         <th scope='col'>Escala</th>
-        <th style="padding-right: 75px;">Color</th>
+        <th style="padding-right: 80px;">Color</th>
 
 
         <th>Ref</th>
-        <th style="padding-right: 30px;">Total Ref</th>
+        <th style="padding-right: 20px;">Total Ref</th>
         <th style="padding-right: 30px;">Bs</th>
         <th style="padding-right: 30px;">Total Bs</th>
         <?php
