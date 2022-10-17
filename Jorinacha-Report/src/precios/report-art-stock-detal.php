@@ -46,14 +46,15 @@ if (isset($_GET)) {
 
     thead {
       display: block;
-
+      overflow: auto;
 
     }
 
     tbody {
       display: block;
       height: 620px;
-
+      width: 100%;
+      overflow: auto;
     }
   </style>
   <center>
