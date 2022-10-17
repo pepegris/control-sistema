@@ -36,7 +36,7 @@ if (isset($_GET)) {
         <th style="padding-right: 70px;">Codigo</th>
         <th style="padding-right: 65px;">Marca</th>
         <th style="padding-right: 30px;">Modelo</th>
-        <th style="padding-right: 250px;">Desc</th>
+        <th style="padding-right: 300px;">Desc</th>
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
 
