@@ -9,7 +9,7 @@ body {
 table {
     border: 0;
     padding: 0;
-    margin: 0 0 20px 0;
+
     border-collapse: collapse;
     overflow-x: scroll; /* Hide horizontal scrollbar */
     overflow-y: scroll; /* Add vertical scrollbar */
@@ -35,7 +35,7 @@ thead
 tbody
 {
 	display: block;
-	height: 500px;
+	height: 600px;
 	overflow: auto;
 }
 
