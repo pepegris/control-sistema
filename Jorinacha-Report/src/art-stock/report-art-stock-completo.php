@@ -131,6 +131,20 @@ if (isset($_GET)) {
           $prec_vta =  number_format($res2['prec_vta'], 2, ',', '.');
           $fec_lote = $res2['fec_lote'];
 
+          $estilo1='normal';
+          $estilo2='normal';
+
+          if ($total_vendido >=1) {
+            $estilo1='bold';
+          }else {
+            $estilo1='normal';
+          }
+
+          if ($stock_act >=1) {
+            $estilo2='bold';
+          }else {
+            $estilo2='normal';
+          }
 
           ?>
 
@@ -150,8 +164,8 @@ if (isset($_GET)) {
               ?></td>
           <td><?= $prec_vta1 ?></td>
           <td><?= $prec_vta5 ?></td>
-          <td><?= $total_vendido ?></td>
-          <td><?= $stock_act ?></td>
+          <td style="font-weight:<?= $estilo1 ?>;"><?= $total_vendido ?></td>
+          <td style="font-weight:<?= $estilo2 ?>;"><?= $stock_act ?></td>
 
 
           <!-- TIENDAS -->
@@ -196,10 +210,32 @@ if (isset($_GET)) {
               $status = $res7['status'];
               $documento = $res7['doc'];
 
+              $estilo1='normal';
+              $estilo2='normal';
+              $estilo3='normal';
+
+              if ($stock_act_tienda >=1) {
+                $estilo1='bold';
+              }else {
+                $estilo1='normal';
+              }
+
+              if ($total_enviado >=1) {
+                $estilo2='bold';
+              }else {
+                $estilo2='normal';
+              }
+
+              if ($vendido_tienda >=1) {
+                $estilo3='bold';
+              }else {
+                $estilo3='normal';
+              }
+
           ?>
-              <td><?= $stock_act_tienda  ?></td>
-              <td><?= $total_enviado  ?></td>
-              <td><?= $vendido_tienda ?></td>
+              <td style="font-weight:<?= $estilo1 ?>;"><?= $stock_act_tienda  ?></td>
+              <td style="font-weight:<?= $estilo2 ?>;"><?= $total_enviado  ?></td>
+              <td style="font-weight:<?= $estilo3 ?>;"><?= $vendido_tienda ?></td>
               <td>$<?= $prec_vta5_tienda ?></td>
               <td><?php
                   if ($status== null) {

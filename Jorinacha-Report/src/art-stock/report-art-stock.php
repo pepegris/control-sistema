@@ -116,14 +116,28 @@ form , td {
           $res2= getCompras($co_art);
           $prec_vta = number_format($res2['prec_vta'], 2, ',', '.'); 
 
+          $estilo1='normal';
+          $estilo2='normal';
+
+          if ($total_vendido >=1) {
+            $estilo1='bold';
+          }else {
+            $estilo1='normal';
+          }
+
+          if ($stock_act >=1) {
+            $estilo2='bold';
+          }else {
+            $estilo2='normal';
+          }
 
 
           ?>
-          <td><?= $total_vendido ?></td>
+          <td style="font-weight:<?= $estilo1 ?>;"><?= $total_vendido ?></td>
           <td><?= $prec_vta ?></td>
           <td><?= $prec_vta1 ?></td>
           <td><?= $prec_vta5 ?></td>
-          <td><?= $stock_act ?></td>
+          <td style="font-weight:<?= $estilo2 ?>;"><?= $stock_act ?></td>
           <?php
           $f = 1;
           for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -145,10 +159,33 @@ form , td {
               $total_enviado = round($res5['total_art']);
               $total_enviado_tienda[$sedes_ar[$f]] += $total_enviado;
 
+              $estilo1='normal';
+              $estilo2='normal';
+              $estilo3='normal';
+
+              if ($stock_act_tienda >=1) {
+                $estilo1='bold';
+              }else {
+                $estilo1='normal';
+              }
+
+              if ($total_enviado >=1) {
+                $estilo2='bold';
+              }else {
+                $estilo2='normal';
+              }
+
+              if ($vendido_tienda >=1) {
+                $estilo3='bold';
+              }else {
+                $estilo3='normal';
+              }
+
+
           ?>
-              <td><?= $stock_act_tienda  ?></td>
-              <td><?= $total_enviado  ?></td>
-              <td><?= $vendido_tienda ?></td>
+              <td style="font-weight:<?= $estilo1 ?>;"><?= $stock_act_tienda  ?></td>
+              <td style="font-weight:<?= $estilo2 ?>;"><?= $total_enviado  ?></td>
+              <td style="font-weight:<?= $estilo3 ?>;"><?= $vendido_tienda ?></td>
 
           <?php $f++;
             }
