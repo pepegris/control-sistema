@@ -25,19 +25,22 @@ if ($_POST) {
       font-size: 12px;
     }
   </style>
-  <center><h1>Fallas</h1></center>
+  <center><h1>Compras</h1></center>
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope='col'>Codigo</th>
-        <th scope='col'>Linea</th>
         <th scope='col'>Marca</th>
-        <th scope='col'>Talla</th>
+        <th scope='col'>Modelo</th>
+        <th scope='col'>Desc</th>
+        <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
         <th scope='col'>Factura de Compra</th>
         <th scope='col'>Fecha Factura</th>
         <th scope='col'>Cantidad</th>
+        <th scope='col'>Costo</th>
+        <th scope='col'>Ref</th>
 
         <?php
 
@@ -57,7 +60,7 @@ if ($_POST) {
     <tbody>
       <?php
 
-      $res1 = getArt('Previa Shop', $linea , 0);
+      $res1 = getArt('Previa Shop', $linea,0,null);
       $n = 1;
       for ($e = 0; $e < count($res1); $e++) {
 
@@ -66,6 +69,7 @@ if ($_POST) {
         $co_subl = getSub_lin($res1[$e]['co_subl']);
         $co_cat = getCat_art($res1[$e]['co_cat']);
         $co_color = getColores($res1[$e]['co_color']);
+        $desc = $res0[$e]['ubicacion'];
 
         $stock_act = round($res1[$e]['stock_act']);
         $total_stock_act_previa += $stock_act;
@@ -82,6 +86,7 @@ if ($_POST) {
           <td><?= $co_art ?></td>
           <td><?= $co_lin ?></td>
           <td><?= $co_subl ?></td>
+          <td><?= $desc ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
           <?php
@@ -91,7 +96,8 @@ if ($_POST) {
           $fact_num =  $res2['fact_num'];
           //$res3 =  $res['fec_lote'];
           $fec_lote = $res2['fec_lote'];
-          $total_art = $res2['total_art'];
+          $total_art = round($res2['total_art']);
+          $prec_vta =  number_format($res2['prec_vta'], 2, ',', '.');
 
           ?>
           <td><?= $fact_num  ?></td>
@@ -102,6 +108,8 @@ if ($_POST) {
                 echo $fec_lote->format('Y-m-d');
               } ?></td>
           <td><?= $total_art ?></td>
+          <td><?= $prec_vta ?></td>
+          <td><?= $prec_vta5 ?></td>
           <td><?= $stock_act ?></td>
           <?php
           $f = 1;

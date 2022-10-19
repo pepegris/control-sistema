@@ -8,6 +8,7 @@ include '../../services/sqlserver.php';
 
 <style>
   .form-check {
+    display: none;
     display: flexbox;
 
   }
@@ -68,18 +69,24 @@ include '../../services/sqlserver.php';
 
         </select>
       </div>
-      <!-- FORMULAIO DE FECHAS -->
+      <!-- FORMULAIO DE cantidades -->
       <div class="form-group">
-        <label for="number" class="form-label ">Cantidad</label>
-        <input type="number" name="number" id="">
+        <label for="art" class="form-label ">Articulo</label>
+        <input type="text" name="art" id="">
+      </div>
+
+      <div class="form-group">
+        <label for="cantidad" class="form-label ">Cantidad</label>
+        <input type="number" name="cantidad" id="" require>
       </div>
 
       <div class="form-group">
         <label for="condicional" class="form-label ">Condicional</label>
         <select name="linea" id="">
-        <option value="mayor">Mayor</option>
+
         <option value="menor">Menor</option>
-        <option value="igual">Igual</option>
+        <option value="mayor">Mayor</option>
+
         </select>
       </div>
       <br>

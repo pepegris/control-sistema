@@ -15,12 +15,12 @@ include '../../services/sqlserver.php';
 </style>
 
 <center>
-  <h1>Reporte Factura de Compras</h1>
+  <h1>Reporte de Precios de Articulos</h1>
 </center>
 
 <div id="body">
 
-  <form action="report-art-stock.php" method="POST">
+  <form action="routes.php" method="POST">
 
     <div class="fieldset">
       <br>
@@ -57,6 +57,7 @@ include '../../services/sqlserver.php';
       <div class="form-group">
         <label for="linea" class="form-label ">Linea</label>
         <select name="linea" id="">
+
           <!--           <option value="todos">Todas</option> -->
 
           <?php
@@ -75,7 +76,7 @@ include '../../services/sqlserver.php';
         </select>
       </div>
       <!-- FORMULAIO DE FECHAS -->
-      <!--       <div class="form-group">
+      <div class="form-group">
         <label for="fecha1" class="form-label ">Desde</label>
           <input type="date" name="fecha1" id="">
       </div>
@@ -83,7 +84,18 @@ include '../../services/sqlserver.php';
       <div class="form-group">
         <label for="fecha2" class="form-label ">Hasta</label>
           <input type="date" name="fecha2" id="">
-      </div> -->
+      </div>
+
+      <label for="reporte" class="form-label ">Reporte</label>
+      <select name="reporte" id="">
+
+        
+        <option value="precios">Valor de Stock</option>
+        <option value="detal">Detallado</option>
+        <option value="global">Global</option>
+
+      </select>
+
       <br>
       <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
       <br>
