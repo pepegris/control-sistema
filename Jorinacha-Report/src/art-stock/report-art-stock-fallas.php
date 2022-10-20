@@ -125,10 +125,25 @@ form , td {
             $g++;
           }
 
+          $estilo1='normal';
+          $estilo2='normal';
+
+          if ($total_vendido >=1) {
+            $estilo1='bold';
+          }else {
+            $estilo1='normal';
+          }
+
+          if ($stock_act >=1) {
+            $estilo2='bold';
+          }else {
+            $estilo2='normal';
+          }
+
           ?>
 
-          <td><?= $total_vendido ?></td>
-          <td><?= $stock_act ?></td>
+          <td style="font-weight:<?= $estilo1 ?>;"><?= $total_vendido ?></td>
+          <td style="font-weight:<?= $estilo2 ?>;"><?= $stock_act ?></td>
           <?php
           $f = 1;
           for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -150,10 +165,31 @@ form , td {
               $prec_vta5_tienda = round($res5[0]['prec_vta5']);
 
 
+              $total_pedido = $res7['total_art'];
+              $status = $res7['status'];
+              $documento = $res7['doc'];
+
+              $estilo1='normal';
+              $estilo2='normal';
+              $estilo3='normal';
+
+              if ($stock_act_tienda >=1) {
+                $estilo1='bold';
+              }else {
+                $estilo1='normal';
+              }
+
+              if ($vendido_tienda >=1) {
+                $estilo3='bold';
+              }else {
+                $estilo3='normal';
+              }
+
+
           ?>
-              <td><?= $stock_act_tienda  ?></td>
+              <td style="font-weight:<?= $estilo1 ?>;"><?= $stock_act_tienda  ?></td>
               <td>$<?= $prec_vta5_tienda  ?></td>
-              <td><?= $vendido_tienda ?></td>
+              <td style="font-weight:<?= $estilo3 ?>;"><?= $vendido_tienda ?></td>
 
           <?php $f++;
             }
