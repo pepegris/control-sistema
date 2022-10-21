@@ -804,11 +804,11 @@ function getOrdenes_Pag($sede, $fecha)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             if ($database == 'MRIA3A21' or $database == 'MERINA21') {
-                $sql = "SELECT monto from ord_pago where cod_ben ='47' and fecha ='$fecha'";
+                $sql = "SELECT monto from ord_pago where cod_ben ='47' and fecha ='$fecha' and anulada=0";
             } elseif ($database == 'KAGUA21' or $database == 'TRAINA21' or $database == 'CORINA21' or $database == 'CORI2_21') {
-                $sql = "SELECT monto from ord_pago where cod_ben ='95' and fecha ='$fecha'";
+                $sql = "SELECT monto from ord_pago where cod_ben ='95' and fecha ='$fecha' and anulada=0";
             } else {
-                $sql = "SELECT monto from ord_pago where cod_ben ='65' and fecha ='$fecha'";
+                $sql = "SELECT monto from ord_pago where cod_ben ='65' and fecha ='$fecha' and anulada=0";
             }
 
 
