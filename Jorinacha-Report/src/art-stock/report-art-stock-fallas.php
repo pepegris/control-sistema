@@ -60,6 +60,8 @@ form , td {
         <?php  
           if ($sedes_ar[$i] != 'Previa Shop') {
             echo "<th scope='col'>Ref $i</th>";
+            echo "<th scope='col'>PVP $i</th>";
+            echo "<th scope='col'>Costo $i</th>";
             echo "<th scope='col'>Total Vendido $i</th>";
           }
             
@@ -90,6 +92,9 @@ form , td {
 
 
         $pedido = $test1['total_art'];
+
+        $precio = $res0[$e]['prec_vta3'];
+        $prec_vta3_costo = number_format($precio, 2, ',', '.');
 
         $stock_act_1 = round($res0[$e]['stock_act']);
         $stock_act =  $stock_act_1 - $pedido; 
@@ -163,6 +168,7 @@ form , td {
 
               $res5 = getArt($sedes_ar[$f], $linea, $co_art,null);
               $prec_vta5_tienda = round($res5[0]['prec_vta5']);
+              $prec_vta1_tienda = round($res5[0]['prec_vta1']);
 
 
               $total_pedido = $res7['total_art'];
@@ -189,6 +195,9 @@ form , td {
           ?>
               <td style="font-weight:<?= $estilo1 ?>;"><?= $stock_act_tienda  ?></td>
               <td>$<?= $prec_vta5_tienda  ?></td>
+              <td>Bs<?= $prec_vta1_tienda  ?></td>
+              <td>Bs<?= $prec_vta3_costo  ?></td>
+              
               <td style="font-weight:<?= $estilo3 ?>;"><?= $vendido_tienda ?></td>
 
           <?php $f++;
@@ -216,6 +225,8 @@ form , td {
 
         ?>
           <td><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></td>
+          <td></td>
+          <td></td>
           <td></td>
           <td><?= $vendido  ?></td>
 
