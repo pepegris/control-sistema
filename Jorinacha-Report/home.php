@@ -145,7 +145,7 @@ $cuenta_on = ucwords($cuenta_on);
 
       <a href="#">
         <div class="box">
-          <i class="lni lni-shopify"></i>
+        <i class="lni lni-construction"></i>
           <h5>Desarrollo</h5>
           <h4>Pronto aun En Desarrollo</h4>
         </div>
@@ -162,5 +162,5 @@ $cuenta_on = ucwords($cuenta_on);
     </div>
 
   </main>
-
+<!-- <i class="lni lni-shopify"></i> -->
   <?php include 'includes/footer.php'; ?>
