@@ -56,12 +56,12 @@ if (isset($_GET)) {
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
-              echo "<th scope='col'>Ref $i</th>";
-              echo "<th scope='col'>Total Ref $i</th>";
-              echo "<th scope='col'>PVP $i</th>";
-              echo "<th scope='col'>Total PVP $i</th>";
-              echo "<th scope='col'>Costo $i</th>";
-              echo "<th scope='col'>Total Costo $i</th>";
+              echo "<th scope='col'>Ref $sede</th>";
+              echo "<th scope='col'>Total Ref $sede</th>";
+              echo "<th scope='col'>PVP $sede</th>";
+              echo "<th scope='col'>Total PVP $sede</th>";
+              echo "<th scope='col'>Costo $sede</th>";
+              echo "<th scope='col'>Total Costo $sede</th>";
             }
 
             ?>
