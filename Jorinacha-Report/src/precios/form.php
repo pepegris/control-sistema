@@ -77,14 +77,10 @@ include '../../services/sqlserver.php';
       </div>
       <!-- FORMULAIO DE FECHAS -->
       <div class="form-group">
-        <label for="fecha1" class="form-label ">Desde</label>
-          <input type="date" name="fecha1" id="">
+        <label for="tasa" class="form-label ">Tasa</label>
+          <input type="number" name="tasa" id="" required>
       </div>
 
-      <div class="form-group">
-        <label for="fecha2" class="form-label ">Hasta</label>
-          <input type="date" name="fecha2" id="">
-      </div>
 
       <label for="reporte" class="form-label ">Reporte</label>
       <select name="reporte" id="">

@@ -11,9 +11,8 @@ if (isset($_GET)) {
 
 
   $linea = $_GET['linea'];
+  $tasa = $_GET['tasa'];
 
-  $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
-  $fecha2 = date("Ymd", strtotime($_GET['fecha2']));  
 
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_GET[$i];
@@ -28,7 +27,7 @@ if (isset($_GET)) {
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">Tasa: <?= $tasa ?></th>
         <th scope='col'>Codigo</th>
         <th scope='col'>Marca</th>
         <th scope='col'>Modelo</th>
@@ -90,10 +89,10 @@ if (isset($_GET)) {
         $stock_act = round($res0[$e]['stock_act']);
         $total_stock_act_previa += $stock_act;
 
-        $precio = $res0[$e]['prec_vta3'];
-        $prec_vta3_costo = number_format($precio, 2, ',', '.');
-
         $prec_vta5 = round($res0[$e]['prec_vta5']);
+
+        $precio = $prec_vta5 * $tasa;
+        $prec_vta3_costo = number_format($precio, 2, ',', '.');
 
         $total_prec_vta5 = $stock_act * $prec_vta5;
         $total_prec_vta3 = $stock_act * $prec_vta3_costo;
@@ -160,15 +159,20 @@ if (isset($_GET)) {
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
-              $prec_vta1_tienda = number_format($res6[0]['prec_vta1'], 2, ',', '.');
+              $precio_tienda = $prec_vta5_tienda * $tasa;
+              $prec_vta1_tienda = number_format($precio_tienda, 2, ',', '.');
+
+              $descuento=$prec_vta3_costo * 0.30;
+              $prec_vta3_costo_tienda = $prec_vta3_costo - $descuento;
 
               $total_prec_vta5_tienda = $stock_act_tienda * $prec_vta5_tienda;
               $total_prec_vta1_tienda = $stock_act_tienda * $prec_vta1_tienda;
-              $prec_vta3_costo_tienda = $stock_act_tienda * $prec_vta3_costo;
+              $total_prec_vta3_costo_tienda = $stock_act_tienda * $prec_vta3_costo_tienda;
 
               $total_prec_vta5_tienda_todo +=  $prec_vta5_tienda;
               $total_prec_vta1_tienda_todo +=  $prec_vta1_tienda;
-              $prec_vta3_costo_tienda_todo +=  $prec_vta3_costo_tienda;
+              $prec_vta3_costo_tienda_todo +=  $total_prec_vta3_costo_tienda;
+
 
               $estilo1='normal';
               $estilo2='normal';
@@ -193,7 +197,7 @@ if (isset($_GET)) {
                 $estilo3='normal';
               }
 
-              if ($prec_vta3_costo_tienda >=1) {
+              if ($total_prec_vta3_costo_tienda >=1) {
                 $estilo4='bold';
               }else {
                 $estilo4='normal';
@@ -211,8 +215,8 @@ if (isset($_GET)) {
               <td>Bs<?= $prec_vta1_tienda ?></td>
               <td style="font-weight:<?= $estilo1 ?>;">Bs<?= number_format($total_prec_vta1_tienda, 2, ',', '.'); ?></td>
 
-              <td>Bs<?= $prec_vta3_costo ?></td>
-              <td style="font-weight:<?= $estilo1 ?>;">Bs<?= number_format($prec_vta3_costo_tienda, 2, ',', '.'); ?></td>
+              <td>Bs<?=  $prec_vta3_costo_tienda  ?></td>
+              <td style="font-weight:<?= $estilo1 ?>;">Bs<?= number_format($total_prec_vta3_costo_tienda, 2, ',', '.'); ?></td>
 
 
 
