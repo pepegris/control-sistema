@@ -158,12 +158,12 @@ if (isset($_GET)) {
             } else {
 
               $res3 = getArt_stock_tiendas($sedes_ar[$f], $co_art);
-              $stock_act_tienda = $res3[0]['stock_act'];
+              $stock_act_tienda = round($res3[0]['stock_act']);
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
 
               $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
-              $prec_vta5_tienda = $res6[0]['prec_vta5'];
+              $prec_vta5_tienda = round($res6[0]['prec_vta5']);
               $precio_tienda = $prec_vta5_tienda * $tasa;
               $prec_vta1_tienda = number_format($precio_tienda, 2, ',', '.');
 
