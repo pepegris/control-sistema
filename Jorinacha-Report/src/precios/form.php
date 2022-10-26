@@ -81,6 +81,16 @@ include '../../services/sqlserver.php';
           <input type="number" step="0.01" name="tasa" id="" required>
       </div>
 
+      <div class="form-group">
+        <label for="fecha1" class="form-label " require>Desde</label>
+        <input type="date" name="fecha1" id="" required>
+      </div>
+
+      <div class="form-group">
+        <label for="fecha2" class="form-label " require>Hasta</label>
+        <input type="date" name="fecha2" id="" required>
+      </div>
+
 
       <label for="reporte" class="form-label ">Reporte</label>
       <select name="reporte" id="">
