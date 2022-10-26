@@ -13,6 +13,9 @@ if (isset($_GET)) {
   $linea = $_GET['linea'];
   $tasa = $_GET['tasa'];
 
+  $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
+  $fecha2 = date("Ymd", strtotime($_GET['fecha2']));  
+
 
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_GET[$i];
