@@ -78,7 +78,7 @@ include '../../services/sqlserver.php';
       <!-- FORMULAIO DE FECHAS -->
       <div class="form-group">
         <label for="tasa" class="form-label ">Tasa</label>
-          <input type="number" name="tasa" id="" required>
+          <input type="number" step="0.01" name="tasa" id="" required>
       </div>
 
 
