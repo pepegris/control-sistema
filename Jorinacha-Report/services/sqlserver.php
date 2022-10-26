@@ -53,6 +53,32 @@ function Database($sede)
 
     return $bd[$sede];
 }
+function Database2($sede)
+{
+
+    $bd = array(
+        "Previa Shop" => 'PREVIA_A',
+        "Comercial Merina" => 'MERINA',
+        "Comercial Merina III" => 'MERINA3',
+        "Comercial Corina I" => 'CORINA1',
+        "Comercial Corina II" => 'CORINA2',
+        "Comercial Punto Fijo" => 'PUFIJO',
+        "Comercial Matur" => 'MATUR',
+        "Comercial Valena" => 'VALENA',
+        "Comercial Trina" => 'TRINA',
+        "Comercial Kagu" => 'KAGU',
+        "Comercial Nachari" => 'NACHARI',
+        "Comercial Higue" => 'HIGUE',
+        "Comercial Apura" => 'APURA',
+        "Comercial Vallepa" => 'VALLEPA',
+        "Comercial Ojena" => 'OJENA',
+        "Comercial Puecruz" => 'PUECRUZ',
+        "Comercial Acari" => 'ACARI',
+        "Comercial Catica II" => 'CATICA2',
+    );
+
+    return $bd[$sede];
+}
 
 function Cliente($sede)
 {
@@ -945,13 +971,13 @@ function Replica($sede)
 {
 
 
-    $database = Database($sede);
+    $database = Database2($sede);
 
 
     if ($database) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
