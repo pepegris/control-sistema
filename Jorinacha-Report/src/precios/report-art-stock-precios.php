@@ -56,6 +56,7 @@ if (isset($_GET)) {
             if ($sedes_ar[$i] != 'Previa Shop') {
 
               echo "<th scope='col'>Ref $sede</th>";
+              echo "<th scope='col'>Pares Vendidos $sede</th>";
               echo "<th scope='col'>Total Ref $sede</th>";
               echo "<th scope='col'>PVP $sede</th>";
               echo "<th scope='col'>Total PVP $sede</th>";
@@ -162,16 +163,20 @@ if (isset($_GET)) {
               $precio_tienda = $prec_vta5_tienda * $tasa;
               $prec_vta1_tienda = number_format($precio_tienda, 2, ',', '.');
 
+              $res4 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
+              $vendido_tienda = number_format($res4, 0, ',', '.');
+              $total_vendido_tienda [$sedes_ar[$f]] += $vendido_tienda;
+
               $descuento=$prec_vta3_costo * 0.30;
               $prec_vta3_costo_tienda = $prec_vta3_costo - $descuento;
 
               $total_prec_vta5_tienda = $stock_act_tienda * $prec_vta5_tienda;
               $total_prec_vta1_tienda = $stock_act_tienda * $prec_vta1_tienda;
               $total_prec_vta3_costo_tienda = $stock_act_tienda * $prec_vta3_costo_tienda;
-
-              $total_prec_vta5_tienda_todo +=  $prec_vta5_tienda;
-              $total_prec_vta1_tienda_todo +=  $prec_vta1_tienda;
-              $prec_vta3_costo_tienda_todo +=  $total_prec_vta3_costo_tienda;
+   
+              $total_prec_vta5_tienda_todo[$sedes_ar[$f]] +=  $prec_vta5_tienda;
+              $total_prec_vta1_tienda_todo[$sedes_ar[$f]] +=  $prec_vta1_tienda;
+              $total_prec_vta3_costo_tienda_todo[$sedes_ar[$f]] +=  $total_prec_vta3_costo_tienda;
 
 
               $estilo1='normal';
@@ -202,12 +207,18 @@ if (isset($_GET)) {
               }else {
                 $estilo4='normal';
               }
-      
+              if ($vendido_tienda >=1) {
+                $estilo5='bold';
+              }else {
+                $estilo5='normal';
+              }
+
 
 
 
           ?>
               <td style="font-weight:<?= $estilo1 ?>;"><?= $stock_act_tienda  ?></td>
+              <td style="font-weight:<?= $estilo5 ?>;"><?= $vendido_tienda ?></td>
 
               <td>$<?= $prec_vta5_tienda ?></td>
               <td style="font-weight:<?= $estilo1 ?>;">$<?= $total_prec_vta5_tienda ?></td>
@@ -250,12 +261,14 @@ if (isset($_GET)) {
 
         ?>
           <td><b><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></b></td>
+          <td><b><?= $total_vendido_tienda [$sedes_ar[$h]] ?></b></td>
+          
           <td></td>
-          <td><b>$<?= number_format($total_prec_vta5_tienda_todo, 0, ',', '.');  ?></b></td>
+          <td><b>$<?= number_format($total_prec_vta5_tienda_todo[$sedes_ar[$h]], 0, ',', '.');  ?></b></td>
           <td></td>
-          <td><b>Bs<?= number_format($total_prec_vta1_tienda_todo, 2, ',', '.'); ?></b></td>
+          <td><b>Bs<?= number_format($total_prec_vta1_tienda_todo[$sedes_ar[$h]], 2, ',', '.'); ?></b></td>
           <td></td>
-          <td><b>Bs<?=number_format( $prec_vta3_costo_tienda_todo); ?></b></td>
+          <td><b>Bs<?=number_format( $total_prec_vta3_costo_tienda_todo[$sedes_ar[$h]]); ?></b></td>
           
           
 
