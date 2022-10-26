@@ -224,14 +224,14 @@ if (isset($_GET)) {
               <td style="font-weight:<?= $estilo1 ?>;"><?= $stock_act_tienda  ?></td>
               <td style="font-weight:<?= $estilo5 ?>;"><?= $vendido_tienda ?></td>
 
-              <td>$<?= $prec_vta5_tienda ?></td>
-              <td style="font-weight:<?= $estilo1 ?>;">$<?= $total_prec_vta5_tienda ?></td>
+              <td><?= $prec_vta5_tienda ?></td>
+              <td style="font-weight:<?= $estilo1 ?>;"><?= $total_prec_vta5_tienda ?></td>
 
-              <td>Bs<?= $prec_vta1_tienda ?></td>
-              <td style="font-weight:<?= $estilo1 ?>;">Bs<?= number_format($total_prec_vta1_tienda, 2, ',', '.'); ?></td>
+              <td><?= $prec_vta1_tienda ?></td>
+              <td style="font-weight:<?= $estilo1 ?>;"><?= number_format($total_prec_vta1_tienda, 2, ',', '.'); ?></td>
 
-              <td>Bs<?=  $prec_vta3_costo_tienda  ?></td>
-              <td style="font-weight:<?= $estilo1 ?>;">Bs<?= number_format($total_prec_vta3_costo_tienda, 2, ',', '.'); ?></td>
+              <td><?=  $prec_vta3_costo_tienda  ?></td>
+              <td style="font-weight:<?= $estilo1 ?>;"><?= number_format($total_prec_vta3_costo_tienda, 2, ',', '.'); ?></td>
 
 
 
