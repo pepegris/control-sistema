@@ -71,7 +71,7 @@ include '../../services/sqlserver.php';
           $now_2 = new DateTime($fecha2);
 
 
-          if ($res1 == NULL) {
+          if ($res1 == null) {
 
             echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  SINCRONIZANDO</span>  <img src='./img/cloud-upload.svg' alt=''> </li>";
 
