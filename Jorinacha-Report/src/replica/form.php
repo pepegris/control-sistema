@@ -59,8 +59,8 @@ include '../../services/sqlserver.php';
           $res1 = $res['fec_emis'];
           
           if ($res1==null) {
-            
-            $fecha = 'SINCRONIZANDO';
+
+            $fecha = 'Sincronizando';
 
           }else{
             $fecha = $res1->format('d-m-Y');
