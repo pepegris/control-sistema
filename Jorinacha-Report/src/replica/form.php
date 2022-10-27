@@ -71,7 +71,12 @@ include '../../services/sqlserver.php';
           $now_2 = new DateTime($fecha2);
 
 
-          if ($fecha) {
+          if ($res1 == NULL) {
+
+            echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  SINCRONIZANDO</span>  <img src='./img/cloud-upload.svg' alt=''> </li>";
+
+          } else {
+
             if ($past  >= $now_1) {
 
               echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  $fecha</span> <img src='./img/cloud-check.svg' alt=''> </li>";
@@ -80,9 +85,8 @@ include '../../services/sqlserver.php';
             } else {
               echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  $fecha</span>  <img src='./img/cloud-upload.svg' alt=''> </li>";
             }
-          } else {
 
-            echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  SINCRONIZANDO</span>  <img src='./img/cloud-upload.svg' alt=''> </li>";
+            
           }
         }
       }
