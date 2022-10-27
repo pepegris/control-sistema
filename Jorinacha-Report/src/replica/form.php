@@ -58,26 +58,26 @@ include '../../services/sqlserver.php';
           $res = Replica($sedes_ar[$i]);
           $res1 = $res['fec_emis'];
           
-          $fecha = $res1->format('d-m-Y');
+          if ($res1==null) {
+            
+            $fecha = 'SINCRONIZANDO';
 
-          $fecha_actual = date("d-m-Y");
+          }else{
+            $fecha = $res1->format('d-m-Y');
 
-          var_dump($fecha_actual);
+            $fecha_actual = date("d-m-Y");
+  
+            $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 3 day"));
+            $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 7 day"));
+  
+  
+            $past = new DateTime($fecha);
+            $now_1 = new DateTime($fecha1);
+            $now_2 = new DateTime($fecha2);
+  
+          }
 
-          $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 3 day"));
-          $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 7 day"));
 
-
-          $past = new DateTime($fecha);
-          $now_1 = new DateTime($fecha1);
-          $now_2 = new DateTime($fecha2);
-
-
-          if ($fecha_actual !=true) {
-
-            echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  SINCRONIZANDO</span>  <img src='./img/cloud-upload.svg' alt=''> </li>";
-
-          } else {
 
             if ($past  >= $now_1) {
 
@@ -89,7 +89,7 @@ include '../../services/sqlserver.php';
             }
 
             
-          }
+
         }
       }
 
