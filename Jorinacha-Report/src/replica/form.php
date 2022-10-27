@@ -57,6 +57,7 @@ include '../../services/sqlserver.php';
 
           $res = Replica($sedes_ar[$i]);
           $res1 = $res['fec_emis'];
+          var_dump($res1);
           $fecha = $res1->format('d-m-Y');
 
           $fecha_actual = date("d-m-Y");
