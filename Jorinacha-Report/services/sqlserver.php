@@ -113,7 +113,7 @@ function getCat_art($co_cat)
 {
 
 
-    $serverName = "172.16.1.19";
+    $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT cat_des FROM cat_art WHERE co_cat = '$co_cat'";
@@ -133,7 +133,7 @@ function getSub_lin($co_subl)
 {
 
 
-    $serverName = "172.16.1.19";
+    $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT subl_des from sub_lin where co_subl ='$co_subl'";
@@ -154,7 +154,7 @@ function getLin_art($co_lin)
 {
 
 
-    $serverName = "172.16.1.19";
+    $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT lin_des from lin_art WHERE co_lin='$co_lin' ";
@@ -174,7 +174,7 @@ function getLin_art_all()
 {
 
 
-    $serverName = "172.16.1.19";
+    $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT lin_art.co_lin, lin_art.lin_des from lin_art 
@@ -200,7 +200,7 @@ function getColores($co_col)
 {
 
 
-    $serverName = "172.16.1.19";
+    $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT des_col FROM colores WHERE co_col='$co_col'";
@@ -224,7 +224,7 @@ function getArt($sede, $linea, $co_art, $almacen)
     if ($database) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -306,7 +306,7 @@ function getArt_todos($sede, $linea, $co_art, $almacen)
     if ($database) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -384,7 +384,7 @@ function getArt_stock_tiendas($sede,  $co_art)
     if ($database) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -421,7 +421,7 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
     if ($database != null) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -459,7 +459,7 @@ function getCompras($co_art)
 {
 
 
-    $serverName = "172.16.1.19";
+    $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT top 1  co_art,fact_num,fec_lote,total_art,prec_vta from reng_com  where co_art ='$co_art'  order by fec_lote desc";
@@ -495,7 +495,7 @@ function getFactura($sede, $co_art, $fecha1, $fecha2, $co_lin)
     if ($cliente != null) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -552,7 +552,7 @@ function getFacturaCompras($sede,  $fecha1, $fecha2, $co_lin)
     if ($cliente != null) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -596,7 +596,7 @@ function getAjustes($sede,  $fecha1, $fecha2, $co_lin, $tipo)
     if ($cliente != null) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -652,7 +652,7 @@ function getDevProveedor($sede,  $fecha1, $fecha2, $co_lin)
     if ($cliente != null) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -703,7 +703,7 @@ function getCotizacion($sede, $co_art)
     if ($cliente != null) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -748,7 +748,7 @@ function getPedidos($sede, $co_art)
     if ($cliente != null) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -782,7 +782,7 @@ function getPedidos($sede, $co_art)
 
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -825,7 +825,7 @@ function getOrdenes_Pag($sede, $fecha)
     if ($database) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -868,7 +868,7 @@ function getTasa($sede, $fecha)
     if ($database) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "KAGUA21", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -909,7 +909,7 @@ function getCot_Ped($sede, $co_art)
     if ($cliente != null) {
         try {
 
-            $serverName = "172.16.1.19";
+            $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -1015,7 +1015,7 @@ function Art_Global($sede)
 
     try {
 
-        $serverName = "172.16.1.19";
+        $serverName = "172.16.1.39";
 
         if ($database==null) {
 
