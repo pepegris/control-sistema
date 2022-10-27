@@ -57,10 +57,13 @@ include '../../services/sqlserver.php';
 
           $res = Replica($sedes_ar[$i]);
           $res1 = $res['fec_emis'];
-          var_dump($res1);
+          
           $fecha = $res1->format('d-m-Y');
 
           $fecha_actual = date("d-m-Y");
+          var_dump($res1);
+          var_dump($fecha);
+          var_dump($fecha_actual);
 
           $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 3 day"));
           $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 7 day"));
