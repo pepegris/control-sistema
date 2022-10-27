@@ -62,7 +62,6 @@ include '../../services/sqlserver.php';
 
           $fecha_actual = date("d-m-Y");
 
-          var_dump($fecha);
           var_dump($fecha_actual);
 
           $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 3 day"));
