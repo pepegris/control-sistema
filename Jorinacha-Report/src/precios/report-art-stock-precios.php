@@ -55,6 +55,7 @@ if (isset($_GET)) {
 
         ?>
             <th scope='col'>Stock <?= $sede ?></th>
+            <th scope='col'>Total Vendido</th>
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
@@ -127,6 +128,28 @@ if (isset($_GET)) {
           $estilo3='normal';
         }
 
+        $g = 1;
+        $total_vendido = 0;
+        for ($i = 0; $i < count($sedes_ar); $i++) {
+
+          if ($sedes_ar[$g] != null) {
+
+            $res_v = getReng_fac($sedes_ar[$g],  $co_art, $fecha1, $fecha2);
+            $total_vendido += round($res_v);
+            
+          }
+          $g++;
+        }
+
+        $total_vendido_todo +=$total_vendido;
+
+        if ($total_vendido >=1) {
+          $estilo4='bold';
+        }else {
+          $estilo4='normal';
+        }
+
+
       ?>
 
         <tr>
@@ -145,6 +168,7 @@ if (isset($_GET)) {
           <td style="font-weight:<?= $estilo2 ?>;">Bs<?= number_format($total_prec_vta3, 2, ',', '.'); ?></td>
 
           <td style="font-weight:<?= $estilo3 ?>;"><?= $stock_act ?></td>
+          <td style="font-weight:<?= $estilo4 ?>;"><?= $total_vendido ?></td>
 
 
           <!-- TIENDAS -->
@@ -256,6 +280,8 @@ if (isset($_GET)) {
         <td></td>
         <td><b>Bs<?= number_format($total_prec_vta3_todo, 2, ',', '.'); ?></b></td>
         <td><b><?= $total_stock_act_previa ?></td>
+        <td><b><?= $total_vendido_todo ?></td>
+        
 
         <?php
 

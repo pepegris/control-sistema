@@ -66,14 +66,14 @@ include '../../services/sqlserver.php';
             $fecha = 'Sincronizando';
 
           }else{
+
             $fecha = $res1->format('d-m-Y');
 
             $fecha_actual = date("d-m-Y");
-  
+
             $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 3 day"));
             $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 7 day"));
-  
-  
+
             $past = new DateTime($fecha);
             $now_1 = new DateTime($fecha1);
             $now_2 = new DateTime($fecha2);
