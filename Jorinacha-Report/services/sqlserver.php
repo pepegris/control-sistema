@@ -2,7 +2,8 @@
 
 
 /* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA*/
-
+$serverName = "172.16.1.39";
+$connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
 
 $sedes_ar = array(
     "Previa Shop",
