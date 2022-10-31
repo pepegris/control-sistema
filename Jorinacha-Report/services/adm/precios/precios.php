@@ -114,7 +114,7 @@ function getLin_art_all()
 {
 
 
-    $serverName = "172.16.1.39";
+    $serverName = "172.16.1.19";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     $sql = "SELECT lin_art.co_lin, lin_art.lin_des from lin_art 
@@ -145,7 +145,7 @@ function getArt($sede, $linea, $co_art, $almacen)
     if ($database) {
         try {
 
-            $serverName = "172.16.1.39";
+            $serverName = "172.16.1.19";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
@@ -187,7 +187,7 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
     if ($database != null) {
         try {
 
-            $serverName = "172.16.1.39";
+            $serverName = "172.16.1.19";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
