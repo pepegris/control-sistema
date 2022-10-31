@@ -22,8 +22,8 @@ END
 ELSE
 BEGIN
 SELECT  LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
-co_color , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 ,art.ubicacion
-from art  where co_lin= '511' AND prec_vta5 >= 1 AND co_art=@co_art
+co_color , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 ,ubicacion
+from art  where co_lin= @co_lin AND prec_vta5 >= 1 AND co_art=@co_art
 END
 END
 
