@@ -5,7 +5,7 @@ ini_set('max_execution_time',3600);
 require "../../includes/log.php";
 include '../../includes/header.php';
 include '../../services/mysql.php';
-include '../../services/sqlserver.php';
+include '../../services/adm/precios/precios.php';
 
 if (isset($_GET)) {
 
@@ -80,22 +80,22 @@ if (isset($_GET)) {
 
       <?php
 
-      $res0 = getArt('Previa Shop', $linea, 0,null);
+      $getArt1 = getArt('Previa Shop', $linea, 0,null);
 
       $n = 1;
-      for ($e = 0; $e < count($res0); $e++) {
+      for ($e = 0; $e < count($getArt1); $e++) {
 
-        $co_art = $res0[$e]['co_art'];
-        $co_lin = getLin_art($res0[$e]['co_lin']);
-        $co_subl = getSub_lin($res0[$e]['co_subl']);
-        $co_cat = getCat_art($res0[$e]['co_cat']);
-        $co_color = getColores($res0[$e]['co_color']);
-        $desc = $res0[$e]['ubicacion'];
+        $co_art = $getArt1[$e]['co_art'];
+        $co_lin = $getArt1[$e]['co_lin'];
+        $co_subl = $getArt1[$e]['co_subl'];
+        $co_cat = $getArt1[$e]['co_cat'];
+        $co_color = $getArt1[$e]['co_color'];
+        $desc = $getArt1[$e]['ubicacion'];
 
-        $stock_act = round($res0[$e]['stock_act']);
+        $stock_act = round($getArt1[$e]['stock_act']);
         $total_stock_act_previa += $stock_act;
 
-        $prec_vta5 = round($res0[$e]['prec_vta5']);
+        $prec_vta5 = round($getArt1[$e]['prec_vta5']);
 
         $precio = $prec_vta5 * $tasa;
         $prec_vta3_costo = number_format($precio, 2, ',', '.');
@@ -134,8 +134,8 @@ if (isset($_GET)) {
 
           if ($sedes_ar[$g] != null) {
 
-            $res_v = getReng_fac($sedes_ar[$g],  $co_art, $fecha1, $fecha2);
-            $total_vendido += round($res_v);
+            $getReng_fac1 = getReng_fac($sedes_ar[$g],  $co_art, $fecha1, $fecha2);
+            $total_vendido += round($getReng_fac1);
             
           }
           $g++;
@@ -181,18 +181,22 @@ if (isset($_GET)) {
               $f++;
             } else {
 
-              $res3 = getArt_stock_tiendas($sedes_ar[$f], $co_art);
-              $stock_act_tienda = round($res3[0]['stock_act']);
+              // $res3 = getArt_stock_tiendas($sedes_ar[$f], $co_art);
+              // $stock_act_tienda = round($res3[0]['stock_act']);
+              // $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
+
+
+              $getArt2 = getArt($sedes_ar[$f], $linea, $co_art,null);
+              $stock_act_tienda = round($getArt2[0]['stock_act']);
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
-
-              $res6 = getArt($sedes_ar[$f], $linea, $co_art,null);
-              $prec_vta5_tienda = round($res6[0]['prec_vta5']);
+              $prec_vta5_tienda = round($getArt2[0]['prec_vta5']);
               $precio_tienda = $prec_vta5_tienda * $tasa;
               $prec_vta1_tienda = number_format($precio_tienda, 2, ',', '.');
 
-              $res4 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
-              $vendido_tienda = number_format($res4, 0, ',', '.');
+
+              $getReng_fac2 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
+              $vendido_tienda = number_format($getReng_fac2, 0, ',', '.');
               $total_vendido_tienda [$sedes_ar[$f]] += $vendido_tienda;
 
               $descuento=$prec_vta3_costo * 0.30;
