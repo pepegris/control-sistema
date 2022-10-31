@@ -5,7 +5,7 @@ include '../../includes/header.php';
 include '../../services/mysql.php';
 
 
-$serverName = "172.16.1.39";
+$serverName = "172.16.1.19";
 $connectionInfo = array("Database" => "TPLIO1A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
