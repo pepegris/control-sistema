@@ -141,7 +141,7 @@ function getLin_art_all()
 function getArt($sede, $linea, $co_art, $almacen)
 {
 
-    $database = Database2($sede);
+    $database = Database($sede);
     if ($database) {
         try {
 
@@ -196,7 +196,7 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
 {
 
 
-    $database = Database2($sede);
+    $database = Database($sede);
     if ($database != null) {
         try {
 
@@ -239,7 +239,7 @@ function getPedidos_t ($sede,  $co_art)
 {
 
     
-    $database = Database2($sede);
+    $database = Database($sede);
     $cliente = Cliente($sede);
 
     if ($database != null) {
