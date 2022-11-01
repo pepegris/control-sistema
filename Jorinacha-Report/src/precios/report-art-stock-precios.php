@@ -255,15 +255,20 @@ if (isset($_GET)) {
 
               if ($pedido_tienda >=1) {
                 $estilo6='bold';
+                $estilo='green';
+                $signo='+';
               }else {
                 $estilo6='normal';
+                $estilo='white';
+                $signo='';
+
               }
 
 
 
           ?>
               <td style="font-weight:<?= $estilo1 ?>;"><?= $stock_act_tienda  ?></td>
-              <td style="font-weight:<?= $estilo6 ?>; color:green;"><?= $pedido_tienda  ?></td>    
+              <td style="font-weight:<?= $estilo6 ?>; "><?= $signo ?><p style="color:<?= $estilo ?>;"><?=  $pedido_tienda  ?></p></td>    
 
               <td style="font-weight:<?= $estilo5 ?>;"><?= $vendido_tienda ?></td>
 
