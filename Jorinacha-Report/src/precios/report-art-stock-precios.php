@@ -253,12 +253,17 @@ if (isset($_GET)) {
                 $estilo5='normal';
               }
 
+              if ($pedido_tienda >=1) {
+                $estilo6='bold';
+              }else {
+                $estilo6='normal';
+              }
 
 
 
           ?>
               <td style="font-weight:<?= $estilo1 ?>;"><?= $stock_act_tienda  ?></td>
-              <td style="font-weight:<?= $estilo1 ?>;"><?= $pedido_tienda  ?></td>    
+              <td style="font-weight:<?= $estilo6 ?>; color:green;"><?= $pedido_tienda  ?></td>    
 
               <td style="font-weight:<?= $estilo5 ?>;"><?= $vendido_tienda ?></td>
 

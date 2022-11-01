@@ -217,6 +217,8 @@ function getPedidos_t ($sede,  $co_art)
 
     
     $database = Database2($sede);
+    $cliente = Cliente($sede);
+
     if ($database != null) {
         try {
 
@@ -224,17 +226,17 @@ function getPedidos_t ($sede,  $co_art)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "EXEC getPedidos_t ,'$co_cli', '$co_art' , '$fecha1' , '$fecha2'";
+            $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
 
             $consulta = sqlsrv_query($conn, $sql);
 
             if ($consulta != null) {
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $reng_fac = $row['total_art'];
+                    $reng_ped = $row['total_art'];
                     break;
                 }
-                $res = $reng_fac;
+                $res = $reng_ped;
             } else {
                 $res = 0;
             }
