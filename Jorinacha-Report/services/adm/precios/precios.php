@@ -153,7 +153,7 @@ function getArt($sede, $linea, $co_art, $almacen)
 
             if ($sede== 'Previa Shop') {
                 $sql ="SELECT  LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(sub_lin.subl_des)) as  co_subl,LTRIM(RTRIM(cat_art.cat_des)) as  co_cat,
-                prec_vta3,prec_vta5,st_almac.stock_act , LTRIM(RTRIM(colores.des_col)) as co_col, LTRIM(RTRIM(lin_art.lin_des)) as co_lin,art.ubicacion
+                prec_vta3,prec_vta5,st_almac.stock_act , LTRIM(RTRIM(colores.des_col)) as co_color, LTRIM(RTRIM(lin_art.lin_des)) as co_lin,art.ubicacion
                 from st_almac 
                 JOIN art on st_almac.co_art=art.co_art
                 JOIN lin_art on art.co_lin = lin_art.co_lin
