@@ -149,7 +149,26 @@ function getArt($sede, $linea, $co_art, $almacen)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql ="EXEC getArt '$sede' , '$co_art', '$linea'  ";
+            #$sql ="EXEC getArt '$sede' , '$co_art', '$linea'  ";
+
+            if ($sede== 'Previa Shop') {
+                $sql ="SELECT  LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(sub_lin.subl_des)) as  co_subl,LTRIM(RTRIM(cat_art.cat_des)) as  co_cat,
+                prec_vta3,prec_vta5,st_almac.stock_act , LTRIM(RTRIM(colores.des_col)) as co_col, LTRIM(RTRIM(lin_art.lin_des)) as co_lin,art.ubicacion
+                from st_almac 
+                JOIN art on st_almac.co_art=art.co_art
+                JOIN lin_art on art.co_lin = lin_art.co_lin
+                JOIN sub_lin on art.co_subl = sub_lin.co_subl
+                JOIN cat_art on art.co_cat=cat_art.co_cat
+                JOIN colores on art.co_color=colores.co_col
+                where art.co_lin='$linea' and st_almac.co_alma='BOLE' AND art.prec_vta5 >=1
+                order by art.co_subl   desc";
+            } else {
+                $sql="SELECT  LTRIM(RTRIM(co_art)) as  co_art  ,LTRIM(RTRIM(co_subl)) as  co_subl  ,LTRIM(RTRIM(co_cat)) as  co_cat  ,
+                co_color , co_lin , stock_act , prec_vta1 , prec_vta2 , prec_vta3 ,prec_vta4 ,prec_vta5 ,ubicacion
+                from art  where co_lin='$linea' AND prec_vta5 >= 1 AND co_art='$co_art'";
+            }
+            
+
 
 
             $consulta = sqlsrv_query($conn, $sql);
@@ -185,7 +204,11 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "EXEC getReng_fac '$co_art' , '$fecha1' , '$fecha2'";
+            #$sql = "EXEC getReng_fac '$co_art' , '$fecha1' , '$fecha2'";
+            $sql = "SELECT reng_fac.co_art,sum(reng_fac.total_art) as total_art 
+            from reng_fac INNER JOIN factura ON reng_fac.fact_num=factura.fact_num
+            where reng_fac.co_art='$co_art' and reng_fac.fec_lote BETWEEN '$fecha1'  AND '$fecha2' AND factura.anulada=0
+            GROUP BY reng_fac.co_art";
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -226,7 +249,12 @@ function getPedidos_t ($sede,  $co_art)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
+           # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
+
+           $sql = "SELECT SUM(reng_ped.total_art) AS  total_art
+           from pedidos
+           JOIN reng_ped ON pedidos.fact_num=reng_ped.fact_num
+           where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art'";
 
             $consulta = sqlsrv_query($conn, $sql);
 
