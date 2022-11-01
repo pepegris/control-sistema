@@ -172,12 +172,6 @@ function getArt($sede, $linea, $co_art, $almacen)
 
 
 
-
-
-
-
-
-
 /* CONSULTAR ARTICULOS VENDIDOS*/
 function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
 {
@@ -217,6 +211,44 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
     }
 }
 
+
+function getPedidos_t ($sede,  $co_art)
+{
+
+    
+    $database = Database2($sede);
+    if ($database != null) {
+        try {
+
+            $serverName = "172.16.1.19";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "EXEC getPedidos_t ,'$co_cli', '$co_art' , '$fecha1' , '$fecha2'";
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $reng_fac = $row['total_art'];
+                    break;
+                }
+                $res = $reng_fac;
+            } else {
+                $res = 0;
+            }
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
 
 
 

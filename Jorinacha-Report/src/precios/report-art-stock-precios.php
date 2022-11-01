@@ -60,6 +60,7 @@ if (isset($_GET)) {
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
+              echo "<th scope='col'>En Pedido $sede</th>";
               echo "<th scope='col'>Pares Vendidos $sede</th>";
               echo "<th scope='col'>Ref $sede</th>";
               
@@ -202,6 +203,10 @@ if (isset($_GET)) {
               $vendido_tienda = number_format($getReng_fac2, 0, ',', '.');
               $total_vendido_tienda [$sedes_ar[$f]] += $vendido_tienda;
 
+              $getPedidos_t= getPedidos_t($sedes_ar[$f],  $co_art);
+              $pedido_tienda = number_format($getPedidos_t, 0, ',', '.');
+              $total_pedido_tienda [$sedes_ar[$f]] += $pedido_tienda;
+
               $descuento=$prec_vta3_costo * 0.30;
               $prec_vta3_costo_tienda = $prec_vta3_costo - $descuento;
 
@@ -253,6 +258,8 @@ if (isset($_GET)) {
 
           ?>
               <td style="font-weight:<?= $estilo1 ?>;"><?= $stock_act_tienda  ?></td>
+              <td style="font-weight:<?= $estilo1 ?>;"><?= $pedido_tienda  ?></td>    
+
               <td style="font-weight:<?= $estilo5 ?>;"><?= $vendido_tienda ?></td>
 
               <td>$<?= $prec_vta5_tienda ?></td>
@@ -298,6 +305,8 @@ if (isset($_GET)) {
 
         ?>
           <td><b><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></b></td>
+          <td><b><?= $total_pedido_tienda [$sedes_ar[$h]] ?></b></td>
+          
           <td><b><?= $total_vendido_tienda [$sedes_ar[$h]] ?></b></td>
           
           <td></td>
