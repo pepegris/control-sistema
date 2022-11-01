@@ -117,7 +117,6 @@ if ($_POST) {
                             $res0 = getOrdenes_Pag($sedes[$e], $fecha);
                             $monto = number_format($res0['monto'], 2, ',', '.');
                             $total_dia_monto[$fecha] += $res0['monto'];
-                            $cod_ben=$res0['cod_ben'];
                             # SUMANDO TIENDA
                             $total_monto[$sedes[$e]] += $res0['monto'];
 
