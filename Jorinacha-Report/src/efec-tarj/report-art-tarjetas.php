@@ -33,9 +33,13 @@ if (isset($_GET)) {
   for ($i = 1; $i < count($sedes_ar); $i++) {
 
     $res = getReng_tip($sedes_ar[$i], 'todos', $fecha1, $fecha2);
+
+    echo "<center><h2>" . $sedes_ar[$i]. "</h2></center>";
     var_dump($sedes_ar[$i]);
     echo "<br>";
     var_dump(count($res[$i]));
+    echo "<br>";
+    var_dump(count($res[$i][$i]));
     echo "  <table class='table table-dark table-striped' >
     <thead>
       <tr>
@@ -63,17 +67,11 @@ if (isset($_GET)) {
     echo "</tbody>
           </table>";
 
-    if ($res == null) {
+    if ($res[$i] == null) {
 
       echo "<center><h1>ERROR</h1>";
-      echo "<h3>No es Posible hacer conexion con la base de dato de </h3>";
+      echo "<h3>No es Posible hacer conexion con la base de dato de " . $sedes_ar[$i]. " </h3>";
       echo "</center>";
-
-    } else {
-
-
-      echo "<center><h2>" . $sedes_ar[$i]. "</h2></center>";
-
 
     }
   }
