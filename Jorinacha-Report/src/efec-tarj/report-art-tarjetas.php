@@ -14,6 +14,8 @@ if (isset($_GET)) {
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
   var_dump($tipo_cob);
+  var_dump($fecha1);
+  var_dump($fecha2);
 
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_GET[$i];
