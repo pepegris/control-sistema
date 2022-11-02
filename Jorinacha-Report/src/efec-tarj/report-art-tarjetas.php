@@ -86,6 +86,7 @@ if (isset($_GET)) {
       echo"<br>";
       var_dump($reng_tip['Comercial Corina I'][1][0]);
       echo"<br>";
+      var_dump(count($reng_tip['Comercial Corina I'][1][0]));
       var_dump($reng_tip['Comercial Corina I'][1][1]);
       echo"<br>";
       
@@ -109,7 +110,16 @@ if (isset($_GET)) {
           $fecha = $reng_tip[$sedes_ar[$f]][$e][$e];
 
           $total_mont_doc [$sedes_ar[$f]] +=$mont_doc;
+
+          for ($i=0; $i < count($reng_tip[$sedes_ar[$f]][$e]); $i++) { 
+
+
+
+            
+          }
+
           
+
 
 
 
