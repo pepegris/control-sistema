@@ -73,8 +73,8 @@ if (isset($_GET)) {
       $f = 1;
       for ($i = 0; $i < count($sedes_ar); $i++) {
 
-        $reng_tip[$sedes_ar[$f]] = getReng_tip($sedes_ar[$f], $tipo_cob, $fecha1, $fecha2);
-        var_dump($reng_tip[$sedes_ar[$f]]);
+        $reng_tip = getReng_tip($sedes_ar[$f], $tipo_cob, $fecha1, $fecha2);
+        var_dump($reng_tip);
         $f++;
       }
       
