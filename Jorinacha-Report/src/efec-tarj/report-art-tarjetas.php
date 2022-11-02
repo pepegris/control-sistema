@@ -82,14 +82,15 @@ if (isset($_GET)) {
   
       }
 
-      var_dump($reng_tip['Comercial Corina I'][1][2]);
-      var_dump(count($reng_tip));
+      var_dump($reng_tip['Comercial Corina I'][1]);
+      var_dump($reng_tip['Comercial Corina I'][1][0]);
+      var_dump($reng_tip['Comercial Corina I'][1][1]);
       
 
       $e = 0;
-      for ($i = 0; $i < count($sedes_ar); $i++) {
+      for ($i = 0; $i < count($reng_tip); $i++) {
       $f = 1;
-      for ($i = 0; $i < count($sedes_ar); $i++) {
+      for ($i = 0; $i < count($reng_tip); $i++) {
 
 
         if ($sedes_ar[$f] == null) {
