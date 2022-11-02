@@ -74,16 +74,16 @@ if (isset($_GET)) {
       <?php
 
 
-      $f = 1;
-      for ($i = 0; $i < count($sedes_ar); $i++) {
+ 
+      for ($i = 1; $i < count($sedes_ar); $i++) {
 
-        $reng_tip[$sedes_ar[$f]] = getReng_tip($sedes_ar[$f], 'todos', $fecha1, $fecha2);
+        $reng_tip[$sedes_ar[$i]] = getReng_tip($sedes_ar[$i], 'todos', $fecha1, $fecha2);
        
-        $f++;
+  
       }
 
       var_dump($reng_tip['Comercial Corina I'][1][2]);
-      var_dump(count($sedes_ar));
+      var_dump(count($reng_tip));
       
 
       $e = 0;
