@@ -70,6 +70,8 @@ if (isset($_GET)) {
       <!-- TIENDAS -->
       <?php
 
+    $reng_tip = getReng_tip( 'Comercial Merina', $tipo_cob, $fecha1, $fecha2);
+    var_dump($reng_tip);
       $f = 1;
       for ($i = 0; $i < count($sedes_ar); $i++) {
 
