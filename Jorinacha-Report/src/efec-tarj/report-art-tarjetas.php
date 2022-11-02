@@ -16,11 +16,7 @@ if (isset($_GET)) {
   $tipo_cob = $_GET['tipo_cob'];
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
-  var_dump($tipo_cob);
-  var_dump($fecha1);
-  var_dump($fecha2);
-  
-  var_dump($sedes_ar);
+
 
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_GET[$i];
@@ -77,12 +73,11 @@ if (isset($_GET)) {
       <!-- TIENDAS -->
       <?php
 
-    $reng_tip = getReng_tip( $sedes_ar[1], 'todos', $fecha1, $fecha2);
-    var_dump($reng_tip);
+
       $f = 1;
       for ($i = 0; $i < count($sedes_ar); $i++) {
 
-        $reng_tip = getReng_tip($sedes_ar[$f], $tipo_cob, $fecha1, $fecha2);
+        $reng_tip[$sedes_ar[$f]] = getReng_tip($sedes_ar[$f], 'todos', $fecha1, $fecha2);
        
         $f++;
       }
