@@ -89,11 +89,12 @@ if (isset($_GET)) {
 
       for ($i = 0; $i < count($reng_tip); $i++) {
 
-        var_dump($reng_tip['Comercial Corina I'][$i]);
+        var_dump($reng_tip[$sedes_ar[$i]]);
         echo"<br>";
       
       for ($o = 0; $o < count($reng_tip[$sedes_ar[$i]]); $o++) {
-        var_dump($reng_tip['Comercial Corina I'][$i][$o]);
+        
+        var_dump($reng_tip[$sedes_ar[$i]][$o]);
         echo"<br>";
 
       for ($p=0; $p < count($reng_tip[$sedes_ar[$i]][$o]) ; $p++) { 
@@ -107,7 +108,7 @@ if (isset($_GET)) {
         $fecha = $reng_tip[$sedes_ar[$f]][$o][$p];
 
 
-        var_dump($reng_tip['Comercial Corina I'][$i][$o][$p]);
+        var_dump($reng_tip[$sedes_ar[$i]][$o][$p]);
         echo"<br>";
         
       }
