@@ -96,13 +96,13 @@ if (isset($_GET)) {
 
       for ($p=0; $p < count($reng_tip[$sedes_ar[$i]][$o]) ; $p++) { 
 
-        $tipo_cob = $reng_tip[$sedes_ar[$f]][$o][$p];
-        $doc_num = $reng_tip[$sedes_ar[$f]][$o][$p];
-        $cob_num = $reng_tip[$sedes_ar[$f]][$o][$p];
-        $movi = $reng_tip[$sedes_ar[$f]][$o][$p];
-        $nombre_ban= $reng_tip[$sedes_ar[$f]][$o][$p];
-        $mont_doc = $reng_tip[$sedes_ar[$f]][$o][$p];
-        $fecha = $reng_tip[$sedes_ar[$f]][$o][$p];
+        $tipo_cob = $reng_tip[$sedes_ar[$i]][$o][$p];
+        $doc_num = $reng_tip[$sedes_ar[$i]][$o][$p];
+        $cob_num = $reng_tip[$sedes_ar[$i]][$o][$p];
+        $movi = $reng_tip[$sedes_ar[$i]][$o][$p];
+        $nombre_ban= $reng_tip[$sedes_ar[$i]][$o][$p];
+        $mont_doc = $reng_tip[$sedes_ar[$i]][$o][$p];
+        $fecha = $reng_tip[$sedes_ar[$i]][$o][$p];
 
         
         echo "<td>$fecha</td>";
