@@ -127,10 +127,10 @@ if (isset($_GET)) {
 
 
       <tr>
-        <th></th>
-        <td colspan="3"></td>
+        
+        <td colspan="1"></td>
         <td>
-          <h4>Totales</h4>
+          <h4>Totales:</h4>
         </td>
 
         <?php
