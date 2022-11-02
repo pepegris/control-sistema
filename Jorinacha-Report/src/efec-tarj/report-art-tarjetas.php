@@ -40,6 +40,8 @@ if (isset($_GET)) {
     var_dump(count($res[$i]));
     echo "<br>";
     var_dump(count($res[$i][$i]));
+    echo "<br>";
+    var_dump(count($res[$i][$i][$i]));
     echo "  <table class='table table-dark table-striped' >
     <thead>
       <tr>
