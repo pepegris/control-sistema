@@ -59,11 +59,27 @@ if (isset($_GET)) {
     <tbody>";
 
     for ($e = 0; $e < count($res[$i]); $e++) {
+
+      $tipo_cob =$res[$i][$e];
+      $doc_num =$res[$i][$e];
+      $cob_num =$res[$i][$e];
+      $movi =$res[$i][$e];
+      $nombre_ban =$res[$i][$e];
+      $mont_doc =$res[$i][$e];
+      $fecha =$res[$i][$e];
+
+
       echo "
       <tr>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>$fecha</td>
+
+      <td>$tipo_cob</td>
+      <td>$doc_num</td>
+      <td>$cob_num</td>
+
+      <td>$movi</td>
+      <td>$nombre_ban</td>
+      <td>$mont_doc</td>
       </tr>";
     }
 
