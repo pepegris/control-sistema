@@ -7,6 +7,28 @@ include '../../includes/header.php';
 include '../../services/mysql.php';
 include '../../services/adm/efec-tarj/efec-tarj.php';
 
+$sedes_ar = array(
+  "Previa Shop",
+  "Comercial Merina",
+  "Comercial Merina III",
+  "Comercial Corina I",
+  "Comercial Corina II",
+  "Comercial Punto Fijo",
+  "Comercial Matur",
+  "Comercial Valena",
+  "Comercial Trina",
+  "Comercial Kagu",
+  "Comercial Nachari",
+  "Comercial Higue",
+  "Comercial Apura",
+  "Comercial Vallepa",
+  "Comercial Ojena",
+  "Comercial Puecruz",
+  "Comercial Acari",
+  "Comercial Catica II",
+);
+
+
 if (isset($_GET)) {
 
 
@@ -16,6 +38,8 @@ if (isset($_GET)) {
   var_dump($tipo_cob);
   var_dump($fecha1);
   var_dump($fecha2);
+  
+  var_dump($sedes_ar);
 
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_GET[$i];
