@@ -96,13 +96,13 @@ if (isset($_GET)) {
           $f++;
         } else {
 
-          $tipo_cob = $reng_tip[$sedes_ar[$f]][$e];
-          $doc_num = $reng_tip[$sedes_ar[$f]][$e];
-          $cob_num = $reng_tip[$sedes_ar[$f]][$e];
-          $movi = $reng_tip[$sedes_ar[$f]][$e];
-          $nombre_ban= $reng_tip[$sedes_ar[$f]][$e];
-          $mont_doc = $reng_tip[$sedes_ar[$f]][$e];
-          $fecha = $reng_tip[$sedes_ar[$f]][$e];
+          $tipo_cob = $reng_tip[$sedes_ar[$f]][$e][$e];
+          $doc_num = $reng_tip[$sedes_ar[$f]][$e][$e];
+          $cob_num = $reng_tip[$sedes_ar[$f]][$e][$e];
+          $movi = $reng_tip[$sedes_ar[$f]][$e][$e];
+          $nombre_ban= $reng_tip[$sedes_ar[$f]][$e][$e];
+          $mont_doc = $reng_tip[$sedes_ar[$f]][$e][$e];
+          $fecha = $reng_tip[$sedes_ar[$f]][$e][$e];
 
           $total_mont_doc [$sedes_ar[$f]] +=$mont_doc;
           
