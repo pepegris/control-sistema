@@ -1,102 +1,63 @@
-<?php
-require '../../includes/log.php';
-include '../../includes/header.php';
-include '../../services/mysql.php';
-include '../../services/sqlserver.php';
+<html lang="es">
 
-?>
+    <head>
+        <meta charset="UTF-8">
+        <title>Reporte de pedidos</title>
+        <link rel="stylesheet" href="css/style.css">
 
-<style>
-  .form-check {
-    display: none;
-    display: flexbox;
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
-  }
-</style>
+        <!-- jQuery Modal -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    </head>
 
-<div id="body">
-  <form action="routes.php" method="POST">
+    <body>
+        <div style="display:flex; flex-direction:column;">
+            <h1 style="margin-bottom:50px;">Reporte de pedidos</h1>
 
-    <div class="fieldset">
-      <br>
-      <center>
-        <legend>Reporte</legend>
-      </center>
+            <div class="filters-container">
+                <input id="begin_date" type="date" text="Rango de inicio" class="date-picker" />
+                <input id="end_date" type="date" text="Rango de fin" class="date-picker" />
+                <button id="filter_button" class="filter-button">Filtrar</button>
+            </div>
+        </div>
 
+        <table id="report_ordes_table" class="display" style="width:90%">
+                <thead>
+                    <tr>
+                        <th>Número de pedido</th>
+                        <th>Fecha de documento</th>
+                        <th>Estatus de pedido</th>
+                        <th>Guía de rastreo</th>
+                        <th>Total de documento</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+        </table>
 
-      <div class="form-check">
-        <?php
-        $res1 = getTiendas();
-        $i = 0;
-        while ($row1 = mysqli_fetch_array($res1)) {
+        <!-- Modal HTML embedded directly into document -->
+        <div id="detail_modal" class="modal">
+            <table id="detail_table_modal" class="display" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>Clave de artículo</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Almacén</th>
+                        <th>Precio por unidad</th>
+                        <th>Precio total</th>
+                        <th>Subtotal</th>
+                        <th>Impuesto</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+            </table>
+            <a href="#" rel="modal:close">Close</a>
+        </div>
 
-          $sede = $row1['sedes_nom'];
-          if ($sede == 'Sede Boleita') {
-            $sede = 'Previa Shop';
-          }
-
-        ?>
-
-          <input class="form-check-input" type="checkbox" value="<?= $sede ?>" name="<?= $i ?>" checked>
-          <label class="form-check-label" for="<?= $sede ?>">
-            <?= $sede ?>
-          </label>
-
-        <?php $i++;
-        } ?>
-
-      </div>
-
-
-
-      <div class="form-group">
-        <label for="linea" class="form-label ">Linea</label>
-        <select name="linea" id="">
-          <!--           <option value="todos">Todas las marcas</option> -->
-
-          <?php
-
-
-          $res2 = getLin_art_all();
-
-          for ($i = 0; $i < count($res2); $i++) {
-
-            $lin_des = utf8_encode("$res2[$i]['lin_des']")
-          ?>
-            <option value="<?= $res2[$i]["co_lin"] ?>"><?= $res2[$i]['lin_des'] ?></option>
-
-          <?php   }  ?>
-
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="fecha1" class="form-label ">Desde</label>
-        <input type="date" name="fecha1" id="">
-      </div>
-
-      <div class="form-group">
-        <label for="fecha2" class="form-label ">Hasta</label>
-        <input type="date" name="fecha2" id="">
-      </div>
-
-      <label for="pedidos" class="form-label ">Pedidos</label>
-      <select name="pedidos" id="">
-
-        <option value="sin">Sin pedidos</option>
-        <option value="con">Con pedidos</option>
-
-
-      </select>
-
-      <br>
-      <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
-      <br>
-    </div>
-  </form>
-</div>
-
-
-
-
-<?php include '../../../includes/footer.php'; ?>
+  <script src="js/js.js"></script>
+    </body>
+</html>
