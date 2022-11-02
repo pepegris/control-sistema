@@ -70,7 +70,7 @@ if (isset($_GET)) {
 
 
       echo "
-      <tr>
+      
       <td>$fecha</td>
 
       <td>$tipo_cob</td>
@@ -79,8 +79,7 @@ if (isset($_GET)) {
 
       <td>$movi</td>
       <td>$nombre_ban</td>
-      <td>$mont_doc</td>
-      </tr>";
+      <td>$mont_doc</td>";
     }
 
     echo "</tbody>
