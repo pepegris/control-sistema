@@ -89,13 +89,10 @@ if (isset($_GET)) {
 
       for ($i = 0; $i < count($reng_tip); $i++) {
 
-        var_dump($reng_tip[$sedes_ar[$i]]);
-        echo"<br>";
       
       for ($o = 0; $o < count($reng_tip[$sedes_ar[$i]]); $o++) {
-        
-        var_dump($reng_tip[$sedes_ar[$i]][$o]);
-        echo"<br>";
+
+      echo "<tr>";
 
       for ($p=0; $p < count($reng_tip[$sedes_ar[$i]][$o]) ; $p++) { 
 
@@ -107,15 +104,22 @@ if (isset($_GET)) {
         $mont_doc = $reng_tip[$sedes_ar[$f]][$o][$p];
         $fecha = $reng_tip[$sedes_ar[$f]][$o][$p];
 
+        
+        echo "<td>$fecha</td>";
+        echo "<td>$tipo_cob</td>";
+        echo "<td>$doc_num</td>";
+        echo "<td>$cob_num</td>";
+        echo "<td>$movi</td>";
+        echo "<td>$nombre_ban</td>";
+        echo "<td>$mont_doc</td>";
 
-        var_dump($reng_tip[$sedes_ar[$i]][$o][$p]);
-        echo"<br>";
+
         
       }
 
 
 
-
+      echo "</tr>";
            
 
 
