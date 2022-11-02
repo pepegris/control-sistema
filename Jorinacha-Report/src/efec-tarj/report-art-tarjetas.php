@@ -30,7 +30,7 @@ if (isset($_GET)) {
   <table class="table table-dark table-striped" id="tblData">
     <thead>
       <tr>
-        <th scope="col">#</th>
+
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -77,6 +77,7 @@ if (isset($_GET)) {
 
         $f++;
       }
+      
       
       $e = 0;
       for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -161,6 +162,7 @@ if (isset($_GET)) {
 
 
 <?php
+var_dump($reng_tip);
   Cerrar(null);
 } else {
   header("location: form.php");
