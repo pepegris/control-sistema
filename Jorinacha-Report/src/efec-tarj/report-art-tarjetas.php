@@ -77,7 +77,7 @@ if (isset($_GET)) {
       <!-- TIENDAS -->
       <?php
 
-    $reng_tip = getReng_tip( $sedes_ar[1], $tip_cob, $fecha1, $fecha2);
+    $reng_tip = getReng_tip( $sedes_ar[1], 'todos', $fecha1, $fecha2);
     var_dump($reng_tip);
       $f = 1;
       for ($i = 0; $i < count($sedes_ar); $i++) {
