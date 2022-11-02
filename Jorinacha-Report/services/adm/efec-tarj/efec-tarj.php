@@ -137,7 +137,7 @@ function getReng_tip($sede, $tip_cob, $fecha1, $fecha2)
                     from reng_tip
                     JOIN cobros ON reng_tip.cob_num=cobros.cob_num
                     JOIN reng_cob ON cobros.cob_num=reng_cob.cob_num
-                    WHERE cobros.anulado = 0 and  reng_tip.fec_cheq BETWEEN '$fecha1' AND '$fecha2' AND tip_cob='$tip_cob'
+                    WHERE cobros.anulado = 0 and  reng_tip.fec_cheq BETWEEN '$fecha1' AND '$fecha2' AND reng_tip.tip_cob='$tip_cob'
                     order by  reng_cob.doc_num desc";
                 }
 
