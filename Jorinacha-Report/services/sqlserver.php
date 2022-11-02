@@ -844,7 +844,7 @@ function getOrdenes_Pag($sede, $fecha)
             while ($row = sqlsrv_fetch_array($consulta)) {
 
                 $ordenes['monto'] = $row['monto'];
-                $ordenes['cod_ben'] = $row['cod_ben'];
+
                 break;
             }
             $res = $ordenes;
