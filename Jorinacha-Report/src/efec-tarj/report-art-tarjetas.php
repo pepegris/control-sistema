@@ -66,11 +66,11 @@ if (isset($_GET)) {
       $movi =$res[$i][$e];
       $nombre_ban =$res[$i][$e];
       $mont_doc =$res[$i][$e];
-      $fecha =$res[$i][$e];
+      $fecha =$res[$i][$e]->format('Y-m-d');
 
 
       echo "
-      
+      <tr>
       <td>$fecha</td>
 
       <td>$tipo_cob</td>
@@ -79,7 +79,8 @@ if (isset($_GET)) {
 
       <td>$movi</td>
       <td>$nombre_ban</td>
-      <td>$mont_doc</td>";
+      <td>$mont_doc</td>
+      </tr>";
     }
 
     echo "</tbody>
