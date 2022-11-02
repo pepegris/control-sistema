@@ -5,7 +5,7 @@ ini_set('max_execution_time',3600);
 require '../../includes/log.php';
 include '../../includes/header.php';
 include '../../services/mysql.php';
-include '../../services/sqlserver.php';
+include '../../services/adm/replica/replica.php';
 
 ?>
 <link rel="stylesheet" href="../../assets/css/animations.css">

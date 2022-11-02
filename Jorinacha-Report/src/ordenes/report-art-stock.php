@@ -5,7 +5,7 @@ ini_set('max_execution_time', 3600);
 require "../../includes/log.php";
 include '../../includes/header.php';
 include '../../services/mysql.php';
-include '../../services/sqlserver.php';
+include '../../services/adm/ordenes/ordenes.php';
 
 if ($_POST) {
     $ordenes = $_POST['ordenes'];
@@ -65,7 +65,7 @@ if ($_POST) {
                     }
                     
                     $fecha =  $Year . $Month . $d;
-                    $res = getTasa($sedes[$e], $fecha);
+                    $res = getTasa( $fecha);
                     $tasa = number_format($res['tasa_v'], 2, ',', '.');
 
                     echo "<th>$tasa</th>";

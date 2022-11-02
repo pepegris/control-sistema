@@ -861,10 +861,10 @@ function getOrdenes_Pag($sede, $fecha)
 }
 
 
-function getTasa($sede, $fecha)
+function getTasa( $fecha)
 {
 
-    $database = Database($sede);
+
 
 
     if ($database) {
