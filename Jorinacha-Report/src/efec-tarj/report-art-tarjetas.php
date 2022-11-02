@@ -82,62 +82,43 @@ if (isset($_GET)) {
   
       }
 
-      var_dump($reng_tip['Comercial Corina I'][1]);
-      echo"<br>";
-      var_dump($reng_tip['Comercial Corina I'][1][0]);
-      echo"<br>";
-      var_dump(count($reng_tip['Comercial Corina I'][1]));
-      var_dump($reng_tip['Comercial Corina I'][1][1]);
-      echo"<br>";
+
+
+
       
 
-      $e = 0;
-      for ($i = 0; $i < count($reng_tip); $i++) {
-      $f = 1;
       for ($i = 0; $i < count($reng_tip); $i++) {
 
+        var_dump($reng_tip['Comercial Corina I'][$i]);
+        echo"<br>";
+      
+      for ($o = 0; $o < count($reng_tip[$sedes_ar[$i]]); $o++) {
+        var_dump($reng_tip['Comercial Corina I'][$i][$o]);
+        echo"<br>";
 
-        if ($sedes_ar[$f] == null) {
-          $f++;
-        } else {
+      for ($p=0; $p < count($reng_tip[$sedes_ar[$i]][$o]) ; $p++) { 
 
-          $tipo_cob = $reng_tip[$sedes_ar[$f]][$e][$e];
-          $doc_num = $reng_tip[$sedes_ar[$f]][$e][$e];
-          $cob_num = $reng_tip[$sedes_ar[$f]][$e][$e];
-          $movi = $reng_tip[$sedes_ar[$f]][$e][$e];
-          $nombre_ban= $reng_tip[$sedes_ar[$f]][$e][$e];
-          $mont_doc = $reng_tip[$sedes_ar[$f]][$e][$e];
-          $fecha = $reng_tip[$sedes_ar[$f]][$e][$e];
-
-          $total_mont_doc [$sedes_ar[$f]] +=$mont_doc;
-
-          for ($i=0; $i < count($reng_tip[$sedes_ar[$f]][$e]); $i++) { 
+        $tipo_cob = $reng_tip[$sedes_ar[$f]][$o][$p];
+        $doc_num = $reng_tip[$sedes_ar[$f]][$o][$p];
+        $cob_num = $reng_tip[$sedes_ar[$f]][$o][$p];
+        $movi = $reng_tip[$sedes_ar[$f]][$o][$p];
+        $nombre_ban= $reng_tip[$sedes_ar[$f]][$o][$p];
+        $mont_doc = $reng_tip[$sedes_ar[$f]][$o][$p];
+        $fecha = $reng_tip[$sedes_ar[$f]][$o][$p];
 
 
-
-            
-          }
-
-          
-
+        var_dump($reng_tip['Comercial Corina I'][$i][$o][$p]);
+        echo"<br>";
+        
+      }
 
 
 
-      ?>
-          <tr>
-            <td><?= $fecha  ?></td>
-            <td><?= $tipo_cob  ?></td>
-            <td><?= $doc_num  ?></td>
-            <td><?= $cob_num  ?></td>
-            <td><?= $movi  ?></td>
-            <td><?= $mont_doc  ?></td>
-            
 
-          </tr>
-      <?php
-          $f++;
-          $e++;
-        }
+           
+
+
+        
       }
     }
       ?>
