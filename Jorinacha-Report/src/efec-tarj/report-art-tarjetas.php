@@ -83,7 +83,7 @@ if (isset($_GET)) {
       }
 
       var_dump($reng_tip['Comercial Corina I'][1][2]);
-      var_dump($reng_tip['Comercial Corina I'][4]);
+      var_dump(count($reng_tip));
       
 
       $e = 0;
