@@ -66,12 +66,12 @@ if (isset($_GET)) {
       $movi =$res[$i][$e];
       $nombre_ban =$res[$i][$e];
       $mont_doc =$res[$i][$e];
-      $fecha =$res[$i][$e]->format('Y-m-d');
+      $fecha =$res[$i][$e];
 
 
       echo "
       <tr>
-      <td>$fecha</td>
+      <td>".$fecha->format('Y-m-d')."</td>
 
       <td>$tipo_cob</td>
       <td>$doc_num</td>
