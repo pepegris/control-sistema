@@ -154,9 +154,9 @@ function getReng_tip($sede, $tip_cob, $fecha1, $fecha2)
                     $reng_tip[] = $row;
                 }
                 $res = $reng_tip;
-                
+
             } else {
-                $res = 0;
+                $res = 'N/A';
             }
 
 
