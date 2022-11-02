@@ -127,11 +127,13 @@ $cuenta_on = ucwords($cuenta_on);
       </a>
 
 
-      <div class="box">
+    <a href="src/efec-tarj/form.php">
+    <div class="box">
         <i class="lni lni-construction"></i>
         <h5>Pronto</h5>
         <h4>Pronto aun En Desarrollo</h4>
       </div>
+    </a>
 
       <a href="src/art-stock-2/form.php">
         <div class="box">
