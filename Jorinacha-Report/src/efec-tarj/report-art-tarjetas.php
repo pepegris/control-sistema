@@ -69,72 +69,59 @@ if (isset($_GET)) {
     </thead>
 
     <tbody>
+      <tr>
+        <!-- TIENDAS -->
+        <?php
 
-      <!-- TIENDAS -->
-      <?php
 
 
- 
-      for ($i = 1; $i < count($sedes_ar); $i++) {
+        for ($i = 1; $i < count($sedes_ar); $i++) {
 
-        $reng_tip[$sedes_ar[$i]] = getReng_tip($sedes_ar[$i], 'todos', $fecha1, $fecha2);
-       
-  
-      }
+          $reng_tip[$sedes_ar[$i]] = getReng_tip($sedes_ar[$i], 'todos', $fecha1, $fecha2);
+        }
 
 
 
 
-      
-
-      for ($i = 0; $i < count($reng_tip); $i++) {
-
-      
-      for ($o = 0; $o < count($reng_tip[$sedes_ar[$i]]); $o++) {
-
-      echo "<tr>";
-
-      for ($p=0; $p < count($reng_tip[$sedes_ar[$i]][$o]) ; $p++) { 
-
-        $tipo_cob = $reng_tip[$sedes_ar[$i]][$o][$p];
-        $doc_num = $reng_tip[$sedes_ar[$i]][$o][$p];
-        $cob_num = $reng_tip[$sedes_ar[$i]][$o][$p];
-        $movi = $reng_tip[$sedes_ar[$i]][$o][$p];
-        $nombre_ban= $reng_tip[$sedes_ar[$i]][$o][$p];
-        $mont_doc = $reng_tip[$sedes_ar[$i]][$o][$p];
-        $fecha = $reng_tip[$sedes_ar[$i]][$o][$p];
-
-        
-        echo "<td>$fecha</td>";
-        echo "<td>$tipo_cob</td>";
-        echo "<td>$doc_num</td>";
-        echo "<td>$cob_num</td>";
-        echo "<td>$movi</td>";
-        echo "<td>$nombre_ban</td>";
-        echo "<td>$mont_doc</td>";
 
 
-        
-      }
+        for ($i = 0; $i < count($reng_tip); $i++) {
+
+
+          for ($o = 0; $o < count($reng_tip[$sedes_ar[$i]]); $o++) {
 
 
 
-      echo "</tr>";
-           
+            for ($p = 0; $p < count($reng_tip[$sedes_ar[$i]][$o]); $p++) {
+
+              $tipo_cob = $reng_tip[$sedes_ar[$i]][$o][$p];
+              $doc_num = $reng_tip[$sedes_ar[$i]][$o][$p];
+              $cob_num = $reng_tip[$sedes_ar[$i]][$o][$p];
+              $movi = $reng_tip[$sedes_ar[$i]][$o][$p];
+              $nombre_ban = $reng_tip[$sedes_ar[$i]][$o][$p];
+              $mont_doc = $reng_tip[$sedes_ar[$i]][$o][$p];
+              $fecha = $reng_tip[$sedes_ar[$i]][$o][$p];
 
 
-        
-      }
-    }
-      ?>
+              echo "<td>$fecha</td>";
+              echo "<td>$tipo_cob</td>";
+              echo "<td>$doc_num</td>";
+              echo "<td>$cob_num</td>";
+              echo "<td>$movi</td>";
+              echo "<td>$nombre_ban</td>";
+              echo "<td>$mont_doc</td>";
+            }
+          }
+        }
+        ?>
 
-
+      </tr>
 
 
 
 
       <tr>
-        
+
         <td colspan="1"></td>
         <td>
           <h4>Totales:</h4>
@@ -144,10 +131,10 @@ if (isset($_GET)) {
 
         $h = 1;
         for ($i = 0; $i < count($total_mont_doc); $i++) {
-          
+
 
         ?>
-          <td><b><?= $total_mont_doc [$sedes_ar[$h]] ?></b></td>
+          <td><b><?= $total_mont_doc[$sedes_ar[$h]] ?></b></td>
 
 
 
@@ -169,9 +156,9 @@ if (isset($_GET)) {
 
 
 <?php
-var_dump($fecha2);
-var_dump($tipo_cob);
-var_dump($reng_tip);
+  var_dump($fecha2);
+  var_dump($tipo_cob);
+  var_dump($reng_tip);
   Cerrar(null);
 } else {
   header("location: form.php");
