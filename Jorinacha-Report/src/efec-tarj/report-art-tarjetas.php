@@ -46,7 +46,7 @@ if (isset($_GET)) {
     echo "  <table class='table table-dark table-striped' >
     <thead>
       <tr>
-              <th scope='col'>Fecha</th>
+
               <th scope='col'>Tipo</th>
               <th scope='col'>Factura</th>
               <th scope='col'>Cobro</th>
@@ -71,7 +71,7 @@ if (isset($_GET)) {
 
       echo "
       <tr>
-      <td>".$fecha->format('Y-m-d')."</td>
+
 
       <td>$tipo_cob</td>
       <td>$doc_num</td>
