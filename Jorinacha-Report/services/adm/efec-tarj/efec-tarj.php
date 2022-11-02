@@ -171,3 +171,5 @@ function getReng_tip($sede, $tip_cob, $fecha1, $fecha2)
         return 0;
     }
 }
+
+?>

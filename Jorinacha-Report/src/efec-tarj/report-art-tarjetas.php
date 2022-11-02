@@ -39,7 +39,7 @@ if (isset($_GET)) {
   var_dump($fecha1);
   var_dump($fecha2);
   
-  var_dump($sedes_ar);
+  var_dump($sedes_ar[1]);
 
   for ($i = 0; $i < 20; $i += 1) {
     $sedes[] = $_GET[$i];
