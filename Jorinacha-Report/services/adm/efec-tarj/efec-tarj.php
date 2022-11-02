@@ -125,8 +125,7 @@ function getReng_tip($sede, $tip_cob, $fecha1, $fecha2)
 
                 if ($tip_cob == "todos") {
                     $sql = "SELECT reng_tip.tip_cob, reng_cob.doc_num, reng_tip.cob_num, 
-                    reng_tip.movi, reng_tip.nombre_ban, reng_tip.mont_doc, 
-                    reng_tip.mont_tmp,fe_us_in 
+                    reng_tip.movi, reng_tip.nombre_ban, reng_tip.mont_doc,reng_tip.fec_cheq  
                     from reng_tip
                     JOIN cobros ON reng_tip.cob_num=cobros.cob_num
                     JOIN reng_cob ON cobros.cob_num=reng_cob.cob_num
@@ -134,8 +133,7 @@ function getReng_tip($sede, $tip_cob, $fecha1, $fecha2)
                     order by  reng_cob.doc_num desc";
                 } else {
                     $sql = "SELECT reng_tip.tip_cob, reng_cob.doc_num, reng_tip.cob_num, 
-                    reng_tip.movi, reng_tip.nombre_ban, reng_tip.mont_doc, 
-                    reng_tip.mont_tmp,fe_us_in 
+                    reng_tip.movi, reng_tip.nombre_ban, reng_tip.mont_doc,reng_tip.fec_cheq  
                     from reng_tip
                     JOIN cobros ON reng_tip.cob_num=cobros.cob_num
                     JOIN reng_cob ON cobros.cob_num=reng_cob.cob_num
@@ -146,8 +144,7 @@ function getReng_tip($sede, $tip_cob, $fecha1, $fecha2)
 
                 if ($tip_cob == "todos") {
                     $sql = "SELECT reng_tip.tip_cob, reng_cob.doc_num, reng_tip.cob_num, 
-                    reng_tip.movi, reng_tip.nombre_ban, reng_tip.mont_doc, 
-                    reng_tip.mont_tmp,fe_us_in 
+                    reng_tip.movi, reng_tip.nombre_ban, reng_tip.mont_doc,reng_tip.fec_cheq  
                     from reng_tip
                     JOIN cobros ON reng_tip.cob_num=cobros.cob_num
                     JOIN reng_cob ON cobros.cob_num=reng_cob.cob_num
@@ -155,8 +152,7 @@ function getReng_tip($sede, $tip_cob, $fecha1, $fecha2)
                     order by  reng_cob.doc_num desc";
                 } else {
                     $sql = "SELECT reng_tip.tip_cob, reng_cob.doc_num, reng_tip.cob_num, 
-                    reng_tip.movi, reng_tip.nombre_ban, reng_tip.mont_doc, 
-                    reng_tip.mont_tmp,fe_us_in 
+                    reng_tip.movi, reng_tip.nombre_ban, reng_tip.mont_doc,reng_tip.fec_cheq  
                     from reng_tip
                     JOIN cobros ON reng_tip.cob_num=cobros.cob_num
                     JOIN reng_cob ON cobros.cob_num=reng_cob.cob_num
