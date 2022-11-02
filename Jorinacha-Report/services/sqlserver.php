@@ -871,7 +871,7 @@ function getTasa($sede, $fecha)
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "KAGUA21", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "KAGU", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
