@@ -83,8 +83,11 @@ if (isset($_GET)) {
       }
 
       var_dump($reng_tip['Comercial Corina I'][1]);
+      echo"<br>";
       var_dump($reng_tip['Comercial Corina I'][1][0]);
+      echo"<br>";
       var_dump($reng_tip['Comercial Corina I'][1][1]);
+      echo"<br>";
       
 
       $e = 0;
