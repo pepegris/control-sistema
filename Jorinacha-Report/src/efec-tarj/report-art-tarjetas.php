@@ -18,9 +18,7 @@ if (isset($_GET)) {
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
 
-  for ($i = 0; $i < 20; $i += 1) {
-    $sedes[] = $_GET[$i];
-  }
+
 
 
 
@@ -30,128 +28,60 @@ if (isset($_GET)) {
   <center>
     <h1>Cobros</h1>
   </center>
-  <table class="table table-dark table-striped" id="tblData">
+  <?php
+
+  for ($i = 1; $i < count($sedes_ar); $i++) {
+
+    $res = getReng_tip($sedes_ar[$i], 'todos', $fecha1, $fecha2);
+    var_dump($sedes_ar[$i]);
+    echo "<br>";
+    var_dump(count($res[$i]));
+    echo "  <table class='table table-dark table-striped' >
     <thead>
       <tr>
-
-        <?php
-
-        for ($i = 0; $i < count($sedes_ar); $i++) {
-
-
-
-
-          if ($sedes_ar[$i] != null) {
-
-            $sede = $sedes_ar[$i];
-
-        ?>
-
-
-            <?php
-            if ($sedes_ar[$i] != 'Previa Shop') {
-
-              echo "<th scope='col'>Fecha $sede</th>";
-              echo "<th scope='col'>Tipo $sede</th>";
-              echo "<th scope='col'>Factura $sede</th>";
-              echo "<th scope='col'>Cobro $sede</th>";
-              echo "<th scope='col'>Mov $sede</th>";
-
-              echo "<th scope='col'>Banco $sede</th>";
-              echo "<th scope='col'>Monto $sede</th>";
-            }
-
-            ?>
-        <?php }
-        } ?>
-
+              <th scope='col'>Fecha</th>
+              <th scope='col'>Tipo</th>
+              <th scope='col'>Factura</th>
+              <th scope='col'>Cobro</th>
+              <th scope='col'>Mov</th>
+  
+              <th scope='col'>Banco</th>
+              <th scope='col'>Monto</th>
       </tr>
     </thead>
+    <tbody>";
 
-    <tbody>
+    for ($e = 0; $e < count($res[$i]); $e++) {
+      echo "
       <tr>
-        <!-- TIENDAS -->
-        <?php
+      <td></td>
+      <td></td>
+      <td></td>
+      </tr>";
+    }
+
+    echo "</tbody>
+          </table>";
+
+    if ($res == null) {
+
+      echo "<center><h1>ERROR</h1>";
+      echo "<h3>No es Posible hacer conexion con la base de dato de </h3>";
+      echo "</center>";
+
+    } else {
 
 
-
-        for ($i = 1; $i < count($sedes_ar); $i++) {
-
-          $reng_tip[$sedes_ar[$i]] = getReng_tip($sedes_ar[$i], 'todos', $fecha1, $fecha2);
-        }
+      echo "<center><h2>" . $sedes_ar[$i]. "</h2></center>";
 
 
-
-
-
-
-        for ($i = 0; $i < count($reng_tip); $i++) {
-
-
-          for ($o = 0; $o < count($reng_tip[$sedes_ar[$i]]); $o++) {
-
-
-
-            for ($p = 0; $p < count($reng_tip[$sedes_ar[$i]][$o]); $p++) {
-
-              $tipo_cob = $reng_tip[$sedes_ar[$i]][$o][$p];
-              $doc_num = $reng_tip[$sedes_ar[$i]][$o][$p];
-              $cob_num = $reng_tip[$sedes_ar[$i]][$o][$p];
-              $movi = $reng_tip[$sedes_ar[$i]][$o][$p];
-              $nombre_ban = $reng_tip[$sedes_ar[$i]][$o][$p];
-              $mont_doc = $reng_tip[$sedes_ar[$i]][$o][$p];
-              $fecha = $reng_tip[$sedes_ar[$i]][$o][$p];
-
-
-              echo "<td>$fecha</td>";
-              echo "<td>$tipo_cob</td>";
-              echo "<td>$doc_num</td>";
-              echo "<td>$cob_num</td>";
-              echo "<td>$movi</td>";
-              echo "<td>$nombre_ban</td>";
-              echo "<td>$mont_doc</td>";
-            }
-          }
-        }
-        ?>
-
-      </tr>
+    }
+  }
 
 
 
 
-      <tr>
-
-        <td colspan="1"></td>
-        <td>
-          <h4>Totales:</h4>
-        </td>
-
-        <?php
-
-        $h = 1;
-        for ($i = 0; $i < count($total_mont_doc); $i++) {
-
-
-        ?>
-          <td><b><?= $total_mont_doc[$sedes_ar[$h]] ?></b></td>
-
-
-
-
-
-
-        <?php
-
-          $h++;
-        }
-
-        ?>
-      </tr>
-
-    </tbody>
-  </table>
-
+  ?>
 
 
 
