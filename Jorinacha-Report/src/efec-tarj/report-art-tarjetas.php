@@ -37,8 +37,8 @@ if (isset($_GET)) {
     echo "<center><h2>" . $sedes_ar[$i]. "</h2></center>";
     var_dump($sedes_ar[$i]);
     echo "<br>";
-    var_dump(count($res[$i][]));
-    var_dump($res[$i]);
+    var_dump(count($res));
+    var_dump($res);
     echo "<br>";
     var_dump($res[$i][$i]);
     echo "<br>";
