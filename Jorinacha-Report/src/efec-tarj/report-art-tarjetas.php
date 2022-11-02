@@ -78,6 +78,7 @@ if (isset($_GET)) {
         $f++;
       }
       
+      var_dump($reng_tip);
       
       $e = 0;
       for ($i = 0; $i < count($sedes_ar); $i++) {
