@@ -831,11 +831,11 @@ function getOrdenes_Pag($sede, $fecha)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             if ($database == 'MERINA3' or $database == 'MERINA') {
-                $sql = "SELECT monto,cod_ben from ord_pago where cod_ben ='47' and fecha ='$fecha' and anulada=0";
+                $sql = "SELECT SUM(monto) from ord_pago where cod_ben ='47' and fecha ='$fecha' and anulada=0";
             } elseif ($database == 'KAGU' or $database == 'TRINA' or $database == 'CORINA1' or $database == 'CORINA2') {
-                $sql = "SELECT monto,cod_ben from ord_pago where cod_ben ='95' and fecha ='$fecha' and anulada=0";
+                $sql = "SELECT SUM(monto) from ord_pago where cod_ben ='95' and fecha ='$fecha' and anulada=0";
             } else {
-                $sql = "SELECT monto,cod_ben from ord_pago where cod_ben ='65' and fecha ='$fecha' and anulada=0";
+                $sql = "SELECT SUM(monto) from ord_pago where cod_ben ='65' and fecha ='$fecha' and anulada=0";
             }
 
 
