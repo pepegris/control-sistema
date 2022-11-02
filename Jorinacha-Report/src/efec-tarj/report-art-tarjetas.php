@@ -81,7 +81,8 @@ if (isset($_GET)) {
        
         $f++;
       }
-      
+      var_dump($reng_tip);
+      var_dump($reng_tip[$sedes_ar[$f]]);
       
 
       $e = 0;
