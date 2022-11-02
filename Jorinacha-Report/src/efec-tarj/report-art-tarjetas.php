@@ -78,7 +78,7 @@ if (isset($_GET)) {
         $f++;
       }
       
-      var_dump($reng_tip[1][0]);
+      var_dump($reng_tip[$sedes_ar[$f]][0]);
 
       $e = 0;
       for ($i = 0; $i < count($sedes_ar); $i++) {
