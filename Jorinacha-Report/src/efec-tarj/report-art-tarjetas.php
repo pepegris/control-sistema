@@ -162,6 +162,7 @@ if (isset($_GET)) {
 
 
 <?php
+var_dump($fecha2);
 var_dump($reng_tip);
   Cerrar(null);
 } else {
