@@ -295,10 +295,8 @@ if (isset($_GET)) {
       <?php  } ?>
       <tr>
 
-        <td colspan="6"></td>
-        <td>
-          <h4>Totales</h4>
-        </td>
+        <td colspan="7"><h3>Totales</h3></td>
+
         <td></td>
         <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
         <td></td>
