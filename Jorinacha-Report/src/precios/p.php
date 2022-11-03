@@ -12,7 +12,7 @@ var_dump($getPedidos_t);
 var_dump($pedido_tienda);
 var_dump($pedido_tienda2);
 echo $pedido_tienda;
-echo $getPedidos_t;
+echo getPedidos_t("Comercial Merina",  '5103624386772');
 var_dump(getPedidos_t("Comercial Merina",  '5103624386772'));
 
 
