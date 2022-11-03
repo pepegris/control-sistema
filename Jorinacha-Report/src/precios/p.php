@@ -29,6 +29,8 @@ if ($consulta != null) {
     while ($row = sqlsrv_fetch_array($consulta)) {
 
         $reng_ped = $row['total_art'];
+        echo $row['total_art'];
+        echo $reng_ped;
         break;
     }
     $res = $reng_ped['total_art'];
