@@ -4,7 +4,7 @@ require '../../services/adm/precios/precios.php';
 
 
 $getPedidos_t= getPedidos_t("Comercial Merina",  '5103624386772');
-$pedido_tienda = $getPedidos_t;
+$pedido_tienda = $getPedidos_t[0]['total_Art'];
 
 
 var_dump($getPedidos_t);
