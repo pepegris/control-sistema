@@ -31,7 +31,7 @@ if ($consulta != null) {
         $reng_ped = $row['total_art'];
         break;
     }
-    $res = $reng_ped;
+    $res = $reng_ped['total_art'];
     echo "$reng_ped";
 } else {
     $res = 0;
