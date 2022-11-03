@@ -60,7 +60,7 @@ if (isset($_GET)) {
       $cob_num =$res[$e]['cob_num'];
       $movi =$res[$e]['movi'];
       
-      if (empty($res[$e]['nombre_ban']) == false) {
+      if ($res[$e]['nombre_ban'] == " ") {
         $nombre_ban == 'N/A';
       }else{
         $nombre_ban =$res[$e]['nombre_ban'];
