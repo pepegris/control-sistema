@@ -59,8 +59,8 @@ include '../../services/sqlserver.php';
         <select name="tipo_cob" id="">
 
           <option value="todos">Todos</option>
-          <option value="EFEC">Tarjeta</option>
-          <option value="TARJ">Efectivo</option>
+          <option value="TARJ">Tarjeta</option>
+          <option value="EFEC">Efectivo</option>
 
         </select>
       </div>
