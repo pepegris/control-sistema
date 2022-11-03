@@ -60,7 +60,7 @@ if (isset($_GET)) {
       $cob_num =$res[$e]['cob_num'];
       $movi =$res[$e]['movi'];
       
-      if (empty($res[$e]['nombre_ban'])) {
+      if (empty($res[$e]['nombre_ban']) == false) {
         $nombre_ban == 'N/A';
       }else{
         $nombre_ban =$res[$e]['nombre_ban'];
@@ -121,6 +121,7 @@ if (isset($_GET)) {
   var_dump($res[14]['nombre_ban']);
   var_dump($res[15]['nombre_ban']);
   var_dump(empty($res[14]['nombre_ban']));
+  var_dump(empty($res[15]['nombre_ban']));
 } else {
   header("location: form.php");
 }
