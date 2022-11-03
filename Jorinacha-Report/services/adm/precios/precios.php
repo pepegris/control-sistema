@@ -239,14 +239,13 @@ function getPedidos_t ($sede,  $co_art)
 {
 
     
-    $database = Database($sede);
     $cliente = Cliente($sede);
 
     if ($database != null) {
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
            # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
