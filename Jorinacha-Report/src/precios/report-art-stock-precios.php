@@ -60,7 +60,7 @@ if (isset($_GET)) {
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
-              echo "<th scope='col'>En Pedido $sede</th>";
+              echo "<th scope='col'>Por Enviar $sede</th>";
               echo "<th scope='col'>Pares Vendidos $sede</th>";
               echo "<th scope='col'>Ref $sede</th>";
               
