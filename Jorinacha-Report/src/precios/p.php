@@ -9,6 +9,8 @@ $pedido_tienda = $getPedidos_t['total_Art'];
 
 var_dump($getPedidos_t);
 var_dump($pedido_tienda);
+echo $pedido_tienda;
+echo $getPedidos_t;
 var_dump(getPedidos_t("Comercial Merina",  '5103624386772'));
 
 
