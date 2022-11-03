@@ -206,7 +206,11 @@ if (isset($_GET)) {
 
                       break;
                   }
-                  $pedido_tienda = $reng_ped;
+                  if ($reng_ped >=1) {
+                    $pedido_tienda = $reng_ped;
+                  }else {
+                    $pedido_tienda = 0;
+                  }
                   $total_pedido_tienda [$sedes_ar[$f]] += $pedido_tienda;
               } else {
                   $res = 0;
@@ -234,7 +238,7 @@ if (isset($_GET)) {
 
           ?>
               <td style="font-weight:<?= $estilo1 ?>;"><?= $stock_act_tienda  ?></td>
-              <td style="font-weight:<?= $estilo6 ?>; "><?= $signo ?><p style="color:<?= $estilo ?>;"><?=  $pedido_tienda  ?></p></td>    
+              <td style="font-weight:<?= $estilo6 ?>; "><p style="color:<?= $estilo ?>;"> <span style="color:white;"><?= $signo ?></span> <?=  $pedido_tienda  ?></p></td>    
 
               <td style="font-weight:<?= $estilo5 ?>;"><?= $vendido_tienda ?></td>
 
