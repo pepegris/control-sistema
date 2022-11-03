@@ -37,6 +37,12 @@ if (isset($_GET)) {
     echo "<center><h2>" . $sedes_ar[$i]. "</h2></center>";
     echo "  <table class='table table-dark table-striped' >
     <thead>
+        <tr>
+                  
+        <th scope='col' colspan='5'>" . $sedes_ar[$i]. "</th>
+
+        <th scope='col'>Fecha</th>
+    </tr>
       <tr>
               
               <th scope='col'>Tipo Cob</th>
@@ -85,8 +91,9 @@ if (isset($_GET)) {
 
     echo "
     <tr>
-    <td colspan='4'>Total</td>
+    <td colspan='5'><h3>Total</h3></td>
     <td>$total_mont_doc</td>
+    <td></td>
     </tr>
     </tbody>
           </table>";
