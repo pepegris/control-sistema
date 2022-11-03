@@ -38,34 +38,36 @@ if (isset($_GET)) {
     echo "  <table class='table table-dark table-striped' >
     <thead>
       <tr>
-
-              <th scope='col'>Tipo</th>
-              <th scope='col'>Factura</th>
-              <th scope='col'>Cobro</th>
-              <th scope='col'>Mov</th>
+              
+              <th scope='col'>Tipo Cob</th>
+              <th scope='col'>N° Factura</th>
+              <th scope='col'>N° Cobro</th>
+              <th scope='col'>N° Mov Caja</th>
   
               <th scope='col'>Banco</th>
               <th scope='col'>Monto</th>
+              <th scope='col'>Fecha</th>
       </tr>
     </thead>
     <tbody>";
 
     for ($e = 0; $e < count($res); $e++) {
 
-      $tipo_cob =$res[$e]['tipo_cob'];
+      $tipo_cob =$res[$e]['tip_cob'];
       $doc_num =$res[$e]['doc_num'];
       $cob_num =$res[$e]['cob_num'];
       $movi =$res[$e]['movi'];
       $nombre_ban =$res[$e]['nombre_ban'];
+      if ($nombre_ban == null) {
+        $nombre_ban == 'N/A';
+      }
       $mont_doc =$res[$e]['mont_doc'];
       $fec_cheq =$res[$e]['fec_cheq'];
-      $fecha = $fec_cheq->format('Y-m-d');
+      $fecha = $fec_cheq->format('d-m-Y');
 
 
       echo "
       <tr>
-
-
       <td>$tipo_cob</td>
       <td>$doc_num</td>
       <td>$cob_num</td>
@@ -73,6 +75,8 @@ if (isset($_GET)) {
       <td>$movi</td>
       <td>$nombre_ban</td>
       <td>$mont_doc</td>
+      <td>$fecha</td>
+
       </tr>";
     }
 
