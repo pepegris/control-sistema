@@ -88,8 +88,7 @@ if (isset($_GET)) {
 
     echo "
     <tr>
-    <th ></th>
-    <td colspan='4'><h3>Total</h3></td>
+    <td colspan='5'><h3>Total</h3></td>
     <td>$total_mont_doc</td>
     <td></td>
     </tr>
@@ -114,7 +113,7 @@ if (isset($_GET)) {
 
 <?php
 
-
+  var_dump($res[14]['nombre_ban']);
   var_dump($fecha2);
   var_dump($tipo_cob);
   var_dump($reng_tip);
