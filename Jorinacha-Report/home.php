@@ -100,7 +100,7 @@ $cuenta_on = ucwords($cuenta_on);
       <a href="src/art-ajuste/form.php">
       <div class="box">
         <i class="lni lni-consulting"></i>
-        <h5>Reporte J</h5>
+        <h5>Reporte Ajustes Realizados</h5>
         <h4>Pronto aun En Desarrollo</h4>
       </div>
       </a>
@@ -114,22 +114,21 @@ $cuenta_on = ucwords($cuenta_on);
       </a>
 
 
-      <a href="src/replica/form.php">
+    <a href="src/efec-tarj/form.php">
+    <div class="box">
+        <i class="lni lni-credit-cards"></i>
+        <h5>Cobros</h5>
+        <h4>Reporte de metodos de cobros realizado por las Tiendas</h4>
+      </div>
+    </a>
+
+    <a href="src/replica/form.php">
         <div class="box">
           <i class="lni lni-signal"></i>
           <h5>Replica</h5>
           <h4>Fechas de las Replicas</h4>
         </div>
       </a>
-
-
-    <a href="src/efec-tarj/form.php">
-    <div class="box">
-        <i class="lni lni-credit-cards"></i>
-        <h5>Pronto</h5>
-        <h4>Pronto aun En Desarrollo</h4>
-      </div>
-    </a>
 
       <a href="src/art-stock-2/form.php">
         <div class="box">
