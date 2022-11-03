@@ -5,7 +5,7 @@ ini_set('max_execution_time',3600);
 require "../../includes/log.php";
 include '../../includes/header.php';
 include '../../services/mysql.php';
-include '../../services/adm/precios/precios.php';
+require '../../services/adm/precios/precios.php';
 
 if (isset($_GET)) {
 
@@ -108,27 +108,6 @@ if (isset($_GET)) {
         $total_prec_vta5_todo +=  $total_prec_vta5;
         $total_prec_vta3_todo +=  $total_prec_vta3;
 
-        $estilo1='normal';
-        $estilo2='normal';
-        $estilo2='normal';
-
-        if ($total_prec_vta5 >=1) {
-          $estilo1='bold';
-        }else {
-          $estilo1='normal';
-        }
-
-        if ($total_prec_vta3 >=1) {
-          $estilo2='bold';
-        }else {
-          $estilo2='normal';
-        }
-
-        if ($stock_act >=1) {
-          $estilo3='bold';
-        }else {
-          $estilo3='normal';
-        }
 
         $g = 1;
         $total_vendido = 0;
@@ -145,11 +124,9 @@ if (isset($_GET)) {
 
         $total_vendido_todo +=$total_vendido;
 
-        if ($total_vendido >=1) {
-          $estilo4='bold';
-        }else {
-          $estilo4='normal';
-        }
+
+        require '../../services/adm/precios/estilo1.php';
+
 
 
       ?>
@@ -219,50 +196,8 @@ if (isset($_GET)) {
               $total_prec_vta3_costo_tienda_todo[$sedes_ar[$f]] +=  $total_prec_vta3_costo_tienda;
 
 
-              $estilo1='normal';
-              $estilo2='normal';
-              $estilo3='normal';
-              $estilo4='normal';
-      
-              if ($stock_act_tienda >=1) {
-                $estilo1='bold';
-              }else {
-                $estilo1='normal';
-              }
-      
-              if ($total_prec_vta5_tienda >=1) {
-                $estilo2='bold';
-              }else {
-                $estilo2='normal';
-              }
-      
-              if ($total_prec_vta1_tienda >=1) {
-                $estilo3='bold';
-              }else {
-                $estilo3='normal';
-              }
+              require '../../services/adm/precios/estilo2.php';
 
-              if ($total_prec_vta3_costo_tienda >=1) {
-                $estilo4='bold';
-              }else {
-                $estilo4='normal';
-              }
-              if ($vendido_tienda >=1) {
-                $estilo5='bold';
-              }else {
-                $estilo5='normal';
-              }
-
-              if ($pedido_tienda >=1) {
-                $estilo6='bold';
-                $estilo='green';
-                $signo='+';
-              }else {
-                $estilo6='normal';
-                $estilo='white';
-                $signo='';
-
-              }
 
 
 
