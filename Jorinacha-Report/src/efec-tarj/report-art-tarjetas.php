@@ -120,6 +120,7 @@ if (isset($_GET)) {
 
   var_dump($res[14]['nombre_ban']);
   var_dump($res[15]['nombre_ban']);
+  var_dump(empty($res[14]['nombre_ban']));
 } else {
   header("location: form.php");
 }
