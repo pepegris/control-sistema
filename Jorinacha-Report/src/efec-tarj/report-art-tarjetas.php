@@ -120,8 +120,12 @@ if (isset($_GET)) {
 
   var_dump($res[14]['nombre_ban']);
   var_dump($res[15]['nombre_ban']);
-  var_dump(empty($res[14]['nombre_ban']));
-  var_dump(empty($res[15]['nombre_ban']));
+  var_dump(isset($res[14]['nombre_ban']));
+  var_dump(isset($res[15]['nombre_ban']));
+  echo "<br>";
+  $expected_array_got_string = 'somestring';
+var_dump(empty($expected_array_got_string['some_key']));
+var_dump(empty($expected_array_got_string));
 } else {
   header("location: form.php");
 }
