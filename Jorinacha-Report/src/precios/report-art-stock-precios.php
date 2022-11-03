@@ -180,9 +180,40 @@ if (isset($_GET)) {
               $vendido_tienda = number_format($getReng_fac2, 0, ',', '.');
               $total_vendido_tienda [$sedes_ar[$f]] += $vendido_tienda;
 
-              $getPedidos_t= getPedidos_t($sedes_ar[$f],  $co_art);
-              $pedido_tienda = $getPedidos_t[0]['total_art'];
-              $total_pedido_tienda [$sedes_ar[$f]] += $pedido_tienda;
+              #$getPedidos_t= getPedidos_t($sedes_ar[$f],  $co_art);
+              #$pedido_tienda = $getPedidos_t[0]['total_art'];
+              #$total_pedido_tienda [$sedes_ar[$f]] += $pedido_tienda;
+
+              $cliente = Cliente($sedes_ar[$f]);
+
+              $serverName = "172.16.1.39";
+              $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+              $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+              # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
+
+              $sql = "SELECT CONVERT(numeric(10,0),SUM(reng_ped.total_art)) AS  total_art
+              from pedidos
+              JOIN reng_ped ON pedidos.fact_num=reng_ped.fact_num
+              where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art'";
+
+              $consulta = sqlsrv_query($conn, $sql);
+
+              if ($consulta != null) {
+                  while ($row = sqlsrv_fetch_array($consulta)) {
+
+                      $reng_ped = $row['total_art'];
+
+                      break;
+                  }
+                  $pedido_tienda = $reng_ped;
+                  $total_pedido_tienda [$sedes_ar[$f]] += $pedido_tienda;
+              } else {
+                  $res = 0;
+              }
+
+
+
 
               $descuento=$prec_vta3_costo * 0.30;
               $prec_vta3_costo_tienda = $prec_vta3_costo - $descuento;
