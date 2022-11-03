@@ -32,7 +32,7 @@ if ($consulta != null) {
         break;
     }
     $res = $reng_ped['total_art'];
-    echo "$reng_ped";
+    echo "$res";
 } else {
     $res = 0;
 }
