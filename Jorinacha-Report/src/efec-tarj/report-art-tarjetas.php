@@ -35,12 +35,6 @@ if (isset($_GET)) {
     $res = getReng_tip($sedes_ar[$i], 'todos', $fecha1, $fecha2);
 
     echo "<center><h2>" . $sedes_ar[$i]. "</h2></center>";
-    var_dump($sedes_ar[$i]);
-    echo "<br>";
-
-    var_dump($res[$i][$i]);
-    echo "<br>";
-    var_dump($res[$i][$i][$i]);
     echo "  <table class='table table-dark table-striped' >
     <thead>
       <tr>
@@ -58,13 +52,14 @@ if (isset($_GET)) {
 
     for ($e = 0; $e < count($res); $e++) {
 
-      $tipo_cob =$res[$i][$e];
-      $doc_num =$res[$i][$e];
-      $cob_num =$res[$i][$e];
-      $movi =$res[$i][$e];
-      $nombre_ban =$res[$i][$e];
-      $mont_doc =$res[$i][$e];
-      $fecha =$res[$i][$e];
+      $tipo_cob =$res[$e]['tipo_cob'];
+      $doc_num =$res[$e]['doc_num'];
+      $cob_num =$res[$e]['cob_num'];
+      $movi =$res[$e]['movi'];
+      $nombre_ban =$res[$e]['nombre_ban'];
+      $mont_doc =$res[$e]['mont_doc'];
+      $fec_cheq =$res[$e]['fec_cheq'];
+      $fecha = $fec_cheq->format('Y-m-d');
 
 
       echo "
