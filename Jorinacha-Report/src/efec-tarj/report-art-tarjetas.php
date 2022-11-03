@@ -52,15 +52,18 @@ if (isset($_GET)) {
     </thead>
     <tbody>";
     $n=1;
+    $total_mont_doc=0;
     for ($e = 0; $e < count($res); $e++) {
 
       $tipo_cob =$res[$e]['tip_cob'];
       $doc_num =$res[$e]['doc_num'];
       $cob_num =$res[$e]['cob_num'];
       $movi =$res[$e]['movi'];
-      $nombre_ban =$res[$e]['nombre_ban'];
-      if ($nombre_ban == '') {
+      
+      if ($res[$e]['nombre_ban']=== '') {
         $nombre_ban == 'N/A';
+      }else{
+        $nombre_ban =$res[$e]['nombre_ban'];
       }
       
       $mont_doc =$res[$e]['mont_doc'];
@@ -86,21 +89,23 @@ if (isset($_GET)) {
       $n++;
     }
 
-    echo "
-    <tr>
-    <td colspan='5'><h3>Total</h3></td>
-    <td>$total_mont_doc</td>
-    <td></td>
-    </tr>
-    </tbody>
-          </table>";
+    if ($total_mont_doc == 0) {
 
-    if ($res[$e] == null) {
-
+      echo "</tbody>
+      </table>";
       echo "<center><h1>ERROR</h1>";
       echo "<h3>No es Posible hacer conexion con la base de dato de " . $sedes_ar[$i]. " </h3>";
       echo "</center>";
 
+    }else {
+      echo "
+      <tr>
+      <td colspan='6'><h3>Total</h3></td>
+      <td>$total_mont_doc</td>
+      <td></td>
+      </tr>
+      </tbody>
+            </table>";
     }
   }
 
@@ -114,10 +119,7 @@ if (isset($_GET)) {
 <?php
 
   var_dump($res[14]['nombre_ban']);
-  var_dump($fecha2);
-  var_dump($tipo_cob);
-  var_dump($reng_tip);
-  Cerrar(null);
+  var_dump($res[15]['nombre_ban']);
 } else {
   header("location: form.php");
 }
