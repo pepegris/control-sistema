@@ -181,7 +181,7 @@ if (isset($_GET)) {
               $total_vendido_tienda [$sedes_ar[$f]] += $vendido_tienda;
 
               $getPedidos_t= getPedidos_t($sedes_ar[$f],  $co_art);
-              $pedido_tienda = number_format($getPedidos_t, 0, ',', '.');
+              $pedido_tienda = number_format($getPedidos_t[0]['total_art'], 0, ',', '.');
               $total_pedido_tienda [$sedes_ar[$f]] += $pedido_tienda;
 
               $descuento=$prec_vta3_costo * 0.30;
