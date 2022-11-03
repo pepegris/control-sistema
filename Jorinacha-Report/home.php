@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 session_start();
 
 $cuenta_on = $_SESSION['username'];
@@ -129,7 +125,7 @@ $cuenta_on = ucwords($cuenta_on);
 
     <a href="src/efec-tarj/form.php">
     <div class="box">
-        <i class="lni lni-construction"></i>
+        <i class="lni lni-credit-cards"></i>
         <h5>Pronto</h5>
         <h4>Pronto aun En Desarrollo</h4>
       </div>
