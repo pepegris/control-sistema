@@ -22,6 +22,7 @@ if (isset($_GET)) {
 
 
 
+
 ?>
 
 
@@ -32,7 +33,7 @@ if (isset($_GET)) {
 
   for ($i = 1; $i < count($sedes_ar); $i++) {
 
-    $res = getReng_tip($sedes_ar[$i], 'todos', $fecha1, $fecha2);
+    $res = getReng_tip($sedes_ar[$i], $tipo_cob, $fecha1, $fecha2);
 
     echo "<center><h2>" . $sedes_ar[$i]. "</h2></center>";
     echo "  <table class='table table-dark table-striped' >
