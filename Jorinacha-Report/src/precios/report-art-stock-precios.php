@@ -295,14 +295,15 @@ if (isset($_GET)) {
       <?php  } ?>
       <tr>
 
-        <td colspan="7"><h3>Totales</h3></td>
+        <td colspan="7"></td>
 
-        <td></td>
+        <td><h3>Totales</h3></td>
         <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
         <td></td>
         <td><b>Bs<?= number_format($total_prec_vta3_todo, 2, ',', '.'); ?></b></td>
-        <td><b><?= $total_stock_act_previa ?></td>
         <td><b><?= $total_vendido_todo ?></td>
+        <td><b><?= $total_stock_act_previa ?></td>
+        
         
 
         <?php
