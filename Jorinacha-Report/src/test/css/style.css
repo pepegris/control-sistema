@@ -1,6 +1,11 @@
 * {
     font-family: 'Titillium Web', sans-serif;
   }
+
+  body{
+    background: #242943;
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+}
   
   .date-picker {
     border: solid 1px #003773;
