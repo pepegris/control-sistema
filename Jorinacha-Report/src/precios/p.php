@@ -13,7 +13,7 @@ var_dump(getPedidos_t("Comercial Merina",  '5103624386772'));
 
 
 $serverName = "172.16.1.39";
-$connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+$connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
