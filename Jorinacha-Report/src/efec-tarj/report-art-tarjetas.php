@@ -58,10 +58,13 @@ if (isset($_GET)) {
       $cob_num =$res[$e]['cob_num'];
       $movi =$res[$e]['movi'];
       $nombre_ban =$res[$e]['nombre_ban'];
-      if ($nombre_ban == null) {
+      if ($nombre_ban == '') {
         $nombre_ban == 'N/A';
       }
+      
       $mont_doc =$res[$e]['mont_doc'];
+      $total_mont_doc += $mont_doc;
+
       $fec_cheq =$res[$e]['fec_cheq'];
       $fecha = $fec_cheq->format('d-m-Y');
 
@@ -80,7 +83,12 @@ if (isset($_GET)) {
       </tr>";
     }
 
-    echo "</tbody>
+    echo "
+    <tr>
+    <td colspan='4'>Total</td>
+    <td>$total_mont_doc</td>
+    </tr>
+    </tbody>
           </table>";
 
     if ($res[$i] == null) {
