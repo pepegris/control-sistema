@@ -320,7 +320,7 @@ if (isset($_GET)) {
 
 
 <?php
-  Cerrar(null);
+  var_dump($getPedidos_t);
 } else {
   header("location: form.php");
 }
