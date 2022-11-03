@@ -37,14 +37,9 @@ if (isset($_GET)) {
     echo "<center><h2>" . $sedes_ar[$i]. "</h2></center>";
     echo "  <table class='table table-dark table-striped' >
     <thead>
-        <tr>
-                  
-        <th scope='col' colspan='5'>" . $sedes_ar[$i]. "</th>
 
-        <th scope='col'>Fecha</th>
-    </tr>
       <tr>
-              
+              <th scope='col'>N°</th>
               <th scope='col'>Tipo Cob</th>
               <th scope='col'>N° Factura</th>
               <th scope='col'>N° Cobro</th>
@@ -56,7 +51,7 @@ if (isset($_GET)) {
       </tr>
     </thead>
     <tbody>";
-
+    $n=1;
     for ($e = 0; $e < count($res); $e++) {
 
       $tipo_cob =$res[$e]['tip_cob'];
@@ -77,6 +72,7 @@ if (isset($_GET)) {
 
       echo "
       <tr>
+      <th scope='row'>$n</th>
       <td>$tipo_cob</td>
       <td>$doc_num</td>
       <td>$cob_num</td>
@@ -87,18 +83,20 @@ if (isset($_GET)) {
       <td>$fecha</td>
 
       </tr>";
+      $n++;
     }
 
     echo "
     <tr>
-    <td colspan='5'><h3>Total</h3></td>
+    <th ></th>
+    <td colspan='4'><h3>Total</h3></td>
     <td>$total_mont_doc</td>
     <td></td>
     </tr>
     </tbody>
           </table>";
 
-    if ($res[$i] == null) {
+    if ($res[$e] == null) {
 
       echo "<center><h1>ERROR</h1>";
       echo "<h3>No es Posible hacer conexion con la base de dato de " . $sedes_ar[$i]. " </h3>";
@@ -115,6 +113,8 @@ if (isset($_GET)) {
 
 
 <?php
+
+
   var_dump($fecha2);
   var_dump($tipo_cob);
   var_dump($reng_tip);
