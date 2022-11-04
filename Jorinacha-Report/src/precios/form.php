@@ -92,7 +92,7 @@ include '../../services/sqlserver.php';
       </div>
 
 
-      <label for="reporte" class="form-label ">Reporte</label>
+<!--       <label for="reporte" class="form-label ">Reporte</label>
       <select name="reporte" id="">
 
         
@@ -100,7 +100,7 @@ include '../../services/sqlserver.php';
         <option value="detal">Detallado</option>
         <option value="global">Global</option>
 
-      </select>
+      </select> -->
 
       <br>
       <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
