@@ -202,7 +202,7 @@ if (isset($_GET)) {
               $conn = sqlsrv_connect($serverName, $connectionInfo);
 
               # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
-
+              $pedido_tienda =0;
               $sql = "SELECT CONVERT(numeric(10,0),SUM(reng_ped.total_art)) AS  total_art
               from pedidos
               JOIN reng_ped ON pedidos.fact_num=reng_ped.fact_num
