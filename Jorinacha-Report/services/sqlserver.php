@@ -794,8 +794,7 @@ function getPedidos($sede, $co_art)
 
             $sql = "SELECT SUM(CONVERT(numeric(10,0), reng_ped.total_art)) as total_art 
             FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=pedidos.fact_num
-            WHERE reng_ped.co_art ='$co_art' and   pedidos.status <=1 and  pedidos.anulada = 0
-            GROUP BY  pedidos.status ";
+            WHERE reng_ped.co_art ='$co_art' and   pedidos.status <=1 and  pedidos.anulada = 0";
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -810,10 +809,13 @@ function getPedidos($sede, $co_art)
                     break;
                 }
 
-                $pedidos['total_art'] = 0;
+                
                 $res = $pedidos ;
             } else {
-                $res = 0;
+
+                $pedidos['total_art'] = 0;
+                $res = $pedidos ;
+                
             }
             return $res;
         } catch (\Throwable $th) {
