@@ -235,7 +235,8 @@ if (isset($_GET)) {
                     echo "$total_pedido";
                   }
                   ?></td>
-              <td> <?= $stock_act_tienda + $total_pedido ?></td>
+              <td> <p>Tienda:<?= $stock_act_tienda?> + Env:<?= $total_pedido ?> </p> 
+              <?= $stock_act_tienda + $total_pedido ?></td>
 
 
           <?php $f++;
