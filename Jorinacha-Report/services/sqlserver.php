@@ -774,7 +774,10 @@ function getPedidos($sede, $co_art)
                 }
                 $res = $pedidos;
             } else {
-                $res = 0;
+
+                $pedidos['status'] =null;
+                $pedidos['total_art'] = 0;
+                $res = $pedidos ;
             }
             return $res;
         } catch (\Throwable $th) {
