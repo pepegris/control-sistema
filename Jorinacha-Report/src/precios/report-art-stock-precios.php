@@ -43,12 +43,12 @@ if (isset($_GET)) {
         <th scope='col'>Total Ref</th>
         <th scope='col'>Bs</th>
         <th scope='col'>Total Bs</th>
-        <th scope='col'>Stock Previa Shop</th>
+        
         <th scope='col'>Total Vendido Tiendas</th>
         
         <?php
 
-        for ($i = 0; $i < count($sedes_ar); $i++) {
+        for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
 
@@ -59,7 +59,7 @@ if (isset($_GET)) {
 
         ?>
         
-            
+        <th scope='col'>Stock <?= $sede ?></th>
             
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
