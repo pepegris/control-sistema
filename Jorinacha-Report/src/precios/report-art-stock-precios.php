@@ -44,6 +44,7 @@ if (isset($_GET)) {
         <th scope='col'>Bs</th>
         <th scope='col'>Total Bs</th>
         
+        <th scope='col'>Stock Previa Shop</th>
         <th scope='col'>Total Vendido Tiendas</th>
         
         <?php
