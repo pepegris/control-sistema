@@ -209,7 +209,7 @@ if (isset($_GET)) {
               <td>$<?= $prec_vta5_tienda ?></td>
               <td><?php
                   if ($status== null) {
-                    echo "<p style='color:red'>Sin Informacion</p>";
+                    echo "<p style='color:orange'>Sin Pedido Nuevo</p>";
                   } else {
                     switch ($status) {
 
