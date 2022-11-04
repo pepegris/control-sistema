@@ -775,7 +775,7 @@ function getPedidos($sede, $co_art)
                 $res = $pedidos;
             } else {
 
-                $pedidos['status'] =null;
+                $pedidos['status'] =3;
                 $pedidos['total_art'] = 0;
                 $res = $pedidos ;
             }
