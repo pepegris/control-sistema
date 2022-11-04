@@ -59,12 +59,12 @@ if (isset($_GET)) {
             <th scope='col'><?= $sede ?></th>
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
-              echo "<th scope='col'>Cant Env $i</th>";
-              echo "<th scope='col'>Total Vendido $i</th>";
-              echo "<th scope='col'>Ref $i</th>";
-              echo "<th scope='col'>Status $i</th>";
-              echo "<th scope='col'>Pedido $i</th>";
-              echo "<th scope='col'>Fallas $i</th>";
+              echo "<th scope='col'>Cant Env $sede</th>";
+              echo "<th scope='col'>Total Vendido $sede</th>";
+              echo "<th scope='col'>Ref $sede</th>";
+              echo "<th scope='col'>Status $sede</th>";
+              echo "<th scope='col'>Pedido $sede</th>";
+              echo "<th scope='col'>Fallas $sede</th>";
             }
 
             ?>
@@ -88,13 +88,13 @@ if (isset($_GET)) {
         $co_color = getColores($res0[$e]['co_color']);
         $desc = $res0[$e]['ubicacion'];
 
-/*         $test1 = getPedidos(null, $co_art);
+        $test1 = getPedidos(null, $co_art);
 
 
-        $pedido = $test1['total_art']; */
+        $pedido = $test1['total_art']; 
 
-        $stock_act = round($res0[$e]['stock_act']);
-        /* $stock_act =  $stock_act_1 - $pedido;  */
+        $stock_act_1 = round($res0[$e]['stock_act']);
+        $stock_act =  $stock_act_1 - $pedido; 
         $total_stock_act_previa += $stock_act;
 
 
@@ -208,7 +208,7 @@ if (isset($_GET)) {
 
               $total_pedido = $res7['total_art'];
               $status = $res7['status'];
-              $documento = $res7['doc'];
+              $documento = $res7['fact_num'];
 
               $estilo1='normal';
               $estilo2='normal';
@@ -239,22 +239,20 @@ if (isset($_GET)) {
               <td>$<?= $prec_vta5_tienda ?></td>
               <td><?php
                   if ($status== null) {
-                    echo "Sin Pedido";
+                    echo "<p style='color:red'>Sin Informacion/p>";
                   } else {
                     switch ($status) {
+
                       case 0:
-                        echo "<p style='color:red'>Sin Procesar</p> $documento";
+                        echo "<p style='color:green'>Sin Procesar</p> $documento";
                         break;
                       case 1:
                         echo "<p style='color:yellow'>Parc/Procesada</p> $documento";
                         break;
-                      case 2:
-                        echo "<p style='color:orangered'>Sin Pedido nuevo</p>";
-                        #echo "<p style='color:green'>Procesada</p> $documento";
-                        break;
+      
 
                       default:
-                        echo "<p style='color:red'>Sin ningun Pedido</p>";
+                        echo "<p style='color:orange'>Sin Pedido Nuevo</p>";
                         break;
                     }
                   }

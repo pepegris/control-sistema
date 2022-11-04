@@ -753,9 +753,10 @@ function getPedidos($sede, $co_art)
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "SELECT top 1 pedidos.fact_num ,CONVERT(numeric(10,0), reng_ped.total_art) as total_art ,pedidos.status 
+            $sql = "SELECT pedidos.fact_num ,CONVERT(numeric(10,0),SUM(reng_ped.total_art)) as total_art ,pedidos.status  
             FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=pedidos.fact_num
-            WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'  and  pedidos.anulada = 0 
+            WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'  AND  pedidos.anulada = 0 AND pedidos.status <= 1		
+            GROUP BY pedidos.fact_num,pedidos.status ,fe_us_in
             ORDER BY fe_us_in DESC";
 
             $consulta = sqlsrv_query($conn, $sql);
@@ -764,13 +765,14 @@ function getPedidos($sede, $co_art)
 
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $total_art['total_art'] = $row['total_art'];
-                    $total_art['status'] = $row['status'];
-                    $total_art['doc'] = 'Ped';
+                    $pedidos['fact_num'] = $row['fact_num'];
+                    $pedidos['total_art'] = $row['total_art'];
+                    $pedidos['status'] = $row['status'];
+                    $pedidos['doc'] = 'Ped';
 
                     break;
                 }
-                $res = $total_art;
+                $res = $pedidos;
             } else {
                 $res = 0;
             }
@@ -798,13 +800,14 @@ function getPedidos($sede, $co_art)
 
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $total_art['total_art'] = $row['total_art'];
-                    $total_art['status'] = $row['status'];
-                    $total_art['doc'] = 'Ped';
+                    $pedidos['fact_num'] = $row['fact_num'];
+                    $pedidos['total_art'] = $row['total_art'];
+                    $pedidos['status'] = $row['status'];
+                    $pedidos['doc'] = 'Ped';
 
                     break;
                 }
-                $res = $total_art;
+                $res = $pedidos;
             } else {
                 $res = 0;
             }
