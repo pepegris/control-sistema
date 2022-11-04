@@ -44,6 +44,7 @@ if (isset($_GET)) {
         <th scope='col'>Bs</th>
         <th scope='col'>Total Bs</th>
         <th scope='col'>Stock Previa Shop</th>
+        <th scope='col'>Total Vendido Tiendas</th>
         
         <?php
 
@@ -57,7 +58,7 @@ if (isset($_GET)) {
             $sede = $sedes_ar[$i];
 
         ?>
-        <th scope='col'>Total Vendido Tiendas</th>
+        
             
             
             <?php
@@ -277,8 +278,9 @@ if (isset($_GET)) {
         <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
         <td></td>
         <td><b>Bs<?= number_format($total_prec_vta3_todo, 2, ',', '.'); ?></b></td>
-        <td><b><?= $total_vendido_todo ?></td>
+        
         <td><b><?= $total_stock_act_previa ?></td>
+        <td><b><?= $total_vendido_todo ?></td>
         
         
 
