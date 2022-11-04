@@ -38,6 +38,7 @@ if (isset($_GET)) {
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
  
+        <th scope='col'>Costo</th>
         <th scope='col'>Ref</th>
         <th scope='col'>Total Ref</th>
         <th scope='col'>Bs</th>
@@ -142,6 +143,8 @@ if (isset($_GET)) {
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
  
+          <td>$<?= $prec_vta4 ?></td>
+
           <td>$<?= $prec_vta5 ?></td>
           <td style="font-weight:<?= $estilo1 ?>;">$<?= number_format($total_prec_vta5, 0, ',', '.'); ?></td>
 
@@ -177,7 +180,7 @@ if (isset($_GET)) {
               
               $precio_tienda = $prec_vta5_tienda * $tasa;
               $prec_vta1_tienda = number_format($precio_tienda, 2, ',', '.');
-              
+
 
               $getReng_fac2 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
               $vendido_tienda = number_format($getReng_fac2, 0, ',', '.');
@@ -249,7 +252,7 @@ if (isset($_GET)) {
               <td style="font-weight:<?= $estilo3 ?>;">Bs<?= number_format($total_prec_vta1_tienda, 2, ',', '.'); ?></td>
 
               <td>$<?=  $prec_vta4  ?></td>
-              <td>Bs<?=  $prec_vta3_costo_tienda  ?></td>
+              <td>Bs<?=  $prec_vta3_costo  ?></td>
               <td style="font-weight:<?= $estilo4 ?>;">Bs<?= number_format($total_prec_vta3_costo_tienda, 2, ',', '.'); ?></td>
 
 
