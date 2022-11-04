@@ -39,9 +39,8 @@ if (isset($_GET)) {
         <th scope='col'>Desc</th>
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
-        <th scope='col'>Costo Bs</th>
-        <th scope='col'>Fecha ult Costo</th>
-        <th scope='col'>Precio Bs</th>
+
+        
         <th scope='col'>Ref</th>
         <th scope='col'>Total Vendido</th>
         <?php
@@ -56,7 +55,7 @@ if (isset($_GET)) {
             $sede = $sedes_ar[$i];
 
         ?>
-            <th scope='col'><?= $sede ?></th>
+            <th scope='col'>Stock <?= $sede ?></th>
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
               echo "<th scope='col'>Cant Env $sede</th>";
@@ -98,8 +97,7 @@ if (isset($_GET)) {
         $total_stock_act_previa += $stock_act;
 
 
-        $precio = $res0[$e]['prec_vta3'];
-        $prec_vta1 = number_format($precio, 2, ',', '.');
+
 
         $prec_vta5 = round($res0[$e]['prec_vta5']);
 
@@ -127,10 +125,6 @@ if (isset($_GET)) {
             $g++;
           }
 
-          $res2 = getCompras($co_art);
-          $prec_vta =  number_format($res2['prec_vta'], 2, ',', '.');
-          $fec_lote = $res2['fec_lote'];
-
           $estilo1='normal';
           $estilo2='normal';
 
@@ -148,21 +142,7 @@ if (isset($_GET)) {
 
           ?>
 
-          <td>Bs<?php
-                if ($prec_vta == null) {
-                  echo 0;
-                } else {
-                  echo $prec_vta ;
-                }
-                ?></td>
-          <td><?php
-              if ($fec_lote == null) {
-                echo "N/A";
-              } else {
-                echo $fec_lote->format('Y-m-d');
-              }
-              ?></td>
-          <td><?= $prec_vta1 ?></td>
+
           <td><?= $prec_vta5 ?></td>
           <td style="font-weight:<?= $estilo1 ?>;"><?= $total_vendido ?></td>
           <td style="font-weight:<?= $estilo2 ?>;"><?= $stock_act ?></td>
@@ -255,7 +235,7 @@ if (isset($_GET)) {
                     echo "$total_pedido";
                   }
                   ?></td>
-              <td></td>
+              <td> <?= $stock_act_tienda + $total_pedido ?></td>
 
 
           <?php $f++;
@@ -270,7 +250,7 @@ if (isset($_GET)) {
       <?php  } ?>
       <tr>
         <th ></th>
-        <td colspan="10"></td>
+        <td colspan="7"></td>
         <td>
           <h4>Total</h4>
         </td>
