@@ -195,16 +195,6 @@ if (isset($_GET)) {
 
               /* REVISANDO SI TIENE COTIZACION O PEDIDO */
               $test1 = getPedidos($sedes_ar[$f], $co_art);
-              if ($test1 != null) {
-                $res7=$test1;
-
-              }else {
-                $test2=getCotizacion($sedes_ar[$f], $co_art);
-                if ($test2 != null) {
-                  $res7=$test2;
-                }
-
-              }
 
               $total_pedido = $res7['total_art'];
               $status = $res7['status'];
