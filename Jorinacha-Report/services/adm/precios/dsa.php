@@ -27,6 +27,7 @@ for ($i = 0; $i < count($total_stock_act_tienda); $i++) {
   <td></td>
   <td><b>Bs<?= number_format($total_prec_vta1_tienda_todo[$sedes_ar[$h]], 2, ',', '.'); ?></b></td>
   <td></td>
+  <td></td>
   <td><b>Bs<?=number_format( $total_prec_vta3_costo_tienda_todo[$sedes_ar[$h]]); ?></b></td>
   
   
