@@ -168,10 +168,6 @@ form , td {
 
 
 
-              $total_pedido = $res7['total_art'];
-              $status = $res7['status'];
-              $documento = $res7['doc'];
-
               $estilo1='normal';
               $estilo2='normal';
               $estilo3='normal';

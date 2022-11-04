@@ -810,7 +810,7 @@ function getPedidos($sede, $co_art)
 
                     break;
                 }
-                $pedidos['status'] =null;
+                $pedidos['status'] =3;
                 $pedidos['total_art'] = 0;
                 $res = $pedidos ;
             } else {
