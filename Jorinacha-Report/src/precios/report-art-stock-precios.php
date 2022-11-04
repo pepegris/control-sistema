@@ -273,15 +273,15 @@ if (isset($_GET)) {
       <?php  } ?>
       <tr>
 
-        <td colspan="7"></td>
+        <td colspan="9"><h3>Totales</h3></td>
 
-        <td><h3>Totales</h3></td>
-        <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
+
+        <td><b>$ prec 5</b></td>
         <td></td>
-        <td><b>Bs<?= number_format($total_prec_vta3_todo, 2, ',', '.'); ?></b></td>
+        <td><b>Bs total prec 3</b></td>
         
-        <td><b><?= $total_stock_act_previa ?></td>
-        <td><b><?= $total_vendido_todo ?></td>
+        <td><b> stock previa </td>
+        <td><b>vendido tiendas</td>
         
         
 
@@ -292,17 +292,17 @@ if (isset($_GET)) {
           $vendido = $total_vendido_tienda[$sedes_ar[$h]];
 
         ?>
-          <td><b><?= $total_stock_act_tienda[$sedes_ar[$h]] ?></b></td>
-          <td><b><?= $total_pedido_tienda [$sedes_ar[$h]] ?></b></td>
+          <td><b> stock tiendas </b></td>
+          <td><b>total pedido</b></td>
           
-          <td><b><?= $total_vendido_tienda [$sedes_ar[$h]] ?></b></td>
+          <td><b>total vendido tienda</b></td>
           
           <td></td>
-          <td><b>$<?= number_format($total_prec_vta5_tienda_todo[$sedes_ar[$h]], 0, ',', '.');  ?></b></td>
+          <td><b>total prec vta 5</b></td>
           <td></td>
-          <td><b>Bs<?= number_format($total_prec_vta1_tienda_todo[$sedes_ar[$h]], 2, ',', '.'); ?></b></td>
+          <td><b>total prec vta 1</b></td>
           <td></td>
-          <td><b>Bs<?=number_format( $total_prec_vta3_costo_tienda_todo[$sedes_ar[$h]]); ?></b></td>
+          <td><b>total prec vta 3</b></b></td>
           
           
 
