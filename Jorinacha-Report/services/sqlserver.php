@@ -803,14 +803,13 @@ function getPedidos($sede, $co_art)
 
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $pedidos['fact_num'] = $row['fact_num'];
+
                     $pedidos['total_art'] = $row['total_art'];
-                    $pedidos['status'] = $row['status'];
-                    $pedidos['doc'] = 'Ped';
+
 
                     break;
                 }
-                $pedidos['status'] =3;
+
                 $pedidos['total_art'] = 0;
                 $res = $pedidos ;
             } else {
