@@ -194,7 +194,7 @@ if (isset($_GET)) {
               $prec_vta5_tienda = round($res6[0]['prec_vta5']);
 
               /* REVISANDO SI TIENE COTIZACION O PEDIDO */
-              $test1 = getPedidos($sedes_ar[$f], $co_art);
+              $res7 = getPedidos($sedes_ar[$f], $co_art);
 
               $total_pedido = $res7['total_art'];
               $status = $res7['status'];
