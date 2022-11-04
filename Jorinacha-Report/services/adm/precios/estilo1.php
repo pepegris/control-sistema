@@ -23,5 +23,10 @@ if ($stock_act >=1) {
   $estilo3='normal';
 }
 
+if ($total_vendido >=1) {
+  $estilo4='bold';
+}else {
+  $estilo4='normal';
+}
 
 

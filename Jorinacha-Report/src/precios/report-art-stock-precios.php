@@ -43,7 +43,8 @@ if (isset($_GET)) {
         <th scope='col'>Total Ref</th>
         <th scope='col'>Bs</th>
         <th scope='col'>Total Bs</th>
-        <th scope='col'>Total Vendido Tiendas</th>
+        <th scope='col'>Stock Previa Shop</th>
+        
         <?php
 
         for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -56,7 +57,8 @@ if (isset($_GET)) {
             $sede = $sedes_ar[$i];
 
         ?>
-            <th scope='col'>Stock <?= $sede ?></th>
+        <th scope='col'>Total Vendido Tiendas</th>
+            
             
             <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
@@ -151,9 +153,9 @@ if (isset($_GET)) {
           <td>Bs<?= $prec_vta3_costo ?></td>
           <td style="font-weight:<?= $estilo2 ?>;">Bs<?= number_format($total_prec_vta3, 2, ',', '.'); ?></td>
 
-          <td style="font-weight:<?= $estilo4 ?>;"><?= $total_vendido ?></td>
-          
           <td style="font-weight:<?= $estilo3 ?>;"><?= $stock_act ?></td>
+
+          <td style="font-weight:<?= $estilo4 ?>;"><?= $total_vendido ?></td>
           
 
 
