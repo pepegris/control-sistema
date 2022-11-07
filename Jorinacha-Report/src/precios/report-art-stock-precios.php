@@ -198,35 +198,35 @@ if (isset($_GET)) {
 
               $cliente = Cliente($sedes_ar[$f]);
 
-              $serverName = "172.16.1.39";
-              $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
-              $conn = sqlsrv_connect($serverName, $connectionInfo);
+                  $serverName = "172.16.1.39";
+                  $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+                  $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-              # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
-              $pedido_tienda =0;
-              $sql = "SELECT CONVERT(numeric(10,0),SUM(reng_ped.total_art)) AS  total_art
-              from pedidos
-              JOIN reng_ped ON pedidos.fact_num=reng_ped.fact_num
-              where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art' AND reng_ped.co_alma = 'BOLE'  ";
+                  # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
+                  $pedido_tienda =0;
+                  $sql = "SELECT CONVERT(numeric(10,0),SUM(reng_ped.total_art)) AS  total_art
+                  from pedidos
+                  JOIN reng_ped ON pedidos.fact_num=reng_ped.fact_num
+                  where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art' AND reng_ped.co_alma = 'BOLE'  ";
 
-              $consulta = sqlsrv_query($conn, $sql);
+                  $consulta = sqlsrv_query($conn, $sql);
 
-              if ($consulta != null) {
-                while ($row = sqlsrv_fetch_array($consulta)) {
+                  if ($consulta != null) {
+                    while ($row = sqlsrv_fetch_array($consulta)) {
 
-                  $reng_ped = $row['total_art'];
+                      $reng_ped = $row['total_art'];
 
-                  break;
-                }
-                if ($reng_ped >= 1) {
-                  $pedido_tienda = $reng_ped;
-                } else {
-                  $pedido_tienda = 0;
-                }
-                $total_pedido_tienda[$sedes_ar[$f]] += $pedido_tienda;
-              } else {
-                $res = 0;
-              }
+                      break;
+                    }
+                    if ($reng_ped >= 1) {
+                      $pedido_tienda = $reng_ped;
+                    } else {
+                      $pedido_tienda = 0;
+                    }
+                    $total_pedido_tienda[$sedes_ar[$f]] += $pedido_tienda;
+                  } else {
+                    $res = 0;
+                  }
 
 
 
