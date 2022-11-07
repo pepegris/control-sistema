@@ -182,7 +182,7 @@ if (isset($_GET)) {
               $stock_act_tienda = round($getArt2[0]['stock_act']);
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
-              $prec_vta5_tienda = round($getArt2[0]['prec_vta5']);
+              $prec_vta5_tienda =number_format($getArt2[0]['prec_vta5'], 0, ',', '.');
 
               $precio_tienda = $prec_vta5_tienda * $tasa;
               $prec_vta1_tienda = number_format($precio_tienda, 2, ',', '.');
