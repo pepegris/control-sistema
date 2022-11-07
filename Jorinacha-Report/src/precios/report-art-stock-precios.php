@@ -105,6 +105,7 @@ if (isset($_GET)) {
         $stock_act = round($getArt1[$e]['stock_act']);
         $total_stock_act_previa += $stock_act;
 
+
         $prec_vta5 = round($getArt1[$e]['prec_vta5']);
         $prec_vta4 = round($getArt1[$e]['prec_vta4']);
 
@@ -206,7 +207,7 @@ if (isset($_GET)) {
               $sql = "SELECT CONVERT(numeric(10,0),SUM(reng_ped.total_art)) AS  total_art
               from pedidos
               JOIN reng_ped ON pedidos.fact_num=reng_ped.fact_num
-              where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art'";
+              where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art' AND pedidos.co_tran  <> 'TA'  ";
 
               $consulta = sqlsrv_query($conn, $sql);
 

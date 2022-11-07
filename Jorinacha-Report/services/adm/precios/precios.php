@@ -241,7 +241,7 @@ function getPedidos_t ($sede,  $co_art)
     
     $cliente = Cliente($sede);
 
-    if ($database != null) {
+    if ($cliente != null) {
         try {
 
             $serverName = "172.16.1.39";
@@ -253,7 +253,7 @@ function getPedidos_t ($sede,  $co_art)
            $sql = "SELECT CONVERT(numeric(10,0),SUM(reng_ped.total_art)) AS  total_art
            from pedidos
            JOIN reng_ped ON pedidos.fact_num=reng_ped.fact_num
-           where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art'";
+           where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art' AND pedidos.co_tran  <> 'TA' ";
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -281,3 +281,89 @@ function getPedidos_t ($sede,  $co_art)
 
 
 
+
+
+function getPedidos($sede, $co_art)
+{
+
+    #$database = Database($sede);
+    $cliente = Cliente($sede);
+
+    if ($cliente != null) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT pedidos.fact_num ,CONVERT(numeric(10,0),SUM(reng_ped.total_art)) as total_art ,pedidos.status  
+            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=pedidos.fact_num
+            WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'  AND  pedidos.anulada = 0 AND pedidos.status <= 1	AND pedidos.co_tran  <> 'TA'
+            GROUP BY pedidos.fact_num,pedidos.status ,fe_us_in
+            ORDER BY fe_us_in DESC";
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $pedidos['fact_num'] = $row['fact_num'];
+                    $pedidos['total_art'] = $row['total_art'];
+                    $pedidos['status'] = $row['status'];
+                    $pedidos['doc'] = 'Ped';
+
+                    break;
+                }
+                $res = $pedidos;
+            } else {
+
+                $pedidos['status'] =3;
+                $pedidos['total_art'] = 0;
+                $res = $pedidos ;
+            }
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT SUM(CONVERT(numeric(10,0), reng_ped.total_art)) as total_art 
+            FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=pedidos.fact_num
+            WHERE reng_ped.co_art ='$co_art' and   pedidos.status <=1 and  pedidos.anulada = 0 AND pedidos.co_tran  <> 'TA'";
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+
+                    $pedidos['total_art'] = $row['total_art'];
+
+
+                    break;
+                }
+
+                
+                $res = $pedidos ;
+            } else {
+
+                $pedidos['total_art'] = 0;
+                $res = $pedidos ;
+                
+            }
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    }
+}

@@ -97,8 +97,6 @@ if (isset($_GET)) {
         $total_stock_act_previa += $stock_act;
 
 
-
-
         $prec_vta5 = round($res0[$e]['prec_vta5']);
 
       ?>
@@ -219,7 +217,7 @@ if (isset($_GET)) {
                       case 1:
                         echo "<p style='color:yellow'>Parc/Procesada</p> $documento";
                         break;
-      
+
 
                       default:
                         echo "<p style='color:orange'>Sin Pedido Nuevo</p>";
