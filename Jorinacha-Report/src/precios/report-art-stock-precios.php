@@ -106,8 +106,9 @@ if (isset($_GET)) {
         $total_stock_act_previa += $stock_act;
 
 
-        $prec_vta5 = round($getArt1[$e]['prec_vta5']);
-        $prec_vta4 = round($getArt1[$e]['prec_vta4']);
+        $prec_vta5 = number_format($getArt1[$e]['prec_vta5'], 0, ',', '.');
+        
+        $prec_vta4 = number_format($getArt1[$e]['prec_vta4'], 0, ',', '.'); 
 
         $precio = $prec_vta4 * $tasa;
         $prec_vta3_costo = number_format($precio, 2, ',', '.');
