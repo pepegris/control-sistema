@@ -253,7 +253,7 @@ function getPedidos_t ($sede,  $co_art)
            $sql = "SELECT CONVERT(numeric(10,0),SUM(reng_ped.total_art)) AS  total_art
            from pedidos
            JOIN reng_ped ON pedidos.fact_num=reng_ped.fact_num
-           where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art' AND pedidos.co_tran  <> 'TA' ";
+           where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art' AND reng_ped.co_alma = 'BOLE' ";
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -298,7 +298,7 @@ function getPedidos($sede, $co_art)
 
             $sql = "SELECT pedidos.fact_num ,CONVERT(numeric(10,0),SUM(reng_ped.total_art)) as total_art ,pedidos.status  
             FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=pedidos.fact_num
-            WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'  AND  pedidos.anulada = 0 AND pedidos.status <= 1	AND pedidos.co_tran  <> 'TA'
+            WHERE reng_ped.co_art ='$co_art'  AND  pedidos.co_cli='$cliente'  AND  pedidos.anulada = 0 AND pedidos.status <= 1	AND reng_ped.co_alma = 'BOLE'
             GROUP BY pedidos.fact_num,pedidos.status ,fe_us_in
             ORDER BY fe_us_in DESC";
 
@@ -337,7 +337,7 @@ function getPedidos($sede, $co_art)
 
             $sql = "SELECT SUM(CONVERT(numeric(10,0), reng_ped.total_art)) as total_art 
             FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=pedidos.fact_num
-            WHERE reng_ped.co_art ='$co_art' and   pedidos.status <=1 and  pedidos.anulada = 0 AND pedidos.co_tran  <> 'TA'";
+            WHERE reng_ped.co_art ='$co_art' and   pedidos.status <=1 and  pedidos.anulada = 0 AND reng_ped.co_alma = 'BOLE'";
 
             $consulta = sqlsrv_query($conn, $sql);
 
