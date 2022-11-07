@@ -108,7 +108,7 @@ if (isset($_GET)) {
 
         $prec_vta5 = number_format($getArt1[$e]['prec_vta5'], 0, ',', '.');
         
-        $prec_vta4 = number_format($getArt1[$e]['prec_vta4'], 0, ',', '.'); 
+        $prec_vta4 = number_format($getArt1[$e]['prec_vta4'], 2, ',', '.'); 
 
         $precio = $prec_vta4 * $tasa;
         $prec_vta3_costo = number_format($precio, 2, ',', '.');
