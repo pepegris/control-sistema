@@ -212,10 +212,10 @@ if (isset($_GET)) {
             <td>$nro_doc</td>
             <td>$nro_fact</td>";
 
-            if ($n_control != null) {
+            if ($n_control != " ") {
               echo " <td>$n_control</td>";
             } else {
-              echo "<td>Sin Núm. Control</td>";
+              echo "<td>N/A</td>";
             }
            
 
