@@ -307,7 +307,7 @@ if (isset($_GET)) {
         echo "
         <tr>
         <td colspan=" . $colspan . "><h3>Total</h3></td>
-        <td>$total_monto</td>
+        <td>". number_format($total_monto, 2, ',', '.') ."</td>
         <td></td>
         </tr>
         </tbody>
