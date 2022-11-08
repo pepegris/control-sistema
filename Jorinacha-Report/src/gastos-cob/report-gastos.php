@@ -42,7 +42,9 @@ if (isset($_GET)) {
       if ($consultas[$o] == "Ordenes de Pago" ) {
 
         $res = getOrd_pago($sede,  $fecha1, $fecha2);
-    
+        
+
+       
 
         if ($res  != null) {
 
@@ -143,11 +145,11 @@ if (isset($_GET)) {
         var_dump(count($res));
 
         for ($e = 0; $e < count($res); $e++) {
-
+          var_dump($res[1]['ord_num'] );
 
           if ($consulta == "Ordenes de Pago") {
 
-
+            var_dump($consulta );
     
             $ord_num = $res[$e]['ord_num'];
 
@@ -165,17 +167,18 @@ if (isset($_GET)) {
             
             $cheque = $res[$e]['cheque'];
     
-            $fecha1 = $res[$e]['fecha'];
-
+            $fecha_che = $res[$e]['fecha'];
+            var_dump($fecha_che);
+            $fecha = $fec_che->format('d-m-Y');
+            var_dump($fecha);
     
 
             
     
             $cuenta_contable = getCuenta_contable($sede, $ord_num ,  $fecha1, $fecha2);
+            var_dump( $cuenta_contable);
             $co_cue = $cuenta_contable['co_cue'];
-            var_dump( $co_cue);
             $des_cue = $cuenta_contable['des_cue'];
-            var_dump( $des_cue);
     
             echo "
             <tr>
@@ -210,8 +213,8 @@ if (isset($_GET)) {
             $monto_net = $res[$e]['monto_net'];
             $total_monto += $monto_net;
     
-            $fec_emis1 = $res[$e]['fec_emis'];
-            #$fecha = $fec_emis->format('d-m-Y');
+            $fec_emis = $res[$e]['fec_emis'];
+            $fecha = $fec_emis->format('d-m-Y');
     
             $cuenta_contable = getCuenta_contable($sede, $nro_doc ,  $fecha1, $fecha2);
             $co_cue = $cuenta_contable['co_cue'];
@@ -229,7 +232,7 @@ if (isset($_GET)) {
     
             <td>$observa</td>
             <td>$monto_net</td>
-            <td>$fec_emis</td>
+            <td>$fecha</td>
       
             </tr>";
             $n++;
@@ -244,8 +247,8 @@ if (isset($_GET)) {
             $monto_d = $res[$e]['monto_d'];
             $total_monto += $monto_d;
     
-            $fecha1 = $res[$e]['fecha'];
-            #$fecha = $fecha->format('d-m-Y');
+            $fecha_cheq = $res[$e]['fecha'];
+            $fecha = $fecha_cheq->format('d-m-Y');
     
             $cuenta_contable = getCuenta_contable($sede, $mov_num ,  $fecha1, $fecha2);
             $co_cue = $cuenta_contable['co_cue'];
