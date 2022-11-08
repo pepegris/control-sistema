@@ -168,10 +168,7 @@ if (isset($_GET)) {
             $cheque = $res[$e]['cheque'];
     
             $fecha_che = $res[$e]['fecha'];
-            var_dump($fecha_che);
-            var_dump($fec_che->format('d-m-Y'));
-            $fecha = $fec_che->format('d-m-Y');
-            var_dump($fecha);
+
     
 
             
