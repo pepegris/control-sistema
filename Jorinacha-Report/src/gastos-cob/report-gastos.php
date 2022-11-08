@@ -215,7 +215,7 @@ if (isset($_GET)) {
             $total_monto += $monto_net;
     
             $fec_emis = $res[$e]['fec_emis'];
-            $fecha = $fec_emis->format('d-m-Y');
+            #$fecha = $fec_emis->format('d-m-Y');
     
             $cuenta_contable = getCuenta_contable($sede, $nro_doc ,  $fecha1, $fecha2);
             $co_cue = $cuenta_contable['co_cue'];
@@ -249,7 +249,7 @@ if (isset($_GET)) {
             $total_monto += $monto_d;
     
             $fecha_cheq = $res[$e]['fecha'];
-            $fecha = $fecha_cheq->format('d-m-Y');
+            #$fecha = $fecha_cheq->format('d-m-Y');
     
             $cuenta_contable = getCuenta_contable($sede, $mov_num ,  $fecha1, $fecha2);
             $co_cue = $cuenta_contable['co_cue'];
