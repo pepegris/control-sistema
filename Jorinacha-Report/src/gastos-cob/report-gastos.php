@@ -146,7 +146,7 @@ if (isset($_GET)) {
 
             $descrip = $res[$e]['descrip'];
 
-            $monto = $res[$e]['monto'];
+            $monto = number_format( $res[$e]['monto'], 2, ',', '.');
             $total_monto += $monto;
 
             $cheque = $res[$e]['cheque'];
@@ -242,7 +242,7 @@ if (isset($_GET)) {
             $cta_egre = $res[$e]['cta_egre'];
             $cta_egre_descrip = $res[$e]['cta_egre_descrip'];
 
-            $monto_d = $res[$e]['monto_d'];
+            $monto_d = number_format($res[$e]['monto_d'], 2, ',', '.') ;
             $total_monto += $monto_d;
 
             $fecha_cheq = $res[$e]['fecha'];
