@@ -71,7 +71,7 @@ if (isset($_GET)) {
 
           echo "<center> No hay Información Disponible ". $consultas[$o] ."
           <h4>". $sede ."</h4> </center>";
-          $status='sin';
+
 
         }
       } elseif ($consultas[$o] == "Documentos de Pago") {
@@ -100,7 +100,7 @@ if (isset($_GET)) {
 
           echo "<center> No hay Información Disponible ". $consultas[$o] ."
           <h4>". $sede ."</h4> </center>";
-          $status='sin';
+
 
         }
       } else {
@@ -127,7 +127,7 @@ if (isset($_GET)) {
 
           echo "<center> No hay Información Disponible ". $consultas[$o] ."
           <h4>". $sede ."</h4> </center>";
-          $status='sin';
+
 
         }
       }
@@ -288,12 +288,11 @@ if (isset($_GET)) {
         }
       }
 
-      if ($status=='sin') {
+      if ($total_monto == 0) {
 
         echo "</tbody>
         </table>";
 
-        $status=='con';
        
       }else {
         $colspan=0;
