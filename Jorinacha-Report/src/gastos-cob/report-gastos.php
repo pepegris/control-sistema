@@ -190,6 +190,7 @@ if (isset($_GET)) {
             $nro_doc = $res[$e]['nro_doc'];
             $nro_fact = $res[$e]['nro_fact'];
             $n_control = $res[$e]['n_control'];
+            var_dump( $n_control);
             $co_cli = $res[$e]['co_cli'];
             $prov_des = $res[$e]['prov_des'];
             $observa = $res[$e]['observa'];
