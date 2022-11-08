@@ -308,15 +308,15 @@ if (isset($_GET)) {
 
         switch ($consulta) {
           case "Ordenes de Pago":
-            $colspan = 8;
+            $colspan = 9;
             break;
 
           case "Documentos de Pago":
-            $colspan = 7;
+            $colspan = 8;
             break;
 
           case "Movimiento de Caja":
-            $colspan = 5;
+            $colspan = 6;
             break;
 
 
