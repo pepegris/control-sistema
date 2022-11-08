@@ -221,7 +221,7 @@ if (isset($_GET)) {
             echo "
             <td>$co_cli - $prov_des</td>";
 
-            
+
             if ($co_cue != null) {
               echo "<td>$co_cue - $des_cue</td>";
             } else {
@@ -296,7 +296,7 @@ if (isset($_GET)) {
             break;
 
           case "Movimiento de Caja":
-            $colspan = 4;
+            $colspan = 5;
             break;
 
 
