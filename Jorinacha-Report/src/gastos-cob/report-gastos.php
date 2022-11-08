@@ -33,7 +33,7 @@ if (isset($_GET)) {
 
     
     
-    
+    $sede=$sedes_ar[$i] ;
 
     for ($o = 0; $o < count($consultas); $o++) {
 
@@ -43,7 +43,7 @@ if (isset($_GET)) {
 
       if ($consultas[$o] == "Ordenes de Pago" ) {
 
-        $res = getOrd_pago($sedes_ar[$i],  $fecha1, $fecha2);
+        $res = getOrd_pago($sede,  $fecha1, $fecha2);
 
         echo "<center><h3>" . $consultas[$o] . "</h3></center>";
         echo "  <table class='table table-dark table-striped' >
@@ -66,7 +66,7 @@ if (isset($_GET)) {
 
       }elseif ($consultas[$o] == "Documentos de Pago" ) {
 
-        $res = getDocum_cp($sedes_ar[$i],  $fecha1, $fecha2);
+        $res = getDocum_cp($sede,  $fecha1, $fecha2);
 
         echo "<center><h3>" . $consultas[$o] . "</h3></center>";
         echo "  <table class='table table-dark table-striped' >
@@ -74,12 +74,12 @@ if (isset($_GET)) {
     
           <tr>
                   <th scope='col'>N°</th>
-                  <th scope='col'>Tipo Cob</th>
-                  <th scope='col'>N° Factura</th>
-                  <th scope='col'>N° Cobro</th>
-                  <th scope='col'>N° Mov Caja</th>
-      
-                  <th scope='col'>Banco</th>
+                  <th scope='col'>Núm. de Doc</th>
+                  <th scope='col'>Núm. Factura</th>
+                  <th scope='col'>Núm. Control</th>
+                  <th scope='col'>Proveedor</th>
+                  <th scope='col'>Cta Contable</th>
+                  <th scope='col'>Descripción</th>
                   <th scope='col'>Monto</th>
                   <th scope='col'>Fecha</th>
           </tr>
@@ -88,7 +88,7 @@ if (isset($_GET)) {
 
       }else{
 
-        $res = getMov_caj($sedes_ar[$i],  $fecha1, $fecha2);
+        $res = getMov_caj($sede,  $fecha1, $fecha2);
 
         echo "<center><h3>" . $consultas[$o] . "</h3></center>";
         echo "  <table class='table table-dark table-striped' >
@@ -96,12 +96,10 @@ if (isset($_GET)) {
     
           <tr>
                   <th scope='col'>N°</th>
-                  <th scope='col'>Tipo Cob</th>
-                  <th scope='col'>N° Factura</th>
-                  <th scope='col'>N° Cobro</th>
-                  <th scope='col'>N° Mov Caja</th>
-      
-                  <th scope='col'>Banco</th>
+                  <th scope='col'>Núm. de Mov Caj</th>
+                  <th scope='col'>>Cta Egreso</th>
+                  <th scope='col'>Cta Contable</th>
+                  <th scope='col'>Descripción</th>
                   <th scope='col'>Monto</th>
                   <th scope='col'>Fecha</th>
           </tr>
@@ -134,7 +132,7 @@ if (isset($_GET)) {
         $monto = $res[$e]['monto'];
         $total_monto += $monto;
 
-        $cuenta_contable = getCuenta_contable($sedes_ar[$i], $ord_num ,  $fecha1, $fecha2);
+        $cuenta_contable = getCuenta_contable($sede, $ord_num ,  $fecha1, $fecha2);
         $co_cue = $cuenta_contable['co_cue'];
         $descri = $cuenta_contable['descri'];
 
@@ -160,34 +158,36 @@ if (isset($_GET)) {
 
       }elseif ($consultas[$o] == "Documentos de Pago" ) {
 
-        $tipo_cob = $res[$e]['tip_cob'];
-        $doc_num = $res[$e]['doc_num'];
-        $cob_num = $res[$e]['cob_num'];
-        $movi = $res[$e]['movi'];
+        $nro_doc = $res[$e]['nro_doc'];
+        $nro_fact = $res[$e]['nro_fact'];
+        $n_control = $res[$e]['n_control'];
+        $co_cli = $res[$e]['co_cli'];
+        $prov_des = $res[$e]['prov_des'];
+        $observa = $res[$e]['observa'];
 
-        if ($res[$e]['nombre_ban'] === " ") {
-          $nombre_ban = 'N/A';
-        } else {
-          $nombre_ban = $res[$e]['nombre_ban'];
-        }
 
-        $mont_doc = $res[$e]['mont_doc'];
-        $total_mont_doc += $mont_doc;
+        $monto_net = $res[$e]['monto_net'];
+        $total_monto += $monto_net;
 
-        $fec_cheq = $res[$e]['fec_cheq'];
-        $fecha = $fec_cheq->format('d-m-Y');
+        $fec_emis = $res[$e]['fec_emis'];
+        $fecha = $fec_emis->format('d-m-Y');
 
+        $cuenta_contable = getCuenta_contable($sede, $nro_doc ,  $fecha1, $fecha2);
+        $co_cue = $cuenta_contable['co_cue'];
+        $descri = $cuenta_contable['descri'];
 
         echo "
         <tr>
         <th scope='row'>$n</th>
-        <td>$tipo_cob</td>
-        <td>$doc_num</td>
-        <td>$cob_num</td>
+        <td>$nro_doc</td>
+        <td>$nro_fact</td>
+        <td>$n_control</td>
   
-        <td>$movi</td>
-        <td>$nombre_ban</td>
-        <td>$mont_doc</td>
+        <td>$co_cli - $prov_des</td>
+        <td>$co_cue - $descri</td>
+
+        <td>$observa</td>
+        <td>$monto_net</td>
         <td>$fecha</td>
   
         </tr>";
@@ -195,34 +195,33 @@ if (isset($_GET)) {
 
       }else {
 
-        $tipo_cob = $res[$e]['tip_cob'];
-        $doc_num = $res[$e]['doc_num'];
-        $cob_num = $res[$e]['cob_num'];
-        $movi = $res[$e]['movi'];
+        $mov_num = $res[$e]['mov_num'];
+        $descrip = $res[$e]['descrip'];
+        $cta_egre = $res[$e]['cta_egre'];
+        $cta_egre_descrip = $res[$e]['cta_egre_descrip'];
 
-        if ($res[$e]['nombre_ban'] === " ") {
-          $nombre_ban = 'N/A';
-        } else {
-          $nombre_ban = $res[$e]['nombre_ban'];
-        }
+        $monto_d = $res[$e]['monto_d'];
+        $total_monto += $monto_d;
 
-        $mont_doc = $res[$e]['mont_doc'];
-        $total_mont_doc += $mont_doc;
+        $fecha_cheq = $res[$e]['fecha'];
+        $fecha = $fecha_cheq->format('d-m-Y');
 
-        $fec_cheq = $res[$e]['fec_cheq'];
-        $fecha = $fec_cheq->format('d-m-Y');
-
+        $cuenta_contable = getCuenta_contable($sede, $mov_num ,  $fecha1, $fecha2);
+        $co_cue = $cuenta_contable['co_cue'];
+        $descri = $cuenta_contable['descri'];
 
         echo "
         <tr>
         <th scope='row'>$n</th>
-        <td>$tipo_cob</td>
-        <td>$doc_num</td>
-        <td>$cob_num</td>
+        <td>$mov_num</td>
+
+        <td>$cta_egre - $cta_egre_descrip</td>
+        <td>$co_cue - $descri</td>
+        
+        <td>$descrip</td>
+        <td>$monto_d</td>
   
         <td>$movi</td>
-        <td>$nombre_ban</td>
-        <td>$mont_doc</td>
         <td>$fecha</td>
   
         </tr>";
@@ -238,7 +237,7 @@ if (isset($_GET)) {
         echo "</tbody>
         </table>";
         echo "<center><h1>ERROR</h1>";
-        echo "<h3>No es Posible hacer conexion con la base de dato de " . $sedes_ar[$i] . " </h3>";
+        echo "<h3>No es Posible hacer conexion con la base de dato de " . $sede . " </h3>";
         echo "</center>";
       } else {
         echo "
