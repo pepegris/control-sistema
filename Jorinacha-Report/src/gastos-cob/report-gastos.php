@@ -128,7 +128,7 @@ if (isset($_GET)) {
       $total_monto = 0;
 
       if ($res  != null) {
-        var_dump(count($res));
+
 
         for ($e = 0; $e < count($res); $e++) {
 
@@ -190,7 +190,7 @@ if (isset($_GET)) {
             $nro_doc = $res[$e]['nro_doc'];
             $nro_fact = $res[$e]['nro_fact'];
             $n_control = $res[$e]['n_control'];
-            var_dump( $n_control);
+
             $co_cli = $res[$e]['co_cli'];
             $prov_des = $res[$e]['prov_des'];
             $observa = $res[$e]['observa'];
@@ -246,7 +246,7 @@ if (isset($_GET)) {
             $total_monto += $monto_d;
 
             $fecha_cheq = $res[$e]['fecha'];
-            #$fecha = $fecha_cheq->format('d-m-Y');
+            $fecha = $fecha_cheq->format('d-m-Y');
 
             $cuenta_contable = getCuenta_contable($sede, $mov_num,  $fecha1, $fecha2);
             $co_cue = $cuenta_contable['co_cue'];
