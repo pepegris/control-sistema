@@ -268,7 +268,7 @@ if (isset($_GET)) {
         }
       }
 
-      if ($total_mont_doc == 0) {
+      if ($total_monto == 0) {
 
         echo "</tbody>
         </table>";
@@ -279,7 +279,7 @@ if (isset($_GET)) {
         echo "
         <tr>
         <td colspan='6'><h3>Total</h3></td>
-        <td>$total_mont_doc</td>
+        <td>$total_monto</td>
         <td></td>
         </tr>
         </tbody>
