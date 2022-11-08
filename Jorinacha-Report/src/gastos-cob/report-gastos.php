@@ -195,7 +195,7 @@ if (isset($_GET)) {
             $observa = $res[$e]['observa'];
 
 
-            $monto_net = $res[$e]['monto_net'];
+            $monto_net = number_format($res[$e]['monto_net'], 2, ',', '.');
             $total_monto += $monto_net;
 
             $fec_emis = $res[$e]['fec_emis'];
