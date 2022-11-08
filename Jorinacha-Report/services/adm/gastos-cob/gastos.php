@@ -191,7 +191,7 @@ function getMov_caj($sede,  $fecha1, $fecha2)
             $sql = "SELECT 
             mov_caj.mov_num, mov_caj.descrip, 
             mov_caj.monto_d,  
-            mov_caj.cta_egre , cta_ingr.descrip as cta_egre_descrip , , 
+            mov_caj.cta_egre , cta_ingr.descrip as cta_egre_descrip  , 
             mov_caj.fecha
             from mov_caj
             JOIN cta_ingr ON mov_caj.cta_egre=cta_ingr.co_ingr
