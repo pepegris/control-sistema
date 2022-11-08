@@ -43,7 +43,7 @@ if (isset($_GET)) {
 
         $res = getOrd_pago($sede,  $fecha1, $fecha2);
 
-        echo "<center> $sede<h3>" . $consultas[$o] . "</h3></center>";
+        echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
         echo "  <table class='table table-dark table-striped' >
         <thead>
     
@@ -66,7 +66,7 @@ if (isset($_GET)) {
 
         $res = getDocum_cp($sede,  $fecha1, $fecha2);
 
-        echo "<center><h3>" . $consultas[$o] . "</h3></center>";
+        echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
         echo "  <table class='table table-dark table-striped' >
         <thead>
     
@@ -88,7 +88,7 @@ if (isset($_GET)) {
 
         $res = getMov_caj($sede,  $fecha1, $fecha2);
 
-        echo "<center><h3>" . $consultas[$o] . "</h3></center>";
+        echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
         echo "  <table class='table table-dark table-striped' >
         <thead>
     
@@ -105,12 +105,13 @@ if (isset($_GET)) {
         <tbody>";
       }
 
+      $consulta=$consultas[$o];
       $n = 1;
       $total_monto = 0;
 
       for ($e = 0; $e < count($res); $e++) {
 
-      if ($consultas[$o] == "Ordenes de Pago") {
+      if ($consulta == "Ordenes de Pago") {
 
         $ord_num = $res[$e]['ord_num'];
         $mov_num = $res[$e]['mov_num'];
@@ -154,7 +155,7 @@ if (isset($_GET)) {
         </tr>";
         $n++;
 
-      }elseif ($consultas[$o] == "Documentos de Pago" ) {
+      }elseif ($consulta == "Documentos de Pago" ) {
 
         $nro_doc = $res[$e]['nro_doc'];
         $nro_fact = $res[$e]['nro_fact'];
