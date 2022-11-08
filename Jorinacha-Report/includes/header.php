@@ -7,6 +7,8 @@
     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
   <!-- ICONOS -->
     <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+    <!-- NIEVE -->
+    <link rel="stylesheet" href="../../assets/navidad/nieve.css">
 
     <link rel="stylesheet" href="../../assets/css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/css/main.css">

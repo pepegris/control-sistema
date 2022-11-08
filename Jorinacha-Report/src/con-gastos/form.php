@@ -15,7 +15,7 @@ include '../../services/sqlserver.php';
 </style>
 
 <center>
-  <h1>Reporte de Gastos</h1>
+  <h1>Reporte de Forma de Pagos</h1>
 </center>
 
 <div id="body">
@@ -53,6 +53,17 @@ include '../../services/sqlserver.php';
       </div>
 
 
+
+      <div class="form-group">
+        <label for="tipo_cob" class="form-label ">Tipo de Cobro</label>
+        <select name="tipo_cob" id="">
+
+          <option value="todos">Todos</option>
+          <option value="TARJ">Tarjeta</option>
+          <option value="EFEC">Efectivo</option>
+
+        </select>
+      </div>
 
       <!-- FORMULAIO DE FECHAS -->
 
