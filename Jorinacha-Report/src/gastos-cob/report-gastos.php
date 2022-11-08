@@ -109,7 +109,7 @@ if (isset($_GET)) {
             <tr>
                     <th scope='col'>N°</th>
                     <th scope='col'>Núm. de Mov Caj</th>
-                    <th scope='col'>>Cta Egreso</th>
+                    <th scope='col'>Cta Egreso</th>
                     <th scope='col'>Cta Contable</th>
                     <th scope='col'>Descripción</th>
                     <th scope='col'>Monto</th>
@@ -242,6 +242,7 @@ if (isset($_GET)) {
             $co_cue = $cuenta_contable['co_cue'];
             $des_cue = $cuenta_contable['des_cue'];
 
+
             echo "
             <tr>
             <th scope='row'>$n</th>
@@ -258,8 +259,6 @@ if (isset($_GET)) {
             echo "
             <td>$descrip</td>
             <td>$monto_d</td>
-      
-            <td>$movi</td>
             <td>$fecha</td>
       
             </tr>";
@@ -276,9 +275,29 @@ if (isset($_GET)) {
         echo "<h3>No es Posible hacer conexion con la base de dato de " . $sede . " </h3>";
         echo "</center>";
       } else {
+
+        switch ($$consulta) {
+          case "Ordenes de Pago":
+            $colspan = 7;
+            break;
+
+          case "Documentos de Pago":
+            $colspan = 7;
+            break;
+
+          case "Movimiento de Caja":
+            $colspan = 6;
+            break;
+
+          default:
+            $colspan = 7;
+            break;
+        }
+
+
         echo "
         <tr>
-        <td colspan='6'><h3>Total</h3></td>
+        <td colspan=" . $colspan . "><h3>Total</h3></td>
         <td>$total_monto</td>
         <td></td>
         </tr>
