@@ -289,9 +289,7 @@ if (isset($_GET)) {
             $colspan = 4;
             break;
 
-          default:
-            $colspan = 7;
-            break;
+
         }
 
 
