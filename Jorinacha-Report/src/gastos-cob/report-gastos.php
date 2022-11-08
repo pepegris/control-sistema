@@ -69,6 +69,7 @@ if (isset($_GET)) {
           <tbody>";
         } else {
 
+          echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
           echo "<center> No hay Información Disponible ". $consultas[$o] ."
           <h4>". $sede ."</h4> </center>";
 
@@ -97,8 +98,8 @@ if (isset($_GET)) {
           </thead>
           <tbody>";
         } else {
-
-          echo "<center> No hay Información Disponible ". $consultas[$o] ."
+          echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
+          echo "<center> No hay Información Disponible
           <h4>". $sede ."</h4> </center>";
 
 
@@ -125,6 +126,7 @@ if (isset($_GET)) {
           <tbody>";
         } else {
 
+          echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
           echo "<center> No hay Información Disponible ". $consultas[$o] ."
           <h4>". $sede ."</h4> </center>";
 
