@@ -4,6 +4,7 @@
 
 $sedes_ar = array(
     "Previa Shop",
+    "Inv Jorinacha",
     "Comercial Merina",
     "Comercial Merina III",
     "Comercial Corina I",
@@ -38,6 +39,7 @@ function Database2($sede)
 
     $bd = array(
         "Previa Shop" => 'C_PREVIA',
+        "Inv Jorinacha"=> 'C_JORINA',
         "Comercial Merina" => 'C_MERINA1',
         "Comercial Merina III" => 'C_MERINA3',
         "Comercial Corina I" => 'C_CORINA1',
@@ -64,6 +66,7 @@ function Database($sede)
 
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
+        "Inv Jorinacha"=> 'JORINA',
         "Comercial Merina" => 'MERINA',
         "Comercial Merina III" => 'MERINA3',
         "Comercial Corina I" => 'CORINA1',
