@@ -29,22 +29,22 @@ if (isset($_GET)) {
 
     echo "<center><h2>" . $sedes_ar[$i] . "</h2></center>";
 
-    
-    
-    $sede=$sedes_ar[$i] ;
+
+
+    $sede = $sedes_ar[$i];
 
     for ($o = 0; $o < count($consultas); $o++) {
 
-      
 
-      
 
-      if ($consultas[$o] == "Ordenes de Pago" ) {
+
+
+      if ($consultas[$o] == "Ordenes de Pago") {
 
         $res = getOrd_pago($sede,  $fecha1, $fecha2);
-        
 
-       
+
+
 
         if ($res  != null) {
 
@@ -67,17 +67,11 @@ if (isset($_GET)) {
             </tr>
           </thead>
           <tbody>";
-
-        }else {
+        } else {
 
           echo "<center> No hay Información Disponible <h3>" . $consultas[$o] . "</h3></center>";
-
         }
-
-
-
-
-      }elseif ($consultas[$o] == "Documentos de Pago" ) {
+      } elseif ($consultas[$o] == "Documentos de Pago") {
 
         $res = getDocum_cp($sede,  $fecha1, $fecha2);
 
@@ -99,16 +93,11 @@ if (isset($_GET)) {
             </tr>
           </thead>
           <tbody>";
-        }else {
+        } else {
 
           echo "<center> No hay Información Disponible <h3>" . $consultas[$o] . "</h3></center>";
-
         }
-
-
-
-
-      }else{
+      } else {
 
         $res = getMov_caj($sede,  $fecha1, $fecha2);
 
@@ -128,16 +117,13 @@ if (isset($_GET)) {
             </tr>
           </thead>
           <tbody>";
-        }else {
+        } else {
 
           echo "<center> No hay Información Disponible <h3>" . $consultas[$o] . "</h3></center>";
-
         }
-
-
       }
 
-      $consulta=$consultas[$o];
+      $consulta = $consultas[$o];
       $n = 1;
       $total_monto = 0;
 
@@ -148,33 +134,32 @@ if (isset($_GET)) {
 
           if ($consulta == "Ordenes de Pago") {
 
-    
+
             $ord_num = $res[$e]['ord_num'];
 
             $mov_num = $res[$e]['mov_num'];
             $cod_cta = $res[$e]['cod_cta'];
             $des_ban = $res[$e]['des_ban'];
-    
+
             $cta_egre = $res[$e]['cta_egre'];
             $cta_egre_descrip = $res[$e]['cta_egre_descrip'];
-    
+
             $descrip = $res[$e]['descrip'];
 
             $monto = $res[$e]['monto'];
             $total_monto += $monto;
-            
+
             $cheque = $res[$e]['cheque'];
-    
+
             $fecha_che = $res[$e]['fecha'];
-        
-    
-            $cuenta_contable = getCuenta_contable($sede, $ord_num ,  $fecha1, $fecha2);
-           
+
+
+            $cuenta_contable = getCuenta_contable($sede, $ord_num,  $fecha1, $fecha2);
+
             $co_cue = $cuenta_contable['co_cue'];
-            var_dump( $co_cue);
             $des_cue = $cuenta_contable['des_cue'];
-            var_dump( $co_cue);
-    
+
+
             echo "
             <tr>
             <th scope='row'>$n</th>
@@ -182,10 +167,16 @@ if (isset($_GET)) {
             <td>$mov_num</td>
     
             <td>$cod_cta - $des_ban</td>
-            <td>$cta_egre - $cta_egre_descrip</td>
-    
-            <td>$co_cue - $des_cue</td>
-    
+            <td>$cta_egre - $cta_egre_descrip</td>";
+
+            if ($co_cue != null) {
+              echo "<td>$co_cue - $des_cue</td>";
+            } else {
+              echo "<td>Sin Contabilizar</td>";
+            }
+
+
+            echo " 
             <td>$descrip</td>
             <td>$cheque</td>
     
@@ -194,27 +185,26 @@ if (isset($_GET)) {
       
             </tr>";
             $n++;
-    
-          }elseif ($consulta == "Documentos de Pago" ) {
-    
+          } elseif ($consulta == "Documentos de Pago") {
+
             $nro_doc = $res[$e]['nro_doc'];
             $nro_fact = $res[$e]['nro_fact'];
             $n_control = $res[$e]['n_control'];
             $co_cli = $res[$e]['co_cli'];
             $prov_des = $res[$e]['prov_des'];
             $observa = $res[$e]['observa'];
-    
-    
+
+
             $monto_net = $res[$e]['monto_net'];
             $total_monto += $monto_net;
-    
+
             $fec_emis = $res[$e]['fec_emis'];
             #$fecha = $fec_emis->format('d-m-Y');
-    
-            $cuenta_contable = getCuenta_contable($sede, $nro_doc ,  $fecha1, $fecha2);
+
+            $cuenta_contable = getCuenta_contable($sede, $nro_doc,  $fecha1, $fecha2);
             $co_cue = $cuenta_contable['co_cue'];
             $des_cue = $cuenta_contable['des_cue'];
-    
+
             echo "
             <tr>
             <th scope='row'>$n</th>
@@ -222,41 +212,50 @@ if (isset($_GET)) {
             <td>$nro_fact</td>
             <td>$n_control</td>
       
-            <td>$co_cli - $prov_des</td>
-            <td>$co_cue - $des_cue</td>
-    
+            <td>$co_cli - $prov_des</td>";
+            if ($co_cue != null) {
+              echo "<td>$co_cue - $des_cue</td>";
+            } else {
+              echo "<td>Sin Contabilizar</td>";
+            }
+            echo "
             <td>$observa</td>
             <td>$monto_net</td>
             <td>$fecha</td>
       
             </tr>";
             $n++;
-    
-          }else {
-    
+          } else {
+
             $mov_num = $res[$e]['mov_num'];
             $descrip = $res[$e]['descrip'];
             $cta_egre = $res[$e]['cta_egre'];
             $cta_egre_descrip = $res[$e]['cta_egre_descrip'];
-    
+
             $monto_d = $res[$e]['monto_d'];
             $total_monto += $monto_d;
-    
+
             $fecha_cheq = $res[$e]['fecha'];
             #$fecha = $fecha_cheq->format('d-m-Y');
-    
-            $cuenta_contable = getCuenta_contable($sede, $mov_num ,  $fecha1, $fecha2);
+
+            $cuenta_contable = getCuenta_contable($sede, $mov_num,  $fecha1, $fecha2);
             $co_cue = $cuenta_contable['co_cue'];
             $des_cue = $cuenta_contable['des_cue'];
-    
+
             echo "
             <tr>
             <th scope='row'>$n</th>
             <td>$mov_num</td>
     
-            <td>$cta_egre - $cta_egre_descrip</td>
-            <td>$co_cue - $des_cue</td>
-            
+            <td>$cta_egre - $cta_egre_descrip</td>";
+
+            if ($co_cue != null) {
+              echo "<td>$co_cue - $des_cue</td>";
+            } else {
+              echo "<td>Sin Contabilizar</td>";
+            }
+
+            echo "
             <td>$descrip</td>
             <td>$monto_d</td>
       
@@ -265,11 +264,8 @@ if (isset($_GET)) {
       
             </tr>";
             $n++;
-    
           }
-    
-    
-          }
+        }
       }
 
       if ($total_mont_doc == 0) {
