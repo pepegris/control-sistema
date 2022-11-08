@@ -28,7 +28,7 @@
 
   .preloader {
     width: 100px;
-    height: 100px;
+    height: 120px;
     border: 10px solid #eee;
     border-top: 10px solid #666;
     border-radius: 50%;
