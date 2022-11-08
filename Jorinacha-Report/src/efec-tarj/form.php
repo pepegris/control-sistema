@@ -54,6 +54,17 @@ include '../../services/sqlserver.php';
 
 
 
+      <div class="form-group">
+        <label for="tipo_cob" class="form-label ">Tipo de Cobro</label>
+        <select name="tipo_cob" id="">
+
+          <option value="todos">Todos</option>
+          <option value="TARJ">Tarjeta</option>
+          <option value="EFEC">Efectivo</option>
+
+        </select>
+      </div>
+
       <!-- FORMULAIO DE FECHAS -->
 
 
