@@ -277,7 +277,7 @@ if (isset($_GET)) {
       } else {
         $colspan=0;
 
-        switch ($$consulta) {
+        switch ($consulta) {
           case "Ordenes de Pago":
             $colspan = 7;
             break;
