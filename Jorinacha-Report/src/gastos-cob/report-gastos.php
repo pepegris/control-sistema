@@ -209,10 +209,19 @@ if (isset($_GET)) {
             <tr>
             <th scope='row'>$n</th>
             <td>$nro_doc</td>
-            <td>$nro_fact</td>
-            <td>$n_control</td>
-      
+            <td>$nro_fact</td>";
+
+            if ($n_control != null) {
+              echo " <td>$n_control</td>";
+            } else {
+              echo "<td>Sin Núm. Control</td>";
+            }
+           
+
+            echo "
             <td>$co_cli - $prov_des</td>";
+
+            
             if ($co_cue != null) {
               echo "<td>$co_cue - $des_cue</td>";
             } else {
@@ -279,7 +288,7 @@ if (isset($_GET)) {
 
         switch ($consulta) {
           case "Ordenes de Pago":
-            $colspan = 7;
+            $colspan = 8;
             break;
 
           case "Documentos de Pago":
