@@ -161,16 +161,18 @@ if (isset($_GET)) {
             $cta_egre_descrip = $res[$e]['cta_egre_descrip'];
     
             $descrip = $res[$e]['descrip'];
+
+            $monto = $res[$e]['monto'];
+            $total_monto += $monto;
             
             $cheque = $res[$e]['cheque'];
     
             $fecha_che = $res[$e]['fecha'];
             var_dump($fecha_che);
+            var_dump($fec_che->format('d-m-Y'));
             $fecha = $fec_che->format('d-m-Y');
             var_dump($fecha);
     
-            $monto = $res[$e]['monto'];
-            $total_monto += $monto;
 
             
     
