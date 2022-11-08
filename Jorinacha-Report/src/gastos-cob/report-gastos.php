@@ -145,11 +145,9 @@ if (isset($_GET)) {
         var_dump(count($res));
 
         for ($e = 0; $e < count($res); $e++) {
-          var_dump($res[1]['ord_num'] );
 
           if ($consulta == "Ordenes de Pago") {
 
-            var_dump($consulta );
     
             $ord_num = $res[$e]['ord_num'];
 
