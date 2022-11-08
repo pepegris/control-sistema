@@ -8,8 +8,6 @@ include '../../services/mysql.php';
 include '../../services/adm/gastos-cob/gastos.php';
 
 
-
-
 if (isset($_GET)) {
 
 
@@ -91,6 +89,7 @@ if (isset($_GET)) {
                     <th scope='col'>Núm. Factura</th>
                     <th scope='col'>Núm. Control</th>
                     <th scope='col'>Proveedor</th>
+                    <th scope='col'>Cod Cta Contable</th>
                     <th scope='col'>Cta Contable</th>
                     <th scope='col'>Descripción</th>
                     <th scope='col'>Monto</th>
@@ -118,6 +117,7 @@ if (isset($_GET)) {
                     <th scope='col'>N°</th>
                     <th scope='col'>Núm. de Mov Caj</th>
                     <th scope='col'>Cta Egreso</th>
+                    <th scope='col'>Cod Cta Contable</th>
                     <th scope='col'>Cta Contable</th>
                     <th scope='col'>Descripción</th>
                     <th scope='col'>Monto</th>
