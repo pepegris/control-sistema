@@ -25,7 +25,7 @@ if (isset($_GET)) {
 
   <?php
 
-  for ($i = 0; $i < count($sedes_ar); $i++) {
+  for ($i = 1; $i < count($sedes_ar); $i++) {
 
     echo "<center><h2>" . $sedes_ar[$i] . "</h2></center>";
 
