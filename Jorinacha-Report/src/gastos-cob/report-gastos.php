@@ -275,6 +275,7 @@ if (isset($_GET)) {
         echo "<h3>No es Posible hacer conexion con la base de dato de " . $sede . " </h3>";
         echo "</center>";
       } else {
+        $colspan=0;
 
         switch ($$consulta) {
           case "Ordenes de Pago":
