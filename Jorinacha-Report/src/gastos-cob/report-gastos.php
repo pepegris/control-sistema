@@ -133,7 +133,7 @@ if (isset($_GET)) {
 
         $cuenta_contable = getCuenta_contable($sede, $ord_num ,  $fecha1, $fecha2);
         $co_cue = $cuenta_contable['co_cue'];
-        $descri = $cuenta_contable['descri'];
+        $des_cue = $cuenta_contable['des_cue'];
 
         echo "
         <tr>
@@ -144,7 +144,7 @@ if (isset($_GET)) {
         <td>$cod_cta - $des_ban</td>
         <td>$cta_egre - $cta_egre_descrip</td>
 
-        <td>$co_cue - $descri</td>
+        <td>$co_cue - $des_cue</td>
 
         <td>$descrip</td>
         <td>$cheque</td>
@@ -173,7 +173,7 @@ if (isset($_GET)) {
 
         $cuenta_contable = getCuenta_contable($sede, $nro_doc ,  $fecha1, $fecha2);
         $co_cue = $cuenta_contable['co_cue'];
-        $descri = $cuenta_contable['descri'];
+        $des_cue = $cuenta_contable['des_cue'];
 
         echo "
         <tr>
@@ -183,7 +183,7 @@ if (isset($_GET)) {
         <td>$n_control</td>
   
         <td>$co_cli - $prov_des</td>
-        <td>$co_cue - $descri</td>
+        <td>$co_cue - $des_cue</td>
 
         <td>$observa</td>
         <td>$monto_net</td>
@@ -207,7 +207,7 @@ if (isset($_GET)) {
 
         $cuenta_contable = getCuenta_contable($sede, $mov_num ,  $fecha1, $fecha2);
         $co_cue = $cuenta_contable['co_cue'];
-        $descri = $cuenta_contable['descri'];
+        $des_cue = $cuenta_contable['des_cue'];
 
         echo "
         <tr>
@@ -215,7 +215,7 @@ if (isset($_GET)) {
         <td>$mov_num</td>
 
         <td>$cta_egre - $cta_egre_descrip</td>
-        <td>$co_cue - $descri</td>
+        <td>$co_cue - $des_cue</td>
         
         <td>$descrip</td>
         <td>$monto_d</td>
