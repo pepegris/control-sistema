@@ -286,7 +286,7 @@ if (isset($_GET)) {
             break;
 
           case "Movimiento de Caja":
-            $colspan = 6;
+            $colspan = 4;
             break;
 
           default:
