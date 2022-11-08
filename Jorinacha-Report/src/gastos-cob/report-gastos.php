@@ -142,6 +142,7 @@ if (isset($_GET)) {
       $total_monto = 0;
 
       if ($res  != null) {
+        var_dump($res);
 
         for ($e = 0; $e < count($res); $e++) {
 
