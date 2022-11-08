@@ -148,8 +148,12 @@ if (isset($_GET)) {
           var_dump($res[1]['ord_num'] );
 
           if ($consulta == "Ordenes de Pago") {
+
+            var_dump($consulta );
     
             $ord_num = $res[$e]['ord_num'];
+            var_dump($ord_num);
+
             $mov_num = $res[$e]['mov_num'];
             $cod_cta = $res[$e]['cod_cta'];
             $des_ban = $res[$e]['des_ban'];
