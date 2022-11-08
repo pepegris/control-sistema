@@ -168,11 +168,7 @@ if (isset($_GET)) {
             $cheque = $res[$e]['cheque'];
     
             $fecha_che = $res[$e]['fecha'];
-            var_dump($fecha_che);
-
-    
-
-            
+        
     
             $cuenta_contable = getCuenta_contable($sede, $ord_num ,  $fecha1, $fecha2);
            
