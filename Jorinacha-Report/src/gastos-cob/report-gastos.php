@@ -25,7 +25,7 @@ if (isset($_GET)) {
 
   <?php
 
-  for ($i = 1; $i < count($sedes_ar); $i++) {
+  for ($i = 2; $i < count($sedes_ar); $i++) {
 
     echo "<center><h2>" . $sedes_ar[$i] . "</h2></center>";
 
@@ -42,10 +42,7 @@ if (isset($_GET)) {
       if ($consultas[$o] == "Ordenes de Pago" ) {
 
         $res = getOrd_pago($sede,  $fecha1, $fecha2);
-        var_dump($res);
-        var_dump($sede);
-        var_dump($fecha1);
-        var_dump($fecha2);
+
 
         echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
         echo "  <table class='table table-dark table-striped' >
@@ -69,9 +66,7 @@ if (isset($_GET)) {
       }elseif ($consultas[$o] == "Documentos de Pago" ) {
 
         $res = getDocum_cp($sede,  $fecha1, $fecha2);
-        var_dump($sede);
-        var_dump($fecha1);
-        var_dump($fecha2);
+
         echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
         echo "  <table class='table table-dark table-striped' >
         <thead>
@@ -93,9 +88,7 @@ if (isset($_GET)) {
       }else{
 
         $res = getMov_caj($sede,  $fecha1, $fecha2);
-        var_dump($sede);
-        var_dump($fecha1);
-        var_dump($fecha2);
+
         echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
         echo "  <table class='table table-dark table-striped' >
         <thead>
