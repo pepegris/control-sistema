@@ -165,12 +165,14 @@ if (isset($_GET)) {
             $cheque = $res[$e]['cheque'];
     
             $fecha_che = $res[$e]['fecha'];
+            var_dump($fecha_che);
             $fecha = $fec_che->format('d-m-Y');
+            var_dump($fecha);
     
             $monto = $res[$e]['monto'];
             $total_monto += $monto;
 
-            var_dump($monto);
+            
     
             $cuenta_contable = getCuenta_contable($sede, $ord_num ,  $fecha1, $fecha2);
             var_dump( $cuenta_contable);
