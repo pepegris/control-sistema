@@ -44,6 +44,8 @@ if (isset($_GET)) {
         $res = getOrd_pago($sede,  $fecha1, $fecha2);
         var_dump($res[1]['ord_num'] );
 
+        if($res  != null) { echo "funciona";}
+
         if ($res  != null) {
 
 
