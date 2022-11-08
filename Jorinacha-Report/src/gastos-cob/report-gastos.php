@@ -44,7 +44,7 @@ if (isset($_GET)) {
         $res = getOrd_pago($sede,  $fecha1, $fecha2);
         var_dump($res[1]['ord_num'] );
 
-        if($res  != null) { echo "funciona";}
+       
 
         if ($res  != null) {
 
@@ -166,6 +166,7 @@ if (isset($_GET)) {
             $total_monto += $monto;
     
             $cuenta_contable = getCuenta_contable($sede, $ord_num ,  $fecha1, $fecha2);
+            var_dump( $cuenta_contable);
             $co_cue = $cuenta_contable['co_cue'];
             $des_cue = $cuenta_contable['des_cue'];
     
