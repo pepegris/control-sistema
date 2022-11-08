@@ -152,7 +152,6 @@ if (isset($_GET)) {
             var_dump($consulta );
     
             $ord_num = $res[$e]['ord_num'];
-            var_dump($ord_num);
 
             $mov_num = $res[$e]['mov_num'];
             $cod_cta = $res[$e]['cod_cta'];
@@ -170,6 +169,8 @@ if (isset($_GET)) {
     
             $monto = $res[$e]['monto'];
             $total_monto += $monto;
+
+            var_dump($monto);
     
             $cuenta_contable = getCuenta_contable($sede, $ord_num ,  $fecha1, $fecha2);
             var_dump( $cuenta_contable);
