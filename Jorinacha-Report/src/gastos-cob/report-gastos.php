@@ -42,7 +42,7 @@ if (isset($_GET)) {
       if ($consultas[$o] == "Ordenes de Pago" ) {
 
         $res = getOrd_pago($sede,  $fecha1, $fecha2);
-        var_dump($res[1]['ord_num'] );
+        
 
        
 
@@ -142,9 +142,10 @@ if (isset($_GET)) {
       $total_monto = 0;
 
       if ($res  != null) {
-        var_dump($res);
+        var_dump(count($res));
 
         for ($e = 0; $e < count($res); $e++) {
+          var_dump($res[1]['ord_num'] );
 
           if ($consulta == "Ordenes de Pago") {
     
