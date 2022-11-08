@@ -69,10 +69,10 @@ if (isset($_GET)) {
           <tbody>";
         } else {
 
-          echo "<center> No hay Información Disponible
-          <h3>". $sede ."</h3> 
-          <h3>" . $consultas[$o]  . "</h3></center>";
+          echo "<center> No hay Información Disponible ". $consultas[$o] ."
+          <h4>". $sede ."</h4> </center>";
           $status='sin';
+
         }
       } elseif ($consultas[$o] == "Documentos de Pago") {
 
@@ -98,10 +98,10 @@ if (isset($_GET)) {
           <tbody>";
         } else {
 
-          echo "<center> No hay Información Disponible
-          <h3>". $sede ."</h3> 
-          <h3>" . $consultas[$o]  . "</h3></center>";
+          echo "<center> No hay Información Disponible ". $consultas[$o] ."
+          <h4>". $sede ."</h4> </center>";
           $status='sin';
+
         }
       } else {
 
@@ -125,10 +125,10 @@ if (isset($_GET)) {
           <tbody>";
         } else {
 
-          echo "<center> No hay Información Disponible
-          <h3>". $sede ."</h3> 
-          <h3>" . $consultas[$o]  . "</h3></center>";
+          echo "<center> No hay Información Disponible ". $consultas[$o] ."
+          <h4>". $sede ."</h4> </center>";
           $status='sin';
+
         }
       }
 
@@ -293,15 +293,8 @@ if (isset($_GET)) {
         echo "</tbody>
         </table>";
 
+        $status=='con';
        
-      }elseif ($total_monto == 0) {
-
-        echo "</tbody>
-        </table>";
-        echo "<center><h1>ERROR</h1>";
-        echo "<h3>No es Posible hacer conexion con la base de dato de " . $sede . " </h3>";
-        echo "</center>";
-
       }else {
         $colspan=0;
 
