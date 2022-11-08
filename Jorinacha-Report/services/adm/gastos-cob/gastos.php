@@ -132,7 +132,7 @@ function getOrd_pago($sede,  $fecha1, $fecha2)
             $sql = "SELECT 
             ord_pago.ord_num, ord_pago.mov_num  , 
             ord_pago.cod_cta , bancos.des_ban ,
-            ord_pago.cta_egre , cta_ingr.descrip ,
+            ord_pago.cta_egre , cta_ingr.descrip as cta_egre_descrip  ,
             ord_pago.tipo_imp,ord_pago.cod_caja , ord_pago.descrip ,
             ord_pago.monto , ord_pago.cheque , ord_pago.fecha
             from ord_pago

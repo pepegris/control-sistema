@@ -56,7 +56,7 @@ if (isset($_GET)) {
                   <th scope='col'>Banco</th>
                   <th scope='col'>Cta Egreso</th>
                   <th scope='col'>Cta Contable</th>
-                  <th scope='col'>Descripcion</th>
+                  <th scope='col'>Descripción</th>
                   <th scope='col'>Núm. Docum</th>
                   <th scope='col'>Monto</th>
                   <th scope='col'>Fecha</th>
