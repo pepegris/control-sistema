@@ -22,9 +22,7 @@ if (isset($_GET)) {
 ?>
 
 
-  <center>
-    <h1>Cobros</h1>
-  </center>
+
   <?php
 
   for ($i = 0; $i < count($sedes_ar); $i++) {
@@ -45,7 +43,7 @@ if (isset($_GET)) {
 
         $res = getOrd_pago($sede,  $fecha1, $fecha2);
 
-        echo "<center><h3>" . $consultas[$o] . "</h3></center>";
+        echo "<center> $sede<h3>" . $consultas[$o] . "</h3></center>";
         echo "  <table class='table table-dark table-striped' >
         <thead>
     
