@@ -175,9 +175,11 @@ if (isset($_GET)) {
             
     
             $cuenta_contable = getCuenta_contable($sede, $ord_num ,  $fecha1, $fecha2);
-            var_dump( $cuenta_contable);
+           
             $co_cue = $cuenta_contable['co_cue'];
+            var_dump( $co_cue);
             $des_cue = $cuenta_contable['des_cue'];
+            var_dump( $co_cue);
     
             echo "
             <tr>
