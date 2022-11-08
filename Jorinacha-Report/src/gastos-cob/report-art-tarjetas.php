@@ -5,7 +5,7 @@ ini_set('max_execution_time', 3600);
 require "../../includes/log.php";
 include '../../includes/header.php';
 include '../../services/mysql.php';
-include '../../services/adm/efec-tarj/efec-tarj.php';
+include '../../services/adm/gastos-cob/efec-tarj.php';
 
 
 
@@ -13,7 +13,7 @@ include '../../services/adm/efec-tarj/efec-tarj.php';
 if (isset($_GET)) {
 
 
-  
+  $tipo_cob = $_GET['tipo_cob'];
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 

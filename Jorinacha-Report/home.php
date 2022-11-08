@@ -117,7 +117,7 @@ $cuenta_on = ucwords($cuenta_on);
       </a>
 
 
-    <a href="src/efec-tarj/form.php">
+    <a href="src/gastos-cob/form.php">
     <div class="box">
         <i class="lni lni-credit-cards"></i>
         <h5>Gastos y Cobros</h5>

@@ -5,7 +5,7 @@ if (isset($_POST)) {
     include '../../includes/loading.php';
     include '../../services/sqlserver.php';
 
-    
+    $tipo_cob=$_POST['tipo_cob'];
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
     $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
 
@@ -19,7 +19,15 @@ if (isset($_POST)) {
       $sedes = urlencode($sedes);
 
 
-    header("refresh:2;url= report-gastos.php?sedes=$sedes&fecha1=$fecha1&fecha2=$fecha2");
+    if ($tipo_cob== 'gastos') {
+
+      header("refresh:2;url= report-gastos.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+
+    }else{
+
+      header("refresh:2;url= report-art-tarjetas.php?tipo_cob=$tipo_cob&fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+
+    }
 
 
 
