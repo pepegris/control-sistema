@@ -300,7 +300,7 @@ function getCuenta_contable($sede, $num , $fecha1, $fecha2)
             sccuenta.des_cue ,fec_emis
             from scren_co 
             JOIN sccuenta ON scren_co.co_cue = sccuenta.co_cue
-            where docref='$num' AND scren_co.co_cue like '6.%' and scren_co.fec_emis between '$fecha1' and '$fecha2'";
+            where docref='$num' and scren_co.fec_emis between '$fecha1' and '$fecha2'";
 
             $consulta = sqlsrv_query($conn, $sql);
 

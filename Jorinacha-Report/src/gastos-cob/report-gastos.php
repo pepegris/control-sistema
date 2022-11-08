@@ -59,6 +59,7 @@ if (isset($_GET)) {
                     <th scope='col'>Núm. de Mov</th>
                     <th scope='col'>Banco</th>
                     <th scope='col'>Cta Egreso</th>
+                    <th scope='col'>Cod Cta Contable</th>
                     <th scope='col'>Cta Contable</th>
                     <th scope='col'>Descripción</th>
                     <th scope='col'>Núm. Docum</th>
@@ -183,9 +184,11 @@ if (isset($_GET)) {
             <td>$cta_egre - $cta_egre_descrip</td>";
 
             if ($co_cue != null) {
-              echo "<td>$co_cue - $des_cue</td>";
+              echo "<td>$co_cue </td>";
+              echo "<td> $des_cue</td>";
             } else {
-              echo "<td>Sin Contabilizar</td>";
+              echo "<td>Sin </td>";
+              echo "<td>Contabilizar</td>";
             }
 
 
@@ -237,9 +240,11 @@ if (isset($_GET)) {
 
 
             if ($co_cue != null) {
-              echo "<td>$co_cue - $des_cue</td>";
+              echo "<td>$co_cue </td>";
+              echo "<td> $des_cue</td>";
             } else {
-              echo "<td>Sin Contabilizar</td>";
+              echo "<td>Sin </td>";
+              echo "<td>Contabilizar</td>";
             }
             echo "
             <td>$observa</td>
@@ -274,9 +279,11 @@ if (isset($_GET)) {
             <td>$cta_egre - $cta_egre_descrip</td>";
 
             if ($co_cue != null) {
-              echo "<td>$co_cue - $des_cue</td>";
+              echo "<td>$co_cue </td>";
+              echo "<td> $des_cue</td>";
             } else {
-              echo "<td>Sin Contabilizar</td>";
+              echo "<td>Sin </td>";
+              echo "<td>Contabilizar</td>";
             }
 
             echo "
