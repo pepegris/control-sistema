@@ -169,8 +169,7 @@ if (isset($_GET)) {
     
             $fecha_che = $res[$e]['fecha'];
             var_dump($fecha_che);
-            $fecha = $fec_che->format('d-m-Y');
-            var_dump($fecha);
+
     
 
             
