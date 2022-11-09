@@ -68,7 +68,8 @@ if (isset($_GET)) {
           <tbody>";
         } else {
 
-          echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
+          echo "<hr>
+          <center> $sede <h3>" . $consultas[$o] . "</h3></center>";
           echo "<center> No hay Información Disponible ". $consultas[$o] ."
           <h4>". $sede ."</h4> </center>";
 
