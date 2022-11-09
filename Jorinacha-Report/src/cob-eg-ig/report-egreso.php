@@ -330,7 +330,8 @@ if (isset($_GET)) {
         <td></td>
         </tr>
         </tbody>
-        </table>";
+        </table>
+        <hr>";
         $total_monto = 0;
       }
     }
