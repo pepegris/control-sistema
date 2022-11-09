@@ -248,9 +248,10 @@ function getDocum_cp($sede,  $fecha1, $fecha2)
 
             $sql = "SELECT 
             docum_cp.nro_doc, docum_cp.nro_fact, docum_cp.monto_net , docum_cp.n_control,
-            docum_cp.co_cli , prov.prov_des , docum_cp.observa ,docum_cp.fec_emis 
+            docum_cp.co_cli , prov.prov_des , docum_cp.observa ,docum_cp.fec_emis ,cta_ingr.co_ingr ,cta_ingr.descrip AS co_ingr_prov
             from docum_cp
             JOIN prov ON docum_cp.co_cli = prov.co_prov
+			JOIN cta_ingr ON prov.co_ingr = cta_ingr.co_ingr
             WHERE docum_cp.tipo_doc='FACT' AND docum_cp.fec_emis between '$fecha1' and '$fecha2' AND docum_cp.co_cli <>'002' AND  docum_cp.anulado=0";
 
             $consulta = sqlsrv_query($conn, $sql);

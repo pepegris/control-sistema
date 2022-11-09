@@ -19,13 +19,37 @@ if (isset($_GET)) {
 
 ?>
 
+<table class='table table-dark table-striped' >
+          <thead>
+      
+            <tr>
+                    <th scope='col'>N°</th>
+                    <th scope='col'>Fecha</th>
+                    <th scope='col'>Cod Cta Contable</th>
+                    <th scope='col'>Cta Contable</th>
+                    <th scope='col'>Cod Cta Egreso</th>
+                    <th scope='col'>Cta Egreso</th>
+                    
+                    <th scope='col'>Empresa</th>
+                    <th scope='col'>Tipo de Proc</th>
+
+                    <th scope='col'>Núm. de Proc</th>
+                    <th scope='col'>Núm. de Doc</th>
+
+                    <th scope='col'>Descripción</th>
+                    <th scope='col'>Monto</th>
+
+            </tr>
+          </thead>
+          <tbody>
+
 
 
   <?php
 
-  for ($i = 0; $i < count($sedes_ar); $i++) {
+  
 
-    echo "<center><h2>" . $sedes_ar[$i] . "</h2></center>";
+  for ($i = 0; $i < count($sedes_ar); $i++) {
 
 
 
@@ -35,110 +59,27 @@ if (isset($_GET)) {
 
 
 
-
-
       if ($consultas[$o] == "Ordenes de Pago") {
 
         $res = getOrd_pago($sede,  $fecha1, $fecha2);
 
 
-
-
-        if ($res  != null) {
-
-
-          echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
-          echo "  <table class='table table-dark table-striped' >
-          <thead>
-      
-            <tr>
-                    <th scope='col'>N°</th>
-                    <th scope='col'>Núm. de Ord</th>
-                    <th scope='col'>Núm. de Mov</th>
-                    <th scope='col'>Banco</th>
-                    <th scope='col'>Cta Egreso</th>
-                    <th scope='col'>Cod Cta Contable</th>
-                    <th scope='col'>Cta Contable</th>
-                    <th scope='col'>Descripción</th>
-                    <th scope='col'>Núm. Docum</th>
-                    <th scope='col'>Monto</th>
-                    <th scope='col'>Fecha</th>
-            </tr>
-          </thead>
-          <tbody>";
-        } else {
-
-          echo "<hr>
-          <center> $sede <h3>" . $consultas[$o] . "</h3></center>";
-          echo "<center> No hay Información Disponible ". $consultas[$o] ."
-          <h4>". $sede ."</h4> </center>";
-
-
-        }
       } elseif ($consultas[$o] == "Documentos de Pago") {
 
         $res = getDocum_cp($sede,  $fecha1, $fecha2);
 
-        if ($res  != null) {
-          echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
-          echo "  <table class='table table-dark table-striped' >
-          <thead>
-      
-            <tr>
-                    <th scope='col'>N°</th>
-                    <th scope='col'>Núm. de Doc</th>
-                    <th scope='col'>Núm. Factura</th>
-                    <th scope='col'>Núm. Control</th>
-                    <th scope='col'>Proveedor</th>
-                    <th scope='col'>Cod Cta Contable</th>
-                    <th scope='col'>Cta Contable</th>
-                    <th scope='col'>Descripción</th>
-                    <th scope='col'>Monto</th>
-                    <th scope='col'>Fecha</th>
-            </tr>
-          </thead>
-          <tbody>";
-        } else {
-          echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
-          echo "<center> No hay Información Disponible
-          <h4>". $sede ."</h4> </center>";
-
-
-        }
+    
       } else {
 
         $res = getMov_caj($sede,  $fecha1, $fecha2);
 
-        if ($res  != null) {
-          echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
-          echo "  <table class='table table-dark table-striped' >
-          <thead>
-      
-            <tr>
-                    <th scope='col'>N°</th>
-                    <th scope='col'>Núm. de Mov Caj</th>
-                    <th scope='col'>Cta Egreso</th>
-                    <th scope='col'>Cod Cta Contable</th>
-                    <th scope='col'>Cta Contable</th>
-                    <th scope='col'>Descripción</th>
-                    <th scope='col'>Monto</th>
-                    <th scope='col'>Fecha</th>
-            </tr>
-          </thead>
-          <tbody>";
-        } else {
-
-          echo "<center> $sede <h3>" . $consultas[$o] . "</h3></center>";
-          echo "<center> No hay Información Disponible ". $consultas[$o] ."
-          <h4>". $sede ."</h4> </center>";
-
-
-        }
       }
+
 
       $consulta = $consultas[$o];
       $n = 1;
       $total_monto = 0;
+
 
       if ($res  != null) {
 
@@ -178,11 +119,7 @@ if (isset($_GET)) {
             echo "
             <tr>
             <th scope='row'>$n</th>
-            <td>$ord_num</td>
-            <td>$mov_num</td>
-    
-            <td>$cod_cta - $des_ban</td>
-            <td>$cta_egre - $cta_egre_descrip</td>";
+            <td>$fecha</td>";
 
             if ($co_cue != null) {
               echo "<td>$co_cue </td>";
@@ -192,24 +129,29 @@ if (isset($_GET)) {
               echo "<td>Contabilizar</td>";
             }
 
-
-            echo " 
-            <td>$descrip</td>
+            echo "
+ 
+            <td>$cta_egre </td>
+            <td>$cta_egre_descrip</td>
+            <td>$sede</td>
+            <td>$consulta</td>
+            <td>$ord_num</td>
             <td>$cheque</td>
-    
+            <td>$descrip</td>
             <td>$monto</td>
-            <td>$fecha</td>
+            
       
             </tr>";
             $n++;
+
           } elseif ($consulta == "Documentos de Pago") {
 
             $nro_doc = $res[$e]['nro_doc'];
             $nro_fact = $res[$e]['nro_fact'];
             $n_control = $res[$e]['n_control'];
 
-            $co_cli = $res[$e]['co_cli'];
-            $prov_des = $res[$e]['prov_des'];
+            $co_ingr = $res[$e]['co_ingr'];
+            $co_ingr_prov = $res[$e]['co_ingr_prov'];
             $observa = $res[$e]['observa'];
 
 
@@ -226,20 +168,10 @@ if (isset($_GET)) {
             echo "
             <tr>
             <th scope='row'>$n</th>
-            <td>$nro_doc</td>
-            <td>$nro_fact</td>";
-
-            if ($n_control != " ") {
-              echo " <td>$n_control</td>";
-            } else {
-              echo "<td>N/A</td>";
-            }
-           
-
-            echo "
-            <td>$co_cli - $prov_des</td>";
-
-
+            <td>$fecha</td>
+            
+            ";
+            
             if ($co_cue != null) {
               echo "<td>$co_cue </td>";
               echo "<td> $des_cue</td>";
@@ -247,10 +179,19 @@ if (isset($_GET)) {
               echo "<td>Sin </td>";
               echo "<td>Contabilizar</td>";
             }
+
             echo "
+            <td>$co_ingr</td>
+            <td>$co_ingr_prov</td>
+
+            <td>$sede</td>
+            <td>$cosnulta</td>
+
+            <td>$nro_doc</td>
+            <td>$nro_fact / $n_control</td>
             <td>$observa</td>
             <td>$monto_net</td>
-            <td>$fecha</td>
+            
       
             </tr>";
             $n++;
@@ -275,9 +216,7 @@ if (isset($_GET)) {
             echo "
             <tr>
             <th scope='row'>$n</th>
-            <td>$mov_num</td>
-    
-            <td>$cta_egre - $cta_egre_descrip</td>";
+            <td>$fecha</td>";
 
             if ($co_cue != null) {
               echo "<td>$co_cue </td>";
@@ -288,50 +227,28 @@ if (isset($_GET)) {
             }
 
             echo "
+            <td>$cta_egre</td>
+            <td>$cta_egre_descrip</td>
+
+            <td>$sede</td>
+            <td>$cosnulta</td>
+
+            <td>$mov_num</td>
+            <td></td>
+
             <td>$descrip</td>
-            <td>$monto_d</td>
-            <td>$fecha</td>
-      
+            <td>$monto_d</td>  
             </tr>";
             $n++;
           }
         }
       }
 
-      if ($total_monto == 0) {
+      if ( $res == null or $total_monto == 0 ) {
 
-        echo "<hr>";
+        echo "<tr><th colspan=13 >$sede No hay Información Disponible $consulta</th></tr>";
 
        
-      }else {
-        $colspan=0;
-
-        switch ($consulta) {
-          case "Ordenes de Pago":
-            $colspan = 9;
-            break;
-
-          case "Documentos de Pago":
-            $colspan = 8;
-            break;
-
-          case "Movimiento de Caja":
-            $colspan = 6;
-            break;
-
-
-        }
-
-
-        echo "
-        <tr>
-        <td colspan=" . $colspan . "><h3>Total</h3></td>
-        <td>". number_format($total_monto, 2, ',', '.') ."</td>
-        <td></td>
-        </tr>
-        </tbody>
-        </table>";
-        $total_monto = 0;
       }
     }
   }
@@ -346,6 +263,7 @@ if (isset($_GET)) {
 <?php
 
 
+
 } else {
   header("location: form.php");
 }
@@ -354,3 +272,6 @@ if (isset($_GET)) {
 
 
 include '../../includes/footer.php'; ?>
+
+        </tbody>
+        </table>
