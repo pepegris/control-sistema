@@ -26,7 +26,7 @@ $sedes_ar = array(
 
 $consultas = array(
     "Ordenes de Pago",
-    "Documentos de Pago",
+    "Documentos de Compras",
     "Movimiento de Caja",
 
 );
