@@ -64,7 +64,7 @@ if (isset($_GET)) {
         $res = getOrd_pago($sede,  $fecha1, $fecha2);
 
 
-      } elseif ($consultas[$o] == "Documentos de Pago") {
+      } elseif ($consultas[$o] == "Documentos de Compras") {
 
         $res = getDocum_cp($sede,  $fecha1, $fecha2);
 
@@ -88,6 +88,9 @@ if (isset($_GET)) {
 
           if ($consulta == "Ordenes de Pago") {
 
+
+
+            $documento = "Ordenes de Pago";
 
             $ord_num = $res[$e]['ord_num'];
 
@@ -144,7 +147,10 @@ if (isset($_GET)) {
             </tr>";
             $n++;
 
-          } elseif ($consulta == "Documentos de Pago") {
+          } elseif ($consulta == "Documentos de Compras") {
+
+
+            $documento = "Documentos de Compras";
 
             $nro_doc = $res[$e]['nro_doc'];
             $nro_fact = $res[$e]['nro_fact'];
@@ -185,7 +191,7 @@ if (isset($_GET)) {
             <td>$co_ingr_prov</td>
 
             <td>$sede</td>
-            <td>$cosnulta</td>
+            <td>$consulta</td>
 
             <td>$nro_doc</td>
             <td>$nro_fact / $n_control</td>
@@ -196,6 +202,10 @@ if (isset($_GET)) {
             </tr>";
             $n++;
           } else {
+
+           
+
+            $documento =  "Movimiento de Caja";
 
             $mov_num = $res[$e]['mov_num'];
             $descrip = $res[$e]['descrip'];
@@ -231,7 +241,7 @@ if (isset($_GET)) {
             <td>$cta_egre_descrip</td>
 
             <td>$sede</td>
-            <td>$cosnulta</td>
+            <td>$consulta</td>
 
             <td>$mov_num</td>
             <td></td>
@@ -246,7 +256,7 @@ if (isset($_GET)) {
 
       if ( $res == null or $total_monto == 0 ) {
 
-        echo "<tr><th colspan=13 >$sede No hay Información Disponible $consulta</th></tr>";
+        echo "<tr><th colspan=13 ><center>$sede No hay Información Disponible $consulta</center></th></tr>";
 
        
       }
