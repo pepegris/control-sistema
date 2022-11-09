@@ -61,7 +61,7 @@ include '../../services/sqlserver.php';
           <option value="todos">Todos</option>
           <option value="TARJ">Tarjeta</option>
           <option value="EFEC">Efectivo</option>
-          <option value="gastos">Gastos</option>
+          <option value="egreso">Egreso</option>
           
 
         </select>
