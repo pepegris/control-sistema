@@ -5,7 +5,7 @@ ini_set('max_execution_time', 3600);
 require "../../includes/log.php";
 include '../../includes/header.php';
 include '../../services/mysql.php';
-include '../../services/adm/gastos-cob/efec-tarj.php';
+include '../../services/adm/cob-eg-ig/efec-tarj.php';
 
 
 

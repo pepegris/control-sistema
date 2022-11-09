@@ -19,9 +19,9 @@ if (isset($_POST)) {
       $sedes = urlencode($sedes);
 
 
-    if ($tipo_cob== 'gastos') {
+    if ($tipo_cob== 'egreso') {
 
-      header("refresh:2;url= report-gastos.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+      header("refresh:2;url= report-egreso.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
 
     }else{
 
