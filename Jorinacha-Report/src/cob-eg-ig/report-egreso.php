@@ -254,12 +254,7 @@ if (isset($_GET)) {
         }
       }
 
-      if ( $res == null or $total_monto == 0 ) {
 
-        echo "<tr><th colspan=13 ><center>$sede No hay Información Disponible $consulta</center></th></tr>";
-
-       
-      }
     }
   }
 
