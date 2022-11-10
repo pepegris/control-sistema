@@ -23,6 +23,10 @@ if (isset($_POST)) {
 
       header("refresh:2;url= report-egreso.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
 
+    }elseif ($tipo_cob== 'detallado') {
+
+      header("refresh:2;url= report-egreso-detallado.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+      
     }else{
 
       header("refresh:2;url= report-art-tarjetas.php?tipo_cob=$tipo_cob&fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
