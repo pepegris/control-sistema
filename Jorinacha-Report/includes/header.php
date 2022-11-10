@@ -39,13 +39,13 @@
         <ul class="navbar-nav ml-auto">
 
         <li class="nav-item">
-            <a class="nav-link" href="../../LoginJorinacha/main.php">Admnistrativo</a>
+            <a class="nav-link" href="../../../LoginJorinacha/main.php">Admnistrativo</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../control/log/contadores/buscador.php">Contadores</a>
+            <a class="nav-link" href="../../../control/log/contadores/buscador.php">Contadores</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../control/inicio.php">Sistema IT</a>
+            <a class="nav-link" href="../../../control/inicio.php">Sistema IT</a>
           </li>
           
 
