@@ -120,8 +120,8 @@ $cuenta_on = ucwords($cuenta_on);
     <a href="src/cob-eg-ig/form.php">
     <div class="box">
         <i class="lni lni-credit-cards"></i>
-        <h5>Gastos y Cobros</h5>
-        <h4>Reporte de metodos de cobros realizado por las Tiendas</h4>
+        <h5>Desarrollo</h5>
+        <h4>Desarrollo</h4>
       </div>
     </a>
 
