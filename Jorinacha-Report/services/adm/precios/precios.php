@@ -367,3 +367,49 @@ function getPedidos($sede, $co_art)
         }
     }
 }
+
+
+function getBultos ($co_art){
+
+
+
+    try{
+
+
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+        $sql = "SELECT TOP 1 total_art from reng_fac 
+        where co_art='$co_art'
+        order by fact_num desc";
+
+        $consulta = sqlsrv_query($conn, $sql);
+
+        if ($consulta != null) {
+
+            while ($row = sqlsrv_fetch_array($consulta)) {
+
+
+                $pedidos['total_art'] = $row['total_art'];
+
+
+                break;
+            }
+
+            
+            $res = $pedidos ;
+        } else {
+
+            $pedidos['total_art'] = 0;
+            $res = $pedidos ;
+            
+        }
+
+    } catch (\Throwable $th) {
+
+            throw $th;
+        }
+
+
+}
