@@ -47,7 +47,7 @@ if (isset($_GET)) {
 
   <?php
 
-  
+$n = 1;
 
   for ($i = 0; $i < count($sedes_ar); $i++) {
 
@@ -77,7 +77,7 @@ if (isset($_GET)) {
 
 
       $consulta = $consultas[$o];
-      $n = 1;
+      
       $total_monto = 0;
 
 
@@ -145,7 +145,7 @@ if (isset($_GET)) {
             
       
             </tr>";
-            $n++;
+            
 
           } elseif ($consulta == "Documentos de Compras") {
 
@@ -200,7 +200,7 @@ if (isset($_GET)) {
             
       
             </tr>";
-            $n++;
+            
           } else {
 
            
@@ -249,8 +249,9 @@ if (isset($_GET)) {
             <td>$descrip</td>
             <td>$monto_d</td>  
             </tr>";
-            $n++;
+            
           }
+          $n++;
         }
       }
 
