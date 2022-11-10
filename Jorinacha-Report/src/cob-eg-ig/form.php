@@ -55,7 +55,7 @@ include '../../services/sqlserver.php';
 
 
       <div class="form-group">
-        <label for="tipo_cob" class="form-label ">Tipo</label>
+        <label for="tipo_cob" class="form-label">Tipo</label>
         <select name="tipo_cob" id="">
 
           <option value="todos">Todos</option>
