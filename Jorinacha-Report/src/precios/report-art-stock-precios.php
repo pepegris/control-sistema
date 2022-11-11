@@ -39,14 +39,16 @@ if (isset($_GET)) {
         <th scope='col'>Desc</th>
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
-        <th scope='col'>Pares por Bultos</th>
-        <th scope='col'>Cant de Bultos</th>
+
 
         <th scope='col'>Costo</th>
         <th scope='col'>Ref</th>
         <th scope='col'>Total Ref</th>
         <th scope='col'>Bs</th>
         <th scope='col'>Total Bs</th>
+
+        <th scope='col'>Pares por Bultos</th>
+        <th scope='col'>Cant de Bultos</th>
 
         <th scope='col'>Stock Previa Shop</th>
         <th scope='col'>Total Vendido Tiendas</th>
@@ -163,8 +165,7 @@ if (isset($_GET)) {
           <td><?= $desc ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
-          <td><?= $bultos ?></td>
-          <td><?= $cant_bultos ?></td>
+
 
 
           <td>$<?= $prec_vta4 ?></td>
@@ -174,6 +175,9 @@ if (isset($_GET)) {
 
           <td>Bs<?= $prec_vta3_costo ?></td>
           <td style="font-weight:<?= $estilo2 ?>;">Bs<?= number_format($total_prec_vta3, 2, ',', '.'); ?></td>
+
+          <td><?= $bultos ?></td>
+          <td><?= $cant_bultos ?></td>
 
           <td style="font-weight:<?= $estilo3 ?>;"><?= $stock_act ?></td>
 
@@ -295,18 +299,19 @@ if (isset($_GET)) {
       <?php  } ?>
       <tr>
 
-        <td colspan="8">
+        <td colspan="9">
           <h3>Totales</h3>
         </td>
 
-        <td><b><?= $total_bultos ?></b></td>
-        <td colspan="2"></td>
+        
         
 
 
         <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
         <td></td>
         <td><b>Bs<?= number_format($total_prec_vta3_todo, 2, ',', '.'); ?></b></td>
+
+        <td><b><?= $total_bultos ?></b></td>
 
         <td><b><?= $total_stock_act_previa ?></td>
         <td><b><?= $total_vendido_todo ?></td>

@@ -478,3 +478,4 @@ function getArtBultos ($co_art){
 
 
 }
+
