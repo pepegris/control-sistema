@@ -311,6 +311,7 @@ if (isset($_GET)) {
         <td></td>
         <td><b>Bs<?= number_format($total_prec_vta3_todo, 2, ',', '.'); ?></b></td>
 
+        <td></td>
         <td><b><?= $total_bultos ?></b></td>
 
         <td><b><?= $total_stock_act_previa ?></td>
