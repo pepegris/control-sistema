@@ -39,6 +39,7 @@ if (isset($_GET)) {
         <th scope='col'>Desc</th>
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
+        <th scope='col'>Bultos</th>
 
         <th scope='col'>Costo</th>
         <th scope='col'>Ref</th>
@@ -105,6 +106,7 @@ if (isset($_GET)) {
         $stock_act = round($getArt1[$e]['stock_act']);
         $total_stock_act_previa += $stock_act;
 
+        $bultos =round(getBultos($co_art));
 
         $prec_vta5 = number_format($getArt1[$e]['prec_vta5'], 0, ',', '.');
         
@@ -149,6 +151,7 @@ if (isset($_GET)) {
           <td><?= $desc ?></td>
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
+          <td><?= $bultos ?></td>
 
           <td>$<?= $prec_vta4 ?></td>
 

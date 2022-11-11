@@ -393,7 +393,7 @@ function getBultos ($co_art){
             while ($row = sqlsrv_fetch_array($consulta)) {
 
 
-                $reng_fac['total_art'] = $row['total_art'];
+                $reng_fac = $row['total_art'];
 
 
                 break;
@@ -403,7 +403,7 @@ function getBultos ($co_art){
             $res = $reng_fac ;
         } else {
 
-            $reng_fac['total_art'] = 0;
+            $reng_fac = 0;
             $res = $reng_fac ;
             
         }
