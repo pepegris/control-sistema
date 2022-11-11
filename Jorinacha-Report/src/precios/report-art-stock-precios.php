@@ -109,7 +109,7 @@ if (isset($_GET)) {
 
         $bultos =round(getBultos($co_art));
 
-        $cant_bultos =round( $stock_act / $bultos);
+        $cant_bultos = floor($stock_act / $bultos);
         $total_bultos +=  $cant_bultos;
 
         $prec_vta5 = number_format($getArt1[$e]['prec_vta5'], 0, ',', '.');
