@@ -3,7 +3,10 @@
 
 $estilo1='normal';
 $estilo2='normal';
-$estilo2='normal';
+$estilo3='normal';
+$estilo4='normal';
+$estilo5='normal';
+
 
 if ($total_prec_vta5 >=1) {
   $estilo1='bold';

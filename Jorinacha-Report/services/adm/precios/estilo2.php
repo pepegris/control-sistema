@@ -1,6 +1,11 @@
 <?php
 
 
+$estilo1='normal';
+$estilo2='normal';
+$estilo3='normal';
+$estilo4='normal';
+$estilo5='normal';
 
 
 
@@ -11,11 +16,6 @@ if ($total_vendido >=1) {
 }
 
 
-$estilo1='normal';
-$estilo2='normal';
-$estilo3='normal';
-$estilo4='normal';
-$estilo5='normal';
 
 if ($stock_act_tienda >=1) {
   $estilo1='bold';
