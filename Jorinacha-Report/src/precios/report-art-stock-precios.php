@@ -292,7 +292,7 @@ if (isset($_GET)) {
         </td>
 
         <td><b>$<?= $total_bultos ?></b></td>
-        <td colspan="1"></td>
+        <td colspan="2"></td>
         
 
 
