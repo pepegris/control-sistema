@@ -404,20 +404,67 @@ function getBultos ($co_art){
             $res = $reng_fac ;
         } else {
 
-            $sql2 = "SELECT uni_relac from art where co_art='$co_art'";
-    
-            $consulta2 = sqlsrv_query($conn, $sql2);
 
             
-            while ($row = sqlsrv_fetch_array($consulta2)) {
+            $reng_fac=0;
+            $res = $reng_fac ;
+            
+        }
+
+        return $res;
+        
+    } catch (\Throwable $th) {
+
+            throw $th;
+        }
+
+
+}
+
+
+
+
+
+
+
+function getArtBultos ($co_art){
+
+
+    #$database = Database($sede);
+    #$cliente = Cliente($sede);
+    #
+
+    try{
+
+
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+        $sql = "SELECT uni_relac from art where co_art='$co_art'";
+    
+        $consulta = sqlsrv_query($conn, $sql);
+        
+
+        if ($consulta != null) {
+
+
+            while ($row = sqlsrv_fetch_array($consulta)) {
 
 
                 $art = $row['uni_relac'];
-
-
+            
+            
                 break;
             }
+            
+            
+            $res = $art ;
+        } else {
 
+
+            
+            $art=0;
             $res = $art ;
             
         }

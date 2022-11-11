@@ -109,6 +109,14 @@ if (isset($_GET)) {
 
         $bultos =round(getBultos($co_art));
 
+        if ($bultos == 0) {
+
+          $bultos =round(getArtBultos($co_art));
+          
+        }
+
+        
+
         $cant_bultos = floor($stock_act / $bultos);
         $total_bultos +=  $cant_bultos;
 
