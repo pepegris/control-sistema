@@ -29,4 +29,9 @@ if ($total_vendido >=1) {
   $estilo4='normal';
 }
 
+if ($$cant_bultos >=1) {
+  $estilo5='bold';
+}else {
+  $estilo5='normal';
+}
 

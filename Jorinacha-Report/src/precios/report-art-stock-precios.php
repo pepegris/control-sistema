@@ -177,7 +177,7 @@ if (isset($_GET)) {
           <td style="font-weight:<?= $estilo2 ?>;">Bs<?= number_format($total_prec_vta3, 2, ',', '.'); ?></td>
 
           <td><?= $bultos ?></td>
-          <td><?= $cant_bultos ?></td>
+          <td style="font-weight:<?= $estilo5 ?>;"><?= $cant_bultos ?></td>
 
           <td style="font-weight:<?= $estilo3 ?>;"><?= $stock_act ?></td>
 
