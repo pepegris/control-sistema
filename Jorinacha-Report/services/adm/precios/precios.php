@@ -372,6 +372,8 @@ function getPedidos($sede, $co_art)
 function getBultos ($co_art){
 
 
+    #$database = Database($sede);
+    #$cliente = Cliente($sede);
 
     try{
 
@@ -391,21 +393,23 @@ function getBultos ($co_art){
             while ($row = sqlsrv_fetch_array($consulta)) {
 
 
-                $pedidos['total_art'] = $row['total_art'];
+                $reng_fac['total_art'] = $row['total_art'];
 
 
                 break;
             }
 
             
-            $res = $pedidos ;
+            $res = $reng_fac ;
         } else {
 
-            $pedidos['total_art'] = 0;
-            $res = $pedidos ;
+            $reng_fac['total_art'] = 0;
+            $res = $reng_fac ;
             
         }
 
+        return $res;
+        
     } catch (\Throwable $th) {
 
             throw $th;
