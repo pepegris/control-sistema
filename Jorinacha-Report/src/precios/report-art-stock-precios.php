@@ -39,7 +39,8 @@ if (isset($_GET)) {
         <th scope='col'>Desc</th>
         <th scope='col'>Escala</th>
         <th scope='col'>Color</th>
-        <th scope='col'>Bultos</th>
+        <th scope='col'>Pares por Bultos</th>
+        <th scope='col'>Cant de Bultos</th>
 
         <th scope='col'>Costo</th>
         <th scope='col'>Ref</th>
@@ -108,6 +109,9 @@ if (isset($_GET)) {
 
         $bultos =round(getBultos($co_art));
 
+        $cant_bultos =round( $stock_act / $bultos);
+        $total_bultos +=  $cant_bultos;
+
         $prec_vta5 = number_format($getArt1[$e]['prec_vta5'], 0, ',', '.');
         
         $prec_vta4 = number_format($getArt1[$e]['prec_vta4'], 2, ',', '.'); 
@@ -152,6 +156,8 @@ if (isset($_GET)) {
           <td><?= $co_cat ?></td>
           <td><?= $co_color ?></td>
           <td><?= $bultos ?></td>
+          <td><?= $cant_bultos ?></td>
+
 
           <td>$<?= $prec_vta4 ?></td>
 
@@ -281,9 +287,13 @@ if (isset($_GET)) {
       <?php  } ?>
       <tr>
 
-        <td colspan="10">
+        <td colspan="8">
           <h3>Totales</h3>
         </td>
+
+        <td><b>$<?= $total_bultos ?></b></td>
+        <td colspan="1"></td>
+        
 
 
         <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>

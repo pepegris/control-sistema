@@ -374,6 +374,7 @@ function getBultos ($co_art){
 
     #$database = Database($sede);
     #$cliente = Cliente($sede);
+    #
 
     try{
 
@@ -403,8 +404,21 @@ function getBultos ($co_art){
             $res = $reng_fac ;
         } else {
 
-            $reng_fac = 0;
-            $res = $reng_fac ;
+            $sql2 = "SELECT uni_relac from art where co_art='$co_art'";
+    
+            $consulta2 = sqlsrv_query($conn, $sql2);
+
+            
+            while ($row = sqlsrv_fetch_array($consulta2)) {
+
+
+                $art = $row['uni_relac'];
+
+
+                break;
+            }
+
+            $res = $art ;
             
         }
 
