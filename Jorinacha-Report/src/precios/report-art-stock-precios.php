@@ -299,7 +299,7 @@ if (isset($_GET)) {
           <h3>Totales</h3>
         </td>
 
-        <td><b>$<?= $total_bultos ?></b></td>
+        <td><b><?= $total_bultos ?></b></td>
         <td colspan="2"></td>
         
 
