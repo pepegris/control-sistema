@@ -93,19 +93,19 @@ if ($_GET) {
         <td><?= $cod   ?></td>
         <td><?= $sedes_ar[$i]  ?></td>
 
-        <td><?= $tot_neto_factura / 1  ?></td>
+        <td><?= $tot_neto_factura   ?></td>
         <td><?= $total_art_factura - $total_art_dev_cli   ?></td>
 
-        <td><?= $tot_neto_dev_cli / 1  ?></td>
+        <td><?= $tot_neto_dev_cli   ?></td>
         <td><?= $total_art_dev_cli  ?></td>
 
-        <td><?= $monto_h_mov_ban / 1 ?></td>
+        <td><?= $monto_h_mov_ban ?></td>
         
 
-        <td><?= $total_efec_dep_caj / 1 ?></td>
-        <td><?= $total_tarj_dep_caj / 1 ?></td>
+        <td><?= $total_efec_dep_caj  ?></td>
+        <td><?= $total_tarj_dep_caj  ?></td>
 
-        <td><?= $monto_ord_pago / 1 ?></td>
+        <td><?= $monto_ord_pago  ?></td>
 
       <?php
 
