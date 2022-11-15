@@ -28,7 +28,7 @@ if ($_GET) {
 
 
   <center>
-    <h1>Ventas Diarias <?= $fecha_titulo1 ?> - <=? $fecha_titulo2  ?></h1>
+    <h1>Ventas Diarias <?= $fecha_titulo1 ?> - <?= $fecha_titulo2  ?></h1>
   </center>
 
   <?php
