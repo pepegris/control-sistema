@@ -193,25 +193,27 @@ if ($_GET) {
         echo "</tr>";
       }
 
+      if ($divisa == 'dl') {
+
+        $simb='$';
+        $colspan=3;
+
+      }else {
+
+        $simb='Bs';
+        $colspan=2;
+
+      }
+
         ?>
 
 
 
         <tr>
-          <td colspan="3">
+          <td colspan="<?= $colspan ?>">
             <h3>Totales</h3>
           </td>
 
-          <?php
-
-          if ($divisa == 'dl') {
-
-            $simb='$';
-          }else {
-            $simb='Bs';
-          }
-
-          ?>
 
 
           <td><b><?=$simb?><?= number_format($total_venta, 2, ',', '.')  ?></b></td>
