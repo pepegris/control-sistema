@@ -114,7 +114,7 @@ function Cliente($sede)
 
 
 /* CONSULTAR ARTICULOS VENDIDOS*/
-function getFactura($sede, $fecha1, $fecha2 ,$data)
+function getFactura($sede, $fecha1, $fecha2, $data)
 {
 
     $database = Database($sede);
@@ -127,22 +127,25 @@ function getFactura($sede, $fecha1, $fecha2 ,$data)
 
             if ($data == 'ven') {
 
-                $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
-                JOIN factura ON factura.fact_num = reng_fac.fact_num
-                where anulada=0 AND fec_emis ='$fecha1'";
-
-            }elseif ($data == 'sin') {
+                if ($fecha2 != null) {
+                    $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
+                    JOIN factura ON factura.fact_num = reng_fac.fact_num
+                    where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
+                } else {
+                    $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
+                    JOIN factura ON factura.fact_num = reng_fac.fact_num
+                    where anulada=0 AND fec_emis ='$fecha1'";
+                }
+            } elseif ($data == 'sin') {
 
                 $sql = "SELECT  SUM(tot_neto)  as tot_neto from factura
                 where anulada=0 AND fec_emis ='$fecha1'";
-
-            }else {
+            } else {
 
                 $sql = "SELECT  SUM(tot_neto) as tot_neto from factura
                 where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
-
             }
-            
+
 
 
 
@@ -157,17 +160,15 @@ function getFactura($sede, $fecha1, $fecha2 ,$data)
                 }
 
                 $res = $factura;
-
             } else {
 
                 $factura['total_art'] = 0;
                 $factura['tot_neto'] = 0;
 
-                $res = $factura ;
+                $res = $factura;
             }
 
             return $res;
-
         } catch (\Throwable $th) {
 
             throw $th;
@@ -179,10 +180,10 @@ function getFactura($sede, $fecha1, $fecha2 ,$data)
 }
 
 
-function getDev_cli ($sede, $fecha1, $fecha2 ,$data)
+function getDev_cli($sede, $fecha1, $fecha2, $data)
 {
 
-    
+
     $database = Database($sede);
     if ($database != null) {
         try {
@@ -196,15 +197,13 @@ function getDev_cli ($sede, $fecha1, $fecha2 ,$data)
                 $sql = "SELECT SUM(dev_cli.tot_neto) as tot_neto ,SUM(reng_dvc.total_art) as total_art from dev_cli 
                 JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                 WHERE fec_emis ='$fecha1' and dev_cli.anulada =0 ";
-
             } else {
 
                 $sql = "SELECT SUM(tot_neto) as tot_neto ,SUM(total_art) as total_art  from dev_cli 
                 JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                 WHERE fec_emis BETWEEN '$fecha1' AND '$fecha2' and dev_cli.anulada =0";
-
             }
-            
+
 
 
 
@@ -219,17 +218,15 @@ function getDev_cli ($sede, $fecha1, $fecha2 ,$data)
                 }
 
                 $res = $dev_cli;
-
             } else {
 
                 $dev_cli['total_art'] = 0;
                 $dev_cli['tot_neto'] = 0;
 
-                $res = $dev_cli ;
+                $res = $dev_cli;
             }
 
             return $res;
-
         } catch (\Throwable $th) {
 
             throw $th;
@@ -242,10 +239,10 @@ function getDev_cli ($sede, $fecha1, $fecha2 ,$data)
 
 
 
-function getDep_caj ($sede, $fecha1, $fecha2 ,$data)
+function getDep_caj($sede, $fecha1, $fecha2, $data)
 {
 
-    
+
     $database = Database($sede);
     if ($database != null) {
         try {
@@ -258,14 +255,12 @@ function getDep_caj ($sede, $fecha1, $fecha2 ,$data)
 
                 $sql = "SELECT SUM(total_efec) as  total_efec , SUM(total_tarj) as total_tarj from dep_caj
                 WHERE fecha ='$fecha1'";
-
             } else {
 
                 $sql = "SELECT SUM(total_efec) as  total_efec , SUM(total_tarj) as total_tarj  from dep_caj
                 WHERE fecha  BETWEEN '$fecha1' AND '$fecha2'";
-
             }
-            
+
 
 
 
@@ -280,17 +275,15 @@ function getDep_caj ($sede, $fecha1, $fecha2 ,$data)
                 }
 
                 $res = $dep_caj;
-
             } else {
 
                 $dep_caj['total_efec'] = 0;
                 $dep_caj['total_tarj'] = 0;
 
-                $res = $dep_caj ;
+                $res = $dep_caj;
             }
 
             return $res;
-
         } catch (\Throwable $th) {
 
             throw $th;
@@ -304,10 +297,10 @@ function getDep_caj ($sede, $fecha1, $fecha2 ,$data)
 
 
 
-function getMov_ban ($sede, $fecha1, $fecha2 ,$data)
+function getMov_ban($sede, $fecha1, $fecha2, $data)
 {
 
-    
+
     $database = Database($sede);
     if ($database != null) {
         try {
@@ -320,14 +313,12 @@ function getMov_ban ($sede, $fecha1, $fecha2 ,$data)
 
                 $sql = "SELECT SUM(monto_h) as monto_h from mov_ban
                 WHERE fecha ='$fecha1' AND anulado = 0 AND origen = 'DEP' AND cta_egre='045'";
-
             } else {
 
                 $sql = "SELECT SUM(monto_h) as monto_h  from mov_ban
                 WHERE fecha  BETWEEN '$fecha1' AND '$fecha2' AND anulado = 0 AND origen = 'DEP' AND cta_egre='045'";
-
             }
-            
+
 
 
 
@@ -341,16 +332,14 @@ function getMov_ban ($sede, $fecha1, $fecha2 ,$data)
                 }
 
                 $res = $mov_ban;
-
             } else {
 
                 $mov_ban['monto_h'] = 0;
 
-                $res = $mov_ban ;
+                $res = $mov_ban;
             }
 
             return $res;
-
         } catch (\Throwable $th) {
 
             throw $th;
@@ -364,10 +353,10 @@ function getMov_ban ($sede, $fecha1, $fecha2 ,$data)
 
 
 
-function getOrd_pago($sede, $fecha1, $fecha2 ,$data)
+function getOrd_pago($sede, $fecha1, $fecha2, $data)
 {
 
-    
+
     $database = Database($sede);
     if ($database != null) {
         try {
@@ -380,14 +369,12 @@ function getOrd_pago($sede, $fecha1, $fecha2 ,$data)
 
                 $sql = "SELECT SUM(monto) as monto from ord_pago
                 WHERE fecha ='$fecha1' AND anulada = 0";
-
             } else {
 
                 $sql = "SELECT SUM(monto) as monto from ord_pago
                 WHERE fecha  BETWEEN '$fecha1' AND '$fecha2' AND anulada = 0";
-
             }
-            
+
 
 
 
@@ -401,16 +388,14 @@ function getOrd_pago($sede, $fecha1, $fecha2 ,$data)
                 }
 
                 $res = $ord_pago;
-
             } else {
 
                 $ord_pago['monto'] = 0;
 
-                $res = $ord_pago ;
+                $res = $ord_pago;
             }
 
             return $res;
-
         } catch (\Throwable $th) {
 
             throw $th;
@@ -427,7 +412,7 @@ function getOrd_pago($sede, $fecha1, $fecha2 ,$data)
 function getTasas($sede, $fecha1)
 {
 
-    
+
     $database = Database($sede);
     if ($database != null) {
         try {
@@ -451,16 +436,14 @@ function getTasas($sede, $fecha1)
                 }
 
                 $res = $tasas;
-
             } else {
 
                 $tasas['tasa_v'] = 0;
 
-                $res = $tasas ;
+                $res = $tasas;
             }
 
             return $res;
-
         } catch (\Throwable $th) {
 
             throw $th;
