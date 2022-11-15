@@ -424,7 +424,7 @@ function getOrd_pago($sede, $fecha1, $fecha2)
 
 
 
-function getTasas($sede, $fecha1, $fecha2)
+function getTasas($sede, $fecha1)
 {
 
     

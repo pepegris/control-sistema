@@ -75,6 +75,16 @@ include '../../services/sqlserver.php';
         <option value="ventas">Ventas Tiendas</option>
 
       </select> 
+
+      <label for="divisa" class="form-label ">Divisa</label>
+      <select name="divisa" id="">
+
+        
+        <option value="bs">Bolivares</option>
+        <option value="dl">Dolares</option>
+
+
+      </select> 
       <br>
       <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
       <br>

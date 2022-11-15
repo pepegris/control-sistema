@@ -9,7 +9,7 @@ include '../../services/adm/ventas/diarias.php';
 
 if ($_GET) {
 
-  
+  $divisa=$_GET['divisa'];
   $fecha_titulo = date("d/m/Y", strtotime($_GET['fecha1']));
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
 
@@ -57,6 +57,13 @@ if ($_GET) {
 
       for ($i = 1; $i < count($sedes_ar); $i++) {
 
+        if ($divisa == 'dl') {
+          $tasas = getTasas($sedes_ar[$i], $fecha1, 'sin');
+          $tasa_v_tasas = number_format($tasas['tasa_v'], 2, ',', '.');
+        }else {
+          $tasa_v_tasas  = 1;
+        }
+
         $cod = Cliente($sedes_ar[$i]);
 
         $factura = getFactura($sedes_ar[$i], $fecha1, 'sin');
@@ -79,27 +86,26 @@ if ($_GET) {
         $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, 'sin');
         $monto_ord_pago = number_format($ord_pago['monto'], 2, ',', '.');
 
-        $tasas = getTasas($sedes_ar[$i], $fecha1, 'sin');
-        $tasa_v_tasas = number_format($tasas['tasa_v'], 2, ',', '.') 
+
       ?>
       <tr>
 
         <td><?= $cod   ?></td>
         <td><?= $sedes_ar[$i]  ?></td>
 
-        <td><?= $tot_neto_factura  ?></td>
+        <td><?= $tot_neto_factura /$tasa_v_tasas  ?></td>
         <td><?= $total_art_factura - $total_art_dev_cli   ?></td>
 
-        <td><?= $tot_neto_dev_cli  ?></td>
+        <td><?= $tot_neto_dev_cli /$tasa_v_tasas  ?></td>
         <td><?= $total_art_dev_cli  ?></td>
 
-        <td><?= $monto_h_mov_ban  ?></td>
+        <td><?= $monto_h_mov_ban /$tasa_v_tasas ?></td>
         
 
-        <td><?= $total_efec_dep_caj  ?></td>
-        <td><?= $total_tarj_dep_caj  ?></td>
+        <td><?= $total_efec_dep_caj /$tasa_v_tasas ?></td>
+        <td><?= $total_tarj_dep_caj /$tasa_v_tasas ?></td>
 
-        <td><?= $monto_ord_pago  ?></td>
+        <td><?= $monto_ord_pago /$tasa_v_tasas ?></td>
 
       <?php
 
