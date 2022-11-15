@@ -126,18 +126,18 @@ if ($_GET) {
         /* totales */
 
 
-        $total_venta += $tot_neto_factura;
+        $total_venta += $tasa_tot_neto_factura;
         $total_venta_pares += $total_art_factura;
 
-        $total_devol += $tot_neto_dev_cli;
+        $total_devol += $tasa_tot_neto_dev_cli;
         $total_devol_pares += $total_art_dev_cli;
 
-        $total_depositos += $monto_h_mov_ban;
+        $total_depositos += $tasa_monto_h_mov_ban;
 
-        $total_efectivo += $total_efec_dep_caj;
-        $total_tarjeta += $total_tarj_dep_caj;
+        $total_efectivo += $tasa_total_efec_dep_caj;
+        $total_tarjeta += $tasa_total_tarj_dep_caj;
 
-        $total_pagos += $monto_ord_pago; 
+        $total_pagos += $tasa_monto_ord_pago; 
 
       ?>
         <tr>
