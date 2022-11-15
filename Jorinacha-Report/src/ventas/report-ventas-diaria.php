@@ -59,33 +59,38 @@ if ($_GET) {
 
         if ($divisa == 'dl') {
           $tasas = getTasas($sedes_ar[$i], $fecha1, 'sin');
-          $tasa_v_tasas = number_format($tasas['tasa_v'], 2, ',', '.');
+          $tasa_v_tasas = $tasas['tasa_v'];
         }else {
           $tasa_v_tasas  = 1;
         }
 
         $cod = Cliente($sedes_ar[$i]);
 
-        $getfactura = getFactura($sedes_ar[$i], $fecha1, 'sin');
-        $factura = $getfactura['tot_neto'] / $tasa_v_tasas ;
-        $tot_neto_factura = number_format($factura, 2, ',', '.');
+        $factura = getFactura($sedes_ar[$i], $fecha1, 'sin');
+        $tasa_tot_neto_factura = $factura['tot_neto'] / $tasa_v_tasas ;
+        $tot_neto_factura = number_format($tasa_tot_neto_factura, 2, ',', '.');
 
         $factura_ven = getFactura($sedes_ar[$i], $fecha1, 'ven');
         $total_art_factura =  number_format($factura_ven['total_art'], 0, ',', '.');
 
         $dev_cli = getDev_cli($sedes_ar[$i], $fecha1, 'sin');
+        $tasa_tot_neto_dev_cli= $dev_cli['tot_neto'] / $tasa_v_tasas ;
         $total_art_dev_cli = number_format( $dev_cli['total_art'], 0, ',', '.');
-        $tot_neto_dev_cli = number_format($dev_cli['tot_neto'], 2, ',', '.');
+        $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
 
         $dep_caj = getDep_caj($sedes_ar[$i], $fecha1, 'sin');
-        $total_efec_dep_caj = number_format($dep_caj['total_efec'], 2, ',', '.');
-        $total_tarj_dep_caj = number_format($dep_caj['total_tarj'], 2, ',', '.');
+        $tasa_total_efec_dep_caj = $dep_caj['total_efec'] / $tasa_v_tasas ;
+        $tasa_total_tarj_dep_caj = $dep_caj['total_tarj'] / $tasa_v_tasas ;
+        $total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
+        $total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
 
         $mov_ban = getMov_ban($sedes_ar[$i], $fecha1, 'sin');
-        $monto_h_mov_ban = number_format($mov_ban['monto_h'], 2, ',', '.');
+        $tasa_monto_h_mov_ban = $mov_ban['monto_h'] / $tasa_v_tasas ;
+        $monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
 
         $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, 'sin');
-        $monto_ord_pago = number_format($ord_pago['monto'], 2, ',', '.');
+        $tasa_monto_ord_pago = $ord_pago['monto'] / $tasa_v_tasas ;
+        $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
 
 
       ?>
