@@ -162,6 +162,9 @@ if ($_GET) {
         }
 
         echo "</tr>";
+
+		$total_art_factura=0;
+		$total_art_dev_cli=0;
       }
 
       if ($divisa == 'dl') {
