@@ -17,12 +17,8 @@ if ($_GET) {
 
 
 ?>
-  <style>
-    form,
-    td {
-      font-size: 12px;
-    }
-  </style>
+
+<link rel='stylesheet' href='responm.css'>
 
   
   
@@ -96,15 +92,18 @@ if ($_GET) {
         <td><?= $tot_neto_dev_cli  ?></td>
         <td><?= $total_art_dev_cli  ?></td>
 
+        <td><?= $monto_h_mov_ban  ?></td>
+        <td><?= $monto_ord_pago  ?></td>
+
         <td><?= $total_efec_dep_caj  ?></td>
         <td><?= $total_tarj_dep_caj  ?></td>
 
       <?php
 
       if ($monto_h_mov_ban == $tot_neto_factura ) {
-        echo "<i class='lni lni-checkmark-circle'></i>";
+        echo "<td><i class='lni lni-checkmark-circle'></i></td>";
       }else {
-        echo "<i class='lni lni-cross-circle'></i>";
+        echo "<td><i class='lni lni-cross-circle'></i></td>";
       }
 
       echo "</tr>";
