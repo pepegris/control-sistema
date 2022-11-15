@@ -9,9 +9,9 @@ include '../../services/adm/ventas/diarias.php';
 
 if ($_GET) {
 
-  $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
+  
   $fecha_titulo = date("d/m/Y", strtotime($_GET['fecha1']));
-  $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
+  $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
 
 
 
