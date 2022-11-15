@@ -125,16 +125,20 @@ function getFactura($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($fecha2 == 'sin') {
+            if ($fecha2 == 'ven') {
 
-                $sql = "SELECT  SUM(factura.tot_neto)  as tot_neto, SUM(reng_fac.total_art) as total_art from factura
-                JOIN reng_fac ON factura.fact_num = reng_fac.fact_num
+                $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
+                JOIN factura ON factura.fact_num = reng_fac.fact_num
                 where anulada=0 AND fec_emis ='$fecha1'";
 
-            } else {
+            }elseif ($fecha2 == 'sin') {
 
-                $sql = "SELECT  SUM(tot_neto) as tot_neto, SUM(total_art) as total_art from factura
-                JOIN reng_fac ON factura.fact_num = reng_fac.fact_num
+                $sql = "SELECT  SUM(tot_neto)  as tot_neto from factura
+                where anulada=0 AND fec_emis ='$fecha1'";
+
+            }else {
+
+                $sql = "SELECT  SUM(tot_neto) as tot_neto from factura
                 where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
 
             }

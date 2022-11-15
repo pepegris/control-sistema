@@ -60,8 +60,10 @@ if ($_GET) {
         $cod = Cliente($sedes_ar[$i]);
 
         $factura = getFactura($sedes_ar[$i], $fecha1, 'sin');
-        $total_art_factura =  number_format($factura['total_art'], 0, ',', '.');
         $tot_neto_factura = number_format($factura['tot_neto'], 2, ',', '.');
+
+        $factura_ven = getFactura($sedes_ar[$i], $fecha1, 'ven');
+        $total_art_factura =  number_format($factura_ven['total_art'], 0, ',', '.');
 
         $dev_cli = getDev_cli($sedes_ar[$i], $fecha1, 'sin');
         $total_art_dev_cli = number_format( $dev_cli['total_art'], 0, ',', '.');
