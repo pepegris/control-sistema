@@ -114,7 +114,7 @@ function Cliente($sede)
 
 
 /* CONSULTAR ARTICULOS VENDIDOS*/
-function getFactura($sede, $fecha1, $fecha2)
+function getFactura($sede, $fecha1, $fecha2 ,$data)
 {
 
     $database = Database($sede);
@@ -125,13 +125,13 @@ function getFactura($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($fecha2 == 'ven') {
+            if ($data == 'ven') {
 
                 $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
                 JOIN factura ON factura.fact_num = reng_fac.fact_num
                 where anulada=0 AND fec_emis ='$fecha1'";
 
-            }elseif ($fecha2 == 'sin') {
+            }elseif ($data == 'sin') {
 
                 $sql = "SELECT  SUM(tot_neto)  as tot_neto from factura
                 where anulada=0 AND fec_emis ='$fecha1'";
@@ -179,7 +179,7 @@ function getFactura($sede, $fecha1, $fecha2)
 }
 
 
-function getDev_cli ($sede, $fecha1, $fecha2)
+function getDev_cli ($sede, $fecha1, $fecha2 ,$data)
 {
 
     
@@ -191,7 +191,7 @@ function getDev_cli ($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($fecha2 == 'sin') {
+            if ($data == 'sin') {
 
                 $sql = "SELECT SUM(dev_cli.tot_neto) as tot_neto ,SUM(reng_dvc.total_art) as total_art from dev_cli 
                 JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
@@ -242,7 +242,7 @@ function getDev_cli ($sede, $fecha1, $fecha2)
 
 
 
-function getDep_caj ($sede, $fecha1, $fecha2)
+function getDep_caj ($sede, $fecha1, $fecha2 ,$data)
 {
 
     
@@ -254,7 +254,7 @@ function getDep_caj ($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($fecha2 == 'sin') {
+            if ($data == 'sin') {
 
                 $sql = "SELECT SUM(total_efec) as  total_efec , SUM(total_tarj) as total_tarj from dep_caj
                 WHERE fecha ='$fecha1'";
@@ -304,7 +304,7 @@ function getDep_caj ($sede, $fecha1, $fecha2)
 
 
 
-function getMov_ban ($sede, $fecha1, $fecha2)
+function getMov_ban ($sede, $fecha1, $fecha2 ,$data)
 {
 
     
@@ -316,7 +316,7 @@ function getMov_ban ($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($fecha2 == 'sin') {
+            if ($data == 'sin') {
 
                 $sql = "SELECT SUM(monto_h) as monto_h from mov_ban
                 WHERE fecha ='$fecha1' AND anulado = 0 AND origen = 'DEP' AND cta_egre='045'";
@@ -364,7 +364,7 @@ function getMov_ban ($sede, $fecha1, $fecha2)
 
 
 
-function getOrd_pago($sede, $fecha1, $fecha2)
+function getOrd_pago($sede, $fecha1, $fecha2 ,$data)
 {
 
     
@@ -376,7 +376,7 @@ function getOrd_pago($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($fecha2 == 'sin') {
+            if ($data == 'sin') {
 
                 $sql = "SELECT SUM(monto) as monto from ord_pago
                 WHERE fecha ='$fecha1' AND anulada = 0";
