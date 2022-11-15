@@ -315,12 +315,12 @@ function getMov_ban ($sede, $fecha1, $fecha2)
             if ($fecha2 == 'sin') {
 
                 $sql = "SELECT SUM(monto_h) as monto_h from mov_ban
-                WHERE fecha ='$fecha1' AND anulado = 0";
+                WHERE fecha ='$fecha1' AND anulado = 0 AND origen = 'DEP' AND cta_egre='045'";
 
             } else {
 
                 $sql = "SELECT SUM(monto_h) as monto_h  from mov_ban
-                WHERE fecha  BETWEEN '$fecha1' AND '$fecha2' AND anulado = 0";
+                WHERE fecha  BETWEEN '$fecha1' AND '$fecha2' AND anulado = 0 AND origen = 'DEP' AND cta_egre='045'";
 
             }
             
