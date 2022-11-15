@@ -66,8 +66,9 @@ if ($_GET) {
 
         $cod = Cliente($sedes_ar[$i]);
 
-        $factura = getFactura($sedes_ar[$i], $fecha1, 'sin');
-        $tot_neto_factura = number_format($factura['tot_neto'], 2, ',', '.');
+        $getfactura = getFactura($sedes_ar[$i], $fecha1, 'sin');
+        $factura = $getfactura['tot_neto'] / $tasa_v_tasas ;
+        $tot_neto_factura = number_format($factura, 2, ',', '.');
 
         $factura_ven = getFactura($sedes_ar[$i], $fecha1, 'ven');
         $total_art_factura =  number_format($factura_ven['total_art'], 0, ',', '.');
