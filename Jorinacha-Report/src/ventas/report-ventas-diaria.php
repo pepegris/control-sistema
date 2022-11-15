@@ -123,6 +123,21 @@ if ($_GET) {
         $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
 
 
+        /* totales */
+
+        $total_venta[$sedes_ar[$i]] += $tot_neto_factura;
+        $total_venta_pares[$sedes_ar[$i]] += $total_art_factura;
+
+        $total_devol[$sedes_ar[$i]] += $tot_neto_dev_cli;
+        $total_devol_pares[$sedes_ar[$i]] += $total_art_dev_cli;
+
+        $total_depositos[$sedes_ar[$i]] += $monto_h_mov_ban;
+
+        $total_efectivo[$sedes_ar[$i]] += $total_efec_dep_caj;
+        $total_tarjeta[$sedes_ar[$i]] += $total_tarj_dep_caj;
+
+        $total_pagos[$sedes_ar[$i]] += $monto_ord_pago;
+
       ?>
         <tr>
 
@@ -171,7 +186,35 @@ if ($_GET) {
 
 
         <tr>
-          <td><b>TOTAL</b></td>
+          <td colspan="3">
+            <h3>Totales</h3>
+          </td>
+
+          <?php
+
+          for ($e= 1; $e < count($sedes_ar); $e++) {
+
+          ?>
+
+          <td><b><?= $total_venta[$sedes_ar[$e]] ?></b></td>
+          <td><b><?= $total_venta_pares[$sedes_ar[$e]] ?></b></td>
+
+          <td><b><?= $total_devol[$sedes_ar[$e]] ?></b></td>
+          <td><b><?= $total_devol_pares[$sedes_ar[$e]]  ?></b></td>
+
+          <td><b><?= $total_depositos[$sedes_ar[$e]] ?></b></td>
+
+          <td><b><?= $total_efectivo[$sedes_ar[$e]] ?></b></td>
+          <td><b><?= $total_devol[$sedes_ar[$e]] ?></b></td>
+
+          <td><b><?= $total_tarjeta[$sedes_ar[$e]] ?></b></td>
+          <td></td>
+
+
+          <?php
+          }
+
+          ?>
 
         </tr>
 
