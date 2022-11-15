@@ -190,18 +190,18 @@ if ($_GET) {
             <h3>Totales</h3>
           </td>
 
-          <td><b><?= $total_venta ?></b></td>
-          <td><b><?= $total_venta_pares ?></b></td>
+          <td><b><?= number_format($total_venta, 2, ',', '.')  ?></b></td>
+          <td><b><?= number_format($total_venta_pares, 2, ',', '.')  ?></b></td>
 
-          <td><b><?= $total_devol ?></b></td>
-          <td><b><?= $total_devol_pares  ?></b></td>
+          <td><b><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
+          <td><b><?= number_format($total_devol_pares , 2, ',', '.')  ?></b></td>
 
-          <td><b><?= $total_depositos ?></b></td>
+          <td><b><?= number_format($total_depositos, 2, ',', '.')  ?></b></td>
 
-          <td><b><?= $total_efectivo ?></b></td>
-          <td><b><?= $total_devol ?></b></td>
+          <td><b><?= number_format($total_efectivo, 2, ',', '.')  ?></b></td>
+          <td><b><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
 
-          <td><b><?= $total_tarjeta ?></b></td>
+          <td><b><?= number_format($total_tarjeta, 2, ',', '.')  ?></b></td>
           <td></td>
 
         </tr>
