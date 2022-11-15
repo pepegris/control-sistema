@@ -127,13 +127,13 @@ function getFactura($sede, $fecha1, $fecha2)
 
             if ($fecha2 == 'sin') {
 
-                $sql = "SELECT  SUM(tot_neto) , SUM(total_art) from factura
+                $sql = "SELECT  SUM(tot_neto)  as tot_neto, SUM(total_art) as total_art from factura
                 JOIN reng_fac ON factura.fact_num = reng_fac.fact_num
                 where anulada=0 AND fec_emis ='$fecha1'";
 
             } else {
 
-                $sql = "SELECT  SUM(tot_neto) , SUM(total_art) from factura
+                $sql = "SELECT  SUM(tot_neto) as tot_neto, SUM(total_art) as total_art from factura
                 JOIN reng_fac ON factura.fact_num = reng_fac.fact_num
                 where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
 
@@ -188,14 +188,14 @@ function getDev_cli ($sede, $fecha1, $fecha2)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             if ($fecha2 == 'sin') {
-                
-                $sql = "SELECT SUM(tot_neto),SUM(total_art) from dev_cli 
+
+                $sql = "SELECT SUM(tot_neto) as tot_neto ,SUM(total_art) as total_art from dev_cli 
                 JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                 WHERE fec_emis ='$fecha1' and dev_cli.anulada =0 ";
 
             } else {
 
-                $sql = "SELECT SUM(tot_neto),SUM(total_art) from dev_cli 
+                $sql = "SELECT SUM(tot_neto) as tot_neto ,SUM(total_art) as total_art  from dev_cli 
                 JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                 WHERE fec_emis BETWEEN '$fecha1' AND '$fecha2' and dev_cli.anulada =0";
 
@@ -251,13 +251,13 @@ function getDep_caj ($sede, $fecha1, $fecha2)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             if ($fecha2 == 'sin') {
-                
-                $sql = "SELECT SUM(total_efec) , SUM(total_tarj) from dep_caj
+
+                $sql = "SELECT SUM(total_efec) as  total_efec , SUM(total_tarj) as total_tarj from dep_caj
                 WHERE fecha ='$fecha1'";
 
             } else {
 
-                $sql = "SELECT SUM(total_efec) , SUM(total_tarj) from dep_caj
+                $sql = "SELECT SUM(total_efec) as  total_efec , SUM(total_tarj) as total_tarj  from dep_caj
                 WHERE fecha  BETWEEN '$fecha1' AND '$fecha2'";
 
             }
@@ -313,13 +313,13 @@ function getMov_ban ($sede, $fecha1, $fecha2)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             if ($fecha2 == 'sin') {
-                
-                $sql = "SELECT SUM(monto_h) from mov_ban
+
+                $sql = "SELECT SUM(monto_h) as monto_h from mov_ban
                 WHERE fecha ='$fecha1' AND anulado = 0";
 
             } else {
 
-                $sql = "SELECT SUM(monto_h) from mov_ban
+                $sql = "SELECT SUM(monto_h) as monto_h  from mov_ban
                 WHERE fecha  BETWEEN '$fecha1' AND '$fecha2' AND anulado = 0";
 
             }
@@ -373,13 +373,13 @@ function getOrd_pago($sede, $fecha1, $fecha2)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             if ($fecha2 == 'sin') {
-                
-                $sql = "SELECT SUM(monto) from ord_pago
+
+                $sql = "SELECT SUM(monto) as monto from ord_pago
                 WHERE fecha ='$fecha1' AND anulada = 0";
 
             } else {
 
-                $sql = "SELECT SUM(monto) from ord_pago
+                $sql = "SELECT SUM(monto) as monto from ord_pago
                 WHERE fecha  BETWEEN '$fecha1' AND '$fecha2' AND anulada = 0";
 
             }
