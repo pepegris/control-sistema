@@ -33,9 +33,9 @@ if ($_GET) {
 
   if ($divisa == 'dl') {
 
-    echo "<h4>En Dls</h4>";
+    echo "<h4>En Dolares</h4>";
   } else {
-    echo "<h4>En Bs</h4>";
+    echo "<h4>En Bolivares</h4>";
   }
 
   ?>
@@ -124,8 +124,20 @@ if ($_GET) {
 
 
         /* totales */
+        $total_venta += number_format($tasa_tot_neto_factura, 2, ',', '.');
+        $total_venta_pares += $total_art_factura;
 
-        $total_venta += $tot_neto_factura;
+        $total_devol += number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
+        $total_devol_pares += $total_art_dev_cli;
+
+        $total_depositos += number_format($tasa_monto_h_mov_ban, 2, ',', '.');
+
+        $total_efectivo += number_format($tasa_total_efec_dep_caj, 2, ',', '.');
+        $total_tarjeta += number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
+
+        $total_pagos += number_format($tasa_monto_ord_pago, 2, ',', '.');
+
+/*         $total_venta += $tot_neto_factura;
         $total_venta_pares += $total_art_factura;
 
         $total_devol += $tot_neto_dev_cli;
@@ -136,7 +148,7 @@ if ($_GET) {
         $total_efectivo += $total_efec_dep_caj;
         $total_tarjeta += $total_tarj_dep_caj;
 
-        $total_pagos += $monto_ord_pago;
+        $total_pagos += $monto_ord_pago; */
 
       ?>
         <tr>
@@ -190,18 +202,30 @@ if ($_GET) {
             <h3>Totales</h3>
           </td>
 
-          <td><b><?= number_format($total_venta, 2, ',', '.')  ?></b></td>
-          <td><b><?= number_format($total_venta_pares, 2, ',', '.')  ?></b></td>
+          <?php
 
-          <td><b><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
-          <td><b><?= number_format($total_devol_pares , 2, ',', '.')  ?></b></td>
+          if ($divisa == 'dl') {
 
-          <td><b><?= number_format($total_depositos, 2, ',', '.')  ?></b></td>
+            $simb='$';
+          }else {
+            $simb='Bs';
+          }
 
-          <td><b><?= number_format($total_efectivo, 2, ',', '.')  ?></b></td>
-          <td><b><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
+          ?>
 
-          <td><b><?= number_format($total_tarjeta, 2, ',', '.')  ?></b></td>
+
+          <td><b><?=$simb?><?= number_format($total_venta, 2, ',', '.')  ?></b></td>
+          <td><b><?= $total_venta_pares ?></b></td>
+
+          <td><b><?=$simb?><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
+          <td><b><?= $total_devol_pares  ?></b></td>
+
+          <td><b><?=$simb?><?= number_format($total_depositos, 2, ',', '.')  ?></b></td>
+
+          <td><b><?=$simb?><?= number_format($total_efectivo, 2, ',', '.')  ?></b></td>
+          <td><b><?=$simb?><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
+
+          <td><b><?=$simb?><?= number_format($total_tarjeta, 2, ',', '.')  ?></b></td>
           <td></td>
 
         </tr>
