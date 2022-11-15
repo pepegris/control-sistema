@@ -63,27 +63,28 @@ if ($_GET) {
 
         $cod = Cliente($sedes_ar[$i]);
 
-        $factura = getFactura($sedes_ar[$i], $fecha1, $fecha2);
+        $factura = getFactura($sedes_ar[$i], $fecha1, null);
         $total_art_factura =  number_format($factura['total_art'], 0, ',', '.');
         $tot_neto_factura = number_format($factura['tot_neto'], 2, ',', '.');
 
-        $dev_cli = getDev_cli($sedes_ar[$i], $fecha1, $fecha2);
+        $dev_cli = getDev_cli($sedes_ar[$i], $fecha1, null);
         $total_art_dev_cli = number_format( $dev_cli['total_art'], 0, ',', '.');
         $tot_neto_dev_cli = number_format($dev_cli['tot_neto'], 2, ',', '.');
 
-        $dep_caj = getDep_caj($sedes_ar[$i], $fecha1, $fecha2);
+        $dep_caj = getDep_caj($sedes_ar[$i], $fecha1, null);
         $total_efec_dep_caj = number_format($dep_caj['total_efec'], 2, ',', '.');
         $total_tarj_dep_caj = number_format($dep_caj['total_tarj'], 2, ',', '.');
 
-        $mov_ban = getMov_ban($sedes_ar[$i], $fecha1, $fecha2);
+        $mov_ban = getMov_ban($sedes_ar[$i], $fecha1, null);
         $monto_h_mov_ban = number_format($mov_ban['monto_h'], 2, ',', '.');
 
-        $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, $fecha2);
+        $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, null);
         $monto_ord_pago = number_format($ord_pago['monto'], 2, ',', '.');
 
-        $tasas = getTasas($sedes_ar[$i], $fecha1, $fecha2);
+        $tasas = getTasas($sedes_ar[$i], $fecha1, null);
         $tasa_v_tasas = number_format($tasas['tasa_v'], 2, ',', '.') 
       ?>
+      <tr>
 
         <td><?= $cod   ?></td>
         <td><?= $sedes_ar[$i]  ?></td>
@@ -104,6 +105,8 @@ if ($_GET) {
       }else {
         echo "<i class='lni lni-cross-circle'></i>";
       }
+
+      echo "</tr>";
 
 
       }
