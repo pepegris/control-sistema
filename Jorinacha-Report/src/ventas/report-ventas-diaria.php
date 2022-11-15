@@ -42,10 +42,10 @@ if ($_GET) {
         <th scope='col'>Pares Dev</th>
 
         <th scope='col'>Depositos</th>
-        <th scope='col'>Pagos</th>
-
         <th scope='col'>Efectivo</th>
         <th scope='col'>Tarjeta</th>
+
+        <th scope='col'>Pagos</th>
 
         <th scope='col'>Estatus Caja</th>
       </tr>
@@ -92,10 +92,12 @@ if ($_GET) {
         <td><?= $total_art_dev_cli  ?></td>
 
         <td><?= $monto_h_mov_ban  ?></td>
-        <td><?= $monto_ord_pago  ?></td>
+        
 
         <td><?= $total_efec_dep_caj  ?></td>
         <td><?= $total_tarj_dep_caj  ?></td>
+
+        <td><?= $monto_ord_pago  ?></td>
 
       <?php
 
