@@ -147,8 +147,8 @@ function getFactura($sede, $fecha1, $fecha2)
             if ($consulta != null) {
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $factura = $row['total_art'];
-                    $factura = $row['tot_neto'];
+                    $factura['total_art'] = $row['total_art'];
+                    $factura['tot_neto'] = $row['tot_neto'];
                     break;
                 }
 
@@ -209,8 +209,8 @@ function getDev_cli ($sede, $fecha1, $fecha2)
             if ($consulta != null) {
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $dev_cli = $row['total_art'];
-                    $dev_cli = $row['tot_neto'];
+                    $dev_cli['total_art'] = $row['total_art'];
+                    $dev_cli['total_art'] = $row['tot_neto'];
                     break;
                 }
 
@@ -270,8 +270,8 @@ function getDep_caj ($sede, $fecha1, $fecha2)
             if ($consulta != null) {
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $dep_caj = $row['total_efec'];
-                    $dep_caj = $row['total_tarj'];
+                    $dep_caj['total_efec'] = $row['total_efec'];
+                    $dep_caj['total_tarj'] = $row['total_tarj'];
                     break;
                 }
 
@@ -332,7 +332,7 @@ function getMov_ban ($sede, $fecha1, $fecha2)
             if ($consulta != null) {
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $mov_ban = $row['monto_h'];
+                    $mov_ban['monto_h'] = $row['monto_h'];
                     break;
                 }
 
@@ -392,7 +392,7 @@ function getOrd_pago($sede, $fecha1, $fecha2)
             if ($consulta != null) {
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $ord_pago = $row['monto'];
+                    $ord_pago['monto'] = $row['monto'];
                     break;
                 }
 
@@ -442,7 +442,7 @@ function getTasas($sede, $fecha1, $fecha2)
             if ($consulta != null) {
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $tasas = $row['tasa_v'];
+                    $tasas['tasa_v'] = $row['tasa_v'];
                     break;
                 }
 
