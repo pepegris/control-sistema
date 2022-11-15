@@ -127,7 +127,7 @@ function getFactura($sede, $fecha1, $fecha2)
 
             if ($fecha2 == 'sin') {
 
-                $sql = "SELECT  SUM(tot_neto)  as tot_neto, SUM(total_art) as total_art from factura
+                $sql = "SELECT  SUM(factura.tot_neto)  as tot_neto, SUM(reng_fac.total_art) as total_art from factura
                 JOIN reng_fac ON factura.fact_num = reng_fac.fact_num
                 where anulada=0 AND fec_emis ='$fecha1'";
 
@@ -189,7 +189,7 @@ function getDev_cli ($sede, $fecha1, $fecha2)
 
             if ($fecha2 == 'sin') {
 
-                $sql = "SELECT SUM(tot_neto) as tot_neto ,SUM(total_art) as total_art from dev_cli 
+                $sql = "SELECT SUM(dev_cli.tot_neto) as tot_neto ,SUM(reng_dvc.total_art) as total_art from dev_cli 
                 JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                 WHERE fec_emis ='$fecha1' and dev_cli.anulada =0 ";
 
@@ -210,7 +210,7 @@ function getDev_cli ($sede, $fecha1, $fecha2)
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
                     $dev_cli['total_art'] = $row['total_art'];
-                    $dev_cli['total_art'] = $row['tot_neto'];
+                    $dev_cli['tot_neto'] = $row['tot_neto'];
                     break;
                 }
 
