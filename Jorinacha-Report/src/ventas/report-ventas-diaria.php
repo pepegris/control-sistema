@@ -5,7 +5,7 @@ ini_set('max_execution_time', 3600);
 require "../../includes/log.php";
 include '../../includes/header.php';
 include '../../services/mysql.php';
-include '../../services/adm/ordenes/ordenes.php';
+include '../../services/adm/ventas/diarias.php';
 
 if ($_GET) {
 
