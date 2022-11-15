@@ -125,7 +125,7 @@ function getFactura($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($fecha2 == null) {
+            if ($fecha2 == 'sin') {
 
                 $sql = "SELECT  SUM(tot_neto) , SUM(total_art) from factura
                 JOIN reng_fac ON factura.fact_num = reng_fac.fact_num
@@ -187,8 +187,8 @@ function getDev_cli ($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($fecha2 == null) {
-
+            if ($fecha2 == 'sin') {
+                
                 $sql = "SELECT SUM(tot_neto),SUM(total_art) from dev_cli 
                 JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                 WHERE fec_emis ='$fecha1' and dev_cli.anulada =0 ";
@@ -250,8 +250,8 @@ function getDep_caj ($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($fecha2 == null) {
-
+            if ($fecha2 == 'sin') {
+                
                 $sql = "SELECT SUM(total_efec) , SUM(total_tarj) from dep_caj
                 WHERE fecha ='$fecha1'";
 
@@ -312,8 +312,8 @@ function getMov_ban ($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($fecha2 == null) {
-
+            if ($fecha2 == 'sin') {
+                
                 $sql = "SELECT SUM(monto_h) from mov_ban
                 WHERE fecha ='$fecha1' AND anulado = 0";
 
@@ -372,8 +372,8 @@ function getOrd_pago($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($fecha2 == null) {
-
+            if ($fecha2 == 'sin') {
+                
                 $sql = "SELECT SUM(monto) from ord_pago
                 WHERE fecha ='$fecha1' AND anulada = 0";
 
