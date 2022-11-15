@@ -165,6 +165,17 @@ if ($_GET) {
 
 		$total_art_factura=0;
 		$total_art_dev_cli=0;
+
+		$tasa_tot_neto_factura=0;
+
+        $tasa_tot_neto_dev_cli=0;
+
+        $tasa_monto_h_mov_ban=0;
+
+        $tasa_total_efec_dep_caj=0;
+        $tasa_total_tarj_dep_caj=0;
+
+        $tasa_monto_ord_pago=0; 
       }
 
       if ($divisa == 'dl') {
