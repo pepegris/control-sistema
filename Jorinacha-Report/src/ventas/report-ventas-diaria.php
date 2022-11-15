@@ -125,18 +125,18 @@ if ($_GET) {
 
         /* totales */
 
-        $total_venta[$sedes_ar[$i]] += $tot_neto_factura;
-        $total_venta_pares[$sedes_ar[$i]] += $total_art_factura;
+        $total_venta += $tot_neto_factura;
+        $total_venta_pares += $total_art_factura;
 
-        $total_devol[$sedes_ar[$i]] += $tot_neto_dev_cli;
-        $total_devol_pares[$sedes_ar[$i]] += $total_art_dev_cli;
+        $total_devol += $tot_neto_dev_cli;
+        $total_devol_pares += $total_art_dev_cli;
 
-        $total_depositos[$sedes_ar[$i]] += $monto_h_mov_ban;
+        $total_depositos += $monto_h_mov_ban;
 
-        $total_efectivo[$sedes_ar[$i]] += $total_efec_dep_caj;
-        $total_tarjeta[$sedes_ar[$i]] += $total_tarj_dep_caj;
+        $total_efectivo += $total_efec_dep_caj;
+        $total_tarjeta += $total_tarj_dep_caj;
 
-        $total_pagos[$sedes_ar[$i]] += $monto_ord_pago;
+        $total_pagos += $monto_ord_pago;
 
       ?>
         <tr>
@@ -190,31 +190,19 @@ if ($_GET) {
             <h3>Totales</h3>
           </td>
 
-          <?php
+          <td><b><?= $total_venta ?></b></td>
+          <td><b><?= $total_venta_pares ?></b></td>
 
-          for ($e= 1; $e < count($sedes_ar); $e++) {
+          <td><b><?= $total_devol ?></b></td>
+          <td><b><?= $total_devol_pares  ?></b></td>
 
-          ?>
+          <td><b><?= $total_depositos ?></b></td>
 
-          <td><b><?= $total_venta[$sedes_ar[$e]] ?></b></td>
-          <td><b><?= $total_venta_pares[$sedes_ar[$e]] ?></b></td>
+          <td><b><?= $total_efectivo ?></b></td>
+          <td><b><?= $total_devol ?></b></td>
 
-          <td><b><?= $total_devol[$sedes_ar[$e]] ?></b></td>
-          <td><b><?= $total_devol_pares[$sedes_ar[$e]]  ?></b></td>
-
-          <td><b><?= $total_depositos[$sedes_ar[$e]] ?></b></td>
-
-          <td><b><?= $total_efectivo[$sedes_ar[$e]] ?></b></td>
-          <td><b><?= $total_devol[$sedes_ar[$e]] ?></b></td>
-
-          <td><b><?= $total_tarjeta[$sedes_ar[$e]] ?></b></td>
+          <td><b><?= $total_tarjeta ?></b></td>
           <td></td>
-
-
-          <?php
-          }
-
-          ?>
 
         </tr>
 
