@@ -83,8 +83,16 @@ include '../../services/sqlserver.php';
         <option value="bs">Bolivares</option>
         <option value="dl">Dolares</option>
 
-
       </select> 
+
+      <div class="form-group">
+        <label for="pass" class="form-label ">Pass</label>
+          <input type="password" name="pass" id="">
+      </div>
+
+      
+
+
       <br>
       <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
       <br>

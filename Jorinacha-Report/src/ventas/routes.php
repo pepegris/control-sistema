@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST)) {
+if (isset($_POST) & $_POST['pass']== 'N3tun0' ) {
 
     include '../../includes/loading.php';
     include '../../services/sqlserver.php';
