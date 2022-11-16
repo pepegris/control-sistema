@@ -381,7 +381,7 @@ function getOrd_pago($sede, $fecha1, $fecha2, $data)
 
                 $sql = "SELECT SUM(monto) as monto from ord_pago
                 JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
-                WHERE fecha ='$fecha1' AND anulada = 0  AND forma_pag = 'EF'";
+                WHERE fecha ='$fecha1' AND anulada = 0  AND forma_pag = 'EF' AND ord_num < 6000000 ";
 
             } elseif ($data == 'ven') {
 
@@ -399,7 +399,7 @@ function getOrd_pago($sede, $fecha1, $fecha2, $data)
 
                 $sql = "SELECT SUM(monto) as monto from ord_pago
                 JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
-                WHERE fecha  BETWEEN '$fecha1' AND '$fecha2' AND anulada = 0 AND forma_pag = 'EF'";
+                WHERE fecha  BETWEEN '$fecha1' AND '$fecha2' AND anulada = 0 AND forma_pag = 'EF' AND ord_num < 6000000 ";
             }
 
 
