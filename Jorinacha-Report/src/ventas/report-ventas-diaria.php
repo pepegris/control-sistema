@@ -200,7 +200,7 @@ if ($_GET) {
 
         $diferencias += $tasa_monto_ord_pago + $tasa_monto_h_mov_ban - $venta ;
 
-        $caja = $tasa_monto_ord_pago + $tasa_monto_h_mov_ban  - $venta;
+        $caja = number_format($tasa_monto_ord_pago + $tasa_monto_h_mov_ban - $venta, 2, ',', '.') ;
 
         if ( $venta <= 1 & $total_art_factura == 0 ) {
 
