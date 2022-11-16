@@ -41,18 +41,16 @@ for ($r = 1; $r <= $Day; $r++) {
 
     $tasa_v_tasas = $tasas['tasa_v'];
 
-    var_dump($fecha);
-    echo "<br>";
-    var_dump($tasas);
-    echo "<br>";
-    var_dump($tasa_v_tasas);
-    echo "<br>";
+
 
 
 
     $factura = getFactura($sede, $fecha, $fecha2, 'sin');
 
     $tasa_tot_neto_factura += $factura['tot_neto'] / $tasa_v_tasas;
+
+
+
 
 
 
@@ -82,6 +80,12 @@ for ($r = 1; $r <= $Day; $r++) {
     $tasa_monto_ord_pago_ven += $ord_pago_ven['monto'] / $tasa_v_tasas;
 
 
+    var_dump($tasa_tot_neto_factura);
+    echo "<br>";
+    var_dump($venta);
+    echo "<br>";
+    var_dump($tasa_monto_ord_pago_ven);
+    echo "<br>";
 
 
 
