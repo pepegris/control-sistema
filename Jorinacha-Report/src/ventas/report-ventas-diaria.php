@@ -196,10 +196,16 @@ if ($_GET) {
 
         $caja = $tasa_monto_ord_pago + $tasa_monto_h_mov_ban;
 
-        if ($caja == $venta) {
+        if ( $venta <= 1) {
+
+          echo "<td> <img src='./img/help.svg' alt=''> </td>";
+
+        }elseif ($caja == $venta) {
 
           echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
-        } else {
+
+        }
+         else {
           echo "<td> <img src='./img/cross-circle.svg' alt=''> </td>";
         }
 
