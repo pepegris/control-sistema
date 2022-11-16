@@ -200,7 +200,7 @@ if ($_GET) {
 
         $caja = $tasa_monto_ord_pago + $tasa_monto_h_mov_ban;
 
-        if ( $venta <= 1) {
+        if ( $venta <= 1 & $total_art_factura == 0 ) {
 
           echo "<td> <img src='./img/help.svg' alt=''> </td>";
 
