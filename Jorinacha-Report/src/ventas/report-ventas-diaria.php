@@ -194,7 +194,7 @@ if ($_GET) {
           <td><?= $monto_ord_pago  ?></td>
           <td><?= $monto_ord_pago_ven  ?></td>
 
-          <td><?= $monto_h_mov_ban  ?> - <?= $tot_neto_factura ?> = <?= $monto_h_mov_ban + $monto_ord_pago - $tot_neto_factura   ?></td>
+          <td><?= $monto_h_mov_ban + $monto_ord_pago  ?> - <?= $tot_neto_factura ?> = <?= $monto_h_mov_ban + $monto_ord_pago - $tot_neto_factura   ?></td>
 
         <?php
 
