@@ -41,8 +41,7 @@ for ($r = 1; $r <= $Day; $r++) {
 
     $tasa_v_tasas = $tasas['tasa_v'];
 
-    var_dump($tasas);
-    echo "<br>";
+
     var_dump($tasa_v_tasas);
     echo "<br>";
 
@@ -53,7 +52,8 @@ for ($r = 1; $r <= $Day; $r++) {
     $tasa_tot_neto_factura += $factura['tot_neto'] / $tasa_v_tasas;
 
 
-
+    var_dump($tasa_tot_neto_factura);
+    echo "<br>";
 
 
 
