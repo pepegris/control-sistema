@@ -200,13 +200,13 @@ if ($_GET) {
 
         $diferencias += $tasa_monto_ord_pago + $tasa_monto_h_mov_ban - $venta ;
 
-        $caja = $tasa_monto_ord_pago + $tasa_monto_h_mov_ban;
+        $caja = $tasa_monto_ord_pago + $tasa_monto_h_mov_ban  - $venta;
 
         if ( $venta <= 1 & $total_art_factura == 0 ) {
 
           echo "<td> <img src='./img/help.svg' alt=''> </td>";
 
-        }elseif ($caja == $venta) {
+        }elseif ($caja == 0) {
 
           echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
 
