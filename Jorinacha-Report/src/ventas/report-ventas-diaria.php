@@ -18,6 +18,13 @@ if ($_GET) {
 
 ?>
 
+  <style>
+    img {
+
+
+      width: 23px;
+    }
+  </style>
 
 
   <link rel='stylesheet' href='responm.css'>
@@ -187,16 +194,16 @@ if ($_GET) {
 
         <?php
 
-        if ($monto_h_mov_ban == $tot_neto_factura) {
-          echo "<td><i class='lni lni-checkmark-circle'></i></td>";
+        $caja = $tasa_monto_ord_pago + $tasa_monto_h_mov_ban;
+
+        if ($caja == $venta) {
+
+          echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
         } else {
-          echo "<td><i class='lni lni-cross-circle'></i></td>";
+          echo "<td> <img src='./img/cross-circle.svg' alt=''> </td>";
         }
 
         echo "</tr>";
-
-
-
       }
 
       if ($divisa == 'dl') {
