@@ -21,10 +21,32 @@ $Year = 2022;
 
 
 
-$e = 1;
+
+for ($i = 1; $i < count($sedes_ar); $i++) {
+
+    /* calcular si se solicito dolares y ver q tasa tenia ese dia */
+
+    $tasa_tot_neto_factura = 0;  
+    $tasa_tot_neto_dev_cli = 0;
+
+    $venta = 0;
+ 
+    $tasa_total_efec_dep_caj = 0;
+    $tasa_total_tarj_dep_caj = 0;
+  
+    $tasa_monto_h_mov_ban= 0;
+ 
+    $tasa_monto_ord_pago = 0;
+  
+    $tasa_monto_ord_pago_ven = 0;
+
+    $e = 1;
+
+    $sede =$sedes_ar[$i];
+
 for ($r = 1; $r <= $Day; $r++) {
 
-    $sede=$sedes_ar[$r];
+    
 
 
     if ($e  < 10) {
@@ -43,7 +65,7 @@ for ($r = 1; $r <= $Day; $r++) {
 
 
     var_dump($tasa_v_tasas);
-    echo "<hr>";
+    echo "<br>";
 
 
 
@@ -53,7 +75,7 @@ for ($r = 1; $r <= $Day; $r++) {
 
 
     var_dump($tasa_tot_neto_factura);
-    echo "<hr>";
+    echo "<br>";
 
 
 
@@ -66,7 +88,7 @@ for ($r = 1; $r <= $Day; $r++) {
     $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
     
     var_dump($venta);
-    echo "<hr>";
+    echo "<br>";
 
     $dep_caj = getDep_caj($sede, $fecha, $fecha2, 'sin');
     $tasa_total_efec_dep_caj += $dep_caj['total_efec'] / $tasa_v_tasas;
@@ -111,6 +133,7 @@ for ($r = 1; $r <= $Day; $r++) {
   $venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
   $total_art_factura  = number_format($venta_art, 0, ',', '.');
 
-
+  echo "<hr>";
   var_dump($tot_neto_factura);
   echo "<hr>";
+}
