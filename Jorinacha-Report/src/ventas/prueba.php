@@ -80,15 +80,35 @@ for ($r = 1; $r <= $Day; $r++) {
     $tasa_monto_ord_pago_ven += $ord_pago_ven['monto'] / $tasa_v_tasas;
 
 
-    var_dump($tasa_tot_neto_factura);
-    echo "<br>";
-    var_dump($venta);
-    echo "<br>";
-    var_dump($tasa_monto_ord_pago_ven);
-    echo "<br>";
 
 
 
 
     $e++;
   }
+
+
+  $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
+  $tot_neto_factura = number_format($venta, 2, ',', '.');
+
+  $total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
+  $total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
+  $monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
+  $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
+  $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
+
+
+  $dev_cli_ven = getDev_cli($sede, $fecha1, $fecha2, 'ven2');
+  $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
+
+  $factura_ven = getFactura($sede, $fecha1, $fecha2, 'ven2');
+
+  $venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
+  $total_art_factura  = number_format($venta_art, 0, ',', '.');
+
+  var_dump($tot_neto_dev_cli);
+  echo "<br>";
+  var_dump($tot_neto_factura);
+  echo "<br>";
+  var_dump($monto_ord_pago_ven);
+  echo "<br>";
