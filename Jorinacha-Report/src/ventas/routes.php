@@ -1,5 +1,5 @@
 <?php
-
+require '../../includes/log.php';
 include '../../includes/loading.php';
 include '../../services/sqlserver.php';
 include '../../services/mysql.php';

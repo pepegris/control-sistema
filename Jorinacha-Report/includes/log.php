@@ -9,7 +9,7 @@
 $cuenta_on=$_SESSION['username'];
 
 if (!isset($cuenta_on)) {
-    header("location:../home.php");
+    header("location:../../home.php");
 }
 
 $cuenta_on = ucwords($cuenta_on); 

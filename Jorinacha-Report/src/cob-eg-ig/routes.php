@@ -1,9 +1,10 @@
 <?php
+  require '../../includes/log.php';
+  include '../../includes/loading.php';
+  include '../../services/sqlserver.php';
 
 if (isset($_POST)) {
 
-    include '../../includes/loading.php';
-    include '../../services/sqlserver.php';
 
     $tipo_cob=$_POST['tipo_cob'];
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));

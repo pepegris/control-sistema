@@ -1,4 +1,5 @@
 <?php
+    require '../../includes/log.php';
 
 if (isset($_POST)) {
 
