@@ -63,7 +63,7 @@ for ($r = 1; $r <= $Day; $r++) {
 
     $tasa_v_tasas = $tasas['tasa_v'];
 
-
+    var_dump($sede);
     var_dump($tasa_v_tasas);
     echo "<br>";
 
@@ -137,5 +137,7 @@ for ($r = 1; $r <= $Day; $r++) {
 
   echo "<hr>";
   var_dump($tot_neto_factura);
+  echo "<br>";
+  var_dump($sede);
   echo "<hr>";
 }
