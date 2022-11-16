@@ -3,10 +3,12 @@
 include '../../includes/loading.php';
 include '../../services/sqlserver.php';
 
-if (isset($_POST) & $_POST['pass']== 'N3tun0' ) {
+if (isset($_POST)  ) {
 
+    $clave=$_POST['pass'];
 
-
+if ($clave =='N3tun0') {
+    
     $reporte=$_POST['reporte'];
     $divisa=$_POST['divisa'];
 
@@ -58,6 +60,12 @@ if (isset($_POST) & $_POST['pass']== 'N3tun0' ) {
         header('refresh:1;url= form.php');
 
     }
+
+}else {
+
+    header('refresh:1;url= form.php');
+
+}
 
 } else {
     header('refresh:1;url= form.php');

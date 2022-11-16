@@ -75,7 +75,7 @@ include '../../services/sqlserver.php';
         <!-- <option value="ventas">Ventas Tiendas</option> -->
 
       </select> 
-      <div class="form-group">
+
       <label for="divisa" class="form-label ">Divisa</label>
       <select name="divisa" id="">
 
@@ -84,7 +84,7 @@ include '../../services/sqlserver.php';
         <option value="dl">Dolares</option>
 
       </select> 
-      </div>
+
 
 
 
