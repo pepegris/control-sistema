@@ -84,7 +84,7 @@ if ($_GET) {
 
         /* calcular si se solicito dolares y ver q tasa tenia ese dia */
 
-/*         $tasa_tot_neto_factura = 0;  
+        $tasa_tot_neto_factura = 0;  
         $tasa_tot_neto_dev_cli = 0;
 
         $venta = 0;
@@ -96,7 +96,7 @@ if ($_GET) {
      
         $tasa_monto_ord_pago = 0;
       
-        $tasa_monto_ord_pago_ven = 0; */
+        $tasa_monto_ord_pago_ven = 0;
 
         $e = 1;
 

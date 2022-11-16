@@ -41,7 +41,10 @@ for ($r = 1; $r <= $Day; $r++) {
 
     $tasa_v_tasas = $tasas['tasa_v'];
 
-
+    var_dump($tasas);
+    echo "<br>";
+    var_dump($tasa_v_tasas);
+    echo "<br>";
 
 
 
@@ -106,9 +109,4 @@ for ($r = 1; $r <= $Day; $r++) {
   $venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
   $total_art_factura  = number_format($venta_art, 0, ',', '.');
 
-  var_dump($tot_neto_dev_cli);
-  echo "<br>";
-  var_dump($tot_neto_factura);
-  echo "<br>";
-  var_dump($monto_ord_pago_ven);
-  echo "<br>";
+
