@@ -103,7 +103,7 @@ if ($_GET) {
         $sede =$sedes_ar[$i];
         
 
-        for ($r = 0; $r <= $Day; $r++) {
+        for ($r = 1; $r <= $Day; $r++) {
 
           if ($e  < 10) {
 
