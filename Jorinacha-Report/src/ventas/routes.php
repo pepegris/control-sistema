@@ -6,6 +6,7 @@ include '../../services/sqlserver.php';
 if (isset($_POST)  ) {
 
     $clave=$_POST['pass'];
+    var_dump($clave);
 
 if ($clave =='N3tun0') {
     
