@@ -136,7 +136,7 @@ function getFactura($sede, $fecha1, $fecha2, $data)
                 $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
                 JOIN factura ON factura.fact_num = reng_fac.fact_num
                 where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
-                
+
             }elseif ($data == 'sin') {
 
                 $sql = "SELECT  SUM(tot_neto)  as tot_neto from factura
@@ -196,7 +196,6 @@ function getDev_cli($sede, $fecha1, $fecha2, $data)
             if ($data == 'sin') {
 
                 $sql = "SELECT SUM(dev_cli.tot_neto) as tot_neto  from dev_cli 
-                JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                 WHERE fec_emis ='$fecha1' and dev_cli.anulada =0 ";
 
             } elseif ($data == 'ven') {
@@ -214,7 +213,6 @@ function getDev_cli($sede, $fecha1, $fecha2, $data)
              }else {
 
                 $sql = "SELECT SUM(tot_neto) as tot_neto  from dev_cli 
-                JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                 WHERE fec_emis BETWEEN '$fecha1' AND '$fecha2' and dev_cli.anulada =0";
             }
 
