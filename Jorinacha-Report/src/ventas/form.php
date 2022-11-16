@@ -85,13 +85,10 @@ include '../../services/sqlserver.php';
 
       </select> 
 
-
-
-
-      <div class="form-group">
+      
         <label for="clave" class="form-label ">Clave</label>
           <input type="password" name="clave" id="" placeholder="Ingresa la contraseña">
-      </div>
+      
       
 
       <br>
