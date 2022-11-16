@@ -199,6 +199,12 @@ if ($_GET) {
 
             $diferencias=number_format($tasa_monto_ord_pago+ $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
             echo "$diferencias";
+
+          } elseif ($total_efec_dep_caj > 1 & $total_tarj_dep_caj > 1) {
+
+            $diferencias=number_format($tasa_total_efec_dep_caj+ $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
+            echo "$diferencias";
+
           } else {
             echo "<img src='./img/help.svg' alt=''> ";
           }
