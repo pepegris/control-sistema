@@ -12,7 +12,7 @@ if (isset($_POST)  ) {
 
 
 
-if ($clave === 'N3tun0' ) {
+if ($clave === 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' ) {
     
     $reporte=$_POST['reporte'];
     $divisa=$_POST['divisa'];
