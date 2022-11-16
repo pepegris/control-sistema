@@ -200,14 +200,14 @@ if ($_GET) {
             $diferencias=number_format($tasa_monto_ord_pago + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
             echo "$diferencias";
           } else {
-            echo "<td> <img src='./img/help.svg' alt=''> </td>";
+            echo "<img src='./img/help.svg' alt=''> ";
           }
                
           ?></td>
 
         <?php
 
-        $total_diferencias += $tasa_monto_ord_pago + $tasa_monto_h_mov_ban - $venta ;
+        $total_diferencias += $diferencias;
 
         $caja = number_format($tasa_monto_ord_pago + $tasa_monto_h_mov_ban - $venta, 2, ',', '.') ;
 
