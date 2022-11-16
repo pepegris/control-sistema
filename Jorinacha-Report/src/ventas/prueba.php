@@ -24,7 +24,7 @@ $Year = 2022;
 $e = 1;
 for ($r = 1; $r <= $Day; $r++) {
 
-    $sede="Comercial Kagu";
+    $sede=$sedes_ar[$r];
 
 
     if ($e  < 10) {
@@ -37,7 +37,7 @@ for ($r = 1; $r <= $Day; $r++) {
 
     $fecha =  $Year . $Month . $d;
 
-    $tasas = getTasas($sede, $fecha);
+    $tasas = getTasas("Comercial Kagu", $fecha);
 
     $tasa_v_tasas = $tasas['tasa_v'];
 
