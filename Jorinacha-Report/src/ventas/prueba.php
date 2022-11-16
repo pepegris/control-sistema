@@ -24,6 +24,8 @@ $Year = 2022;
 $e = 1;
 for ($r = 1; $r <= $Day; $r++) {
 
+    $sede=$sedes_ar[$r];
+
     if ($e  < 10) {
 
       $d = 0 . $e;
@@ -33,12 +35,15 @@ for ($r = 1; $r <= $Day; $r++) {
 
 
     $fecha =  $Year . $Month . $d;
+
+    $tasas = getTasas($sede, $fecha);
+
+    $tasa_v_tasas = $tasas['tasa_v'];
+
     var_dump($fecha);
     echo "<br>";
-    $tasas = getTasas($sede, $fecha);
     var_dump($tasas);
     echo "<br>";
-    $tasa_v_tasas = $tasas['tasa_v'];
     var_dump($tasa_v_tasas);
     echo "<br>";
 
