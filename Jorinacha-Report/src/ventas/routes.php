@@ -30,7 +30,7 @@ if (isset($_POST)) {
             
             if ($divisa== 'dl') {
 
-                header("refresh:1;url= report-ventas-acumulado-dolores.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=" . $sedes);
+                header("refresh:1;url= report-ventas-acumulado-dolares.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=" . $sedes);
             }    else {
 
                 header("refresh:1;url= report-ventas-acumulado.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=" . $sedes);
