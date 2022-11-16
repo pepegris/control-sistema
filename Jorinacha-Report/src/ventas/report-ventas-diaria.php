@@ -107,18 +107,9 @@ if ($_GET) {
         $tasa_tot_neto_dev_cli = $dev_cli['tot_neto'] / $tasa_v_tasas;
         $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
 
-        if ($factura['tot_neto']  !=null) {
 
-          $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
-          $tot_neto_factura = number_format($venta, 2, ',', '.');
-
-        }else {
-          
-          $tot_neto_factura = number_format(0, 2, ',', '.');
-        }
-
-        
-        
+        $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+        $tot_neto_factura = number_format($venta, 2, ',', '.');
 
 
         $dev_cli_ven = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'ven');
