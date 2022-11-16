@@ -63,9 +63,10 @@ if ($_GET) {
         <th scope='col'>Efectivo</th>
         <th scope='col'>Tarjeta</th>
 
-        <th scope='col'>Pagos</th>
+        <th scope='col'>Divisas</th>
+		<th scope='col'>Gastos</th>
 
-        <th scope='col'>Estatus Caja</th>
+        <th scope='col'>Cierre Caja</th>
       </tr>
 
     </thead>
@@ -115,6 +116,10 @@ if ($_GET) {
         $tasa_monto_ord_pago = $ord_pago['monto'] / $tasa_v_tasas;
         $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
 
+		$ord_pago_ven = getOrd_pago($sedes_ar[$i], $fecha1,$fecha2, 'ven');
+        $tasa_monto_ord_pago_ven = $ord_pago_ven['monto'] / $tasa_v_tasas;
+        $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
+
 
         /* totales */
 
@@ -131,6 +136,7 @@ if ($_GET) {
         $total_tarjeta += $tasa_total_tarj_dep_caj;
 
         $total_pagos += $tasa_monto_ord_pago; 
+		$total_gastos += $tasa_monto_ord_pago_ven; 
 
       ?>
         <tr>
@@ -139,7 +145,7 @@ if ($_GET) {
           <td><?= $sedes_ar[$i]  ?></td>
 
 
-          <td><?= $tot_neto_factura   ?></td>
+          <td><?= $tot_neto_factura - $tot_neto_dev_cli  ?></td>
           <td><?= $total_art_factura - $total_art_dev_cli   ?></td>
 
           <td><?= $tot_neto_dev_cli   ?></td>
@@ -152,6 +158,7 @@ if ($_GET) {
           <td><?= $total_tarj_dep_caj  ?></td>
 
           <td><?= $monto_ord_pago  ?></td>
+		  <td><?= $monto_ord_pago_ven  ?></td>
 
         <?php
 

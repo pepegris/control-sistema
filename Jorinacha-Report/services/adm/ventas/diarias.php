@@ -127,16 +127,17 @@ function getFactura($sede, $fecha1, $fecha2, $data)
 
             if ($data == 'ven') {
 
-                if ($fecha2 != null) {
-                    $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
-                    JOIN factura ON factura.fact_num = reng_fac.fact_num
-                    where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
-                } else {
-                    $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
-                    JOIN factura ON factura.fact_num = reng_fac.fact_num
-                    where anulada=0 AND fec_emis ='$fecha1'";
-                }
-            } elseif ($data == 'sin') {
+                $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
+                JOIN factura ON factura.fact_num = reng_fac.fact_num
+                where anulada=0 AND fec_emis ='$fecha1'";
+
+            }elseif ($data == 'ven2') {
+
+                $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
+                JOIN factura ON factura.fact_num = reng_fac.fact_num
+                where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
+                
+            }elseif ($data == 'sin') {
 
                 $sql = "SELECT  SUM(tot_neto)  as tot_neto from factura
                 where anulada=0 AND fec_emis ='$fecha1'";
@@ -194,12 +195,25 @@ function getDev_cli($sede, $fecha1, $fecha2, $data)
 
             if ($data == 'sin') {
 
-                $sql = "SELECT SUM(dev_cli.tot_neto) as tot_neto ,SUM(reng_dvc.total_art) as total_art from dev_cli 
+                $sql = "SELECT SUM(dev_cli.tot_neto) as tot_neto  from dev_cli 
                 JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                 WHERE fec_emis ='$fecha1' and dev_cli.anulada =0 ";
-            } else {
 
-                $sql = "SELECT SUM(tot_neto) as tot_neto ,SUM(total_art) as total_art  from dev_cli 
+            } elseif ($data == 'ven') {
+
+                $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
+                JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
+                WHERE fec_emis ='$fecha1' and dev_cli.anulada =0";
+
+             } elseif ($data == 'ven2') {
+
+                $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
+                JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
+                WHERE fec_emis BETWEEN '$fecha1' AND '$fecha2' and dev_cli.anulada =0";
+
+             }else {
+
+                $sql = "SELECT SUM(tot_neto) as tot_neto  from dev_cli 
                 JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                 WHERE fec_emis BETWEEN '$fecha1' AND '$fecha2' and dev_cli.anulada =0";
             }
@@ -368,11 +382,26 @@ function getOrd_pago($sede, $fecha1, $fecha2, $data)
             if ($data == 'sin') {
 
                 $sql = "SELECT SUM(monto) as monto from ord_pago
-                WHERE fecha ='$fecha1' AND anulada = 0";
-            } else {
+                JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
+                WHERE fecha ='$fecha1' AND anulada = 0 AND benefici.ben_des='PREVIA SHOP'";
+
+            } elseif ($data == 'ven') {
+
+               $sql = "SELECT SUM(monto) as monto from ord_pago
+                JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
+                WHERE fecha ='$fecha1' AND anulada = 0 AND benefici.ben_des<>'PREVIA SHOP'";
+
+            }elseif ($data == 'ven2') {
 
                 $sql = "SELECT SUM(monto) as monto from ord_pago
-                WHERE fecha  BETWEEN '$fecha1' AND '$fecha2' AND anulada = 0";
+                 JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
+                 WHERE fecha BETWEEN '$fecha1' AND '$fecha2'  AND anulada = 0 AND benefici.ben_des<>'PREVIA SHOP'";
+             }
+            else {
+
+                $sql = "SELECT SUM(monto) as monto from ord_pago
+                JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
+                WHERE fecha  BETWEEN '$fecha1' AND '$fecha2' AND anulada = 0 AND benefici.ben_des='PREVIA SHOP'";
             }
 
 
