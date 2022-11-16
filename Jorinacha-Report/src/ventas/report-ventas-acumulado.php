@@ -109,8 +109,8 @@ if ($_GET) {
 
 		$factura_ven = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'ven2');
 
-		$venta_art += $factura_ven['total_art'] - $dev_cli_ven['total_art'];
-        $tot_neto_factura = number_format($venta_art, 0, ',', '.');
+		$venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
+        $total_art_factura  = number_format($venta_art, 0, ',', '.');
 
 
         $dep_caj = getDep_caj($sedes_ar[$i], $fecha1, $fecha2, '');
@@ -158,7 +158,7 @@ if ($_GET) {
 
 
           <td><?= $tot_neto_factura    ?></td>
-          <td><?= $total_art_factura - $total_art_dev_cli   ?></td>
+          <td><?= $total_art_factura   ?></td>
 
           <td><?= $tot_neto_dev_cli   ?></td>
           <td><?= $total_art_dev_cli  ?></td>
