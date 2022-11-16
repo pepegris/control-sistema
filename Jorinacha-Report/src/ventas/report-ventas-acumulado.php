@@ -93,8 +93,7 @@ if ($_GET) {
         $factura = getFactura($sedes_ar[$i], $fecha1, $fecha2, '');
         $tasa_tot_neto_factura = $factura['tot_neto'] / $tasa_v_tasas;
 
-        $factura_ven = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'ven2');
-        $total_art_factura =  number_format($factura_ven['total_art'], 0, ',', '.');
+
 
         $dev_cli = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, '');
         $tasa_tot_neto_dev_cli = $dev_cli['tot_neto'] / $tasa_v_tasas;
@@ -107,6 +106,12 @@ if ($_GET) {
 
         $dev_cli_ven = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'ven2');
         $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
+
+		$factura_ven = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'ven2');
+
+		$venta_art += $factura_ven['total_art'] - $dev_cli_ven['total_art'];
+        $tot_neto_factura = number_format($venta_art, 0, ',', '.');
+
 
         $dep_caj = getDep_caj($sedes_ar[$i], $fecha1, $fecha2, '');
         $tasa_total_efec_dep_caj = $dep_caj['total_efec'] / $tasa_v_tasas;
