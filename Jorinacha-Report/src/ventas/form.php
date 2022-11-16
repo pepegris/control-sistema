@@ -87,7 +87,7 @@ include '../../services/sqlserver.php';
 
       <div class="form-group">
         <label for="pass" class="form-label ">Pass</label>
-          <input type="password" name="" id="">
+          <input type="password" name="pass" id="">
       </div>
 
       

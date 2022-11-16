@@ -1,9 +1,11 @@
 <?php
 
+include '../../includes/loading.php';
+include '../../services/sqlserver.php';
+
 if (isset($_POST) & $_POST['pass']== 'N3tun0' ) {
 
-    include '../../includes/loading.php';
-    include '../../services/sqlserver.php';
+
 
     $reporte=$_POST['reporte'];
     $divisa=$_POST['divisa'];
