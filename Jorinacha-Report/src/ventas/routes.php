@@ -2,13 +2,17 @@
 
 include '../../includes/loading.php';
 include '../../services/sqlserver.php';
+include '../../services/mysql.php';
 
 if (isset($_POST)  ) {
 
-    $clave=$_POST['pass'];
-    
 
-if ($clave ) {
+    $clave=$_POST['clave'];
+
+
+
+
+if ($clave === 'N3tun0' ) {
     
     $reporte=$_POST['reporte'];
     $divisa=$_POST['divisa'];
