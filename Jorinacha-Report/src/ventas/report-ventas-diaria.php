@@ -80,7 +80,9 @@ if ($_GET) {
         <th scope='col'>Divisas</th>
         <th scope='col'>Gastos</th>
 
-        <th scope='col'>Estatus Caja</th>
+        <th scope='col'>Cuadre Caja</th>
+
+        <th scope='col'>Cierre Caja</th>
       </tr>
 
     </thead>
@@ -191,6 +193,8 @@ if ($_GET) {
 
           <td><?= $monto_ord_pago  ?></td>
           <td><?= $monto_ord_pago_ven  ?></td>
+
+          <td><?= $monto_h_mov_ban  ?> - <?= $tot_neto_factura ?> = <?= $monto_h_mov_ban - $tot_neto_factura   ?></td>
 
         <?php
 
