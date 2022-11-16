@@ -105,7 +105,7 @@ if ($_GET) {
         $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
 
 
-        $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+        $venta = $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
         $tot_neto_factura = number_format($venta, 2, ',', '.');
 
 
