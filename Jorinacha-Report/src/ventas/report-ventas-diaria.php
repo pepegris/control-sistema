@@ -197,7 +197,7 @@ if ($_GET) {
           <td> <?php
           if ($tot_neto_factura > 1 & $monto_h_mov_ban > 1 ) {
 
-            $diferencias=number_format($tasa_monto_ord_pago+ $monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
+            $diferencias=number_format($tasa_monto_ord_pago+ $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
             echo "$diferencias";
           } else {
             echo "<img src='./img/help.svg' alt=''> ";
@@ -209,7 +209,7 @@ if ($_GET) {
 
         $total_diferencias += $diferencias;
 
-        $caja = number_format($tasa_monto_ord_pago + $monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.') ;
+        $caja = number_format($tasa_monto_ord_pago + $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.') ;
 
         if ( $venta <= 1 & $total_art_factura == 0 ) {
 
