@@ -25,6 +25,7 @@ $e = 1;
 for ($r = 1; $r <= $Day; $r++) {
 
     $sede=$sedes_ar[$r];
+    var_dump($sede);
 
     if ($e  < 10) {
 
