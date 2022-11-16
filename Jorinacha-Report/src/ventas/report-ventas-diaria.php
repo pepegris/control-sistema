@@ -100,6 +100,9 @@ if ($_GET) {
         $factura = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'sin');
         $tasa_tot_neto_factura = $factura['tot_neto'] / $tasa_v_tasas;
 
+        var_dump($factura);
+        var_dump($tasa_tot_neto_factura);
+
 
         $factura_ven = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'ven');
         $total_art_factura =  number_format($factura_ven['total_art'], 0, ',', '.');
@@ -195,24 +198,8 @@ if ($_GET) {
 
         echo "</tr>";
 
-        $total_art_dev_cli = 0;
-        $total_art_factura = 0;
-        $tasa_tot_neto_factura = 0;     
-        $tasa_tot_neto_dev_cli = 0;
-        $tasa_monto_h_mov_ban = 0;
-        $tasa_total_efec_dep_caj = 0;
-        $tasa_total_tarj_dep_caj = 0;
-        $tasa_monto_ord_pago = 0;
-        $tasa_monto_ord_pago_ven = 0;
 
-        $tot_neto_factura = 0;       
-        $tot_neto_dev_cli = 0;
-        $monto_h_mov_ban = 0;
-        $total_efec_dep_caj = 0;
-        $total_tarj_dep_caj = 0;
-        $monto_ord_pago = 0;
-        $monto_ord_pago_ven = 0;
-        
+
       }
 
       if ($divisa == 'dl') {
