@@ -24,8 +24,8 @@ $Year = 2022;
 $e = 1;
 for ($r = 1; $r <= $Day; $r++) {
 
-    $sede=$sedes_ar[$r];
-    var_dump($sede);
+    $sede="Comercial Kagu";
+
 
     if ($e  < 10) {
 
