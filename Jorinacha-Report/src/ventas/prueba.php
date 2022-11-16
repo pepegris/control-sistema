@@ -45,10 +45,9 @@ for ($r = 0; $r <= $Day; $r++) {
 
 
     $factura = getFactura($sede, $fecha, $fecha2, 'sin');
-    var_dump($factura);
+
     $tasa_tot_neto_factura += $factura['tot_neto'] / $tasa_v_tasas;
-    echo "<br>";
-    var_dump($tasa_tot_neto_factura);
+
 
 
     $dev_cli = getDev_cli($sede, $fecha, $fecha2, 'sin');
