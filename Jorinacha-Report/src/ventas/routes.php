@@ -27,9 +27,19 @@ if (isset($_POST)) {
     }elseif ($reporte=='acumulado') {
 
         if ($fecha2) {
-            header("refresh:1;url= report-ventas-acumulado.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=" . $sedes);
+            
+            if ($divisa== 'dl') {
+
+                header("refresh:1;url= report-ventas-acumulado-dolores.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=" . $sedes);
+            }    else {
+
+                header("refresh:1;url= report-ventas-acumulado.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=" . $sedes);
+            }
+
         }    else {
+
             header('refresh:1;url= form.php');
+
         }
         
     }elseif ($reporte=='ventas'){
