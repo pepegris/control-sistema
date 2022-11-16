@@ -194,9 +194,11 @@ if ($_GET) {
           <td><?= $monto_ord_pago  ?></td>
           <td><?= $monto_ord_pago_ven  ?></td>
 
-          <td><?= $monto_h_mov_ban  ?> - <?= $tot_neto_factura ?> = <?= $monto_h_mov_ban - $tot_neto_factura   ?></td>
+          <td><?= $monto_h_mov_ban  ?> - <?= $tot_neto_factura ?> = <?= $monto_h_mov_ban + $monto_ord_pago - $tot_neto_factura   ?></td>
 
         <?php
+
+        $diferencias += $tasa_monto_ord_pago + $tasa_monto_h_mov_ban - $venta ;
 
         $caja = $tasa_monto_ord_pago + $tasa_monto_h_mov_ban;
 
@@ -250,6 +252,8 @@ if ($_GET) {
 
           <td><b><?= $simb ?><?= number_format($total_pagos, 2, ',', '.')  ?></b></td>
           <td><b><?= $simb ?><?= number_format($total_gastos, 2, ',', '.')  ?></b></td>
+          <td><b><?= $simb ?><?= number_format($diferencias, 2, ',', '.')  ?></b></td>
+          
 
           <td></td>
 
