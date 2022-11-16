@@ -43,7 +43,7 @@ for ($r = 1; $r <= $Day; $r++) {
 
 
     var_dump($tasa_v_tasas);
-    echo "<br>";
+    echo "<hr>";
 
 
 
@@ -53,7 +53,8 @@ for ($r = 1; $r <= $Day; $r++) {
 
 
     var_dump($tasa_tot_neto_factura);
-    echo "<br>";
+    echo "<hr>";
+
 
 
 
@@ -64,7 +65,8 @@ for ($r = 1; $r <= $Day; $r++) {
 
     $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
     
-
+    var_dump($venta);
+    echo "<hr>";
 
     $dep_caj = getDep_caj($sede, $fecha, $fecha2, 'sin');
     $tasa_total_efec_dep_caj += $dep_caj['total_efec'] / $tasa_v_tasas;
@@ -110,3 +112,5 @@ for ($r = 1; $r <= $Day; $r++) {
   $total_art_factura  = number_format($venta_art, 0, ',', '.');
 
 
+  var_dump($tot_neto_factura);
+  echo "<hr>";
