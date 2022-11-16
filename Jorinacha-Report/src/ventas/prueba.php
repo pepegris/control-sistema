@@ -89,6 +89,8 @@ for ($r = 1; $r <= $Day; $r++) {
     
     var_dump($venta);
     echo "<br>";
+    var_dump($fecha);
+    echo "<br>";
 
     $dep_caj = getDep_caj($sede, $fecha, $fecha2, 'sin');
     $tasa_total_efec_dep_caj += $dep_caj['total_efec'] / $tasa_v_tasas;
