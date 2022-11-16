@@ -72,7 +72,7 @@ include '../../services/sqlserver.php';
         
         <option value="diario">Ventas Diarias</option>
         <option value="acumulado">Ventas Acumuladas</option>
-        <option value="ventas">Ventas Tiendas</option>
+        <!-- <option value="ventas">Ventas Tiendas</option> -->
 
       </select> 
 
