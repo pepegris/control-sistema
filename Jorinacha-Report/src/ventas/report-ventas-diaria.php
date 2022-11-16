@@ -195,43 +195,63 @@ if ($_GET) {
           <td><?= $monto_ord_pago_ven  ?></td>
 
           <td> <?php
-          if ($tot_neto_factura > 1 & $monto_h_mov_ban > 1 ) {
 
-            $diferencias=number_format($tasa_monto_ord_pago+ $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
-            echo "$diferencias";
+                if ($venta <= 1 & $total_art_factura == 0) {
 
-          } elseif ($total_efec_dep_caj > 1 & $total_tarj_dep_caj > 1) {
+                  echo "<td> <img src='./img/help.svg' alt=''> </td>";
 
-            $diferencias=number_format($tasa_total_efec_dep_caj+ $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
-            echo "$diferencias";
+                }elseif ($tot_neto_factura > 1 & $monto_h_mov_ban > 1) {
 
-          } else {
-            echo "<img src='./img/help.svg' alt=''> ";
-          }
-               
-          ?></td>
+                  $diferencias = number_format($tasa_monto_ord_pago + $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
+                  echo "$diferencias";
+
+                } elseif ($total_tarj_dep_caj > 1) {
+
+                  $diferencias = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
+
+                  if ($diferencias > 1) {
+
+                    echo "<img src='./img/help.svg' alt=''> ";
+                  } else {
+                    echo "$diferencias";
+                  }
+                } else {
+                  echo "<img src='./img/help.svg' alt=''> ";
+                }
+
+                ?></td>
 
         <?php
 
         $total_diferencias += $diferencias;
 
-        $caja = number_format($tasa_monto_ord_pago + $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.') ;
+        $caja = number_format($tasa_monto_ord_pago + $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
 
-        if ( $venta <= 1 & $total_art_factura == 0 ) {
+        if ($venta <= 1 & $total_art_factura == 0) {
 
           echo "<td> <img src='./img/help.svg' alt=''> </td>";
+
+        } elseif ($total_tarj_dep_caj > 1) {
+
+          $caja = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
+
+          if ($caja > 1) {
+
+            echo "<img src='./img/help.svg' alt=''> ";
+            
+          } else {
+
+            echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
+            
+          }
 
         }elseif ($monto_h_mov_ban < 1) {
 
           echo "<td> <img src='./img/help.svg' alt=''> </td>";
-
-        }
-        elseif ($caja == 0) {
+        } elseif ($caja == 0) {
 
           echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
-
-        }
-         else {
+        } else {
           echo "<td> <img src='./img/cross-circle.svg' alt=''> </td>";
         }
 
@@ -273,7 +293,7 @@ if ($_GET) {
           <td><b><?= $simb ?><?= number_format($total_pagos, 2, ',', '.')  ?></b></td>
           <td><b><?= $simb ?><?= number_format($total_gastos, 2, ',', '.')  ?></b></td>
           <td><b><?= $simb ?><?= number_format($total_diferencias, 2, ',', '.')  ?></b></td>
-          
+
 
           <td></td>
 
