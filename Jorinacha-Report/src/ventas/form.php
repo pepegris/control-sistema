@@ -90,7 +90,7 @@ include '../../services/sqlserver.php';
 
       <div class="form-group">
         <label for="clave" class="form-label ">Clave</label>
-          <input type="password" name="clave" id="">
+          <input type="password" name="clave" id="" placeholder="Ingresa la contraseña">
       </div>
       
 
