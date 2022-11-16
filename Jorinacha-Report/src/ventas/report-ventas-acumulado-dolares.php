@@ -114,8 +114,14 @@ if ($_GET) {
 
 
           $fecha =  $Year . $Month . $d;
-          $tasas = getTasas("Comercial Kagu", $fecha);
-          $tasa_v_tasas = $tasas['tasa_v'];
+          $tasas = getTasas($sede, $fecha);
+
+
+          if ($tasas != null) {
+            $tasa_v_tasas = $tasas['tasa_v'];
+          } else {
+            $tasa_v_tasas;
+          }
 
 
 
