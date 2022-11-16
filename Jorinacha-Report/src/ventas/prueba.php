@@ -33,8 +33,14 @@ for ($r = 0; $r <= $Day; $r++) {
 
 
     $fecha =  $Year . $Month . $d;
+    var_dump($fecha);
+    echo "<br>";
     $tasas = getTasas($sede, $fecha);
+    var_dump($tasas);
+    echo "<br>";
     $tasa_v_tasas = $tasas['tasa_v'];
+    var_dump($tasa_v_tasas);
+    echo "<br>";
 
 
 
