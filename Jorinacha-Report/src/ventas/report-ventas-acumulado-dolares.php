@@ -29,7 +29,7 @@ if ($_GET) {
     img {
 
 
-      width: 23px;
+      width: 26px;
     }
   </style>
 
