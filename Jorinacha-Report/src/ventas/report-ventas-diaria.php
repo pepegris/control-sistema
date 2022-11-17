@@ -248,7 +248,7 @@ if ($_GET) {
 
           if ($caja2 != 0) {
 
-            echo "<td><img src='./img/help.svg' alt=''> </td>";
+            echo "$caja2 ";
 
           } else {
 
