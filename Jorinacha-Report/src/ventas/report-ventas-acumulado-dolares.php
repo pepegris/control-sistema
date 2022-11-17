@@ -84,24 +84,24 @@ if ($_GET) {
 
         /* calcular si se solicito dolares y ver q tasa tenia ese dia */
 
-        $tasa_tot_neto_factura = 0;  
+        $tasa_tot_neto_factura = 0;
         $tasa_tot_neto_dev_cli = 0;
 
         $venta = 0;
-     
+
         $tasa_total_efec_dep_caj = 0;
         $tasa_total_tarj_dep_caj = 0;
-      
-        $tasa_monto_h_mov_ban= 0;
-     
+
+        $tasa_monto_h_mov_ban = 0;
+
         $tasa_monto_ord_pago = 0;
-      
+
         $tasa_monto_ord_pago_ven = 0;
 
         $e = 1;
 
-        $sede =$sedes_ar[$i];
-        
+        $sede = $sedes_ar[$i];
+
 
         for ($r = 1; $r <= $Day; $r++) {
 
@@ -127,29 +127,29 @@ if ($_GET) {
 
           $factura = getFactura($sede, $fecha, $fecha2, 'sin');
           $tasa_tot_neto_factura += $factura['tot_neto'] / $tasa_v_tasas;
-  
+
           $dev_cli = getDev_cli($sede, $fecha, $fecha2, 'sin');
           $tasa_tot_neto_dev_cli += $dev_cli['tot_neto'] / $tasa_v_tasas;
-          
-  
-  
+
+
+
           $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
-          
-  
+
+
 
           $dep_caj = getDep_caj($sede, $fecha, $fecha2, 'sin');
           $tasa_total_efec_dep_caj += $dep_caj['total_efec'] / $tasa_v_tasas;
           $tasa_total_tarj_dep_caj += $dep_caj['total_tarj'] / $tasa_v_tasas;
 
-  
+
           $mov_ban = getMov_ban($sede, $fecha, $fecha2, 'sin');
           $tasa_monto_h_mov_ban += $mov_ban['monto_h'] / $tasa_v_tasas;
 
-  
+
           $ord_pago = getOrd_pago($sede, $fecha, $fecha2, 'sin');
           $tasa_monto_ord_pago += $ord_pago['monto'] / $tasa_v_tasas;
 
-  
+
           $ord_pago_ven = getOrd_pago($sede, $fecha, $fecha2, 'ven');
           $tasa_monto_ord_pago_ven += $ord_pago_ven['monto'] / $tasa_v_tasas;
 
@@ -225,16 +225,35 @@ if ($_GET) {
 
         <?php
 
-        if ($monto_h_mov_ban == $tot_neto_factura) {
-          echo "<td><i class='lni lni-checkmark-circle'></i></td>";
+        $total_diferencias += $diferencias;
+
+        $caja = number_format($tasa_monto_ord_pago + $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
+
+        if ($venta <= 1 & $total_art_factura == 0) {
+
+          echo "<td> <img src='./img/help.svg' alt=''> </td>";
+        } elseif ($caja == 0) {
+
+          echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
+        } elseif ($total_tarj_dep_caj > 1) {
+
+          $caja2 = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
+
+          if ($caja2 > 1) {
+
+            echo "<td><img src='./img/help.svg' alt=''> </td>";
+          } else {
+
+            echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
+          }
+        } elseif ($monto_h_mov_ban < 1) {
+
+          echo "<td> <img src='./img/help.svg' alt=''> </td>";
         } else {
-          echo "<td><i class='lni lni-cross-circle'></i></td>";
+          echo "<td> <img src='./img/cross-circle.svg' alt=''> </td>";
         }
 
         echo "</tr>";
-
-        
-
       }
 
       if ($divisa == 'dl') {
