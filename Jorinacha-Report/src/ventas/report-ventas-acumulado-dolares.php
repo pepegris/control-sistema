@@ -29,7 +29,7 @@ if ($_GET) {
     img {
 
 
-      width: 30px;
+      width: 28px;
     }
   </style>
 
@@ -42,7 +42,7 @@ if ($_GET) {
 
 
   <center>
-    <h1>Ventas Diarias <?= $fecha_titulo1 ?> - <?= $fecha_titulo2  ?></h1>
+    <h1>Ventas Acumulado <?= $fecha_titulo1 ?> - <?= $fecha_titulo2  ?></h1>
   </center>
 
   <?php
