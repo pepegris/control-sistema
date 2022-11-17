@@ -234,11 +234,7 @@ if ($_GET) {
 
           echo "<td> <img src='./img/help.svg' alt=''> </td>";
 
-        } elseif ($monto_h_mov_ban < 1) {
-
-          echo "<td> <img src='./img/help.svg' alt=''> </td>";
-
-        } elseif ($caja == 0) {
+        }  elseif ($caja == 0) {
 
           echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
 
@@ -246,15 +242,19 @@ if ($_GET) {
 
           $caja2 = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
 
-          if ($caja2 != 0) {
+          if ($caja2 < 1 or $caja2 > 1) {
 
-            echo "$caja2 ";
+            echo "<td><img src='./img/help.svg' alt=''> </td>";
 
           } else {
 
             echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
             
           }
+
+        }elseif ($monto_h_mov_ban < 1) {
+
+          echo "<td> <img src='./img/help.svg' alt=''> </td>";
 
         }
         else {
