@@ -244,7 +244,7 @@ if ($_GET) {
 
           if ($caja2 < 1 or $caja2 > 1) {
 
-            echo "<td>2 </td>";
+            echo "<td>2  $caja2 </td>";
 
           } else {
 
