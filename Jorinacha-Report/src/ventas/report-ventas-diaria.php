@@ -198,7 +198,7 @@ if ($_GET) {
 
                 if ($venta <= 1 & $total_art_factura == 0) {
 
-                  echo "<td> <img src='./img/help.svg' alt=''> </td>";
+                  echo " <img src='./img/help.svg' alt=''> ";
 
                 }elseif ($tot_neto_factura > 1 & $monto_h_mov_ban > 1) {
 
@@ -237,8 +237,8 @@ if ($_GET) {
 
           if ($caja > 1) {
 
-            echo "<img src='./img/help.svg' alt=''> ";
-            
+            echo "<td><img src='./img/help.svg' alt=''> </td>";
+
           } else {
 
             echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
