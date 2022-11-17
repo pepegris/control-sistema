@@ -55,17 +55,6 @@ include '../../services/sqlserver.php';
 
       <!-- FORMULAIO DE FECHAS -->
 
-      <div class="form-group">
-        <label for="fecha1" class="form-label " require>Desde</label>
-        <input type="date" name="fecha1" id="" required>
-      </div>
-
-      <div class="form-group">
-        <label for="fecha2" class="form-label " require>Hasta</label>
-        <input type="date" name="fecha2" id="" >
-      </div>
-
-
       <label for="reporte" class="form-label ">Reporte</label>
       <select name="reporte" id="">
 
@@ -84,6 +73,23 @@ include '../../services/sqlserver.php';
         <option value="dl">Dolares</option>
 
       </select> 
+      
+
+
+      <div class="form-group">
+        <label for="fecha1" class="form-label " require>Desde</label>
+        <input type="date" name="fecha1" id="" required>
+      </div>
+
+      <div class="form-group">
+        <label for="fecha2" class="form-label " require>Hasta</label>
+        <input type="date" name="fecha2" id="" >
+      </div>
+
+
+
+
+
 
       
         <label for="clave" class="form-label ">Clave</label>
