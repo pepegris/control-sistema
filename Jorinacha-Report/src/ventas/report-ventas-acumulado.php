@@ -74,7 +74,6 @@ if ($_GET) {
         <th scope='col'>Divisas</th>
         <th scope='col'>Gastos</th>
 
-        <th scope='col'>Cuadre Caja</th>
 
         <th scope='col'>Cierre Caja</th>
       </tr>
@@ -172,31 +171,6 @@ if ($_GET) {
           <td><?= $monto_ord_pago  ?></td>
           <td><?= $monto_ord_pago_ven  ?></td>
 
-          <td> <?php
-
-                if ($venta <= 1 & $total_art_factura == 0) {
-
-                  echo " <img src='./img/help.svg' alt=''> ";
-                } elseif ($tot_neto_factura > 1 & $monto_h_mov_ban > 1) {
-
-                  $diferencias = number_format($tasa_monto_ord_pago + $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
-                  echo "$diferencias";
-                } elseif ($total_tarj_dep_caj > 1) {
-
-                  $diferencias = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
-
-                  if ($diferencias > 1) {
-
-                    echo "<img src='./img/help.svg' alt=''> ";
-                  } else {
-
-                    echo "$diferencias";
-                  }
-                } else {
-                  echo "<img src='./img/help.svg' alt=''> ";
-                }
-
-                ?></td>
 
         <?php
 
@@ -264,7 +238,6 @@ if ($_GET) {
 
           <td><b><?= $simb ?><?= number_format($total_pagos, 2, ',', '.')  ?></b></td>
           <td><b><?= $simb ?><?= number_format($total_gastos, 2, ',', '.')  ?></b></td>
-          <td><b><?= $simb ?><?= number_format($total_diferencias, 2, ',', '.')  ?></b></td>
 
           <td></td>
 
