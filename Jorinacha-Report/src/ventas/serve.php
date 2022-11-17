@@ -24,5 +24,5 @@ $data = array (
     ),
 );
 
-echo json_encode($data);
+json_encode($data);
 ?>

@@ -5,7 +5,8 @@ xhr.onload = function () {
     if (xhr.status == 200) {
     
 
-        let json = xhr.responseText
+        let json = JSON.parse(xhr.responseText)
+
         console.log(json)
         
     }else{
