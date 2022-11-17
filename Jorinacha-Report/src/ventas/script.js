@@ -6,8 +6,11 @@ xhr.onload = function () {
     
 
         let json = JSON.parse(xhr.responseText)
+        let prueba = `andres`
+        let template = `<h1>${prueba}</h1>`
 
         console.log(json)
+        console.log(template)
         
     }else{
         console.log(`ERROR ${xhr.status}`)
