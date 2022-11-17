@@ -242,9 +242,9 @@ if ($_GET) {
 
           $caja2 = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
 
-          if ($caja2 < 1 or $caja2 > 1) {
+          if ($caja2 > 1) {
 
-            echo "<td>2  $caja2 </td>";
+            echo "<td>2  </td>";
 
           } else {
 
