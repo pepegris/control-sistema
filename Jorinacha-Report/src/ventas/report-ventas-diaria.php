@@ -212,8 +212,11 @@ if ($_GET) {
                   if ($diferencias > 1) {
 
                     echo "<img src='./img/help.svg' alt=''> ";
+
                   } else {
+
                     echo "$diferencias";
+                    
                   }
                 } else {
                   echo "<img src='./img/help.svg' alt=''> ";
@@ -231,11 +234,19 @@ if ($_GET) {
 
           echo "<td> <img src='./img/help.svg' alt=''> </td>";
 
+        } elseif ($monto_h_mov_ban < 1) {
+
+          echo "<td> <img src='./img/help.svg' alt=''> </td>";
+
+        } elseif ($caja == 0) {
+
+          echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
+
         } elseif ($total_tarj_dep_caj > 1) {
 
-          $caja = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
+          $caja2 = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
 
-          if ($caja > 1) {
+          if ($caja2 < 1 or $caja2 > 1) {
 
             echo "<td><img src='./img/help.svg' alt=''> </td>";
 
@@ -245,13 +256,8 @@ if ($_GET) {
             
           }
 
-        }elseif ($monto_h_mov_ban < 1) {
-
-          echo "<td> <img src='./img/help.svg' alt=''> </td>";
-        } elseif ($caja == 0) {
-
-          echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
-        } else {
+        }
+        else {
           echo "<td> <img src='./img/cross-circle.svg' alt=''> </td>";
         }
 
