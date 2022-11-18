@@ -26,7 +26,7 @@ if (isset($_GET)) {
   <?php
 
 
-  for ($o = 0; $o >= count($consultas); $o++) {
+  for ($o = 0; $o < 2; $o++) {
 
 
 
