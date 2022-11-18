@@ -48,7 +48,7 @@ if (isset($_GET)) {
                     <th scope='col'>Codigo</th>
                     <th scope='col'>Marca</th>
                     <th scope='col'>Modelo</th>
-                    <th scope='col'>Escala/th>
+                    <th scope='col'>Escala</th>
                     <th scope='col'>Color</th>
                     <th scope='col'>Descripción</th>
                     <th scope='col'>Stock</th>
@@ -79,7 +79,7 @@ if (isset($_GET)) {
                     <th scope='col'>Codigo</th>
                     <th scope='col'>Marca</th>
                     <th scope='col'>Modelo</th>
-                    <th scope='col'>Escala/th>
+                    <th scope='col'>Escala</th>
                     <th scope='col'>Color</th>
                     <th scope='col'>Descripción</th>
                     <th scope='col'>Stock</th>
@@ -139,6 +139,7 @@ if (isset($_GET)) {
         echo "
         <tr>
         <th scope='row'>$n</th>
+        <td>$sede</td>
         <td>$co_art</td>
         <td>$co_lin</td>
         <td>$co_subl </td>
@@ -197,6 +198,7 @@ if (isset($_GET)) {
           echo "
           <tr>
           <th scope='row'>$n</th>
+          <td>$sede</td>
           <td>$co_art</td>
           <td>$co_lin</td>
           <td>$co_subl </td>
