@@ -6,7 +6,7 @@
 if (isset($_POST)) {
 
 
-    $tipo_cob=$_POST['tipo_cob'];
+    
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
     $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
 
@@ -20,20 +20,11 @@ if (isset($_POST)) {
       $sedes = urlencode($sedes);
 
 
-    if ($tipo_cob== 'egreso') {
 
-      header("refresh:2;url= report-egreso.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
 
-    }elseif ($tipo_cob== 'detallado') {
+    header("refresh:2;url= report-devoluciones.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
 
-      header("refresh:2;url= report-egreso-detallado.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
-      
-    }else{
-
-      header("refresh:2;url= report-art-tarjetas.php?tipo_cob=$tipo_cob&fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
-
-    }
-
+ 
 
 
 } else {
