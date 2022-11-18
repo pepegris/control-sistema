@@ -130,11 +130,16 @@ function getDev_cli($sede, $fecha1, $fecha2)
 
 
             $sql = "SELECT  art.co_art, sub_lin.subl_des , cat_art.cat_des , colores.des_col, lin_art.lin_des , art.ubicacion, art.stock_act , 
+
             dev_cli.fact_num as dev_cli_fact,
-            dev_cli.comentario as dev_cli_comentario ,dev_cli.fec_emis as dev_cli_fec_emis , reng_dvc.total_art as reng_dvc_total_art,
+            dev_cli.comentario as dev_cli_comentario ,
+            dev_cli.fec_emis as dev_cli_fec_emis , 
+            reng_dvc.total_art as reng_dvc_total_art,
+
             compras.fact_num as compras_fact,
             compras.comentario as comp_comentario , compras.fec_emis as com_fecha,
             reng_com.total_art as com_total_art
+            
             FROM dev_cli 
             JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
             JOIN art ON art.co_art = reng_dvc.co_art
@@ -187,11 +192,17 @@ function getDev_pro($sede, $fecha1, $fecha2)
 
 
             $sql = "SELECT  art.co_art, sub_lin.subl_des , cat_art.cat_des , colores.des_col, lin_art.lin_des , art.ubicacion, art.stock_act , 
-            dev_pro.fact_num as dev_pro_fact,
-            dev_pro.descrip as dev_pro_descrip ,dev_pro.fec_emis as dev_pro_fec_emis , reng_dvp.total_art as reng_dvp_total_art,
+            
+			dev_pro.fact_num as dev_pro_fact,
+            dev_pro.descrip as dev_pro_descrip ,
+			dev_pro.fec_emis as dev_pro_fec_emis , 
+			reng_dvp.total_art as reng_dvp_total_art,
+
             compras.fact_num as compras_fact,
-            compras.comentario as comp_comentario , compras.fec_emis as com_fecha,
+            compras.comentario as comp_comentario , 
+			compras.fec_emis as com_fecha,
             reng_com.total_art as com_total_art
+
             FROM dev_pro 
             JOIN reng_dvp ON dev_pro.fact_num = reng_dvp.fact_num
             JOIN art ON art.co_art = reng_dvp.co_art
