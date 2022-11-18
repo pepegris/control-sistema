@@ -6,7 +6,7 @@
 if (isset($_POST)) {
 
 
-    
+    $tipo_dev=$_POST['tipo_dev'];
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
     $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
 
@@ -20,9 +20,17 @@ if (isset($_POST)) {
       $sedes = urlencode($sedes);
 
 
+      if ($tipo_dev== 'cliente') {
 
+        header("refresh:2;url= report-devoluciones-cli.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+  
+      }else {
+  
+        header("refresh:2;url= report-devoluciones-prov.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+        
+      }
 
-    header("refresh:2;url= report-devoluciones.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+    
 
  
 

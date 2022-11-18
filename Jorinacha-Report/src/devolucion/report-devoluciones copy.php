@@ -23,18 +23,8 @@ if (isset($_GET)) {
     <h1>Devoluciones</h1>
   </center>
 
-  <?php
-
-
-  for ($o = 0; $o < 20; $o++) {
-
-
-
-    if ($consultas[$o] == "1-Cliente") {
-
-
-      echo "<center> <h3>" . $consultas[$o] . "</h3></center>";
-      echo "  <table class='table table-dark table-striped' >
+  <center> <h3>" . $consultas[$o] . "</h3></center>
+  <table class='table table-dark table-striped' >
           <thead>
 
           
@@ -64,7 +54,21 @@ if (isset($_GET)) {
                     
             </tr>
           </thead>
-          <tbody>";
+          <tbody>
+
+  <?php
+
+
+
+  for ($o = 0; $o < 20; $o++) {
+
+
+
+    if ($consultas[$o] == "1-Cliente") {
+
+
+      echo "<center> <h3>" . $consultas[$o] . "</h3></center>";
+      echo "  ";
     } else {
 
 

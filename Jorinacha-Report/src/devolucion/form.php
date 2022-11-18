@@ -52,7 +52,17 @@ include '../../services/sqlserver.php';
 
       </div>
 
+      <div class="form-group">
+        <label for="tipo_dev" class="form-label">Tipo</label>
+        <select name="tipo_dev" id="">
 
+          <option value="cliente">Cliente</option>
+          <option value="proveedor">Proveedor</option>
+
+          
+
+        </select>
+      </div>
 
 
       <!-- FORMULAIO DE FECHAS -->
