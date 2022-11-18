@@ -50,7 +50,6 @@ if (isset($_GET)) {
 
 
         <th scope='col'>Num Fac de Compra</th>
-        <th scope='col'>Comentario</th>
         <th scope='col'>Fecha Comp</th>
         <th scope='col'>Pares</th>
 
@@ -99,7 +98,6 @@ if (isset($_GET)) {
           $total_stock_reng_dvc += $reng_dvc_total_art;
 
           $compras_fact = $res[$i]['compras_fact'];
-          $comp_comentario = $res[$i]['comp_comentario'];
           $com_fecha = $res[$i]['com_fecha'];
           $fecha_com = $com_fecha->format('d-m-Y');
           $com_total_art = round($res[$i]['com_total_art']);
@@ -124,7 +122,6 @@ if (isset($_GET)) {
         <td>$reng_dvc_total_art</td>
 
         <td>$compras_fact</td>
-        <td>$comp_comentario</td>
         <td>$fecha_com</td>
         <td>$com_total_art</td>
   

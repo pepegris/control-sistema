@@ -137,9 +137,9 @@ function getDev_cli($sede, $fecha1, $fecha2)
             reng_dvc.total_art as reng_dvc_total_art,
 
             compras.fact_num as compras_fact,
-            compras.comentario as comp_comentario , compras.fec_emis as com_fecha,
+            compras.fec_emis as com_fecha,
             reng_com.total_art as com_total_art
-            
+
             FROM dev_cli 
             JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
             JOIN art ON art.co_art = reng_dvc.co_art
@@ -198,8 +198,7 @@ function getDev_pro($sede, $fecha1, $fecha2)
 			dev_pro.fec_emis as dev_pro_fec_emis , 
 			reng_dvp.total_art as reng_dvp_total_art,
 
-            compras.fact_num as compras_fact,
-            compras.comentario as comp_comentario , 
+            compras.fact_num as compras_fact, 
 			compras.fec_emis as com_fecha,
             reng_com.total_art as com_total_art
 
