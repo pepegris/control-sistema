@@ -26,11 +26,6 @@ if (isset($_GET)) {
   <?php
 
 
-
-
-
-
-
   for ($o = 0; $o < count($consultas); $o++) {
 
 
@@ -136,13 +131,13 @@ if (isset($_GET)) {
           $dev_cli_comentario = $res[$i]['dev_cli_comentario'];
           $dev_cli_fec_emis = $res[$i]['dev_cli_fec_emis'];
           $fecha_dev_cli = $dev_cli_fec_emis->format('d-m-Y');
-          $reng_dvc_total_art = $res[$i]['reng_dvc_total_art'];
+          $reng_dvc_total_art = round($res[$i]['reng_dvc_total_art']);
 
           $compras_fact = $res[$i]['compras_fact'];
           $comp_comentario = $res[$i]['comp_comentario'];
           $com_fecha = $res[$i]['com_fecha'];
           $fecha_com = $com_fecha->format('d-m-Y');
-          $com_total_art = $res[$i]['com_total_art'];
+          $com_total_art = round($res[$i]['com_total_art']);
 
           echo "
         <tr>
