@@ -262,21 +262,42 @@ if (isset($_GET)) {
 
 
 
-
-    echo "
-        <tr>
+    if ($total_stock_act_dev_pro > 0) {
       
-        <td>" . $total_stock_act_dev_cli . "</td>
-        <td>" . $total_stock_com_total_art . "</td>
-        <td>" . $total_stock_reng_dvc . "</td>
-        <td>" . $total_stock_act_dev_pro . "</td>
-        <td>" . $total_stock_com . "</td>
-        <td>" . $total_stock_reng_dvp . "</td>
-        <td></td>
-        </tr>
-        </tbody>
-        </table>";
+      echo "
+      <tr>
+    
+      <th colspan='8' >Totales</th>
+      <td>" . $total_stock_act_dev_pro . "</td>
+      <th colspan='3' ></th>
+      <td>" . $total_stock_com . "</td>
+      <th colspan='3' ></th>
+      <td>" . $total_stock_reng_dvp . "</td>
+      </tr>
+      </tbody>
+      </table>";
+
+    }else {
+
+      echo "
+      <tr>
+    
+      <th colspan='8' >Totales</th>
+      <td>" . $total_stock_act_dev_cli . "</td>
+      <th colspan='3' ></th>
+      <td>" . $total_stock_com_total_art . "</td>
+      <th colspan='3' ></th>
+      <td>" . $total_stock_reng_dvc . "</td>
+      </tr>
+      </tbody>
+      </table>";
+    }
+
+
         
+        /*         <td>" . $total_stock_act_dev_pro . "</td>
+        <td>" . $total_stock_com . "</td>
+        <td>" . $total_stock_reng_dvp . "</td> */
 
 
   }
