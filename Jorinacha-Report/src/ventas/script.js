@@ -22,7 +22,7 @@ xhr.onload = function () {
         })
 
 
-        console.log(template);
+
         document.getElementsByClassName('lista').innerHTML=template
         
     }else{
