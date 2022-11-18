@@ -120,10 +120,10 @@ if (isset($_GET)) {
             <td>$co_color</td>
             <td>$stock_act</td>
     
-            <td>$dev_cli_fact</td>
-            <td>$dev_cli_comentario</td>
-            <td>$fecha_dev_cli</td>
-            <td>$reng_dvc_total_art</td>
+            <td>$dev_pro_fact</td>
+            <td>$dev_pro_descrip</td>
+            <td>$fecha_dev_pro</td>
+            <td>$reng_dvp_total_art</td>
     
             <td>$compras_fact</td>
             <td>$comp_comentario</td>
