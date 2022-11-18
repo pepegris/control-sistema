@@ -168,6 +168,7 @@ if (isset($_GET)) {
         </tr>";
           $n++;
         }
+        
       } else {
 
         $res = getDev_pro($sede, $fecha1, $fecha2);
@@ -263,7 +264,7 @@ if (isset($_GET)) {
 
 
     if ($total_stock_act_dev_pro > 0) {
-      
+
       echo "
       <tr>
     
