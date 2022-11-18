@@ -159,7 +159,7 @@ $cuenta_on = ucwords($cuenta_on);
         </div>
       </a>
 
-    </div>
+
 
     <a href="src/devolucion/form.php">
         <div class="box">
@@ -169,7 +169,7 @@ $cuenta_on = ucwords($cuenta_on);
         </div>
       </a>
 
-    </div>
+
 
   </main>
 
