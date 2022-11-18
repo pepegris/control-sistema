@@ -23,7 +23,7 @@ xhr.onload = function () {
 
 
         console.log(template);
-        document.getElementsByClassName('lista').innerHtml=template
+        document.getElementsByClassName('lista').innerHTML=template
         
     }else{
         console.log(`ERROR ${xhr.status}`)
