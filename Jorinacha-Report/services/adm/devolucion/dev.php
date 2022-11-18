@@ -25,8 +25,8 @@ $sedes_ar = array(
 );
 
 $consultas = array(
-    "Devolucion Cliente",
-    "Devolucion Proveedores",
+    "1-Cliente",
+    "2-Proveedores",
 
 );
 

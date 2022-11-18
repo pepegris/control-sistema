@@ -35,7 +35,7 @@ if (isset($_GET)) {
 
 
 
-    if ($consultas[$o] == "Devolucion Cliente") {
+    if ($consultas[$o] == "1-Cliente") {
 
 
       echo "<center> <h3>" . $consultas[$o] . "</h3></center>";
@@ -111,11 +111,11 @@ if (isset($_GET)) {
     $n = 1;
 
 
-    for ($e = 0; $e < count($sedes_ar); $e++) {
+    for ($e = 1; $e < count($sedes_ar); $e++) {
 
       $sede = $sedes_ar[$e];
 
-      if ($consulta == "Devolucion Cliente") {
+      if ($consulta == "1-Cliente") {
 
         $res = getDev_cli($sede, $fecha1, $fecha2);
 
@@ -173,56 +173,86 @@ if (isset($_GET)) {
 
         $res = getDev_pro($sede, $fecha1, $fecha2);
 
-        for ($t = 0; $t < count($res); $t++) {
+        if ($res !=null) {
+          for ($t = 0; $t < count($res); $t++) {
 
 
-          $co_art = $res[$t]['co_art'];
-          $co_lin = $res[$t]['lin_des'];
-          $co_subl = $res[$t]['subl_des'];
-          $co_cat = $res[$t]['cat_des'];
-          $co_color = $res[$t]['des_col'];
-          $ubicacion = $res[$t]['ubicacion'];
-          $stock_act = round($res[$t]['stock_act']);
+            $co_art = $res[$t]['co_art'];
+            $co_lin = $res[$t]['lin_des'];
+            $co_subl = $res[$t]['subl_des'];
+            $co_cat = $res[$t]['cat_des'];
+            $co_color = $res[$t]['des_col'];
+            $ubicacion = $res[$t]['ubicacion'];
+            $stock_act = round($res[$t]['stock_act']);
+  
+            $total_stock_act_dev_pro += $stock_act;
+  
+            $dev_pro_fact = $res[$t]['dev_pro_fact'];
+            $dev_pro_descrip = $res[$t]['dev_pro_descrip'];
+            $dev_pro_fec_emis = $res[$t]['dev_pro_fec_emis'];
+            $fecha_dev_pro = $dev_pro_fec_emis->format('d-m-Y');
+            $reng_dvp_total_art = $res[$t]['reng_dvp_total_art'];
+  
+            $compras_fact = $res[$t]['compras_fact'];
+            $comp_comentario = $res[$t]['comp_comentario'];
+            $com_fecha = $res[$t]['com_fecha'];
+            $fecha_com = $com_fecha->format('d-m-Y');
+            $com_total_art = $res[$t]['com_total_art'];
+  
+            echo "
+            <tr>
+            <th scope='row'>$n</th>
+            <td>$sede</td>
+            <td>$co_art</td>
+            <td>$co_lin</td>
+            <td>$co_subl </td>
+            <td>$ubicacion</td>
+            <td>$co_cat </td>
+            <td>$co_color</td>
+            <td>$stock_act</td>
+    
+            <td>$dev_cli_fact</td>
+            <td>$dev_cli_comentario</td>
+            <td>$fecha_dev_cli</td>
+            <td>$reng_dvc_total_art</td>
+    
+            <td>$compras_fact</td>
+            <td>$comp_comentario</td>
+            <td>$fecha_com</td>
+            <td>$com_total_art</td>
+      
+            </tr>";
+            $n++;
+          }
 
-          $total_stock_act_dev_pro += $stock_act;
-
-          $dev_pro_fact = $res[$t]['dev_pro_fact'];
-          $dev_pro_descrip = $res[$t]['dev_pro_descrip'];
-          $dev_pro_fec_emis = $res[$t]['dev_pro_fec_emis'];
-          $fecha_dev_pro = $dev_pro_fec_emis->format('d-m-Y');
-          $reng_dvp_total_art = $res[$t]['reng_dvp_total_art'];
-
-          $compras_fact = $res[$t]['compras_fact'];
-          $comp_comentario = $res[$t]['comp_comentario'];
-          $com_fecha = $res[$t]['com_fecha'];
-          $fecha_com = $com_fecha->format('d-m-Y');
-          $com_total_art = $res[$t]['com_total_art'];
-
+        } else {
           echo "
           <tr>
-          <th scope='row'>$n</th>
+          <th scope='row'>No hay Informacion</th>
           <td>$sede</td>
-          <td>$co_art</td>
-          <td>$co_lin</td>
-          <td>$co_subl </td>
-          <td>$ubicacion</td>
-          <td>$co_cat </td>
-          <td>$co_color</td>
-          <td>$stock_act</td>
+          <td>No hay Informacion</td>
+          <td>$sede</td>
+          <td>No hay Informacion</td>
+          <td>$sede</td>
+          <td>No hay Informacion</td>
+          <td>$sede</td>
+          <td>No hay Informacion</td>
   
-          <td>$dev_cli_fact</td>
-          <td>$dev_cli_comentario</td>
-          <td>$fecha_dev_cli</td>
-          <td>$reng_dvc_total_art</td>
+          <td>$sede</td>
+          <td>No hay Informacion</td>
+          <td>$sede</td>
+          <td>No hay Informacion</td>
   
-          <td>$compras_fact</td>
-          <td>$comp_comentario</td>
-          <td>$fecha_com</td>
-          <td>$com_total_art</td>
+          <td>$sede</td>
+          <td>No hay Informacion</td>
+          <td>$sede</td>
+          <td>No hay Informacion</td>
     
           </tr>";
-          $n++;
         }
+        
+
+        
       }
     }
 
