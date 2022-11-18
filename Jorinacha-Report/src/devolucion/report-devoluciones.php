@@ -168,12 +168,12 @@ if (isset($_GET)) {
         </tr>";
           $n++;
         }
-        
+
       } else {
 
         $res = getDev_pro($sede, $fecha1, $fecha2);
 
-        if ($res !=null) {
+        if (round($res[0]['reng_dvp_total_art']) >= 1 ) {
           for ($t = 0; $t < count($res); $t++) {
 
 
