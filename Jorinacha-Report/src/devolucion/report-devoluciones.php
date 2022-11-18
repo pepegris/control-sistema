@@ -15,7 +15,7 @@ if (isset($_GET)) {
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
-
+  var_dump(count($consultas));
 
 ?>
 
@@ -133,11 +133,15 @@ if (isset($_GET)) {
           $fecha_dev_cli = $dev_cli_fec_emis->format('d-m-Y');
           $reng_dvc_total_art = round($res[$i]['reng_dvc_total_art']);
 
+          $total_stock_reng_dvc += $reng_dvc_total_art;
+
           $compras_fact = $res[$i]['compras_fact'];
           $comp_comentario = $res[$i]['comp_comentario'];
           $com_fecha = $res[$i]['com_fecha'];
           $fecha_com = $com_fecha->format('d-m-Y');
           $com_total_art = round($res[$i]['com_total_art']);
+
+          $total_stock_com_total_art += $com_total_art;
 
           echo "
         <tr>
@@ -186,13 +190,18 @@ if (isset($_GET)) {
             $dev_pro_descrip = $res[$t]['dev_pro_descrip'];
             $dev_pro_fec_emis = $res[$t]['dev_pro_fec_emis'];
             $fecha_dev_pro = $dev_pro_fec_emis->format('d-m-Y');
-            $reng_dvp_total_art = $res[$t]['reng_dvp_total_art'];
+            $reng_dvp_total_art = round($res[$t]['reng_dvp_total_art']);
+
+            $total_stock_reng_dvp += $reng_dvp_total_art;
   
             $compras_fact = $res[$t]['compras_fact'];
             $comp_comentario = $res[$t]['comp_comentario'];
             $com_fecha = $res[$t]['com_fecha'];
             $fecha_com = $com_fecha->format('d-m-Y');
-            $com_total_art = $res[$t]['com_total_art'];
+            $com_total_art = round($res[$t]['com_total_art']);
+
+            $total_stock_com += $com_total_art;
+
   
             echo "
             <tr>
@@ -258,12 +267,18 @@ if (isset($_GET)) {
         <tr>
       
         <td>" . $total_stock_act_dev_cli . "</td>
+        <td>" . $total_stock_com_total_art . "</td>
+        <td>" . $total_stock_reng_dvc . "</td>
         <td>" . $total_stock_act_dev_pro . "</td>
+        <td>" . $total_stock_com . "</td>
+        <td>" . $total_stock_reng_dvp . "</td>
         <td></td>
         </tr>
         </tbody>
         </table>";
-    $total_monto = 0;
+        
+
+
   }
 
 
