@@ -15,7 +15,7 @@ include '../../services/sqlserver.php';
 </style>
 
 <center>
-  <h1>Reporte de Gastos y Cobros</h1>
+  <h1>Reporte en Prueba</h1>
 </center>
 
 <div id="body">
