@@ -326,12 +326,8 @@ function getCuenta_contable($sede, $num , $fecha1, $fecha2)
 
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $scren_co['comp_num'] = $row['comp_num'];
-                    $scren_co['descri'] = $row['descri'];
-                    $scren_co['co_cue'] = $row['co_cue'];
-                    $scren_co['des_cue'] = $row['des_cue'];
-                    $scren_co['fec_emis'] = $row['fec_emis'];
-                    break;
+                    $scren_co[] = $row;
+
                 }
                 $res = $scren_co;
 
