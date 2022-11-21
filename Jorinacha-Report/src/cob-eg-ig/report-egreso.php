@@ -96,7 +96,7 @@ $n = 1;
 
             $mov_num = $res[$e]['mov_num'];
             $cod_cta = $res[$e]['cod_cta'];
-            $des_ban = $res[$e]['des_ban'];
+            #$des_ban = $res[$e]['des_ban'];
 
             $cta_egre = $res[$e]['cta_egre'];
             $cta_egre_descrip = $res[$e]['cta_egre_descrip'];

@@ -131,8 +131,21 @@ function getOrd_pago($sede,  $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
+            $sql ="SELECT             
+			ord_pago.ord_num, ord_pago.mov_num  , 
+            ord_pago.cod_cta , 
+            ord_pago.cta_egre , cta_ingr.descrip as cta_egre_descrip  ,
+            ord_pago.tipo_imp,ord_pago.cod_caja , ord_pago.descrip ,
+            ord_pago.monto , ord_pago.cheque , ord_pago.fecha
+			FROM ord_pago
+			JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
+			JOIN cta_ingr ON ord_pago.cta_egre=cta_ingr.co_ingr
+			WHERE ord_pago.fecha between '$fecha1' and '$fecha2'
+			AND ord_pago.anulada=0
+			AND cta_egre <>'878'";
 
-            $sql = "SELECT 
+
+            /*$sql = "SELECT 
             ord_pago.ord_num, ord_pago.mov_num  , 
             ord_pago.cod_cta , bancos.des_ban ,
             ord_pago.cta_egre , cta_ingr.descrip as cta_egre_descrip  ,
@@ -142,7 +155,7 @@ function getOrd_pago($sede,  $fecha1, $fecha2)
             JOIN cta_ingr ON ord_pago.cta_egre=cta_ingr.co_ingr
             JOIN cuentas ON ord_pago.cod_cta=cuentas.cod_cta
             JOIN bancos ON cuentas.co_banco=bancos.co_ban
-            where ord_pago.anulada=0   AND ord_pago.fecha between '$fecha1' and '$fecha2'";
+            where ord_pago.anulada=0   AND ord_pago.fecha between '$fecha1' and '$fecha2'";*/
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -247,7 +260,7 @@ function getDocum_cp($sede,  $fecha1, $fecha2)
 
 
             $sql = "SELECT 
-            docum_cp.nro_doc, docum_cp.nro_fact, docum_cp.monto_net , docum_cp.n_control,
+            docum_cp.nro_doc, docum_cp.nro_fact, docum_cp.monto_bru as monto_neto , docum_cp.n_control,
             docum_cp.co_cli , prov.prov_des , docum_cp.observa ,docum_cp.fec_emis ,cta_ingr.co_ingr ,cta_ingr.descrip AS co_ingr_prov
             from docum_cp
             JOIN prov ON docum_cp.co_cli = prov.co_prov
