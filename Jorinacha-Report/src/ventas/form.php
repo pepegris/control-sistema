@@ -1,6 +1,6 @@
 <?php
 require '../../includes/log.php';
-include '../../includes/header.php';
+include '../../includes/header2.php';
 include '../../services/mysql.php';
 include '../../services/sqlserver.php';
 
