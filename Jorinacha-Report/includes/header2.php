@@ -30,7 +30,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="../../LoginJorinacha/inicio.php">Jorinacha</a>
+      <a class="navbar-brand" href="../../../LoginJorinacha/inicio.php">Jorinacha</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -39,7 +39,7 @@
         <ul class="navbar-nav ml-auto">
 
         <li class="nav-item">
-            <a class="nav-link" href="../../../../LoginJorinacha/main.php">Admnistrativo</a>
+            <a class="nav-link" href="../../../LoginJorinacha/main.php">Admnistrativo</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../../../log/contadores/buscador.php">Contadores</a>
