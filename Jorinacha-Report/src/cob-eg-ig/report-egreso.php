@@ -153,9 +153,14 @@ if (isset($_GET)) {
                           echo "
                           <td>$monto_h2</td>           
                           </tr>";
-                        } else {
+                        } elseif ($monto_d2 > 1) {
                           echo "
                           <td>$monto_d2</td>           
+                          </tr>";
+                        }
+                        else {
+                          echo "
+                          <td>$monto</td>           
                           </tr>";
                         }
                     $n++;
@@ -189,9 +194,14 @@ if (isset($_GET)) {
                         echo "
                         <td>$monto_h</td>           
                         </tr>";
-                      } else {
+                      } elseif ($monto_d > 1) {
                         echo "
                         <td>$monto_d</td>           
+                        </tr>";
+                      }
+                      else {
+                        echo "
+                        <td>$monto</td>           
                         </tr>";
                       }
 
@@ -265,9 +275,14 @@ if (isset($_GET)) {
                       echo "
                       <td>$monto_h2</td>           
                       </tr>";
-                    } else {
+                    } elseif ($monto_d2 > 1) {
                       echo "
                       <td>$monto_d2</td>           
+                      </tr>";
+                    }
+                    else {
+                      echo "
+                      <td>$monto_net</td>           
                       </tr>";
                     }
 
@@ -305,9 +320,14 @@ if (isset($_GET)) {
                       echo "
                       <td>$monto_h</td>           
                       </tr>";
-                    } else {
+                    }elseif ($monto_d > 1) {
                       echo "
                       <td>$monto_d</td>           
+                      </tr>";
+                    }
+                    else {
+                      echo "
+                      <td>$monto_net</td>           
                       </tr>";
                     }
                 }
@@ -373,9 +393,14 @@ if (isset($_GET)) {
                       echo "
                       <td>$monto_h2</td>           
                       </tr>";
-                    } else {
+                    } elseif ($monto_d2 > 1) {
                       echo "
                       <td>$monto_d2</td>           
+                      </tr>";
+                    }
+                    else {
+                      echo "
+                      <td>$monto_d</td>           
                       </tr>";
                     }
 
@@ -385,7 +410,7 @@ if (isset($_GET)) {
                   }
 
                 } else {
-                  
+
                   echo "
                   <tr>
                   <th scope='row'>$n</th>
@@ -415,7 +440,12 @@ if (isset($_GET)) {
                     echo "
                     <td>$monto_h</td>           
                     </tr>";
-                  } else {
+                  } elseif ($monto_d > 1) {
+                    echo "
+                    <td>$monto_d</td>           
+                    </tr>";
+                  }
+                  else {
                     echo "
                     <td>$monto_d</td>           
                     </tr>";
