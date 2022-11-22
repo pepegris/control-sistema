@@ -28,6 +28,7 @@ $consultas = array(
     "Ordenes de Pago",
     "Documentos de Compras",
     "Movimiento de Caja",
+    "Movimiento de Banco",
 
 );
 
@@ -209,9 +210,9 @@ function getMov_caj($sede,  $fecha1, $fecha2)
             mov_caj.monto_d,  
             mov_caj.cta_egre , cta_ingr.descrip as cta_egre_descrip  , 
             mov_caj.fecha
-            from mov_caj
+            FROM mov_caj
             JOIN cta_ingr ON mov_caj.cta_egre=cta_ingr.co_ingr
-            where mov_caj.origen='CAJ' and mov_caj.tipo_op= 'E' AND mov_caj.fecha between '$fecha1' and '$fecha2' AND mov_caj.anulado=0";
+            where cta_egre <>'045' AND cta_egre <>'878' and mov_caj.tipo_op= 'E' AND mov_caj.fecha between '$fecha1' and '$fecha2' AND mov_caj.anulado=0";
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -242,6 +243,62 @@ function getMov_caj($sede,  $fecha1, $fecha2)
 }
 
 
+
+
+function getMov_ban($sede,  $fecha1, $fecha2)
+{
+
+
+    $database = Database($sede);
+
+
+    if ($database) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+
+            $sql = "SELECT 
+            mov_ban.mov_num, 
+            mov_ban.descrip, 
+            mov_ban.monto_d,  
+            mov_ban.cta_egre , 
+            mov_ban.fecha,
+            cta_ingr.descrip as cta_egre_descrip  
+            FROM mov_ban
+            JOIN cta_ingr ON mov_ban.cta_egre=cta_ingr.co_ingr
+            WHERE   origen <>'OPA' AND cta_egre <>'045' AND cta_egre <>'415' AND mov_ban.fecha between '$fecha1' and '$fecha2'AND mov_ban.anulado=0";
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+
+            if ($consulta != null) {
+
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $mov_ban[] = $row;
+                }
+                $res = $mov_ban;
+
+            } else {
+                $res = 'N/A';
+            }
+
+
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
 
 
 function getDocum_cp($sede,  $fecha1, $fecha2)

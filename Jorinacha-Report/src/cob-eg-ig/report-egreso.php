@@ -62,13 +62,20 @@ if (isset($_GET)) {
           if ($consultas[$o] == "Ordenes de Pago") {
 
             $res = getOrd_pago($sede,  $fecha1, $fecha2);
+
           } elseif ($consultas[$o] == "Documentos de Compras") {
 
             $res = getDocum_cp($sede,  $fecha1, $fecha2);
-          } else {
+
+          } elseif ($consultas[$o] == "Movimiento de Caja") {
 
             $res = getMov_caj($sede,  $fecha1, $fecha2);
+
+          }else {
+
+            $res = getMov_ban($sede,  $fecha1, $fecha2);
           }
+          
 
 
           $consulta = $consultas[$o];
@@ -332,11 +339,134 @@ if (isset($_GET)) {
                     }
                     $n++;
                 }
-              } else {
+              } elseif ($consulta == "Movimiento de Caja") {
 
 
 
                 $documento =  "Movimiento de Caja";
+
+                $mov_num = $res[$e]['mov_num'];
+                $descrip = $res[$e]['descrip'];
+                $cta_egre = $res[$e]['cta_egre'];
+                $cta_egre_descrip = $res[$e]['cta_egre_descrip'];
+
+                $monto_neto = number_format($res[$e]['monto_d'], 2, ',', '.');
+                $total_monto += $monto_d;
+
+                $fecha_cheq = $res[$e]['fecha'];
+                $fecha = $fecha_cheq->format('d-m-Y');
+
+                $cuenta_contable = getCuenta_contable($sede, $mov_num,  $fecha1, $fecha2);
+                $co_cue = $cuenta_contable['co_cue'];
+                $des_cue = $cuenta_contable['des_cue'];
+                $monto_h = number_format($cuenta_contable[$e]['monto_h'], 2, ',', '.');
+                $monto_d = number_format($cuenta_contable[$e]['monto_d'], 2, ',', '.');
+
+
+
+                if (count($cuenta_contable) > 1) {
+
+                  for ($x = 0; $x < count($cuenta_contable); $x++) {
+                    $co_cue2 = $cuenta_contable[$x]['co_cue'];
+                    $des_cue2 = $cuenta_contable[$x]['des_cue'];
+                    $monto_h2 = number_format($cuenta_contable[$x]['monto_h'], 2, ',', '.');
+                    $monto_d2 = number_format($cuenta_contable[$x]['monto_d'], 2, ',', '.');
+
+                    echo "
+                    <tr>
+                    <th scope='row'>$n</th>
+                    <td>$fecha</td>";
+
+                    if ($co_cue2 != null) {
+                      echo "<td>$co_cue2 </td>";
+                      echo "<td> $des_cue2</td>";
+                    } else {
+                      echo "<td>Sin </td>";
+                      echo "<td>Contabilizar</td>";
+                    }
+
+                    echo "
+                    <td>$cta_egre</td>
+                    <td>$cta_egre_descrip</td>
+        
+                    <td>$sede</td>
+                    <td>$consulta</td>
+        
+                    <td>$mov_num</td>
+                    <td></td>
+        
+                    <td>$descrip</td>";
+
+                    if ($monto_h2 > 1) {
+                      echo "
+                      <td>$monto_h2</td>           
+                      </tr>";
+                    } elseif ($monto_d2 > 1) {
+                      echo "
+                      <td>$monto_d2</td>           
+                      </tr>";
+                    }
+                    else {
+                      echo "
+                      <td>$monto_neto</td>           
+                      </tr>";
+                    }
+
+
+
+                    $n++;
+                  }
+
+                } else {
+
+                  echo "
+                  <tr>
+                  <th scope='row'>$n</th>
+                  <td>$fecha</td>";
+
+                  if ($co_cue != null) {
+                    echo "<td>$co_cue </td>";
+                    echo "<td> $des_cue</td>";
+                  } else {
+                    echo "<td>Sin </td>";
+                    echo "<td>Contabilizar</td>";
+                  }
+
+                  echo "
+                  <td>$cta_egre</td>
+                  <td>$cta_egre_descrip</td>
+      
+                  <td>$sede</td>
+                  <td>$consulta</td>
+      
+                  <td>$mov_num</td>
+                  <td></td>
+      
+                  <td>$descrip</td>";
+
+                  if ($monto_h > 1) {
+                    echo "
+                    <td>$monto_h</td>           
+                    </tr>";
+                  } elseif ($monto_d > 1) {
+                    echo "
+                    <td>$monto_d</td>           
+                    </tr>";
+                  }
+                  else {
+                    echo "
+                    <td>$monto_neto</td>           
+                    </tr>";
+                  }
+
+                  $n++;
+                }
+                
+              }else {
+
+
+
+                $documento =  "Movimiento de Banco";
 
                 $mov_num = $res[$e]['mov_num'];
                 $descrip = $res[$e]['descrip'];
