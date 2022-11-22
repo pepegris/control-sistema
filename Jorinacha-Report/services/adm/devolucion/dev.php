@@ -249,7 +249,7 @@ function getCompras($sede, $fecha1, $fecha2 , $co_art)
             JOIN compras ON compras.fact_num = reng_com.fact_num
 			WHERE  compras.anulada =0 
 			AND co_art ='$co_art'
-            AND com_fecha BETWEEN '$fecha1' AND '$fecha2'
+            AND com_fecha >= '$fecha2'
             ORDER BY com_fecha DESC";
 
 
