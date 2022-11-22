@@ -92,7 +92,7 @@ if (isset($_GET)) {
 
           $total_stock_reng_dvc += $reng_dvc_total_art;
 
-          $res2 = getCompras($sede, $fecha1, $fecha2 , $co_art );
+          $res2 = getCompras($sede,  $fecha2 , $co_art );
 
           $compras_fact = $res2[$i]['compras_fact'];
           $com_fecha = $res2[$i]['com_fecha'];

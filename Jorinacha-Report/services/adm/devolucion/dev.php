@@ -228,7 +228,7 @@ function getDev_pro($sede, $fecha1, $fecha2)
 
 
 
-function getCompras($sede, $fecha1, $fecha2 , $co_art)
+function getCompras($sede,  $fecha2 , $co_art)
 {
 
 
@@ -249,8 +249,8 @@ function getCompras($sede, $fecha1, $fecha2 , $co_art)
             JOIN compras ON compras.fact_num = reng_com.fact_num
 			WHERE  compras.anulada =0 
 			AND co_art ='$co_art'
-            AND com_fecha <= '$fecha2'
-            ORDER BY com_fecha DESC";
+            AND fec_emis <= '$fecha2'
+            ORDER BY fec_emis DESC";
 
 
 
