@@ -16,7 +16,7 @@ if (isset($_GET)) {
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
-  var_dump(count($consultas));
+  
 
 ?>
 
@@ -70,7 +70,7 @@ if (isset($_GET)) {
 
 
         $res = getDev_cli($sede, $fecha1, $fecha2);
-
+        var_dump(count($res));
         for ($i = 0; $i < count($res); $i++) {
 
 
