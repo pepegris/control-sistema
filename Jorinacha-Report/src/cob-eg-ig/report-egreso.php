@@ -112,6 +112,8 @@ if (isset($_GET)) {
 
                 $co_cue = $cuenta_contable[$e]['co_cue'];
                 $des_cue = $cuenta_contable[$e]['des_cue'];
+                $monto_h = number_format($cuenta_contable[$e]['monto_h'], 2, ',', '.');
+                $monto_d = number_format($cuenta_contable[$e]['monto_d'], 2, ',', '.');
 
                 if (count($cuenta_contable) > 1) {
 
@@ -120,6 +122,8 @@ if (isset($_GET)) {
 
                     $co_cue2 = $cuenta_contable[$x]['co_cue'];
                     $des_cue2 = $cuenta_contable[$x]['des_cue'];
+                    $monto_h2 = number_format($cuenta_contable[$x]['monto_h'], 2, ',', '.');
+                    $monto_d2 = number_format($cuenta_contable[$x]['monto_d'], 2, ',', '.');
 
 
                     echo "
@@ -143,14 +147,19 @@ if (isset($_GET)) {
                         <td>$consulta</td>
                         <td>$ord_num</td>
                         <td>$cheque</td>
-                        <td>$descrip</td>
-                        <td>$monto</td>
-                        
-                  
-                        </tr>";
-                        $n++;
+                        <td>$descrip</td>";
+
+                        if ($monto_h2 > 1) {
+                          echo "
+                          <td>$monto_h2</td>           
+                          </tr>";
+                        } else {
+                          echo "
+                          <td>$monto_d2</td>           
+                          </tr>";
+                        }
+                    $n++;
                   }
-                  
                 } else {
 
                   echo "
@@ -174,11 +183,20 @@ if (isset($_GET)) {
                       <td>$consulta</td>
                       <td>$ord_num</td>
                       <td>$cheque</td>
-                      <td>$descrip</td>
-                      <td>$monto</td>
+                      <td>$descrip</td>";
+
+                      if ($monto_h > 1) {
+                        echo "
+                        <td>$monto_h</td>           
+                        </tr>";
+                      } else {
+                        echo "
+                        <td>$monto_d</td>           
+                        </tr>";
+                      }
+
+
                       
-                
-                      </tr>";
                 }
               } elseif ($consulta == "Documentos de Compras") {
 
@@ -205,6 +223,8 @@ if (isset($_GET)) {
 
                 $co_cue = $cuenta_contable[$e]['co_cue'];
                 $des_cue = $cuenta_contable[$e]['des_cue'];
+                $monto_h = number_format($cuenta_contable[$e]['monto_h'], 2, ',', '.');
+                $monto_d = number_format($cuenta_contable[$e]['monto_d'], 2, ',', '.');
 
                 if (count($cuenta_contable) > 1) {
 
@@ -212,6 +232,8 @@ if (isset($_GET)) {
 
                     $co_cue2 = $cuenta_contable[$x]['co_cue'];
                     $des_cue2 = $cuenta_contable[$x]['des_cue'];
+                    $monto_h2 = number_format($cuenta_contable[$x]['monto_h'], 2, ',', '.');
+                    $monto_d2 = number_format($cuenta_contable[$x]['monto_d'], 2, ',', '.');
 
                     echo "
                   <tr>
@@ -237,16 +259,22 @@ if (isset($_GET)) {
       
                   <td>$nro_doc</td>
                   <td>$nro_fact / $n_control</td>
-                  <td>$observa</td>
-                  <td>$monto_net</td>
-                  
-            
-                  </tr>";
-                  $n++;
-                  }
+                  <td>$observa</td>";
 
+                    if ($monto_h2 > 1) {
+                      echo "
+                      <td>$monto_h2</td>           
+                      </tr>";
+                    } else {
+                      echo "
+                      <td>$monto_d2</td>           
+                      </tr>";
+                    }
+
+                    $n++;
+                  }
                 } else {
-                  
+
                   echo "
                   <tr>
                   <th scope='row'>$n</th>
@@ -271,11 +299,17 @@ if (isset($_GET)) {
       
                   <td>$nro_doc</td>
                   <td>$nro_fact / $n_control</td>
-                  <td>$observa</td>
-                  <td>$monto_net</td>
-                  
-            
-                  </tr>";
+                  <td>$observa</td>";
+
+                    if ($monto_h > 1) {
+                      echo "
+                      <td>$monto_h</td>           
+                      </tr>";
+                    } else {
+                      echo "
+                      <td>$monto_d</td>           
+                      </tr>";
+                    }
                 }
               } else {
 
@@ -297,6 +331,8 @@ if (isset($_GET)) {
                 $cuenta_contable = getCuenta_contable($sede, $mov_num,  $fecha1, $fecha2);
                 $co_cue = $cuenta_contable['co_cue'];
                 $des_cue = $cuenta_contable['des_cue'];
+                $monto_h = number_format($cuenta_contable[$e]['monto_h'], 2, ',', '.');
+                $monto_d = number_format($cuenta_contable[$e]['monto_d'], 2, ',', '.');
 
 
 
@@ -305,6 +341,8 @@ if (isset($_GET)) {
                   for ($x = 0; $x < count($cuenta_contable); $x++) {
                     $co_cue2 = $cuenta_contable[$x]['co_cue'];
                     $des_cue2 = $cuenta_contable[$x]['des_cue'];
+                    $monto_h2 = number_format($cuenta_contable[$x]['monto_h'], 2, ',', '.');
+                    $monto_d2 = number_format($cuenta_contable[$x]['monto_d'], 2, ',', '.');
 
                     echo "
                     <tr>
@@ -329,12 +367,25 @@ if (isset($_GET)) {
                     <td>$mov_num</td>
                     <td></td>
         
-                    <td>$descrip</td>
-                    <td>$monto_d</td>  
-                    </tr>";
+                    <td>$descrip</td>";
+
+                    if ($monto_h2 > 1) {
+                      echo "
+                      <td>$monto_h2</td>           
+                      </tr>";
+                    } else {
+                      echo "
+                      <td>$monto_d2</td>           
+                      </tr>";
+                    }
+
+
+
                     $n++;
                   }
+
                 } else {
+                  
                   echo "
                   <tr>
                   <th scope='row'>$n</th>
@@ -358,9 +409,19 @@ if (isset($_GET)) {
                   <td>$mov_num</td>
                   <td></td>
       
-                  <td>$descrip</td>
-                  <td>$monto_d</td>  
-                  </tr>";
+                  <td>$descrip</td>";
+
+                  if ($monto_h > 1) {
+                    echo "
+                    <td>$monto_h</td>           
+                    </tr>";
+                  } else {
+                    echo "
+                    <td>$monto_d</td>           
+                    </tr>";
+                  }
+
+
                 }
               }
               $n++;

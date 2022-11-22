@@ -313,8 +313,12 @@ function getCuenta_contable($sede, $num , $fecha1, $fecha2)
 
 
             $sql = "SELECT 
-            comp_num,descri,scren_co.co_cue ,
-            sccuenta.des_cue ,fec_emis
+            comp_num,descri,
+            scren_co.co_cue ,
+            sccuenta.des_cue ,
+            monto_h,
+            monto_d,
+            fec_emis
             from scren_co 
             JOIN sccuenta ON scren_co.co_cue = sccuenta.co_cue
             where docref='$num' and scren_co.fec_emis between '$fecha1' and '$fecha2'";
