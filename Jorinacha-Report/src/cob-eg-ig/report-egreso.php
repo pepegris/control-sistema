@@ -205,7 +205,7 @@ if (isset($_GET)) {
                         </tr>";
                       }
 
-
+                      $n++;
                       
                 }
               } elseif ($consulta == "Documentos de Compras") {
@@ -330,6 +330,7 @@ if (isset($_GET)) {
                       <td>$monto_net</td>           
                       </tr>";
                     }
+                    $n++;
                 }
               } else {
 
@@ -451,7 +452,7 @@ if (isset($_GET)) {
                     </tr>";
                   }
 
-
+                  $n++;
                 }
               }
               $n++;
