@@ -12,6 +12,8 @@ if (isset($_GET)) {
 
 
 
+  $fecha_titulo1 = date("d/m/Y", strtotime($_GET['fecha1']));
+  $fecha_titulo2 = date("d/m/Y", strtotime($_GET['fecha2']));
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
@@ -20,10 +22,9 @@ if (isset($_GET)) {
 ?>
 
   <center>
-    <h1>Devoluciones</h1>
+    <h1>Devoluciones <?= $fecha_titulo1 ?> - <?= $fecha_titulo2  ?></h1>
+    <h3>Proveedores</h3>
   </center>
-
-  <center> <h3>Proveedores</h3></center>
   <table class='table table-dark table-striped' >
           <thead>
 

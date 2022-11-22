@@ -11,7 +11,8 @@ include '../../services/adm/devolucion/dev.php';
 if (isset($_GET)) {
 
 
-
+  $fecha_titulo1 = date("d/m/Y", strtotime($_GET['fecha1']));
+  $fecha_titulo2 = date("d/m/Y", strtotime($_GET['fecha2']));
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
@@ -20,10 +21,8 @@ if (isset($_GET)) {
 ?>
 
   <center>
-    <h1>Devoluciones</h1>
-  </center>
+    <h1>Devoluciones <?= $fecha_titulo1 ?> - <?= $fecha_titulo2  ?></h1>
 
-  <center>
     <h3> Clientes </h3>
   </center>
   <table class='table table-dark table-striped'>
@@ -62,10 +61,6 @@ if (isset($_GET)) {
 
 
 
-
-
-
-
       $n = 1;
 
 
@@ -97,7 +92,7 @@ if (isset($_GET)) {
 
           $total_stock_reng_dvc += $reng_dvc_total_art;
 
-          $res2 = getCompras($sede, $co_art );
+          $res2 = getCompras($sede, $fecha1, $fecha2 , $co_art );
 
           $compras_fact = $res2[$i]['compras_fact'];
           $com_fecha = $res2[$i]['com_fecha'];
