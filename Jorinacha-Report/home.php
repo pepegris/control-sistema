@@ -115,7 +115,6 @@ $cuenta_on = ucwords($cuenta_on);
         <h4>Articulos con sus precio y cantidad vendida</h4>
       </div>
       </a>
-      
 
 
     <a href="src/cob-eg-ig/form.php">
@@ -126,14 +125,27 @@ $cuenta_on = ucwords($cuenta_on);
       </div>
     </a>
 
-    <a href="src/devolucion/form.php">
+
+    <a href="src/ventas/form.php">
         <div class="box">
-          
         <i class="lni lni-invest-monitor"></i>
           <h5>Ventas</h5>
           <h4>Pronto aun En Desarrollo</h4>
         </div>
       </a>
+
+
+    <a href="src/devolucion/form.php">
+        <div class="box">
+          
+        <i class="lni lni-offer"></i>
+          <h5>Devoluciones</h5>
+          <h4>Pronto aun En Desarrollo</h4>
+        </div>
+      </a>
+
+
+
 
     <a href="src/replica/form.php">
         <div class="box">
@@ -153,13 +165,7 @@ $cuenta_on = ucwords($cuenta_on);
 
 
 
-      <a href="src/ventas/form.php">
-        <div class="box">
-        <i class="lni lni-construction"></i>
-          <h5>Desarrollo</h5>
-          <h4>Pronto aun En Desarrollo</h4>
-        </div>
-      </a>
+
 
       <a href="src/test/form.php">
         <div class="box">
@@ -168,7 +174,6 @@ $cuenta_on = ucwords($cuenta_on);
           <h4>Pronto aun En Desarrollo</h4>
         </div>
       </a>
-
 
 
 
