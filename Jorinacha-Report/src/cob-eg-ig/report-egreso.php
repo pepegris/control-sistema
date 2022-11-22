@@ -467,7 +467,8 @@ if (isset($_GET)) {
 
       ?>
 
-
+</tbody>
+  </table>
 
     <?php
 
@@ -482,5 +483,3 @@ if (isset($_GET)) {
 
   include '../../includes/footer.php'; ?>
 
-    </tbody>
-  </table>
