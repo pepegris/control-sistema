@@ -343,7 +343,7 @@ if (isset($_GET)) {
                 $cta_egre = $res[$e]['cta_egre'];
                 $cta_egre_descrip = $res[$e]['cta_egre_descrip'];
 
-                $monto_d = number_format($res[$e]['monto_d'], 2, ',', '.');
+                $monto_neto = number_format($res[$e]['monto_d'], 2, ',', '.');
                 $total_monto += $monto_d;
 
                 $fecha_cheq = $res[$e]['fecha'];
@@ -401,7 +401,7 @@ if (isset($_GET)) {
                     }
                     else {
                       echo "
-                      <td>$monto_d</td>           
+                      <td>$monto_neto</td>           
                       </tr>";
                     }
 
@@ -448,7 +448,7 @@ if (isset($_GET)) {
                   }
                   else {
                     echo "
-                    <td>$monto_d</td>           
+                    <td>$monto_neto</td>           
                     </tr>";
                   }
 
