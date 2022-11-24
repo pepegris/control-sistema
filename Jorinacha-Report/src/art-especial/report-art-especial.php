@@ -112,7 +112,7 @@ if (isset($_GET)) {
 
         if ($ventas != null) {
 
-          echo "<td>$fec_emis_ventas </td>";
+          echo "<td>".$fec_emis_ventas->format('d-m-Y') ."</td>";
         } else {
           echo "<td>No se a Vendido </td>";
         }
@@ -120,14 +120,14 @@ if (isset($_GET)) {
 
         if ($compras != null) {
 
-          echo "<td>$fact_num_compras </td><td>$fec_emis_compras </td>";
+          echo "<td>$fact_num_compras </td><td>".$fec_emis_compras->format('d-m-Y') ."</td>";
         } else {
           echo "<td>No se a</td><td>Registrado Compra</td>";
         }
 
         if ($ajuste != null) {
 
-          echo "<td>$ajue_num_ajuste </td><td>$fec_emifecha_ajuste_compras </td>";
+          echo "<td>$ajue_num_ajuste </td><td>".$fec_emifecha_ajuste_compras->format('d-m-Y') ."</td>";
         } else {
           echo "<td>No se a</td><td>Registrado Ajuste</td>";
         }
