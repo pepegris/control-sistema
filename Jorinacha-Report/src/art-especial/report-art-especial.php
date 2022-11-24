@@ -67,20 +67,20 @@ if (isset($_GET)) {
         $co_cat = $getArt1[$e]['co_cat'];
         $co_color = $getArt1[$e]['co_color'];
         $desc = $getArt1[$e]['ubicacion'];
-        var_dump( $co_art );
+
 
         $stock_act = round($getArt1[$e]['stock_act']);
         
         $ventas =getReng_fac($tienda,  $co_art , $fecha1 , $fecha2);
         var_dump( $ventas );
-        
+        echo "<br>";
         $total_art_ventas = $ventas['total_art'];
         $fec_emis_ventas = $ventas['fec_emis'];
 
 
         $compras =getReng_com($tienda,  $co_art , $fecha1 , $fecha2);
         var_dump( $compras );
-
+        echo "<br>";
         $fact_num_compras = $compras['fact_num'];
         $total_art_compras = $compras['total_art'];
         $fec_emis_compras = $compras['fec_emis'];
@@ -88,7 +88,7 @@ if (isset($_GET)) {
 
         $ajuste =getReng_ajue($tienda,  $co_art , $fecha1 , $fecha2);
         var_dump( $ajuste );
-
+        echo "<br>";
         $ajue_num_ajuste = $ajuste['ajue_num'];
         $total_art_ajuste = $ajuste['total_art'];
         $fecha_ajuste = $ajuste['fecha'];
