@@ -67,6 +67,7 @@ if (isset($_GET)) {
         $co_cat = $getArt1[$e]['co_cat'];
         $co_color = $getArt1[$e]['co_color'];
         $desc = $getArt1[$e]['ubicacion'];
+        var_dump( $co_art );
 
         $stock_act = round($getArt1[$e]['stock_act']);
         
