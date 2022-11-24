@@ -312,8 +312,7 @@ function getReng_ajue($sede, $co_art, $fecha1, $fecha2)
             JOIN ajuste ON reng_aju.ajue_num =ajuste.ajue_num
             WHERE ajuste.anulada=0 AND ajuste.fecha BETWEEN '$fecha1'  AND '$fecha2'
             AND reng_aju.co_art='$co_art'
-            ORDER BY ajuste.fecha  DESC 
-            ";
+            ORDER BY ajuste.fecha  DESC  ";
 
             $consulta = sqlsrv_query($conn, $sql);
 
