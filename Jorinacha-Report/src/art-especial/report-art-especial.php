@@ -57,9 +57,6 @@ if (isset($_GET)) {
       <?php
 
       $getArt1 = getArt($tienda, $linea, 0, null);
-      var_dump($getArt1);
-      echo "<hr>";
-      var_dump(count($getArt1));
 
       $n = 1;
       for ($e = 0; $e < count($getArt1); $e++) {
