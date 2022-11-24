@@ -72,12 +72,10 @@ if (isset($_GET)) {
         $stock_act = round($getArt1[$e]['stock_act']);
         
         $ventas =getReng_fac($tienda,  $co_art , $fecha1 , $fecha2);
-        var_dump( $ventas );
 
         $total_art_ventas = $ventas['total_art'];
         $fec_emis_ventas = $ventas['fec_emis']->format('d-m-Y');
 
-        var_dump( $fec_emis_ventas );
 
         $compras =getReng_com($tienda,  $co_art , $fecha1 , $fecha2);
  
@@ -105,17 +103,32 @@ if (isset($_GET)) {
           <td><?= $co_color ?></td>
 
           <td ><?= $stock_act ?></td>
+        <?php  
+
+        if ($ventas != null) {
+
+          echo "<td>$fec_emis_ventas </td>";
+        } else {
+          echo "<td>No se a Vendido </td>";
+        }
 
 
-          <td><?=$fec_emis_ventas?></td>
+        if ($compras != null) {
 
-          <td><?=$fact_num_compras?></td>
-          <td><?=$fec_emis_compras?></td>
+          echo "<td>$fact_num_compras </td><td>$fec_emis_compras </td>";
+        } else {
+          echo "<td>No se a</td><td>Registrado Compra</td>";
+        }
 
-          <td><?=$ajue_num_ajuste?></td>
-          <td><?=$fecha_ajuste?></td>
+        if ($ajuste != null) {
 
-        <?php  $n++ ?>
+          echo "<td>$ajue_num_ajuste </td><td>$fec_emifecha_ajuste_compras </td>";
+        } else {
+          echo "<td>No se a</td><td>Registrado Ajuste</td>";
+        }
+        
+        
+        $n++ ?>
         </tr>
 
 
