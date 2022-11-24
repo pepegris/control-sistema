@@ -222,8 +222,8 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
             if ($consulta != null) {
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $reng_fac['total_art'] = $row['total_art'];
-                    $reng_fac['fec_emis'] = $row['fec_emis'];
+                    $reng_fac[] = $row;
+
                     break;
                 }
                 $res = $reng_fac;
@@ -270,9 +270,7 @@ function getReng_com ($sede,  $co_art , $fecha1, $fecha2)
             if ($consulta != null) {
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $reng_com['fact_num'] = $row['fact_num'];
-                    $reng_com['total_art'] = $row['total_art'];
-                    $reng_com['fec_emis'] = $row['fec_emis'];
+                    $reng_com[] = $row;
                     break;
                 }
                 $res = $reng_com;
@@ -320,9 +318,7 @@ function getReng_ajue($sede, $co_art, $fecha1, $fecha2)
 
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $reng_aju['ajue_num'] = $row['ajue_num'];
-                    $reng_aju['total_art'] = $row['total_art'];
-                    $reng_aju['fecha'] = $row['fecha'];
+                    $reng_aju[] = $row;
                     break;
                 }
                 $res = $reng_aju;
