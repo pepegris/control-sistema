@@ -261,7 +261,7 @@ function getReng_com ($sede,  $co_art , $fecha1, $fecha2)
            $sql = "SELECT TOP 1 reng_com.total_art , compras.fact_num , compras.fec_emis 
            FROM reng_com
            JOIN compras ON reng_com.fact_num =compras.fact_num
-           WHERE compras.anulada=0 AND compras.fec_emis BETWEEN '$fecha1'  AND '$fecha2'
+           WHERE compras.anulada=0 AND 
            AND reng_com.co_art='$co_art'
            ORDER BY compras.fec_emis  DESC ";
 
@@ -308,7 +308,7 @@ function getReng_ajue($sede, $co_art, $fecha1, $fecha2)
             $sql = "SELECT TOP 1 reng_aju.total_art , ajuste.ajue_num , ajuste.fecha  
             FROM reng_aju
             JOIN ajuste ON reng_aju.ajue_num =ajuste.ajue_num
-            WHERE ajuste.anulada=0 AND ajuste.fecha BETWEEN '$fecha1'  AND '$fecha2'
+            WHERE ajuste.anulada=0 
             AND reng_aju.co_art='$co_art'
             ORDER BY ajuste.fecha  DESC  ";
 
