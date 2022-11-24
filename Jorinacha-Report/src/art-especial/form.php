@@ -15,7 +15,7 @@ require '../../services/adm/art-especial/especial.php';
 </style>
 
 <center>
-  <h1>Reporte de Precios de Articulos</h1>
+  <h1>Reporte de Mov Articulos</h1>
 </center>
 
 <div id="body">
