@@ -72,6 +72,8 @@ if (isset($_GET)) {
         $stock_act = round($getArt1[$e]['stock_act']);
         
         $ventas =getReng_fac($tienda,  $co_art , $fecha1 , $fecha2);
+        var_dump( $n );
+        echo "<br>";
         var_dump( $ventas );
         echo "<br>";
         $total_art_ventas = $ventas[0]['total_art'];
