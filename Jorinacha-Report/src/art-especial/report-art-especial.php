@@ -127,7 +127,7 @@ if (isset($_GET)) {
 
         if ($ajuste != null) {
 
-          echo "<td>$ajue_num_ajuste </td><td>".$fec_emifecha_ajuste_compras->format('d-m-Y') ."</td>";
+          echo "<td>$ajue_num_ajuste </td><td>".$fecha_ajuste->format('d-m-Y') ."</td>";
         } else {
           echo "<td>No se a</td><td>Registrado Ajuste</td>";
         }
