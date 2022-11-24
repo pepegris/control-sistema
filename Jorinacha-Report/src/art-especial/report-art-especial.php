@@ -13,6 +13,7 @@ if (isset($_GET)) {
   $linea = $_GET['linea'];
   $tienda = $_GET['tienda'];
   var_dump($tienda);
+  var_dump($linea);
 
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
