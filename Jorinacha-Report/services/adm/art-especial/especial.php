@@ -261,7 +261,7 @@ function getReng_com ($sede,  $co_art , $fecha1, $fecha2)
            $sql = "SELECT TOP 1 reng_com.total_art , compras.fact_num , compras.fec_emis 
            FROM reng_com
            JOIN compras ON reng_com.fact_num =compras.fact_num
-           WHERE compras.anulada=0 AND compras.fec_emis BETWEEN '$fecha1'  AND '$fecha2'
+           WHERE compras.anulada=0 AND compras.fec_emis <=  '$fecha2'
            AND reng_com.co_art='$co_art'
            ORDER BY compras.fec_emis  DESC ";
 
