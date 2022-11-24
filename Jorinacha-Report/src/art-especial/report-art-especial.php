@@ -12,8 +12,7 @@ if (isset($_GET)) {
 
   $linea = $_GET['linea'];
   $tienda = $_GET['tienda'];
-  var_dump($tienda);
-  var_dump($linea);
+
 
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
@@ -58,6 +57,9 @@ if (isset($_GET)) {
       <?php
 
       $getArt1 = getArt($tienda, $linea, 0, null);
+      var_dump($getArt1);
+      echo "<hr>";
+      var_dump(count($getArt1));
 
       $n = 1;
       for ($e = 0; $e < count($getArt1); $e++) {
