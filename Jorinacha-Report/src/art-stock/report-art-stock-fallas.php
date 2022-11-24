@@ -5,7 +5,7 @@ ini_set('max_execution_time',3600);
 require "../../includes/log.php";
 include '../../includes/header.php';
 include '../../services/mysql.php';
-include '../../services/sqlserver.php';
+include '../../services/adm/fallas/fallas.php';
 
 if (isset($_GET)) {
 
@@ -81,10 +81,10 @@ form , td {
 
 
         $co_art = $res0[$e]['co_art'];
-        $co_lin = getLin_art($res0[$e]['co_lin']);
-        $co_subl = getSub_lin($res0[$e]['co_subl']);
-        $co_cat = getCat_art($res0[$e]['co_cat']);
-        $co_color = getColores($res0[$e]['co_color']);
+        $co_lin = $res0[$e]['co_lin'];
+        $co_subl = $res0[$e]['co_subl'];
+        $co_cat = $res0[$e]['co_cat'];
+        $co_color = $res0[$e]['co_color'];
         $desc = $res0[$e]['ubicacion'];
         
         $test1 = getPedidos(null, $co_art);
@@ -157,14 +157,12 @@ form , td {
 
               $res3 = getArt_stock_tiendas($sedes_ar[$f], $co_art);
               $stock_act_tienda = round($res3[0]['stock_act']);
+              $prec_vta5_tienda = round($res3[0]['prec_vta5']);
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
               $res4 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
               $vendido_tienda = number_format($res4, 0, ',', '.');
               $total_vendido_tienda [$sedes_ar[$f]] += $vendido_tienda;
-
-              $res5 = getArt($sedes_ar[$f], $linea, $co_art,null);
-              $prec_vta5_tienda = round($res5[0]['prec_vta5']);
 
 
 
@@ -231,10 +229,6 @@ form , td {
 
     </tbody>
   </table>
-  <script src="../../assets/js/excel.js"></script>
-  <center>
-    <button id="submitExport" class="btn btn-success">Exportar Reporte a EXCEL</button>
-  </center>
 
 
 
