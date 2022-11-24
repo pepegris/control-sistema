@@ -72,23 +72,26 @@ if (isset($_GET)) {
         $stock_act = round($getArt1[$e]['stock_act']);
         
         $ventas =getReng_fac($tienda,  $co_art , $fecha1 , $fecha2);
-
+        var_dump( $ventas );
+        
         $total_art_ventas = $ventas['total_art'];
-        $fec_emis_ventas = $ventas['fec_emis']->format('d-m-Y');
+        $fec_emis_ventas = $ventas['fec_emis'];
 
 
         $compras =getReng_com($tienda,  $co_art , $fecha1 , $fecha2);
- 
+        var_dump( $compras );
+
         $fact_num_compras = $compras['fact_num'];
         $total_art_compras = $compras['total_art'];
-        $fec_emis_compras = $compras['fec_emis']->format('d-m-Y');
+        $fec_emis_compras = $compras['fec_emis'];
 
 
         $ajuste =getReng_ajue($tienda,  $co_art , $fecha1 , $fecha2);
- 
+        var_dump( $ajuste );
+
         $ajue_num_ajuste = $ajuste['ajue_num'];
         $total_art_ajuste = $ajuste['total_art'];
-        $fecha_ajuste = $ajuste['fecha']->format('d-m-Y');
+        $fecha_ajuste = $ajuste['fecha'];
 
 
       ?>
