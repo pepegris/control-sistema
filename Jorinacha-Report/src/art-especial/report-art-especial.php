@@ -5,13 +5,14 @@ ini_set('max_execution_time', 3600);
 require "../../includes/log.php";
 include '../../includes/header.php';
 include '../../services/mysql.php';
-require '../../services/adm/precios/precios.php';
+require '../../services/adm/art-especial/especial.php';
 
 if (isset($_GET)) {
 
 
   $linea = $_GET['linea'];
   $tienda = $_GET['tienda'];
+  var_dump($tienda);
 
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
