@@ -13,6 +13,28 @@ if ($_GET) {
   $fecha_titulo = date("d/m/Y", strtotime($_GET['fecha1']));
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
 
+  $fecha = date("Ymd", strtotime($_GET['fecha1']));
+
+  $Day = date("d", strtotime($fecha));
+  $Month = date("m", strtotime($fecha));
+  $Year = date("Y", strtotime($fecha));
+
+  var_dump($Day );
+
+  if ($Day <= 31) {
+
+    $fecha_2 = $Year . $Month . $Day +1;
+
+  }else {
+    $Day = 01;
+    $fecha_2 = $Year . $Month + 1 . $Day ;
+  }
+
+  var_dump($fecha_2 );
+
+
+
+
 
 
 
@@ -93,7 +115,7 @@ if ($_GET) {
       for ($i = 1; $i < count($sedes_ar); $i++) {
 
         if ($divisa == 'dl') {
-          $tasas = getTasas($sedes_ar[$i], $fecha1);
+          $tasas = getTasas($sedes_ar[$i], $fecha1 , $fecha_2);
 
           if ($tasas != null) {
             $tasa_v_tasas = $tasas['tasa_v'];
