@@ -19,7 +19,7 @@ if ($_GET) {
   $Month = date("m", strtotime($fecha));
   $Year = date("Y", strtotime($fecha));
 
-  var_dump($Day );
+  echo "$Day";
 
   if ($Day <= 31) {
 
