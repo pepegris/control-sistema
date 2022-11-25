@@ -23,7 +23,7 @@ if ($_GET) {
 
   if ($Day >= 31) {
     $Day = 01;
-    $fecha_2 = $Year . $Month + 1 . $Day ;
+    $fecha_1 = $Year . $Month + 1 . $Day ;
 
   }else {
     
@@ -32,6 +32,7 @@ if ($_GET) {
     
   }
 
+  var_dump($fecha_1 );
   var_dump($fecha_2 );
 
 
