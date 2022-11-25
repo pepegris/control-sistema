@@ -21,7 +21,7 @@ if ($_GET) {
 
   echo "$Day";
 
-  if ($Day >= 31) {
+  if ($Day >= '31') {
     $Day = 01;
     $fecha_1 = $Year . $Month + 1 . $Day ;
 
