@@ -40,7 +40,7 @@ function Database2($sede)
 
     $bd = array(
         "Previa Shop" => 'C_PREVIA',
-        "Inv Jorinacha"=> 'C_JORINA',
+        "Inv Jorinacha" => 'C_JORINA',
         "Comercial Merina" => 'C_MERINA1',
         "Comercial Merina III" => 'C_MERINA3',
         "Comercial Corina I" => 'C_CORINA1',
@@ -67,7 +67,7 @@ function Database($sede)
 
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
-        "Inv Jorinacha"=> 'JORINA',
+        "Inv Jorinacha" => 'JORINA',
         "Comercial Merina" => 'MERINA',
         "Comercial Merina III" => 'MERINA3',
         "Comercial Corina I" => 'CORINA1',
@@ -132,7 +132,7 @@ function getOrd_pago($sede,  $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql ="SELECT             
+            $sql = "SELECT             
 			ord_pago.ord_num, ord_pago.mov_num  , 
             ord_pago.cod_cta , 
             ord_pago.cta_egre , cta_ingr.descrip as cta_egre_descrip  ,
@@ -168,7 +168,6 @@ function getOrd_pago($sede,  $fecha1, $fecha2)
                     $ord_pago[] = $row;
                 }
                 $res = $ord_pago;
-
             } else {
                 $res = 'N/A';
             }
@@ -205,14 +204,27 @@ function getMov_caj($sede,  $fecha1, $fecha2)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-            $sql = "SELECT 
-            mov_caj.mov_num, mov_caj.descrip, 
-            mov_caj.monto_d,  
-            mov_caj.cta_egre , cta_ingr.descrip as cta_egre_descrip  , 
-            mov_caj.fecha
-            FROM mov_caj
-            JOIN cta_ingr ON mov_caj.cta_egre=cta_ingr.co_ingr
-            where cta_egre <>'045' AND cta_egre <>'878' and mov_caj.tipo_op= 'E' AND mov_caj.fecha between '$fecha1' and '$fecha2' AND mov_caj.anulado=0";
+
+            if ($database == 'JORINA' ) {
+                $sql = "SELECT 
+                mov_caj.mov_num, mov_caj.descrip, 
+                mov_caj.monto_d,  
+                mov_caj.cta_egre , cta_ingr.descrip as cta_egre_descrip  , 
+                mov_caj.fecha
+                FROM mov_caj
+                JOIN cta_ingr ON mov_caj.cta_egre=cta_ingr.co_ingr
+                where  mov_caj.tipo_op= 'E' AND mov_caj.fecha between '$fecha1' and '$fecha2' AND mov_caj.anulado=0";
+            }else {
+                $sql = "SELECT 
+                mov_caj.mov_num, mov_caj.descrip, 
+                mov_caj.monto_d,  
+                mov_caj.cta_egre , cta_ingr.descrip as cta_egre_descrip  , 
+                mov_caj.fecha
+                FROM mov_caj
+                JOIN cta_ingr ON mov_caj.cta_egre=cta_ingr.co_ingr
+                where cta_egre <>'045' AND cta_egre <>'878' and mov_caj.tipo_op= 'E' AND mov_caj.fecha between '$fecha1' and '$fecha2' AND mov_caj.anulado=0";
+            }
+
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -224,7 +236,6 @@ function getMov_caj($sede,  $fecha1, $fecha2)
                     $mov_caj[] = $row;
                 }
                 $res = $mov_caj;
-
             } else {
                 $res = 'N/A';
             }
@@ -259,17 +270,30 @@ function getMov_ban($sede,  $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
+            if ($database == 'JORINA' ) {
+                $sql = "SELECT 
+                mov_ban.mov_num, 
+                mov_ban.descrip, 
+                mov_ban.monto_d,  
+                mov_ban.cta_egre , 
+                mov_ban.fecha,
+                cta_ingr.descrip as cta_egre_descrip  
+                FROM mov_ban
+                JOIN cta_ingr ON mov_ban.cta_egre=cta_ingr.co_ingr
+                WHERE   origen <>'OPA' AND mov_ban.fecha between '$fecha1' and '$fecha2'AND mov_ban.anulado=0";
+            }else {
+                $sql = "SELECT 
+                mov_ban.mov_num, 
+                mov_ban.descrip, 
+                mov_ban.monto_d,  
+                mov_ban.cta_egre , 
+                mov_ban.fecha,
+                cta_ingr.descrip as cta_egre_descrip  
+                FROM mov_ban
+                JOIN cta_ingr ON mov_ban.cta_egre=cta_ingr.co_ingr
+                WHERE   origen <>'OPA' AND cta_egre <>'045' AND cta_egre <>'415' AND mov_ban.fecha between '$fecha1' and '$fecha2'AND mov_ban.anulado=0";
+            }
 
-            $sql = "SELECT 
-            mov_ban.mov_num, 
-            mov_ban.descrip, 
-            mov_ban.monto_d,  
-            mov_ban.cta_egre , 
-            mov_ban.fecha,
-            cta_ingr.descrip as cta_egre_descrip  
-            FROM mov_ban
-            JOIN cta_ingr ON mov_ban.cta_egre=cta_ingr.co_ingr
-            WHERE   origen <>'OPA' AND cta_egre <>'045' AND cta_egre <>'415' AND mov_ban.fecha between '$fecha1' and '$fecha2'AND mov_ban.anulado=0";
 
 
             $consulta = sqlsrv_query($conn, $sql);
@@ -282,7 +306,6 @@ function getMov_ban($sede,  $fecha1, $fecha2)
                     $mov_ban[] = $row;
                 }
                 $res = $mov_ban;
-
             } else {
                 $res = 'N/A';
             }
@@ -332,10 +355,8 @@ function getDocum_cp($sede,  $fecha1, $fecha2)
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
                     $docum_cp[] = $row;
-
                 }
                 $res = $docum_cp;
-
             } else {
                 $res = 'N/A';
             }
@@ -354,7 +375,7 @@ function getDocum_cp($sede,  $fecha1, $fecha2)
 }
 
 
-function getCuenta_contable($sede, $num , $fecha1, $fecha2)
+function getCuenta_contable($sede, $num, $fecha1, $fecha2)
 {
 
 
@@ -388,17 +409,13 @@ function getCuenta_contable($sede, $num , $fecha1, $fecha2)
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
                     $scren_co[] = $row;
-
                 }
                 $res = $scren_co;
-
             } else {
                 $res = 'N/A';
             }
 
             return $res;
-
-
         } catch (\Throwable $th) {
 
             throw $th;
