@@ -450,7 +450,7 @@ function getTasas($sede, $fecha1)
 
             
             $sql = "SELECT TOP 1 tasa_v from tasas 
-            where Convert(char(10), fecha, 111) = '$fecha1'
+            where Convert(char(10), fecha, 111) <= '$fecha1'
             ORDER BY fecha DESC";
 
             #$sql = "SELECT TOP 1 tasa_v from tasas 
