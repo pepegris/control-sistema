@@ -122,7 +122,7 @@ if ($_GET) {
           }
 
 
-          $fecha =  $Year . $Month . $d;
+          $fecha =  $Year .'/'. $Month .'/'  . $d;
           $tasas = getTasas($sede, $fecha);
 
 
