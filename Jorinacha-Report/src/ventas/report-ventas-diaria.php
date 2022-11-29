@@ -19,21 +19,15 @@ if ($_GET) {
   $Month = date("m", strtotime($fecha));
   $Year = date("Y", strtotime($fecha));
 
-  echo "$Day";
 
-  if ($Day >= '31') {
-    $Day = 01;
-    $fecha_1 = $Year . $Month + 1 . $Day ;
-
-  }else {
     
 
-    $fecha_2 = $Year . $Month . $Day +1;
+  $fecha_2 = $Year .'/'. $Month .'/' . $Day ;
+  echo $fecha_2;
     
-  }
 
-  var_dump($fecha_1 );
-  var_dump($fecha_2 );
+
+
 
 
 
