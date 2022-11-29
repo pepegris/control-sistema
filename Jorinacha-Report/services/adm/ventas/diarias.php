@@ -449,7 +449,7 @@ function getTasas($sede, $fecha1)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             
-            $sql = "SELECT tasa_v from tasas 
+            $sql = "SELECT TOP 1 tasa_v from tasas 
             where Convert(char(10), fecha, 111) = '$fecha1'
             ORDER BY fecha DESC";
 
