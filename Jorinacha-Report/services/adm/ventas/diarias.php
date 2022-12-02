@@ -448,13 +448,16 @@ function getTasas($sede, $fecha1)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
+            $sql = "SELECT TOP 1 tasa_v from tasas 
+            where Convert(char(10), fecha, 111) between '$fecha1' and  '$fecha1'
+            ORDER BY fecha DESC";
             
             #$sql = "SELECT TOP 1 tasa_v from tasas 
             #where Convert(char(10), fecha, 111) <= '$fecha1'
             #ORDER BY fecha DESC";
 
-            $sql = "SELECT TOP 1 tasa_v from tasas 
-            where fecha >= CAST('$fecha1' AS datetime) ";
+            #$sql = "SELECT TOP 1 tasa_v from tasas 
+            #where fecha >= CAST('$fecha1' AS datetime) ";
 
 
             $consulta = sqlsrv_query($conn, $sql);

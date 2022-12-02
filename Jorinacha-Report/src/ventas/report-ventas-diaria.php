@@ -20,10 +20,10 @@ if ($_GET) {
   $Year = date("Y", strtotime($fecha));
 
 
-    
+  /* $fecha_2 =  $fecha; */
 
   $fecha_2 = $Year .'/'. $Month .'/' . $Day ;
-  echo $fecha_2;
+  echo $fecha_2; 
     
 
 
