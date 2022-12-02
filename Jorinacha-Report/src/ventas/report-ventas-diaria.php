@@ -106,6 +106,7 @@ if ($_GET) {
 
         if ($divisa == 'dl') {
           $tasas = getTasas($sedes_ar[$i], $fecha1 , $fecha_2);
+          $tasa_v_tasas = $tasas['tasa_v'];
 
         } else {
           $tasa_v_tasas  = 1;
