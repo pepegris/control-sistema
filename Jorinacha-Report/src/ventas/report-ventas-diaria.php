@@ -105,8 +105,15 @@ if ($_GET) {
       for ($i = 1; $i < count($sedes_ar); $i++) {
 
         if ($divisa == 'dl') {
+
           $tasas = getTasas($sedes_ar[$i], $fecha1 , $fecha_2);
-          $tasa_v_tasas = $tasas['tasa_v'];
+           
+          if ($tasas != null) {
+            $tasa_v_tasas = $tasas['tasa_v'];
+          } else {
+            $tasa_v_tasas;
+          }
+
 
         } else {
           $tasa_v_tasas  = 1;

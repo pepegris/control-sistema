@@ -449,7 +449,7 @@ function getTasas($sede, $fecha1)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT TOP 1 tasa_v from tasas 
-            where Convert(char(10), fecha, 111) between '$fecha1' and  '$fecha1'
+            where Convert(char(10), fecha, 111) BETWEEN '$fecha1' AND  '$fecha1'
             ORDER BY fecha DESC";
             
             #$sql = "SELECT TOP 1 tasa_v from tasas 
