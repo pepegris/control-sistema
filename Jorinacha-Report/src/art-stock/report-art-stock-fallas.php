@@ -94,7 +94,7 @@ form , td {
 
         $res_stock = getArt('Previa Shop', $linea, $co_art ,$almacen );
 
-        if ($res_stock != null) {
+        if ($res_stock[0]['stock_act'] != 0) {
           $stock_act_1 = round($res_stock[0]['stock_act']);
         } else {
           $stock_act_1 = 0;
