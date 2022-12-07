@@ -97,6 +97,7 @@ form , td {
 
         if ($res_stock != null) {
           $stock_act_1 = round($res_stock[0]['stock_act']);
+          var_dump( $stock_act_1 );
         } else {
           $stock_act_1 = 0;
         }
