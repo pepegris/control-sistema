@@ -72,9 +72,9 @@ form , td {
     </thead>
     <tbody>
       <?php
-var_dump( $almacen);
+
       $res0 = getArt('Previa Shop', $linea,0 ,0 );
-      var_dump($res0);
+
       $n = 1;
       for ($e = 0; $e < count($res0); $e++) {
 
