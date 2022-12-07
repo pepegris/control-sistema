@@ -163,7 +163,7 @@ function getArt($sede, $linea, $co_art, $almacen)
                 JOIN sub_lin on art.co_subl = sub_lin.co_subl
                 JOIN cat_art on art.co_cat=cat_art.co_cat
                 JOIN colores on art.co_color=colores.co_col
-                where art.co_lin='$linea' AND art.prec_vta5 >= 1 AND art.fe_us_in >= '20180101'
+                where art.co_lin='$linea' AND art.prec_vta5 >= 1 AND art.fe_us_in >= '20170101'
                 order by art.co_subl   desc";
                 
 
