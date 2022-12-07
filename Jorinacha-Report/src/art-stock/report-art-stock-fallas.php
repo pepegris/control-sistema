@@ -72,9 +72,9 @@ form , td {
     </thead>
     <tbody>
       <?php
-
+var_dump( $almacen);
       $res0 = getArt('Previa Shop', $linea,0 ,0 );
-      
+      var_dump($res0);
       $n = 1;
       for ($e = 0; $e < count($res0); $e++) {
 
@@ -93,6 +93,7 @@ form , td {
         $pedido = $test1['total_art'];
 
         $res_stock = getArt('Previa Shop', $linea, $co_art ,$almacen );
+        var_dump( $res_stock);
         if ($res_stock != null) {
           $stock_act_1 = round($res_stock[0]['stock_act']);
         } else {
