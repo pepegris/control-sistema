@@ -94,7 +94,7 @@ if (isset($_GET)) {
 
       <?php
 
-      $getArt1 = getArt('Previa Shop', $linea, 0, null);
+      $getArt1 = getArt('Previa Shop', $linea, 0, 0);
 
       $n = 1;
       for ($e = 0; $e < count($getArt1); $e++) {
@@ -106,7 +106,17 @@ if (isset($_GET)) {
         $co_color = $getArt1[$e]['co_color'];
         $desc = $getArt1[$e]['ubicacion'];
 
-        $stock_act = round($getArt1[$e]['stock_act']);
+
+        $test1 = getPedidos(null, $co_art);
+
+        $pedido = $test1['total_art'];
+
+        $res_stock = getArt('Previa Shop', $linea, $co_art ,'BOLE' );
+
+        $stock_act_1 = round($res_stock[0]['stock_act']);
+               
+        
+        $stock_act =  $stock_act_1 - $pedido; 
         $total_stock_act_previa += $stock_act;
 
         $bultos =round(getBultos($co_art));
