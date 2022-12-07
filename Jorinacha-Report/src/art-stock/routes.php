@@ -6,7 +6,7 @@ if (isset($_POST)) {
     include '../../services/sqlserver.php';
 
     $pedidos=$_POST['pedidos'];
-    $almacen=$_POST['almacen'];
+    $almacen='BOLE';
 
     $linea = $_POST['linea'];
     /*   $fecha1 = $_POST['fecha1'];
