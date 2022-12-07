@@ -151,7 +151,7 @@ function getArt($sede, $linea, $co_art, $almacen)
 
             #$sql ="EXEC getArt '$sede' , '$co_art', '$linea'  ";
 
-            if ($sede== 'Previa Shop' and $almacen== 0) {
+            if ($sede== 'Previa Shop' and $almacen== 0 and $co_art == 0) {
 
                 $sql ="SELECT  LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(sub_lin.subl_des)) as  co_subl,LTRIM(RTRIM(cat_art.cat_des)) as  co_cat,
                 prec_vta3,prec_vta4,prec_vta5,art.stock_act , LTRIM(RTRIM(colores.des_col)) as co_color, LTRIM(RTRIM(lin_art.lin_des)) as co_lin,art.ubicacion
@@ -165,7 +165,7 @@ function getArt($sede, $linea, $co_art, $almacen)
                 
 
            
-            } elseif ($almacen== 'BOLE' and $sede== 'Previa Shop') {
+            } elseif ($almacen== 'BOLE' and $sede== 'Previa Shop' and $co_art != 0) {
 
                 $sql ="SELECT stock_act FROM st_almac WHERE co_art='$co_art' AND co_alma='BOLE'";
 
