@@ -97,21 +97,15 @@ form , td {
 
 
         $stock_act_1 = round($res_stock[0]['stock_act']);
-          
- 
-        
+               
 
         
         $stock_act =  $stock_act_1 - $pedido; 
         $total_stock_act_previa += $stock_act;
 
-        var_dump($co_art);
-        var_dump($stock_act_1);
-        var_dump($pedido);
-        var_dump($stock_act);
-        echo "<br>";
 
         $prec_vta5 = round($res0[$e]['prec_vta5']);
+        
 
       ?>
 
