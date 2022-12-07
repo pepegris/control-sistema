@@ -95,6 +95,8 @@ form , td {
 
         $res_stock = getArt('Previa Shop', $linea,0 ,'BOLE' );
 
+        var_dump( $res_stock );
+
         if ($res_stock != null) {
           $stock_act_1 = round($res_stock[0]['stock_act']);
           var_dump( $stock_act_1 );
