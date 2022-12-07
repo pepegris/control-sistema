@@ -11,7 +11,7 @@ if (isset($_GET)) {
 
 
   $linea = $_GET['linea'];
-  $almacen =$_GET['almacen'];
+  $almacen = 'BOLE';
 
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));  
@@ -73,7 +73,7 @@ form , td {
     <tbody>
       <?php
 
-      $res0 = getArt('Previa Shop', $linea,0 ,$almacen );
+      $res0 = getArt('Previa Shop', $linea,0 ,0 );
       
       $n = 1;
       for ($e = 0; $e < count($res0); $e++) {
@@ -93,7 +93,16 @@ form , td {
         $pedido = $test1['total_art'];
 
 
-        $stock_act_1 = round($res0[$e]['stock_act']);
+        $res_stock = getArt('Previa Shop', $linea,0 ,$almacen );
+
+        if ($res_stock != null) {
+          $stock_act_1 = round($res_stock[0]['stock_act']);
+        } else {
+          $stock_act_1 = 0;
+        }
+        
+
+        
         $stock_act =  $stock_act_1 - $pedido; 
         $total_stock_act_previa += $stock_act;
 
