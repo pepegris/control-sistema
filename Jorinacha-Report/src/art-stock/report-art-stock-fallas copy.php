@@ -96,9 +96,16 @@ form , td {
         $res_stock = getArt('Previa Shop', $linea, $co_art ,$almacen );
 
 
-        $stock_act_1 = round($res_stock[0]['stock_act']);
+
+        if (round($res_stock[0]['stock_act']) == 0 ) {
+
+          $stock_act_1 = 0;
           
- 
+        } else {
+
+          $stock_act_1 = round($res_stock[0]['stock_act']);
+          
+        }
         
 
         
@@ -125,8 +132,6 @@ form , td {
           <td><?= $co_color ?></td>
           <td>$<?= $prec_vta5 ?></td>
           <?php
-
-          $stock_act_1=0;
           $g = 1;
           $total_vendido = 0; 
           for ($i = 0; $i < count($sedes_ar); $i++) {
