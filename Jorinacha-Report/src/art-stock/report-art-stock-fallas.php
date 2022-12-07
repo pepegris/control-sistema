@@ -93,7 +93,7 @@ form , td {
         $pedido = $test1['total_art'];
 
         $res_stock = getArt('Previa Shop', $linea, $co_art ,$almacen );
-        var_dump( $res_stock);
+
         if ($res_stock != null) {
           $stock_act_1 = round($res_stock[0]['stock_act']);
         } else {
