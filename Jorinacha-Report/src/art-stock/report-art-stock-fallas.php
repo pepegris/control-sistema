@@ -92,6 +92,7 @@ form , td {
 
         $pedido = $test1['total_art'];
 
+
         $res_stock = getArt('Previa Shop', $linea, $co_art ,$almacen );
 
 
@@ -106,7 +107,10 @@ form , td {
           
         }
         
-
+        var_dump($co_art);
+        var_dump($pedido);
+        var_dump($stock_act_1);
+        echo "<br>";
         
         $stock_act =  $stock_act_1 - $pedido; 
         $total_stock_act_previa += $stock_act;
