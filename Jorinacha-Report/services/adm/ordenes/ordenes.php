@@ -156,7 +156,7 @@ function getOrdenes_Pag($sede, $fecha)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "SELECT * from ord_pago
+            $sql = "SELECT SUM(monto) as monto from ord_pago
                 JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
                 WHERE  anulada = 0   AND ord_num < 6000000 AND cta_egre ='878'
                 AND  fecha ='$fecha'";
