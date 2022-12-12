@@ -110,17 +110,17 @@ function getTasa( $fecha)
 
 
 
-
+    $database = Database($sede);
     if ($database) {
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "KAGU", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-
-            $sql = "SELECT TOP 1 tasa_v from tasas where fe_us_in >='$fecha' order by fecha desc";
-
+            $sql = "SELECT TOP 1 tasa_v from tasas 
+            where Convert(char(10), fecha, 111) BETWEEN '$fecha' AND  '$fecha'
+            ORDER BY fecha DESC";
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -156,13 +156,11 @@ function getOrdenes_Pag($sede, $fecha)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($database == 'MERINA3' or $database == 'MERINA') {
-                $sql = "SELECT SUM(monto) as monto from ord_pago where cod_ben ='47' and fecha ='$fecha' and anulada=0";
-            } elseif ($database == 'KAGU' or $database == 'TRINA' or $database == 'CORINA1' or $database == 'CORINA2') {
-                $sql = "SELECT SUM(monto) as monto from ord_pago where cod_ben ='95' and fecha ='$fecha' and anulada=0";
-            } else {
-                $sql = "SELECT SUM(monto) as monto from ord_pago where cod_ben ='65' and fecha ='$fecha' and anulada=0";
-            }
+            $sql = "SELECT * from ord_pago
+                JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
+                WHERE  anulada = 0   AND ord_num < 6000000 AND cta_egre ='878'
+                AND  fecha ='$fecha'";
+
 
 
             $consulta = sqlsrv_query($conn, $sql);
