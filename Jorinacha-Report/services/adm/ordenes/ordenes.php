@@ -110,16 +110,16 @@ function getTasa( $fecha)
 
 
 
-    $database = Database($sede);
+
     if ($database) {
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "KAGU", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT TOP 1 tasa_v from tasas 
-            where Convert(char(10), fecha, 111) BETWEEN '$fecha' AND  '$fecha'
+            where Convert(char(10), fecha, 111) <='$fecha' 
             ORDER BY fecha DESC";
 
             $consulta = sqlsrv_query($conn, $sql);
