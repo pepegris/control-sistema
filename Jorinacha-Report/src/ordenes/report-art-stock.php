@@ -165,6 +165,8 @@ if ($_POST) {
                         }
                         $total = number_format($total_t, 2, ',', '.');
                         echo "<td>$total</td>";
+
+                        $total_t = 0;
                     } else {
 
                         $total_fecha = number_format($total_dia_monto[$fecha], 2, ',', '.');
