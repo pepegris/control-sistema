@@ -124,6 +124,7 @@ if ($_POST) {
 
                                 $total = number_format($total_monto[$sedes[$e]], 2, ',', '.');
                                 echo "<td>$total</td>";
+                                $total = 0;
                             } else {
                                 if ($monto == null) {
                                     echo "<td>0</td>";
