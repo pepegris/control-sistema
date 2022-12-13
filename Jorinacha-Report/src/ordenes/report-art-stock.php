@@ -118,11 +118,11 @@ if ($_POST) {
                             $monto = number_format($res0['monto'], 2, ',', '.');
                             $total_dia_monto[$fecha] += $res0['monto'];
                             # SUMANDO TIENDA
-                            $total_monto[$sedes[$e]] += $res0['monto'];
+                            $total_monto[$sedes[$e]] += $monto;
 
                             if ($r >= $Day) {
 
-                                $total = number_format($total_monto[$sedes[$e]], 2, ',', '.');
+                                $total = $total_monto[$sedes[$e]];
                                 echo "<td>$total</td>";
                                 $total = 0;
                             } else {
