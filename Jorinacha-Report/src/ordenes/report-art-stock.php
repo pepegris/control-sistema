@@ -65,7 +65,8 @@ if ($_POST) {
                     }
                     
                     $fecha =  $Year . $Month . $d;
-                    $res = getTasa( $fecha);
+                    $fecha_2 = $Year .'/'. $Month .'/' . $d;
+                    $res = getTasa( $fecha_2);
                     $tasa = number_format($res['tasa_v'], 2, ',', '.');
 
                     echo "<th>$tasa</th>";
@@ -114,6 +115,9 @@ if ($_POST) {
                                 $d = $y;
                             }
                             $fecha =  $Year . $Month . $d;
+
+                            
+
                             $res0 = getOrdenes_Pag($sedes[$e], $fecha);
                             $monto = number_format($res0['monto'], 2, ',', '.');
                             $total_dia_monto[$fecha] += $res0['monto'];
