@@ -213,8 +213,8 @@ if ($_GET) {
             <td><?= $tot_neto_factura    ?></td>
             <td><?= $total_art_factura - $total_art_dev_cli   ?></td>
 
-            <td><?= $tot_neto_dev_cli   ?></td>
-            <td><?= $total_art_dev_cli  ?></td>
+            <td>-<?= $tot_neto_dev_cli   ?></td>
+            <td>-<?= $total_art_dev_cli  ?></td>
 
             <td><?= $monto_h_mov_ban ?></td>
 
