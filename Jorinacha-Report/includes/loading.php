@@ -53,7 +53,7 @@
 
   <h1>Revisando Datos</h1>
   <div class="preloader"></div>
-  <img class="pulse" src="../../assets/giphy_dedos_grinch.gif" alt="" srcset="">
+  <img class="pulse" src="../../assets/giphy_dedos2.gif" alt="" srcset="">
 
 
 </body>
