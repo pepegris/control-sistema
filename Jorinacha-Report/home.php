@@ -34,7 +34,7 @@ $cuenta_on = ucwords($cuenta_on);
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- NIEVE -->
-  <link rel="stylesheet" href="./assets/navidad/nieve.css">
+<!--   <link rel="stylesheet" href="./assets/navidad/nieve.css"> -->
   <title>Jorinacha Report</title>
 </head>
 
@@ -187,4 +187,4 @@ $cuenta_on = ucwords($cuenta_on);
   <?php include 'includes/footer.php'; ?>
 
 
- <script src="./assets/navidad/nieve.js"></script>
+<!--  <script src="./assets/navidad/nieve.js"></script> -->

@@ -19,7 +19,7 @@
 </footer>
 
 
-<script src="../../assets/navidad/nieve.js"></script>
+<!-- <script src="../../assets/navidad/nieve.js"></script> -->
 </body>
 
 </html>

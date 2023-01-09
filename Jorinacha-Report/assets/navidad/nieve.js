@@ -1,4 +1,4 @@
-const body = document.querySelector('body')
+/* const body = document.querySelector('body')
 
 
 const crear_nieve = () => {
@@ -29,3 +29,4 @@ const crear_nieve = () => {
 }
 
 setInterval(crear_nieve,100)
+ */
