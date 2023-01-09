@@ -111,30 +111,29 @@ if (isset($_GET)) {
 
         $pedido = $test1['total_art'];
 
-        $res_stock = getArt('Previa Shop', $linea, $co_art ,'BOLE' );
+        $res_stock = getArt('Previa Shop', $linea, $co_art, 'BOLE');
 
         $stock_act_1 = round($res_stock[0]['stock_act']);
-               
-        
-        $stock_act =  $stock_act_1 - $pedido; 
+
+
+        $stock_act =  $stock_act_1 - $pedido;
         $total_stock_act_previa += $stock_act;
 
-        $bultos =round(getBultos($co_art));
+        $bultos = round(getBultos($co_art));
 
         if ($bultos == 0) {
 
-          $bultos =round(getArtBultos($co_art));
-          
+          $bultos = round(getArtBultos($co_art));
         }
 
-        
+
 
         $cant_bultos = floor($stock_act / $bultos);
         $total_bultos +=  $cant_bultos;
 
         $prec_vta5 = number_format($getArt1[$e]['prec_vta5'], 0, ',', '.');
-        
-        $prec_vta4 = number_format($getArt1[$e]['prec_vta4'], 2, ',', '.'); 
+
+        $prec_vta4 = number_format($getArt1[$e]['prec_vta4'], 2, ',', '.');
 
         $precio = $prec_vta4 * $tasa;
         $prec_vta3_costo = number_format($precio, 2, ',', '.');
@@ -214,7 +213,7 @@ if (isset($_GET)) {
               $stock_act_tienda = round($getArt2[0]['stock_act']);
               $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
-              $prec_vta5_tienda =number_format($getArt2[0]['prec_vta5'], 0, ',', '.');
+              $prec_vta5_tienda = number_format($getArt2[0]['prec_vta5'], 0, ',', '.');
 
               $precio_tienda = $prec_vta5_tienda * $tasa;
               $prec_vta1_tienda = number_format($precio_tienda, 2, ',', '.');
@@ -230,35 +229,35 @@ if (isset($_GET)) {
 
               $cliente = Cliente($sedes_ar[$f]);
 
-                  $serverName = "172.16.1.39";
-                  $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
-                  $conn = sqlsrv_connect($serverName, $connectionInfo);
+              $serverName = "172.16.1.39";
+              $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+              $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-                  # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
-                  $pedido_tienda =0;
-                  $sql = "SELECT CONVERT(numeric(10,0),SUM(reng_ped.total_art)) AS  total_art
+              # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
+              $pedido_tienda = 0;
+              $sql = "SELECT CONVERT(numeric(10,0),SUM(reng_ped.total_art)) AS  total_art
                   from pedidos
                   JOIN reng_ped ON pedidos.fact_num=reng_ped.fact_num
                   where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art' AND reng_ped.co_alma = 'BOLE'  ";
 
-                  $consulta = sqlsrv_query($conn, $sql);
+              $consulta = sqlsrv_query($conn, $sql);
 
-                  if ($consulta != null) {
-                    while ($row = sqlsrv_fetch_array($consulta)) {
+              if ($consulta != null) {
+                while ($row = sqlsrv_fetch_array($consulta)) {
 
-                      $reng_ped = $row['total_art'];
+                  $reng_ped = $row['total_art'];
 
-                      break;
-                    }
-                    if ($reng_ped >= 1) {
-                      $pedido_tienda = $reng_ped;
-                    } else {
-                      $pedido_tienda = 0;
-                    }
-                    $total_pedido_tienda[$sedes_ar[$f]] += $pedido_tienda;
-                  } else {
-                    $res = 0;
-                  }
+                  break;
+                }
+                if ($reng_ped >= 1) {
+                  $pedido_tienda = $reng_ped;
+                } else {
+                  $pedido_tienda = 0;
+                }
+                $total_pedido_tienda[$sedes_ar[$f]] += $pedido_tienda;
+              } else {
+                $res = 0;
+              }
 
 
 
@@ -313,8 +312,8 @@ if (isset($_GET)) {
           <h3>Totales</h3>
         </td>
 
-        
-        
+
+
 
 
         <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
@@ -332,6 +331,9 @@ if (isset($_GET)) {
         <?php
 
         $h = 1;
+        $tienda_total_ref = 0;
+        $tienda_total_bs = 0;
+        $tienda_total_stock = 0;
         for ($i = 0; $i < count($total_stock_act_tienda); $i++) {
           $vendido = $total_vendido_tienda[$sedes_ar[$h]];
 
@@ -355,10 +357,53 @@ if (isset($_GET)) {
 
         <?php
 
+          $tienda_total_ref += $total_prec_vta5_tienda_todo[$sedes_ar[$h]];
+          $tienda_total_bs += $total_prec_vta1_tienda_todo[$sedes_ar[$h]];
+          $tienda_total_stock +=$total_stock_act_tienda[$sedes_ar[$h]];
+
           $h++;
         }
 
         ?>
+      </tr>
+<!--  -->
+      <tr>
+
+        <td >
+          <h3>Totales Valor Previa</h3>
+        </td>
+
+
+
+
+        <td>BS - $</td>
+        <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
+        <td><b>Bs<?= number_format($total_prec_vta3_todo, 2, ',', '.'); ?></b></td>
+        <td>Stock</td>
+        <td><b><?= $total_stock_act_previa ?></td>
+
+
+        <td></td>
+      </tr>
+<!--  -->
+      <tr>
+
+        <td >
+          <h3>Totales Valor Tiendas</h3>
+        </td>
+
+
+
+
+        <td>BS - $</td>
+        <td><b>$<?= number_format($tienda_total_ref, 0, ',', '.'); ?></b></td>
+        <td><b>Bs<?= number_format($tienda_total_bs, 2, ',', '.'); ?></b></td>
+        <td>Stock</td>
+        <td><b><?= $tienda_total_stock ?></td>
+        
+
+
+        <td></td>
       </tr>
 
     </tbody>
