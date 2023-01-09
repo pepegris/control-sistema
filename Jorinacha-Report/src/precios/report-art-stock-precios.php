@@ -369,33 +369,33 @@ if (isset($_GET)) {
 <!--  -->
       <tr>
 
-        <td >
+        <td  colspan="1">
           <h3>Totales Valor Previa</h3>
         </td>
 
 
 
 
-        <td>BS - $</td>
+
         <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
         <td><b>Bs<?= number_format($total_prec_vta3_todo, 2, ',', '.'); ?></b></td>
         <td>Stock</td>
         <td><b><?= $total_stock_act_previa ?></td>
 
 
-        <td></td>
+
       </tr>
 <!--  -->
       <tr>
 
-        <td >
+        <td colspan="1">
           <h3>Totales Valor Tiendas</h3>
         </td>
 
 
 
 
-        <td>BS - $</td>
+
         <td><b>$<?= number_format($tienda_total_ref, 0, ',', '.'); ?></b></td>
         <td><b>Bs<?= number_format($tienda_total_bs, 2, ',', '.'); ?></b></td>
         <td>Stock</td>
@@ -403,7 +403,7 @@ if (isset($_GET)) {
         
 
 
-        <td></td>
+        
       </tr>
 
     </tbody>
