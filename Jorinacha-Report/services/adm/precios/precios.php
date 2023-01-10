@@ -120,7 +120,8 @@ function getLin_art_all()
     $sql = "SELECT LTRIM(RTRIM(lin_art.co_lin)) as co_lin, LTRIM(RTRIM(lin_art.lin_des)) as lin_des from lin_art 
     INNER JOIN art ON lin_art.co_lin=art.co_lin
     WHERE art.fe_us_in >='20180101'
-    GROUP BY lin_art.co_lin,lin_art.lin_des";
+    GROUP BY lin_art.co_lin,lin_art.lin_des
+    ORDER BY lin_art.lin_des";
 
     $consulta = sqlsrv_query($conn, $sql);
 
