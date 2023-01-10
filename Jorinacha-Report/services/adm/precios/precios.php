@@ -155,9 +155,9 @@ function getArt($sede, $linea, $co_art, $almacen)
 
             #$sql ="EXEC getArt '$sede' , '$co_art', '$linea'  ";
 
-            if ($sede== 'Previa Shop' and $almacen== 0 and $co_art == 0) {
+            if ($sede == 'Previa Shop' and $almacen == 0 and $co_art == 0) {
 
-                $sql ="SELECT  LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(sub_lin.subl_des)) as  co_subl,LTRIM(RTRIM(cat_art.cat_des)) as  co_cat,
+                $sql = "SELECT  LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(sub_lin.subl_des)) as  co_subl,LTRIM(RTRIM(cat_art.cat_des)) as  co_cat,
                 prec_vta3,prec_vta4,prec_vta5,art.stock_act , LTRIM(RTRIM(colores.des_col)) as co_color, LTRIM(RTRIM(lin_art.lin_des)) as co_lin,art.ubicacion
                 from art 
                 JOIN lin_art on art.co_lin = lin_art.co_lin
@@ -166,24 +166,32 @@ function getArt($sede, $linea, $co_art, $almacen)
                 JOIN colores on art.co_color=colores.co_col
                 where art.co_lin='$linea' AND art.prec_vta5 >= 1 AND art.fe_us_in >= '20190101'
                 order by art.co_subl   desc";
-                
+            } elseif ($almacen == 'BOLE' and $sede == 'Previa Shop' and $co_art != 0) {
 
-           
-            } elseif ($almacen== 'BOLE' and $sede== 'Previa Shop' and $co_art != 0) {
-
-                $sql ="SELECT stock_act FROM st_almac WHERE co_art='$co_art' AND co_alma='BOLE'";
-
+                $sql = "SELECT stock_act FROM st_almac WHERE co_art='$co_art' AND co_alma='BOLE'";
             } else {
-                $sql="SELECT  LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(sub_lin.subl_des)) as  co_subl,LTRIM(RTRIM(cat_art.cat_des)) as  co_cat,
-                prec_vta3,prec_vta4,prec_vta5,art.stock_act , LTRIM(RTRIM(colores.des_col)) as co_color, LTRIM(RTRIM(lin_art.lin_des)) as co_lin,art.ubicacion
-                from art 
-                JOIN lin_art on art.co_lin = lin_art.co_lin
-                JOIN sub_lin on art.co_subl = sub_lin.co_subl
-                JOIN cat_art on art.co_cat=cat_art.co_cat
-                JOIN colores on art.co_color=colores.co_col
-                where art.co_lin='$linea' AND art.prec_vta5 >= 1 AND art.co_art='$co_art' ";
+
+                if ($linea == 'A13') {
+                    $sql = "SELECT  LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(sub_lin.subl_des)) as  co_subl,LTRIM(RTRIM(cat_art.cat_des)) as  co_cat,
+                    prec_vta3,prec_vta4,prec_vta5,art.stock_act , LTRIM(RTRIM(colores.des_col)) as co_color, LTRIM(RTRIM(lin_art.lin_des)) as co_lin,art.ubicacion
+                    from art 
+                    JOIN lin_art on art.co_lin = lin_art.co_lin
+                    JOIN sub_lin on art.co_subl = sub_lin.co_subl
+                    JOIN cat_art on art.co_cat=cat_art.co_cat
+                    JOIN colores on art.co_color=colores.co_col
+                    where art.co_lin='A13' AND art.prec_vta5 >= 1 AND art.co_art='$co_art' ";
+                } else {
+                    $sql = "SELECT  LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(sub_lin.subl_des)) as  co_subl,LTRIM(RTRIM(cat_art.cat_des)) as  co_cat,
+                    prec_vta3,prec_vta4,prec_vta5,art.stock_act , LTRIM(RTRIM(colores.des_col)) as co_color, LTRIM(RTRIM(lin_art.lin_des)) as co_lin,art.ubicacion
+                    from art 
+                    JOIN lin_art on art.co_lin = lin_art.co_lin
+                    JOIN sub_lin on art.co_subl = sub_lin.co_subl
+                    JOIN cat_art on art.co_cat=cat_art.co_cat
+                    JOIN colores on art.co_color=colores.co_col
+                    where art.co_lin='$linea' AND art.prec_vta5 >= 1 AND art.co_art='$co_art' ";
+                }
             }
-            
+
 
 
 
@@ -251,10 +259,10 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
 }
 
 
-function getPedidos_t ($sede,  $co_art)
+function getPedidos_t($sede,  $co_art)
 {
 
-    
+
     $cliente = Cliente($sede);
 
     if ($cliente != null) {
@@ -264,9 +272,9 @@ function getPedidos_t ($sede,  $co_art)
             $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-           # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
+            # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
 
-           $sql = "SELECT CONVERT(numeric(10,0),SUM(reng_ped.total_art)) AS  total_art
+            $sql = "SELECT CONVERT(numeric(10,0),SUM(reng_ped.total_art)) AS  total_art
            from pedidos
            JOIN reng_ped ON pedidos.fact_num=reng_ped.fact_num
            where pedidos.anulada=0 AND pedidos.status = 0 AND pedidos.co_cli='$cliente' AND reng_ped.co_art='$co_art' AND reng_ped.co_alma = 'BOLE' ";
@@ -334,9 +342,9 @@ function getPedidos($sede, $co_art)
                 $res = $pedidos;
             } else {
 
-                $pedidos['status'] =3;
+                $pedidos['status'] = 3;
                 $pedidos['total_art'] = 0;
-                $res = $pedidos ;
+                $res = $pedidos;
             }
             return $res;
         } catch (\Throwable $th) {
@@ -368,13 +376,12 @@ function getPedidos($sede, $co_art)
                     break;
                 }
 
-                
-                $res = $pedidos ;
+
+                $res = $pedidos;
             } else {
 
                 $pedidos['total_art'] = 0;
-                $res = $pedidos ;
-                
+                $res = $pedidos;
             }
             return $res;
         } catch (\Throwable $th) {
@@ -385,14 +392,15 @@ function getPedidos($sede, $co_art)
 }
 
 
-function getBultos ($co_art){
+function getBultos($co_art)
+{
 
 
     #$database = Database($sede);
     #$cliente = Cliente($sede);
     #
 
-    try{
+    try {
 
 
         $serverName = "172.16.1.39";
@@ -416,25 +424,21 @@ function getBultos ($co_art){
                 break;
             }
 
-            
-            $res = $reng_fac ;
+
+            $res = $reng_fac;
         } else {
 
 
-            
-            $reng_fac=0;
-            $res = $reng_fac ;
-            
+
+            $reng_fac = 0;
+            $res = $reng_fac;
         }
 
         return $res;
-        
     } catch (\Throwable $th) {
 
-            throw $th;
-        }
-
-
+        throw $th;
+    }
 }
 
 
@@ -443,14 +447,15 @@ function getBultos ($co_art){
 
 
 
-function getArtBultos ($co_art){
+function getArtBultos($co_art)
+{
 
 
     #$database = Database($sede);
     #$cliente = Cliente($sede);
     #
 
-    try{
+    try {
 
 
         $serverName = "172.16.1.39";
@@ -458,9 +463,9 @@ function getArtBultos ($co_art){
         $conn = sqlsrv_connect($serverName, $connectionInfo);
 
         $sql = "SELECT uni_relac from art where co_art='$co_art'";
-    
+
         $consulta = sqlsrv_query($conn, $sql);
-        
+
 
         if ($consulta != null) {
 
@@ -469,29 +474,24 @@ function getArtBultos ($co_art){
 
 
                 $art = $row['uni_relac'];
-            
-            
+
+
                 break;
             }
-            
-            
-            $res = $art ;
+
+
+            $res = $art;
         } else {
 
 
-            
-            $art=0;
-            $res = $art ;
-            
+
+            $art = 0;
+            $res = $art;
         }
 
         return $res;
-        
     } catch (\Throwable $th) {
 
-            throw $th;
-        }
-
-
+        throw $th;
+    }
 }
-
