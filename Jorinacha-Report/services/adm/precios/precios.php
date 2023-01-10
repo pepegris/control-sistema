@@ -164,14 +164,13 @@ function getArt($sede, $linea, $co_art, $almacen)
                 JOIN sub_lin on art.co_subl = sub_lin.co_subl
                 JOIN cat_art on art.co_cat=cat_art.co_cat
                 JOIN colores on art.co_color=colores.co_col
-                where art.co_lin='$linea' AND art.prec_vta5 >= 1 AND art.fe_us_in >= '20190101'
+                where art.co_lin='$linea' AND art.prec_vta5 >= 1 AND art.anulado=0 AND art.fe_us_in >= '20190101'
                 order by art.co_subl   desc";
             } elseif ($almacen == 'BOLE' and $sede == 'Previa Shop' and $co_art != 0) {
 
                 $sql = "SELECT stock_act FROM st_almac WHERE co_art='$co_art' AND co_alma='BOLE'";
             } else {
 
-                if ($linea == 'A13') {
                     $sql = "SELECT  LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(sub_lin.subl_des)) as  co_subl,LTRIM(RTRIM(cat_art.cat_des)) as  co_cat,
                     prec_vta3,prec_vta4,prec_vta5,art.stock_act , LTRIM(RTRIM(colores.des_col)) as co_color, LTRIM(RTRIM(lin_art.lin_des)) as co_lin,art.ubicacion
                     from art 
@@ -179,17 +178,8 @@ function getArt($sede, $linea, $co_art, $almacen)
                     JOIN sub_lin on art.co_subl = sub_lin.co_subl
                     JOIN cat_art on art.co_cat=cat_art.co_cat
                     JOIN colores on art.co_color=colores.co_col
-                    where art.co_lin='A13' AND art.prec_vta5 >= 1 AND art.co_art='$co_art' ";
-                } else {
-                    $sql = "SELECT  LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(sub_lin.subl_des)) as  co_subl,LTRIM(RTRIM(cat_art.cat_des)) as  co_cat,
-                    prec_vta3,prec_vta4,prec_vta5,art.stock_act , LTRIM(RTRIM(colores.des_col)) as co_color, LTRIM(RTRIM(lin_art.lin_des)) as co_lin,art.ubicacion
-                    from art 
-                    JOIN lin_art on art.co_lin = lin_art.co_lin
-                    JOIN sub_lin on art.co_subl = sub_lin.co_subl
-                    JOIN cat_art on art.co_cat=cat_art.co_cat
-                    JOIN colores on art.co_color=colores.co_col
-                    where art.co_lin='$linea' AND art.prec_vta5 >= 1 AND art.co_art='$co_art' ";
-                }
+                    where  art.prec_vta5 >= 1 AND art.co_art='$co_art' ";
+
             }
 
 
