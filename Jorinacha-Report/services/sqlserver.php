@@ -178,10 +178,11 @@ function getLin_art_all()
     $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $sql = "SELECT lin_art.co_lin, lin_art.lin_des from lin_art 
-            INNER JOIN art ON lin_art.co_lin=art.co_lin
-            WHERE art.fe_us_in >='20180101'
-            GROUP BY lin_art.co_lin,lin_art.lin_des";
+    $sql = "SELECT LTRIM(RTRIM(lin_art.co_lin)) as co_lin, LTRIM(RTRIM(lin_art.lin_des)) as lin_des from lin_art 
+    INNER JOIN art ON lin_art.co_lin=art.co_lin
+    WHERE art.fe_us_in >='20180101'
+    GROUP BY lin_art.co_lin,lin_art.lin_des
+    ORDER BY lin_art.lin_des";
 
     $consulta = sqlsrv_query($conn, $sql);
 
