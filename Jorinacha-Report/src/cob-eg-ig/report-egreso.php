@@ -132,7 +132,7 @@ if (isset($_GET)) {
                     $monto_h2 = number_format($cuenta_contable[$x]['monto_h'], 2, ',', '.');
                     $monto_d2 = number_format($cuenta_contable[$x]['monto_d'], 2, ',', '.');
 
-                    if ($monto_vs == $monto_d2 or $monto_vs == $monto_h2 ) {
+                    if ($monto == $monto_d2 or $monto == $monto_h2 ) {
 
   
   
