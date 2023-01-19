@@ -358,7 +358,7 @@ if (isset($_GET)) {
                 $cta_egre_descrip = $res[$e]['cta_egre_descrip'];
 
                 $monto_neto = number_format($res[$e]['monto_d'], 2, ',', '.');
-                $total_monto += $monto_d;
+                $total_monto += $monto_neto;
 
                 $fecha_cheq = $res[$e]['fecha'];
                 $fecha = $fecha_cheq->format('d-m-Y');
