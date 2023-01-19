@@ -165,7 +165,7 @@ if (isset($_GET)) {
           <td>$<?= number_format($prec_vta4, 2, ',', '.'); ?></td>
           <td style="font-weight:<?= $estilo2 ?>;">$<?= number_format($total_prec_vta4,  2, ',', '.'); ?></td>
 
-          <td>$<?= number_format($prec_vta5, 2, ',', '.'); ?></td>
+          <td>$<?= number_format($prec_vta5, 0, ',', '.'); ?></td>
           <td style="font-weight:<?= $estilo1 ?>;">$<?= number_format($total_prec_vta5, 0, ',', '.'); ?></td>
 
 
