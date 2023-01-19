@@ -231,7 +231,7 @@ if (isset($_GET)) {
             }
           } ?>
 
-          <td>$<?= $total_stock_art_tienda ?></td>
+          <td><?= $total_stock_art_tienda ?></td>
           <td>$<?= $total_pvp_tienda ?></td>
           <td>$<?= $total_costo_tienda ?></td>
 
@@ -293,7 +293,7 @@ if (isset($_GET)) {
           <td><b>$<?= number_format($total_prec_vta5_tienda_todo[$sedes_ar[$h]], 0, ',', '.');  ?></b></td>
 
           <td></td>
-          <td><b>Bs<?= number_format($total_prec_vta3_costo_tienda_todo[$sedes_ar[$h]], 2, ',', '.'); ?></b></td>
+          <td><b>$<?= number_format($total_prec_vta3_costo_tienda_todo[$sedes_ar[$h]], 2, ',', '.'); ?></b></td>
 
 
 
