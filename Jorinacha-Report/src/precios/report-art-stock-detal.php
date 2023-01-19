@@ -293,7 +293,7 @@ if (isset($_GET)) {
           <td><b>$<?= number_format($total_prec_vta3_costo_tienda_todo[$sedes_ar[$h]], 2, ',', '.'); ?></b></td>
 
           <td></td>
-          <td><b>$<?= number_format($total_prec_vta5_tienda_todo[$sedes_ar[$h]], 2, ',', '.');  ?></b></td>
+          <td><b>$<?= number_format($total_prec_vta5_tienda_todo[$sedes_ar[$h]], 0, ',', '.');  ?></b></td>
 
 
 
