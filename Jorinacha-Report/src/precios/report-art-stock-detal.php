@@ -245,9 +245,9 @@ if (isset($_GET)) {
             }
           } ?>
 
-          <td>$<?= $total_stock_art_tienda ?></td>
-          <td>$<?= $total_pvp_tienda ?></td>
-          <td>$<?= $total_costo_tienda ?></td>
+          <td>$PROBANDO TOTAL<?= $total_stock_art_tienda ?></td>
+          <td>$PROBANDO TOTAL<?= $total_pvp_tienda ?></td>
+          <td>$PROBANDO TOTAL<?= $total_costo_tienda ?></td>
 
           <?php
 
