@@ -163,7 +163,7 @@ if (isset($_GET)) {
 
 
           <td>$<?= $prec_vta4 ?></td>
-          <td style="font-weight:<?= $estilo2 ?>;">$<?= number_format($total_prec_vta4,  0, ',', '.'); ?></td>
+          <td style="font-weight:<?= $estilo2 ?>;">$<?= number_format($total_prec_vta4,  2, ',', '.'); ?></td>
 
           <td>$<?= $prec_vta5 ?></td>
           <td style="font-weight:<?= $estilo1 ?>;">$<?= number_format($total_prec_vta5, 0, ',', '.'); ?></td>
@@ -183,9 +183,6 @@ if (isset($_GET)) {
               $f++;
             } else {
 
-              // $res3 = getArt_stock_tiendas($sedes_ar[$f], $co_art);
-              // $stock_act_tienda = round($res3[0]['stock_act']);
-              // $total_stock_act_tienda[$sedes_ar[$f]] += $stock_act_tienda;
 
 
               $getArt2 = getArt($sedes_ar[$f], $linea, $co_art, null);
@@ -196,15 +193,9 @@ if (isset($_GET)) {
               $prec_vta5_tienda = number_format($getArt2[0]['prec_vta5'], 0, ',', '.');
 
 
-
               $getReng_fac2 = getReng_fac($sedes_ar[$f],  $co_art, $fecha1, $fecha2);
               $vendido_tienda = number_format($getReng_fac2, 0, ',', '.');
               $total_vendido_tienda[$sedes_ar[$f]] += $vendido_tienda;
-
-              #$getPedidos_t= getPedidos_t($sedes_ar[$f],  $co_art);
-              #$pedido_tienda = $getPedidos_t[0]['total_art'];
-              #$total_pedido_tienda [$sedes_ar[$f]] += $pedido_tienda;
-
 
 
               $total_prec_vta5_tienda = $stock_act_tienda * $prec_vta5_tienda;
@@ -214,7 +205,6 @@ if (isset($_GET)) {
               $total_costo_tienda += $total_prec_vta3_costo_tienda;
 
               $total_prec_vta5_tienda_todo[$sedes_ar[$f]] +=  $total_prec_vta5_tienda;
-              $total_prec_vta1_tienda_todo[$sedes_ar[$f]] +=  $total_prec_vta1_tienda;
               $total_prec_vta3_costo_tienda_todo[$sedes_ar[$f]] +=  $total_prec_vta3_costo_tienda;
 
 
@@ -241,9 +231,9 @@ if (isset($_GET)) {
             }
           } ?>
 
-          <td>$PROBANDO TOTAL<?= $total_stock_art_tienda ?></td>
-          <td>$PROBANDO TOTAL<?= $total_pvp_tienda ?></td>
-          <td>$PROBANDO TOTAL<?= $total_costo_tienda ?></td>
+          <td>$<?= $total_stock_art_tienda ?></td>
+          <td>$<?= $total_pvp_tienda ?></td>
+          <td>$<?= $total_costo_tienda ?></td>
 
           <?php
 
@@ -265,21 +255,22 @@ if (isset($_GET)) {
       <?php  } ?>
       <tr>
 
-        <td colspan="9">
+        <td colspan="5">
           <h3>Totales</h3>
         </td>
 
 
 
 
-
-        <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
-        <td></td>
-        <td><b>$<?= number_format($total_prec_vta4_todo, 0, ',', '.'); ?></b></td>
-
-        <td></td>
-
         <td><b><?= $total_stock_act_previa ?></td>
+
+        <td></td>
+        <td><b>$<?= number_format($total_prec_vta4_todo, 2, ',', '.'); ?></b></td>
+        
+        <td></td>
+        <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
+        
+          
         <td><b><?= $total_vendido_todo ?></td>
 
 
@@ -300,10 +291,9 @@ if (isset($_GET)) {
 
           <td></td>
           <td><b>$<?= number_format($total_prec_vta5_tienda_todo[$sedes_ar[$h]], 0, ',', '.');  ?></b></td>
+
           <td></td>
-          <td></td>
-          <td></td>
-          <td><b>Bs<?= number_format($total_prec_vta3_costo_tienda_todo[$sedes_ar[$h]]); ?></b></td>
+          <td><b>Bs<?= number_format($total_prec_vta3_costo_tienda_todo[$sedes_ar[$h]], 2, ',', '.'); ?></b></td>
 
 
 
@@ -312,6 +302,7 @@ if (isset($_GET)) {
         <?php
 
           $tienda_total_ref += $total_prec_vta5_tienda_todo[$sedes_ar[$h]];
+          $tienda_total_cost += $total_prec_vta3_costo_tienda_todo[$sedes_ar[$h]];
 
           $tienda_total_stock += $total_stock_act_tienda[$sedes_ar[$h]];
 
@@ -330,9 +321,9 @@ if (isset($_GET)) {
 
 
 
-
-        <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
         <td><b>$<?= number_format($total_prec_vta4_todo, 2, ',', '.'); ?></b></td>
+        <td><b>$<?= number_format($total_prec_vta5_todo, 0, ',', '.'); ?></b></td>
+        
         <td>Stock</td>
         <td><b><?= $total_stock_act_previa ?></td>
 
@@ -349,7 +340,7 @@ if (isset($_GET)) {
 
 
 
-
+        <td><b>$<?= number_format($tienda_total_cost, 2, ',', '.'); ?></b></td>
         <td><b>$<?= number_format($tienda_total_ref, 0, ',', '.'); ?></b></td>
         <td>Stock</td>
         <td><b><?= $tienda_total_stock ?></td>
