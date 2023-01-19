@@ -232,8 +232,7 @@ if (isset($_GET)) {
               <td>$<?= $prec_vta5_tienda ?></td>
               <td style="font-weight:<?= $estilo2 ?>;">$<?= $total_prec_vta5_tienda ?></td>
 
-              <td>$<?= $prec_vta5_tienda ?></td>
-              <td style="font-weight:<?= $estilo2 ?>;">$<?= $total_prec_vta5_tienda ?></td>
+
 
 
 
