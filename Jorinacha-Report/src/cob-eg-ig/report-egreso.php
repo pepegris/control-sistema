@@ -380,7 +380,7 @@ if (isset($_GET)) {
                     $monto_d2 = number_format($cuenta_contable[$x]['monto_d'], 2, ',', '.');
 
 
-                    if ($monto_neto == $monto_d2 or $monto_neto == $monto_h2 ) {
+                    if ($monto_neto === $monto_d2 or $monto_neto === $monto_h2 ) {
 
                     echo "
                     <tr>
