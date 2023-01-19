@@ -107,6 +107,7 @@ if (isset($_GET)) {
 
                 $monto = number_format($res[$e]['monto'], 2, ',', '.');
                 $total_monto += $monto;
+                $monto_vs = $res[$e]['monto'];
 
                 $cheque = $res[$e]['cheque'];
 
@@ -126,50 +127,56 @@ if (isset($_GET)) {
 
                   for ($x = 0; $x < count($cuenta_contable); $x++) {
 
-
                     $co_cue2 = $cuenta_contable[$x]['co_cue'];
                     $des_cue2 = $cuenta_contable[$x]['des_cue'];
                     $monto_h2 = number_format($cuenta_contable[$x]['monto_h'], 2, ',', '.');
                     $monto_d2 = number_format($cuenta_contable[$x]['monto_d'], 2, ',', '.');
 
+                    if ($monto_vs == $monto_h2 or $monto_vs == $monto_d2 ) {
 
-                    echo "
-                        <tr>
-                        <th scope='row'>$n</th>
-                        <td>$fecha</td>";
-
-                    if ($co_cue2 != null) {
-                      echo "<td>$co_cue2 </td>";
-                      echo "<td> $des_cue2</td>";
-                    } else {
-                      echo "<td>Sin </td>";
-                      echo "<td>Contabilizar</td>";
+  
+  
+                      echo "
+                          <tr>
+                          <th scope='row'>$n</th>
+                          <td>$fecha</td>";
+  
+                      if ($co_cue2 != null) {
+                        echo "<td>$co_cue2 </td>";
+                        echo "<td> $des_cue2</td>";
+                      } else {
+                        echo "<td>Sin </td>";
+                        echo "<td>Contabilizar</td>";
+                      }
+  
+                      echo "
+              
+                          <td>$cta_egre </td>
+                          <td>$cta_egre_descrip</td>
+                          <td>$sede</td>
+                          <td>$consulta</td>
+                          <td>$ord_num</td>
+                          <td>$cheque</td>
+                          <td>$descrip</td>";
+  
+                          if ($monto_h2 > 1) {
+                            echo "
+                            <td>$monto_h2</td>           
+                            </tr>";
+                          } elseif ($monto_d2 > 1) {
+                            echo "
+                            <td>$monto_d2</td>           
+                            </tr>";
+                          }
+                          else {
+                            echo "
+                            <td>$monto</td>           
+                            </tr>";
+                          }
                     }
 
-                    echo "
-            
-                        <td>$cta_egre </td>
-                        <td>$cta_egre_descrip</td>
-                        <td>$sede</td>
-                        <td>$consulta</td>
-                        <td>$ord_num</td>
-                        <td>$cheque</td>
-                        <td>$descrip</td>";
 
-                        if ($monto_h2 > 1) {
-                          echo "
-                          <td>$monto_h2</td>           
-                          </tr>";
-                        } elseif ($monto_d2 > 1) {
-                          echo "
-                          <td>$monto_d2</td>           
-                          </tr>";
-                        }
-                        else {
-                          echo "
-                          <td>$monto</td>           
-                          </tr>";
-                        }
+
                     $n++;
                   }
                 } else {
