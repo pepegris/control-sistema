@@ -46,9 +46,6 @@ if (isset($_GET)) {
         <th scope='col'>PVP</th>
         <th scope='col'>Total PVP</th>
 
-
-
-
         <th scope='col'>Total Pares Vendido Tiendas</th>
 
         <?php
