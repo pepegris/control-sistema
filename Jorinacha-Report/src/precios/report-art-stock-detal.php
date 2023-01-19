@@ -66,7 +66,7 @@ if (isset($_GET)) {
 
             <th scope='col'>Stock <?= $sede ?></th>
 
-            <?php
+        <?php
             if ($sedes_ar[$i] != 'Previa Shop') {
 
               echo "<th scope='col'>Pares Vendidos $sede</th>";
@@ -77,13 +77,12 @@ if (isset($_GET)) {
               echo "<th scope='col'>PVP $sede</th>";
               echo "<th scope='col'>Total PVP $sede</th>";
             }
-
-            ?>
-            <th scope='col'>Stock Total Tiendas</th>
-            <th scope='col'>Total Costo Tiendas</th>
-            <th scope='col'>Total PVP</th>
-        <?php }
+          }
         } ?>
+
+        <th scope='col'>Stock Total Tiendas</th>
+        <th scope='col'>Total Costo Tiendas</th>
+        <th scope='col'>Total PVP</th>
 
       </tr>
     </thead>
