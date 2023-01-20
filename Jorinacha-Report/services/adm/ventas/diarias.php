@@ -459,7 +459,7 @@ function getOrd_pago_inf($sede, $fecha1, $fecha2)
             if ($consulta != null) {
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $ord_pago = $row;
+                    $ord_pago[] = $row;
 
                     break;
                 }
