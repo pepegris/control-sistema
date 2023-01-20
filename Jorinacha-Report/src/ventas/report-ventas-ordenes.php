@@ -21,13 +21,6 @@ if ($_GET) {
   $Year = date("Y", strtotime($fecha));
 
 
-  /* $fecha_2 =  $fecha; */
-
-  $fecha_2 = $Year . '/' . $Month . '/' . $Day;
-  echo $fecha_2;
-
-
-
 
 ?>
 
@@ -80,9 +73,24 @@ if ($_GET) {
 
       <?php
 
+      $e=1;
+
       for ($i = 1; $i < count($sedes_ar); $i++) {
 
+
+        if ($e  < 10) {
+
+          $d = 0 . $e;
+        } else {
+          $d = $e;
+        }
+
+
+        $fecha_2 = $Year . '/' . $Month . '/' . $d;
+
         $tasas = getTasas($sedes_ar[$i],  $fecha_2);
+
+        $e++;
 
         if ($tasas != null) {
           $tasa_v_tasas = $tasas['tasa_v'];
@@ -96,7 +104,7 @@ if ($_GET) {
 
         $cod = Cliente($sedes_ar[$i]);
 
-        $sede = $sedes_ar[$i] ;
+        $sede = $sedes_ar[$i];
 
         /* CONSULTAS */
 
@@ -108,11 +116,11 @@ if ($_GET) {
 
 
           $fecha_ord_pago = $ord_pago[$x]['fecha'];
-          $fecha = $fecha_ord_pago->format('d-m-Y'); 
+          $fecha = $fecha_ord_pago->format('d-m-Y');
 
           $num_ord_pago = $ord_pago[$x]['ord_num'];
           $descrip_ord_pago = $ord_pago[$x]['descrip'];
-          
+
 
 
           /* DOLARES *//* DOLARES *//* DOLARES */
