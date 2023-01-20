@@ -219,7 +219,7 @@ if ($_GET) {
           <td><?= $cod   ?></td>
           <td><?= $sedes_ar[$i]  ?></td>
 
-          <td>$tasa_dia</td>
+          <td><?= $tasa_dia ?></td>
 
           <td><?= $tot_neto_factura_bs    ?></td>
           <td><?= $tot_neto_factura_usd    ?></td>
@@ -227,7 +227,7 @@ if ($_GET) {
           <td><?= $monto_ord_pago_bs  ?></td>
           <td><?= $monto_ord_pago_usd  ?></td>
 
-          <td>%<?= number_format($porcentaje_usd, 0, ',', '.');   ?></td>
+          <td>%<?= number_format($porcentaje_usd, 2, ',', '.');   ?></td>
 
           <td><?= $total_art_factura - $total_art_dev_cli   ?></td>
 
@@ -323,7 +323,7 @@ if ($_GET) {
           <td><b>Bs<?= number_format($total_pagos_bs, 2, ',', '.')  ?></b></td>
           <td><b>$<?= number_format($total_pagos_usd, 2, ',', '.')  ?></b></td>
 
-          <td>%<?= number_format($total_porcentaje_usd, 0, ',', '.');  ?></td>
+          <td>%<?= number_format($total_porcentaje_usd, 2, ',', '.');  ?></td>
 
           <td><b><?= number_format($total_venta_pares, 0, '', '.')  ?></b></td>
 
