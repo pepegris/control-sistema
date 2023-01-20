@@ -102,7 +102,10 @@ if ($_GET) {
         $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, $fecha2, 'ordenes');
 
         $num_ord_pago = $ord_pago['ord_num'];
-          $descrip_ord_pago = $ord_pago['descrip'];
+        $descrip_ord_pago = $ord_pago['descrip'];
+
+        echo "$num_ord_pago";
+        echo "$descrip_ord_pago";
 
         for ($x = 0; $x < count($ord_pago); $x++) {
 
