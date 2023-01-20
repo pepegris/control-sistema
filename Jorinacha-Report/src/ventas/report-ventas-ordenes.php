@@ -146,7 +146,7 @@ if ($_GET) {
       ?>
           <tr>
 
-            <td><?= 0   ?></td>
+            <td><?= $fecha   ?></td>
             <td><?= $cod   ?></td>
             <td><?= $sede ?></td>
 
