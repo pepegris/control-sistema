@@ -59,11 +59,15 @@ if ($clave === 'N3td0s' ) {
         
     }elseif ($reporte=='ventas'){
 
-        if ($fecha2) {
+        header("refresh:1;url= report-ventas-detalle.php?fecha1=$fecha1&divisa=$divisa&sedes=$sedes");
+
+        /* reporte de ventas de tienda en desarrollo */
+
+/*         if ($fecha2) {
             header("refresh:1;url= report-ventas-tiendas.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=" . $sedes);
         }    else {
             header('refresh:1;url= form.php');
-        }
+        } */
         
 
     } else {
