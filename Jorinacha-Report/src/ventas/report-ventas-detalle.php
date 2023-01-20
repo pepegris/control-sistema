@@ -208,7 +208,7 @@ if ($_GET) {
 
         /* porcentaje de dolares */
 
-        $porcentaje_usd = ($tot_neto_factura_usd/  $monto_ord_pago_usd) * 100;
+        $porcentaje_usd = ($monto_ord_pago_bs / $tot_neto_factura_bs  ) * 100;
         
 
 
@@ -227,7 +227,7 @@ if ($_GET) {
           <td><?= $monto_ord_pago_bs  ?></td>
           <td><?= $monto_ord_pago_usd  ?></td>
 
-          <td>%<?= number_format(($monto_ord_pago_usd/ $tot_neto_factura_usd  ) * 100, 2, ',', '.');   ?></td>
+          <td>%<?= number_format($porcentaje_usd, 0, ',', '.');   ?></td>
 
           <td><?= $total_art_factura - $total_art_dev_cli   ?></td>
 
@@ -305,7 +305,7 @@ if ($_GET) {
         echo "</tr>";
       }
 
-      $total_porcentaje_usd = $total_venta_usd /  $total_pagos_usd * 100;
+      $total_porcentaje_usd = $total_pagos_bs  /   $total_venta_bs* 100;
         ?>
 
 
@@ -323,7 +323,7 @@ if ($_GET) {
           <td><b>Bs<?= number_format($total_pagos_bs, 2, ',', '.')  ?></b></td>
           <td><b>$<?= number_format($total_pagos_usd, 2, ',', '.')  ?></b></td>
 
-          <td>%<?= number_format($total_porcentaje_usd, 2, ',', '.');  ?></td>
+          <td>%<?= number_format($total_porcentaje_usd, 0, ',', '.');  ?></td>
 
           <td><b><?= number_format($total_venta_pares, 0, '', '.')  ?></b></td>
 
