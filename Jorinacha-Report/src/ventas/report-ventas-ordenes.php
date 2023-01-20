@@ -103,9 +103,7 @@ if ($_GET) {
 
 
         $b=count($ord_pago);
-        var_dump($ord_pago["date"]);
-        echo "<br>";
-        var_dump($ord_pago["descrip"]);
+        var_dump($ord_pago);
         echo "<br>";
         echo "$b";
         echo "<br>";
