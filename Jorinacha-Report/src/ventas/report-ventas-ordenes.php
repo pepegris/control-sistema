@@ -104,7 +104,7 @@ if ($_GET) {
         $num_ord_pago = $ord_pago['ord_num'];
         $descrip_ord_pago = $ord_pago['descrip'];
 
-        echo "$num_ord_pago";
+        echo "$ord_pago";
         echo "$descrip_ord_pago";
 
         for ($x = 0; $x < count($ord_pago); $x++) {
