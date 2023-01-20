@@ -99,59 +99,63 @@ if ($_GET) {
 
         $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, $fecha2, 'ordenes');
 
-        $fecha_ord_pago = $ord_pago['fecha'];
-        $fecha = $fecha_ord_pago->format('d-m-Y');
-
-        $num_ord_pago = $ord_pago['ord_num'];
-        $descrip_ord_pago = $ord_pago['descrip'];
-
-
-        /* DOLARES *//* DOLARES *//* DOLARES */
-
-
-        $tasa_monto_ord_pago_usd = $ord_pago['monto'] / $tasa_v_tasas;
-        $monto_ord_pago_usd = number_format($tasa_monto_ord_pago_usd, 2, ',', '.');
+        for ($i = 0; $i < count($ord_pago); $i++) {
 
 
 
-        /* BOLIVARES *//* BOLIVARES *//* BOLIVARES */
+          $fecha_ord_pago = $ord_pago['fecha'];
+          $fecha = $fecha_ord_pago->format('d-m-Y');
+
+          $num_ord_pago = $ord_pago['ord_num'];
+          $descrip_ord_pago = $ord_pago['descrip'];
 
 
-        $tasa_monto_ord_pago_bs = $ord_pago['monto'] / $tasa_v_bs;
-        $monto_ord_pago_bs = number_format($tasa_monto_ord_pago_bs, 2, ',', '.');
+          /* DOLARES *//* DOLARES *//* DOLARES */
 
 
-        /* totales *//* BOLIVARES *//* totales */
-
-        $total_pagos_usd += $tasa_monto_ord_pago_usd;
-
-
-        /* totales *//* DOLARES *//* totales */
+          $tasa_monto_ord_pago_usd = $ord_pago['monto'] / $tasa_v_tasas;
+          $monto_ord_pago_usd = number_format($tasa_monto_ord_pago_usd, 2, ',', '.');
 
 
-        $total_pagos_bs += $tasa_monto_ord_pago_bs;
+
+          /* BOLIVARES *//* BOLIVARES *//* BOLIVARES */
+
+
+          $tasa_monto_ord_pago_bs = $ord_pago['monto'] / $tasa_v_bs;
+          $monto_ord_pago_bs = number_format($tasa_monto_ord_pago_bs, 2, ',', '.');
+
+
+          /* totales *//* BOLIVARES *//* totales */
+
+          $total_pagos_usd += $tasa_monto_ord_pago_usd;
+
+
+          /* totales *//* DOLARES *//* totales */
+
+
+          $total_pagos_bs += $tasa_monto_ord_pago_bs;
 
 
 
       ?>
-        <tr>
+          <tr>
 
-          <td><?= $fecha   ?></td>
-          <td><?= $cod   ?></td>
-          <td><?= $sedes_ar[$i]  ?></td>
+            <td><?= $fecha   ?></td>
+            <td><?= $cod   ?></td>
+            <td><?= $sedes_ar[$i]  ?></td>
 
-          <td><?= $tasa_dia ?></td>
+            <td><?= $tasa_dia ?></td>
 
-          <td><?= $num_ord_pago    ?></td>
-          <td><?= $descrip_ord_pago  ?></td>
+            <td><?= $num_ord_pago    ?></td>
+            <td><?= $descrip_ord_pago  ?></td>
 
-          <td><?= $monto_ord_pago_bs  ?></td>
-          <td><?= $monto_ord_pago_usd  ?></td>
+            <td><?= $monto_ord_pago_bs  ?></td>
+            <td><?= $monto_ord_pago_usd  ?></td>
 
 
 
         <?php
-
+        }
       }
 
 
@@ -160,23 +164,23 @@ if ($_GET) {
 
 
 
-<tr>
-          <td colspan="6">
-            <h3>Totales</h3>
-          </td>
+          <tr>
+            <td colspan="6">
+              <h3>Totales</h3>
+            </td>
 
 
 
 
 
-          <td><b>Bs<?= number_format($total_pagos_bs, 2, ',', '.')  ?></b></td>
-          <td><b>$<?= number_format($total_pagos_usd, 2, ',', '.')  ?></b></td>
+            <td><b>Bs<?= number_format($total_pagos_bs, 2, ',', '.')  ?></b></td>
+            <td><b>$<?= number_format($total_pagos_usd, 2, ',', '.')  ?></b></td>
 
 
 
-          <td></td>
+            <td></td>
 
-        </tr>
+          </tr>
 
     </tbody>
 

@@ -57,7 +57,7 @@ if ($clave === 'N3td0s' ) {
 
         }
         
-    }elseif ($reporte=='ventas'){
+    }elseif ($reporte=='ord'){
 
         header("refresh:1;url= report-ventas-detalle.php?fecha1=$fecha1&divisa=$divisa&sedes=$sedes");
 
