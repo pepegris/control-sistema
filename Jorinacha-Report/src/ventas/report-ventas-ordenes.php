@@ -102,8 +102,6 @@ if ($_GET) {
         $ord_pago = getOrd_pago_inf($sedes_ar[$i], $fecha1, $fecha2);
 
 
-
-
         for ($x = 0; $x < count($ord_pago); $x++) {
 
 
