@@ -208,7 +208,7 @@ if ($_GET) {
 
         /* porcentaje de dolares */
 
-        $porcentaje_usd = $tot_neto_factura_usd /  $monto_ord_pago_usd * 100;
+        $porcentaje_usd = ($tot_neto_factura_usd /  $monto_ord_pago_usd) * 100;
         
 
 
