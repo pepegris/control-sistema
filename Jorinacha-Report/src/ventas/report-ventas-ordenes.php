@@ -102,7 +102,7 @@ if ($_GET) {
         $ord_pago = getOrd_pago_inf($sedes_ar[$i], $fecha1, $fecha2);
 
 
-        $b=count($ord_pago);
+        $b=count($ord_pago[0]);
         var_dump($ord_pago[0]);
         echo "<br>";
         var_dump($ord_pago[1]);
