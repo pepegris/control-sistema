@@ -63,7 +63,7 @@ include '../../services/sqlserver.php';
         <option value="ventas">Ventas Detalladas</option> 
         <option value="acumulado">Ventas Acumuladas</option>
         <option value="dias">Ventas Detalladas por Dias</option> 
-        <option value="ord">Detalladas de Ord de Pagos</option> 
+        <option value="ord">Detalles de Ord de Pagos</option> 
         
 
       </select> 
