@@ -105,8 +105,8 @@ if ($_GET) {
 
 
 
-          $fecha_ord_pago = $ord_pago['fecha'];
-          $fecha = $fecha_ord_pago->format('d-m-Y');
+          /* $fecha_ord_pago = $ord_pago['fecha'];
+          $fecha = $fecha_ord_pago->format('d-m-Y'); */
 
           $num_ord_pago = $ord_pago['ord_num'];
           $descrip_ord_pago = $ord_pago['descrip'];
@@ -142,7 +142,7 @@ if ($_GET) {
       ?>
           <tr>
 
-            <td><?= $fecha   ?></td>
+            <td><?= 0   ?></td>
             <td><?= $cod   ?></td>
             <td><?= $sede ?></td>
 
