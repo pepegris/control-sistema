@@ -101,19 +101,19 @@ if ($_GET) {
 
         $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, $fecha2, 'ordenes');
 
-        $num_ord_pago = $ord_pago['ord_num'];
-        $descrip_ord_pago = $ord_pago['descrip'];
 
-        echo "$ord_pago";
-        var_dump($ord_pago);
+
+
 
         for ($x = 0; $x < count($ord_pago); $x++) {
 
 
 
-          /* $fecha_ord_pago = $ord_pago['fecha'];
-          $fecha = $fecha_ord_pago->format('d-m-Y'); */
-
+          $fecha_ord_pago = $ord_pago['fecha'];
+          $fecha = $fecha_ord_pago->format('d-m-Y'); 
+          
+          $num_ord_pago = $ord_pago['ord_num'];
+          $descrip_ord_pago = $ord_pago['descrip'];
           
 
 
