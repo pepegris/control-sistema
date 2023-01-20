@@ -448,7 +448,7 @@ function getOrd_pago_inf($sede, $fecha1, $fecha2)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT fecha,ord_num,descrip,monto  from ord_pago
-            WHERE fecha ='$fecha1' AND anulada = 0   AND ord_num < 6000000 AND cta_egre ='878'";
+            WHERE fecha BETWEEN '$fecha1' AND '$fecha2' AND anulada = 0   AND ord_num < 6000000 AND cta_egre ='878'";
 
             $consulta = sqlsrv_query($conn, $sql);
 
