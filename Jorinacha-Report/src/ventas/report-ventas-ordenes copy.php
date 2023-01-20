@@ -80,7 +80,7 @@ if ($_GET) {
 
 
         $tasa_v_bs  = 1;
-
+        
         $cod = Cliente($sedes_ar[$i]);
 
         $sede = $sedes_ar[$i];
@@ -102,9 +102,9 @@ if ($_GET) {
 
           $fecha_2 = $Year . '/' . $Month . '/' . $Day;
 
-          $tasas = getTasas($sede,  $fecha_2);
+          $tasas = getTasas($sedes_ar[$i],  $fecha_2);
 
-          
+          $e++;
 
           if ($tasas != null) {
             $tasa_v_tasas = $tasas['tasa_v'];
