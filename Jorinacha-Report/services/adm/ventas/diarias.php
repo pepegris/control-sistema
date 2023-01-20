@@ -449,7 +449,7 @@ function getOrd_pago_inf($sede, $fecha1, $fecha2)
 
             $sql = "SELECT fecha,ord_num,descrip,monto  from ord_pago
             JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
-            WHERE fecha ='$fecha1' AND anulada = 0   AND ord_num < 6000000 AND cta_egre ='878'";
+            WHERE fecha ='$fecha1' ";
 
 
 
