@@ -448,11 +448,7 @@ function getOrd_pago_inf($sede, $fecha1, $fecha2)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT fecha,ord_num,descrip,monto  from ord_pago
-            JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
             WHERE fecha ='$fecha1' AND anulada = 0   AND ord_num < 6000000 AND cta_egre ='878'";
-
-
-
 
             $consulta = sqlsrv_query($conn, $sql);
 
@@ -461,7 +457,7 @@ function getOrd_pago_inf($sede, $fecha1, $fecha2)
 
                     $ord_pago[] = $row;
 
-                    break;
+
                 }
 
                 $res = $ord_pago;
