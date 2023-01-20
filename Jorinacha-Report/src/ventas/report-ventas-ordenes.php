@@ -103,7 +103,7 @@ if ($_GET) {
 
 
 
-
+        var_dump(count($ord_pago));
 
         for ($x = 0; $x < count($ord_pago); $x++) {
 
@@ -111,7 +111,7 @@ if ($_GET) {
 
           $fecha_ord_pago = $ord_pago['fecha'];
           $fecha = $fecha_ord_pago->format('d-m-Y'); 
-          
+
           $num_ord_pago = $ord_pago['ord_num'];
           $descrip_ord_pago = $ord_pago['descrip'];
           
