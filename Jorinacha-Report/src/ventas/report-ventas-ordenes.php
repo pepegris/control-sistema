@@ -102,40 +102,34 @@ if ($_GET) {
         $ord_pago = getOrd_pago_inf($sedes_ar[$i], $fecha1, $fecha2);
 
 
-        $b=count($ord_pago);
-        var_dump($ord_pago[0]["fecha"]);
-        echo "<br>";
-        var_dump($ord_pago[1]["ord_num"]);
-        echo "<br>";
-        echo "$b";
-        echo "<br>";
+
 
         for ($x = 0; $x < count($ord_pago); $x++) {
 
 
-/* 
-          $fecha_ord_pago = $ord_pago['fecha'];
+
+          $fecha_ord_pago = $ord_pago[$x]['fecha'];
           $fecha = $fecha_ord_pago->format('d-m-Y'); 
 
-          $num_ord_pago = $ord_pago['ord_num'];
-          $descrip_ord_pago = $ord_pago['descrip'];
-           */
+          $num_ord_pago = $ord_pago[$x]['ord_num'];
+          $descrip_ord_pago = $ord_pago[$x]['descrip'];
+          
 
 
           /* DOLARES *//* DOLARES *//* DOLARES */
 
 
-/*           $tasa_monto_ord_pago_usd = $ord_pago['monto'] / $tasa_v_tasas;
+          $tasa_monto_ord_pago_usd = $ord_pago[$x]['monto'] / $tasa_v_tasas;
           $monto_ord_pago_usd = number_format($tasa_monto_ord_pago_usd, 2, ',', '.');
- */
+
 
 
           /* BOLIVARES *//* BOLIVARES *//* BOLIVARES */
 
 
-/*           $tasa_monto_ord_pago_bs = $ord_pago['monto'] / $tasa_v_bs;
+          $tasa_monto_ord_pago_bs = $ord_pago[$x]['monto'] / $tasa_v_bs;
           $monto_ord_pago_bs = number_format($tasa_monto_ord_pago_bs, 2, ',', '.');
- */
+
 
           /* totales *//* BOLIVARES *//* totales */
 
