@@ -99,11 +99,11 @@ if ($_GET) {
 
         /* CONSULTAS */
 
-        $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, $fecha2, 'ordenes');
+        $ord_pago = getOrd_pago_inf($sedes_ar[$i], $fecha1, $fecha2);
 
 
-        $b=count($ord_pago['ord_num']);
-        var_dump(count($ord_pago['ord_num']));
+        $b=count($ord_pago);
+        var_dump(count($ord_pago));
         echo "$b";
 
         for ($x = 0; $x < count($ord_pago); $x++) {

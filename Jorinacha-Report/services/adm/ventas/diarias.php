@@ -395,12 +395,6 @@ function getOrd_pago($sede, $fecha1, $fecha2, $data)
                  JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
                  WHERE fecha BETWEEN '$fecha1' AND '$fecha2'  AND anulada = 0 AND benefici.ben_des<>'PREVIA SHOP' AND cta_egre <>'878' AND ord_num < 6000000";
 
-             }elseif ($data == 'ordenes') {
-
-                $sql = "SELECT fecha,ord_num,descrip,monto  from ord_pago
-                 JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
-                 WHERE fecha ='$fecha1' ";
- 
              }else {
 
                 $sql = "SELECT SUM(monto) as monto from ord_pago
@@ -417,9 +411,7 @@ function getOrd_pago($sede, $fecha1, $fecha2, $data)
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
                     $ord_pago['monto'] = $row['monto'];
-                    $ord_pago['fecha'] = $row['fecha'];
-                    $ord_pago['ord_num'] = $row['ord_num'];
-                    $ord_pago['descrip'] = $row['descrip'];
+
                     break;
                 }
 
@@ -441,6 +433,56 @@ function getOrd_pago($sede, $fecha1, $fecha2, $data)
         return 0;
     }
 }
+
+
+function getOrd_pago_inf($sede, $fecha1, $fecha2)
+{
+
+
+    $database = Database($sede);
+    if ($database != null) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT fecha,ord_num,descrip,monto  from ord_pago
+            JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
+            WHERE fecha ='$fecha1' AND anulada = 0   AND ord_num < 6000000 AND cta_egre ='878'";
+
+
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $ord_pago = $row;
+
+                    break;
+                }
+
+                $res = $ord_pago;
+            } else {
+
+                $ord_pago = 0;
+
+                $res = $ord_pago;
+            }
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
+
 
 
 
