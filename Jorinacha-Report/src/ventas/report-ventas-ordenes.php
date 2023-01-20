@@ -16,12 +16,8 @@ if ($_GET) {
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
-  $fecha = date("Ymd", strtotime($_GET['fecha1']));
-
-  $Day = date("d", strtotime($fecha));
-  $Month = date("m", strtotime($fecha));
-  $Year = date("Y", strtotime($fecha));
-
+  $Month = date("m", strtotime($fecha1));
+  $Year = date("Y", strtotime($fecha1));
 
 
 ?>
@@ -41,7 +37,7 @@ if ($_GET) {
 
 
   <center>
-    <h1>Ordenes de Pago <?= $fecha_titulo1 ?> -  <?= $fecha_titulo2 ?> </h1>
+    <h1>Ordenes de Pago <?= $fecha_titulo1 ?> - <?= $fecha_titulo2 ?> </h1>
   </center>
 
 
@@ -100,6 +96,7 @@ if ($_GET) {
           $fecha = $fecha_ord_pago->format('d-m-Y');
 
           $Day = date("d", strtotime($fecha));
+
 
 
           $fecha_2 = $Year . '/' . $Month . '/' . $Day;
