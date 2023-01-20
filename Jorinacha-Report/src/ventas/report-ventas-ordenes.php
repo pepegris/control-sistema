@@ -95,11 +95,13 @@ if ($_GET) {
 
         $cod = Cliente($sedes_ar[$i]);
 
+        $sede = $sedes_ar[$i] ;
+
         /* CONSULTAS */
 
         $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, $fecha2, 'ordenes');
 
-        for ($i = 0; $i < count($ord_pago); $i++) {
+        for ($x = 0; $x < count($ord_pago); $x++) {
 
 
 
@@ -142,7 +144,7 @@ if ($_GET) {
 
             <td><?= $fecha   ?></td>
             <td><?= $cod   ?></td>
-            <td><?= $sedes_ar[$i]  ?></td>
+            <td><?= $sede ?></td>
 
             <td><?= $tasa_dia ?></td>
 
