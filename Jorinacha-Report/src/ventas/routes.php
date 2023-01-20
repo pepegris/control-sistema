@@ -57,7 +57,7 @@ if ($clave === 'N3td0s' ) {
 
         }
         
-    }elseif ($reporte=='ord'){
+    }elseif ($reporte=='ventas'){
 
         header("refresh:1;url= report-ventas-detalle.php?fecha1=$fecha1&divisa=$divisa&sedes=$sedes");
 
@@ -69,6 +69,10 @@ if ($clave === 'N3td0s' ) {
             header('refresh:1;url= form.php');
         } */
         
+
+    }elseif ($reporte=='ord'){
+        
+        header("refresh:1;url= report-ventas-ordenes.php?fecha1=$fecha1&divisa=$divisa&sedes=$sedes");
 
     } else {
 
