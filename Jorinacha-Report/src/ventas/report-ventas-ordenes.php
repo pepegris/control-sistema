@@ -104,8 +104,11 @@ if ($_GET) {
 
         $b=count($ord_pago);
         var_dump($ord_pago[0]);
+        echo "<br>";
         var_dump($ord_pago[1]);
+        echo "<br>";
         echo "$b";
+        echo "<br>";
 
         for ($x = 0; $x < count($ord_pago); $x++) {
 
