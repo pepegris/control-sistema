@@ -227,7 +227,7 @@ if ($_GET) {
           <td><?= $monto_ord_pago_bs  ?></td>
           <td><?= $monto_ord_pago_usd  ?></td>
 
-          <td>%<?= number_format(($tot_neto_factura_usd/  $monto_ord_pago_usd) * 100, 2, ',', '.');   ?></td>
+          <td>%<?= number_format(($tot_neto_factura_bs/  $monto_ord_pago_bs) * 100, 2, ',', '.');   ?></td>
 
           <td><?= $total_art_factura - $total_art_dev_cli   ?></td>
 
