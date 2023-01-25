@@ -140,10 +140,8 @@ if (isset($_GET)) {
                     $monto_detalle = number_format($detalle[$x]['monto_a'], 2, ',', '.');
 
                     if ($monto == $monto_d2 or $monto == $monto_h2
-                    or $monto_detalle == $monto_d2 or $monto_detalle == $monto_h2 
-                    or $monto_detalle == $monto_h2 or $monto_detalle == $monto_d2) {
+                    or $monto_detalle == $monto_d2 or $monto_detalle == $monto_h2) {
 
-  
   
                       echo "
                           <tr>
@@ -185,7 +183,7 @@ if (isset($_GET)) {
                     }
 
 
-
+                    $monto_detalle=0;
                     $n++;
                   }
                 } else {
