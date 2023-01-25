@@ -119,6 +119,10 @@ if (isset($_GET)) {
                 $cuenta_contable = getCuenta_contable($sede, $ord_num,  $fecha1, $fecha2);
 
                 $detalle = getOrd_pago($sede,  $fecha1, $fecha2 , $ord_num);
+                $monto_detalle1 = number_format($detalle[0]['monto_a'], 2, ',', '.');
+                $monto_detalle2 = number_format($detalle[1]['monto_a'], 2, ',', '.');
+                $monto_detalle3 = number_format($detalle[2]['monto_a'], 2, ',', '.');
+                $monto_detalle4 = number_format($detalle[3]['monto_a'], 2, ',', '.');
 
                 $co_cue = $cuenta_contable[$e]['co_cue'];
                 $des_cue = $cuenta_contable[$e]['des_cue'];
@@ -137,10 +141,11 @@ if (isset($_GET)) {
 
                     /* detalle ord_pago */
 
-                    $monto_detalle = number_format($detalle[$x]['monto_a'], 2, ',', '.');
+
 
                     if ($monto == $monto_d2 or $monto == $monto_h2
-                    or $monto_detalle == $monto_d2 or $monto_detalle == $monto_h2) {
+                    or $monto_detalle1 == $monto_d2 or $monto_detalle2 == $monto_d2 or $monto_detalle3 == $monto_d2 or $monto_detalle4 == $monto_d2
+                    or $monto_detalle1 == $monto_h2 or $monto_detalle2 == $monto_h2 or $monto_detalle3 == $monto_h2 or $monto_detalle4 == $monto_h2  ) {
 
   
                       echo "
