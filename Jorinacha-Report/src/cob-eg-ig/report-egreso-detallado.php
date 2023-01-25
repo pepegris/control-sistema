@@ -39,7 +39,7 @@ if (isset($_GET)) {
 
       if ($consultas[$o] == "Ordenes de Pago") {
 
-        $res = getOrd_pago($sede,  $fecha1, $fecha2);
+        $res = getOrd_pago($sede,  $fecha1, $fecha2 , 0);
 
 
 

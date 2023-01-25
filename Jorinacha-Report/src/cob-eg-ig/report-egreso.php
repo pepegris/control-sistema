@@ -61,7 +61,7 @@ if (isset($_GET)) {
 
           if ($consultas[$o] == "Ordenes de Pago") {
 
-            $res = getOrd_pago($sede,  $fecha1, $fecha2);
+            $res = getOrd_pago($sede,  $fecha1, $fecha2 , 0);
 
           } elseif ($consultas[$o] == "Documentos de Compras") {
 
@@ -118,6 +118,8 @@ if (isset($_GET)) {
 
                 $cuenta_contable = getCuenta_contable($sede, $ord_num,  $fecha1, $fecha2);
 
+                $detalle = getOrd_pago($sede,  $fecha1, $fecha2 , $ord_num);
+
                 $co_cue = $cuenta_contable[$e]['co_cue'];
                 $des_cue = $cuenta_contable[$e]['des_cue'];
                 $monto_h = number_format($cuenta_contable[$e]['monto_h'], 2, ',', '.');
@@ -129,10 +131,17 @@ if (isset($_GET)) {
 
                     $co_cue2 = $cuenta_contable[$x]['co_cue'];
                     $des_cue2 = $cuenta_contable[$x]['des_cue'];
+
                     $monto_h2 = number_format($cuenta_contable[$x]['monto_h'], 2, ',', '.');
                     $monto_d2 = number_format($cuenta_contable[$x]['monto_d'], 2, ',', '.');
 
-                    if ($monto == $monto_d2 or $monto == $monto_h2 ) {
+                    /* detalle ord_pago */
+
+                    $monto_detalle = number_format($detalle[$x]['monto_a'], 2, ',', '.');
+
+                    if ($monto == $monto_d2 or $monto == $monto_h2
+                    or $monto_detalle == $monto_d2 or $monto_detalle == $monto_h2 
+                    or $monto_detalle == $monto_h2 or $monto_detalle == $monto_d2) {
 
   
   

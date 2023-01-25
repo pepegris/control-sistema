@@ -118,7 +118,7 @@ function Cliente($sede)
 }
 
 
-function getOrd_pago($sede,  $fecha1, $fecha2)
+function getOrd_pago($sede,  $fecha1, $fecha2,$ord_num)
 {
 
 
@@ -132,18 +132,28 @@ function getOrd_pago($sede,  $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "SELECT             
-			ord_pago.ord_num, ord_pago.mov_num  , 
-            ord_pago.cod_cta , 
-            ord_pago.cta_egre , cta_ingr.descrip as cta_egre_descrip  ,
-            ord_pago.tipo_imp,ord_pago.cod_caja , ord_pago.descrip ,
-            ord_pago.monto , ord_pago.cheque , ord_pago.fecha
-			FROM ord_pago
-			JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
-			JOIN cta_ingr ON ord_pago.cta_egre=cta_ingr.co_ingr
-			WHERE ord_pago.fecha between '$fecha1' and '$fecha2'
-			AND ord_pago.anulada=0
-			AND cta_egre <>'878'";
+            if ($ord_num != 0) {
+
+                $sql = "SELECT cta_egre,monto_a FROM reng_opg  WHERE ord_num = '$ord_num'";
+
+            }else {
+
+                $sql = "SELECT             
+                ord_pago.ord_num, ord_pago.mov_num  , 
+                ord_pago.cod_cta , 
+                ord_pago.cta_egre , cta_ingr.descrip as cta_egre_descrip  ,
+                ord_pago.tipo_imp,ord_pago.cod_caja , ord_pago.descrip ,
+                ord_pago.monto , ord_pago.cheque , ord_pago.fecha
+                FROM ord_pago
+                JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
+                JOIN cta_ingr ON ord_pago.cta_egre=cta_ingr.co_ingr
+                WHERE ord_pago.fecha between '$fecha1' and '$fecha2'
+                AND ord_pago.anulada=0
+                AND cta_egre <>'878'";
+
+            }
+
+
 
 
             /*$sql = "SELECT 
