@@ -69,7 +69,7 @@ include '../../services/sqlserver.php';
           <input type="number"  name="doc2" id="" >
       </div>
 
-      <div class="">
+      <div class="form-group">
       <label for="art" class="form-label ">Articulo</label>
           <input style="background:white" type="search" name="art" id="">
       </div>
