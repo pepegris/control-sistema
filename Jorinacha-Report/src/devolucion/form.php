@@ -63,11 +63,11 @@ include '../../services/sqlserver.php';
 
         </select>
       </div>
-      <div class="form-group">
+      <div class="">
       <label for="doc1" class="form-label ">Nro Documento</label>
           <input type="number"  name="doc1" id="" >
       </div>
-      <div class="form-group">
+      <div class="">
           <label for="doc1" class="form-label "></label>
           <input type="number"  name="doc1" id="" >
       </div>
