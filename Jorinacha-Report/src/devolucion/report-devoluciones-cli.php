@@ -16,7 +16,7 @@ if (isset($_GET)) {
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
-  $art=$GET['art'];
+  $art=$_GET['art'];
 
   if ($art != null) {
     echo "no null-";
