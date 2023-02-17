@@ -74,7 +74,7 @@ if (isset($_GET)) {
 
  
 
-        $res = getDev_pro($sede, $fecha1, $fecha2);
+        $res = getDev_pro('Previa Shop', $fecha1, $fecha2);
 
         if (round($res[0]['reng_dvp_total_art']) >= 1 ) {
 
@@ -99,7 +99,7 @@ if (isset($_GET)) {
 
             $total_stock_reng_dvp += $reng_dvp_total_art;
 
-            $res2 = getCompras($sede, $co_art );
+            $res2 = getCompras('Previa Shop', $co_art );
 
             $compras_fact = $res2[$i]['compras_fact'];
             $com_fecha = $res2[$i]['com_fecha'];

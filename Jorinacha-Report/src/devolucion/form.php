@@ -64,18 +64,30 @@ include '../../services/sqlserver.php';
         </select>
       </div>
 
+      <label for="doc1" class="form-label ">Nro Documento</label>
+          <input type="number"  name="doc1" id="" >
+      </div>
+          <label for="doc1" class="form-label "></label>
+          <input type="number"  name="doc1" id="" >
+      </div>
+
+      <label for="art" class="form-label ">Articulo</label>
+          <input type="text" name="art" id="">
+      </div>
+
+
 
       <!-- FORMULAIO DE FECHAS -->
 
 
       <div class="form-group">
-        <label for="fecha1" class="form-label " required>Desde</label>
+        <label for="fecha1" class="form-label " >Desde</label>
         <input type="date" name="fecha1" id="" required>
       </div>
 
       <div class="form-group">
         <label for="fecha2" class="form-label " >Hasta</label>
-        <input type="date" name="fecha2" id="" >
+        <input type="date" name="fecha2" id="" required>
       </div>
 
 
