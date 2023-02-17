@@ -65,14 +65,14 @@ if (isset($_GET)) {
 
       $n = 1;
 
-
+      var_dump($art);
       for ($e = 1; $e < count($sedes_ar); $e++) {
 
         $sede = $sedes_ar[$e];
 
 
         $res = getDev_cli($sede, $fecha1, $fecha2 , $art);
-        var_dump(count($res));
+        
         for ($i = 0; $i < count($res); $i++) {
 
 
@@ -139,7 +139,7 @@ if (isset($_GET)) {
       <td>" . $total_stock_act_dev_cli . "</td>
       <th colspan='3' ></th>
       <td>" . $total_stock_com_total_art . "</td>
-      <th colspan='3' ></th>
+      <th colspan='2' ></th>
       <td>" . $total_stock_reng_dvc . "</td>
       </tr>
       </tbody>
