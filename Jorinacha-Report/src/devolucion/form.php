@@ -64,17 +64,14 @@ include '../../services/sqlserver.php';
         </select>
       </div>
       <div class="">
-      <label for="doc1" class="form-label ">Nro Documento</label>
+      <label  class="form-label ">Nro Documento</label>
           <input type="number"  name="doc1" id="" >
-          <input type="number"  name="doc1" id="" >
+          <input type="number"  name="doc2" id="" >
       </div>
-      <div class="form-group">
-          <label for="doc1" class="form-label "></label>
-          <input type="number"  name="doc1" id="" >
-      </div>
+
       <div class="form-group">
       <label for="art" class="form-label ">Articulo</label>
-          <input style="color:white" type="search" name="art" id="">
+          <input style="background:white" type="search" name="art" id="">
       </div>
 
 
