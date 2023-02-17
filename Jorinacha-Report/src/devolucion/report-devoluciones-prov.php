@@ -32,14 +32,14 @@ if (isset($_GET)) {
       
             <tr>
                     <th scope='col'>N°</th>
-                    <th scope='col'>Tienda</th>
-                    <th scope='col'>Codigo</th>
-                    <th scope='col'>Marca</th>
-                    <th scope='col'>Modelo</th>
+                    <th scope='col'>N° Devolución</th>
+                    <th scope='col'>Fecha</th>
+                    <th scope='col'>Proveedor</th>
+                    <th scope='col'>Cod Art</th>
                     <th scope='col'>Descripción</th>
-                    <th scope='col'>Escala</th>
-                    <th scope='col'>Color</th>  
-                    <th scope='col'>Stock</th>
+                    <th scope='col'>Fecha ult Compra</th>
+                    <th scope='col'>Último Costo</th>  
+                    <th scope='col'>Precio Actual</th>
 
                     <th scope='col'>Num Dev</th> 
                     <th scope='col'>Comentario</th>                   
