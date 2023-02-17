@@ -15,15 +15,9 @@ if (isset($_POST)) {
     $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
 
 
-
-    echo"$tipo_dev <br>";
-    echo"$doc1 <br>";
-    echo"$doc2 <br>";
-    echo"$art <br>";
-
   
     
-/*       for ($i = 0; $i < 20; $i += 1) {
+       for ($i = 0; $i < 20; $i += 1) {
         $sedes[] = $_POST[$i];
       }
     
@@ -33,13 +27,13 @@ if (isset($_POST)) {
 
       if ($tipo_dev== 'cliente') {
 
-        header("refresh:2;url= report-devoluciones-cli.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+        header("refresh:2;url= report-devoluciones-cli.php?fecha1=$fecha1&fecha2=$fecha2&art=$art&sedes=$sedes");
   
       }else {
   
-        header("refresh:2;url= report-devoluciones-prov.php?fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+        header("refresh:2;url= report-devoluciones-prov.php?fecha1=$fecha1&fecha2=$fecha2&doc1=$doc1&doc2=$doc2&art=$art&sedes=$sedes");
         
-      } */
+      } 
 
     
 

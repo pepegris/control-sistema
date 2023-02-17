@@ -16,6 +16,8 @@ if (isset($_GET)) {
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
+  $art=$GET['art'];
+
   
 
 ?>
@@ -69,7 +71,7 @@ if (isset($_GET)) {
         $sede = $sedes_ar[$e];
 
 
-        $res = getDev_cli($sede, $fecha1, $fecha2);
+        $res = getDev_cli($sede, $fecha1, $fecha2 , $art);
         var_dump(count($res));
         for ($i = 0; $i < count($res); $i++) {
 
@@ -87,7 +89,7 @@ if (isset($_GET)) {
           $dev_cli_fact = $res[$i]['dev_cli_fact'];
           $dev_cli_comentario = $res[$i]['dev_cli_comentario'];
           $dev_cli_fec_emis = $res[$i]['dev_cli_fec_emis'];
-          $fecha_dev_cli = $dev_cli_fec_emis->format('d-m-Y');
+          $fecha_dev_cli = 'fecha';
           $reng_dvc_total_art = round($res[$i]['reng_dvc_total_art']);
 
           $total_stock_reng_dvc += $reng_dvc_total_art;
