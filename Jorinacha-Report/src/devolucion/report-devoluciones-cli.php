@@ -18,6 +18,13 @@ if (isset($_GET)) {
 
   $art=$GET['art'];
 
+  if ($art != null) {
+    echo "no null-";
+    var_dump($art);
+  }else {
+    var_dump($art);
+  }
+
   
 
 ?>
@@ -65,7 +72,7 @@ if (isset($_GET)) {
 
       $n = 1;
 
-      var_dump($art);
+      
       for ($e = 1; $e < count($sedes_ar); $e++) {
 
         $sede = $sedes_ar[$e];
