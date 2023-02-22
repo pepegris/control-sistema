@@ -197,7 +197,7 @@ function getArt($sede, $linea, $co_art, $almacen)
 
 
 /* CONSULTAR ARTICULOS VENDIDOS*/
-function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
+function getReng_fac($sede,  $co_art)
 {
 
 
@@ -213,7 +213,7 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
             $sql = "SELECT TOP 1 reng_fac.total_art , factura.fec_emis 
             FROM reng_fac
             JOIN factura ON reng_fac.fact_num =factura.fact_num
-            WHERE factura.anulada=0 AND factura.fec_emis BETWEEN '$fecha1'  AND '$fecha2'
+            WHERE factura.anulada=0 
             AND reng_fac.co_art='$co_art'
             ORDER BY factura.fec_emis  DESC";
 
@@ -243,7 +243,7 @@ function getReng_fac($sede,  $co_art, $fecha1, $fecha2)
 }
 
 
-function getReng_com ($sede,  $co_art , $fecha1, $fecha2)
+function getReng_com ($sede,  $co_art  )
 {
 
     
@@ -261,7 +261,7 @@ function getReng_com ($sede,  $co_art , $fecha1, $fecha2)
            $sql = "SELECT TOP 1 reng_com.total_art , compras.fact_num , compras.fec_emis 
            FROM reng_com
            JOIN compras ON reng_com.fact_num =compras.fact_num
-           WHERE compras.anulada=0 AND compras.fec_emis <= '$fecha2'
+           WHERE compras.anulada=0 
            AND reng_com.co_art='$co_art'
            ORDER BY compras.fec_emis  DESC ";
 
@@ -293,7 +293,7 @@ function getReng_com ($sede,  $co_art , $fecha1, $fecha2)
 
 
 
-function getReng_ajue($sede, $co_art, $fecha1, $fecha2)
+function getReng_ajue($sede, $co_art)
 {
 
     #$database = Database($sede);
@@ -308,7 +308,7 @@ function getReng_ajue($sede, $co_art, $fecha1, $fecha2)
             $sql = "SELECT TOP 1 reng_aju.total_art , ajuste.ajue_num , ajuste.fecha  
             FROM reng_aju
             JOIN ajuste ON reng_aju.ajue_num =ajuste.ajue_num
-            WHERE ajuste.anulada=0 AND ajuste.fecha <= '$fecha2'
+            WHERE ajuste.anulada=0 
             AND reng_aju.co_art='$co_art'
             ORDER BY ajuste.fecha  DESC  ";
 

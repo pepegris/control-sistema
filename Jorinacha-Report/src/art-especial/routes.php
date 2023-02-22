@@ -9,8 +9,6 @@ if (isset($_POST)) {
     $tienda=$_POST['tienda'];
 
     $linea = $_POST['linea'];
-    $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
-    $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
 
   
     
@@ -21,7 +19,7 @@ if (isset($_POST)) {
       $sedes = serialize($sedes);
       $sedes = urlencode($sedes);
 
-    header("refresh:2;url= report-art-especial.php?linea=$linea&tienda=$tienda&fecha1=$fecha1&fecha2=$fecha2&sedes=$sedes");
+    header("refresh:2;url= report-art-especial.php?linea=$linea&tienda=$tienda&sedes=$sedes");
 
 
 } else {

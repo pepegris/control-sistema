@@ -80,7 +80,7 @@ require '../../services/adm/art-especial/especial.php';
 
       <!-- FORMULAIO DE FECHAS -->
 
-      <div class="form-group">
+<!--       <div class="form-group">
         <label for="fecha1" class="form-label " require>Desde</label>
         <input type="date" name="fecha1" id="" required>
       </div>
@@ -89,7 +89,7 @@ require '../../services/adm/art-especial/especial.php';
         <label for="fecha2" class="form-label " require>Hasta</label>
         <input type="date" name="fecha2" id="" required>
       </div>
-
+ -->
 
 
       <br>
