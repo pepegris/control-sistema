@@ -23,6 +23,9 @@ if (isset($_GET)) {
   $doc2 = $_GET['doc2'];
 
   var_dump($art);
+  if ($art=='') {
+    echo "VACIO";
+  }
   var_dump('<br>');
   var_dump($linea);
   echo "$linea";
