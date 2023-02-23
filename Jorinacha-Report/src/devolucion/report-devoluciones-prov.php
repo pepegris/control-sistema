@@ -26,6 +26,9 @@ if (isset($_GET)) {
   if ($art=='') {
     echo "VACIO";
   }
+  if ($art!='') {
+    echo "no VACIO";
+  }
   var_dump('<br>');
   var_dump($linea);
   echo "$linea";
