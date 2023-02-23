@@ -61,14 +61,7 @@ if (isset($_GET)) {
 
       <?php
 
-
-
-
-
-
-
-
-      $n = 1;
+    $n = 1;
 
 
 
@@ -90,7 +83,7 @@ if (isset($_GET)) {
         $dev_pro_fact = $res[$t]['dev_pro_fact'];
         $dev_pro_descrip = $res[$t]['dev_pro_descrip'];
         $dev_pro_fec_emis = $res[$t]['dev_pro_fec_emis'];
-        $fecha_dev_pro = '$dev_pro_fec_emis->format("d-m-Y")';
+        $fecha_dev_pro = 'fecha dev';
         $reng_dvp_total_art = round($res[$t]['reng_dvp_total_art']);
 
         $total_stock_reng_dvp += $reng_dvp_total_art;
@@ -99,7 +92,7 @@ if (isset($_GET)) {
 
         $compras_fact = $res2[$i]['compras_fact'];
         $com_fecha = $res2[$i]['com_fecha'];
-        $fecha_com = '$com_fecha->format("d-m-Y")';
+        $fecha_com = 'fecha com';
         $com_total_art = round($res2[$i]['com_total_art']);
         $tot_neto = $res2[$i]['tot_neto'];
 
