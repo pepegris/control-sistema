@@ -235,7 +235,7 @@ function getDev_pro($sede, $fecha1, $fecha2,$art,$linea)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-            if ($art != null) {
+            if ($art !='') {
 
                     $sql = "SELECT  
                     reng_dvp.co_art,
@@ -294,6 +294,8 @@ function getDev_pro($sede, $fecha1, $fecha2,$art,$linea)
                     JOIN reng_dvp ON dev_pro.fact_num = reng_dvp.fact_num
                     JOIN art ON art.co_art = reng_dvp.co_art
                     JOIN prov ON dev_pro.co_cli=prov.co_prov  
+
+                    
                     WHERE dev_pro.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND dev_pro.anulada =0 ";
             }
             
