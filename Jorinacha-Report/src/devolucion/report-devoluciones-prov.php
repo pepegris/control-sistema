@@ -17,7 +17,8 @@ if (isset($_GET)) {
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
-  var_dump(count($consultas));
+  $art=$_GET['art'];
+  $co_lin=$_GET['co_lin'];
 
 ?>
 
@@ -37,20 +38,10 @@ if (isset($_GET)) {
                     <th scope='col'>Proveedor</th>
                     <th scope='col'>Cod Art</th>
                     <th scope='col'>Descripción</th>
-                    <th scope='col'>Fecha ult Compra</th>
+                    <th scope='col'>Fecha Últ Compra</th>
                     <th scope='col'>Último Costo</th>  
                     <th scope='col'>Precio Actual</th>
 
-                    <th scope='col'>Num Dev</th> 
-                    <th scope='col'>Comentario</th>                   
-                    <th scope='col'>Fecha Dev</th>
-                    <th scope='col'>Pares</th>
-
-                    
-
-                    <th scope='col'>Num Fac de Compra</th>   
-                    <th scope='col'>Fecha Comp</th>
-                    <th scope='col'>Pares</th>
                     
             </tr>
           </thead>
@@ -74,19 +65,15 @@ if (isset($_GET)) {
 
  
 
-        $res = getDev_pro('Previa Shop', $fecha1, $fecha2);
+        $res = getDev_pro('Previa Shop', $fecha1, $fecha2, $art, $lin);
 
         if (round($res[0]['reng_dvp_total_art']) >= 1 ) {
 
           for ($t = 0; $t < count($res); $t++) {
 
 
-            $co_art = $res[$t]['co_art'];
-            $co_lin = $res[$t]['lin_des'];
-            $co_subl = $res[$t]['subl_des'];
-            $co_cat = $res[$t]['cat_des'];
-            $co_color = $res[$t]['des_col'];
-            $ubicacion = $res[$t]['ubicacion'];
+            $art_des = $res[$t]['art_des'];
+
             $stock_act = round($res[$t]['stock_act']);
   
             $total_stock_act_dev_pro += $stock_act;
@@ -94,7 +81,7 @@ if (isset($_GET)) {
             $dev_pro_fact = $res[$t]['dev_pro_fact'];
             $dev_pro_descrip = $res[$t]['dev_pro_descrip'];
             $dev_pro_fec_emis = $res[$t]['dev_pro_fec_emis'];
-            $fecha_dev_pro = $dev_pro_fec_emis->format('d-m-Y');
+            $fecha_dev_pro = '$dev_pro_fec_emis->format("d-m-Y")';
             $reng_dvp_total_art = round($res[$t]['reng_dvp_total_art']);
 
             $total_stock_reng_dvp += $reng_dvp_total_art;
@@ -103,7 +90,7 @@ if (isset($_GET)) {
 
             $compras_fact = $res2[$i]['compras_fact'];
             $com_fecha = $res2[$i]['com_fecha'];
-            $fecha_com = $com_fecha->format('d-m-Y');
+            $fecha_com = '$com_fecha->format("d-m-Y")';
             $com_total_art = round($res2[$i]['com_total_art']);
   
             $total_stock_com += $com_total_art;
@@ -114,11 +101,8 @@ if (isset($_GET)) {
             <th scope='row'>$n</th>
             <td>$sede</td>
             <td>$co_art</td>
-            <td>$co_lin</td>
-            <td>$co_subl </td>
-            <td>$ubicacion</td>
-            <td>$co_cat </td>
-            <td>$co_color</td>
+            <td>$art_des</td>
+
             <td>$stock_act</td>
     
             <td>$dev_pro_fact</td>

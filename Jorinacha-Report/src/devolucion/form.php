@@ -2,7 +2,7 @@
 require '../../includes/log.php';
 include '../../includes/header.php';
 include '../../services/mysql.php';
-include '../../services/sqlserver.php';
+include '../../services/adm/devolucion/dev.php';
 
 ?>
 
@@ -67,6 +67,30 @@ include '../../services/sqlserver.php';
       <label  class="form-label ">Nro Documento</label>
           <input style="color:black" type="number"  name="doc1" id="" >
           <input style="color:black" type="number"  name="doc2" id="" >
+      </div>
+
+
+      
+      <div class="form-group">
+        <label for="linea" class="form-label ">Linea</label>
+        <select name="linea" id="">
+
+          <!--           <option value="todos">Todas</option> -->
+
+          <?php
+
+
+          $res2 = getLin_art_all();
+
+          for ($i = 0; $i < count($res2); $i++) {
+
+            $lin_des = utf8_encode("$res2[$i]['lin_des']")
+          ?>
+            <option value="<?= $res2[$i]["co_lin"] ?>"><?= $res2[$i]['lin_des'] ?></option>
+
+          <?php   }  ?>
+
+        </select>
       </div>
 
       <div class="form-group">

@@ -10,6 +10,8 @@ if (isset($_POST)) {
     $doc1=$_POST['doc1'];
     $doc2=$_POST['doc2'];
     $art=$_POST['art'];
+    $co_lin=$_POST['co_lin'];
+  
 
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
     $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
@@ -27,11 +29,11 @@ if (isset($_POST)) {
 
       if ($tipo_dev== 'cliente') {
 
-        header("refresh:2;url= report-devoluciones-cli.php?fecha1=$fecha1&fecha2=$fecha2&art=$art&sedes=$sedes");
+        header("refresh:2;url= report-devoluciones-cli.php?fecha1=$fecha1&fecha2=$fecha2&art=$art&co_lin=$co_lin&sedes=$sedes");
   
       }else {
   
-        header("refresh:2;url= report-devoluciones-prov.php?fecha1=$fecha1&fecha2=$fecha2&doc1=$doc1&doc2=$doc2&art=$art&sedes=$sedes");
+        header("refresh:2;url= report-devoluciones-prov.php?fecha1=$fecha1&fecha2=$fecha2&doc1=$doc1&doc2=$doc2&art=$art&co_lin=$co_lin&sedes=$sedes");
         
       } 
 

@@ -114,6 +114,32 @@ function Cliente($sede)
 
 
 
+/* CONSULTAR TODAS LAS LINEA DE ARTICULOS*/
+function getLin_art_all()
+{
+
+
+    $serverName = "172.16.1.39";
+    $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $sql = "SELECT lin_art.co_lin, lin_art.lin_des from lin_art 
+            INNER JOIN art ON lin_art.co_lin=art.co_lin
+            WHERE art.fe_us_in >='20180101'
+            GROUP BY lin_art.co_lin,lin_art.lin_des";
+
+    $consulta = sqlsrv_query($conn, $sql);
+
+
+    while ($row = sqlsrv_fetch_array($consulta)) {
+
+        $lin_art[] =  $row;
+    }
+
+    $res = $lin_art;
+    return $res;
+}
+
+
 
 
 function getDev_cli($sede, $fecha1, $fecha2 , $art)
@@ -196,7 +222,7 @@ function getDev_cli($sede, $fecha1, $fecha2 , $art)
 }
 
 
-function getDev_pro($sede, $fecha1, $fecha2)
+function getDev_pro($sede, $fecha1, $fecha2,$art,$lin)
 {
 
 
@@ -209,22 +235,68 @@ function getDev_pro($sede, $fecha1, $fecha2)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-            $sql = "SELECT  art.co_art, sub_lin.subl_des , cat_art.cat_des , colores.des_col, lin_art.lin_des , art.ubicacion, art.stock_act , 
-            
-			dev_pro.fact_num as dev_pro_fact,
-            dev_pro.descrip as dev_pro_descrip ,
-			dev_pro.fec_emis as dev_pro_fec_emis , 
-			reng_dvp.total_art as reng_dvp_total_art
+            if ($art != null) {
 
-            FROM dev_pro 
-            JOIN reng_dvp ON dev_pro.fact_num = reng_dvp.fact_num
-            JOIN art ON art.co_art = reng_dvp.co_art
+                    $sql = "SELECT  
+                    reng_dvp.co_art,
+                    art_des , 
+                    prec_vta5,
+                    prov_des,
+                
+                    dev_pro.fact_num as dev_pro_fact,
+                    dev_pro.descrip as dev_pro_descrip ,
+                    dev_pro.fec_emis as dev_pro_fec_emis , 
+                    reng_dvp.total_art as reng_dvp_total_art
+                        
             
-            JOIN lin_art ON art.co_lin = lin_art.co_lin
-            JOIN sub_lin ON art.co_subl = sub_lin.co_subl
-            JOIN cat_art ON art.co_cat=cat_art.co_cat
-            JOIN colores ON art.co_color=colores.co_col
-            WHERE dev_pro.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND dev_pro.anulada =0 ";
+                    FROM dev_pro 
+                    JOIN reng_dvp ON dev_pro.fact_num = reng_dvp.fact_num
+                    JOIN art ON art.co_art = reng_dvp.co_art
+                    JOIN prov ON dev_pro.co_cli=prov.co_prov  
+                    WHERE dev_pro.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND reng_dvp.co_art='$art'  AND dev_pro.anulada =0 ";
+
+            } elseif ($lin != null) {
+
+                $sql = "SELECT  
+                reng_dvp.co_art,
+                art_des , 
+                prec_vta5,
+                prov_des,
+            
+                dev_pro.fact_num as dev_pro_fact,
+                dev_pro.descrip as dev_pro_descrip ,
+                dev_pro.fec_emis as dev_pro_fec_emis , 
+                reng_dvp.total_art as reng_dvp_total_art
+                    
+        
+                FROM dev_pro 
+                JOIN reng_dvp ON dev_pro.fact_num = reng_dvp.fact_num
+                JOIN art ON art.co_art = reng_dvp.co_art
+                JOIN prov ON dev_pro.co_cli=prov.co_prov
+                JOIN lin_art ON art.co_lin = lin_art.co_lin  
+                WHERE dev_pro.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND art.co_lin='$lin'  AND dev_pro.anulada =0 ";
+
+            }else {
+
+                    $sql = "SELECT  
+                    reng_dvp.co_art,
+                    art_des , 
+                    prec_vta5,
+                    prov_des,
+                
+                    dev_pro.fact_num as dev_pro_fact,
+                    dev_pro.descrip as dev_pro_descrip ,
+                    dev_pro.fec_emis as dev_pro_fec_emis , 
+                    reng_dvp.total_art as reng_dvp_total_art
+                        
+            
+                    FROM dev_pro 
+                    JOIN reng_dvp ON dev_pro.fact_num = reng_dvp.fact_num
+                    JOIN art ON art.co_art = reng_dvp.co_art
+                    JOIN prov ON dev_pro.co_cli=prov.co_prov  
+                    WHERE dev_pro.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND dev_pro.anulada =0 ";
+            }
+            
 
 
 
