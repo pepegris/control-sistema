@@ -255,7 +255,7 @@ function getDev_pro($sede, $fecha1, $fecha2,$art,$linea)
                     JOIN prov ON dev_pro.co_cli=prov.co_prov  
                     WHERE dev_pro.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND reng_dvp.co_art='$art'  AND dev_pro.anulada =0 ";
 
-            } elseif ($lin != 'todos') {
+            } elseif ($linea != 'todos') {
 
                 $sql = "SELECT  
                 reng_dvp.co_art,
@@ -274,7 +274,7 @@ function getDev_pro($sede, $fecha1, $fecha2,$art,$linea)
                 JOIN art ON art.co_art = reng_dvp.co_art
                 JOIN prov ON dev_pro.co_cli=prov.co_prov
                 JOIN lin_art ON art.co_lin = lin_art.co_lin  
-                WHERE dev_pro.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND art.co_lin='$lin'  AND dev_pro.anulada =0 ";
+                WHERE dev_pro.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND art.co_lin='$linea'  AND dev_pro.anulada =0 ";
 
             }else {
 
