@@ -17,10 +17,10 @@ if (isset($_GET)) {
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
-  $art=$_GET['art'];
-  $co_lin=$_GET['co_lin'];
-  $doc1=$_GET['doc1'];
-  $doc2=$_GET['doc2'];
+  $art = $_GET['art'];
+  $co_lin = $_GET['co_lin'];
+  $doc1 = $_GET['doc1'];
+  $doc2 = $_GET['doc2'];
 
 ?>
 
@@ -28,80 +28,76 @@ if (isset($_GET)) {
     <h1>Devoluciones <?= $fecha_titulo1 ?> - <?= $fecha_titulo2  ?></h1>
     <h3>Proveedores</h3>
   </center>
-  <table class='table table-dark table-striped' >
-          <thead>
-
-          
-      
-            <tr>
-                    <th scope='col'>N°</th>
-                    <th scope='col'>N° Devolución</th>
-                    <th scope='col'>Fecha</th>
-                    <th scope='col'>Proveedor</th>
-                    <th scope='col'>Cod Art</th>
-                    <th scope='col'>Descripción</th>
-                    <th scope='col'>N° Compra</th>
-                    <th scope='col'>Fecha Últ Compra</th>
-                    <th scope='col'>Último Costo</th>  
-                    <th scope='col'>Precio Actual</th>
-
-                    
-            </tr>
-          </thead>
-          <tbody>
-
-  <?php
+  <table class='table table-dark table-striped'>
+    <thead>
 
 
+
+      <tr>
+        <th scope='col'>N°</th>
+        <th scope='col'>N° Devolución</th>
+        <th scope='col'>Fecha</th>
+        <th scope='col'>Proveedor</th>
+        <th scope='col'>Cod Art</th>
+        <th scope='col'>Descripción</th>
+        <th scope='col'>N° Compra</th>
+        <th scope='col'>Fecha Últ Compra</th>
+        <th scope='col'>Último Costo</th>
+        <th scope='col'>Precio Actual</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+
+      <?php
 
 
 
 
 
-    
-    $n = 1;
 
 
-    for ($e = 1; $e < count($sedes_ar); $e++) {
 
-      $sede = $sedes_ar[$e];
-
- 
-
-        $res = getDev_pro('Previa Shop', $fecha1, $fecha2, $art, $lin);
-
-       
-
-          for ($t = 0; $t < count($res); $t++) {
+      $n = 1;
 
 
-            $art_des = $res[$t]['art_des'];
-            $prec_vta5 = $res[$t]['prec_vta5'];
 
-            $stock_act = round($res[$t]['stock_act']);
-  
-            $total_stock_act_dev_pro += $stock_act;
-  
-            $dev_pro_fact = $res[$t]['dev_pro_fact'];
-            $dev_pro_descrip = $res[$t]['dev_pro_descrip'];
-            $dev_pro_fec_emis = $res[$t]['dev_pro_fec_emis'];
-            $fecha_dev_pro = '$dev_pro_fec_emis->format("d-m-Y")';
-            $reng_dvp_total_art = round($res[$t]['reng_dvp_total_art']);
 
-            $total_stock_reng_dvp += $reng_dvp_total_art;
+      $res = getDev_pro('Previa Shop', $fecha1, $fecha2, $art, $lin);
 
-            $res2 = getCompras('Previa Shop', $co_art );
 
-            $compras_fact = $res2[$i]['compras_fact'];
-            $com_fecha = $res2[$i]['com_fecha'];
-            $fecha_com = '$com_fecha->format("d-m-Y")';
-            $com_total_art = round($res2[$i]['com_total_art']);
-            $tot_neto = $res2[$i]['tot_neto'];
-  
-            $total_stock_com += $com_total_art;
 
-  
-            echo "
+      for ($t = 0; $t < count($res); $t++) {
+
+
+        $art_des = $res[$t]['art_des'];
+        $prec_vta5 = $res[$t]['prec_vta5'];
+
+        $stock_act = round($res[$t]['stock_act']);
+
+        $total_stock_act_dev_pro += $stock_act;
+
+        $dev_pro_fact = $res[$t]['dev_pro_fact'];
+        $dev_pro_descrip = $res[$t]['dev_pro_descrip'];
+        $dev_pro_fec_emis = $res[$t]['dev_pro_fec_emis'];
+        $fecha_dev_pro = '$dev_pro_fec_emis->format("d-m-Y")';
+        $reng_dvp_total_art = round($res[$t]['reng_dvp_total_art']);
+
+        $total_stock_reng_dvp += $reng_dvp_total_art;
+
+        $res2 = getCompras('Previa Shop', $co_art);
+
+        $compras_fact = $res2[$i]['compras_fact'];
+        $com_fecha = $res2[$i]['com_fecha'];
+        $fecha_com = '$com_fecha->format("d-m-Y")';
+        $com_total_art = round($res2[$i]['com_total_art']);
+        $tot_neto = $res2[$i]['tot_neto'];
+
+        $total_stock_com += $com_total_art;
+
+
+        echo "
             <tr>
             <th scope='row'>$n</th>
             <td>$dev_pro_fact</td>
@@ -115,23 +111,15 @@ if (isset($_GET)) {
             <td>$fecha_com</td>
             <td>$tot_neto</td>
             <td>$prec_vta5</td>
-
-            
-
-      
+ 
             </tr>";
-            $n++;
-          }
-
-        
-
-        
-
-    }
+        $n++;
+      }
 
 
 
-    
+
+
 
       echo "
       <tr>
@@ -157,18 +145,18 @@ if (isset($_GET)) {
 
 
 
-  ?>
+      ?>
 
 
 
-<?php
+    <?php
 
 
-} else {
-  header("location: form.php");
-}
+  } else {
+    header("location: form.php");
+  }
 
 
 
 
-include '../../includes/footer.php'; ?>
+  include '../../includes/footer.php'; ?>
