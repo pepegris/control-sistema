@@ -19,6 +19,8 @@ if (isset($_GET)) {
 
   $art=$_GET['art'];
   $co_lin=$_GET['co_lin'];
+  $doc1=$_GET['doc1'];
+  $doc2=$_GET['doc2'];
 
 ?>
 
@@ -38,6 +40,7 @@ if (isset($_GET)) {
                     <th scope='col'>Proveedor</th>
                     <th scope='col'>Cod Art</th>
                     <th scope='col'>Descripción</th>
+                    <th scope='col'>N° Compra</th>
                     <th scope='col'>Fecha Últ Compra</th>
                     <th scope='col'>Último Costo</th>  
                     <th scope='col'>Precio Actual</th>
@@ -67,12 +70,13 @@ if (isset($_GET)) {
 
         $res = getDev_pro('Previa Shop', $fecha1, $fecha2, $art, $lin);
 
-        if (round($res[0]['reng_dvp_total_art']) >= 1 ) {
+       
 
           for ($t = 0; $t < count($res); $t++) {
 
 
             $art_des = $res[$t]['art_des'];
+            $prec_vta5 = $res[$t]['prec_vta5'];
 
             $stock_act = round($res[$t]['stock_act']);
   
@@ -92,6 +96,7 @@ if (isset($_GET)) {
             $com_fecha = $res2[$i]['com_fecha'];
             $fecha_com = '$com_fecha->format("d-m-Y")';
             $com_total_art = round($res2[$i]['com_total_art']);
+            $tot_neto = $res2[$i]['tot_neto'];
   
             $total_stock_com += $com_total_art;
 
@@ -99,50 +104,25 @@ if (isset($_GET)) {
             echo "
             <tr>
             <th scope='row'>$n</th>
-            <td>$sede</td>
+            <td>$dev_pro_fact</td>
+            <td>$fecha_dev_pro</td>
+            
+
             <td>$co_art</td>
             <td>$art_des</td>
 
-            <td>$stock_act</td>
-    
-            <td>$dev_pro_fact</td>
-            <td>$dev_pro_descrip</td>
-            <td>$fecha_dev_pro</td>
-            <td>$reng_dvp_total_art</td>
-    
             <td>$compras_fact</td>
             <td>$fecha_com</td>
-            <td>$com_total_art</td>
+            <td>$tot_neto</td>
+            <td>$prec_vta5</td>
+
+            
+
       
             </tr>";
             $n++;
           }
 
-        } else {
-          echo "
-          <tr>
-          <th scope='row'>No hay Informacion</th>
-          <td>$sede</td>
-          <td>No hay Informacion</td>
-          <td>$sede</td>
-          <td>No hay Informacion</td>
-          <td>$sede</td>
-          <td>No hay Informacion</td>
-          <td>$sede</td>
-          <td>No hay Informacion</td>
-  
-          <td>$sede</td>
-          <td>No hay Informacion</td>
-          <td>$sede</td>
-          <td>No hay Informacion</td>
-  
-          <td>$sede</td>
-          <td>No hay Informacion</td>
-          <td>$sede</td>
-          <td>No hay Informacion</td>
-    
-          </tr>";
-        }
         
 
         

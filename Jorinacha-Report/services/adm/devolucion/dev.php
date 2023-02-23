@@ -255,7 +255,7 @@ function getDev_pro($sede, $fecha1, $fecha2,$art,$lin)
                     JOIN prov ON dev_pro.co_cli=prov.co_prov  
                     WHERE dev_pro.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND reng_dvp.co_art='$art'  AND dev_pro.anulada =0 ";
 
-            } elseif ($lin != null) {
+            } elseif ($lin != 'todos') {
 
                 $sql = "SELECT  
                 reng_dvp.co_art,
@@ -341,7 +341,8 @@ function getCompras($sede,  $fecha2 , $co_art)
             $sql = "SELECT  TOP 1
 			compras.fact_num as compras_fact,
             compras.fec_emis as com_fecha,
-            reng_com.total_art as com_total_art
+            reng_com.total_art as com_total_art,
+            compras.tot_neto
 			FROM reng_com
             JOIN compras ON compras.fact_num = reng_com.fact_num
 			WHERE  compras.anulada =0 
