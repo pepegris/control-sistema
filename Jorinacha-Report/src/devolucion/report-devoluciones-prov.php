@@ -22,6 +22,14 @@ if (isset($_GET)) {
   $doc1 = $_GET['doc1'];
   $doc2 = $_GET['doc2'];
 
+  var_dump($art);
+  var_dump('<br>');
+  var_dump($co_lin);
+  var_dump('<br>');
+  var_dump( $doc1 );
+  var_dump('<br>');
+  var_dump( $doc2 );
+
 ?>
 
   <center>
