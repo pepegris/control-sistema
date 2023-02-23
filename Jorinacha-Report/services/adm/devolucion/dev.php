@@ -222,7 +222,7 @@ function getDev_cli($sede, $fecha1, $fecha2 , $art)
 }
 
 
-function getDev_pro($sede, $fecha1, $fecha2,$art,$lin)
+function getDev_pro($sede, $fecha1, $fecha2,$art,$linea)
 {
 
 

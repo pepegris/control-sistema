@@ -18,14 +18,14 @@ if (isset($_GET)) {
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
   $art = $_GET['art'];
-  $co_lin = $_GET['co_lin'];
+  $linea = $_GET['linea'];
   $doc1 = $_GET['doc1'];
   $doc2 = $_GET['doc2'];
 
   var_dump($art);
   var_dump('<br>');
-  var_dump($co_lin);
-  echo "$co_lin";
+  var_dump($linea);
+  echo "$linea";
   var_dump('<br>');
   var_dump( $doc1 );
   var_dump('<br>');
@@ -73,7 +73,7 @@ if (isset($_GET)) {
 
 
 
-      $res = getDev_pro('Previa Shop', $fecha1, $fecha2, $art, $lin);
+      $res = getDev_pro('Previa Shop', $fecha1, $fecha2, $art, $linea);
 
 
 
