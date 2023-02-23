@@ -25,6 +25,7 @@ if (isset($_GET)) {
   var_dump($art);
   var_dump('<br>');
   var_dump($co_lin);
+  echo "$co_lin";
   var_dump('<br>');
   var_dump( $doc1 );
   var_dump('<br>');
