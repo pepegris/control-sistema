@@ -64,6 +64,7 @@ include '../../services/sqlserver.php';
         <option value="acumulado">Ventas Acumuladas</option>
         <option value="dias">Ventas Detalladas por Dias</option> 
         <option value="ord">Detalles de Ord de Pagos</option> 
+        <option value="factura">Detalles de Facturas, Cobros y Devoluciones</option> 
         
 
       </select> 

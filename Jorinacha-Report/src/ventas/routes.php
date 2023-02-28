@@ -74,7 +74,12 @@ if ($clave === 'N3td0s' ) {
         
         header("refresh:1;url= report-ventas-ordenes.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
 
-    } else {
+    } elseif ($reporte=='factura'){
+        
+        header("refresh:1;url= report-ventas-facturas.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
+
+    }
+    else {
 
         header('refresh:1;url= form.php');
 
