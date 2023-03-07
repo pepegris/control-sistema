@@ -570,8 +570,7 @@ function getFacturaDetalles($sede, $fecha1,$fecha2)
             cobros
             JOIN reng_tip ON cobros.cob_num = reng_tip.cob_num
             JOIN reng_cob ON cobros.cob_num = reng_cob.cob_num
-            WHERE cobros.anulado=0  AND cobros.fec_cob BETWEEN'$fecha1' AND '$fecha2'
-            order by fec_cob desc";
+            WHERE cobros.anulado=0  AND cobros.fec_cob BETWEEN'$fecha1' AND '$fecha2'";
 
 
             $consulta = sqlsrv_query($conn, $sql);
