@@ -565,8 +565,7 @@ function getFacturaDetalles($sede, $fecha1,$fecha2)
             reng_tip.cod_caja,
             reng_tip.des_caja
             
-            
-            
+
             FROM 
             cobros
             JOIN reng_tip ON cobros.cob_num = reng_tip.cob_num
