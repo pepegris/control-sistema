@@ -80,7 +80,8 @@ if ($_GET) {
 
         $res_factura = getFacturaDetalles($sedes_ar[$i], $fecha1, $fecha2);
 
-
+        var_dump($res_factura);
+        var_dump(count($res_factura));
 
         for ($x = 0; $x < count($res_factura); $x++) {
 
