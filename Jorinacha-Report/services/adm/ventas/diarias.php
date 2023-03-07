@@ -534,3 +534,72 @@ function getTasas($sede, $fecha1)
         return 0;
     }
 }
+
+
+
+
+
+function getFacturaDetalles($sede, $fecha1,$fecha2)
+{
+
+
+    $database = Database($sede);
+    if ($database != null) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT
+
+            reng_cob.tp_doc_cob,
+            reng_cob.doc_num as FACTURA,
+            reng_cob.neto,
+             
+            cobros.cob_num as COBROS,
+            cobros.fec_cob,
+            
+            reng_tip.tip_cob,
+            reng_tip.mont_doc,
+            reng_tip.cod_caja,
+            reng_tip.des_caja
+            
+            
+            
+            FROM 
+            cobros
+            JOIN reng_tip ON cobros.cob_num = reng_tip.cob_num
+            JOIN reng_cob ON cobros.cob_num = reng_cob.cob_num
+            WHERE cobros.anulado=0  AND AND cobros.fec_cob BETWEEN'$fecha1' AND '$fecha2'
+            order by fec_cob desc";
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $cobros[] = $row;
+
+
+                }
+
+                $res = $cobros;
+            } else {
+
+                $cobros = 0;
+
+                $res = $cobros;
+            }
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}

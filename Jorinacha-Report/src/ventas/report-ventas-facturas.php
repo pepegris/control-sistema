@@ -9,16 +9,10 @@ include '../../services/adm/ventas/diarias.php';
 
 if ($_GET) {
 
-  $divisa = $_GET['divisa'];
   $fecha_titulo = date("d/m/Y", strtotime($_GET['fecha1']));
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
-  $fecha = date("Ymd", strtotime($_GET['fecha1']));
-
-  $Day = date("d", strtotime($fecha));
-  $Month = date("m", strtotime($fecha));
-  $Year = date("Y", strtotime($fecha));
 
 
 
@@ -54,14 +48,17 @@ if ($_GET) {
         <th scope="col">Cod</th>
         <th scope='col'>Empresa</th>
 
-        <th scope='col'>Tasa</th>
+        <th scope='col'>Documen</th>
 
-        <th scope='col'>Número de Orden</th>
+        <th scope='col'>Num Fact</th>
+        <th scope='col'>Monto</th>
 
-        <th scope='col'>Descripción</th>
+        <th scope='col'>Num Cob</th>
+        <th scope='col'>Tipo de Cob</th>
+        <th scope='col'>Monto</th>
 
-        <th scope='col'>Monto Bs</th>
-        <th scope='col'>Monto USD</th>
+        <th scope='col'>Cod Caja</th>
+        <th scope='col'>Caja</th>
 
         
       </tr>
@@ -74,10 +71,6 @@ if ($_GET) {
 
 
       for ($i = 1; $i < count($sedes_ar); $i++) {
-
-
-
-        $tasa_v_bs  = 1;
         
         $cod = Cliente($sedes_ar[$i]);
 
@@ -85,87 +78,49 @@ if ($_GET) {
 
         /* CONSULTAS */
 
-        $ord_pago = getOrd_pago_inf($sedes_ar[$i], $fecha1, $fecha2);
+        $res_factura = getFacturaDetalles($sedes_ar[$i], $fecha1, $fecha2);
 
 
 
-        for ($x = 0; $x < count($ord_pago); $x++) {
-
-
-          $fecha_ord_pago = $ord_pago[$x]['fecha'];
-          $fecha = $fecha_ord_pago->format('d-m-Y');
-
-          $Day = date("d", strtotime($fecha));
-
-
-          $fecha_2 = $Year . '/' . $Month . '/' . $Day;
-
-          $tasas = getTasas($sedes_ar[$i],  $fecha_2);
-
-          $e++;
-
-          if ($tasas != null) {
-            $tasa_v_tasas = $tasas['tasa_v'];
-          } else {
-            $tasa_v_tasas;
-          }
-
-          $tasa_dia = number_format($tasa_v_tasas, 2, ',', '.');
-
-          
+        for ($x = 0; $x < count($res_factura); $x++) {
 
 
 
+          $tp_doc_cob = $res_factura[$x]['tp_doc_cob'];
+          $doc_num = $res_factura[$x]['FACTURA'];
+          $neto = $res_factura[$x]['neto'];
 
+          $cob_num = $res_factura[$x]['COBROS'];
+          $fec_cob = $res_factura[$x]['fec_cob'];
+          $fecha = $res1->format('d-m-Y');
 
-          $num_ord_pago = $ord_pago[$x]['ord_num'];
-          $descrip_ord_pago = $ord_pago[$x]['descrip'];
-
-
-
-          /* DOLARES *//* DOLARES *//* DOLARES */
-
-
-          $tasa_monto_ord_pago_usd = $ord_pago[$x]['monto'] / $tasa_v_tasas;
-          $monto_ord_pago_usd = number_format($tasa_monto_ord_pago_usd, 2, ',', '.');
-
-
-
-          /* BOLIVARES *//* BOLIVARES *//* BOLIVARES */
-
-
-          $tasa_monto_ord_pago_bs = $ord_pago[$x]['monto'] / $tasa_v_bs;
-          $monto_ord_pago_bs = number_format($tasa_monto_ord_pago_bs, 2, ',', '.');
-
-
-          /* totales *//* BOLIVARES *//* totales */
-
-          $total_pagos_usd += $tasa_monto_ord_pago_usd;
-
-
-          /* totales *//* DOLARES *//* totales */
-
-
-          $total_pagos_bs += $tasa_monto_ord_pago_bs;
-
+          $tip_cob = $res_factura[$x]['tip_cob'];
+          $mont_doc = $res_factura[$x]['mont_doc'];
+          $cod_caja = $res_factura[$x]['cod_caja'];
+          $des_caja = $res_factura[$x]['des_caja'];
 
 
       ?>
           <tr>
 
             <td><?= $fecha   ?></td>
+
             <td><?= $cod   ?></td>
             <td><?= $sede ?></td>
 
-            <td><?= $tasa_dia ?></td>
+            <td><?= $tp_doc_cob ?></td>
 
-            <td><?= $num_ord_pago    ?></td>
-            <td><?= $descrip_ord_pago  ?></td>
+            <td><?= $doc_num    ?></td>
+            <td><?= $neto  ?></td>
 
-            <td><?= $monto_ord_pago_bs  ?></td>
-            <td><?= $monto_ord_pago_usd  ?></td>
+            <td><?= $cob_num  ?></td>
+            <td><?= $tip_cob  ?></td>
+            <td><?= $mont_doc  ?></td>
 
+            <td><?= $cod_caja  ?></td>
+            <td><?= $des_caja  ?></td>
 
+            </tr>
 
         <?php
         }
