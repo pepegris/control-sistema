@@ -10,6 +10,7 @@ include '../../services/adm/ventas/diarias.php';
 if ($_GET) {
 
   $fecha_titulo = date("d/m/Y", strtotime($_GET['fecha1']));
+  $fecha_titulo2 = date("d/m/Y", strtotime($_GET['fecha2']));
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
@@ -33,7 +34,7 @@ if ($_GET) {
 
 
   <center>
-    <h1>Ordenes de Pago <?= $fecha_titulo ?></h1>
+    <h1>Facturas <?= $fecha_titulo ?> - <?= $fecha_titulo2 ?></h1>
   </center>
 
 
@@ -93,8 +94,8 @@ if ($_GET) {
 
           $cob_num = $res_factura[$x]['COBROS'];
           $fec_cob = $res_factura[$x]['fec_cob'];
-          $fecha = '$res1->format("d-m-Y")';
-          #$fecha = $res1->format('d-m-Y');
+          $fecha = '$fec_cob->format("d-m-Y")';
+          #$fecha = $fec_cob->format('d-m-Y');
 
           $tip_cob = $res_factura[$x]['tip_cob'];
           $mont_doc = $res_factura[$x]['mont_doc'];
