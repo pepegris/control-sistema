@@ -52,11 +52,11 @@ if ($_GET) {
         <th scope='col'>Documen</th>
 
         <th scope='col'>Num Fact</th>
-        <th scope='col'>Monto</th>
+        <th scope='col'>Fact Monto</th>
 
         <th scope='col'>Num Cob</th>
         <th scope='col'>Tipo de Cob</th>
-        <th scope='col'>Monto</th>
+        <th scope='col'>Cob Monto</th>
 
         <th scope='col'>Cod Caja</th>
         <th scope='col'>Caja</th>
