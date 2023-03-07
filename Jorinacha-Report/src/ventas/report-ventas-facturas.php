@@ -92,8 +92,7 @@ if ($_GET) {
 
           $cob_num = $res_factura[$x]['COBROS'];
           $fec_cob = $res_factura[$x]['fec_cob'];
-          $fecha = '$fec_cob->format("d-m-Y")';
-          #$fecha = $fec_cob->format('d-m-Y');
+          $fecha = $fec_cob->format("d-m-Y");
 
           $tip_cob = $res_factura[$x]['tip_cob'];
           $mont_doc = $res_factura[$x]['mont_doc'];
