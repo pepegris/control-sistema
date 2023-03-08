@@ -120,7 +120,7 @@ if ($_GET) {
             <td><?= $cod_caja  ?></td>
             <td><?= $des_caja  ?></td>
 
-            </tr>
+          </tr>
 
         <?php
         }
