@@ -115,17 +115,18 @@ $cuenta_on = ucwords($cuenta_on);
         <h4>Articulos con sus precio y cantidad vendida</h4>
       </div>
       </a>
-
-
-    <a href="src/cob-eg-ig/form.php">
+<!-- VENTANA DE EGRESO Y GASTOS -->
+<!-- VENTANA DE EGRESO Y GASTOS -->
+<!--     <a href="src/cob-eg-ig/form.php">
     <div class="box">
         <i class="lni lni-credit-cards"></i>
         <h5>Desarrollo</h5>
         <h4>Desarrollo</h4>
       </div>
     </a>
-
-
+ -->
+<!-- VENTANA DE EGRESO Y GASTOS -->
+<!-- VENTANA DE EGRESO Y GASTOS -->
     <a href="src/ventas/form.php">
         <div class="box">
         <i class="lni lni-invest-monitor"></i>
