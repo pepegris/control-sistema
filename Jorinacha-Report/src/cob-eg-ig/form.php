@@ -4,6 +4,15 @@ include '../../includes/header.php';
 include '../../services/mysql.php';
 include '../../services/sqlserver.php';
 
+if (isset($_POST)  ) {
+  
+  $clave=$_POST['clave'];
+
+
+
+
+  if ($clave === 'C0nt4b1l1d4d' ) {
+
 ?>
 
 <style>
@@ -93,4 +102,12 @@ include '../../services/sqlserver.php';
 
 
 
-<?php include '../../includes/footer.php'; ?>
+<?php include '../../includes/footer.php'; 
+  }else {
+    header('refresh:1;url= form-2.php');
+    exit;}
+
+      }else {
+        header('refresh:1;url= form-2.php');
+        exit;}
+?>

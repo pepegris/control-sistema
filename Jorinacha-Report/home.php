@@ -117,14 +117,14 @@ $cuenta_on = ucwords($cuenta_on);
       </a>
 <!-- VENTANA DE EGRESO Y GASTOS -->
 <!-- VENTANA DE EGRESO Y GASTOS -->
-<!--     <a href="src/cob-eg-ig/form.php">
+   <a href="src/cob-eg-ig/form-2.php">
     <div class="box">
         <i class="lni lni-credit-cards"></i>
         <h5>Desarrollo</h5>
         <h4>Desarrollo</h4>
       </div>
     </a>
- -->
+
 <!-- VENTANA DE EGRESO Y GASTOS -->
 <!-- VENTANA DE EGRESO Y GASTOS -->
     <a href="src/ventas/form.php">
