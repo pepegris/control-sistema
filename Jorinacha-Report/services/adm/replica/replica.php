@@ -162,7 +162,7 @@ function Replica_detal($sede,$doc)
             $fecha_actual = date("Ymd");
 
             if ($doc=='factura') {
-                $sql = "SELECT top 1 fec_emis  from factura where fec_emis <='$fecha_actual' order by fec_emis desc";           
+                $sql = "SELECT top 1 fec_emis as fec_emis from factura where fec_emis <='$fecha_actual' order by fec_emis desc";           
             }elseif ($doc=='cobros') {
                 $sql = "SELECT top 1 fec_cob as fec_emis FROM cobros where fec_cob <='$fecha_actual' order by fec_cob desc";
             }elseif ($doc=='ord_pago') {
