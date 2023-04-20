@@ -53,9 +53,9 @@ if (isset($_GET['sede'])) {
     $factura1=$res1['fec_emis'];
     $factura = $factura1->format('d-m-Y');
     var_dump($res1['fec_emis']);
-    echo "<br>";
+    echo "++++++++++++++";
     echo $res1['fec_emis'];
-    echo "<br>";
+    echo "+++++++++++++++";
     echo "$factura";
 
     $res2 = Replica_detal($sede, 'cobros');
