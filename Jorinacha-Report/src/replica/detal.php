@@ -52,30 +52,26 @@ if (isset($_GET['sede'])) {
     $res1 = Replica_detal($sede, 'factura');
     $factura1=$res1['fec_emis'];
     $factura = $factura1->format('d-m-Y');
-    echo "++++++++++++++";
-    
+
 
 
     $res2 = Replica_detal($sede, 'cobros');
     $cobros2=$res2['fec_emis'];
     $cobros = $cobros2->format('d-m-Y');
 
-    echo "$cobros";
-    echo "++++++++++++++";
+
 
     $res3 = Replica_detal($sede, 'ord_pago');
     $ord_pago3=$res3['fec_emis'];
     $ord_pago = $ord_pago3->format('d-m-Y');
 
-    echo "$ord_pago";
-    echo "++++++++++++++";
+
 
     $res4 = Replica_detal($sede, 'mov_ban');
     $mov_ban4=$res4['fec_emis'];
     $mov_ban = $mov_ban4->format('d-m-Y');
 
-    echo "$mov_ban";
-    echo "++++++++++++++";
+
 
 } else {
     header("location: form.php");
