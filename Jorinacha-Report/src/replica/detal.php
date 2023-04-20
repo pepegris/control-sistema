@@ -49,10 +49,18 @@ include '../../services/adm/replica/replica.php';
 if (isset($_GET['sede'])) {
     $sede = $_GET['sede'];
 
-    $factura = Replica_detal($sede, 'factura');
-    $cobros = Replica_detal($sede, 'cobros');
-    $ord_pago = Replica_detal($sede, 'ord_pago');
-    $mov_ban = Replica_detal($sede, 'mov_ban');
+    $factura1 = Replica_detal($sede, 'factura');
+    $factura=$factura1['fec_emis'];
+
+    $cobros2 = Replica_detal($sede, 'cobros');
+    $cobros=$cobros2['fec_emis'];
+
+    $ord_pago3 = Replica_detal($sede, 'ord_pago');
+    $ord_pago=$ord_pago3['fec_emis'];
+
+    $mov_ban4 = Replica_detal($sede, 'mov_ban');
+    $mov_ban=$mov_ban4['fec_emis'];
+
 } else {
     header("location: form.php");
 }
