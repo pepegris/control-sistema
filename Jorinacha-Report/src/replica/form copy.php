@@ -84,11 +84,11 @@ include '../../services/adm/replica/replica.php';
 
             if ($past  >= $now_1) {
 
-              echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=<?php echo $sede?>'>$sede</a> </b> /  $fecha</span> <img src='./img/cloud-check.svg' alt=''> </li>";
+              echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  $fecha</span> <img src='./img/cloud-check.svg' alt=''> </li>";
             } elseif ($past  >= $now_2) {
-              echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=<?php echo $sede?>'>$sede</a> </b> /  $fecha</span>  <img src='./img/cloud-sync.svg' alt=''> </li>";
+              echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  $fecha</span>  <img src='./img/cloud-sync.svg' alt=''> </li>";
             } else {
-              echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=<?php echo $sede?>'>$sede</a> </b> /  $fecha</span>  <img src='./img/cloud-upload.svg' alt=''> </li>";
+              echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  $fecha</span>  <img src='./img/cloud-upload.svg' alt=''> </li>";
             }
 
             
@@ -105,7 +105,7 @@ include '../../services/adm/replica/replica.php';
   </div>
 
 
-
+<a href='href="detal.php?sede=<?php echo $sede?>"'></a>
 
 
 
