@@ -54,6 +54,7 @@ if (isset($_GET['sede'])) {
     $factura = $factura1->format('d-m-Y');
     var_dump($res1['fec_emis']);
     echo "++++++++++++++";
+    echo "$factura";
     echo $res1['fec_emis'];
     echo "+++++++++++++++";
     echo "$factura";
