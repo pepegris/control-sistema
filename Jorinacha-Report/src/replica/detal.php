@@ -55,9 +55,7 @@ if (isset($_GET['sede'])) {
     var_dump($res1['fec_emis']);
     echo "++++++++++++++";
     echo "$factura";
-    echo $res1['fec_emis'];
-    echo "+++++++++++++++";
-    echo "$factura";
+
 
     $res2 = Replica_detal($sede, 'cobros');
     $cobros2=$res2['fec_emis'];
