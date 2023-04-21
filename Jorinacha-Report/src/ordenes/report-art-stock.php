@@ -7,17 +7,17 @@ include '../../includes/header.php';
 include '../../services/mysql.php';
 include '../../services/adm/ordenes/ordenes.php';
 
-if ($_POST) {
-    $ordenes = $_POST['ordenes'];
-    $fecha1 = $_POST['fecha1'];
-    $fecha2 = $_POST['fecha2'];
+if ($_GET) {
+    $ordenes = $_GET['ordenes'];
+    $fecha1 = $_GET['fecha1'];
+    $fecha2 = $_GET['fecha2'];
 
     $Day = date("d", strtotime($fecha2));
     $Month = date("m", strtotime($fecha2));
     $Year = date("Y", strtotime($fecha2));
 
     for ($i = 0; $i < 20; $i += 1) {
-        $sedes[] = $_POST[$i];
+        $sedes[] = $_GET[$i];
     }
 
 ?>
