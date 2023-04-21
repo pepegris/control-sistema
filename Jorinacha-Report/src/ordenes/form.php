@@ -25,7 +25,7 @@ include '../../services/sqlserver.php';
 <div id="body">
 
 
-  <form action="report-art-stock.php" method="POST">
+  <form action="routes.php" method="POST">
 
     <div class="fieldset">
       <br>
