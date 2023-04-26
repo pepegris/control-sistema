@@ -23,10 +23,10 @@ if (isset($_GET)) {
   $doc2 = $_GET['doc2'];
 
   var_dump($art);
-  if ($art=='') {
+  if ($art!='') {
     echo "VACIO";
   }
-  if ($art!='') {
+  if ($art=='') {
     echo "no VACIO";
   }
   var_dump('<br>');
