@@ -79,7 +79,7 @@ if (isset($_GET)) {
 
 
         $res = getDev_cli($sede, $fecha1, $fecha2 , $art);
-        
+        var_dump($res);
         for ($i = 0; $i < count($res); $i++) {
 
 
