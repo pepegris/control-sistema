@@ -5,8 +5,8 @@
 $sedes_ar = array(
     "Previa Shop",
     "Inv Jorinacha",
-    "Comercial Merina",
-    "Comercial Merina III",
+    "Sucursal Caracas I",
+    "Sucursal Caracas II",
     "Comercial Corina I",
     "Comercial Corina II",
     "Comercial Punto Fijo",
@@ -41,8 +41,8 @@ function Database2($sede)
     $bd = array(
         "Previa Shop" => 'C_PREVIA',
         "Inv Jorinacha" => 'C_JORINA',
-        "Comercial Merina" => 'C_MERINA1',
-        "Comercial Merina III" => 'C_MERINA3',
+        "Sucursal Caracas I" => 'C_MERINA1',
+        "Sucursal Caracas II" => 'C_MERINA3',
         "Comercial Corina I" => 'C_CORINA1',
         "Comercial Corina II" => 'C_CORINA2',
         "Comercial Punto Fijo" => 'C_PUFIJO',
@@ -68,8 +68,8 @@ function Database($sede)
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
         "Inv Jorinacha" => 'JORINA',
-        "Comercial Merina" => 'MERINA',
-        "Comercial Merina III" => 'MERINA3',
+        "Sucursal Caracas I" => 'MERINA',
+        "Sucursal Caracas II" => 'MERINA3',
         "Comercial Corina I" => 'CORINA1',
         "Comercial Corina II" => 'CORINA2',
         "Comercial Punto Fijo" => 'PUFIJO',
@@ -94,8 +94,8 @@ function Cliente($sede)
 {
 
     $bd = array(
-        "Comercial Merina"    =>     'T15',
-        "Comercial Merina III"    =>     'T23',
+        "Sucursal Caracas I"    =>     'S01',
+        "Sucursal Caracas II"    =>     'S02',
         "Comercial Corina I"    =>     'T18',
         "Comercial Corina II"    =>     'T22',
         "Comercial Punto Fijo"    =>     'T13',

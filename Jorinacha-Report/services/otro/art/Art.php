@@ -1,35 +1,36 @@
 <?php
 
-    $sedes_ar = array(
-        "Previa Shop",
-        "Comercial Merina" ,
-        "Comercial Merina III" ,
-        "Comercial Corina I" ,
-        "Comercial Corina II" ,
-        "Comercial Punto Fijo" ,
-        "Comercial Matur" ,
-        "Comercial Valena" ,
-        "Comercial Trina" ,
-        "Comercial Kagu" ,
-        "Comercial Nachari" ,
-        "Comercial Higue" ,
-        "Comercial Apura",
-        "Comercial Vallepa",
-        "Comercial Ojena",
-        "Comercial Puecruz",
-        "Comercial Acari",
-        "Comercial Catica II",
-    );
+  
+$sedes_ar = array(
+    "Previa Shop",
+    "Sucursal Caracas I",
+    "Sucursal Caracas II",
+    "Comercial Corina I",
+    "Comercial Corina II",
+    "Comercial Punto Fijo",
+    "Comercial Matur",
+    "Comercial Valena",
+    "Comercial Trina",
+    "Comercial Kagu",
+    "Comercial Nachari",
+    "Comercial Higue",
+    "Comercial Apura",
+    "Comercial Vallepa",
+    "Comercial Ojena",
+    "Comercial Puecruz",
+    "Comercial Acari",
+    "Comercial Catica II",
+);
 
 
 
-function Database($sede)
+function Database2($sede)
 {
 
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
-        "Comercial Merina" => 'MERINA21',
-        "Comercial Merina III" => 'MRIA3A21',
+        "Sucursal Caracas I" => 'CARACAS1',
+        "Sucursal Caracas II" => 'CARACAS2',
         "Comercial Corina I" => 'CORINA21',
         "Comercial Corina II" => 'CORI2_21',
         "Comercial Punto Fijo" => 'PUFIJO21',
@@ -49,13 +50,39 @@ function Database($sede)
 
     return $bd[$sede];
 }
+function Database($sede)
+{
+
+    $bd = array(
+        "Previa Shop" => 'PREVIA_A',
+        "Sucursal Caracas I" => 'CARACAS1',
+        "Sucursal Caracas II" => 'CARACAS2',
+        "Comercial Corina I" => 'CORINA1',
+        "Comercial Corina II" => 'CORINA2',
+        "Comercial Punto Fijo" => 'PUFIJO',
+        "Comercial Matur" => 'MATUR',
+        "Comercial Valena" => 'VALENA',
+        "Comercial Trina" => 'TRINA',
+        "Comercial Kagu" => 'KAGU',
+        "Comercial Nachari" => 'NACHARI',
+        "Comercial Higue" => 'HIGUE',
+        "Comercial Apura" => 'APURA',
+        "Comercial Vallepa" => 'VALLEPA',
+        "Comercial Ojena" => 'OJENA',
+        "Comercial Puecruz" => 'PUECRUZ',
+        "Comercial Acari" => 'ACARI',
+        "Comercial Catica II" => 'CATICA2',
+    );
+
+    return $bd[$sede];
+}
 
 function Cliente($sede)
 {
 
     $bd = array(
-        "Comercial Merina"    =>     'T20',
-        "Comercial Merina III"    =>     'T23',
+        "Sucursal Caracas I"    =>     'S01',
+        "Sucursal Caracas II"    =>     'S02',
         "Comercial Corina I"    =>     'T18',
         "Comercial Corina II"    =>     'T22',
         "Comercial Punto Fijo"    =>     'T13',
@@ -76,6 +103,7 @@ function Cliente($sede)
 
     return $bd[$sede];
 }
+
 
 
 /* CONSULTAR TALLA DE ARTICULOS */

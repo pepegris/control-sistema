@@ -6,8 +6,8 @@
 
 $sedes_ar = array(
     "Previa Shop",
-    "Comercial Merina",
-    "Comercial Merina III",
+    "Sucursal Caracas I",
+    "Sucursal Caracas II",
     "Comercial Corina I",
     "Comercial Corina II",
     "Comercial Punto Fijo",
@@ -32,8 +32,8 @@ function Database2($sede)
 
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
-        "Comercial Merina" => 'MERINA21',
-        "Comercial Merina III" => 'MRIA3A21',
+        "Sucursal Caracas I" => 'CARACAS1',
+        "Sucursal Caracas II" => 'CARACAS2',
         "Comercial Corina I" => 'CORINA21',
         "Comercial Corina II" => 'CORI2_21',
         "Comercial Punto Fijo" => 'PUFIJO21',
@@ -58,8 +58,8 @@ function Database($sede)
 
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
-        "Comercial Merina" => 'MERINA',
-        "Comercial Merina III" => 'MERINA3',
+        "Sucursal Caracas I" => 'CARACAS1',
+        "Sucursal Caracas II" => 'CARACAS2',
         "Comercial Corina I" => 'CORINA1',
         "Comercial Corina II" => 'CORINA2',
         "Comercial Punto Fijo" => 'PUFIJO',
@@ -84,8 +84,8 @@ function Cliente($sede)
 {
 
     $bd = array(
-        "Comercial Merina"    =>     'T15',
-        "Comercial Merina III"    =>     'T23',
+        "Sucursal Caracas I"    =>     'S01',
+        "Sucursal Caracas II"    =>     'S02',
         "Comercial Corina I"    =>     'T18',
         "Comercial Corina II"    =>     'T22',
         "Comercial Punto Fijo"    =>     'T13',
@@ -106,6 +106,7 @@ function Cliente($sede)
 
     return $bd[$sede];
 }
+
 
 
 
