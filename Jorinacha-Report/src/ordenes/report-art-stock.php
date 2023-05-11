@@ -95,7 +95,7 @@ if ($_GET) {
             <?php
 
             $e = 1;
-            for ($i = 0; $i < count($sedes); $i++) {
+            for ($i = 1; $i < count($sedes); $i++) {
                 if ($sedes[$e] != null) {
                     $sede = $sedes[$e];
 
