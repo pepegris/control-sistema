@@ -308,7 +308,7 @@ if ($_GET) {
 
 
             <td><b><?= $simb ?><?= number_format($total_venta, 2, ',', '.')  ?></b></td>
-            <td><b><?= number_format($total_venta, 0, '', '.') - number_format($total_devol_pares, 0, '', '.')  ?></b></td>
+            <td><b><?= number_format($total_venta_pares, 0, '', '.') - number_format($total_devol_pares, 0, '', '.')  ?></b></td>
 
             <td><b><?= $simb ?><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
             <td><b><?= number_format($total_devol_pares, 0, '', '.')  ?></b></td>
