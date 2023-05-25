@@ -192,6 +192,8 @@ if ($_GET) {
           $total_pagos += $tasa_monto_ord_pago;
           $total_gastos += $tasa_monto_ord_pago_ven;
 
+
+
         ?>
           <tr>
 
@@ -306,7 +308,7 @@ if ($_GET) {
 
 
             <td><b><?= $simb ?><?= number_format($total_venta, 2, ',', '.')  ?></b></td>
-            <td><b><?= number_format($total_venta, 0, '', '.')  ?></b></td>
+            <td><b><?= number_format($total_venta, 0, '', '.') - number_format($total_devol_pares, 0, '', '.')  ?></b></td>
 
             <td><b><?= $simb ?><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
             <td><b><?= number_format($total_devol_pares, 0, '', '.')  ?></b></td>
@@ -341,6 +343,18 @@ if ($_GET) {
     $total_pagos = 0;
     $total_gastos = 0;
     $total_diferencias = 0;
+
+
+    $tasa_tot_neto_factura= 0;
+    $tasa_tot_neto_dev_cli= 0;
+    $factura_ven= 0;
+    $tasa_tot_neto_dev_cli= 0;
+    $dev_cli_ven= 0;
+    $tasa_monto_h_mov_ban= 0;
+    $tasa_total_efec_dep_caj= 0;
+    $tasa_total_tarj_dep_caj= 0;
+    $tasa_monto_ord_pago= 0;
+    $tasa_monto_ord_pago_ven= 0;
   }
 } else {
   header("location: form.php");
