@@ -343,6 +343,8 @@ if ($_GET) {
     $total_pagos = 0;
     $total_gastos = 0;
     $total_diferencias = 0;
+    
+    $total_venta_pares=0;
 
 
     $tasa_tot_neto_factura= 0;
@@ -355,6 +357,8 @@ if ($_GET) {
     $tasa_total_tarj_dep_caj= 0;
     $tasa_monto_ord_pago= 0;
     $tasa_monto_ord_pago_ven= 0;
+
+
   }
 } else {
   header("location: form.php");
