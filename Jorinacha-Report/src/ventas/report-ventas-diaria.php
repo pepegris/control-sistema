@@ -161,9 +161,10 @@ if ($_GET) {
 
         /* totales */
 
+        $pares=$total_art_factura - $total_art_dev_cli  ;
 
         $total_venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
-        $total_venta_pares += $factura_ven['total_art'] - $dev_cli_ven['total_art'];
+        $total_venta_pares +=  $pares;
 
         $total_devol += $tasa_tot_neto_dev_cli;
         $total_devol_pares += $dev_cli_ven['total_art'];
@@ -301,7 +302,7 @@ if ($_GET) {
 
 
           <td><b><?= $simb ?><?= number_format($total_venta, 2, ',', '.')  ?></b></td>
-          <td><b><?= number_format($total_venta_pares, 0, '', '.')  ?></b></td>
+          <td><b><?= $total_venta_pares ?></b></td>
 
           <td><b><?= $simb ?><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
           <td><b><?= number_format($total_devol_pares, 0, '', '.')  ?></b></td>
