@@ -13,7 +13,7 @@ $sedes_ar = array(
     "Comercial Matur",
     "Comercial Valena",
     "Comercial Trina",
-    "Comercial Kagu",
+    "Sucursal Cagua",
     "Comercial Nachari",
     "Comercial Higue",
     "Comercial Apura",
