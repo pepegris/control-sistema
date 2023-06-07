@@ -71,7 +71,7 @@ include '../../services/adm/replica/replica.php';
 
             $fecha_actual = date("d-m-Y");
 
-            $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 4 day"));
+            $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 3 day"));
             $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 7 day"));
 
             $past = new DateTime($fecha);
