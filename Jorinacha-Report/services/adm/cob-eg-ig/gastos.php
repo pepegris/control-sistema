@@ -41,8 +41,8 @@ function Database2($sede)
     $bd = array(
         "Previa Shop" => 'C_PREVIA',
         "Inv Jorinacha" => 'C_JORINA',
-        "Sucursal Caracas I" => 'C_MERINA1',
-        "Sucursal Caracas II" => 'C_MERINA3',
+        "Sucursal Caracas I" => 'C_CARACAS1',
+        "Sucursal Caracas II" => 'C_CARACAS2',
         "Comercial Corina I" => 'C_CORINA1',
         "Comercial Corina II" => 'C_CORINA2',
         "Comercial Punto Fijo" => 'C_PUFIJO',
@@ -68,8 +68,8 @@ function Database($sede)
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
         "Inv Jorinacha" => 'JORINA',
-        "Sucursal Caracas I" => 'MERINA',
-        "Sucursal Caracas II" => 'MERINA3',
+        "Sucursal Caracas I" => 'CARACAS1',
+        "Sucursal Caracas II" => 'CARACAS2',
         "Comercial Corina I" => 'CORINA1',
         "Comercial Corina II" => 'CORINA2',
         "Comercial Punto Fijo" => 'PUFIJO',
