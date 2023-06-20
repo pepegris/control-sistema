@@ -603,3 +603,50 @@ function getFacturaDetalles($sede, $fecha1,$fecha2)
         return 0;
     }
 }
+
+
+
+function getMov_banco($sede, $fecha)
+{
+
+
+    $database = Database($sede);
+    if ($database != null) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT  mov_num , codigo , tipo_op , doc_num , descrip , monto_h , monto_d , idb from mov_ban where fecha ='$fecha'
+            order by codigo";
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $mov_banc[] = $row;
+
+
+                }
+
+                $res = $mov_banc;
+            } else {
+
+                $mov_banc = 0;
+
+                $res = $mov_banc;
+            }
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
