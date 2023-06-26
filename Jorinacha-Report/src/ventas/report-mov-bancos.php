@@ -92,9 +92,7 @@ if ($_GET) {
           <td><?= $mov_num   ?></td>
           <td><?= $mov_num   ?></td>
           <td><?= $mov_num   ?></td>
-
-
-
+          
         </td>
 
           <?php
