@@ -28,7 +28,7 @@ $sedes_ar = array(
 
 
 
-function Database($sede)
+function Database2($sede)
 {
 
     $bd = array(
@@ -54,7 +54,7 @@ function Database($sede)
 
     return $bd[$sede];
 }
-function Database2($sede)
+function Database($sede)
 {
 
     $bd = array(
