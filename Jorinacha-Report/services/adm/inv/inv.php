@@ -141,7 +141,7 @@ function getInv_fis_teorico($marca,$database)
     from reng_fis
     inner join art on art.co_art = reng_fis.co_art 
     where art.co_lin= '$marca'
-    group by reng_fis.co_art  , reng_fis.stock_teor 
+    group by reng_fis.co_art  , reng_fis.stock_teor , art.prec_vta4, art.prec_vta5
     order by reng_fis.co_art  
     ";
 
