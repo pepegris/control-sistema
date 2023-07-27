@@ -16,13 +16,6 @@ if ($_GET) {
 
 ?>
 
-  <style>
-    img {
-
-
-      width: 28px;
-    }
-  </style>
 
 
   <link rel='stylesheet' href='responm.css'>

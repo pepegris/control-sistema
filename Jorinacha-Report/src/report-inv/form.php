@@ -43,7 +43,7 @@ include '../../services/adm/inv/inv.php';
 
         ?>
 
-        <option value="<?php $tienda ?>"><?= $tienda ?></option>
+        <option value="<?= $tienda ?>"><?= $tienda ?></option>
 
 
         <?php 
