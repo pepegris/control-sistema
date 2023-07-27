@@ -94,9 +94,9 @@ function getInv_fis($marca,$database)
     $conn = sqlsrv_connect($serverName, $connectionInfo);
 
     $sql = " SELECT  
-    sum(stock_real)as STOCK_ACTUAL, 
-    SUM(stock_real * art.prec_vta4)AS COSTO, 
-    SUM(stock_real * art.prec_vta5) AS PRECIO
+    CONVERT(numeric(10,0),sum(stock_real))as STOCK_ACTUAL, 
+    CONVERT(numeric(10,0),SUM(stock_real * art.prec_vta4))AS COSTO, 
+    CONVERT(numeric(10,0),SUM(stock_real * art.prec_vta5)) AS PRECIO
     FROM reng_fis
     join art on art.co_art = reng_fis.co_art 
     where art.co_lin= '$marca'";
@@ -106,7 +106,9 @@ function getInv_fis($marca,$database)
 
     while ($row = sqlsrv_fetch_array($consulta)) {
 
-        $inv_fis[] =  $row;
+        $inv_fis['STOCK_ACTUAL'] = $row['STOCK_ACTUAL'];
+        $inv_fis['COSTO'] =  $row['COSTO'];
+        $inv_fis['PRECIO'] =  $row['PRECIO'];
     }
 
     $res = $inv_fis;
@@ -149,3 +151,13 @@ function getInv_fis_teorico($marca,$database)
     return $res;
 }
 
+/* MARCAS QUE SE TRABAJARON CONSULTA PARA SABER QUE MARCAS SE TRABAJARON*/
+/* MARCAS QUE SE TRABAJARON CONSULTA PARA SABER QUE MARCAS SE TRABAJARON*/
+/*
+select  lin_art.co_lin from reng_fis 
+inner join art on art.co_art = reng_fis.co_art 
+inner join lin_art on art.co_lin = lin_art.co_lin 
+group by  lin_art.co_lin 
+*/
+/* MARCAS QUE SE TRABAJARON CONSULTA PARA SABER QUE MARCAS SE TRABAJARON*/
+/* MARCAS QUE SE TRABAJARON CONSULTA PARA SABER QUE MARCAS SE TRABAJARON*/
