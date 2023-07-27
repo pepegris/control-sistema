@@ -61,6 +61,30 @@ $marcas = array(
 
 
 
+
+function getLin_art($marca)
+{
+
+
+    $serverName = "172.16.1.39";
+    $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+    $sql = "  SELECT lin_des FROM lin_art WHERE co_lin='$marca'";
+
+    $consulta = sqlsrv_query($conn, $sql);
+
+
+    while ($row = sqlsrv_fetch_array($consulta)) {
+
+        $lin_des['lin_des'] =  $row['lin_des'];
+    }
+
+    $res = $lin_des;
+    return $res;
+}
+
+
 function getInv_fis($marca,$database)
 {
 
@@ -98,9 +122,11 @@ function getInv_fis_teorico($marca,$database)
     $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-    $sql = "  SELECT  
-    reng_fis.co_art, 
-    stock_teor from reng_fis
+    $sql = "  SELECT   
+    reng_fis.stock_teor ,
+    stock_teor *  art.prec_vta4 as costo , 
+    stock_teor *  art.prec_vta5 AS precio
+    from reng_fis
     inner join art on art.co_art = reng_fis.co_art 
     group by reng_fis.co_art  , reng_fis.stock_teor 
     order by reng_fis.co_art  
@@ -108,10 +134,15 @@ function getInv_fis_teorico($marca,$database)
 
     $consulta = sqlsrv_query($conn, $sql);
 
+    $inv_fis['stock_teor'] = 0;
+    $inv_fis['costo'] =  0;
+    $inv_fis['precio'] =  0;
 
     while ($row = sqlsrv_fetch_array($consulta)) {
 
-        $inv_fis[] =  $row;
+        $inv_fis['stock_teor'] += $row['stock_teor'];
+        $inv_fis['costo'] +=  $row['costo'];
+        $inv_fis['precio'] +=  $row['precio'];
     }
 
     $res = $inv_fis;
