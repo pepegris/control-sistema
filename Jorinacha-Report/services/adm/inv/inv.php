@@ -135,7 +135,7 @@ function getInv_fis_teorico($marca,$database)
     $conn = sqlsrv_connect($serverName, $connectionInfo);
 
     $sql = "  SELECT   
-    CONVERT(numeric(10,0),reng_fis.stock_teor) ,
+    CONVERT(numeric(10,0),reng_fis.stock_teor) as stock_teor ,
     CONVERT(numeric(10,0),stock_teor *  art.prec_vta4) as costo , 
     CONVERT(numeric(10,0),stock_teor *  art.prec_vta5) AS precio
     from reng_fis

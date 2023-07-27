@@ -70,15 +70,13 @@ if ($_GET) {
         <tr>
 
           <td><?= $marca['lin_des'] ?>-<?= $marcas[$i]?></td>
+          
           <td><?= $stock_teor  ?></td>
-
-
           <td><?= $costo_teor    ?></td>
           <td><?= $precio_teor ?></td>
 
           <td><?= $stock_real   ?></td>
           <td><?= $costo_real  ?></td>
-
           <td><?= $precio_real ?></td>
 
 
