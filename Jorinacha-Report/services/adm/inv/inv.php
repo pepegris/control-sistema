@@ -134,7 +134,7 @@ function getInv_fis_teorico($marca,$database)
     $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-    $sql = "  SELECT   
+    /*$sql = "  SELECT   
     CONVERT(numeric(10,0),reng_fis.stock_teor) as stock_teor ,
     CONVERT(numeric(10,0),stock_teor *  art.prec_vta4) as costo , 
     CONVERT(numeric(10,0),stock_teor *  art.prec_vta5) AS precio
@@ -143,7 +143,21 @@ function getInv_fis_teorico($marca,$database)
     where art.co_lin= '$marca'
     group by reng_fis.co_art  , reng_fis.stock_teor , art.prec_vta4, art.prec_vta5
     order by reng_fis.co_art  
-    ";
+    ";*/
+
+    $sql = "  SELECT DISTINCT ST.co_art,CONVERT(numeric(10,0),ST.stock_act),CONVERT(numeric(10,0),ST.stock_act *  art.prec_vta4),CONVERT(numeric(10,0),ST.stock_act *  art.prec_vta5)
+	FROM st_almac AS ST
+	INNER JOIN art 
+	ON art.co_art=ST.co_art
+	WHERE ST.co_alma=1 AND ST.stock_act>0 and art.co_lin='$marca'
+	UNION
+	SELECT DISTINCT RF.co_art,CONVERT(numeric(10,0),RF.stock_teor),CONVERT(numeric(10,0),stock_teor *  art.prec_vta4),CONVERT(numeric(10,0),stock_teor *  art.prec_vta5)
+	FROM reng_fis AS RF
+	INNER JOIN fisico AS F
+	ON F.num_fis=RF.num_fis
+	INNER JOIN art 
+	ON art.co_art=RF.co_art
+	WHERE RF.co_alma=1 AND F.cerrado=0 and art.co_lin='$marca'";
 
     $consulta = sqlsrv_query($conn, $sql);
 
