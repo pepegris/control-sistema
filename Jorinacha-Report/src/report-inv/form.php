@@ -62,6 +62,10 @@ include '../../services/adm/inv/inv.php';
 
       <br>
       <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
+
+      <center><a href="../../../../../inventariocyp/index.php"class="btn btn-warning">Reporte de Inventari</a></center>
+      
+
       <br>
     </div>
   </form>
