@@ -145,13 +145,19 @@ function getInv_fis_teorico($marca,$database)
     order by reng_fis.co_art  
     ";*/
 
-    $sql = "  SELECT DISTINCT ST.co_art,CONVERT(numeric(10,0),ST.stock_act),CONVERT(numeric(10,0),ST.stock_act *  art.prec_vta4),CONVERT(numeric(10,0),ST.stock_act *  art.prec_vta5)
+    $sql = "  SELECT DISTINCT ST.co_art,
+    CONVERT(numeric(10,0),ST.stock_act) as stock_teor ,
+    CONVERT(numeric(10,0),ST.stock_act *  art.prec_vta4) as costo ,
+    CONVERT(numeric(10,0),ST.stock_act *  art.prec_vta5) AS precio
 	FROM st_almac AS ST
 	INNER JOIN art 
 	ON art.co_art=ST.co_art
 	WHERE ST.co_alma=1 AND ST.stock_act>0 and art.co_lin='$marca'
 	UNION
-	SELECT DISTINCT RF.co_art,CONVERT(numeric(10,0),RF.stock_teor),CONVERT(numeric(10,0),stock_teor *  art.prec_vta4),CONVERT(numeric(10,0),stock_teor *  art.prec_vta5)
+	SELECT DISTINCT RF.co_art,
+    CONVERT(numeric(10,0),RF.stock_teor) as stock_teor ,
+    CONVERT(numeric(10,0),stock_teor *  art.prec_vta4) as costo ,
+    CONVERT(numeric(10,0),stock_teor *  art.prec_vta5) AS precio
 	FROM reng_fis AS RF
 	INNER JOIN fisico AS F
 	ON F.num_fis=RF.num_fis
