@@ -172,6 +172,14 @@ $cuenta_on = ucwords($cuenta_on);
         </div>
       </a>
 
+      <a href="src/report-inv/form.php">
+        <div class="box">
+        <i class="lni lni-graph"></i>
+          <h5>Reporte de Valor de Inventario</h5>
+          <h4>Pronto aun En Desarrollo</h4>
+        </div>
+      </a>
+
 
 
 
