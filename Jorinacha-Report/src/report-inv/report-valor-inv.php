@@ -72,12 +72,12 @@ if ($_GET) {
           <td><?= $marca['lin_des'] ?>-<?= $marcas[$i]?></td>
 
           <td><?= $stock_teor  ?></td>
-          <td><?= $costo_teor    ?></td>
-          <td><?= $precio_teor ?></td>
+          <td><?= number_format($costo_teor, 2, ',', '.')     ?></td>
+          <td><?= number_format($precio_teor, 2, ',', '.')   ?></td>
 
           <td><?= $stock_real   ?></td>
-          <td><?= $costo_real  ?></td>
-          <td><?= $precio_real ?></td>
+          <td><?= number_format($costo_real, 2, ',', '.')   ?></td>
+          <td><?= number_format($precio_real, 2, ',', '.')  ?></td>
 
 
         </tr>
@@ -108,12 +108,12 @@ if ($_GET) {
 
 
           <td><b><?= $total_stock_teor ?></b></td>
-          <td><b><?= $total_costo_teor ?></b></td>
-          <td><b><?= $total_precio_teor ?></b></td>
+          <td><b><?= number_format($total_costo_teor, 2, ',', '.') ?></b></td>
+          <td><b><?= number_format($total_precio_teor, 2, ',', '.') ?></b></td>
 
           <td><b><?= $total_stock_real ?></b></td>
-          <td><b><?= $total_costo_real ?></b></td>
-          <td><b><?= $total_precio_real ?></b></td>
+          <td><b><?= number_format($total_costo_real, 2, ',', '.') ?></b></td>
+          <td><b><?= number_format($total_precio_real, 2, ',', '.') ?></b></td>
 
 
           <td></td>
