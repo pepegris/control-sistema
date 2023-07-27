@@ -111,8 +111,18 @@ function getInv_fis($marca,$database)
         $inv_fis['PRECIO'] =  $row['PRECIO'];
     }
 
-    $res = $inv_fis;
-    return $res;
+    if ($inv_fis['STOCK_ACTUAL'] != null) {
+        $res = $inv_fis;
+        return $res;
+    }else{
+        $inv_fis['STOCK_ACTUAL'] = 0;
+        $inv_fis['COSTO'] =  0;
+        $inv_fis['PRECIO'] =  0;
+        $res = $inv_fis;
+        return $res;
+    }
+
+
 }
 
 
