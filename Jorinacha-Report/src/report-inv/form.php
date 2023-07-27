@@ -51,6 +51,7 @@ include '../../services/adm/inv/inv.php';
 
       
       ?>
+      </select> 
 
 
       <div class="form-group">
