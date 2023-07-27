@@ -31,7 +31,7 @@ if ($_GET) {
 
 
   <center>
-    <h1>Valor del Inventario</h1>
+    <h1>Valor del Inventario <?=$database?></h1>
   </center>
 
 
