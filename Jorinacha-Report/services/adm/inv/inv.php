@@ -140,9 +140,10 @@ function getInv_fis_teorico($marca,$database)
     CONVERT(numeric(10,0),stock_teor *  art.prec_vta5) AS precio
     from reng_fis
     inner join art on art.co_art = reng_fis.co_art 
+    where art.co_lin= '$marca'
     group by reng_fis.co_art  , reng_fis.stock_teor 
     order by reng_fis.co_art  
-    where art.co_lin= '$marca'";
+    ";
 
     $consulta = sqlsrv_query($conn, $sql);
 
