@@ -70,7 +70,7 @@ if ($_GET) {
         <tr>
 
           <td><?= $marca['lin_des'] ?>-<?= $marcas[$i]?></td>
-          
+
           <td><?= $stock_teor  ?></td>
           <td><?= $costo_teor    ?></td>
           <td><?= $precio_teor ?></td>
@@ -84,6 +84,15 @@ if ($_GET) {
 
         <?php
 
+  
+        $total_stock_teor+=$stock_teor;
+        $total_costo_teor+=$costo_teor;
+        $total_precio_teor+=$precio_teor;
+
+
+        $total_stock_real+=$stock_real;
+        $total_costo_real+=$costo_real;
+        $total_precio_real+=$precio_real;
 
         }
         ?>
@@ -98,7 +107,13 @@ if ($_GET) {
 
 
 
-          <td><b>0</b></td>
+          <td><b><?= $total_stock_teor ?></b></td>
+          <td><b><?= $total_costo_teor ?></b></td>
+          <td><b><?= $total_precio_teor ?></b></td>
+
+          <td><b><?= $total_stock_real ?></b></td>
+          <td><b><?= $total_costo_real ?></b></td>
+          <td><b><?= $total_precio_real ?></b></td>
 
 
           <td></td>
