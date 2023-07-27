@@ -153,9 +153,9 @@ function getInv_fis_teorico($marca,$database)
 
     while ($row = sqlsrv_fetch_array($consulta)) {
 
-        $inv_fis['stock_teor'] = $row['stock_teor'];
-        $inv_fis['costo'] =  $row['costo'];
-        $inv_fis['precio'] =  $row['precio'];
+        $inv_fis['stock_teor'] += $row['stock_teor'];
+        $inv_fis['costo'] +=  $row['costo'];
+        $inv_fis['precio'] +=  $row['precio'];
     }
 
     if ($inv_fis['stock_teor'] != null) {
