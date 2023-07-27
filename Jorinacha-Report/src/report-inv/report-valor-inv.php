@@ -76,7 +76,7 @@ if ($_GET) {
       ?>
         <tr>
 
-          <td><?= $marca['lin_des']   ?></td>
+          <td><?= $marca['lin_des'] ?>-<?= $marcas[$i]?></td>
           <td><?= $stock_teor  ?></td>
 
 
@@ -92,6 +92,7 @@ if ($_GET) {
         </tr>
 
         <?php
+
 
         }
         ?>
