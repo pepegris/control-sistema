@@ -116,7 +116,7 @@ if ($_GET) {
           <td><b><?= number_format($total_precio_real, 2, ',', '.') ?></b></td>
 
 
-          <td></td>
+
 
         </tr>
 
