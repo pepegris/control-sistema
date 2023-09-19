@@ -85,7 +85,7 @@ function getLin_art($marca)
 }
 
 
-function getInv_fis($marca,$database)
+function getInv_fis($marca,$database,$fecha1)
 {
 
 
@@ -99,7 +99,8 @@ function getInv_fis($marca,$database)
     CONVERT(numeric(10,0),SUM(stock_real * art.prec_vta5)) AS PRECIO
     FROM reng_fis
     join art on art.co_art = reng_fis.co_art 
-    where art.co_lin= '$marca'";
+    INNER JOIN fisico ON fisico.num_fis=reng_fis.num_fis
+    where art.co_lin= '$marca' and fisico.fecha_fis='$fecha1'";
 
     $consulta = sqlsrv_query($conn, $sql);
 
@@ -126,7 +127,7 @@ function getInv_fis($marca,$database)
 }
 
 
-function getInv_fis_teorico($marca,$database)
+function getInv_fis_teorico($marca,$database,$fecha1 )
 {
 
 
@@ -163,7 +164,7 @@ function getInv_fis_teorico($marca,$database)
 	ON F.num_fis=RF.num_fis
 	INNER JOIN art 
 	ON art.co_art=RF.co_art
-	WHERE RF.co_alma=1 AND F.cerrado=0 and art.co_lin='$marca'";
+	WHERE RF.co_alma=1  and art.co_lin='$marca' and f.fecha_fis='$fecha1' ";
 
     $consulta = sqlsrv_query($conn, $sql);
 

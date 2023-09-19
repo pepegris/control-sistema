@@ -54,7 +54,7 @@ if ($_GET) {
 
        $marca=getLin_art("$marcas[$i]");
 
-       $teorico=getInv_fis_teorico("$marcas[$i]","$database");
+       $teorico=getInv_fis_teorico("$marcas[$i]","$database","$fecha1");
        $stock_teor=$teorico['stock_teor'];
        $costo_teor=$teorico['costo'];
        $precio_teor=$teorico['precio'];
