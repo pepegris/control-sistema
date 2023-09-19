@@ -59,7 +59,7 @@ if ($_GET) {
        $costo_teor=$teorico['costo'];
        $precio_teor=$teorico['precio'];
 
-       $real=getInv_fis("$marcas[$i]","$database");
+       $real=getInv_fis("$marcas[$i]","$database","$fecha1");
        $stock_real=$real['STOCK_ACTUAL'];
        $costo_real=$real['COSTO'];
        $precio_real=$real['PRECIO'];
