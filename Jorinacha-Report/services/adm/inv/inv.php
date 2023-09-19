@@ -96,7 +96,7 @@ function getInv_fis($marca,$database,$fecha1)
     $sql = " SELECT  
     CONVERT(numeric(10,0),sum(stock_real))as STOCK_ACTUAL, 
     CONVERT(numeric(10,1),SUM(stock_real * art.prec_vta4))AS COSTO, 
-    CONVERT(numeric(10,1),SUM(stock_real * art.prec_vta5)) AS PRECIO
+    CONVERT(numeric(10,0),SUM(stock_real * art.prec_vta5)) AS PRECIO
     FROM reng_fis
     join art on art.co_art = reng_fis.co_art 
     INNER JOIN fisico ON fisico.num_fis=reng_fis.num_fis
@@ -148,7 +148,7 @@ function getInv_fis_teorico($marca,$database,$fecha1 )
 
     $sql = "  SELECT DISTINCT ST.co_art,
     CONVERT(numeric(10,0),ST.stock_act) as stock_teor ,
-    CONVERT(numeric(10,0),ST.stock_act *  art.prec_vta4) as costo ,
+    CONVERT(numeric(10,1),ST.stock_act *  art.prec_vta4) as costo ,
     CONVERT(numeric(10,0),ST.stock_act *  art.prec_vta5) AS precio
 	FROM st_almac AS ST
 	INNER JOIN art 
@@ -157,7 +157,7 @@ function getInv_fis_teorico($marca,$database,$fecha1 )
 	UNION
 	SELECT DISTINCT RF.co_art,
     CONVERT(numeric(10,0),RF.stock_teor) as stock_teor ,
-    CONVERT(numeric(10,0),stock_teor *  art.prec_vta4) as costo ,
+    CONVERT(numeric(10,1),stock_teor *  art.prec_vta4) as costo ,
     CONVERT(numeric(10,0),stock_teor *  art.prec_vta5) AS precio
 	FROM reng_fis AS RF
 	INNER JOIN fisico AS F
