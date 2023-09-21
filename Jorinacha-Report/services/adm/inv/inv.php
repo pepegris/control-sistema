@@ -5,6 +5,7 @@
 
 $sedes_tiendas = array(
     "DEV_EMP",
+    "TPLIO1A",
     "PREVIA_A",
     "CARACAS1",
     "CARACAS2",
