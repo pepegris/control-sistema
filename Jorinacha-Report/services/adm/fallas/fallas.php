@@ -8,33 +8,6 @@
 require "../../services/empresas.php";
 
 
-function Cliente($sede)
-{
-
-    $bd = array(
-        "Sucursal Caracas I"    =>     'S01',
-        "Sucursal Caracas II"    =>     'S02',
-        "Sucursal Cagua" => 'S03',
-        "Sucursal Matur"    =>     'S04',
-
-        "Comercial Corina I"    =>     'T18',
-        "Comercial Corina II"    =>     'T22',
-        "Comercial Punto Fijo"    =>     'T13',
-        "Comercial Valena"    =>     'T10',
-        "Comercial Trina"    =>     'T16',
-        "Comercial Nachari"    =>     'T19',
-        "Comercial Higue"    =>     'T09',
-        "Comercial Apura"    =>     'T17',
-        "Comercial Vallepa"    =>     'T06',
-        "Comercial Ojena"    =>     'T12',
-        "Comercial Puecruz"    =>     'T05',
-        "Comercial Acari"    =>     'T04',
-        "Comercial Catica II"    =>     'T24',
-
-    );
-
-    return $bd[$sede];
-}
 
 
 
