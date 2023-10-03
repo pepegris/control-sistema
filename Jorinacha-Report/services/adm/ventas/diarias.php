@@ -4,7 +4,7 @@
 /* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA*/
 
 
-require "../../empresas.php";
+require "../../services/empresas.php";
 
 
 
