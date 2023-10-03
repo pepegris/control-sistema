@@ -2,7 +2,7 @@
 
 
 
-require "../../empresas.php";
+require "../../adm/empresas.php";
 
 function Replica($sede)
 {
