@@ -10,10 +10,12 @@ $sedes_ar = array(
     "Sucursal Caracas II",
     "Sucursal Cagua",
 
+    "Sucursal Maturin",
+    "Comercial Matur" ,
+
     "Comercial Acari" ,
     "Comercial Puecruz" ,
     "Comercial Vallepa" ,
-    "Comercial Matur" ,
     "Comercial Higue" ,
     "Comercial Valena" ,
     "Comercial Ojena" ,
@@ -37,10 +39,12 @@ function Database2($sede)
         "Sucursal Caracas II" => 'CARACAS2',
         "Sucursal Cagua" => 'CAGUA',
 
+        "Sucursal Maturin" => 'MATURIN',
+        "Comercial Matur" => 'MATURA21',
+
         "Comercial Acari" => 'ACARI21',
         "Comercial Puecruz" => 'PUECRU21',
         "Comercial Vallepa" => 'VALLEP21',
-        "Comercial Matur" => 'MATURA21',
         "Comercial Higue" => 'HIGUE21',
         "Comercial Valena" => 'VALENA21',
         "Comercial Ojena" => 'OJENA21',
@@ -66,11 +70,13 @@ function Database($sede)
         "Sucursal Caracas I" => 'CARACAS1',
         "Sucursal Caracas II" => 'CARACAS2',
         "Sucursal Cagua" => 'CAGUA',
+
+        "Sucursal Maturin" => 'MATURIN',
+        "Comercial Matur" => 'MATUR',
         
         "Comercial Acari" => 'ACARI',
         "Comercial Puecruz" => 'PUECRUZ',
         "Comercial Vallepa" => 'VALLEPA',
-        "Comercial Matur" => 'MATUR',
         "Comercial Higue" => 'HIGUE',
         "Comercial Valena" => 'VALENA',
         "Comercial Ojena" => 'OJENA',
@@ -93,10 +99,13 @@ function Cliente($sede)
         "Sucursal Caracas I"    =>     'S01',
         "Sucursal Caracas II"    =>     'S02',
         "Sucursal Cagua" => 'S03',
+        "Sucursal Maturin" => 'S04',
+        "Comercial Matur"    =>     'T07',
+
         "Comercial Acari"    =>     'T04',
         "Comercial Puecruz"    =>     'T05',
         "Comercial Vallepa"    =>     'T06',
-        "Comercial Matur"    =>     'T07',
+
         "Comercial Higue"    =>     'T09',
         "Comercial Valena"    =>     'T10',
         "Comercial Ojena"    =>     'T12',

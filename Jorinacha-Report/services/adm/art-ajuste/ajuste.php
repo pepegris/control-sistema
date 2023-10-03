@@ -4,18 +4,18 @@
 $serverName = "172.16.1.39";
 $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
 
-
 $sedes_ar = array(
     "Previa Shop",
     "Sucursal Caracas I",
     "Sucursal Caracas II",
+    "Sucursal Cagua",
+    "Sucursal Maturin",
+    
     "Comercial Corina I",
     "Comercial Corina II",
     "Comercial Punto Fijo",
-    "Comercial Matur",
     "Comercial Valena",
     "Comercial Trina",
-    "Sucursal Cagua" ,
     "Comercial Nachari",
     "Comercial Higue",
     "Comercial Apura",
@@ -35,13 +35,14 @@ function Database2($sede)
         "Previa Shop" => 'PREVIA_A',
         "Sucursal Caracas I" => 'CARACAS1',
         "Sucursal Caracas II" => 'CARACAS2',
+        "Sucursal Cagua" => 'CAGUA',
+        "Sucursal Matur" => 'MATURIN',
+
         "Comercial Corina I" => 'CORINA21',
         "Comercial Corina II" => 'CORI2_21',
         "Comercial Punto Fijo" => 'PUFIJO21',
-        "Comercial Matur" => 'MATURA21',
         "Comercial Valena" => 'VALENA21',
-        "Comercial Trina" => 'TRAINA21',
-        "Sucursal Cagua" => 'CAGUA',
+        "Comercial Trina" => 'TRAINA21',    
         "Comercial Nachari" => 'NACHAR21',
         "Comercial Higue" => 'HIGUE21',
         "Comercial Apura" => 'APURA21',
@@ -61,13 +62,14 @@ function Database($sede)
         "Previa Shop" => 'PREVIA_A',
         "Sucursal Caracas I" => 'CARACAS1',
         "Sucursal Caracas II" => 'CARACAS2',
+        "Sucursal Cagua" => 'CAGUA',
+        "Sucursal Matur" => 'MATURIN',
+
         "Comercial Corina I" => 'CORINA1',
         "Comercial Corina II" => 'CORINA2',
         "Comercial Punto Fijo" => 'PUFIJO',
-        "Comercial Matur" => 'MATUR',
         "Comercial Valena" => 'VALENA',
         "Comercial Trina" => 'TRINA',
-        "Sucursal Cagua" => 'CAGUA',
         "Comercial Nachari" => 'NACHARI',
         "Comercial Higue" => 'HIGUE',
         "Comercial Apura" => 'APURA',
@@ -87,13 +89,14 @@ function Cliente($sede)
     $bd = array(
         "Sucursal Caracas I"    =>     'S01',
         "Sucursal Caracas II"    =>     'S02',
+        "Sucursal Cagua" => 'S03',
+        "Sucursal Maturin"    =>     'S04',
+
         "Comercial Corina I"    =>     'T18',
         "Comercial Corina II"    =>     'T22',
         "Comercial Punto Fijo"    =>     'T13',
-        "Comercial Matur"    =>     'T07',
         "Comercial Valena"    =>     'T10',
         "Comercial Trina"    =>     'T16',
-        "Sucursal Cagua" => 'S03',
         "Comercial Nachari"    =>     'T19',
         "Comercial Higue"    =>     'T09',
         "Comercial Apura"    =>     'T17',

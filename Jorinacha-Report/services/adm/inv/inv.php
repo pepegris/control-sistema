@@ -9,10 +9,12 @@ $sedes_tiendas = array(
     "PREVIA_A",
     "CARACAS1",
     "CARACAS2",
+    "MATURIN",
+    
     "CORINA1",
     "CORINA2",
     "PUFIJO",
-    "MATUR",
+    
     "VALENA",
     "TRINA",
     "CAGUA" ,
