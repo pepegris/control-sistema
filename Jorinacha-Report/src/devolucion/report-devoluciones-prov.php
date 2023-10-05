@@ -44,7 +44,7 @@ if (isset($_GET)) {
 for ($e = 1; $e < count($sedes_ar); $e++) {
 
   $sede = $sedes_ar[$e];
-  if (count($sedes_ar)>18) {
+  if ($e>18) {
     exit();
   }
 
