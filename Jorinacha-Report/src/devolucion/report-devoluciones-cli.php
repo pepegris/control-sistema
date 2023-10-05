@@ -19,9 +19,9 @@ if (isset($_GET)) {
   $art=$_GET['art'];
 
   var_dump($art);
-  echo "PRIMERA PRUEBA";
+  echo "PRIMERA PRUEBA <";
 
-  if ($art =='') {
+  if ($art !='') {
     echo "IF";
     var_dump($art);
   }else {
