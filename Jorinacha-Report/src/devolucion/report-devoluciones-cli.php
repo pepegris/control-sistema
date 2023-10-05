@@ -17,17 +17,11 @@ if (isset($_GET)) {
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
   $art=$_GET['art'];
+  $linea=$_GET['linea'];
 
   var_dump($art);
-  echo "PRIMERA PRUEBA <";
+  var_dump($linea);
 
-  if ($art !='') {
-    echo "IF";
-    var_dump($art);
-  }else {
-    echo "ELSE";
-    var_dump($art);
-  }
 
   
 
