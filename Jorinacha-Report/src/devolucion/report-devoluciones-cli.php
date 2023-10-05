@@ -38,7 +38,7 @@ if (isset($_GET)) {
 
 
 
-$n = 1;
+
 
 
 for ($e = 1; $e < count($sedes_ar); $e++) {
@@ -87,7 +87,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
 
         $res = getDev_cli($sede, $fecha1, $fecha2 , $art);
 
-
+        $n = 1;
         for ($i = 0; $i < count($res); $i++) {
 
 
@@ -159,6 +159,12 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
       </tr>
       </tbody>
       </table>";
+
+
+      $total_stock_act_dev_cli =0;
+      $total_stock_com_total_art =0;
+      $total_stock_reng_dvc =0;
+
 
 
 
