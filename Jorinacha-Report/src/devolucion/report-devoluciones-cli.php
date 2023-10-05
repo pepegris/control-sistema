@@ -85,10 +85,6 @@ if (isset($_GET)) {
 
 
         $res = getDev_cli($sede, $fecha1, $fecha2 , $art);
-        var_dump($sede);
-        echo "////\\\\";
-        var_dump($res);
-        echo "<br>";
 
 
         for ($i = 0; $i < count($res); $i++) {
