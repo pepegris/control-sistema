@@ -7,8 +7,6 @@ if (isset($_POST)) {
 
 
     $tipo_dev=$_POST['tipo_dev'];
-    $doc1=$_POST['doc1'];
-    $doc2=$_POST['doc2'];
     $art=$_POST['art'];
     $linea=$_POST['linea'];
   
@@ -33,7 +31,7 @@ if (isset($_POST)) {
   
       }else {
   
-        header("refresh:2;url= report-devoluciones-prov.php?fecha1=$fecha1&fecha2=$fecha2&doc1=$doc1&doc2=$doc2&art=$art&linea=$linea&sedes=$sedes");
+        header("refresh:2;url= report-devoluciones-prov.php?fecha1=$fecha1&fecha2=$fecha2&art=$art&linea=$linea&sedes=$sedes");
         
       } 
 

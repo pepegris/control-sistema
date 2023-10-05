@@ -18,10 +18,14 @@ if (isset($_GET)) {
 
   $art=$_GET['art'];
 
+  var_dump($art);
+  echo "PRIMERA PRUEBA";
+
   if ($art != null) {
-    echo "no null-";
+    echo "IF";
     var_dump($art);
   }else {
+    echo "ELSE";
     var_dump($art);
   }
 
@@ -76,11 +80,11 @@ if (isset($_GET)) {
       for ($e = 1; $e < count($sedes_ar); $e++) {
 
         $sede = $sedes_ar[$e];
-        var_dump($sede);
+
 
 
         $res = getDev_cli($sede, $fecha1, $fecha2 , $art);
-        var_dump($res);
+
         for ($i = 0; $i < count($res); $i++) {
 
 

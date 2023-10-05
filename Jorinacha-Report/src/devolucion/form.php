@@ -63,11 +63,6 @@ include '../../services/adm/devolucion/dev.php';
 
         </select>
       </div>
-      <div class="">
-      <label  class="form-label ">Nro Documento (Solo para Proveedor)</label>
-          <input style="color:black" type="number"  name="doc1" id="" >
-          <input style="color:black" type="number"  name="doc2" id="" >
-      </div>
 
 
       
