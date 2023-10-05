@@ -44,7 +44,9 @@ if (isset($_GET)) {
 for ($e = 1; $e < count($sedes_ar); $e++) {
 
   $sede = $sedes_ar[$e];
-  var_dump($sede);
+  if ($sede='Comercial Catica II') {
+    exit();
+  }
 
   ?>
 
