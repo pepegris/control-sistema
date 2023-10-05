@@ -115,7 +115,7 @@ function getDev_cli($sede, $fecha1, $fecha2 , $art)
 }
 
 
-function getDev_pro($sede, $fecha1, $fecha2,$art,$linea)
+function getDev_pro2($sede, $fecha1, $fecha2,$art,$linea)
 {
 
 
@@ -244,6 +244,48 @@ function getCompras($sede,  $fecha2 , $co_art)
 			AND co_art ='$co_art'
             AND fec_emis <= '$fecha2'
             ORDER BY fec_emis DESC";
+
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $compras[] = $row;
+
+                }
+
+                $res = $compras;
+
+                return $res;
+                
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
+
+
+
+function getDev_pro($sede,$fecha1 , $fecha2 , $art ,$linea)
+{
+
+
+    $database = Database($sede);
+    if ($database != null) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+
+            $sql = "SELECT fact_num,descrip,fec_emis from dev_pro 
+            where status=0 and fec_emis between '$fecha1' and '$fecha2'";
 
 
 
