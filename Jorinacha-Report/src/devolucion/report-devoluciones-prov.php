@@ -79,6 +79,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
           $fact_num = $res[$i]['fact_num'];
           $descrip = $res[$i]['descrip'];
           $fec_emis = $res[$i]['fec_emis'];
+          $fecha = $fec_emis->format('d-m-Y');
 
           echo "
         <tr>
@@ -86,7 +87,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         <td>$sede</td>
         <td>$fact_num</td>
         <td>$descrip</td>
-        <td>fecha </td>
+        <td>$fecha </td>
 
   
         </tr>";
