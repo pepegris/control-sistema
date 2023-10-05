@@ -48,7 +48,7 @@ function getDev_cli($sede, $fecha1, $fecha2 , $art)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-            if ($art != '') {
+            if ($art == '') {
 
                 $sql = "SELECT  art.co_art, sub_lin.subl_des , cat_art.cat_des , colores.des_col, lin_art.lin_des , art.ubicacion, art.stock_act , 
 
