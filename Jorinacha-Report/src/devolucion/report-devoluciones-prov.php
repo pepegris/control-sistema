@@ -41,7 +41,7 @@ if (isset($_GET)) {
 
 
 
-for ($e = 1; $e <= count($sedes_ar); $e++) {
+for ($e = 1; $e < count($sedes_ar); $e++) {
 
   $sede = $sedes_ar[$e];
 
