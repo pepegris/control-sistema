@@ -97,7 +97,9 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
  
 
 
-
+        echo "
+        </tbody>
+        </table>";
 
       /*         <td>" . $total_stock_act_dev_pro . "</td>
         <td>" . $total_stock_com . "</td>
