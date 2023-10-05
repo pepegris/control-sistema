@@ -109,8 +109,8 @@ if (isset($_GET)) {
           $res2 = getCompras($sede,  $fecha2 , $co_art );
 
           $compras_fact = $res2[$i]['compras_fact'];
-          #$com_fecha = $res2[$i]['com_fecha'];
-          $fecha_com = 'fecha';
+          $com_fecha = $res2[$i]['com_fecha'];
+          $fecha_com = $com_fecha->format('d-m-Y');
           $com_total_art = round($res2[$i]['com_total_art']);
 
           $total_stock_com_total_art += $com_total_art;
