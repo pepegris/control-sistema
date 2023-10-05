@@ -86,7 +86,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         <td>$sede</td>
         <td>$fact_num</td>
         <td>$descrip</td>
-        <td>$fec_emis </td>
+        <td>fecha </td>
 
   
         </tr>";
