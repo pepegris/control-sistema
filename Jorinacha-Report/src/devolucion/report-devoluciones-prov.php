@@ -44,7 +44,7 @@ if (isset($_GET)) {
 for ($e = 1; $e < count($sedes_ar); $e++) {
 
   $sede = $sedes_ar[$e];
-  if ($sede=='Comercial Catica II') {
+  if (count($sedes_ar)>18) {
     exit();
   }
 
