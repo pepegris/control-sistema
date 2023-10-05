@@ -21,7 +21,7 @@ if (isset($_GET)) {
   var_dump($art);
   echo "PRIMERA PRUEBA";
 
-  if ($art != null) {
+  if ($art =='') {
     echo "IF";
     var_dump($art);
   }else {
