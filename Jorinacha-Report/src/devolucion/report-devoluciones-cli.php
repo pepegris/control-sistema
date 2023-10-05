@@ -32,6 +32,23 @@ if (isset($_GET)) {
 
     <h3> Clientes </h3>
   </center>
+
+  <?php
+
+
+
+
+$n = 1;
+
+
+for ($e = 1; $e < count($sedes_ar); $e++) {
+
+  $sede = $sedes_ar[$e];
+
+  ?>
+
+<center><h1><?= $sede  ?></h1></center>
+  
   <table class='table table-dark table-striped'>
     <thead>
 
@@ -65,16 +82,6 @@ if (isset($_GET)) {
       
 
       <?php
-
-
-
-
-      $n = 1;
-
-      
-      for ($e = 1; $e < count($sedes_ar); $e++) {
-
-        $sede = $sedes_ar[$e];
 
 
 
@@ -135,7 +142,7 @@ if (isset($_GET)) {
         </tr>";
           $n++;
         }
-      }
+ 
 
 
 
@@ -165,7 +172,7 @@ if (isset($_GET)) {
 
 
 
-
+      }
 
       ?>
 
