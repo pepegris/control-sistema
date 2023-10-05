@@ -30,7 +30,7 @@ if (isset($_GET)) {
   <center>
     <h1>Devoluciones <?= $fecha_titulo1 ?> - <?= $fecha_titulo2  ?></h1>
 
-    <h3> Clientes </h3>
+    <h3> Proveedor </h3>
   </center>
 
   <?php
@@ -44,6 +44,7 @@ if (isset($_GET)) {
 for ($e = 1; $e < count($sedes_ar); $e++) {
 
   $sede = $sedes_ar[$e];
+  var_dump($sede);
 
   ?>
 
