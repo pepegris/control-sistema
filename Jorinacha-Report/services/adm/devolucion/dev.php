@@ -106,7 +106,7 @@ function getDev_cli($sede, $fecha1, $fecha2 , $art, $lin_art)
                 JOIN colores ON art.co_color=colores.co_col
                 WHERE dev_cli.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND reng_dvc.co_art='$art' AND lin_art.lin_des ='$lin_art' AND dev_cli.anulada =0";
             }else {
-                $sql = "SELECT  art.co_art, sub_lin.subl_des , cat_art.cat_des , colores.des_col, lin_art.lin_des , art.ubicacion, art.stock_act , 
+                $sql = "SELECT  art.co_art, sub_lin.subl_des , cat_art.cat_des , colores.des_col, lin_art.lin_des , art.ubicacion, art.stock_act ,art.co_lin, 
 
                 dev_cli.fact_num as dev_cli_fact,
                 dev_cli.comentario as dev_cli_comentario ,
@@ -121,7 +121,7 @@ function getDev_cli($sede, $fecha1, $fecha2 , $art, $lin_art)
                 JOIN sub_lin ON art.co_subl = sub_lin.co_subl
                 JOIN cat_art ON art.co_cat=cat_art.co_cat
                 JOIN colores ON art.co_color=colores.co_col
-                WHERE dev_cli.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND lin_art.lin_des ='$lin_art' AND dev_cli.anulada =0";
+                WHERE dev_cli.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND art.co_lin ='$lin_art' AND dev_cli.anulada =0";
             }
 
 
