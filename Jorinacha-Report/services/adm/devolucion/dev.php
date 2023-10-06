@@ -68,7 +68,7 @@ function getDev_cli($sede, $fecha1, $fecha2 , $art, $lin_art)
                 WHERE dev_cli.fec_emis BETWEEN '$fecha1' AND '$fecha2' AND dev_cli.anulada =0";
                 
 
-            }elseif ($art != '') {
+            }elseif ($art != '' &&  $lin_art =='todos' ) {
                 $sql = "SELECT  art.co_art, sub_lin.subl_des , cat_art.cat_des , colores.des_col, lin_art.lin_des , art.ubicacion, art.stock_act , 
 
                 dev_cli.fact_num as dev_cli_fact,
