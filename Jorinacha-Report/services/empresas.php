@@ -9,7 +9,7 @@ $sedes_ar = array(
     "Sucursal Cagua",
 
     "Sucursal Maturin",
-    "Comercial Matur" ,
+
 
     "Comercial Acari" ,
     "Comercial Puecruz" ,
@@ -38,7 +38,7 @@ function Database2($sede)
         "Sucursal Cagua" => 'CAGUA',
 
         "Sucursal Maturin" => 'MATURIN',
-        "Comercial Matur" => 'MATURA21',
+
 
         "Comercial Acari" => 'ACARI21',
         "Comercial Puecruz" => 'PUECRU21',
@@ -70,7 +70,7 @@ function Database($sede)
         "Sucursal Cagua" => 'CAGUA',
 
         "Sucursal Maturin" => 'MATURIN',
-        "Comercial Matur" => 'MATUR',
+
         
         "Comercial Acari" => 'ACARI',
         "Comercial Puecruz" => 'PUECRUZ',
@@ -98,7 +98,7 @@ function Cliente($sede)
         "Sucursal Caracas II"    =>     'S02',
         "Sucursal Cagua" => 'S03',
         "Sucursal Maturin" => 'S04',
-        "Comercial Matur"    =>     'T07',
+
 
         "Comercial Acari"    =>     'T04',
         "Comercial Puecruz"    =>     'T05',
