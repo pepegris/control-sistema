@@ -37,7 +37,7 @@ function Database2($sede)
         "Sucursal Caracas I" => 'CARACAS1',
         "Sucursal Caracas II" => 'CARACAS2',
         "Sucursal Cagua" => 'CAGUA',
-        "Sucursal Maturin" => 'MATURIN',
+       /* "Sucursal Maturin" => 'MATURIN',*/
         "Comercial Matur" => 'MATURA21',
         
 
