@@ -7,7 +7,7 @@ $sedes_ar = array(
     "Sucursal Caracas I",
     "Sucursal Caracas II",
     "Sucursal Cagua",
-   /* "Sucursal Maturin",*/
+    "Sucursal Maturin",
     "Comercial Matur" ,
     
     "Comercial Corina I",
@@ -40,27 +40,26 @@ function Database2($sede)
 {
 
     $bd = array(
-        "Previa Shop" => 'PREVIA_A',
-        "Sucursal Caracas I" => 'CARACAS1',
-        "Sucursal Caracas II" => 'CARACAS2',
-        "Sucursal Cagua" => 'CAGUA',
-        /*"Sucursal Maturin" => 'MATURIN',*/
-        "Comercial Matur" => 'MATURA21',
-        
+        "Previa Shop" => 'C_PREVIA',
+        "Sucursal Caracas I" => 'C_CARACAS1',
+        "Sucursal Caracas II" => 'C_CARACAS2',
+        "Sucursal Cagua" => 'C_CAGUA',
+        "Sucursal Maturin" => 'C_MATURIN',
+        "Comercial Matur" => 'C_MATUR',
 
-        "Comercial Corina I" => 'CORINA21',
-        "Comercial Corina II" => 'CORI2_21',
-        "Comercial Punto Fijo" => 'PUFIJO21',
-        "Comercial Valena" => 'VALENA21',
-        "Comercial Trina" => 'TRAINA21',    
-        "Comercial Nachari" => 'NACHAR21',
-        "Comercial Higue" => 'HIGUE21',
-        "Comercial Apura" => 'APURA21',
-        "Comercial Vallepa" => 'VALLEP21',
-        "Comercial Ojena" => 'OJENA21',
-        "Comercial Puecruz" => 'PUECRU21',
-        "Comercial Acari" => 'ACARI21',
-        "Comercial Catica II" => 'CATICA21',
+        "Comercial Corina I" => 'C_CORINA1',
+        "Comercial Corina II" => 'C_CORINA2',
+        "Comercial Punto Fijo" => 'C_PUFIJO',
+        "Comercial Valena" => 'C_VALENA',
+        "Comercial Trina" => 'C_TRINA',
+        "Comercial Nachari" => 'C_NACHARI',
+        "Comercial Higue" => 'C_HIGUE',
+        "Comercial Apura" => 'C_APURA',
+        "Comercial Vallepa" => 'C_VALLEPA',
+        "Comercial Ojena" => 'C_OJENA',
+        "Comercial Puecruz" => 'C_PUECRUZ',
+        "Comercial Acari" => 'C_ACARI',
+        "Comercial Catica II" => 'C_CATICA2',
     );
 
     return $bd[$sede];
@@ -75,7 +74,7 @@ function Database($sede)
         "Sucursal Caracas I" => 'CARACAS1',
         "Sucursal Caracas II" => 'CARACAS2',
         "Sucursal Cagua" => 'CAGUA',
-        /*"Sucursal Maturin" => 'MATURIN',*/
+        "Sucursal Maturin" => 'MATURIN',
         "Comercial Matur" => 'MATUR',
 
         "Comercial Corina I" => 'CORINA1',
