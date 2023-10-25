@@ -4,6 +4,7 @@
 
 $sedes_ar = array(
     "Previa Shop",
+    "Jorinacha",
     "Sucursal Caracas I",
     "Sucursal Caracas II",
     "Sucursal Cagua",
@@ -41,6 +42,7 @@ function Database2($sede)
 
     $bd = array(
         "Previa Shop" => 'C_PREVIA',
+        "Jorinacha" => 'C_JORINA',
         "Sucursal Caracas I" => 'C_CARACAS1',
         "Sucursal Caracas II" => 'C_CARACAS2',
         "Sucursal Cagua" => 'C_CAGUA',
@@ -71,6 +73,7 @@ function Database($sede)
 
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
+        "Jorinacha" => 'JORINA',
         "Sucursal Caracas I" => 'CARACAS1',
         "Sucursal Caracas II" => 'CARACAS2',
         "Sucursal Cagua" => 'CAGUA',
