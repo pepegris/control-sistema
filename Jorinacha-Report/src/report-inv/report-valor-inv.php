@@ -50,7 +50,7 @@ if ($_GET) {
 
       <?php
 
-      $marca[]=getLin_art("$fecha1",$database);
+      $marca=getLin_art("$fecha1",$database);
 
       var_dump($marca);
       echo "<br>";
@@ -58,7 +58,8 @@ if ($_GET) {
       var_dump($marca[0]);
       echo "<br>";
       echo "<br>";
-      var_dump($marca[1]);
+      var_dump($marca[1]['co_lin']);
+      var_dump($marca[2]['co_lin']);
 
 
       for ($i = 0; $i < count($marca); $i++) {
