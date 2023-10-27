@@ -53,6 +53,7 @@ if ($_GET) {
       $marca=getLin_art("$fecha1",$database);
 
       var_dump(count($marca['lin_des']));
+      var_dump(count($marca));
       echo "<br>";
       echo "<br>";
       var_dump($marca[0]);
