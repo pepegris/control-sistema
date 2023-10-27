@@ -52,7 +52,7 @@ if ($_GET) {
 
       $marca=getLin_art("$fecha1",$database);
 
-      var_dump($marca);
+      var_dump(count($marca['lin_des']));
       echo "<br>";
       echo "<br>";
       var_dump($marca[0]);
@@ -60,6 +60,7 @@ if ($_GET) {
       echo "<br>";
       var_dump($marca[1]['co_lin']);
       var_dump($marca[2]['co_lin']);
+  
 
 
       for ($i = 0; $i < count($marca); $i++) {
@@ -81,7 +82,7 @@ if ($_GET) {
       ?>
         <tr>
 
-          <td><?= $marca['lin_des'] ?></td>
+          <td><?= $marca[$i]['lin_des']  ?> - <?= $marca[$i]['co_lin'] ?></td>
 
           <td><?= $stock_teor  ?></td>
           <td><?= number_format($costo_teor, 2, ',', '.')     ?></td>
