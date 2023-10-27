@@ -50,7 +50,7 @@ if ($_GET) {
 
       <?php
 
-      $marca=getLin_art("$fecha1",$databas);
+      $marca=getLin_art("$fecha1",$database);
 
       var_dump($marca);
 
