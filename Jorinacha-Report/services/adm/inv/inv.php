@@ -67,8 +67,37 @@ $marcas = array(
 
 
 
+function getLin_art($fecha)
+{
 
-function getLin_art($marca)
+
+    $serverName = "172.16.1.39";
+    $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+    $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+    $sql = "SELECT lin_art.lin_des, art.co_lin from reng_fis
+    JOIN art ON reng_fis.co_art = art.co_art
+    JOIN lin_art ON lin_art.co_lin = art.co_lin
+    JOIN fisico ON reng_fis.num_fis = fisico.num_fis
+    where fisico.fecha_fis='$fecha'
+    group by lin_art.lin_des , art.co_lin";
+
+    $consulta = sqlsrv_query($conn, $sql);
+
+
+    while ($row = sqlsrv_fetch_array($consulta)) {
+
+        $lin_des['lin_des'] =  $row['lin_des'];
+        $lin_des['co_lin'] =  $row['co_lin'];
+    }
+
+    $res = $lin_des;
+    return $res;
+}
+
+
+
+function getLin_art2($marca)
 {
 
 

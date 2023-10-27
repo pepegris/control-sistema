@@ -50,16 +50,20 @@ if ($_GET) {
 
       <?php
 
-      for ($i = 0; $i < count($marcas); $i++) {
+      $marca=getLin_art("$fecha1");
 
-       $marca=getLin_art("$marcas[$i]");
+      var_dump($marca);
 
-       $teorico=getInv_fis_teorico("$marcas[$i]","$database","$fecha1");
+      for ($i = 0; $i < count($marca); $i++) {
+
+       
+
+       $teorico=getInv_fis_teorico("$marca[$i]['co_lin']","$database","$fecha1");
        $stock_teor=$teorico['stock_teor'];
        $costo_teor=$teorico['costo'];
        $precio_teor=$teorico['precio'];
 
-       $real=getInv_fis("$marcas[$i]","$database","$fecha1");
+       $real=getInv_fis("$marca[$i]['co_lin']","$database","$fecha1");
        $stock_real=$real['STOCK_ACTUAL'];
        $costo_real=$real['COSTO'];
        $precio_real=$real['PRECIO'];
@@ -69,7 +73,7 @@ if ($_GET) {
       ?>
         <tr>
 
-          <td><?= $marca['lin_des'] ?>-<?= $marcas[$i]?></td>
+          <td><?= $marca['lin_des'] ?></td>
 
           <td><?= $stock_teor  ?></td>
           <td><?= number_format($costo_teor, 2, ',', '.')     ?></td>
