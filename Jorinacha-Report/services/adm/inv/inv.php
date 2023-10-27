@@ -87,8 +87,8 @@ function getLin_art($fecha,$database)
 
     while ($row = sqlsrv_fetch_array($consulta)) {
 
-        $lin_des['lin_des'] =  $row['lin_des'];
-        $lin_des['co_lin'] =  $row['co_lin'];
+        $lin_des[]['lin_des'] =  $row['lin_des'];
+        $lin_des[]['co_lin'] =  $row['co_lin'];
     }
 
     $res = $lin_des;
