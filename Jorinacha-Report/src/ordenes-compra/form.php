@@ -37,9 +37,9 @@ include '../../services/adm/ordenes-compra/ordenes-compra.php';
 
       <?php
       
-      for ($i=0; $i < count($sedes_tiendas) ; $i++) { 
+      for ($i=0; $i < count($sedes_ar) ; $i++) { 
 
-        $tienda=$sedes_tiendas[$i];
+        $tienda=$sedes_ar[$i];
 
         ?>
 
