@@ -22,6 +22,12 @@ if (isset($_POST)  ) {
     echo "<br>";
     var_dump($Reng_Factura);
 
+    
+    $prueba=$Factura_Ordenes[0]['fact_num'];
+    $Reng_Factura2 = Reng_Factura($tienda,$fecha1,$prueba);
+    echo "<br>";
+    var_dump($Reng_Factura2);
+
     echo "<br>";
 
     for ($i=0; $i < count($Factura_Ordenes) ; $i++) { 
