@@ -18,7 +18,7 @@ if (isset($_POST)  ) {
 
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
 
-    var_dump(count($Factura_Ordenes['fact_num']));
+    var_dump(count($Factura_Ordenes));
     echo "<br>";
     var_dump($Factura_Ordenes[1]['fact_num']);
 
