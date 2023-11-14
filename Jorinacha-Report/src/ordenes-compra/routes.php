@@ -13,13 +13,11 @@ if (isset($_POST)  ) {
 
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
 
-    $database = Database($tienda);
-    $cliente = Cliente($tienda);
-
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
     $Reng_Factura = Reng_Factura($tienda,$fecha1,$Factura_Ordenes[0]['fact_num']);
 
-    var_dump(count($Factura_Ordenes));
+    var_dump($Factura_Ordenes);
+    echo "<br>";echo "<br>";
     var_dump($Factura_Ordenes[0]['fact_num']);
     echo "<br>";
     var_dump($Reng_Factura);
