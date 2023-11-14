@@ -4,7 +4,7 @@
 
 $sedes_ar = array(
     "Previa Shop",
-    "Jorinacha",
+    "Inv Jorinacha",
     "Sucursal Caracas I",
     "Sucursal Caracas II",
     "Sucursal Cagua",
@@ -105,7 +105,7 @@ function Cliente($sede)
         "Sucursal Caracas I"    =>     'S01',
         "Sucursal Caracas II"    =>     'S02',
         "Sucursal Cagua" => 'S03',
-        /*"Sucursal Maturin" => 'S04',*/
+        "Sucursal Maturin" => 'S04',
         "Comercial Matur"    =>     'T07',
         
 
