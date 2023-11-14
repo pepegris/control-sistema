@@ -20,6 +20,18 @@ if (isset($_POST)  ) {
 
     echo "<br>";
 
+    if ($cliente =='S04' or $cliente =='S03' 
+    or $cliente =='S02' or $cliente =='S01'  ) {
+
+        echo "S0";
+
+
+}else{
+
+    echo "T0";
+}
+
+
     $prueba = Factura_Ordenes($tienda,$fecha1);
 
     var_dump($prueba);
