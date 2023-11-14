@@ -15,8 +15,6 @@ if (isset($_POST)  ) {
 
     $database = Database($tienda);
     $cliente = Cliente($tienda);
-    var_dump($database);
-    var_dump($cliente);
 
     echo "<br>";
 
@@ -32,9 +30,14 @@ if (isset($_POST)  ) {
 }
 
 
-    $prueba = Factura_Ordenes($tienda,$fecha1);
+    $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
 
-    var_dump($prueba);
+    var_dump($Factura_Ordenes['fact_num'][2]);
+    var_dump($Factura_Ordenes[2]['fact_num']);
+
+    for ($i=0; $i < count($Factura_Ordenes['fact_num']) ; $i++) { 
+        # code...
+    }
 
 
     
