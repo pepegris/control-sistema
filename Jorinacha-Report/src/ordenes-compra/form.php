@@ -14,7 +14,7 @@ include '../../services/adm/inv/inv.php';
 </style>
 
 <center>
-  <h1>Valor del Inventario</h1>
+  <h1>Crear Ordenes de Compras</h1>
 </center>
 
 <div id="body">

@@ -184,9 +184,9 @@ $cuenta_on = ucwords($cuenta_on);
 
 
 
-      <a href="src/test/form.php">
+      <a href="src/ordenes-compra/form.php">
         <div class="box">
-        <i class="lni lni-invention"></i>
+          <i class="lni lni-signal"></i>
           <h5>Desarrollo</h5>
           <h4>Pronto aun En Desarrollo</h4>
         </div>
