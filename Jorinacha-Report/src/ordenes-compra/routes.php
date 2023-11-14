@@ -16,7 +16,7 @@ if (isset($_POST)  ) {
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
     
 
-
+    $r=0;
     for ($i=0; $i < count($Factura_Ordenes) ; $i++) { 
 
         $ordenes_fact_num = $Factura_Ordenes[$r]['fact_num'];
@@ -24,9 +24,15 @@ if (isset($_POST)  ) {
         $ordenes_saldo = $Factura_Ordenes[$r]['saldo'];
         $ordenes_iva = $Factura_Ordenes[$r]['iva'];
         
-        $Reng_Factura = Reng_Factura($tienda,$fecha1,$Factura_Ordenes[0]['fact_num']);
+        $orden=Ordenes_Compra();
+        $Reng_Factura = Reng_Factura($tienda,$fecha1,$Factura_Ordenes[$r]['fact_num']);
+        
 
+        for ($e=0; $e < count($Reng_Factura); $e++) { 
+            # code...
+        }
 
+        $r++;
     }
 
 

@@ -26,16 +26,18 @@ function Factura_Ordenes($sede,$fecha)
             if ($cliente =='S04' or $cliente =='S03' 
                 or $cliente =='S02' or $cliente =='S01'  ) {
 
-                $sql = "SELECT fact_num,contrib,CONVERT(numeric(10,2), saldo) AS saldo ,CONVERT(numeric(10,2), iva)   AS iva
+                $sql = "SELECT fact_num,contrib,
+                CONVERT(numeric(10,2), saldo) AS saldo ,CONVERT(numeric(10,2), tot_bruto)AS tot_bruto ,CONVERT(numeric(10,2), tot_neto)AS tot_neto ,CONVERT(numeric(10,2), iva)   AS iva
                 FROM not_ent 
                 WHERE co_cli='$cliente' AND FEC_EMIS='$fecha'  AND anulada=0";
 
 
             }else{
 
-                $sql = "SELECT fact_num,contrib,CONVERT(numeric(10,2), saldo) AS saldo,CONVERT(numeric(10,2), iva)   AS iva
-                        FROM factura 
-                        WHERE co_cli='$cliente' AND FEC_EMIS = '$fecha' AND anulada=0";
+                $sql = "SELECT fact_num,contrib,
+                CONVERT(numeric(10,2), saldo) AS saldo ,CONVERT(numeric(10,2), tot_bruto)AS tot_bruto ,CONVERT(numeric(10,2), tot_neto)AS tot_neto ,CONVERT(numeric(10,2), iva)   AS iva
+                FROM factura 
+                WHERE co_cli='$cliente' AND FEC_EMIS = '$fecha' AND anulada=0";
 
             }
 
@@ -150,9 +152,16 @@ function Ordenes_Compra($sede)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-
-            $sql = "INSERT into ordenes (fact_num,contrib,status,comentario,descrip,co_sucu,forma_pag,moneda,co_cli)
-            values(789,1,0,'prueba','descripcion',1,'CRED','BSD','002')";
+            $dif=$tot_bruto/$iva;
+            $sql = "INSERT into ordenes (fact_num,contrib,status,comentario,descrip
+            ,co_sucu,forma_pag,moneda,co_cli,
+            saldo,tot_bruto,tot_neto,iva
+            tasag,tasag10,co_us_in,co_us_mo,dis_cen)
+            values(7891,1,0,'prueba','descripcion',
+            
+            1,'CRED','BSD','002',
+            16,12,'001','001','<IVA> <1>$iva/$tot_bruto/$dif</1>  </IVA> ')
+            ";
 
 
             $consulta = sqlsrv_query($conn, $sql);
