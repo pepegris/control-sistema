@@ -26,14 +26,14 @@ function Factura_Ordenes($sede,$fecha)
             if ($cliente =='S04' or $cliente =='S03' 
                 or $cliente =='S02' or $cliente =='S01'  ) {
 
-                $sql = "SELECT fact_num,contrib,CONVERT(numeric(10,2), saldo),CONVERT(numeric(10,2), iva)  
+                $sql = "SELECT fact_num,contrib,CONVERT(numeric(10,2), saldo) AS saldo ,CONVERT(numeric(10,2), iva)   AS iva
                 FROM not_ent 
                 WHERE co_cli='$cliente' AND FEC_EMIS='$fecha'  AND anulada=0";
 
 
             }else{
 
-                $sql = "SELECT fact_num,contrib,CONVERT(numeric(10,2), saldo),CONVERT(numeric(10,2), iva)   
+                $sql = "SELECT fact_num,contrib,CONVERT(numeric(10,2), saldo) AS saldo,CONVERT(numeric(10,2), iva)   AS iva
                         FROM factura 
                         WHERE co_cli='$cliente' AND FEC_EMIS = '$fecha' AND anulada=0";
 
