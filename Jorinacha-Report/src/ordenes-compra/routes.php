@@ -22,9 +22,10 @@ if (isset($_POST)  ) {
     echo "<br>";
     var_dump($Reng_Factura);
 
-    
+
     $prueba=$Factura_Ordenes[0]['fact_num'];
     $Reng_Factura2 = Reng_Factura($tienda,$fecha1,$prueba);
+    var_dump($prueba);
     echo "<br>";
     var_dump($Reng_Factura2);
 
