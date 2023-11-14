@@ -2,7 +2,7 @@
 require '../../includes/log.php';
 include '../../includes/header2.php';
 include '../../services/mysql.php';
-include '../../services/adm/inv/inv.php';
+include '../../services/adm/ordenes-compra/ordenes-compra.php';
 ?>
 
 <style>
