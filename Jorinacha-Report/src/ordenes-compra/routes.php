@@ -13,6 +13,12 @@ if (isset($_POST)  ) {
 
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
 
+    $database = Database($tienda);
+    $cliente = Cliente($tienda);
+    var_dump($database);
+    var_dump($cliente);
+
+    echo "<br>";
 
     $prueba = Factura_Ordenes($tienda,$fecha1);
 
