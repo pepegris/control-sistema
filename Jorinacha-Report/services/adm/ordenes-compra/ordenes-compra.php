@@ -83,20 +83,20 @@ function Reng_Factura($sede,$fecha)
             if ($cliente =='S04' or $cliente =='S03' 
             or $cliente =='S02' or $cliente =='S01'  ) {
 
-                $sql = "SELECT reng_num,co_art, CONVERT(numeric(10,0), total_art), CONVERT(numeric(10,2), prec_vta) ,CONVERT(numeric(10,2), reng_neto)
+                $sql = "SELECT reng_num,co_art, CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,CONVERT(numeric(10,2), reng_neto) AS reng_neto
                 FROM reng_nde
                 INNER JOIN not_ent  ON reng_nde.fact_num = not_ent.fact_num
-                WHERE co_cli='S04' AND FEC_EMIS>'20231112' AND anulada=0";
+                WHERE co_cli='$cliente' AND FEC_EMIS>'$fecha' AND anulada=0";
 
 
         }else{
 
 
 
-            $sql = "SELECT reng_num,co_art,total_art,prec_vta ,reng_neto
+            $sql = "SELECT reng_num,co_art, CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,CONVERT(numeric(10,2), reng_neto) AS reng_neto
                     FROM reng_fac
                     INNER JOIN factura  ON reng_fac.fact_num = factura.fact_num
-                    WHERE co_cli='T05' AND FEC_EMIS>'20231112' AND anulada=0";
+                    WHERE co_cli='$cliente' AND FEC_EMIS>'$fecha'' AND anulada=0";
 
         }
 
@@ -104,12 +104,17 @@ function Reng_Factura($sede,$fecha)
 
             $consulta = sqlsrv_query($conn, $sql);
 
+            $r=0;
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $fecha['fec_emis'] = $row['fec_emis'];
-                break;
+                $Reng_Factura[$r]['reng_num'] = $row['reng_num'] ;
+                $Reng_Factura[$r]['co_art'] = $row['co_art'] ;
+                $Reng_Factura[$r]['total_art'] = $row['total_art'] ;
+                $Reng_Factura[$r]['prec_vta'] = $row['prec_vta'] ;
+                $Reng_Factura[$r]['reng_neto'] = $row['reng_neto'] ;
+                $r++;
             }
-            $res = $fecha;
+            $res = $Reng_Factura;
 
             return $res;
         } catch (\Throwable $th) {
@@ -151,12 +156,16 @@ function Ordenes_Compra($sede)
 
             $consulta = sqlsrv_query($conn, $sql);
 
+            $r=0;
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $fecha['fec_emis'] = $row['fec_emis'];
-                break;
+                $Ordenes_Compra[$r]['reng_num'] = $row['reng_num'] ;
+                $Ordenes_Compra[$r]['total_art'] = $row['total_art'] ;
+                $Ordenes_Compra[$r]['prec_vta'] = $row['prec_vta'] ;
+                $Ordenes_Compra[$r]['reng_neto'] = $row['reng_neto'] ;
+                $r++;
             }
-            $res = $fecha;
+            $res = $Ordenes_Compra;
 
             return $res;
         } catch (\Throwable $th) {
@@ -168,6 +177,9 @@ function Ordenes_Compra($sede)
         return 0;
     }
 }
+
+
+
 
 
 function Reng_Ordenes($sede)

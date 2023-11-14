@@ -16,23 +16,9 @@ if (isset($_POST)  ) {
     $database = Database($tienda);
     $cliente = Cliente($tienda);
 
-
-
-    if ($cliente =='S04' or $cliente =='S03' 
-    or $cliente =='S02' or $cliente =='S01'  ) {
-
-        echo "S0";
-
-
-}else{
-
-    echo "T0";
-}
-
-
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
 
-    var_dump($Factura_Ordenes);
+    var_dump(count($Factura_Ordenes['fact_num']));
     echo "<br>";
     var_dump($Factura_Ordenes[1]['fact_num']);
 
