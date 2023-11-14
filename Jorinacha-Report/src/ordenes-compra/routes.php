@@ -14,30 +14,22 @@ if (isset($_POST)  ) {
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
 
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
-    $Reng_Factura = Reng_Factura($tienda,$fecha1,$Factura_Ordenes[0]['fact_num']);
+    
 
-    var_dump($Factura_Ordenes);
-    echo "<br>";echo "<br>";
-    var_dump($Factura_Ordenes[0]['fact_num']);
-    echo "<br>";
-    var_dump($Reng_Factura);
-
-
-    $prueba=$Factura_Ordenes[0]['fact_num'];
-    $Reng_Factura2 = Reng_Factura($tienda,$fecha1,$prueba);
-    var_dump($prueba);
-    echo "<br>";
-    var_dump($Reng_Factura2);
-
-    echo "<br>";
 
     for ($i=0; $i < count($Factura_Ordenes) ; $i++) { 
-        # code...
+
+        $ordenes_fact_num = $Factura_Ordenes[$r]['fact_num'];
+        $ordenes_contrib = $Factura_Ordenes[$r]['contrib'];
+        $ordenes_saldo = $Factura_Ordenes[$r]['saldo'];
+        $ordenes_iva = $Factura_Ordenes[$r]['iva'];
+        
+        $Reng_Factura = Reng_Factura($tienda,$fecha1,$Factura_Ordenes[0]['fact_num']);
+
+
     }
 
-    for ($i=0; $i < count($Reng_Factura) ; $i++) { 
-        # code...
-    }
+
 
 
     
