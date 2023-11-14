@@ -86,7 +86,7 @@ function Reng_Factura($sede,$fecha,$fact_num)
                 $sql = "SELECT not_ent.fact_num,reng_num,co_art, CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,CONVERT(numeric(10,2), reng_neto) AS reng_neto
                 FROM reng_nde
                 INNER JOIN not_ent  ON reng_nde.fact_num = not_ent.fact_num
-                WHERE co_cli='$cliente' AND FEC_EMIS>'$fecha' AND not_ent.fact_num='$fact_num' AND anulada=0";
+                WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND not_ent.fact_num='$fact_num' AND anulada=0";
 
 
         }else{
@@ -96,7 +96,7 @@ function Reng_Factura($sede,$fecha,$fact_num)
             $sql = "SELECT factura.fact_num,reng_num,co_art, CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,CONVERT(numeric(10,2), reng_neto) AS reng_neto
                     FROM reng_fac
                     INNER JOIN factura  ON reng_fac.fact_num = factura.fact_num
-                    WHERE co_cli='$cliente' AND FEC_EMIS>'$fecha' AND factura.fact_num='$fact_num' AND anulada=0";
+                    WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND factura.fact_num='$fact_num' AND anulada=0";
 
         }
 
