@@ -63,7 +63,7 @@ function Factura_Ordenes($sede,$fecha)
 }
 
 
-function Reng_Factura($sede,$fecha)
+function Reng_Factura($sede,$fecha,$fact_num)
 {
 
 
@@ -83,20 +83,20 @@ function Reng_Factura($sede,$fecha)
             if ($cliente =='S04' or $cliente =='S03' 
             or $cliente =='S02' or $cliente =='S01'  ) {
 
-                $sql = "SELECT reng_num,co_art, CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,CONVERT(numeric(10,2), reng_neto) AS reng_neto
+                $sql = "SELECT not_ent.fact_num,reng_num,co_art, CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,CONVERT(numeric(10,2), reng_neto) AS reng_neto
                 FROM reng_nde
                 INNER JOIN not_ent  ON reng_nde.fact_num = not_ent.fact_num
-                WHERE co_cli='$cliente' AND FEC_EMIS>'$fecha' AND anulada=0";
+                WHERE co_cli='$cliente' AND FEC_EMIS>'$fecha' AND not_ent.fact_num='$fact_num' AND anulada=0";
 
 
         }else{
 
 
 
-            $sql = "SELECT reng_num,co_art, CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,CONVERT(numeric(10,2), reng_neto) AS reng_neto
+            $sql = "SELECT not_ent.fact_num,reng_num,co_art, CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,CONVERT(numeric(10,2), reng_neto) AS reng_neto
                     FROM reng_fac
                     INNER JOIN factura  ON reng_fac.fact_num = factura.fact_num
-                    WHERE co_cli='$cliente' AND FEC_EMIS>'$fecha'' AND anulada=0";
+                    WHERE co_cli='$cliente' AND FEC_EMIS>'$fecha' AND not_ent.fact_num='$fact_num' AND anulada=0";
 
         }
 
@@ -107,6 +107,7 @@ function Reng_Factura($sede,$fecha)
             $r=0;
             while ($row = sqlsrv_fetch_array($consulta)) {
 
+                $Reng_Factura[$r]['fact_num'] = $row['fact_num'] ;
                 $Reng_Factura[$r]['reng_num'] = $row['reng_num'] ;
                 $Reng_Factura[$r]['co_art'] = $row['co_art'] ;
                 $Reng_Factura[$r]['total_art'] = $row['total_art'] ;

@@ -17,10 +17,11 @@ if (isset($_POST)  ) {
     $cliente = Cliente($tienda);
 
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
-    $Reng_Factura = Reng_Factura($tienda,$fecha1);
+    $Reng_Factura = Reng_Factura($tienda,$fecha1,$Factura_Ordenes[0]['fact_num']);
 
     var_dump(count($Factura_Ordenes));
-    var_dump(count($Reng_Factura));
+    echo "<br>";
+    var_dump($Reng_Factura);
 
     echo "<br>";
 
