@@ -40,13 +40,14 @@ function Factura_Ordenes($sede,$fecha)
             }
 
             $consulta = sqlsrv_query($conn, $sql);
-
+            $r=0;
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $ordenes_facturas['fact_num'] = $row['fact_num'] ;
-                $ordenes_facturas['contrib'] = $row['contrib'] ;
-                $ordenes_facturas['saldo'] = $row['saldo'] ;
-                $ordenes_facturas['iva'] = $row['iva'] ;
+                $ordenes_facturas[$r]['fact_num'] = $row['fact_num'] ;
+                $ordenes_facturas[$r]['contrib'] = $row['contrib'] ;
+                $ordenes_facturas[$r]['saldo'] = $row['saldo'] ;
+                $ordenes_facturas[$r]['iva'] = $row['iva'] ;
+                $r++;
             }
             $res = $ordenes_facturas;
 
