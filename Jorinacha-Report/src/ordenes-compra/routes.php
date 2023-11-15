@@ -22,6 +22,8 @@ if (isset($_POST)  ) {
     for ($i=0; $i < count($Factura_Ordenes) ; $i++) { 
 
         if ($Factura_Ordenes == 'IMPORTADOS') {
+
+            echo "<center><h3>No hay Información que Importar</h3></center>";
             break;
         }    
 
