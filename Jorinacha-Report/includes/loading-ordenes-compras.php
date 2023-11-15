@@ -20,7 +20,9 @@
   h1 {
     color: white;
   }
-
+  h3 {
+    color: white;
+  }
   img {
     width: 110px;
     border-radius: 100%;
@@ -65,7 +67,7 @@
     divs[i++].style.display = 'none';
     if (i == divs.length)
       clearInterval(interval);
-  }, 10);
+  }, 100);
 </script>
 
 

@@ -16,7 +16,7 @@ if (isset($_POST)  ) {
 
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
 
-
+    sleep(10);
     $r=0;
     for ($i=0; $i < count($Factura_Ordenes) ; $i++) { 
 
