@@ -28,10 +28,6 @@ if (isset($_POST)  ) {
         $ordenes_iva = $Factura_Ordenes[$r]['iva'];
 
         $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$ordenes_tot_neto,$ordenes_iva);
-        echo "Orden";
-        var_dump($orden);
-        echo "<br>";
-        echo "<br>";
         $Reng_Factura = Reng_Factura($tienda,$fecha1,$ordenes_fact_num );
 
         $f=0;
@@ -56,6 +52,10 @@ if (isset($_POST)  ) {
 
             $f++;
         }
+
+        $importado=Up_Factura_Ordenes($tienda,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
+
+        echo "<center><h3>$importado</h3></center>";
 
         $r++;
     }
