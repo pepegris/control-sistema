@@ -87,9 +87,16 @@ function Reng_Factura($sede,$fecha,$fact_num)
             if ($cliente =='S04' or $cliente =='S03' 
             or $cliente =='S02' or $cliente =='S01'  ) {
 
-                $sql = "SELECT not_ent.fact_num,reng_num,co_art, CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,CONVERT(numeric(10,2), reng_neto) AS reng_neto
+                $sql = "SELECT not_ent.fact_num,reng_num,reng_nde.co_art, 
+                CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,
+                CONVERT(numeric(10,2), reng_neto) AS reng_neto,
+                CONVERT(numeric(10,2),art.cos_pro_un) AS  cos_pro_un , 
+                CONVERT(numeric(10,2),art.ult_cos_un) AS  ult_cos_un, 
+                CONVERT(numeric(10,2),art.ult_cos_om) AS  ult_cos_om,
+                CONVERT(numeric(10,2),art.cos_pro_om) AS  cos_pro_om
                 FROM reng_nde
                 INNER JOIN not_ent  ON reng_nde.fact_num = not_ent.fact_num
+                inner join art on art.co_art = reng_nde.co_art
                 WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND not_ent.fact_num='$fact_num' AND anulada=0";
 
 
@@ -97,10 +104,17 @@ function Reng_Factura($sede,$fecha,$fact_num)
 
 
 
-            $sql = "SELECT factura.fact_num,reng_num,co_art, CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,CONVERT(numeric(10,2), reng_neto) AS reng_neto
-                    FROM reng_fac
-                    INNER JOIN factura  ON reng_fac.fact_num = factura.fact_num
-                    WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND factura.fact_num='$fact_num' AND anulada=0";
+            $sql = "SELECT factura.fact_num,reng_num,reng_fac.co_art, 
+            CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,
+            CONVERT(numeric(10,2), reng_neto) AS reng_neto,
+            CONVERT(numeric(10,2),art.cos_pro_un) AS  cos_pro_un , 
+            CONVERT(numeric(10,2),art.ult_cos_un) AS  ult_cos_un, 
+            CONVERT(numeric(10,2),art.ult_cos_om) AS  ult_cos_om,
+            CONVERT(numeric(10,2),art.cos_pro_om) AS  cos_pro_om
+            FROM reng_fac
+            INNER JOIN factura  ON reng_fac.fact_num = factura.fact_num
+            inner join art on art.co_art = reng_fac.co_art
+            WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND factura.fact_num='$fact_num' AND anulada=0";
 
         }
 
@@ -117,6 +131,10 @@ function Reng_Factura($sede,$fecha,$fact_num)
                 $Reng_Factura[$r]['total_art'] = $row['total_art'] ;
                 $Reng_Factura[$r]['prec_vta'] = $row['prec_vta'] ;
                 $Reng_Factura[$r]['reng_neto'] = $row['reng_neto'] ;
+                $Reng_Factura[$r]['cos_pro_un'] = $row['cos_pro_un'] ;
+                $Reng_Factura[$r]['ult_cos_un'] = $row['ult_cos_un'] ;
+                $Reng_Factura[$r]['ult_cos_om'] = $row['ult_cos_om'] ;
+                $Reng_Factura[$r]['cos_pro_om'] = $row['cos_pro_om'] ;
                 $r++;
             }
             $res = $Reng_Factura;
@@ -186,7 +204,11 @@ function Ordenes_Compra($sede,$fact_num,$contrib,$saldo,$tot_bruto,$tot_neto,$iv
 
 
 
-function Reng_Ordenes($sede)
+function Reng_Ordenes($sede,$fact_num,$reng_num,$co_art,$total_art,$prec_vta,$reng_neto,
+$cos_pro_un,
+$ult_cos_un,
+$ult_cos_om,
+$cos_pro_om)
 {
 
 
@@ -202,8 +224,15 @@ function Reng_Ordenes($sede)
 
 
 
-            $sql = "INSERT into reng_ord (fact_num,reng_num,tipo_doc,  co_alma,co_art,total_art,uni_venta)
-            values(789,1,'P',1, '2053603107928',2,'PAR')";
+            $sql = "INSERT into reng_ord 
+            (fact_num,reng_num,comentario,
+            uni_venta,total_uni, co_alma,tipo_imp,
+            co_art,total_art,pendiente,prec_vta,reng_neto,
+            cos_pro_un,ult_cos_un,ult_cos_om,cos_pro_om)
+            values('1$fact_num',$reng_num,'<Orden de Compra Importada>',
+            'PAR',1, 1,1,
+            $co_art,$total_art,$total_art,$prec_vta,$reng_neto,
+            $cos_pro_un,$ult_cos_un,$ult_cos_om,$cos_pro_om)";
 
 
             $consulta = sqlsrv_query($conn, $sql);
