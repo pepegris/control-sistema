@@ -10,12 +10,16 @@ if (isset($_POST)  ) {
 
     
     $tienda=$_POST['tienda'];
-    var_dump($tienda);
-
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
 
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
     var_dump($Factura_Ordenes);
+
+    
+    if ($Factura_Ordenes == null) {
+
+        echo "<center><h3>No hay Información que Importar</h3></center>";
+    }    
     
 
     $r=0;

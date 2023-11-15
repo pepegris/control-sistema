@@ -54,12 +54,15 @@ function Factura_Ordenes($sede,$fecha)
                 $r++;
             }
 
-            if ($consulta != null) {
-                $res = $ordenes_facturas;
-
-                return $res;
-            }else {
+            if ($consulta == null) {
+                
                 return "IMPORTADOS";
+
+            }else {
+
+                $res = $ordenes_facturas;
+                return $res;
+                
             }
 
 
