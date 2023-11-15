@@ -55,7 +55,7 @@ function Factura_Ordenes($sede,$fecha)
             }
 
             if ($consulta == null) {
-                
+
                 return "IMPORTADOS";
 
             }else {
@@ -196,13 +196,13 @@ function Ordenes_Compra($sede,$fact_num,$contrib,$saldo,$tot_bruto,$tot_neto,$iv
 
             $consulta = sqlsrv_query($conn, $sql);
 
-            if ($consulta != null) {
+            if ($consulta == null) {
 
-                $res = true;
+                $res = false;
                 return $res;
             }else{
 
-                $res = false;
+                $res = true;
                 return $res;
             }
 
@@ -253,15 +253,15 @@ $cos_pro_om)
 
             $consulta = sqlsrv_query($conn, $sql);
 
-            if ($consulta != null) {
-
-                $res = true;
-                return $res;
-
-            }else{
+            if ($consulta == null) {
 
                 $res = false;
                 return $res;
+
+            }else{
+                $res = true;
+                return $res;
+
 
             }
 
@@ -314,10 +314,12 @@ function Up_Factura_Ordenes($sede,$fecha,$fact_num,$status1,$status2)
             if ($status1==true && $status2==true) {
                 $consulta = sqlsrv_query($conn, $sql);
 
-                if ($consulta != null) {
-                    return "Fue importada con Excito la $documento a la Tienda $sede";
-                }else {
+                if ($consulta == null) {
+
                     return "No se Pudo Importar la $documento";
+                    
+                }else {
+                    return "Fue importada con Excito la $documento a la Tienda $sede";
                 }
 
                 

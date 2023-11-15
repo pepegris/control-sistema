@@ -13,10 +13,8 @@ if (isset($_POST)  ) {
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
 
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
-    var_dump($Factura_Ordenes);
-
-    
-    if ($Factura_Ordenes == null) {
+ 
+    if ($Factura_Ordenes == "IMPORTADOS") {
 
         echo "<center><h3>No hay Información que Importar</h3></center>";
     }    
@@ -25,11 +23,6 @@ if (isset($_POST)  ) {
     $r=0;
     for ($i=0; $i < count($Factura_Ordenes) ; $i++) { 
 
-        if ($Factura_Ordenes == 'IMPORTADOS') {
-
-            echo "<center><h3>No hay Información que Importar</h3></center>";
-            break;
-        }    
 
         $ordenes_fact_num = $Factura_Ordenes[$r]['fact_num'];
         $ordenes_contrib = $Factura_Ordenes[$r]['contrib'];
