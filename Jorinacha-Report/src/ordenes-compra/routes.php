@@ -27,8 +27,9 @@ if (isset($_POST)  ) {
         $ordenes_tot_neto = $Factura_Ordenes[$r]['tot_neto'];
         $ordenes_iva = $Factura_Ordenes[$r]['iva'];
         echo "ordenes_fact_num";
-        var_dump($ordenes_fact_num[$r]['fact_num']);
+        var_dump($Factura_Ordenes[$r]['fact_num']);
         echo "<br>";
+        var_dump($ordenes_fact_num);
         echo "<br>";
         $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$$ordenes_tot_neto,$ordenes_iva);
         echo "Orden";
