@@ -59,6 +59,7 @@ include '../../services/adm/ordenes-compra/ordenes-compra.php';
         <input type="date" name="fecha1" id="" required>
       </div>
       
+      
 
       <br>
       <center><button type="submit" class="btn btn-primary">Ingresar</button></center>

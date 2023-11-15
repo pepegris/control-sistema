@@ -3,12 +3,7 @@ require '../../includes/log.php';
 include '../../includes/loading-ordenes-compras.php';
 include '../../services/adm/ordenes-compra/ordenes-compra.php';
 include '../../services/mysql.php';
-?>
-<script type="text/javascript">
-setTimeout( console.log("Hola Mundo"), 2000);
 
-</script>
-<?php
 if (isset($_POST)  ) {
 
 
@@ -64,7 +59,11 @@ if (isset($_POST)  ) {
         $r++;
     }
 
-
+    if ($orden==true && $reng_orden == true ) {
+        echo "<center><a href='form.php' class='btn btn-success'>Volver</a></center>";
+    }else {
+        echo "<center><a href='form.php'' class='btn btn-danger'>Volver</a></center>";
+    }
 
 
     
