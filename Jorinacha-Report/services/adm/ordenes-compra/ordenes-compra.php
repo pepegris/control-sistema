@@ -88,8 +88,8 @@ function Reng_Factura($sede,$fecha,$fact_num)
             or $cliente =='S02' or $cliente =='S01'  ) {
 
                 $sql = "SELECT not_ent.fact_num,reng_num,reng_nde.co_art, 
-                CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,
-                CONVERT(numeric(10,2), reng_neto) AS reng_neto,
+                CONVERT(numeric(10,0), reng_nde.total_art) AS total_art, CONVERT(numeric(10,2), reng_nde.prec_vta) AS prec_vta,
+                CONVERT(numeric(10,2), reng_nde.reng_neto) AS reng_neto,
                 CONVERT(numeric(10,2),art.cos_pro_un) AS  cos_pro_un , 
                 CONVERT(numeric(10,2),art.ult_cos_un) AS  ult_cos_un, 
                 CONVERT(numeric(10,2),art.ult_cos_om) AS  ult_cos_om,
@@ -105,8 +105,8 @@ function Reng_Factura($sede,$fecha,$fact_num)
 
 
             $sql = "SELECT factura.fact_num,reng_num,reng_fac.co_art, 
-            CONVERT(numeric(10,0), total_art) AS total_art, CONVERT(numeric(10,2), prec_vta) AS prec_vta,
-            CONVERT(numeric(10,2), reng_neto) AS reng_neto,
+            CONVERT(numeric(10,0), reng_fac.total_art) AS total_art, CONVERT(numeric(10,2), reng_fac.prec_vta) AS prec_vta,
+            CONVERT(numeric(10,2), reng_fac.reng_neto) AS reng_neto,
             CONVERT(numeric(10,2),art.cos_pro_un) AS  cos_pro_un , 
             CONVERT(numeric(10,2),art.ult_cos_un) AS  ult_cos_un, 
             CONVERT(numeric(10,2),art.ult_cos_om) AS  ult_cos_om,
@@ -186,10 +186,16 @@ function Ordenes_Compra($sede,$fact_num,$contrib,$saldo,$tot_bruto,$tot_neto,$iv
 
             $consulta = sqlsrv_query($conn, $sql);
 
+            if ($consulta != null) {
 
-            $res = $consulta;
+                $res = true;
+                return $res;
+            }else{
 
-            return $res;
+                $res = false;
+                return $res;
+            }
+
         } catch (\Throwable $th) {
 
             throw $th;
@@ -227,19 +233,28 @@ $cos_pro_om)
             $sql = "INSERT into reng_ord 
             (fact_num,reng_num,comentario,
             uni_venta,total_uni, co_alma,tipo_imp,
-            co_art,total_art,pendiente,prec_vta,reng_neto,
+            co_art,total_art,pendiente,prec_vta,prec_vta2,reng_neto,
             cos_pro_un,ult_cos_un,ult_cos_om,cos_pro_om)
             values('1$fact_num',$reng_num,'<Orden de Compra Importada>',
             'PAR',1, 1,1,
-            $co_art,$total_art,$total_art,$prec_vta,$reng_neto,
+            $co_art,$total_art,$total_art,$prec_vta,$prec_vta,$reng_neto,
             $cos_pro_un,$ult_cos_un,$ult_cos_om,$cos_pro_om)";
 
 
             $consulta = sqlsrv_query($conn, $sql);
 
-            $res = $consulta;
+            if ($consulta != null) {
 
-            return $res;
+                $res = true;
+                return $res;
+                
+            }else{
+
+                $res = false;
+                return $res;
+
+            }
+
         } catch (\Throwable $th) {
 
             throw $th;
