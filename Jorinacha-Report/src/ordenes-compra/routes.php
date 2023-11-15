@@ -33,7 +33,7 @@ if (isset($_POST)  ) {
         echo "<br>";
         $Reng_Factura = Reng_Factura($tienda,$fecha1,$Factura_Ordenes[$r]['fact_num']);
         echo "Reng_Factura";
-        var_dump($Reng_Factura[$r]['fact_num']);
+        var_dump($Reng_Factura);
         echo "<br>";
         echo "<br>";
 
