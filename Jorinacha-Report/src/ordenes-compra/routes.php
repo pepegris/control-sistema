@@ -14,7 +14,7 @@ if (isset($_POST)  ) {
 
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
  
-    if ($Factura_Ordenes == "IMPORTADOS") {
+    if ($Factura_Ordenes == null) {
 
         echo "<center><h3>No hay Información que Importar</h3></center>";
     }    
