@@ -29,7 +29,7 @@ function Factura_Ordenes($sede,$fecha)
                 $sql = "SELECT fact_num,contrib,
                 CONVERT(numeric(10,2), saldo) AS saldo ,CONVERT(numeric(10,2), tot_bruto)AS tot_bruto ,CONVERT(numeric(10,2), tot_neto)AS tot_neto ,CONVERT(numeric(10,2), iva)   AS iva
                 FROM not_ent 
-                WHERE co_cli='$cliente' AND FEC_EMIS='$fecha'  AND anulada=0";
+                WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND campo7 <>'IMPORTADO'  AND anulada=0";
 
 
             }else{
@@ -37,7 +37,7 @@ function Factura_Ordenes($sede,$fecha)
                 $sql = "SELECT fact_num,contrib,
                 CONVERT(numeric(10,2), saldo) AS saldo ,CONVERT(numeric(10,2), tot_bruto)AS tot_bruto ,CONVERT(numeric(10,2), tot_neto)AS tot_neto ,CONVERT(numeric(10,2), iva)   AS iva
                 FROM factura 
-                WHERE co_cli='$cliente' AND FEC_EMIS = '$fecha' AND anulada=0";
+                WHERE co_cli='$cliente' AND FEC_EMIS = '$fecha' AND  campo7 <>'IMPORTADO' AND anulada=0";
 
             }
 
@@ -53,9 +53,16 @@ function Factura_Ordenes($sede,$fecha)
                 $ordenes_facturas[$r]['iva'] = $row['iva'] ;
                 $r++;
             }
-            $res = $ordenes_facturas;
 
-            return $res;
+            if ($consulta != null) {
+                $res = $ordenes_facturas;
+
+                return $res;
+            }else {
+                return "IMPORTADOS";
+            }
+
+
         } catch (\Throwable $th) {
 
             throw $th;

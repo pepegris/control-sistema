@@ -15,10 +15,15 @@ if (isset($_POST)  ) {
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
 
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
-
+    var_dump($Factura_Ordenes);
     
+
     $r=0;
     for ($i=0; $i < count($Factura_Ordenes) ; $i++) { 
+
+        if ($Factura_Ordenes == 'IMPORTADOS') {
+            break;
+        }    
 
         $ordenes_fact_num = $Factura_Ordenes[$r]['fact_num'];
         $ordenes_contrib = $Factura_Ordenes[$r]['contrib'];
