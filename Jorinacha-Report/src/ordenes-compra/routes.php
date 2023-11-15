@@ -1,6 +1,6 @@
 <?php
 require '../../includes/log.php';
-#include '../../includes/loading.php';
+include '../../includes/loading-ordenes-compras.php';
 include '../../services/adm/ordenes-compra/ordenes-compra.php';
 include '../../services/mysql.php';
 
