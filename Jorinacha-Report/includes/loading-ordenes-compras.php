@@ -67,7 +67,7 @@
     divs[i++].style.display = 'none';
     if (i == divs.length)
       clearInterval(interval);
-  }, 100);
+  }, 150);
 </script>
 
 
