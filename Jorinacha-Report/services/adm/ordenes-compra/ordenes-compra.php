@@ -160,7 +160,7 @@ function Ordenes_Compra($sede,$fact_num,$contrib,$saldo,$tot_bruto,$tot_neto,$iv
             ,co_sucu,forma_pag,moneda,co_cli,
             saldo,tot_bruto,tot_neto,iva,
             tasag,tasag10,co_us_in,co_us_mo,dis_cen)
-            values('9$fact_num'',1,0,'Orden de Compra Importada','Factura $fact_num',
+            values('9$fact_num',1,0,'<Orden de Compra Importada>','Factura $fact_num',
             $saldo,$tot_bruto,$tot_neto,$iva ,
             1,'CRED','BSD','002',
             16,12,'001','001','<IVA> <1>$iva/$tot_bruto/$dif</1>  </IVA> ')";
