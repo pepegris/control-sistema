@@ -48,6 +48,8 @@ function Factura_Ordenes($sede,$fecha)
                 $ordenes_facturas[$r]['fact_num'] = $row['fact_num'] ;
                 $ordenes_facturas[$r]['contrib'] = $row['contrib'] ;
                 $ordenes_facturas[$r]['saldo'] = $row['saldo'] ;
+                $ordenes_facturas[$r]['tot_bruto'] = $row['tot_bruto'] ;
+                $ordenes_facturas[$r]['tot_neto'] = $row['tot_neto'] ;
                 $ordenes_facturas[$r]['iva'] = $row['iva'] ;
                 $r++;
             }
@@ -137,7 +139,8 @@ function Reng_Factura($sede,$fecha,$fact_num)
 #########################################################################################################################################################
 
 
-function Ordenes_Compra($sede)
+
+function Ordenes_Compra($sede,$fact_num,$contrib,$saldo,$tot_bruto,$tot_neto,$iva )
 {
 
 
@@ -148,7 +151,7 @@ function Ordenes_Compra($sede)
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "DEV_EMP", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "DEV_EMP2", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
@@ -157,25 +160,16 @@ function Ordenes_Compra($sede)
             ,co_sucu,forma_pag,moneda,co_cli,
             saldo,tot_bruto,tot_neto,iva
             tasag,tasag10,co_us_in,co_us_mo,dis_cen)
-            values(7891,1,0,'prueba','descripcion',
-            
+            values('9$fact_num'',1,0,'Orden de Compra Importada','Factura $fact_num',
+            $saldo,$tot_bruto,$tot_neto,$iva ,
             1,'CRED','BSD','002',
-            16,12,'001','001','<IVA> <1>$iva/$tot_bruto/$dif</1>  </IVA> ')
-            ";
+            16,12,'001','001','<IVA> <1>$iva/$tot_bruto/$dif</1>  </IVA> ')";
 
 
             $consulta = sqlsrv_query($conn, $sql);
 
-            $r=0;
-            while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $Ordenes_Compra[$r]['reng_num'] = $row['reng_num'] ;
-                $Ordenes_Compra[$r]['total_art'] = $row['total_art'] ;
-                $Ordenes_Compra[$r]['prec_vta'] = $row['prec_vta'] ;
-                $Ordenes_Compra[$r]['reng_neto'] = $row['reng_neto'] ;
-                $r++;
-            }
-            $res = $Ordenes_Compra;
+            $res = $consulta;
 
             return $res;
         } catch (\Throwable $th) {
@@ -203,7 +197,7 @@ function Reng_Ordenes($sede)
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "DEV_EMP", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "DEV_EMP2", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
@@ -214,12 +208,7 @@ function Reng_Ordenes($sede)
 
             $consulta = sqlsrv_query($conn, $sql);
 
-            while ($row = sqlsrv_fetch_array($consulta)) {
-
-                $fecha['fec_emis'] = $row['fec_emis'];
-                break;
-            }
-            $res = $fecha;
+            $res = $consulta;
 
             return $res;
         } catch (\Throwable $th) {
