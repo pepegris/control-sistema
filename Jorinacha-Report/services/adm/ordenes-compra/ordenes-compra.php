@@ -157,12 +157,12 @@ function Ordenes_Compra($sede,$fact_num,$contrib,$saldo,$tot_bruto,$tot_neto,$iv
 
             $dif=$tot_bruto/$iva;
             $sql = "INSERT into ordenes (fact_num,contrib,status,comentario,descrip
-            ,co_sucu,forma_pag,moneda,co_cli,
+            ,co_sucu,forma_pag,moneda,co_cli,co_ven,co_tran,
             saldo,tot_bruto,tot_neto,iva,
             tasag,tasag10,co_us_in,co_us_mo,dis_cen)
-            values('9$fact_num',1,0,'<Orden de Compra Importada>','Factura $fact_num',
+            values('1$fact_num',1,0,'<Orden de Compra Importada>','Factura $fact_num',
+            1,'CRED','BSD','002',127,1,
             $saldo,$tot_bruto,$tot_neto,$iva ,
-            1,'CRED','BSD','002',
             16,12,'001','001','<IVA> <1>$iva/$tot_bruto/$dif</1>  </IVA> ')";
 
 
