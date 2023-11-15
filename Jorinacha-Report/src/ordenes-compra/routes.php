@@ -10,6 +10,7 @@ if (isset($_POST)  ) {
 
     
     $tienda=$_POST['tienda'];
+    var_dump($tienda);
 
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
 
