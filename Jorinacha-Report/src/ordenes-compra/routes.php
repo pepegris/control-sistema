@@ -22,11 +22,20 @@ if (isset($_POST)  ) {
         $ordenes_fact_num = $Factura_Ordenes[$r]['fact_num'];
         $ordenes_contrib = $Factura_Ordenes[$r]['contrib'];
         $ordenes_saldo = $Factura_Ordenes[$r]['saldo'];
+        $ordenes_tot_bruto = $Factura_Ordenes[$r]['tot_bruto'];
+        $ordenes_tot_neto = $Factura_Ordenes[$r]['tot_neto'];
         $ordenes_iva = $Factura_Ordenes[$r]['iva'];
         
-        $orden=Ordenes_Compra();
+        $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$$ordenes_tot_neto,$ordenes_iva);
+        echo "Orden";
+        var_dump($orden);
+        echo "<br>";
+        echo "<br>";
         $Reng_Factura = Reng_Factura($tienda,$fecha1,$Factura_Ordenes[$r]['fact_num']);
-        
+        echo "Reng_Factura";
+        var_dump($Reng_Factura);
+        echo "<br>";
+        echo "<br>";
 
         for ($e=0; $e < count($Reng_Factura); $e++) { 
             # code...
