@@ -5,9 +5,7 @@ include '../../services/adm/ordenes-compra/ordenes-compra.php';
 include '../../services/mysql.php';
 ?>
 <script type="text/javascript">
-setTimeout(function(){
-    console.log("Hola Mundo");
-}, 2000);
+setTimeout( console.log("Hola Mundo"), 2000);
 
 </script>
 <?php
