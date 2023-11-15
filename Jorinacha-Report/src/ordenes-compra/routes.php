@@ -29,14 +29,13 @@ if (isset($_POST)  ) {
         echo "ordenes_fact_num";
         var_dump($Factura_Ordenes[$r]['fact_num']);
         echo "<br>";
-        var_dump($ordenes_fact_num);
         echo "<br>";
-        $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$$ordenes_tot_neto,$ordenes_iva);
+        $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$ordenes_tot_neto,$ordenes_iva);
         echo "Orden";
         var_dump($orden);
         echo "<br>";
         echo "<br>";
-        $Reng_Factura = Reng_Factura($tienda,$fecha1,$Factura_Ordenes[$r]['fact_num']);
+        $Reng_Factura = Reng_Factura($tienda,$fecha1,$ordenes_fact_num );
         echo "Reng_Factura";
         var_dump($Reng_Factura[$r]['fact_num']);
         echo "<br>";
