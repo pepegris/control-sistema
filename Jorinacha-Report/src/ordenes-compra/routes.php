@@ -3,7 +3,14 @@ require '../../includes/log.php';
 include '../../includes/loading-ordenes-compras.php';
 include '../../services/adm/ordenes-compra/ordenes-compra.php';
 include '../../services/mysql.php';
+?>
+<script type="text/javascript">
+setTimeout(function(){
+    console.log("Hola Mundo");
+}, 2000);
 
+</script>
+<?php
 if (isset($_POST)  ) {
 
 
@@ -54,7 +61,6 @@ if (isset($_POST)  ) {
         }
 
         $importado=Up_Factura_Ordenes($tienda,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
-        sleep(1);
         echo "<center><h3>$importado</h3></center>";
 
         $r++;
@@ -70,3 +76,4 @@ if (isset($_POST)  ) {
     header('refresh:1;url= form.php');
     exit;
 }
+?>
