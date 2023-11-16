@@ -19,7 +19,7 @@ function Factura_Ordenes($sede,$fecha)
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "DEV_EMP", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
@@ -89,7 +89,7 @@ function Reng_Factura($sede,$fecha,$fact_num)
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "DEV_EMP", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
@@ -179,7 +179,7 @@ function Ordenes_Compra($sede,$fact_num,$contrib,$saldo,$tot_bruto,$tot_neto,$iv
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "DEV_EMP2", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
@@ -235,7 +235,7 @@ $cos_pro_om)
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "DEV_EMP2", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
@@ -296,7 +296,7 @@ function Up_Factura_Ordenes($sede,$fecha,$fact_num,$status1,$status2)
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "DEV_EMP", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
