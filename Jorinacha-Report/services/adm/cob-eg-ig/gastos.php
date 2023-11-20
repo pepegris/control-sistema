@@ -42,7 +42,7 @@ function Database2($sede)
 
     $bd = array(
         "Previa Shop" => 'C_PREVIA',
-        "Jorinacha" => 'C_JORINA',
+        "Inv Jorinacha" => 'C_JORINA',
         "Sucursal Caracas I" => 'C_CARACAS1',
         "Sucursal Caracas II" => 'C_CARACAS2',
         "Sucursal Cagua" => 'C_CAGUA',
