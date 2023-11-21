@@ -245,7 +245,7 @@ $cos_pro_om)
             uni_venta,total_uni, co_alma,tipo_imp,
             co_art,total_art,pendiente,prec_vta,prec_vta2,reng_neto,
             cos_pro_un,ult_cos_un,ult_cos_om,cos_pro_om)
-            values('1$fact_num',$reng_num,'<Orden de Compra Importada>',
+            values('10$fact_num',$reng_num,'<Orden de Compra Importada>',
             'PAR',1, 1,1,
             $co_art,$total_art,$total_art,$prec_vta,$prec_vta,$reng_neto,
             $cos_pro_un,$ult_cos_un,$ult_cos_om,$cos_pro_om)";
