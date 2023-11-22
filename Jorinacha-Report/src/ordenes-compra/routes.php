@@ -9,10 +9,11 @@ if (isset($_POST)  ) {
 
 
     
-    $sedes_ar =$_POST['tienda'];
+    $tienda=$_POST['tienda'];
+    var_dump($tienda);
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
 
-    $Factura_Ordenes = Factura_Ordenes($sedes_ar ,$fecha1);
+    $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
  
     if ($Factura_Ordenes == null) {
 
@@ -31,8 +32,8 @@ if (isset($_POST)  ) {
         $ordenes_tot_neto = $Factura_Ordenes[$r]['tot_neto'];
         $ordenes_iva = $Factura_Ordenes[$r]['iva'];
 
-        $orden=Ordenes_Compra($sedes_ar ,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$ordenes_tot_neto,$ordenes_iva);
-        $Reng_Factura = Reng_Factura($sedes_ar ,$fecha1,$ordenes_fact_num );
+        $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$ordenes_tot_neto,$ordenes_iva);
+        $Reng_Factura = Reng_Factura($tienda,$fecha1,$ordenes_fact_num );
 
         $f=0;
         for ($e=0; $e < count($Reng_Factura); $e++) { 
@@ -48,7 +49,7 @@ if (isset($_POST)  ) {
             $Reng_Factura_ult_cos_om= $Reng_Factura[$f]['ult_cos_om'] ;
             $Reng_Factura_cos_pro_om= $Reng_Factura[$f]['cos_pro_om'] ;
 
-            $reng_orden= Reng_Ordenes($sedes_ar ,$Reng_Factura_fact_num,$Reng_Factura_reng_num,$Reng_Factura_co_art,$Reng_Factura_total_art,$Reng_Factura_prec_vta,$Reng_Factura_reng_neto,
+            $reng_orden= Reng_Ordenes($tienda,$Reng_Factura_fact_num,$Reng_Factura_reng_num,$Reng_Factura_co_art,$Reng_Factura_total_art,$Reng_Factura_prec_vta,$Reng_Factura_reng_neto,
             $Reng_Factura_cos_pro_un,
             $Reng_Factura_ult_cos_un,
             $Reng_Factura_ult_cos_om,
@@ -57,7 +58,7 @@ if (isset($_POST)  ) {
             $f++;
         }
 
-        $importado=Up_Factura_Ordenes($sedes_ar ,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
+        $importado=Up_Factura_Ordenes($tienda,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
         echo "<center><h3>$importado</h3></center>";
 
         $r++;
