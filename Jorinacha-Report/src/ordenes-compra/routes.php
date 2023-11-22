@@ -15,7 +15,7 @@ if (isset($_POST)  ) {
 
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
 
-    var_dump($Factura_Ordenes);
+
  
     if ($Factura_Ordenes == null) {
 
@@ -34,7 +34,11 @@ if (isset($_POST)  ) {
         $ordenes_tot_neto = $Factura_Ordenes[$r]['tot_neto'];
         $ordenes_iva = $Factura_Ordenes[$r]['iva'];
 
+        var_dump($ordenes_fact_num);
+        echo "<br>";
+
         $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$ordenes_tot_neto,$ordenes_iva);
+        var_dump($orden);
         $Reng_Factura = Reng_Factura($tienda,$fecha1,$ordenes_fact_num );
 
         $f=0;
