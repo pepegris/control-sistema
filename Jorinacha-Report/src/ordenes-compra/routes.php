@@ -14,6 +14,8 @@ if (isset($_POST)  ) {
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
 
     $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
+
+    var_dump($Factura_Ordenes);
  
     if ($Factura_Ordenes == null) {
 
