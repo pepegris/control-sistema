@@ -184,14 +184,26 @@ function Ordenes_Compra($sede,$fact_num,$contrib,$saldo,$tot_bruto,$tot_neto,$iv
 
 
             $dif=$tot_bruto/16;
-            $sql = "INSERT into ordenes (fact_num,contrib,status,comentario,descrip
-            ,co_sucu,forma_pag,moneda,co_cli,co_ven,co_tran,
-            saldo,tot_bruto,tot_neto,iva,
-            tasag,tasag10,co_us_in,co_us_mo,dis_cen)
-            values('10$fact_num',$contrib,0,'<Orden de Compra Importada>','Factura $fact_num',
-            1,'CRED','BSD','002',127,1,
-            $saldo,$tot_bruto,$tot_neto,$iva ,
-            16,12,'001','001','<IVA> <1>16/$tot_bruto/$dif</1>  </IVA> ')";
+            if ($database=='CAGUA') {
+                $sql = "INSERT into ordenes (fact_num,contrib,status,comentario,descrip
+                ,co_sucu,forma_pag,moneda,co_cli,co_ven,co_tran,
+                saldo,tot_bruto,tot_neto,iva,
+                tasag,tasag10,co_us_in,co_us_mo,dis_cen)
+                values('10$fact_num',$contrib,0,'<Orden de Compra Importada>','Factura $fact_num',
+                1,'CRED','BOD','002',127,1,
+                $saldo,$tot_bruto,$tot_neto,$iva ,
+                16,12,'001','001','<IVA> <1>16/$tot_bruto/$dif</1>  </IVA> ')";
+            }else{
+                $sql = "INSERT into ordenes (fact_num,contrib,status,comentario,descrip
+                ,co_sucu,forma_pag,moneda,co_cli,co_ven,co_tran,
+                saldo,tot_bruto,tot_neto,iva,
+                tasag,tasag10,co_us_in,co_us_mo,dis_cen)
+                values('10$fact_num',$contrib,0,'<Orden de Compra Importada>','Factura $fact_num',
+                1,'CRED','BSD','002',127,1,
+                $saldo,$tot_bruto,$tot_neto,$iva ,
+                16,12,'001','001','<IVA> <1>16/$tot_bruto/$dif</1>  </IVA> ')";
+            }
+    
 
 
             $consulta = sqlsrv_query($conn, $sql);
