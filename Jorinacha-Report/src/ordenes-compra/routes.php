@@ -37,7 +37,9 @@ if (isset($_POST)  ) {
         $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$ordenes_tot_neto,$ordenes_iva);
         $Reng_Factura = Reng_Factura($tienda,$fecha1,$ordenes_fact_num );
 
+        var_dump($ordenes_fact_num);echo "/////";
         var_dump(count($Reng_Factura));
+        echo "<br>";
 
         $f=0;
         for ($e=0; $e < count($Reng_Factura); $e++) { 
