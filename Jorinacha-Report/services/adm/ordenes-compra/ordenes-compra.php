@@ -315,11 +315,11 @@ function Up_Factura_Ordenes($sede,$fecha,$fact_num,$status1,$status2)
             if ($cliente =='S04' or $cliente =='S03' 
                 or $cliente =='S02' or $cliente =='S01'  ) {
 
-                $sql = "UPDATE not_ent SET campo7='IMPORTADO' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
+                $sql = "UPDATE not_ent SET campo1='IMPORTADO' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
                 $documento="Nota de Entrega $fact_num";        
             }else{
 
-                $sql = "UPDATE factura SET campo7='IMPORTADO' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
+                $sql = "UPDATE factura SET campo1='IMPORTADO' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
                 $documento="Factura $fact_num"; 
             }
 
