@@ -179,7 +179,7 @@ function Ordenes_Compra($sede,$fact_num,$contrib,$saldo,$tot_bruto,$tot_neto,$iv
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "DEV_EMP2", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
@@ -247,7 +247,7 @@ $cos_pro_om)
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "DEV_EMP2", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
