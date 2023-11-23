@@ -63,10 +63,10 @@ if (isset($_POST)  ) {
 
             $f++;
         }
-/* 
+ 
         $importado=Up_Factura_Ordenes($tienda,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
         echo "<center><h3>$importado</h3></center>";
- */
+ 
         $r++;
     }
 
