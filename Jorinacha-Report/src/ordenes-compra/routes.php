@@ -40,21 +40,22 @@ if (isset($_POST)  ) {
     
         echo "<center><h3>$ordenes_fact_num////////</h3></center>";
         var_dump(count($Reng_Factura));
+        var_dump($Reng_Factura['reng_num']);
         echo "<br>";
 
-        $f=0;
+
         for ($e=0; $e < count($Reng_Factura); $e++) { 
 
-            $Reng_Factura_fact_num = $Reng_Factura[$f]['fact_num'] ;
-            $Reng_Factura_reng_num = $Reng_Factura[$f]['reng_num'] ;
-            $Reng_Factura_co_art = $Reng_Factura[$f]['co_art'] ;
-            $Reng_Factura_total_art = $Reng_Factura[$f]['total_art'] ;
-            $Reng_Factura_prec_vta = $Reng_Factura[$f]['prec_vta'] ;
-            $Reng_Factura_reng_neto = $Reng_Factura[$f]['reng_neto'] ;
-            $Reng_Factura_cos_pro_un= $Reng_Factura[$f]['cos_pro_un'] ;
-            $Reng_Factura_ult_cos_un= $Reng_Factura[$f]['ult_cos_un'] ;
-            $Reng_Factura_ult_cos_om= $Reng_Factura[$f]['ult_cos_om'] ;
-            $Reng_Factura_cos_pro_om= $Reng_Factura[$f]['cos_pro_om'] ;
+            $Reng_Factura_fact_num = $Reng_Factura[$e]['fact_num'] ;
+            $Reng_Factura_reng_num = $Reng_Factura[$e]['reng_num'] ;
+            $Reng_Factura_co_art = $Reng_Factura[$e]['co_art'] ;
+            $Reng_Factura_total_art = $Reng_Factura[$e]['total_art'] ;
+            $Reng_Factura_prec_vta = $Reng_Factura[$e]['prec_vta'] ;
+            $Reng_Factura_reng_neto = $Reng_Factura[$e]['reng_neto'] ;
+            $Reng_Factura_cos_pro_un= $Reng_Factura[$e]['cos_pro_un'] ;
+            $Reng_Factura_ult_cos_un= $Reng_Factura[$e]['ult_cos_un'] ;
+            $Reng_Factura_ult_cos_om= $Reng_Factura[$e]['ult_cos_om'] ;
+            $Reng_Factura_cos_pro_om= $Reng_Factura[$e]['cos_pro_om'] ;
 
             $reng_orden= Reng_Ordenes($tienda,$Reng_Factura_fact_num,$Reng_Factura_reng_num,$Reng_Factura_co_art,$Reng_Factura_total_art,$Reng_Factura_prec_vta,$Reng_Factura_reng_neto,
             $Reng_Factura_cos_pro_un,
@@ -62,7 +63,6 @@ if (isset($_POST)  ) {
             $Reng_Factura_ult_cos_om,
             $Reng_Factura_cos_pro_om);
 
-            $f++;
         }
  
          $importado=Up_Factura_Ordenes($tienda,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
