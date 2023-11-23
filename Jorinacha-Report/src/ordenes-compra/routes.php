@@ -37,8 +37,9 @@ if (isset($_POST)  ) {
         $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$ordenes_tot_neto,$ordenes_iva);
         $Reng_Factura = Reng_Factura($tienda,$fecha1,$ordenes_fact_num );
 
-        $count=count($Reng_Factura);
-        echo "<center><h3>$ordenes_fact_num////////$count</h3></center>";
+    
+        echo "<center><h3>$ordenes_fact_num////////</h3></center>";
+        var_dump(count($Reng_Factura));
         echo "<br>";
 
         $f=0;
@@ -65,7 +66,7 @@ if (isset($_POST)  ) {
         }
  
          $importado=Up_Factura_Ordenes($tienda,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
-     /*   echo "<center><h3>$importado</h3></center>";
+  /*      echo "<center><h3>$importado</h3></center>";
   */
         $r++;
     }
