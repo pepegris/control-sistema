@@ -259,7 +259,7 @@ $cos_pro_om)
             cos_pro_un,ult_cos_un,ult_cos_om,cos_pro_om)
             values('10$fact_num',$reng_num,'<Orden de Compra Importada>',
             'PAR',1, 1,1,
-            $co_art,$total_art,$total_art,$prec_vta,$prec_vta,$reng_neto,
+            '$co_art',$total_art,$total_art,$prec_vta,$prec_vta,$reng_neto,
             $cos_pro_un,$ult_cos_un,$ult_cos_om,$cos_pro_om)";
 
 
