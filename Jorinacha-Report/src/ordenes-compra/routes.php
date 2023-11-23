@@ -62,6 +62,7 @@ if (isset($_POST)  ) {
             $Reng_Factura_ult_cos_un,
             $Reng_Factura_ult_cos_om,
             $Reng_Factura_cos_pro_om);
+            var_dump($reng_orden);
 
         }
  
