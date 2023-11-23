@@ -179,7 +179,7 @@ function Ordenes_Compra($sede,$fact_num,$contrib,$saldo,$tot_bruto,$tot_neto,$iv
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "DEV_EMP2", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
@@ -247,7 +247,7 @@ $cos_pro_om)
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "DEV_EMP2", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
@@ -315,11 +315,11 @@ function Up_Factura_Ordenes($sede,$fecha,$fact_num,$status1,$status2)
             if ($cliente =='S04' or $cliente =='S03' 
                 or $cliente =='S02' or $cliente =='S01'  ) {
 
-                $sql = "UPDATE not_ent SET campo1='IMPORTADO' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
+                $sql = "UPDATE not_ent SET campo7='IMPORTADO' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
                 $documento="Nota de Entrega $fact_num";        
             }else{
 
-                $sql = "UPDATE factura SET campo1='IMPORTADO' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
+                $sql = "UPDATE factura SET campo7='IMPORTADO' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
                 $documento="Factura $fact_num"; 
             }
 

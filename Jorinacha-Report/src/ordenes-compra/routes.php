@@ -38,10 +38,6 @@ if (isset($_POST)  ) {
         $Reng_Factura = Reng_Factura($tienda,$fecha1,$ordenes_fact_num );
 
     
-        echo "<center><h3>$ordenes_fact_num////////</h3></center>";
-        var_dump(count($Reng_Factura));
-        var_dump($Reng_Factura['reng_num']);
-        echo "<br>";
 
 
         for ($e=0; $e < count($Reng_Factura); $e++) { 
@@ -62,13 +58,13 @@ if (isset($_POST)  ) {
             $Reng_Factura_ult_cos_un,
             $Reng_Factura_ult_cos_om,
             $Reng_Factura_cos_pro_om);
-            var_dump($reng_orden);
+
 
         }
  
          $importado=Up_Factura_Ordenes($tienda,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
-  /*      echo "<center><h3>$importado</h3></center>";
-  */
+            echo "<center><h3>$importado</h3></center>";
+  
         $r++;
     }
 
