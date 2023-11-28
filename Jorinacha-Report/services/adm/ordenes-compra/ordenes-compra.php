@@ -331,7 +331,7 @@ function Up_Factura_Ordenes($sede,$fecha,$fact_num,$status1,$status2)
                     return "No se Pudo Importar la $documento";
                     
                 }else {
-                    return "Fue importada con Excito la $documento a la Tienda $sede";
+                    return "Fue importada con Éxito la $documento a la Tienda $sede";
                 }
 
                 
