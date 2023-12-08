@@ -29,7 +29,7 @@ function Factura_Ordenes($sede,$fecha)
                 $sql = "SELECT fact_num,contrib,
                 CONVERT(numeric(10,2), saldo) AS saldo ,CONVERT(numeric(10,2), tot_bruto)AS tot_bruto ,CONVERT(numeric(10,2), tot_neto)AS tot_neto ,CONVERT(numeric(10,2), iva)   AS iva
                 FROM not_ent 
-                WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND campo7 <>'IMPORTADO'  AND anulada=0";
+                WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND campo7 <>'IMPORTADOp'  AND anulada=0";
 
 
             }else{
@@ -37,7 +37,7 @@ function Factura_Ordenes($sede,$fecha)
                 $sql = "SELECT fact_num,contrib,
                 CONVERT(numeric(10,2), saldo) AS saldo ,CONVERT(numeric(10,2), tot_bruto)AS tot_bruto ,CONVERT(numeric(10,2), tot_neto)AS tot_neto ,CONVERT(numeric(10,2), iva)   AS iva
                 FROM factura 
-                WHERE co_cli='$cliente' AND FEC_EMIS = '$fecha' AND  campo7 <>'IMPORTADO' AND anulada=0";
+                WHERE co_cli='$cliente' AND FEC_EMIS = '$fecha' AND  campo7 <>'IMPORTADOp' AND anulada=0";
 
             }
 
@@ -374,11 +374,11 @@ function Up_Factura_Ordenes($sede,$fecha,$fact_num,$status1,$status2)
             if ($cliente =='S04' or $cliente =='S03' 
                 or $cliente =='S02' or $cliente =='S01'  ) {
 
-                $sql = "UPDATE not_ent SET campo7='IMPORTADOp' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
+                $sql = "UPDATE not_ent SET campo7='IMPORTADO' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
                 $documento="Nota de Entrega $fact_num";        
             }else{
 
-                $sql = "UPDATE factura SET campo7='IMPORTADOp' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
+                $sql = "UPDATE factura SET campo7='IMPORTADO' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
                 $documento="Factura $fact_num"; 
             }
 
