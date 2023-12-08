@@ -63,7 +63,7 @@ if (isset($_POST)  ) {
 
             if ($Con_Reng_Factura == null) {
 
-                echo "<center><h3>Articulo sin Crear $Reng_Factura_co_art- Orden de Compra 10$Reng_Factura_fact_num </h3></center>";
+                echo "<center><h3>Articulo sin Crear $Reng_Factura_co_art- Orden de Compra 10$Reng_Factura_fact_num Renglon -$Reng_Factura_reng_num </h3></center>";
             }  
 
 
