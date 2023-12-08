@@ -22,16 +22,16 @@ if (isset($_POST)  ) {
     }    
     
 
-    $r=0;
+  
     for ($i=0; $i < count($Factura_Ordenes) ; $i++) { 
 
 
-        $ordenes_fact_num = $Factura_Ordenes[$r]['fact_num'];
-        $ordenes_contrib = $Factura_Ordenes[$r]['contrib'];
-        $ordenes_saldo = $Factura_Ordenes[$r]['saldo'];
-        $ordenes_tot_bruto = $Factura_Ordenes[$r]['tot_bruto'];
-        $ordenes_tot_neto = $Factura_Ordenes[$r]['tot_neto'];
-        $ordenes_iva = $Factura_Ordenes[$r]['iva'];
+        $ordenes_fact_num = $Factura_Ordenes[$i]['fact_num'];
+        $ordenes_contrib = $Factura_Ordenes[$i]['contrib'];
+        $ordenes_saldo = $Factura_Ordenes[$i]['saldo'];
+        $ordenes_tot_bruto = $Factura_Ordenes[$i]['tot_bruto'];
+        $ordenes_tot_neto = $Factura_Ordenes[$i]['tot_neto'];
+        $ordenes_iva = $Factura_Ordenes[$i]['iva'];
 
 
         $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$ordenes_tot_neto,$ordenes_iva);
@@ -59,13 +59,25 @@ if (isset($_POST)  ) {
             $Reng_Factura_ult_cos_om,
             $Reng_Factura_cos_pro_om);
 
+            $Con_Reng_Factura=Con_Reng_Ordenes($tienda, $Reng_Factura_fact_num, $Reng_Factura_reng_num );
 
-        }
- 
+            if ($Con_Reng_Factura == null) {
+
+                $reng_orden= Reng_Ordenes($tienda,$Reng_Factura_fact_num,$Reng_Factura_reng_num,$Reng_Factura_co_art,$Reng_Factura_total_art,$Reng_Factura_prec_vta,$Reng_Factura_reng_neto,
+                $Reng_Factura_cos_pro_un,
+                $Reng_Factura_ult_cos_un,
+                $Reng_Factura_ult_cos_om,
+                $Reng_Factura_cos_pro_om);
+
+                echo "<center><h3>Renglon reparado $Reng_Factura_reng_num - Orden de Compra 10$Reng_Factura_fact_num </h3></center>";
+            }  
+
+
+        } 
          $importado=Up_Factura_Ordenes($tienda,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
             echo "<center><h3>$importado</h3></center>";
   
-        $r++;
+ 
     }
 
     if ($orden==true && $reng_orden == true ) {
