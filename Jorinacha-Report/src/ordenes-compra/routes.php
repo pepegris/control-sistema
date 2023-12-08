@@ -63,13 +63,7 @@ if (isset($_POST)  ) {
 
             if ($Con_Reng_Factura == null) {
 
-                $reng_orden= Reng_Ordenes($tienda,$Reng_Factura_fact_num,$Reng_Factura_reng_num,$Reng_Factura_co_art,$Reng_Factura_total_art,$Reng_Factura_prec_vta,$Reng_Factura_reng_neto,
-                $Reng_Factura_cos_pro_un,
-                $Reng_Factura_ult_cos_un,
-                $Reng_Factura_ult_cos_om,
-                $Reng_Factura_cos_pro_om);
-
-                echo "<center><h3>Renglon reparado $Reng_Factura_reng_num - Orden de Compra 10$Reng_Factura_fact_num </h3></center>";
+                echo "<center><h3>Articulo sin Crear $Reng_Factura_co_art- Orden de Compra 10$Reng_Factura_fact_num </h3></center>";
             }  
 
 
