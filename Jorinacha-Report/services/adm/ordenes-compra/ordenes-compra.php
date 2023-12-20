@@ -317,8 +317,6 @@ function Con_Reng_Ordenes($sede,$fact_num,$reng_num)
 
 
 
-
-
             $consulta = sqlsrv_query($conn, $sql);
 
             $r=0;

@@ -54,6 +54,8 @@ if (isset($_POST)  ) {
             $Reng_Factura_ult_cos_om= $Reng_Factura[$e]['ult_cos_om'] ;
             $Reng_Factura_cos_pro_om= $Reng_Factura[$e]['cos_pro_om'] ;
 
+            $Con_Reng_Factura_error=Con_Reng_Ordenes($tienda, $Reng_Factura_fact_num, $Reng_Factura_reng_num );
+
             $reng_orden= Reng_Ordenes($tienda,$Reng_Factura_fact_num,$Reng_Factura_reng_num,$Reng_Factura_co_art,$Reng_Factura_total_art,$Reng_Factura_prec_vta,$Reng_Factura_reng_neto,
             $Reng_Factura_cos_pro_un,
             $Reng_Factura_ult_cos_un,
@@ -65,12 +67,20 @@ if (isset($_POST)  ) {
             if ($Con_Reng_Factura == null) {
 
                 echo "<center><h3>Articulo sin Crear $Reng_Factura_co_art- Orden de Compra 10$Reng_Factura_fact_num Renglon -$Reng_Factura_reng_num </h3></center>";
-            }  
+
+            } elseif ($corregir == 'error' && $Con_Reng_Factura_error == null) {
+
+                echo "<center><h3>Articulos creados $Reng_Factura_co_art- Orden de Compra 10$Reng_Factura_fact_num Renglon -$Reng_Factura_reng_num </h3></center>";
+            } 
 
 
         } 
-         $importado=Up_Factura_Ordenes($tienda,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
+
+        if ($corregir == 'IMPORTADO') {
+            $importado=Up_Factura_Ordenes($tienda,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
             echo "<center><h3>$importado</h3></center>";
+        }
+
   
  
     }
