@@ -12,8 +12,9 @@ if (isset($_POST)  ) {
     $tienda=$_POST['tienda'];
 
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
+    $corregir= $_POST['corregir'];
 
-    $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1);
+    $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1,$corregir);
 
  
     if ($Factura_Ordenes == null) {

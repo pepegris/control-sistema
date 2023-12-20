@@ -59,6 +59,15 @@ include '../../services/adm/ordenes-compra/ordenes-compra.php';
         <input type="date" name="fecha1" id="" required>
       </div>
       
+      <label for="corregir" class="form-label ">Corregir</label>
+      <select name="corregir" id="">
+
+        <option value="IMPORTADO">No</option>
+        <option value="error">Si</option>
+
+
+
+      </select> 
       
 
       <br>

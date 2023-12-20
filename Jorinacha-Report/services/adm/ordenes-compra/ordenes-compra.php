@@ -7,7 +7,7 @@ require "../../services/empresas.php";
 
 
 
-function Factura_Ordenes($sede,$fecha)
+function Factura_Ordenes($sede,$fecha,$campo7)
 {
 
 
@@ -29,7 +29,7 @@ function Factura_Ordenes($sede,$fecha)
                 $sql = "SELECT fact_num,contrib,
                 CONVERT(numeric(10,2), saldo) AS saldo ,CONVERT(numeric(10,2), tot_bruto)AS tot_bruto ,CONVERT(numeric(10,2), tot_neto)AS tot_neto ,CONVERT(numeric(10,2), iva)   AS iva
                 FROM not_ent 
-                WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND campo7 <>'IMPORTADOa'  AND anulada=0";
+                WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND campo7 <>'$campo7'  AND anulada=0";
 
 
             }else{
@@ -37,7 +37,7 @@ function Factura_Ordenes($sede,$fecha)
                 $sql = "SELECT fact_num,contrib,
                 CONVERT(numeric(10,2), saldo) AS saldo ,CONVERT(numeric(10,2), tot_bruto)AS tot_bruto ,CONVERT(numeric(10,2), tot_neto)AS tot_neto ,CONVERT(numeric(10,2), iva)   AS iva
                 FROM factura 
-                WHERE co_cli='$cliente' AND FEC_EMIS = '$fecha' AND  campo7 <>'IMPORTADOa' AND anulada=0";
+                WHERE co_cli='$cliente' AND FEC_EMIS = '$fecha' AND  campo7 <>'$campo7' AND anulada=0";
 
             }
 
