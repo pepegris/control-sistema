@@ -80,7 +80,7 @@ function getLin_art($fecha,$database)
     JOIN lin_art ON lin_art.co_lin = art.co_lin
     JOIN fisico ON reng_fis.num_fis = fisico.num_fis
     where fisico.fecha_fis='$fecha'
-    group by lin_art.lin_des , art.co_lin";
+    group by lin_art.lin_des , art.co_lin order by lin_art.lin_des";
 
     $consulta = sqlsrv_query($conn, $sql);
 
@@ -237,3 +237,104 @@ group by  lin_art.co_lin
 */
 /* MARCAS QUE SE TRABAJARON CONSULTA PARA SABER QUE MARCAS SE TRABAJARON*/
 /* MARCAS QUE SE TRABAJARON CONSULTA PARA SABER QUE MARCAS SE TRABAJARON*/
+
+
+
+function getreng_stock_teorico($marca,$database,$fecha1)
+{
+
+    if ($database) {
+        try {
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "  SELECT DISTINCT ST.co_art,art.art_des,
+            CONVERT(numeric(10,0),ST.stock_act) as stock_teor ,
+            CONVERT(numeric(10,1),art.prec_vta4) as costo , 
+            CONVERT(numeric(10,1),ST.stock_act *  art.prec_vta4) as total_costo_teorico ,
+            CONVERT(numeric(10,0),art.prec_vta5) as precio, 
+            CONVERT(numeric(10,0),ST.stock_act *  art.prec_vta5) AS total_precio_teorico
+            FROM st_almac AS ST
+            INNER JOIN art 
+            ON art.co_art=ST.co_art
+            WHERE ST.co_alma=1 AND ST.stock_act>0 and art.co_lin='$marca'
+
+            UNION
+
+            SELECT DISTINCT RF.co_art,art.art_des,
+            CONVERT(numeric(10,0),RF.stock_teor) as stock_teor ,
+            CONVERT(numeric(10,1),art.prec_vta4) as costo , 
+            CONVERT(numeric(10,1),stock_teor *  art.prec_vta4) as total_costo_teorico ,
+            CONVERT(numeric(10,0),art.prec_vta5) as precio,
+            CONVERT(numeric(10,0),stock_teor *  art.prec_vta5) AS total_precio_teorico
+            FROM reng_fis AS RF
+            INNER JOIN fisico AS F
+            ON F.num_fis=RF.num_fis
+            INNER JOIN art 
+            ON art.co_art=RF.co_art
+            WHERE RF.co_alma=1  and art.co_lin='$marca' and f.fecha_fis='$fecha1' ";
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+
+            while ($row = sqlsrv_fetch_array($consulta)) {
+
+                $inv_fis[] = $row;
+            }
+
+                return $inv_fis;
+
+            } catch (\Throwable $th) {
+
+                throw $th;
+            }
+        } else {
+    
+            return 0;
+        }
+
+}
+
+
+
+function getreng_stock_real($marca,$database,$fecha1,$co_art)
+{
+
+    if ($database) {
+        try {
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = " 	SELECT DISTINCT RF.co_art,
+            CONVERT(numeric(10,0),RF.stock_real) as stock_real ,
+            CONVERT(numeric(10,1),stock_real *  art.prec_vta4) as total_costo_real ,
+            CONVERT(numeric(10,0),stock_real *  art.prec_vta5) AS total_precio_real
+            FROM reng_fis AS RF
+            INNER JOIN fisico AS F
+            ON F.num_fis=RF.num_fis
+            INNER JOIN art 
+            ON art.co_art=RF.co_art
+            WHERE art.co_lin='$marca' and f.fecha_fis='$fecha1' and rf.co_Art='$co_art' ";
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+
+            while ($row = sqlsrv_fetch_array($consulta)) {
+
+                $inv_fis[] = $row;
+            }
+
+                return $inv_fis;
+
+            } catch (\Throwable $th) {
+
+                throw $th;
+            }
+        } else {
+    
+            return 0;
+        }
+
+}
