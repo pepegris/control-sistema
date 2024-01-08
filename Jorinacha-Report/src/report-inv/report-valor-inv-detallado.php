@@ -80,7 +80,7 @@ if ($_GET) {
         $co_art=$teorico[$e]['co_art'];
         $art_des=$teorico[$e]['art_des'];
 
-        $real=getInv_fis("$co_lin","$database","$fecha1","$co_art");
+        $real=getreng_stock_real("$co_lin","$database","$fecha1","$co_art");
 
 
         $stock_teorico=$teorico[$e]['stock_teor'];
