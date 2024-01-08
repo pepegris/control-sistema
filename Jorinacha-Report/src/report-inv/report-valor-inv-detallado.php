@@ -69,33 +69,37 @@ if ($_GET) {
 
       for ($i = 0; $i < count($marca); $i++) {
 
-       $marcas=$marca[$i]['co_lin'];
+       $co_lin=$marca[$i]['co_lin'];
+       $lin_des=$marca[$i]['lin_des'];
 
-       $teorico=getreng_stock_teorico("$marcas","$database","$fecha1");
+       $teorico=getreng_stock_teorico("$co_lin","$database","$fecha1");
 
-       $co_art=$teorico['co_art'];
-       $art_des=$teorico['art_des'];
-
-       $real=getInv_fis("$marcas","$database","$fecha1","$co_art");
+       for ($i = 0; $e < count($teorico); $i++) {
 
 
-       $stock_teorico=$teorico['stock_teor'];
-       $stock_real=$real['stock_real'];
+        $co_art=$teorico[$e]['co_art'];
+        $art_des=$teorico[$e]['art_des'];
 
-       
-       $costo=$teorico['costo'];
-       $teorico_total_costo=$teorico['total_costo_teorico'];
-       $real_total_costo=$real['total_costo_real'];
+        $real=getInv_fis("$co_lin","$database","$fecha1","$co_art");
 
-       $precio=$teorico['precio'];
-       $teorico_total_precio=$teorico['total_precio_teorico'];
-       $real_total_precio=$real['total_precio_real'];
+
+        $stock_teorico=$teorico[$e]['stock_teor'];
+        $stock_real=$real['stock_real'];
+
+        
+        $costo=$teorico[$e]['costo'];
+        $teorico_total_costo=$teorico[$e]['total_costo_teorico'];
+        $real_total_costo=$real['total_costo_real'];
+
+        $precio=$teorico[$e]['precio'];
+        $teorico_total_precio=$teorico[$e]['total_precio_teorico'];
+        $real_total_precio=$real['total_precio_real'];
 
 
       ?>
         <tr>
 
-          <td><?= $marca[$i]['lin_des']  ?> - <?= $marcas ?></td>
+          <td><?= $lin_des  ?> - <?= $co_lin ?></td>
           <td><?= $co_art  ?></td>
           <td><?= $art_des  ?></td>
 
@@ -127,7 +131,7 @@ if ($_GET) {
         $total_stock_real+=$stock_real;
         $total_costo_real+=$costo_real;
         $total_precio_real+=$precio_real;*/
-
+          }
         }
         ?>
 

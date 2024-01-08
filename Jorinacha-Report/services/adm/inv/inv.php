@@ -323,7 +323,9 @@ function getreng_stock_real($marca,$database,$fecha1,$co_art)
 
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $inv_fis[] = $row;
+                $inv_fis['stock_real'] = $row['stock_real'];
+                $inv_fis['total_costo_real'] = $row['total_costo_real'];
+                $inv_fis['total_costo_real'] = $row['total_costo_real'];
             }
 
                 return $inv_fis;
