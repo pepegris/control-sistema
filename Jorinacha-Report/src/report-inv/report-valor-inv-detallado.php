@@ -86,8 +86,8 @@ if ($_GET) {
 
        $teorico=getreng_stock_teorico("$co_lin","$database","$fecha1");
 
-       for ($e = 0; $e < 3; $e++) {
-       //for ($e = 0; $e < count($teorico); $e++) {
+
+       for ($e = 0; $e < count($teorico); $e++) {
 
 
         $co_art=$teorico[$e]['co_art'];
