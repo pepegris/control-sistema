@@ -157,7 +157,9 @@ if ($_GET) {
         $sub_total_precio_real+=$real_total_precio;
         $sub_total_precio_dif+=$dif_precio;
         
-
+        $t_total_costo_teorico+=$teorico[$e]['total_costo_teorico'];
+        $t_total_costo_real+=$real['total_costo_real'];
+        
 
           }
           ?>
@@ -193,10 +195,6 @@ if ($_GET) {
           $t_total_stock_real+=$sub_total_stock_real;
           $t_total_stock_dif+=$sub_total_stock_dif;
 
-          $t_total_costo_teorico+=$sub_total_costo_teorico;
-          $t_total_costo_real+=$sub_total_costo_real;
-          $t_total_costo_dif+=$sub_total_costo_dif;
-
           $t_total_precio_teorico+=$sub_total_precio_teorico;
           $t_total_precio_real+=$sub_total_precio_real;
           $t_total_precio_dif+=$sub_total_precio_dif;
@@ -215,6 +213,9 @@ if ($_GET) {
  
  
         }
+
+        $t_total_costo_dif=$t_total_costo_real-$t_total_costo_teorico;
+
         ?>
 
 
