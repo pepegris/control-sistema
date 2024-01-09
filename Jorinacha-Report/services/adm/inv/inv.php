@@ -307,10 +307,10 @@ function getreng_stock_real($marca,$database,$fecha1,$co_art)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = " 	SELECT DISTINCT RF.co_art,
-            CONVERT(numeric(10,0),RF.stock_real) as stock_real ,
-            CONVERT(numeric(10,1),stock_real *  art.prec_vta4) as total_costo_real ,
-            CONVERT(numeric(10,0),stock_real *  art.prec_vta5) AS total_precio_real
+            $sql = " 	SELECT 
+            CONVERT(numeric(10,0),SUM(RF.stock_real)) as stock_real ,
+            CONVERT(numeric(10,1),SUM(stock_real *  art.prec_vta4)) as total_costo_real ,
+            CONVERT(numeric(10,0),SUM(stock_real *  art.prec_vta5)) AS total_precio_real
             FROM reng_fis AS RF
             INNER JOIN fisico AS F
             ON F.num_fis=RF.num_fis
