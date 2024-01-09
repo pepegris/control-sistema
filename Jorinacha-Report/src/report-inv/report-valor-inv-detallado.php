@@ -175,9 +175,9 @@ if ($_GET) {
           <td style="color:red"><?=  $sub_total_stock_dif ?></td>
 
           <td></td>
-          <td><b><?= $sub_total_costo_teorico   ?></b></td>
-          <td><b><?= $sub_total_costo_real   ?></b></td>
-          <td style="color:red"><?=  $sub_total_costo_dif  ?></td>
+          <td><b><?= number_format($sub_total_costo_teorico, 1, ',', '.')   ?></b></td>
+          <td><b><?= number_format($sub_total_costo_real, 1, ',', '.')   ?></b></td>
+          <td style="color:red"><?=  number_format($sub_total_costo_dif, 1, ',', '.')  ?></td>
 
           <td></td>
           <td><b><?= $sub_total_precio_teorico  ?></b></td>
