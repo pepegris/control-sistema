@@ -79,7 +79,8 @@ if ($_GET) {
        ?>
 
        <tr>
-       <center><h4><?= $lin_des  ?> - <?= $co_lin ?></h4></center>
+       <th ><center><h4><?= $lin_des  ?> - <?= $co_lin ?></h4></center></th>
+
        </tr>
  
        <?php
