@@ -33,6 +33,8 @@ if ($_GET) {
     <thead>
 
       <tr>
+
+      <center>
         <th scope="col">Marca</th>
         <th scope='col'>Codigo</th>
         <th scope='col'>Descripcion</th>
@@ -51,6 +53,8 @@ if ($_GET) {
         <th scope='col'>Precio Teorico</th>
         <th scope='col'>Precio Real</th>
         <th scope='col'>DIF</th>
+      </center>
+
 
       </tr>
 
@@ -108,9 +112,9 @@ if ($_GET) {
           <td><?= $co_art  ?></td>
           <td><?= $art_des  ?></td>
 
-          <td><?= $stock_teor  ?></td>
+          <td><?= $stock_teorico  ?></td>
           <td><?= $stock_real  ?></td>
-          <td><?= $stock_teor - $stock_real  ?></td>
+          <td><?= $stock_teorico - $stock_real  ?></td>
 
           <td><?= $costo  ?></td>
           <td><?= $teorico_total_costo  ?></td>
