@@ -113,10 +113,10 @@ if ($_GET) {
         $dif_costo= $real_total_costo-$teorico_total_costo  ;
         $dif_precio = $real_total_precio-$teorico_total_precio   ;
 
-        if ($co_lin=='A29') {
-          var_dump($costo);
-          var_dump($teorico_total_costo);
-          var_dump($real_total_costo);
+        if ($costo==0) {
+          $costo=0;
+          $teorico_total_costo=0;
+          $real_total_costo=0;
 
         }
 
