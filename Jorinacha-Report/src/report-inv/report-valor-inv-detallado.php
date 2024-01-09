@@ -113,13 +113,13 @@ if ($_GET) {
         $dif_costo= $real_total_costo-$teorico_total_costo  ;
         $dif_precio = $real_total_precio-$teorico_total_precio   ;
 
-        if ($costo==0) {
+/*         if ($costo==0) {
           $costo=0;
           $teorico_total_costo=0;
           $real_total_costo=0;
 
         }
-
+ */
       ?>
         <tr>
 
@@ -131,7 +131,7 @@ if ($_GET) {
           <td><?= $stock_real  ?></td>
           <td style="color:red"><?=  $dif_stock ?></td>
 
-          <td><?= $costo  ?></td>
+          <td><?= number_format($costo , 1, ',', '.')  ?></td>
           <td><?= number_format($teorico_total_costo , 1, ',', '.') ?></td>
           <td><?= $real_total_costo  ?></td>
           <td style="color:red"><?=  $dif_costo ?></td>
