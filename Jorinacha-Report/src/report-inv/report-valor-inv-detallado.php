@@ -101,6 +101,10 @@ if ($_GET) {
         $real_total_precio=$real['total_precio_real'];
 
 
+        $dif_stock=$stock_teorico - $stock_real ;
+        $dif_costo=$teorico_total_costo - $real_total_costo ;
+        $dif_precio =$teorico_total_precio - $real_total_precio  ;
+
       ?>
         <tr>
 
@@ -110,34 +114,103 @@ if ($_GET) {
 
           <td><?= $stock_teorico  ?></td>
           <td><?= $stock_real  ?></td>
-          <td><?= $stock_teorico - $stock_real  ?></td>
+          <td><?=  $dif_stock ?></td>
 
           <td><?= $costo  ?></td>
           <td><?= $teorico_total_costo  ?></td>
           <td><?= $real_total_costo  ?></td>
-          <td><?= $teorico_total_costo - $real_total_costo  ?></td>
+          <td><?=  $dif_costo ?></td>
 
           <td><?= $precio  ?></td>
           <td><?= $teorico_total_precio  ?></td>
           <td><?= $real_total_precio  ?></td>
-          <td><?= $teorico_total_precio - $real_total_precio  ?></td>
+          <td><?= $dif_precio ?></td>
 
 
         </tr>
 
         <?php
 
-  /*
-        $total_stock_teor+=$stock_teorico;
-        $total_costo_teor+=$costo_teor;
-        $total_dif+=$stock_teor - $stock_real;
+        $sub_total_stock_teorico+=$stock_teorico;
+        $sub_total_stock_real+=$stock_real;
+        $sub_total_stock_dif+=$dif_stock;
+
+        $sub_total_costo_teorico+=$teorico_total_costo;
+        $sub_total_costo_real+=$real_total_costo;
+        $sub_total_costo_dif+=$dif_costo;
+
+        $sub_total_precio_teorico+=$teorico_total_precio;
+        $sub_total_precio_real+=$real_total_precio;
+        $sub_total_precio_dif+=$dif_precio;
+        
 
 
-        $total_stock_real+=$stock_real;
-        $total_costo_real+=$costo_real;
-        $total_precio_real+=$precio_real;*/
           }
+          ?>
 
+
+          <tr>
+          <td></td>
+          <td colspan="1" ><h3><?= $lin_des  ?> - <?= $co_lin ?> Sub Total:</h3></td>
+          
+
+          <td><?= $sub_total_stock_teorico  ?></td>
+          <td><?= $sub_total_stock_real  ?></td>
+          <td><?=  $sub_total_stock_dif ?></td>
+
+          <td></td>
+          <td><?= $sub_total_costo_teorico  ?></td>
+          <td><?= $sub_total_costo_real  ?></td>
+          <td><?=  $sub_total_costo_dif ?></td>
+
+          <td></td>
+          <td><?= $sub_total_precio_teorico  ?></td>
+          <td><?= $sub_total_precio_real  ?></td>
+          <td><?= $sub_total_precio_dif ?></td>
+
+
+          </tr>
+
+
+        <?php
+
+          $sub_total_stock_teorico+=$stock_teorico;
+          $sub_total_stock_real+=$stock_real;
+          $sub_total_stock_dif+=$dif_stock;
+
+          $sub_total_costo_teorico+=$teorico_total_costo;
+          $sub_total_costo_real+=$real_total_costo;
+          $sub_total_costo_dif+=$dif_costo;
+
+          $sub_total_precio_teorico+=$teorico_total_precio;
+          $sub_total_precio_real+=$real_total_precio;
+          $sub_total_precio_dif+=$dif_precio;
+          /**********************************************/
+          $t_total_stock_teorico+=$sub_total_stock_teorico;
+          $t_total_stock_real+=$sub_total_stock_real;
+          $t_total_stock_dif+=$sub_total_stock_dif;
+
+          $t_total_costo_teorico+=$sub_total_costo_teorico;
+          $t_total_costo_real+=$sub_total_costo_real;
+          $t_total_costo_dif+=$sub_total_costo_dif;
+
+          $t_total_precio_teorico+=$sub_total_precio_teorico;
+          $t_total_precio_real+=$sub_total_precio_real;
+          $t_total_precio_dif+=$sub_total_precio_dif;
+          /**********************************************/
+          $sub_total_stock_teorico=0;
+          $sub_total_stock_real=0;
+          $sub_total_stock_dif=0;
+
+          $sub_total_costo_teorico=0;
+          $sub_total_costo_real=0;
+          $sub_total_costo_dif=0;
+
+          $sub_total_precio_teorico=0;
+          $sub_total_precio_real=0;
+          $sub_total_precio_dif=0;
+ 
+ 
         }
         ?>
 
