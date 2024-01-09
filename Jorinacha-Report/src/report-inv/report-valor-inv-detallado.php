@@ -84,15 +84,11 @@ if ($_GET) {
 
         $co_art=$teorico[$e]['co_art'];
         $art_des=$teorico[$e]['art_des'];
-        var_dump($co_art);
-        var_dump("<br>");
 
         $real=getreng_stock_real("$co_lin","$database","$fecha1","$co_art");
 
 
         $stock_teorico=$teorico[$e]['stock_teor'];
-        var_dump($stock_teorico);
-        var_dump("<br>");
         $stock_real=$real['stock_real'];
 
         
