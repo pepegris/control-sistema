@@ -20,6 +20,14 @@ if ($_GET) {
 
   <link rel='stylesheet' href='responm.css'>
 
+  <style>
+
+    .dif{
+      color:red
+    }
+
+  </style>
+
 
 
 
@@ -114,17 +122,17 @@ if ($_GET) {
 
           <td><?= $stock_teorico  ?></td>
           <td><?= $stock_real  ?></td>
-          <td><?=  $dif_stock ?></td>
+          <td class="dif"><?=  $dif_stock ?></td>
 
           <td><?= $costo  ?></td>
           <td><?= $teorico_total_costo  ?></td>
           <td><?= $real_total_costo  ?></td>
-          <td><?=  $dif_costo ?></td>
+          <td class="dif"><?=  $dif_costo ?></td>
 
           <td><?= $precio  ?></td>
           <td><?= $teorico_total_precio  ?></td>
           <td><?= $real_total_precio  ?></td>
-          <td><?= $dif_precio ?></td>
+          <td class="dif"><?= $dif_precio ?></td>
 
 
         </tr>
@@ -151,22 +159,23 @@ if ($_GET) {
 
           <tr>
           <td></td>
-          <td colspan="1" ><h3><?= $lin_des  ?> - <?= $co_lin ?> Sub Total:</h3></td>
+          <td></td>
+          <td ><h4><?= $lin_des  ?> - <?= $co_lin ?> Sub Total:</h4></td>
           
 
-          <td><?= $sub_total_stock_teorico  ?></td>
-          <td><?= $sub_total_stock_real  ?></td>
-          <td><?=  $sub_total_stock_dif ?></td>
+          <td><b><?= $sub_total_stock_teorico  ?></b></td>
+          <td><b><?= $sub_total_stock_real  ?></b></td>
+          <td class="dif"><b><?=  $sub_total_stock_dif ?></b></td>
 
           <td></td>
-          <td><?= $sub_total_costo_teorico  ?></td>
-          <td><?= $sub_total_costo_real  ?></td>
-          <td><?=  $sub_total_costo_dif ?></td>
+          <td><b><?= $sub_total_costo_teorico  ?></b></td>
+          <td><b><?= $sub_total_costo_real  ?></b></td>
+          <td class="dif"><b><?=  $sub_total_costo_dif ?></b></td>
 
           <td></td>
-          <td><?= $sub_total_precio_teorico  ?></td>
-          <td><?= $sub_total_precio_real  ?></td>
-          <td><?= $sub_total_precio_dif ?></td>
+          <td><b><?= $sub_total_precio_teorico  ?></b></td>
+          <td><b><?= $sub_total_precio_real  ?></b></td>
+          <td class="dif"><b><?= $sub_total_precio_dif ?></b></td>
 
 
           </tr>
