@@ -150,9 +150,9 @@ if ($_GET) {
         $sub_total_stock_real+=$stock_real;
         $sub_total_stock_dif+=$dif_stock;
 
-        $sub_total_costo_teorico+=$teorico_total_costo;
-        $sub_total_costo_real+=$real_total_costo;
-        $sub_total_costo_dif+=$dif_costo;
+        $sub_total_costo_teorico+=number_format($teorico_total_costo, 1, ',', '.');
+        $sub_total_costo_real+=number_format($real_total_costo, 1, ',', '.');
+        $sub_total_costo_dif+=number_format($dif_costo, 1, ',', '.');
 
         $sub_total_precio_teorico+=$teorico_total_precio;
         $sub_total_precio_real+=$real_total_precio;
