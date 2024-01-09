@@ -109,9 +109,9 @@ if ($_GET) {
         $real_total_precio=$real['total_precio_real'];
 
 
-        $dif_stock=$stock_teorico - $stock_real ;
-        $dif_costo=$teorico_total_costo - $real_total_costo ;
-        $dif_precio =$teorico_total_precio - $real_total_precio  ;
+        $dif_stock= $stock_real -$stock_teorico  ;
+        $dif_costo= $real_total_costo-$teorico_total_costo  ;
+        $dif_precio = $real_total_precio-$teorico_total_precio   ;
 
       ?>
         <tr>
