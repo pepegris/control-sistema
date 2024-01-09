@@ -132,6 +132,7 @@ if ($_GET) {
         $total_costo_real+=$costo_real;
         $total_precio_real+=$precio_real;*/
           }
+          
         }
         ?>
 
