@@ -71,7 +71,13 @@ if ($_GET) {
       echo "<br>";
 
   
+      ?>
 
+      <tr>
+      <center><h4><?= $lin_des  ?> - <?= $co_lin ?></h4></center>
+      </tr>
+
+      <?php
 
       for ($i = 0; $i < count($marca); $i++) {
 
