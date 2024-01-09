@@ -36,7 +36,6 @@ if ($_GET) {
 
       <tr>
 
-      <center>
         <th scope="col">Marca</th>
         <th scope='col'>Codigo</th>
         <th scope='col'>Descripcion</th>
@@ -55,7 +54,6 @@ if ($_GET) {
         <th scope='col'>Precio Teorico</th>
         <th scope='col'>Precio Real</th>
         <th scope='col'>DIF</th>
-      </center>
 
 
       </tr>
@@ -71,18 +69,20 @@ if ($_GET) {
       echo "<br>";
 
   
-      ?>
 
-      <tr>
-      <center><h4><?= $lin_des  ?> - <?= $co_lin ?></h4></center>
-      </tr>
-
-      <?php
 
       for ($i = 0; $i < count($marca); $i++) {
 
        $co_lin=$marca[$i]['co_lin'];
        $lin_des=$marca[$i]['lin_des'];
+
+       ?>
+
+       <tr>
+       <center><h4><?= $lin_des  ?> - <?= $co_lin ?></h4></center>
+       </tr>
+ 
+       <?php
 
        $teorico=getreng_stock_teorico("$co_lin","$database","$fecha1");
 
@@ -165,17 +165,17 @@ if ($_GET) {
 
           <td><b><?= $sub_total_stock_teorico  ?></b></td>
           <td><b><?= $sub_total_stock_real  ?></b></td>
-          <td style="color:red"><b><?=  $sub_total_stock_dif ?></b></td>
+          <td style="color:red"><?=  $sub_total_stock_dif ?></td>
 
           <td></td>
           <td><b><?= $sub_total_costo_teorico  ?></b></td>
           <td><b><?= $sub_total_costo_real  ?></b></td>
-          <td style="color:red"><b><?=  $sub_total_costo_dif ?></b></td>
+          <td style="color:red"><?=  $sub_total_costo_dif ?></td>
 
           <td></td>
           <td><b><?= $sub_total_precio_teorico  ?></b></td>
           <td><b><?= $sub_total_precio_real  ?></b></td>
-          <td style="color:red"><b><?= $sub_total_precio_dif ?></b></td>
+          <td style="color:red"><?= $sub_total_precio_dif ?></td>
 
 
           </tr>
