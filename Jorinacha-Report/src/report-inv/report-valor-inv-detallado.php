@@ -78,10 +78,9 @@ if ($_GET) {
 
        ?>
 
-       <tr>
-       <th ><center><h4><?= $lin_des  ?> - <?= $co_lin ?></h4></center></th>
-
-       </tr>
+<!--        <tr>
+       <th ><h4><?= $lin_des  ?> - <?= $co_lin ?></h4></th>
+       </tr> -->
  
        <?php
 
@@ -227,26 +226,29 @@ if ($_GET) {
 
 
 
-        <tr>
-          <td colspan="1">
-            <h3>Totales</h3>
-          </td>
+<tr>
+          <td></td>
+          <td></td>
+          <td ><h3> Totales :</h3></td>
+          
+
+          <td><b><?= $t_total_stock_teorico  ?></b></td>
+          <td><b><?= $t_total_stock_real  ?></b></td>
+          <td style="color:red"><?=  $t_total_stock_dif ?></td>
+
+          <td></td>
+          <td><b><?= $t_total_costo_teorico  ?></b></td>
+          <td><b><?= $t_total_costo_real  ?></b></td>
+          <td style="color:red"><?=  $t_total_costo_dif ?></td>
+
+          <td></td>
+          <td><b><?= $t_total_precio_teorico  ?></b></td>
+          <td><b><?= $t_total_precio_real  ?></b></td>
+          <td style="color:red"><?= $t_total_precio_dif ?></td>
 
 
-
-          <td><b><?= $total_stock_teor ?></b></td>
-          <td><b><?= number_format($total_costo_teor, 2, ',', '.') ?></b></td>
-          <td><b><?= number_format($total_precio_teor, 2, ',', '.') ?></b></td>
-
-          <td><b><?= $total_stock_real ?></b></td>
-          <td><b><?= number_format($total_costo_real, 2, ',', '.') ?></b></td>
-          <td><b><?= number_format($total_precio_real, 2, ',', '.') ?></b></td>
-
-
-
-
-        </tr>
-
+          </tr>
+          
     </tbody>
 
 
