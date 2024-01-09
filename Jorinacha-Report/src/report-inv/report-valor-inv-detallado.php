@@ -188,18 +188,6 @@ if ($_GET) {
 
 
         <?php
-
-          $sub_total_stock_teorico+=$stock_teorico;
-          $sub_total_stock_real+=$stock_real;
-          $sub_total_stock_dif+=$dif_stock;
-
-          $sub_total_costo_teorico+=$teorico_total_costo;
-          $sub_total_costo_real+=$real_total_costo;
-          $sub_total_costo_dif+=$dif_costo;
-
-          $sub_total_precio_teorico+=$teorico_total_precio;
-          $sub_total_precio_real+=$real_total_precio;
-          $sub_total_precio_dif+=$dif_precio;
           /**********************************************/
           $t_total_stock_teorico+=$sub_total_stock_teorico;
           $t_total_stock_real+=$sub_total_stock_real;
@@ -243,9 +231,9 @@ if ($_GET) {
           <td style="color:red"><?=  $t_total_stock_dif ?></td>
 
           <td></td>
-          <td><b><?= $t_total_costo_teorico  ?></b></td>
-          <td><b><?= $t_total_costo_real  ?></b></td>
-          <td style="color:red"><?=  $t_total_costo_dif ?></td>
+          <td><b><?= number_format( $t_total_costo_teorico, 1, ',', '.')   ?></b></td>
+          <td><b><?= number_format($t_total_costo_real, 1, ',', '.')   ?></b></td>
+          <td style="color:red"><?=  number_format($t_total_costo_dif, 1, ',', '.')  ?></td>
 
           <td></td>
           <td><b><?= $t_total_precio_teorico  ?></b></td>
