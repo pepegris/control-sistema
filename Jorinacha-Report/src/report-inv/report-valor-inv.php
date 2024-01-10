@@ -24,7 +24,7 @@ if ($_GET) {
 
 
   <center>
-    <h1>Valor del Inventario <?=$database?></h1>
+    <h1>Valor del Inventario Global <?=$database?></h1>
   </center>
 
 
