@@ -85,7 +85,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
 
 
 
-        $res = getDev_cli($sede, $fecha1, $fecha2 , $art);
+        $res = getDev_cli($sede, $fecha1, $fecha2 , $art,$linea);
         var_dump($res);
 
         $n = 1;
