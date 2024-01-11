@@ -166,6 +166,12 @@ function getInv_fis($marca,$database,$fecha1)
 function getInv_fis_teorico($marca,$database,$fecha1 )
 {
 
+    if ($database=='PREVIA_A') {
+        $alma='BOLE';
+    }else{
+        $alma=1;
+    }
+
 
     $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
@@ -189,7 +195,7 @@ function getInv_fis_teorico($marca,$database,$fecha1 )
 	FROM st_almac AS ST
 	INNER JOIN art 
 	ON art.co_art=ST.co_art
-	WHERE ST.co_alma=1 AND ST.stock_act>0 and art.co_lin='$marca'
+	WHERE ST.co_alma='$alma' AND ST.stock_act>0 and art.co_lin='$marca'
 	UNION
 	SELECT DISTINCT RF.co_art,
     CONVERT(numeric(10,0),RF.stock_teor) as stock_teor ,
@@ -200,7 +206,7 @@ function getInv_fis_teorico($marca,$database,$fecha1 )
 	ON F.num_fis=RF.num_fis
 	INNER JOIN art 
 	ON art.co_art=RF.co_art
-	WHERE RF.co_alma=1  and art.co_lin='$marca' and f.fecha_fis='$fecha1' ";
+	WHERE RF.co_alma='$alma'  and art.co_lin='$marca' and f.fecha_fis='$fecha1' ";
 
     $consulta = sqlsrv_query($conn, $sql);
 
@@ -243,11 +249,19 @@ group by  lin_art.co_lin
 function getreng_stock_teorico($marca,$database,$fecha1)
 {
 
+
+
     if ($database) {
         try {
             $serverName = "172.16.1.39";
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            if ($database=='PREVIA_A') {
+                $alma='BOLE';
+            }else{
+                $alma=1;
+            }
 
             $sql = "  SELECT DISTINCT ST.co_art,art.art_des,
             CONVERT(numeric(10,0),ST.stock_act) as stock_teor ,
@@ -258,7 +272,7 @@ function getreng_stock_teorico($marca,$database,$fecha1)
             FROM st_almac AS ST
             INNER JOIN art 
             ON art.co_art=ST.co_art
-            WHERE ST.co_alma=1 AND ST.stock_act>0 and art.co_lin='$marca'
+            WHERE ST.co_alma='$alma' AND ST.stock_act>0 and art.co_lin='$marca'
 
             UNION
 
@@ -273,7 +287,7 @@ function getreng_stock_teorico($marca,$database,$fecha1)
             ON F.num_fis=RF.num_fis
             INNER JOIN art 
             ON art.co_art=RF.co_art
-            WHERE RF.co_alma=1  and art.co_lin='$marca' and f.fecha_fis='$fecha1' ";
+            WHERE RF.co_alma='$alma'  and art.co_lin='$marca' and f.fecha_fis='$fecha1' ";
 
             $consulta = sqlsrv_query($conn, $sql);
 
