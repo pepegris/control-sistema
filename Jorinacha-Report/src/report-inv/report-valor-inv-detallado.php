@@ -108,12 +108,7 @@ if ($_GET) {
         $teorico_total_precio=$teorico[$e]['total_precio_teorico'];
         $real_total_precio=$real['total_precio_real'];
 
-
-        $dif_stock= $stock_real -$stock_teorico  ;
-        $dif_costo= $real_total_costo-$teorico_total_costo  ;
-        $dif_precio = $real_total_precio-$teorico_total_precio   ;
-
-         if ($stock_real==null) {
+        if ($stock_real==null) {
           
           $stock_real=0;
 
@@ -124,6 +119,13 @@ if ($_GET) {
           $real_total_precio=0;
 
         }
+
+
+        $dif_stock= $stock_real -$stock_teorico  ;
+        $dif_costo= $real_total_costo-$teorico_total_costo  ;
+        $dif_precio = $real_total_precio-$teorico_total_precio   ;
+
+
  
  
       ?>
