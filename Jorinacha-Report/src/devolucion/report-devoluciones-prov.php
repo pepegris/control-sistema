@@ -19,8 +19,6 @@ if (isset($_GET)) {
   $art=$_GET['art'];
   $linea=$_GET['linea'];
 
-  var_dump($art);
-  var_dump($linea);
 
 
   

@@ -222,21 +222,21 @@ if ($_GET) {
 
 
 <tr>
-          <td></td>
-          <td></td>
-          <td ><h3> Totales :</h3></td>
+
+          <th colspan='1' ></th>
+          <th  >Totales:</th>
           
 
           <td><b><?= $t_total_stock_teorico  ?></b></td>
           <td><b><?= $t_total_stock_real  ?></b></td>
           <td style="color:red"><?=  $t_total_stock_dif ?></td>
 
-          <td></td>
+          <th ></th>
           <td><b><?= number_format( $t_total_costo_teorico, 1, ',', '.')   ?></b></td>
           <td><b><?= number_format($t_total_costo_real, 1, ',', '.')   ?></b></td>
           <td style="color:red"><?=  number_format($t_total_costo_dif, 1, ',', '.')  ?></td>
 
-          <td></td>
+          <th ></th>
           <td><b><?= $t_total_precio_teorico  ?></b></td>
           <td><b><?= $t_total_precio_real  ?></b></td>
           <td style="color:red"><?= $t_total_precio_dif ?></td>
