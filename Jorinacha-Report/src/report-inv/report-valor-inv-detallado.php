@@ -118,6 +118,13 @@ if ($_GET) {
           $stock_real=0;
 
         }
+
+        if ($real_total_precio==null) {
+          
+          $real_total_precio=0;
+
+        }
+ 
  
       ?>
         <tr>
