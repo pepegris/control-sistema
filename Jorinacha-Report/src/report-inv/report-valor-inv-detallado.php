@@ -166,9 +166,8 @@ if ($_GET) {
 
 
           <tr>
-          <th colspan='2' ></th>
-          <th  >Totales:</th>
-          <td ><h4><?= $lin_des  ?> - <?= $co_lin ?> Sub Total:</h4></td>
+          <th colspan='2' ><?= $lin_des  ?> - <?= $co_lin ?> </th>
+          <td ><h4>Sub Total:</h4></td>
           
 
           <td><b><?= $sub_total_stock_teorico  ?></b></td>
