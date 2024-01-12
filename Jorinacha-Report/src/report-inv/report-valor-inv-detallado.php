@@ -166,8 +166,8 @@ if ($_GET) {
 
 
           <tr>
-          <td></td>
-          <td></td>
+          <th colspan='2' ></th>
+          <th  >Totales:</th>
           <td ><h4><?= $lin_des  ?> - <?= $co_lin ?> Sub Total:</h4></td>
           
 
@@ -175,12 +175,12 @@ if ($_GET) {
           <td><b><?= $sub_total_stock_real  ?></b></td>
           <td style="color:red"><?=  $sub_total_stock_dif ?></td>
 
-          <td></td>
+          <th ></th>
           <td><b><?= number_format($sub_total_costo_teorico, 1, ',', '.')   ?></b></td>
           <td><b><?= number_format($sub_total_costo_real, 1, ',', '.')   ?></b></td>
           <td style="color:red"><?=  number_format($sub_total_costo_dif, 1, ',', '.')  ?></td>
 
-          <td></td>
+          <th ></th>
           <td><b><?= $sub_total_precio_teorico  ?></b></td>
           <td><b><?= $sub_total_precio_real  ?></b></td>
           <td style="color:red"><?= $sub_total_precio_dif ?></td>
@@ -223,7 +223,7 @@ if ($_GET) {
 
 <tr>
 
-          <th colspan='1' ></th>
+          <th colspan='2' ></th>
           <th  >Totales:</th>
           
 
