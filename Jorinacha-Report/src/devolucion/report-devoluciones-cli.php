@@ -145,7 +145,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
       <th colspan='8' >Totales</th>
       <td>" . $total_stock_act_dev_cli . "</td>
       <th colspan='3' ></th>
-      <td>" . $total_stock_com_total_art . "</td>
+      <td>" . $total_stock_reng_dvc . "</td>
 
       </tr>
       </tbody>
