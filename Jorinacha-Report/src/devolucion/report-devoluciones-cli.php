@@ -71,11 +71,6 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         <th scope='col'>Pares</th>
 
 
-
-        <th scope='col'>Num Fac de Compra</th>
-        <th scope='col'>Fecha Comp</th>
-        <th scope='col'>Pares</th>
-
       </tr>
     </thead>
     <tbody>
@@ -135,10 +130,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         <td>$fecha_dev_cli</td>
         <td>$reng_dvc_total_art</td>
 
-        <td>$compras_fact</td>
-        <td>$fecha_com</td>
-        <td>$com_total_art</td>
-  
+
         </tr>";
           $n++;
         }
@@ -154,8 +146,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
       <td>" . $total_stock_act_dev_cli . "</td>
       <th colspan='3' ></th>
       <td>" . $total_stock_com_total_art . "</td>
-      <th colspan='2' ></th>
-      <td>" . $total_stock_reng_dvc . "</td>
+
       </tr>
       </tbody>
       </table>";
