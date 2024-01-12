@@ -19,8 +19,6 @@ if (isset($_GET)) {
   $art=$_GET['art'];
   $linea=$_GET['linea'];
 
-  var_dump($art);
-  var_dump($linea);
 
 
   
@@ -142,8 +140,8 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
       echo "
       <tr>
     
-      <th colspan='7' >Totales</th>
-      <td>Totales:</td>
+      <th colspan='7' ></th>
+      <th  >Totales:</th>
       <td>" . $total_stock_act_dev_cli . "</td>
       <th colspan='3' ></th>
       <td>" . $total_stock_reng_dvc . "</td>
