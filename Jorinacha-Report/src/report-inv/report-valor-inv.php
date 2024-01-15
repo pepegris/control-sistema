@@ -35,13 +35,12 @@ if ($_GET) {
       <tr>
         <th scope="col">Marca</th>
         <th scope='col'>Stock Teorico</th>
-
-        <th scope='col'>Total Costo Teorico</th>
-        <th scope='col'>Total Precio Teorico</th>
-
         <th scope='col'>Stock Real</th>
 
+        <th scope='col'>Total Costo Teorico</th>
         <th scope='col'>Total Costo Real</th>
+
+        <th scope='col'>Total Precio Teorico</th>
         <th scope='col'>Total Precio Real</th>
       </tr>
 
@@ -78,11 +77,12 @@ if ($_GET) {
           <td><?= $marca[$i]['lin_des']  ?> - <?= $marcas ?></td>
 
           <td><?= $stock_teor  ?></td>
-          <td><?= number_format($costo_teor, 2, ',', '.')     ?></td>
-          <td><?= number_format($precio_teor, 2, ',', '.')   ?></td>
-
           <td><?= $stock_real   ?></td>
+
+          <td><?= number_format($costo_teor, 2, ',', '.')     ?></td>
           <td><?= number_format($costo_real, 2, ',', '.')   ?></td>
+
+          <td><?= number_format($precio_teor, 2, ',', '.')   ?></td>
           <td><?= number_format($precio_real, 2, ',', '.')  ?></td>
 
 
@@ -114,11 +114,12 @@ if ($_GET) {
 
 
           <td><b><?= $total_stock_teor ?></b></td>
-          <td><b><?= number_format($total_costo_teor, 2, ',', '.') ?></b></td>
-          <td><b><?= number_format($total_precio_teor, 2, ',', '.') ?></b></td>
-
           <td><b><?= $total_stock_real ?></b></td>
+
+          <td><b><?= number_format($total_costo_teor, 2, ',', '.') ?></b></td>
           <td><b><?= number_format($total_costo_real, 2, ',', '.') ?></b></td>
+
+          <td><b><?= number_format($total_precio_teor, 2, ',', '.') ?></b></td>
           <td><b><?= number_format($total_precio_real, 2, ',', '.') ?></b></td>
 
 
