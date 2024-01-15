@@ -70,17 +70,31 @@ $marcas = array(
 function getLin_art($fecha,$database)
 {
 
+    if ($database=='PREVIA_A') {
+        $alma='BOLE';
+    }else{
+        $alma=1;
+    }
+
+
 
     $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-    $sql = "SELECT lin_art.lin_des, art.co_lin from reng_fis
+/*     $sql = "SELECT lin_art.lin_des, art.co_lin from reng_fis
     JOIN art ON reng_fis.co_art = art.co_art
     JOIN lin_art ON lin_art.co_lin = art.co_lin
     JOIN fisico ON reng_fis.num_fis = fisico.num_fis
     where fisico.fecha_fis='$fecha'
-    group by lin_art.lin_des , art.co_lin order by lin_art.lin_des";
+    group by lin_art.lin_des , art.co_lin order by lin_art.lin_des"; */
+
+    
+
+    $sql = "SELECT lin_art.lin_des ,art.co_lin from st_almac
+    inner join art on art.co_Art = st_almac.co_art
+    inner join lin_art on lin_art.co_lin = art.co_lin
+    where st_almac.stock_act >= 1 and co_alma = '$alma' group by art.co_lin , lin_art.lin_des";
 
     $consulta = sqlsrv_query($conn, $sql);
 
