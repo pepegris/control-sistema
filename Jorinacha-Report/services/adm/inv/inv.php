@@ -3,67 +3,7 @@
 
 
 
-$sedes_tiendas = array(
-    "DEV_EMP",
-    "TPLIO1A",
-    "PREVIA_A",
-    "CARACAS1",
-    "CARACAS2",
-    "MATURIN",
-    
-    "CORINA1",
-    "CORINA2",
-    "PUFIJO",
-    
-    "VALENA",
-    "TRINA",
-    "CAGUA" ,
-    "NACHARI",
-    "HIGUE",
-    "APURA",
-    "VALLEPA",
-    "OJENA",
-    "PUECRUZ",
-    "ACARI",
-    "CATICA2",
-);
 
-
-$marcas = array(
-     '121',
-     'A29',
-     '123',
-     'A33',
-     '186',
-     '187',
-     '188',
-     '203',
-     '205',
-     '327',
-     '345',
-
-     '417',
-     '466',
-     'A30',
-     'A27',
-     '509',
-     '510',
-     '511',
-     '538',
-     '539',
-     '601',
-     '628',
-     'A10',
-     'A34',
-     '184',
-     'A36',
-     'A37',
-     'A13',
-
-     '026',
-     'A23',
-    
-);
 
 
 
@@ -87,16 +27,31 @@ function getLin_art($fecha,$database)
     JOIN lin_art ON lin_art.co_lin = art.co_lin
     JOIN fisico ON reng_fis.num_fis = fisico.num_fis
     where fisico.fecha_fis='$fecha'
-    group by lin_art.lin_des , art.co_lin order by lin_art.lin_des"; */
-
+    group by lin_art.lin_des , art.co_lin order by lin_art.lin_des"; 
     
-
     $sql = "SELECT lin_art.lin_des ,art.co_lin from st_almac
     inner join art on art.co_Art = st_almac.co_art
     inner join lin_art on lin_art.co_lin = art.co_lin
     where st_almac.stock_act >= 1 and co_alma = '$alma' 
     group by art.co_lin , lin_art.lin_des
-    order by  lin_art.lin_des";
+    order by  lin_art.lin_des"; */
+
+    $sql = "SELECT DISTINCT lin_art.lin_des, art.co_lin 
+    from reng_fis
+   JOIN art ON reng_fis.co_art = art.co_art
+   JOIN lin_art ON lin_art.co_lin = art.co_lin
+   JOIN fisico ON reng_fis.num_fis = fisico.num_fis
+   where fisico.fecha_fis='$fecha'
+   UNION
+   SELECT DISTINCT lin_art.lin_des ,art.co_lin 
+   from st_almac
+   inner join art on art.co_Art = st_almac.co_art
+   inner join lin_art on lin_art.co_lin = art.co_lin
+   where st_almac.stock_act >= 1 and co_alma = '$alma' 
+   group by art.co_lin , lin_art.lin_des
+   order by  lin_art.lin_des"; 
+
+    
 
     $consulta = sqlsrv_query($conn, $sql);
 
