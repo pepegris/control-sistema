@@ -94,7 +94,9 @@ function getLin_art($fecha,$database)
     $sql = "SELECT lin_art.lin_des ,art.co_lin from st_almac
     inner join art on art.co_Art = st_almac.co_art
     inner join lin_art on lin_art.co_lin = art.co_lin
-    where st_almac.stock_act >= 1 and co_alma = '$alma' group by art.co_lin , lin_art.lin_des";
+    where st_almac.stock_act >= 1 and co_alma = '$alma' 
+    group by art.co_lin , lin_art.lin_des
+    order by art.co_lin , lin_art.lin_des";
 
     $consulta = sqlsrv_query($conn, $sql);
 
