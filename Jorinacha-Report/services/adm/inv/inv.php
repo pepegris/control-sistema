@@ -70,7 +70,7 @@ $marcas = array(
 function getLin_art($fecha,$database)
 {
 
-    if ($database=='PREVIA_A') {
+    if ($database=='PREVIA_A' or $database=='DEV_EMP'  )  {
         $alma='BOLE';
     }else{
         $alma=1;
@@ -182,7 +182,7 @@ function getInv_fis($marca,$database,$fecha1)
 function getInv_fis_teorico($marca,$database,$fecha1 )
 {
 
-    if ($database=='PREVIA_A') {
+    if ($database=='PREVIA_A' or $database=='DEV_EMP'  )  {
         $alma='BOLE';
     }else{
         $alma=1;
@@ -273,7 +273,7 @@ function getreng_stock_teorico($marca,$database,$fecha1)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($database=='PREVIA_A') {
+            if ($database=='PREVIA_A' or $database=='DEV_EMP'  )  {
                 $alma='BOLE';
             }else{
                 $alma=1;
