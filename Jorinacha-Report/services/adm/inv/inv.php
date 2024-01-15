@@ -3,6 +3,30 @@
 
 
 
+$sedes_tiendas = array(
+    "DEV_EMP",
+    "TPLIO1A",
+    "PREVIA_A",
+    "CARACAS1",
+    "CARACAS2",
+    "MATURIN",
+    
+    "CORINA1",
+    "CORINA2",
+    "PUFIJO",
+    
+    "VALENA",
+    "TRINA",
+    "CAGUA" ,
+    "NACHARI",
+    "HIGUE",
+    "APURA",
+    "VALLEPA",
+    "OJENA",
+    "PUECRUZ",
+    "ACARI",
+    "CATICA2",
+);
 
 
 
@@ -28,7 +52,7 @@ function getLin_art($fecha,$database)
     JOIN fisico ON reng_fis.num_fis = fisico.num_fis
     where fisico.fecha_fis='$fecha'
     group by lin_art.lin_des , art.co_lin order by lin_art.lin_des"; 
-    
+    -----------------------------------------------------------------------------------------------------
     $sql = "SELECT lin_art.lin_des ,art.co_lin from st_almac
     inner join art on art.co_Art = st_almac.co_art
     inner join lin_art on lin_art.co_lin = art.co_lin
