@@ -59,6 +59,17 @@ include '../../services/adm/inv/inv.php';
         <input type="date" name="fecha1" id="" required>
       </div>
 
+      <label for="almac" class="form-label ">Almacen</label>
+      <select name="almac" id="">
+
+        <option value="1">1</option>
+        <option value="BOLE">BOLE</option>
+        <option value="DEVO">DEVO</option>
+
+
+      </select> 
+      
+
       <label for="reporte" class="form-label ">Reporte</label>
       <select name="reporte" id="">
 

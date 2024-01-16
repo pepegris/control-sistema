@@ -10,6 +10,7 @@ include '../../services/adm/inv/inv.php';
 if ($_GET) {
 
   $database = $_GET['tienda'];
+  $almac=$_GET['almac'];
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
 
 
@@ -49,7 +50,7 @@ if ($_GET) {
 
       <?php
 
-      $marca=getLin_art("$fecha1",$database);
+      $marca=getLin_art("$fecha1",$database,$almac);
 
       var_dump(count($marca));
 
@@ -59,7 +60,7 @@ if ($_GET) {
 
        $marcas=$marca[$i]['co_lin'];
 
-       $teorico=getInv_fis_teorico("$marcas","$database","$fecha1");
+       $teorico=getInv_fis_teorico("$marcas","$database","$fecha1",$almac);
        $stock_teor=$teorico['stock_teor'];
        $costo_teor=$teorico['costo'];
        $precio_teor=$teorico['precio'];
