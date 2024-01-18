@@ -102,8 +102,8 @@ if ($_GET) {
 
         
         $costo=number_format($teorico[$e]['costo'], 1, ',', '.') ;
-        $teorico_total_costo=number_format($teorico[$e]['total_costo_teorico'], 1, ',', '.') ;
-        $real_total_costo=number_format($real['total_costo_real'], 1, ',', '.') ;
+        $teorico_total_costo=$teorico[$e]['total_costo_teorico'] ;
+        $real_total_costo=$real['total_costo_real'] ;
 
         $precio=$teorico[$e]['precio'];
         $teorico_total_precio=$teorico[$e]['total_precio_teorico'];
@@ -143,7 +143,7 @@ if ($_GET) {
           <td><?= $costo  ?></td>
           <td><?= $teorico_total_costo  ?></td>
           <td><?= $real_total_costo  ?></td>
-          <td style="color:red"><?=  $dif_costo ?></td>
+          <td style="color:red"><?=  number_format($dif_costo, 1, ',', '.') ?></td>
 
           <td><?= $precio  ?></td>
           <td><?= number_format($teorico_total_precio, 0, ',', '.')  ?></td>
