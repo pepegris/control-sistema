@@ -65,16 +65,16 @@ if ($_GET) {
 
        $teorico=getInv_fis_teorico("$marcas","$database","$fecha1",$almac);
        $stock_teor=$teorico['stock_teor'];
-       $costo_teor=number_format($teorico['costo'], 1, ',', '.');
+       $costo_teor=$teorico['costo'];
        $precio_teor=$teorico['precio'];
 
        $real=getInv_fis("$marcas","$database","$fecha1");
        $stock_real=$real['STOCK_ACTUAL'];
-       $costo_real=number_format($real['COSTO'], 1, ',', '.');
+       $costo_real=$real['COSTO'];
        $precio_real=$real['PRECIO'];
 
        $dif_stock=$stock_real  - $stock_teor;
-       $dif_costo=$real['COSTO']  - $teorico['costo'];
+       $dif_costo=$costo_real  - $costo_teor;
        $dif_precio=$precio_real  - $precio_teor;
 
 
