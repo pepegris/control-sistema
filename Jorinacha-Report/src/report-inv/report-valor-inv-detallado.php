@@ -115,6 +115,13 @@ if ($_GET) {
 
         }
 
+        if ($real_total_costo==null) {
+          
+          $real_total_costo=0;
+
+        }
+
+
         if ($real_total_precio==null) {
           
           $real_total_precio=0;
