@@ -37,12 +37,15 @@ if ($_GET) {
         <th scope="col">Marca</th>
         <th scope='col'>Stock Teorico</th>
         <th scope='col'>Stock Real</th>
+        <th scope='col'>DIF</th>
 
         <th scope='col'>Total Costo Teorico</th>
         <th scope='col'>Total Costo Real</th>
+        <th scope='col'>DIF</th>
 
         <th scope='col'>Total Precio Teorico</th>
         <th scope='col'>Total Precio Real</th>
+        <th scope='col'>DIF</th>
       </tr>
 
     </thead>
@@ -69,8 +72,11 @@ if ($_GET) {
        $stock_real=$real['STOCK_ACTUAL'];
        $costo_real=$real['COSTO'];
        $precio_real=$real['PRECIO'];
-       
 
+
+
+       
+       #$dif_stock= $stock_real -$stock_teorico  ;
 
       ?>
         <tr>
@@ -80,22 +86,30 @@ if ($_GET) {
           <td><?= $stock_teor  ?></td>
           <td><?= $stock_real   ?></td>
 
+          <td style="color:red"><?= $stock_real  - $stock_teor   ?></td>
+
           <td><?= number_format($costo_teor, 2, ',', '.')     ?></td>
           <td><?= number_format($costo_real, 2, ',', '.')   ?></td>
 
+          <td style="color:red"><?= number_format($costo_real, 2, ',', '.')  - number_format($costo_teor, 2, ',', '.')   ?></td>
+
           <td><?= number_format($precio_teor, 2, ',', '.')   ?></td>
           <td><?= number_format($precio_real, 2, ',', '.')  ?></td>
+
+          <td style="color:red"><?= number_format($precio_real, 2, ',', '.')  - number_format($precio_teor, 2, ',', '.')   ?></td>
 
 
         </tr>
 
         <?php
 
-  
+        $total_dif_stock+=$stock_real  - $stock_teor;
+        $total_dif_costo+=$costo_real  - $costo_teor;
+        $total_dif_precio+=$precio_real  - $precio_teor;
+
         $total_stock_teor+=$stock_teor;
         $total_costo_teor+=$costo_teor;
         $total_precio_teor+=$precio_teor;
-
 
         $total_stock_real+=$stock_real;
         $total_costo_real+=$costo_real;
@@ -116,12 +130,15 @@ if ($_GET) {
 
           <td><b><?= $total_stock_teor ?></b></td>
           <td><b><?= $total_stock_real ?></b></td>
+          <td style="color:red"><?= $total_dif_stock ?></td>
 
           <td><b><?= number_format($total_costo_teor, 2, ',', '.') ?></b></td>
           <td><b><?= number_format($total_costo_real, 2, ',', '.') ?></b></td>
+          <td style="color:red"><?= number_format($total_dif_costo, 2, ',', '.') ?></td>
 
           <td><b><?= number_format($total_precio_teor, 2, ',', '.') ?></b></td>
           <td><b><?= number_format($total_precio_real, 2, ',', '.') ?></b></td>
+          <td style="color:red"><?= number_format($total_dif_precio, 2, ',', '.') ?></td>
 
 
 
@@ -142,3 +159,5 @@ if ($_GET) {
 
 
 include '../../includes/footer.php'; ?>
+
+
