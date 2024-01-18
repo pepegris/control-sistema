@@ -238,7 +238,7 @@ if ($_GET) {
           $color='red';
         }
 
-        if ($t_total_costo_dif >= 0) {
+        if ($t_total_costo_dif >= 1) {
           $color='green';
         }else {
           $color='red';
