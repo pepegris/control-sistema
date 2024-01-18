@@ -74,7 +74,7 @@ if ($_GET) {
        $precio_real=$real['PRECIO'];
 
        $dif_stock=$stock_real  - $stock_teor;
-       $dif_costo=number_format($real['COSTO'], 1, ',', '.')  - number_format($teorico['costo'], 1, ',', '.');
+       $dif_costo=$real['COSTO']  - $teorico['costo'];
        $dif_precio=$precio_real  - $precio_teor;
 
 
