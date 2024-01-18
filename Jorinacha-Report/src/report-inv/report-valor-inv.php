@@ -91,12 +91,12 @@ if ($_GET) {
           <td><?= $costo_teor     ?></td>
           <td><?= $costo_real   ?></td>
 
-          <td style="color:red"><?= $costo_real  - $costo_teor   ?></td>
+          <td style="color:red"><?= number_format($costo_real  - $costo_teor, 1, ',', '.')    ?></td>
 
-          <td><?= $precio_teor   ?></td>
-          <td><?= $precio_real  ?></td>
+          <td><?= number_format($precio_teor, 0, ',', '.')   ?></td>
+          <td><?= number_format($precio_real, 0, ',', '.')  ?></td>
 
-          <td style="color:red"><?= $precio_real - $precio_teor  ?></td>
+          <td style="color:red"><?= number_format($precio_real - $precio_teor, 0, ',', '.')   ?></td>
 
 
         </tr>
