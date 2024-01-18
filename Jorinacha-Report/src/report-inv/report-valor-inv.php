@@ -65,12 +65,12 @@ if ($_GET) {
 
        $teorico=getInv_fis_teorico("$marcas","$database","$fecha1",$almac);
        $stock_teor=$teorico['stock_teor'];
-       $costo_teor=$teorico['costo'];
+       $costo_teor=number_format($teorico['costo'], 1, ',', '.');
        $precio_teor=$teorico['precio'];
 
        $real=getInv_fis("$marcas","$database","$fecha1");
        $stock_real=$real['STOCK_ACTUAL'];
-       $costo_real=$real['COSTO'];
+       $costo_real=number_format($real['COSTO'], 1, ',', '.');
        $precio_real=$real['PRECIO'];
 
 
@@ -88,15 +88,15 @@ if ($_GET) {
 
           <td style="color:red"><?= $stock_real  - $stock_teor   ?></td>
 
-          <td><?= number_format($costo_teor, 2, ',', '.')     ?></td>
-          <td><?= number_format($costo_real, 2, ',', '.')   ?></td>
+          <td><?= $costo_teor     ?></td>
+          <td><?= $costo_real   ?></td>
 
-          <td style="color:red"><?= number_format($costo_real, 2, ',', '.')  - number_format($costo_teor, 2, ',', '.')   ?></td>
+          <td style="color:red"><?= $costo_real  - $costo_teor   ?></td>
 
-          <td><?= number_format($precio_teor, 2, ',', '.')   ?></td>
-          <td><?= number_format($precio_real, 2, ',', '.')  ?></td>
+          <td><?= $precio_teor   ?></td>
+          <td><?= $precio_real  ?></td>
 
-          <td style="color:red"><?= number_format($precio_real, 2, ',', '.')  - number_format($precio_teor, 2, ',', '.')   ?></td>
+          <td style="color:red"><?= $precio_real - $precio_teor  ?></td>
 
 
         </tr>
@@ -132,13 +132,13 @@ if ($_GET) {
           <td><b><?= $total_stock_real ?></b></td>
           <td style="color:red"><?= $total_dif_stock ?></td>
 
-          <td><b><?= number_format($total_costo_teor, 2, ',', '.') ?></b></td>
-          <td><b><?= number_format($total_costo_real, 2, ',', '.') ?></b></td>
-          <td style="color:red"><?= number_format($total_dif_costo, 2, ',', '.') ?></td>
+          <td><b><?= number_format($total_costo_teor, 1, ',', '.') ?></b></td>
+          <td><b><?= number_format($total_costo_real, 1, ',', '.') ?></b></td>
+          <td style="color:red"><?= number_format($total_dif_costo, 1, ',', '.') ?></td>
 
-          <td><b><?= number_format($total_precio_teor, 2, ',', '.') ?></b></td>
-          <td><b><?= number_format($total_precio_real, 2, ',', '.') ?></b></td>
-          <td style="color:red"><?= number_format($total_dif_precio, 2, ',', '.') ?></td>
+          <td><b><?= number_format($total_precio_teor, 1, ',', '.') ?></b></td>
+          <td><b><?= number_format($total_precio_real, 1, ',', '.') ?></b></td>
+          <td style="color:red"><?= number_format($total_dif_precio, 1, ',', '.') ?></td>
 
 
 
