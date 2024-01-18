@@ -73,6 +73,9 @@ if ($_GET) {
        $costo_real=number_format($real['COSTO'], 1, ',', '.');
        $precio_real=$real['PRECIO'];
 
+       $dif_stock=$stock_real  - $stock_teor;
+       $dif_costo=$costo_real  - $costo_teor;
+       $dif_precio=$precio_real  - $precio_teor;
 
 
        
@@ -86,26 +89,26 @@ if ($_GET) {
           <td><?= $stock_teor  ?></td>
           <td><?= $stock_real   ?></td>
 
-          <td style="color:red"><?= $stock_real  - $stock_teor   ?></td>
+          <td style="color:red"><?= $dif_stock   ?></td>
 
           <td><?= $costo_teor     ?></td>
           <td><?= $costo_real   ?></td>
 
-          <td style="color:red"><?= number_format($costo_real  - $costo_teor, 1, ',', '.')    ?></td>
+          <td style="color:red"><?= $dif_costo    ?></td>
 
           <td><?= number_format($precio_teor, 0, ',', '.')   ?></td>
           <td><?= number_format($precio_real, 0, ',', '.')  ?></td>
 
-          <td style="color:red"><?= number_format($precio_real - $precio_teor, 0, ',', '.')   ?></td>
+          <td style="color:red"><?= number_format($dif_precio, 0, ',', '.')   ?></td>
 
 
         </tr>
 
         <?php
 
-        $total_dif_stock+=$stock_real  - $stock_teor;
-        $total_dif_costo+=$costo_real  - $costo_teor;
-        $total_dif_precio+=$precio_real  - $precio_teor;
+        $total_dif_stock+=$dif_stock;
+        $total_dif_costo+=$dif_costo;
+        $total_dif_precio+=$dif_precio;
 
         $total_stock_teor+=$stock_teor;
         $total_costo_teor+=$costo_teor;
