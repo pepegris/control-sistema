@@ -232,6 +232,24 @@ if ($_GET) {
 
         $t_total_costo_dif=$t_total_costo_real-$t_total_costo_teorico;
 
+        if ($t_total_stock_dif >= 0) {
+          $color='green';
+        }else {
+          $color='red';
+        }
+
+        if ($t_total_costo_dif >= 0) {
+          $color='green';
+        }else {
+          $color='red';
+        }
+
+        if ($t_total_precio_dif >= 0) {
+          $color='green';
+        }else {
+          $color='red';
+        }
+
         ?>
 
 
@@ -245,17 +263,17 @@ if ($_GET) {
 
           <td><b><?= $t_total_stock_teorico  ?></b></td>
           <td><b><?= $t_total_stock_real  ?></b></td>
-          <td style="color:red"><?=  $t_total_stock_dif ?></td>
+          <td style="color:<?= $color ?>"><?=  $t_total_stock_dif ?></td>
 
           <th >Costo:</th>
           <td><b><?= number_format( $t_total_costo_teorico, 1, ',', '.')   ?></b></td>
           <td><b><?= number_format($t_total_costo_real, 1, ',', '.')   ?></b></td>
-          <td style="color:red"><?=  number_format($t_total_costo_dif, 1, ',', '.')  ?></td>
+          <td style="color:<?= $color ?>"><?=  number_format($t_total_costo_dif, 1, ',', '.')  ?></td>
 
           <th >Precio:</th>
           <td><b><?= number_format($t_total_precio_teorico, 0, ',', '.')  ?></b></td>
           <td><b><?= number_format($t_total_precio_real, 0, ',', '.')  ?></b></td>
-          <td style="color:red"><?= number_format($t_total_precio_dif, 0, ',', '.') ?></td>
+          <td style="color:<?= $color ?>"><?= number_format($t_total_precio_dif, 0, ',', '.') ?></td>
 
 
           </tr>
