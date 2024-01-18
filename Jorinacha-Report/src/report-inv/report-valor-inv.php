@@ -119,7 +119,22 @@ if ($_GET) {
         $total_precio_real+=$precio_real;
 
         }
+
+        $dif_stock=0;
+        $dif_costo=0;
+        $dif_precio=0;
+
+        $stock_teor=0;
+        $costo_teor=0;
+        $precio_teor=0;
+
+        $stock_real=0;
+        $costo_real=0;
+        $precio_real=0;
+
         ?>
+
+        
 
 
 
