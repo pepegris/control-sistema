@@ -136,9 +136,9 @@ if ($_GET) {
           <td><b><?= number_format($total_costo_real, 1, ',', '.') ?></b></td>
           <td style="color:red"><?= number_format($total_dif_costo, 1, ',', '.') ?></td>
 
-          <td><b><?= number_format($total_precio_teor, 1, ',', '.') ?></b></td>
-          <td><b><?= number_format($total_precio_real, 1, ',', '.') ?></b></td>
-          <td style="color:red"><?= number_format($total_dif_precio, 1, ',', '.') ?></td>
+          <td><b><?= number_format($total_precio_teor, 0, ',', '.') ?></b></td>
+          <td><b><?= number_format($total_precio_real, 0, ',', '.') ?></b></td>
+          <td style="color:red"><?= number_format($total_dif_precio, 0, ',', '.') ?></td>
 
 
 

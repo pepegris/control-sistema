@@ -190,9 +190,9 @@ if ($_GET) {
           <td style="color:red"><?=  number_format($sub_total_costo_dif, 1, ',', '.')  ?></td>
 
           <td ><h4>Precio:</h4></td>
-          <td><b><?= $sub_total_precio_teorico  ?></b></td>
-          <td><b><?= $sub_total_precio_real  ?></b></td>
-          <td style="color:red"><?= $sub_total_precio_dif ?></td>
+          <td><b><?= number_format($sub_total_precio_teorico, 0, ',', '.')   ?></b></td>
+          <td><b><?= number_format($sub_total_precio_real, 0, ',', '.')  ?></b></td>
+          <td style="color:red"><?= number_format($sub_total_precio_dif, 0, ',', '.') ?></td>
 
 
           </tr>
@@ -246,9 +246,9 @@ if ($_GET) {
           <td style="color:red"><?=  number_format($t_total_costo_dif, 1, ',', '.')  ?></td>
 
           <th >Precio:</th>
-          <td><b><?= $t_total_precio_teorico  ?></b></td>
-          <td><b><?= $t_total_precio_real  ?></b></td>
-          <td style="color:red"><?= $t_total_precio_dif ?></td>
+          <td><b><?= number_format($t_total_precio_teorico, 0, ',', '.')  ?></b></td>
+          <td><b><?= number_format($t_total_precio_real, 0, ',', '.')  ?></b></td>
+          <td style="color:red"><?= number_format($t_total_precio_dif, 0, ',', '.') ?></td>
 
 
           </tr>
