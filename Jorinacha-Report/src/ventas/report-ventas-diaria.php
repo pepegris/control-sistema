@@ -21,7 +21,7 @@ if ($_GET) {
 
 
 
-  $cantidadDias2 = cal_days_in_month(CAL_GREGORIAN, 02, 2023);
+  $cantidadDias = cal_days_in_month(CAL_GREGORIAN, 02, 2023);
   echo $cantidadDias;
 
   $cantidadDias2 = cal_days_in_month(CAL_GREGORIAN, 02, 2024);
