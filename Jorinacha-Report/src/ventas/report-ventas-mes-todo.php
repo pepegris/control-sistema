@@ -171,7 +171,7 @@ if ($_GET) {
           $total_art_factura =  number_format($factura_ven['total_art'], 0, ',', '.');
 
           $dev_cli_ven = getDev_cli($tienda, $fecha1, $fecha3, 'ven');
-          $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
+          $total_art_dev_cli += number_format($dev_cli_ven['total_art'], 0, ',', '.');
 
 
           $pares+=$total_art_factura - $total_art_dev_cli  ;
