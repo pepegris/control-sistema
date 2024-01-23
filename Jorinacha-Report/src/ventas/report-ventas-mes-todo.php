@@ -159,11 +159,11 @@ if ($_GET) {
 
           $dev_cli = getDev_cli($sedes_ar[$u], $fecha1, $fecha3, 'sin');
           $tasa_tot_neto_dev_cli += $dev_cli['tot_neto'] / $tasa_v_tasas;
-          #$tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
+          $tot_neto_dev_cli += number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
 
 
           $venta = $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
-          #$tot_neto_factura += number_format($venta, 2, ',', '.');
+          $tot_neto_factura += number_format($venta, 2, ',', '.');
 
 
           $factura_ven = getFactura($sedes_ar[$u], $fecha1, $fecha3, 'ven');
@@ -176,33 +176,33 @@ if ($_GET) {
           $dep_caj = getDep_caj($sedes_ar[$u], $fecha1, $fecha3, 'sin');
           $tasa_total_efec_dep_caj += $dep_caj['total_efec'] / $tasa_v_tasas;
           $tasa_total_tarj_dep_caj += $dep_caj['total_tarj'] / $tasa_v_tasas;
-          #$total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
-          #$total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
+          $total_efec_dep_caj += number_format($tasa_total_efec_dep_caj, 2, ',', '.');
+          $total_tarj_dep_caj += number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
 
           $mov_ban = getMov_ban($sedes_ar[$u], $fecha1, $fecha3, 'sin');
           $tasa_monto_h_mov_ban += $mov_ban['monto_h'] / $tasa_v_tasas;
-          #$monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
+          $monto_h_mov_ban += number_format($tasa_monto_h_mov_ban, 2, ',', '.');
 
           $ord_pago = getOrd_pago($sedes_ar[$u], $fecha1, $fecha3, 'sin');
           $tasa_monto_ord_pago += $ord_pago['monto'] / $tasa_v_tasas;
-          #$monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
+          $monto_ord_pago += number_format($tasa_monto_ord_pago, 2, ',', '.');
 
           $ord_pago_ven = getOrd_pago($sedes_ar[$u], $fecha1, $fecha3, 'ven');
           $tasa_monto_ord_pago_ven += $ord_pago_ven['monto'] / $tasa_v_tasas;
-          #$monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
+          $monto_ord_pago_ven += number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
 
 
 
         }
 
-        $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
+/*         $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
         $tot_neto_factura=number_format($venta, 2, ',', '.');
         $total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
         $total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
         $monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
         $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
         $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
-
+ */
         ?>
           <tr>
 
