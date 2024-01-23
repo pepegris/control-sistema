@@ -119,6 +119,7 @@ if ($_GET) {
 
           $w=1;
           $venta =0;
+          $pares=0;
           for ($u = 1; $u < $cantidad_Dias; $u++) {
             $w++;
 
