@@ -60,9 +60,10 @@ include '../../services/sqlserver.php';
 
         
         <option value="diario">Ventas Diarias</option>
-        <option value="ventas">Ventas Detalladas</option> 
+        <!-- <option value="ventas">Ventas Detalladas</option>  -->
         <option value="acumulado">Ventas Acumuladas</option>
         <option value="dias">Ventas Detalladas por Dias</option> 
+        <option value="dias">Ventas Detalladas por Mes</option> 
         <option value="ord">Detalles de Ord de Pagos</option> 
         <option value="factura">Detalles de Facturas, Cobros y Devoluciones</option> 
         
