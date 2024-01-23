@@ -37,7 +37,11 @@ if ($clave === 'N3td0s' ) {
 
         header("refresh:1;url= report-ventas-diaria-todo.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
 
-    }
+    }    }elseif ($reporte=='mes') {
+
+        header("refresh:1;url= report-ventas-mes-todo.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
+
+    } 
     
     elseif ($reporte=='acumulado') {
 
