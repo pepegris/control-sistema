@@ -114,6 +114,9 @@ if ($_GET) {
 
         for ($i = 1; $i < count($sedes_ar); $i++) {
 
+          $cod = Cliente($sedes_ar[$i]);
+          $tienda=$sedes_ar[$i];
+
           $w=1;
           $venta =0;
           for ($u = 1; $u < $cantidad_Dias; $u++) {
@@ -135,7 +138,6 @@ if ($_GET) {
               $fecha1 = $Year . '' . $mes . '' . $dia;
             }
 
-          
 
           if ($divisa == 'dl') {
 
@@ -150,7 +152,7 @@ if ($_GET) {
             $tasa_v_tasas  = 1;
           }
 
-          $cod = Cliente($sedes_ar[$u]);
+         
 
           $factura = getFactura($sedes_ar[$u], $fecha1, $fecha3, 'sin');
           $tasa_tot_neto_factura += $factura['tot_neto'] / $tasa_v_tasas;
@@ -205,7 +207,7 @@ if ($_GET) {
           <tr>
 
             <td><?= $cod   ?></td>
-            <td><?= $sedes_ar[$u]  ?></td>
+            <td><?= $tienda  ?></td>
 
 
 
