@@ -20,6 +20,14 @@ if ($_GET) {
   $Year = date("Y", strtotime($fecha));
 
 
+
+  $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year);
+  echo $cantidadDias;
+
+  $cantidadDias2 = cal_days_in_month(CAL_GREGORIAN, 02, 2024);
+  echo $cantidadDias2;
+
+
   /* $fecha_2 =  $fecha; */
 
   $fecha_2 = $Year .'/'. $Month .'/' . $Day ;
