@@ -239,6 +239,9 @@ if ($_GET) {
 
         $factura_ven = getFactura($sede, $fecha1, $fecha2, 'ven2');
 
+        var_dump($dev_cli_ven);
+        var_dump($factura_ven);
+
         $venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
         $total_art_factura  = number_format($venta_art, 0, ',', '.');
 
