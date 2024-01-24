@@ -172,9 +172,10 @@ if ($_GET) {
 
           $dev_cli_ven = getDev_cli($tienda, $fecha1, $fecha3, 'ven');
           $total_art_dev_cli += number_format($dev_cli_ven['total_art'], 0, ',', '.');
+          $total_art_dev_cli_2 = number_format($dev_cli_ven['total_art'], 0, ',', '.');
 
 
-          $pares+=$total_art_factura - $total_art_dev_cli  ;
+          $pares+=$total_art_factura - $total_art_dev_cli_2  ;
 
 
           $dep_caj = getDep_caj($tienda, $fecha1, $fecha3, 'sin');
@@ -260,6 +261,7 @@ if ($_GET) {
                     $tot_neto_factura =0;
                     $total_art_factura =0;
                     $total_art_dev_cli =0;
+                    $total_art_dev_cli_2=0;
                     $tasa_total_efec_dep_caj =0;
                     $tasa_total_tarj_dep_caj =0;
                     $total_efec_dep_caj = 0;
@@ -270,6 +272,7 @@ if ($_GET) {
                     $monto_ord_pago = 0;
                     $tasa_monto_ord_pago_ven =0;
                     $monto_ord_pago_ven = 0;
+                    
           
 
                   if ($venta <= 1 & $total_art_factura == 0) {
