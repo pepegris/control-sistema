@@ -187,6 +187,22 @@ if ($_GET) {
     
             $venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
             $total_art_factura  = number_format($venta_art, 0, ',', '.');
+
+
+            if ($tot_neto_factura == null ) {
+
+              $tot_neto_dev_cli = 0;
+              $tot_neto_factura = 0;
+              $total_efec_dep_caj = 0;
+              $total_tarj_dep_caj = 0;
+              $monto_h_mov_ban = 0;
+              $monto_ord_pago = 0;
+              $monto_ord_pago_ven = 0;
+              $total_art_dev_cli = 0;
+              $total_art_factura  = 0;
+
+            }
+    
     
             /* totales */
     
@@ -206,7 +222,8 @@ if ($_GET) {
             $total_pagos += $tasa_monto_ord_pago;
             $total_gastos += $tasa_monto_ord_pago_ven;
     
-    
+
+
 
   
 

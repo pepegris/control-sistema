@@ -152,6 +152,22 @@ if ($_GET) {
           $ord_pago_ven = getOrd_pago($sede, $fecha1, $fecha2, 'ven2');
           $tasa_monto_ord_pago_ven = $ord_pago_ven['monto'];
           $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
+
+
+          
+          if ($tot_neto_factura == null ) {
+
+            $tot_neto_dev_cli = 0;
+            $tot_neto_factura = 0;
+            $total_efec_dep_caj = 0;
+            $total_tarj_dep_caj = 0;
+            $monto_h_mov_ban = 0;
+            $monto_ord_pago = 0;
+            $monto_ord_pago_ven = 0;
+            $total_art_dev_cli = 0;
+            $total_art_factura  = 0;
+
+          }
   
   
           /* totales */
