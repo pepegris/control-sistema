@@ -129,8 +129,7 @@ if ($_GET) {
             } else {
               $dia = $w;
             }
-            echo "$dia - $mes" ;
-            echo "<br>";
+
             
             $fecha_2 = $Year . '/' . $mes . '/' . $dia;
     
@@ -154,6 +153,10 @@ if ($_GET) {
           } else {
             $tasa_v_tasas  = 1;
           }
+
+
+          echo "$dia - $mes / FECHA1 $fecha1  /FECHA2 $fecha_2" ;
+          echo "<br>";
 
          
 
