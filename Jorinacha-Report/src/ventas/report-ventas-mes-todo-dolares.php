@@ -130,28 +130,39 @@ if ($_GET) {
                 $d = $e;
               }
 
- 
               if ($sede == "Sucursal Caracas I" && $Month < 04  && $Year <= 2023) {
                 $sede = 'Comercial Merina';
                 
               }elseif ( $sede == "Sucursal Caracas I" && $Month == 04 && $d < 13 && $Year <= 2023){
                 $sede = 'Comercial Merina';
               }
+    
+              if ($sede == "Comercial Merina" && $Month == 04 && $d > 13 && $Year <= 2023) {
+                $sede = 'Sucursal Caracas I';
+                
+              }
               
-              
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////   
               if ($sede == "Sucursal Caracas II" && $Month < 04  && $Year <= 2023) {
                 $sede = 'Comercial Merina3';
     
               }elseif ( $sede == "Sucursal Caracas II" && $Month == 04   && $d < 20 && $Year <= 2023){
                 $sede = 'Comercial Merina3';
               }
+    
+              if ($sede == "Comercial Merina3" && $Month == 04 && $d > 13 && $Year <= 2023) {
+                $sede = 'Sucursal Caracas II';
+                
+              }
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
               
               if ($sede == "Sucursal Maturin" && $Month < 10  && $Year <= 2023) {
                 $sede = 'Comercial Matur';
           
               }
               
-              
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////          
               if ($sede == "Sucursal Cagua" && $Month < 06  && $Year <= 2023) {
                 $sede = 'Comercial Kagu';
                 
