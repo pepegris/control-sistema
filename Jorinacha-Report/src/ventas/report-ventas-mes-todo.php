@@ -49,7 +49,7 @@ if ($_GET) {
   }
 
   $y=1;
-  for ($k = 0; $k < $Month_total; $k++) {
+  for ($k = 1; $k < $Month_total; $k++) {
 
 
 
