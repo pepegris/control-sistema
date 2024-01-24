@@ -195,12 +195,43 @@ if ($_GET) {
         /* totales */
 
 
+        if ($tasa_tot_neto_factura == null or $tot_neto_factura == 0 ) {
+
+          $tot_neto_dev_cli = 0;
+          $tot_neto_factura = 0;
+          $total_efec_dep_caj = 0;
+          $total_tarj_dep_caj = 0;
+          $monto_h_mov_ban = 0;
+          $monto_ord_pago = 0;
+          $monto_ord_pago_ven = 0;
+          $total_art_dev_cli = 0;
+          $total_art_factura  = 0;
+          $tasa_tot_neto_dev_cli=0;
+          $tasa_monto_h_mov_ban=0;
+          $tasa_total_efec_dep_caj=0;
+          $tasa_total_tarj_dep_caj=0;
+          $tasa_monto_ord_pago=0;
+          $tasa_monto_ord_pago_ven=0;
+          $venta_art=0;
+          $tasa_tot_neto_factura=0;
+
+        }
+
+
 
         $total_venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
         $total_venta_pares += $venta_art;
 
         $total_devol += $tasa_tot_neto_dev_cli;
-        $total_devol_pares += $dev_cli_ven['total_art'];
+        if ($dev_cli_ven == null or $tot_neto_factura == 0) {
+
+          $total_devol_pares += 0;
+
+        }else {
+          
+          $total_devol_pares += $dev_cli_ven['total_art'];
+        }
+        
 
         $total_depositos += $tasa_monto_h_mov_ban;
 
