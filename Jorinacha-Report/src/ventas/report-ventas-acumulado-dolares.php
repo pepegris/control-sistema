@@ -133,6 +133,10 @@ if ($_GET) {
             $tasa_v_tasas;
           }
 
+          if ($Month <= 04) {
+           echo "prueba";
+          }
+
 
           if ($sede == 'CARACAS1' && $Month <= 04 && $d < 13 && $Year <= 2023) {
             $sede == 'MERINA';
