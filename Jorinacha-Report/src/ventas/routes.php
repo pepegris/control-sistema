@@ -40,7 +40,16 @@ if ($clave === 'N3td0s' ) {
     }    
     elseif ($reporte=='mes') {
 
-        header("refresh:1;url= report-ventas-mes-todo.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
+
+        if ($divisa== 'dl') {
+
+            header("refresh:1;url= report-ventas-mes-todo-dolares.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
+        }    else {
+
+            header("refresh:1;url= report-ventas-mes-todo-bolivares.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
+        }
+
+        
 
     } 
     
