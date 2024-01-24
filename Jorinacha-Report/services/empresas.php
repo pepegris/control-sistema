@@ -88,7 +88,7 @@ function Database($sede)
 
         "Comercial Merina" => 'MERINA',
         "Comercial Merina3" => 'MERINA3',
-        "Comerical Kagu" => 'KAGU',
+        "Comercial Kagu" => 'KAGU',
         "Comercial Matur" => 'MATUR',
 
     );

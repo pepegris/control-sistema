@@ -114,7 +114,7 @@ if ($_GET) {
 
 
         for ($r = 0; $r <= $Day; $r++) {
-
+          echo $r;
           if ($e  < 10) {
 
             $d = 0 . $e;
@@ -156,7 +156,7 @@ if ($_GET) {
           
           
           if ($sede == "Sucursal Cagua" && $Month < 06  && $Year <= 2023) {
-            $sede = 'Comerical Kagu';
+            $sede = 'Comercial Kagu';
             
           }
 
