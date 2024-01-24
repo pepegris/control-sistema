@@ -111,8 +111,6 @@ if ($_GET) {
 
         $cantidad_Dias = cal_days_in_month(CAL_GREGORIAN, $mes, $Year);
 
-        echo $cantidad_Dias;
-        echo "<br>";
         for ($i = 1; $i < count($sedes_ar); $i++) {
 
           $cod = Cliente($sedes_ar[$i]);
@@ -153,22 +151,6 @@ if ($_GET) {
             }
           } else {
             $tasa_v_tasas  = 1;
-          }
-
-          if ($dia==31 and $mes==01) {
-            echo "$dia - $mes / FECHA1 $fecha1  /FECHA2 $fecha_2" ;
-            echo "<br>";
-  
-          }
-
-          if ($dia==28 and $mes==02) {
-            echo "$dia - $mes / FECHA1 $fecha1  /FECHA2 $fecha_2" ;
-            echo "<br>";
-          }
-
-          if ($dia==29 and $mes==02) {
-            echo "$dia - $mes / FECHA1 $fecha1  /FECHA2 $fecha_2" ;
-            echo "<br>";
           }
 
          
@@ -217,6 +199,9 @@ if ($_GET) {
 
         }
 
+        $pares+=$total_art_factura - $total_art_dev_cli  ;
+        $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+
         $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
         $tot_neto_factura=number_format($venta, 2, ',', '.');
         $total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
@@ -225,8 +210,7 @@ if ($_GET) {
         $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
         $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
 
-        $pares+=$total_art_factura - $total_art_dev_cli  ;
-        $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+
         
 
         ?>
