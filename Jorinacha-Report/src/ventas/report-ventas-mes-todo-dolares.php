@@ -223,6 +223,8 @@ if ($_GET) {
         
         $fecha1 =  $Year .''. $Month .''  . 01;
         $fecha2 =  $Year .''. $Month .''  . $cantidad_Dias;
+        echo "$fecha1";
+        echo "$fecha2";
 
         $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
         $tot_neto_factura = number_format($venta, 2, ',', '.');
