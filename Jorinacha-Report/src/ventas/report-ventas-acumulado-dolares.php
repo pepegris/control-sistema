@@ -134,30 +134,19 @@ if ($_GET) {
           }
 
 
-          if ($sede == 'CARACAS1' && $Month >= 04 && $d >= 13 && $Year >= 2023) {
-            $sede == 'CARACAS1';
-          }else{
+          if ($sede == 'CARACAS1' && $Month <= 04 && $d < 13 && $Year <= 2023) {
             $sede == 'MERINA';
             echo $sede;
-          }
 
-          if ($sede == 'CARACAS2' && $Month >= 04 && $d >= 20 && $Year >= 2023) {
-            $sede == 'CARACAS2';
-          }else{
+          }elseif ($sede == 'CARACAS2' && $Month <= 04 && $d < 20 && $Year <= 2023) {
             $sede == 'MERINA3';
             echo $sede;
-          }
 
-          if ($sede == 'MATURIN' && $Month >= 10 && $d >= '01' && $Year >= 2023) {
-            $sede == 'MATURIN';
-          }else{
+          }elseif ($sede == 'MATURIN' && $Month <= 10 && $d < 01 && $Year <= 2023) {
             $sede == 'MATUR';
             echo $sede;
-          }
 
-          if ($sede == 'CAGUA' && $Month >= 06 && $d >= '01' && $Year >= 2023) {
-            $sede == 'CAGUA';
-          }else{
+          }elseif ($sede == 'CAGUA' && $Month <= 06 && $d < 01 && $Year <= 2023) {
             $sede == 'KAGU';
             echo $sede;
           }
