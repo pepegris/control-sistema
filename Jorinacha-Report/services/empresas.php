@@ -65,10 +65,10 @@ function Database($sede)
 
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
+
         "Sucursal Caracas I" => 'CARACAS1',
         "Sucursal Caracas II" => 'CARACAS2',
         "Sucursal Cagua" => 'CAGUA',
-
         "Sucursal Maturin" => 'MATURIN',
 
         
@@ -85,6 +85,12 @@ function Database($sede)
         "Comercial Nachari" => 'NACHARI',
         "Comercial Corina II" => 'CORINA2',
         "Comercial Catica II" => 'CATICA2',
+
+        "Comercial Merina" => 'MERINA',
+        "Comercial Merina3" => 'MERINA3',
+        "Comerical Kagu" => 'KAGU',
+        "Comercial Matur" => 'MATUR',
+
     );
 
     return $bd[$sede];

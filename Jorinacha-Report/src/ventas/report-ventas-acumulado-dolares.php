@@ -133,25 +133,21 @@ if ($_GET) {
             $tasa_v_tasas;
           }
 
-          if ($Month <= 04) {
-           echo "prueba";
-          }
 
-
-          if ($sede == 'CARACAS1' && $Month <= 04 && $d < 13 && $Year <= 2023) {
-            $sede == 'MERINA';
+          if ($sede == "Sucursal Caracas I" && $Month <= 04 && $d < 13 && $Year <= 2023) {
+            $sede == 'Comercial Merina';
             echo $sede;
 
-          }elseif ($sede == 'CARACAS2' && $Month <= 04 && $d < 20 && $Year <= 2023) {
-            $sede == 'MERINA3';
+          }elseif ($sede == "Sucursal Caracas II" && $Month <= 04 && $d < 20 && $Year <= 2023) {
+            $sede == 'Comercial Merina3';
             echo $sede;
 
-          }elseif ($sede == 'MATURIN' && $Month <= 10 && $d < 01 && $Year <= 2023) {
-            $sede == 'MATUR';
+          }elseif ($sede == "Sucursal Maturin" && $Month <= 10 && $d < 01 && $Year <= 2023) {
+            $sede == 'Comercial Matur';
             echo $sede;
 
-          }elseif ($sede == 'CAGUA' && $Month <= 06 && $d < 01 && $Year <= 2023) {
-            $sede == 'KAGU';
+          }elseif ($sede == "Sucursal Cagua" && $Month <= 06 && $d < 01 && $Year <= 2023) {
+            $sede == 'Comerical Kagu';
             echo $sede;
           }
 
