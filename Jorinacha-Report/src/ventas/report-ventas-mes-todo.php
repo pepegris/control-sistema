@@ -154,9 +154,21 @@ if ($_GET) {
             $tasa_v_tasas  = 1;
           }
 
+          if ($dia==31 and $mes==01) {
+            echo "$dia - $mes / FECHA1 $fecha1  /FECHA2 $fecha_2" ;
+            echo "<br>";
+  
+          }
 
-          echo "$dia - $mes / FECHA1 $fecha1  /FECHA2 $fecha_2" ;
-          echo "<br>";
+          if ($dia==28 and $mes==02) {
+            echo "$dia - $mes / FECHA1 $fecha1  /FECHA2 $fecha_2" ;
+            echo "<br>";
+          }
+
+          if ($dia==29 and $mes==02) {
+            echo "$dia - $mes / FECHA1 $fecha1  /FECHA2 $fecha_2" ;
+            echo "<br>";
+          }
 
          
 
