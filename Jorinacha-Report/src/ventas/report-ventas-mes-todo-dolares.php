@@ -152,7 +152,7 @@ if ($_GET) {
             $sede = 'Comercial Merina3';
           }
 
-          if ($sede == "Comercial Merina3" && $Month == 04 && $d > 13 && $Year <= 2023) {
+          if ($sede == "Comercial Merina3" && $Month == 04 && $d > 20 && $Year <= 2023) {
             $sede = 'Sucursal Caracas II';
             
           }
