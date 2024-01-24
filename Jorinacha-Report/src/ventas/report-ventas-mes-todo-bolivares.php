@@ -109,14 +109,15 @@ if ($_GET) {
         for ($i = 1; $i < count($sedes_ar); $i++) {
 
           $cod = Cliente($sedes_ar[$i]);
+          $sede=$sedes_ar[$i];
 
 
-          $factura = getFactura($sedes_ar[$i], $fecha1, $fecha2, '');
+          $factura = getFactura($sede, $fecha1, $fecha2, '');
           $tasa_tot_neto_factura = $factura['tot_neto'];
   
   
   
-          $dev_cli = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, '');
+          $dev_cli = getDev_cli($sede, $fecha1, $fecha2, '');
           $tasa_tot_neto_dev_cli = $dev_cli['tot_neto'];
           $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
   
@@ -125,30 +126,30 @@ if ($_GET) {
           $tot_neto_factura = number_format($venta, 2, ',', '.');
   
   
-          $dev_cli_ven = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'ven2');
+          $dev_cli_ven = getDev_cli($sede, $fecha1, $fecha2, 'ven2');
           $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
   
-          $factura_ven = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'ven2');
+          $factura_ven = getFactura($sede, $fecha1, $fecha2, 'ven2');
   
           $venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
           $total_art_factura  = number_format($venta_art, 0, ',', '.');
   
   
-          $dep_caj = getDep_caj($sedes_ar[$i], $fecha1, $fecha2, '');
+          $dep_caj = getDep_caj($sede, $fecha1, $fecha2, '');
           $tasa_total_efec_dep_caj = $dep_caj['total_efec'];
           $tasa_total_tarj_dep_caj = $dep_caj['total_tarj'];
           $total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
           $total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
   
-          $mov_ban = getMov_ban($sedes_ar[$i], $fecha1, $fecha2, '');
+          $mov_ban = getMov_ban($sede, $fecha1, $fecha2, '');
           $tasa_monto_h_mov_ban = $mov_ban['monto_h'];
           $monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
   
-          $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, $fecha2, '');
+          $ord_pago = getOrd_pago($sede, $fecha1, $fecha2, '');
           $tasa_monto_ord_pago = $ord_pago['monto'];
           $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
   
-          $ord_pago_ven = getOrd_pago($sedes_ar[$i], $fecha1, $fecha2, 'ven2');
+          $ord_pago_ven = getOrd_pago($sede, $fecha1, $fecha2, 'ven2');
           $tasa_monto_ord_pago_ven = $ord_pago_ven['monto'];
           $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
   
@@ -198,11 +199,6 @@ if ($_GET) {
 
             <td> <?php
 
-
-          
-
-                    
-          
 
                   if ($venta <= 1 & $total_art_factura == 0) {
 
