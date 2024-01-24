@@ -155,7 +155,7 @@ if ($_GET) {
 
 
           
-          if ($tot_neto_factura == null ) {
+          if ($tasa_tot_neto_factura == null or $tot_neto_factura == 0 ) {
 
             $tot_neto_dev_cli = 0;
             $tot_neto_factura = 0;
