@@ -223,10 +223,6 @@ if ($_GET) {
         
         $fecha1 =  $Year .''. $Month .''  . '01';
         $fecha2 =  $Year .''. $Month .''  . $cantidad_Dias;
-        echo "$fecha1";
-        echo "<br>";
-        echo "$fecha2";
-        echo "<br>";
 
         $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
         $tot_neto_factura = number_format($venta, 2, ',', '.');
@@ -237,17 +233,10 @@ if ($_GET) {
         $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
         $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
 
-        echo "<br>";
-
         $dev_cli_ven = getDev_cli($sede, $fecha1, $fecha2, 'ven2');
         $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
 
         $factura_ven = getFactura($sede, $fecha1, $fecha2, 'ven2');
-
-        var_dump($dev_cli_ven);
-        echo "<br>";
-        var_dump($factura_ven);
-        echo "<br>";
 
         $venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
         $total_art_factura  = number_format($venta_art, 0, ',', '.');
