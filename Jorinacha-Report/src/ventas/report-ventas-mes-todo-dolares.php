@@ -217,7 +217,7 @@ if ($_GET) {
           <tr>
 
             <td><?= $cod   ?></td>
-            <td><?= $tienda  ?></td>
+            <td><?= $sede  ?></td>
 
 
 

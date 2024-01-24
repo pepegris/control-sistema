@@ -391,7 +391,7 @@ function getTasas($sede, $fecha1)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "SELECT TOP 1 tasa_v from tasas 
+            $sql = "SELECT TOP 1 CONVERT(numeric(10,2), tasa_v) as tasa_v from tasas 
             where Convert(char(10), fecha, 111) BETWEEN '$fecha1' AND  '$fecha1'
             ORDER BY fecha DESC";
             

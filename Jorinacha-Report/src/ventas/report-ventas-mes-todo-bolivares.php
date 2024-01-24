@@ -178,7 +178,7 @@ if ($_GET) {
           <tr>
 
             <td><?= $cod   ?></td>
-            <td><?= $tienda  ?></td>
+            <td><?= $sede  ?></td>
 
 
 
@@ -255,25 +255,6 @@ if ($_GET) {
           }
 
           echo "</tr>";
-
-
-          $tasa_tot_neto_factura =0;
-          $tasa_tot_neto_dev_cli =0;
-          $tot_neto_dev_cli = 0;
-          $tot_neto_factura =0;
-          $total_art_factura =0;
-          $total_art_dev_cli =0;
-          $total_art_dev_cli_2=0;
-          $tasa_total_efec_dep_caj =0;
-          $tasa_total_tarj_dep_caj =0;
-          $total_efec_dep_caj = 0;
-          $total_tarj_dep_caj = 0;
-          $tasa_monto_h_mov_ban =0;
-          $monto_h_mov_ban = 0;
-          $tasa_monto_ord_pago =0;
-          $monto_ord_pago = 0;
-          $tasa_monto_ord_pago_ven =0;
-          $monto_ord_pago_ven = 0;
 
         }
 
