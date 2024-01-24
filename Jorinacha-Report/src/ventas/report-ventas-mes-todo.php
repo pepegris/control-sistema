@@ -156,26 +156,25 @@ if ($_GET) {
          
 
           $factura = getFactura($tienda, $fecha1, $fecha3, 'sin');
-          $tasa_tot_neto_factura = $factura['tot_neto'] / $tasa_v_tasas;
+          $tasa_tot_neto_factura += $factura['tot_neto'] / $tasa_v_tasas;
 
           $dev_cli = getDev_cli($tienda, $fecha1, $fecha3, 'sin');
-          $tasa_tot_neto_dev_cli = $dev_cli['tot_neto'] / $tasa_v_tasas;
+          $tasa_tot_neto_dev_cli += $dev_cli['tot_neto'] / $tasa_v_tasas;
           #$tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
 
 
-          $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+          #$venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
           #$tot_neto_factura += number_format($venta, 2, ',', '.');
 
 
           $factura_ven = getFactura($tienda, $fecha1, $fecha3, 'ven');
-          $total_art_factura =  number_format($factura_ven['total_art'], 0, ',', '.');
+          $total_art_factura +=  number_format($factura_ven['total_art'], 0, ',', '.');
 
           $dev_cli_ven = getDev_cli($tienda, $fecha1, $fecha3, 'ven');
           $total_art_dev_cli += number_format($dev_cli_ven['total_art'], 0, ',', '.');
-          $total_art_dev_cli_2 = number_format($dev_cli_ven['total_art'], 0, ',', '.');
 
 
-          $pares+=$total_art_factura - $total_art_dev_cli_2  ;
+          #$pares+=$total_art_factura - $total_art_dev_cli  ;
 
 
           $dep_caj = getDep_caj($tienda, $fecha1, $fecha3, 'sin');
@@ -207,6 +206,10 @@ if ($_GET) {
         $monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
         $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
         $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
+
+        $pares+=$total_art_factura - $total_art_dev_cli  ;
+        $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+        
 
         ?>
           <tr>
