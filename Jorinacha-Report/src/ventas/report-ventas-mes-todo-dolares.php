@@ -41,15 +41,11 @@ if ($_GET) {
 
   <?php
 
-  if ($divisa == 'dl') {
-
     echo "<h4>En Dolares</h4>";
-  } else {
-    echo "<h4>En Bolivares</h4>";
-  }
+
 
   $y=1;
-  for ($k = 1; $k < $Month_total; $k++) {
+  for ($k = 0; $k < $Month_total; $k++) {
 
 
 
@@ -119,7 +115,7 @@ if ($_GET) {
             $e=1;
 
 
-            for ($r = 1; $r <= $cantidad_Dias; $r++) {
+            for ($r = 0; $r < $cantidad_Dias; $r++) {
 
               if ($e  < 10) {
     
@@ -129,8 +125,8 @@ if ($_GET) {
               }
     
     
-              $fecha =  $Year .'/'. $mes .'/'  . $d;
-              $tasas = getTasas($tienda, $fecha);
+              $fecha1 =  $Year .'/'. $mes .'/'  . $d;
+              $tasas = getTasas($tienda, $fecha1);
     
     
               if ($tasas != null) {
@@ -139,46 +135,41 @@ if ($_GET) {
                 $tasa_v_tasas;
               }
     
-    
-    
-              $factura = getFactura($tienda, $fecha, $fecha2, 'sin');
+
+              $factura = getFactura($tienda, $fecha1, $fecha3, 'sin');
               $tasa_tot_neto_factura += $factura['tot_neto'] / $tasa_v_tasas;
     
-              $dev_cli = getDev_cli($tienda, $fecha, $fecha2, 'sin');
+              $dev_cli = getDev_cli($tienda, $fecha1, $fecha3, 'sin');
               $tasa_tot_neto_dev_cli += $dev_cli['tot_neto'] / $tasa_v_tasas;
     
-    
-    
+
               $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
     
-    
-    
-              $dep_caj = getDep_caj($tienda, $fecha, $fecha2, 'sin');
+
+              $dep_caj = getDep_caj($tienda, $fecha1, $fecha3, 'sin');
               $tasa_total_efec_dep_caj += $dep_caj['total_efec'] / $tasa_v_tasas;
               $tasa_total_tarj_dep_caj += $dep_caj['total_tarj'] / $tasa_v_tasas;
     
     
-              $mov_ban = getMov_ban($tienda, $fecha, $fecha2, 'sin');
+              $mov_ban = getMov_ban($tienda, $fecha1, $fecha3, 'sin');
               $tasa_monto_h_mov_ban += $mov_ban['monto_h'] / $tasa_v_tasas;
     
     
-              $ord_pago = getOrd_pago($tienda, $fecha, $fecha2, 'sin');
+              $ord_pago = getOrd_pago($tienda, $fecha1, $fecha3, 'sin');
               $tasa_monto_ord_pago += $ord_pago['monto'] / $tasa_v_tasas;
     
     
-              $ord_pago_ven = getOrd_pago($tienda, $fecha, $fecha2, 'ven');
+              $ord_pago_ven = getOrd_pago($tienda, $fecha1, $fecha3, 'ven');
               $tasa_monto_ord_pago_ven += $ord_pago_ven['monto'] / $tasa_v_tasas;
-    
-    
-    
-    
     
     
               $e++;
             }
     
     
-    
+            $fecha2 =  $Year .'/'. $mes .'/'  . $cantidad_Dias;
+            $fecha1 =  $Year .'/'. $mes .'/'  . 01;
+
             $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
             $tot_neto_factura = number_format($venta, 2, ',', '.');
     

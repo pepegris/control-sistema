@@ -45,7 +45,7 @@ if ($_GET) {
 
 
   $y=1;
-  for ($k = 1; $k < $Month_total; $k++) {
+  for ($k = 0; $k < $Month_total; $k++) {
 
 
 
@@ -103,11 +103,13 @@ if ($_GET) {
 
         $cantidad_Dias = cal_days_in_month(CAL_GREGORIAN, $mes, $Year);
 
+        $fecha1 =  $Year .'/'. $mes .'/'  . 01;
+        $fecha2 =  $Year .'/'. $mes .'/'  . $cantidad_Dias;
+
         for ($i = 1; $i < count($sedes_ar); $i++) {
 
           $cod = Cliente($sedes_ar[$i]);
 
-          
 
           $factura = getFactura($sedes_ar[$i], $fecha1, $fecha2, '');
           $tasa_tot_neto_factura = $factura['tot_neto'];
@@ -169,13 +171,7 @@ if ($_GET) {
           $total_pagos += $tasa_monto_ord_pago;
           $total_gastos += $tasa_monto_ord_pago_ven;
   
-
-
-
-
-
-
-        
+ 
 
         ?>
           <tr>
@@ -345,7 +341,7 @@ if ($_GET) {
 
     $total_venta_pares=0;
 
-
+/* 
     $tasa_tot_neto_factura= 0;
     $tasa_tot_neto_dev_cli= 0;
     $factura_ven= 0;
@@ -355,7 +351,7 @@ if ($_GET) {
     $tasa_total_efec_dep_caj= 0;
     $tasa_total_tarj_dep_caj= 0;
     $tasa_monto_ord_pago= 0;
-    $tasa_monto_ord_pago_ven= 0;
+    $tasa_monto_ord_pago_ven= 0; */
     
 
 
