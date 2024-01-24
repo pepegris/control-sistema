@@ -191,7 +191,7 @@ if ($_GET) {
             $total_art_factura  = number_format($venta_art, 0, ',', '.');
 
 
-            if ($tasa_tot_neto_factura == null  ) {
+            if ($tasa_tot_neto_factura == null or $tot_neto_factura == 0 ) {
 
               $tot_neto_dev_cli = 0;
               $tot_neto_factura = 0;
@@ -223,10 +223,10 @@ if ($_GET) {
     
             $total_devol += $tasa_tot_neto_dev_cli;
 
-            if ($dev_cli_ven == null) {
+            if ($dev_cli_ven == null or $tot_neto_factura == 0) {
 
               $total_devol_pares += 0;
-              
+
             }else {
               
               $total_devol_pares += $dev_cli_ven['total_art'];

@@ -154,8 +154,8 @@ if ($_GET) {
           $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
 
 
-          
-          if ($tasa_tot_neto_factura == null  ) {
+
+          if ($tasa_tot_neto_factura == null or $tot_neto_factura == 0 ) {
 
             $tot_neto_dev_cli = 0;
             $tot_neto_factura = 0;
@@ -186,15 +186,15 @@ if ($_GET) {
           $total_venta_pares += $venta_art;
   
           $total_devol += $tasa_tot_neto_dev_cli;
+          
+          if ($dev_cli_ven == null or $tot_neto_factura == 0) {
 
-          if ($dev_cli_ven == null) {
-            
             $total_devol_pares += 0;
+
           }else {
             
             $total_devol_pares += $dev_cli_ven['total_art'];
           }
-          
   
           $total_depositos += $tasa_monto_h_mov_ban;
   
