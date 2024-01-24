@@ -119,85 +119,136 @@ if ($_GET) {
           $w=1;
           $venta =0;
           $pares=0;
-          for ($u = 1; $u < $cantidad_Dias; $u++) {
-            $w++;
-
-            if ($w < 10) {
-
-              $dia = 0 . $w;
-            } else {
-              $dia = $w;
-            }
-
-            
-            $fecha_2 = $Year . '/' . $mes . '/' . $dia;
-    
-            if ($w == 1) {
-        
-              $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
-            } else {
-              $fecha1 = $Year . '' . $mes . '' . $dia;
-            }
-
-
+          
           if ($divisa == 'dl') {
 
-            $tasas = getTasas($tienda,  $fecha_2);
+            for ($u = 1; $u < $cantidad_Dias; $u++) {
+              
+  
+              if ($w < 10) {
+  
+                $dia = 0 . $w;
+              } else {
+                $dia = $w;
+              }
 
-            if ($tasas != null) {
-              $tasa_v_tasas = $tasas['tasa_v'];
-            } else {
-              $tasa_v_tasas;
+              $w++;
+  
+              
+              $fecha_2 = $Year . '/' . $mes . '/' . $dia;
+
+              $fecha1 = $Year . '' . $mes . '' . $dia;
+              
+  
+              $tasas = getTasas($tienda,  $fecha_2);
+  
+              if ($tasas != null) {
+                $tasa_v_tasas = $tasas['tasa_v'];
+              } else {
+                $tasa_v_tasas;
+              }
+
+              $factura = getFactura($tienda, $fecha1, $fecha3, 'sin');
+              $tasa_tot_neto_factura += $factura['tot_neto'] / $tasa_v_tasas;
+    
+              $dev_cli = getDev_cli($tienda, $fecha1, $fecha3, 'sin');
+              $tasa_tot_neto_dev_cli += $dev_cli['tot_neto'] / $tasa_v_tasas;
+              #$tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
+    
+    
+              #$venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+              #$tot_neto_factura += number_format($venta, 2, ',', '.');
+    
+    
+              $factura_ven = getFactura($tienda, $fecha1, $fecha3, 'ven');
+              $total_art_factura +=  number_format($factura_ven['total_art'], 0, ',', '.');
+    
+              $dev_cli_ven = getDev_cli($tienda, $fecha1, $fecha3, 'ven');
+              $total_art_dev_cli += number_format($dev_cli_ven['total_art'], 0, ',', '.');
+    
+    
+              #$pares+=$total_art_factura - $total_art_dev_cli  ;
+    
+    
+              $dep_caj = getDep_caj($tienda, $fecha1, $fecha3, 'sin');
+              $tasa_total_efec_dep_caj += $dep_caj['total_efec'] / $tasa_v_tasas;
+              $tasa_total_tarj_dep_caj += $dep_caj['total_tarj'] / $tasa_v_tasas;
+              #$total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
+              #$total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
+    
+              $mov_ban = getMov_ban($tienda, $fecha1, $fecha3, 'sin');
+              $tasa_monto_h_mov_ban += $mov_ban['monto_h'] / $tasa_v_tasas;
+              #$monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
+    
+              $ord_pago = getOrd_pago($tienda, $fecha1, $fecha3, 'sin');
+              $tasa_monto_ord_pago += $ord_pago['monto'] / $tasa_v_tasas;
+              #$monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
+    
+              $ord_pago_ven = getOrd_pago($tienda, $fecha1, $fecha3, 'ven');
+              $tasa_monto_ord_pago_ven += $ord_pago_ven['monto'] / $tasa_v_tasas;
+              #$monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
+  
+  
+  
             }
+
           } else {
-            $tasa_v_tasas  = 1;
+  
+      
+
+              $fecha1 = $Year . '' . $mes . '' . 01;
+              $fecha3 = $Year . '' . $mes . '' . $cantidad_Dias;
+              
+
+
+              $factura = getFactura($tienda, $fecha1, $fecha3, 'sin2');
+              $tasa_tot_neto_factura += $factura['tot_neto'] / $tasa_v_tasas;
+    
+              $dev_cli = getDev_cli($tienda, $fecha1, $fecha3, 'sin2');
+              $tasa_tot_neto_dev_cli += $dev_cli['tot_neto'] / $tasa_v_tasas;
+              #$tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
+    
+    
+              #$venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+              #$tot_neto_factura += number_format($venta, 2, ',', '.');
+    
+    
+              $factura_ven = getFactura($tienda, $fecha1, $fecha3, 'ven2');
+              $total_art_factura +=  number_format($factura_ven['total_art'], 0, ',', '.');
+    
+              $dev_cli_ven = getDev_cli($tienda, $fecha1, $fecha3, 'ven2');
+              $total_art_dev_cli += number_format($dev_cli_ven['total_art'], 0, ',', '.');
+    
+    
+              #$pares+=$total_art_factura - $total_art_dev_cli  ;
+    
+    
+              $dep_caj = getDep_caj($tienda, $fecha1, $fecha3, 'sin2');
+              $tasa_total_efec_dep_caj += $dep_caj['total_efec'] / $tasa_v_tasas;
+              $tasa_total_tarj_dep_caj += $dep_caj['total_tarj'] / $tasa_v_tasas;
+              #$total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
+              #$total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
+    
+              $mov_ban = getMov_ban($tienda, $fecha1, $fecha3, 'sin2');
+              $tasa_monto_h_mov_ban += $mov_ban['monto_h'] / $tasa_v_tasas;
+              #$monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
+    
+              $ord_pago = getOrd_pago($tienda, $fecha1, $fecha3, 'sin2');
+              $tasa_monto_ord_pago += $ord_pago['monto'] / $tasa_v_tasas;
+              #$monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
+    
+              $ord_pago_ven = getOrd_pago($tienda, $fecha1, $fecha3, 'ven2');
+              $tasa_monto_ord_pago_ven += $ord_pago_ven['monto'] / $tasa_v_tasas;
+              #$monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
+  
+  
+  
+          
+            
           }
 
-         
-
-          $factura = getFactura($tienda, $fecha1, $fecha3, 'sin');
-          $tasa_tot_neto_factura += $factura['tot_neto'] / $tasa_v_tasas;
-
-          $dev_cli = getDev_cli($tienda, $fecha1, $fecha3, 'sin');
-          $tasa_tot_neto_dev_cli += $dev_cli['tot_neto'] / $tasa_v_tasas;
-          #$tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
 
 
-          #$venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
-          #$tot_neto_factura += number_format($venta, 2, ',', '.');
-
-
-          $factura_ven = getFactura($tienda, $fecha1, $fecha3, 'ven');
-          $total_art_factura +=  number_format($factura_ven['total_art'], 0, ',', '.');
-
-          $dev_cli_ven = getDev_cli($tienda, $fecha1, $fecha3, 'ven');
-          $total_art_dev_cli += number_format($dev_cli_ven['total_art'], 0, ',', '.');
-
-
-          #$pares+=$total_art_factura - $total_art_dev_cli  ;
-
-
-          $dep_caj = getDep_caj($tienda, $fecha1, $fecha3, 'sin');
-          $tasa_total_efec_dep_caj += $dep_caj['total_efec'] / $tasa_v_tasas;
-          $tasa_total_tarj_dep_caj += $dep_caj['total_tarj'] / $tasa_v_tasas;
-          #$total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
-          #$total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
-
-          $mov_ban = getMov_ban($tienda, $fecha1, $fecha3, 'sin');
-          $tasa_monto_h_mov_ban += $mov_ban['monto_h'] / $tasa_v_tasas;
-          #$monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
-
-          $ord_pago = getOrd_pago($tienda, $fecha1, $fecha3, 'sin');
-          $tasa_monto_ord_pago += $ord_pago['monto'] / $tasa_v_tasas;
-          #$monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
-
-          $ord_pago_ven = getOrd_pago($tienda, $fecha1, $fecha3, 'ven');
-          $tasa_monto_ord_pago_ven += $ord_pago_ven['monto'] / $tasa_v_tasas;
-          #$monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
-
-
-
-        }
 
         $pares+=$total_art_factura - $total_art_dev_cli  ;
         $venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
