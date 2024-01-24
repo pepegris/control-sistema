@@ -129,6 +129,7 @@ if ($_GET) {
             } else {
               $dia = $w;
             }
+            echo $dia ;
             
             $fecha_2 = $Year . '/' . $mes . '/' . $dia;
     
