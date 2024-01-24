@@ -129,6 +129,33 @@ if ($_GET) {
               } else {
                 $d = $e;
               }
+
+ 
+              if ($sede == "Sucursal Caracas I" && $Month < 04  && $Year <= 2023) {
+                $sede = 'Comercial Merina';
+                
+              }elseif ( $sede == "Sucursal Caracas I" && $Month == 04 && $d < 13 && $Year <= 2023){
+                $sede = 'Comercial Merina';
+              }
+              
+              
+              if ($sede == "Sucursal Caracas II" && $Month < 04  && $Year <= 2023) {
+                $sede = 'Comercial Merina3';
+    
+              }elseif ( $sede == "Sucursal Caracas II" && $Month == 04   && $d < 20 && $Year <= 2023){
+                $sede = 'Comercial Merina3';
+              }
+              
+              if ($sede == "Sucursal Maturin" && $Month < 10  && $Year <= 2023) {
+                $sede = 'Comercial Matur';
+          
+              }
+              
+              
+              if ($sede == "Sucursal Cagua" && $Month < 06  && $Year <= 2023) {
+                $sede = 'Comercial Kagu';
+                
+              }
     
     
               $fecha =  $Year .'/'. $mes .'/'  . $d;
@@ -142,31 +169,6 @@ if ($_GET) {
               }
 
               $fecha1 =  $Year .''. $mes .''  . $d;
-
-
-              if ($sede == 'CARACAS1' && $mes >= 04 && $d >= 13 && $Year >= 2023) {
-                $sede == 'CARACAS1';
-              }else{
-                $sede == 'MERINA';
-              }
-
-              if ($sede == 'CARACAS2' && $mes >= 04 && $d >= 20 && $Year >= 2023) {
-                $sede == 'CARACAS2';
-              }else{
-                $sede == 'MERINA3';
-              }
-
-              if ($sede == 'MATURIN' && $mes >= 10 && $d >= 01 && $Year >= 2023) {
-                $sede == 'MATURIN';
-              }else{
-                $sede == 'MATUR';
-              }
-
-              if ($sede == 'CAGUA' && $mes >= 06 && $d >= 01 && $Year >= 2023) {
-                $sede == 'CAGUA';
-              }else{
-                $sede == 'KAGU';
-              }
     
 
               $factura = getFactura($sede, $fecha1, $fecha3, 'sin');
