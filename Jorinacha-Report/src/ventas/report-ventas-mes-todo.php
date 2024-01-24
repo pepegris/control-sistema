@@ -195,7 +195,7 @@ if ($_GET) {
           } else {
   
       
-
+              $tasa_v_tasas=1;
               $fecha1 = $Year . '' . $mes . '' . 01;
               $fecha3 = $Year . '' . $mes . '' . $cantidad_Dias;
               
@@ -392,7 +392,7 @@ if ($_GET) {
         if ($divisa == 'dl') {
 
           $simb = '$';
-          $colspan = 3;
+          $colspan = 2;
         } else {
 
           $simb = 'Bs';
@@ -460,6 +460,7 @@ if ($_GET) {
     $tasa_total_tarj_dep_caj= 0;
     $tasa_monto_ord_pago= 0;
     $tasa_monto_ord_pago_ven= 0;
+    
 
 
   }
