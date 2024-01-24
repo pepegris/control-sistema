@@ -113,7 +113,7 @@ if ($_GET) {
         $cod = Cliente($sede);
 
 
-        for ($r = 0; $r < $Day; $r++) {
+        for ($r = 0; $r <= $Day; $r++) {
           echo $r;
           if ($e  < 10) {
 

@@ -45,7 +45,7 @@ if ($_GET) {
 
 
   $y=1;
-  for ($k = 0; $k < $Month_total; $k++) {
+  for ($k = 0; $k <= $Month_total; $k++) {
 
 
 
@@ -121,7 +121,7 @@ if ($_GET) {
           $e=1;
 
 
-            for ($r = 0; $r < $cantidad_Dias; $r++) {
+            for ($r = 0; $r <= $cantidad_Dias; $r++) {
 
               if ($e  < 10) {
     
