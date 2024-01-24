@@ -114,13 +114,14 @@ if ($_GET) {
 
 
         for ($r = 0; $r <= $Day; $r++) {
-          echo $r;
+
           if ($e  < 10) {
 
             $d = 0 . $e;
           } else {
             $d = $e;
           }
+           echo $d;
 
           if ($sede == "Sucursal Caracas I" && $Month < 04  && $Year <= 2023) {
             $sede = 'Comercial Merina';
