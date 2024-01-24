@@ -38,7 +38,7 @@ if ($_GET) {
 
 
   <?php
-    echo "<h4>En Dolares</h4>";
+    echo "<h4>En Bolivares</h4>";
 
     $y=1;
   for ($k = 1; $k <= $Month_total; $k++) {
