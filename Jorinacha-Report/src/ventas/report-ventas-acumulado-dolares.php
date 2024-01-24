@@ -138,24 +138,28 @@ if ($_GET) {
             $sede == 'CARACAS1';
           }else{
             $sede == 'MERINA';
+            echo $sede;
           }
 
           if ($sede == 'CARACAS2' && $Month >= 04 && $d >= 20 && $Year >= 2023) {
             $sede == 'CARACAS2';
           }else{
             $sede == 'MERINA3';
+            echo $sede;
           }
 
           if ($sede == 'MATURIN' && $Month >= 10 && $d >= '01' && $Year >= 2023) {
             $sede == 'MATURIN';
           }else{
             $sede == 'MATUR';
+            echo $sede;
           }
 
           if ($sede == 'CAGUA' && $Month >= 06 && $d >= '01' && $Year >= 2023) {
             $sede == 'CAGUA';
           }else{
             $sede == 'KAGU';
+            echo $sede;
           }
 
 
