@@ -111,7 +111,8 @@ if ($_GET) {
 
         $cantidad_Dias = cal_days_in_month(CAL_GREGORIAN, $mes, $Year);
 
-
+        echo $cantidad_Dias;
+        echo "<br>";
         for ($i = 1; $i < count($sedes_ar); $i++) {
 
           $cod = Cliente($sedes_ar[$i]);
