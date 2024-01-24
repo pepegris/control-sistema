@@ -186,7 +186,7 @@ if ($_GET) {
           $total_venta_pares += $venta_art;
   
           $total_devol += $tasa_tot_neto_dev_cli;
-          
+
           if ($dev_cli_ven == null or $tot_neto_factura == 0) {
 
             $total_devol_pares += 0;

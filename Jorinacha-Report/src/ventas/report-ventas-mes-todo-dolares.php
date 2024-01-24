@@ -142,6 +142,31 @@ if ($_GET) {
               }
 
               $fecha1 =  $Year .''. $mes .''  . $d;
+
+
+              if ($sede == 'CARACAS1' && $mes >= 04 && $d >= 13 && $Year >= 2023) {
+                $sede == 'CARACAS1';
+              }else{
+                $sede == 'MERINA';
+              }
+
+              if ($sede == 'CARACAS2' && $mes >= 04 && $d >= 20 && $Year >= 2023) {
+                $sede == 'CARACAS2';
+              }else{
+                $sede == 'MERINA3';
+              }
+
+              if ($sede == 'MATURIN' && $mes >= 10 && $d >= 01 && $Year >= 2023) {
+                $sede == 'MATURIN';
+              }else{
+                $sede == 'MATUR';
+              }
+
+              if ($sede == 'CAGUA' && $mes >= 06 && $d >= 01 && $Year >= 2023) {
+                $sede == 'CAGUA';
+              }else{
+                $sede == 'KAGU';
+              }
     
 
               $factura = getFactura($sede, $fecha1, $fecha3, 'sin');

@@ -110,6 +110,7 @@ if ($_GET) {
         $e = 1;
 
         $sede = $sedes_ar[$i];
+        $cod = Cliente($sede);
 
 
         for ($r = 0; $r <= $Day; $r++) {
@@ -130,6 +131,31 @@ if ($_GET) {
             $tasa_v_tasas = $tasas['tasa_v'];
           } else {
             $tasa_v_tasas;
+          }
+
+
+          if ($sede == 'CARACAS1' && $mes >= 04 && $d >= 13 && $Year >= 2023) {
+            $sede == 'CARACAS1';
+          }else{
+            $sede == 'MERINA';
+          }
+
+          if ($sede == 'CARACAS2' && $mes >= 04 && $d >= 20 && $Year >= 2023) {
+            $sede == 'CARACAS2';
+          }else{
+            $sede == 'MERINA3';
+          }
+
+          if ($sede == 'MATURIN' && $mes >= 10 && $d >= 01 && $Year >= 2023) {
+            $sede == 'MATURIN';
+          }else{
+            $sede == 'MATUR';
+          }
+
+          if ($sede == 'CAGUA' && $mes >= 06 && $d >= 01 && $Year >= 2023) {
+            $sede == 'CAGUA';
+          }else{
+            $sede == 'KAGU';
           }
 
 
@@ -171,7 +197,7 @@ if ($_GET) {
         }
 
 
-        $cod = Cliente($sede);
+        
 
 
         $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
