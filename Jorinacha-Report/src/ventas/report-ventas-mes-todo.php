@@ -112,12 +112,12 @@ if ($_GET) {
           $cod = Cliente($sedes_ar[$i]);
           $tienda=$sedes_ar[$i];
 
-          $w=1;
+          
           $venta =0;
           $pares=0;
           
           if ($divisa == 'dl') {
-
+            $w=1;
             for ($u = 1; $u < $cantidad_Dias; $u++) {
               
   
@@ -206,58 +206,45 @@ if ($_GET) {
               $fecha1 = $Year . '' . $mes . '' . 01;
               $fecha2 = $Year . '' . $mes . '' . $cantidad_Dias;
               
-
-
               $factura = getFactura($tienda, $fecha1, $fecha2, '');
-              $tasa_tot_neto_factura = $factura['tot_neto'] ;
-    
+              $tasa_tot_neto_factura = $factura['tot_neto'];
+      
+      
+      
               $dev_cli = getDev_cli($tienda, $fecha1, $fecha2, '');
-              $tasa_tot_neto_dev_cli = $dev_cli['tot_neto'] ;
-              #$tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
-    
-    
-              #$venta = $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
-              #$tot_neto_factura = number_format($venta, 2, ',', '.');
-    
-    
-              $factura_ven = getFactura($tienda, $fecha1, $fecha2, 'ven2');
-              $total_art_factura =  number_format($factura_ven['total_art'], 0, ',', '.');
-    
+              $tasa_tot_neto_dev_cli = $dev_cli['tot_neto'];
+              $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
+      
+      
+              $venta = $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+              $tot_neto_factura = number_format($venta, 2, ',', '.');
+      
+      
               $dev_cli_ven = getDev_cli($tienda, $fecha1, $fecha2, 'ven2');
               $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
-    
-    
-              #$pares=$total_art_factura - $total_art_dev_cli  ;
-    
-    
-              $dep_caj = getDep_caj($tienda, $fecha1, $fecha2, '');
-              $tasa_total_efec_dep_caj = $dep_caj['total_efec'] ;
-              $tasa_total_tarj_dep_caj = $dep_caj['total_tarj'] ;
-              #$total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
-              #$total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
-    
-              $mov_ban = getMov_ban($tienda, $fecha1, $fecha2, '');
-              $tasa_monto_h_mov_ban = $mov_ban['monto_h'] ;
-              #$monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
-    
-              $ord_pago = getOrd_pago($tienda, $fecha1, $fecha2, '');
-              $tasa_monto_ord_pago = $ord_pago['monto'] ;
-              #$monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
-    
-              $ord_pago_ven = getOrd_pago($tienda, $fecha1, $fecha2, 'ven2');
-              $tasa_monto_ord_pago_ven = $ord_pago_ven['monto'] ;
-              #$monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
-  
-  
-              $pares=$total_art_factura - $total_art_dev_cli  ;
-              $venta = $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
       
-              $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
-              $tot_neto_factura=number_format($venta, 2, ',', '.');
+              $factura_ven = getFactura($tienda, $fecha1, $fecha2, 'ven2');
+      
+              $venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
+              $pares  = number_format($venta_art, 0, ',', '.');
+      
+      
+              $dep_caj = getDep_caj($tienda, $fecha1, $fecha2, '');
+              $tasa_total_efec_dep_caj = $dep_caj['total_efec'];
+              $tasa_total_tarj_dep_caj = $dep_caj['total_tarj'];
               $total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
               $total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
+      
+              $mov_ban = getMov_ban($tienda, $fecha1, $fecha2, '');
+              $tasa_monto_h_mov_ban = $mov_ban['monto_h'];
               $monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
+      
+              $ord_pago = getOrd_pago($tienda, $fecha1, $fecha2, '');
+              $tasa_monto_ord_pago = $ord_pago['monto'];
               $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
+      
+              $ord_pago_ven = getOrd_pago($tienda, $fecha1, $fecha2, 'ven2');
+              $tasa_monto_ord_pago_ven = $ord_pago_ven['monto'];
               $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
       
   
