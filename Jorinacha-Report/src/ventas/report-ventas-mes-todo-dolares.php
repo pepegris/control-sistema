@@ -125,8 +125,8 @@ if ($_GET) {
               }
     
     
-              $fecha1 =  $Year .'/'. $mes .'/'  . $d;
-              $tasas = getTasas($sede, $fecha1);
+              $fecha =  $Year .'/'. $mes .'/'  . $d;
+              $tasas = getTasas($sede, $fecha);
     
     
               if ($tasas != null) {
@@ -134,6 +134,8 @@ if ($_GET) {
               } else {
                 $tasa_v_tasas;
               }
+
+              $fecha1 =  $Year .''. $mes .''  . $d;
     
 
               $factura = getFactura($sede, $fecha1, $fecha3, 'sin');
@@ -167,8 +169,8 @@ if ($_GET) {
             }
     
     
-            $fecha2 =  $Year .'/'. $mes .'/'  . $cantidad_Dias;
-            $fecha1 =  $Year .'/'. $mes .'/'  . 01;
+            $fecha2 =  $Year .''. $mes .''  . $cantidad_Dias;
+            $fecha1 =  $Year .''. $mes .''  . 01;
 
             $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
             $tot_neto_factura = number_format($venta, 2, ',', '.');
@@ -189,7 +191,7 @@ if ($_GET) {
             $total_art_factura  = number_format($venta_art, 0, ',', '.');
 
 
-            if ($tot_neto_factura == null ) {
+            if ($tasa_tot_neto_factura == null or $tot_neto_factura == 0 ) {
 
               $tot_neto_dev_cli = 0;
               $tot_neto_factura = 0;

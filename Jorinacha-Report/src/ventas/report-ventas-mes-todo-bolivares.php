@@ -103,8 +103,8 @@ if ($_GET) {
 
         $cantidad_Dias = cal_days_in_month(CAL_GREGORIAN, $mes, $Year);
 
-        $fecha1 =  $Year .'/'. $mes .'/'  . 01;
-        $fecha2 =  $Year .'/'. $mes .'/'  . $cantidad_Dias;
+        $fecha1 =  $Year .''. $mes .''  . 01;
+        $fecha2 =  $Year .''. $mes .''  . $cantidad_Dias;
 
         for ($i = 1; $i < count($sedes_ar); $i++) {
 
