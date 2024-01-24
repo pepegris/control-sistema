@@ -221,7 +221,7 @@ if ($_GET) {
 
 
         
-        $fecha1 =  $Year .''. $Month .''  . 01;
+        $fecha1 =  $Year .''. $Month .''  . '01';
         $fecha2 =  $Year .''. $Month .''  . $cantidad_Dias;
         echo "$fecha1";
         echo "<br>";
@@ -238,7 +238,7 @@ if ($_GET) {
         $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
 
         echo "<br>";
-        
+
         $dev_cli_ven = getDev_cli($sede, $fecha1, $fecha2, 'ven2');
         $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
 
