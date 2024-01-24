@@ -121,7 +121,7 @@ if ($_GET) {
           $e=1;
 
 
-            for ($r = 0; $r <= $cantidad_Dias; $r++) {
+            for ($r = 1; $r <= $cantidad_Dias; $r++) {
 
               if ($e  < 10) {
     
