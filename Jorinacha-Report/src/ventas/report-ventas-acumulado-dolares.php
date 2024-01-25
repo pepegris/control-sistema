@@ -121,6 +121,7 @@ if ($_GET) {
           } else {
             $d = $e;
           }
+           echo $d;
 
           if ($sede == "Sucursal Caracas I" && $Month < 04  && $Year <= 2023) {
             $sede = 'Comercial Merina';
