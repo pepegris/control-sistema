@@ -118,7 +118,7 @@ echo "<h4>En Dolares</h4>";
           
         }
 
-        if ($sede == "Comercial Merina" && $Month == 04  && $Year >= 2023) {
+        if ($sede == "Comercial Merina" &&  $Year >= 2023   && $Month == 04) {
           $sede = 'Sucursal Caracas I';
           
         }
@@ -129,7 +129,7 @@ echo "<h4>En Dolares</h4>";
 
         }
 
-        if ($sede == "Comercial Merina3" && $Month == 04   && $Year >=  2023) {
+        if ($sede == "Comercial Merina3" && $Year >=  2023   &&  $Month == 04 ) {
           $sede = 'Sucursal Caracas II';
           
         }
