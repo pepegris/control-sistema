@@ -78,6 +78,29 @@ include '../../services/sqlserver.php';
         <option value="dl">Dolares</option>
 
       </select> 
+
+      
+      <div class="form-group">
+        <label for="linea" class="form-label ">Marcas</label>
+        <select name="linea" id="">
+          <option value="todos">Todas las marcas</option>
+
+          <?php
+
+
+          $res2 = getLin_art_all();
+
+          for ($i = 0; $i < count($res2); $i++) {
+
+            $lin_des = utf8_encode("$res2[$i]['lin_des']")
+          ?>
+            
+            <option value="<?= $res2[$i]["co_lin"] ?>"><?= $res2[$i]['lin_des'] ?> - <?= $res2[$i]["co_lin"] ?></option>
+
+          <?php   }  ?>
+
+        </select>
+      </div>
       
 
 

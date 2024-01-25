@@ -16,6 +16,7 @@ if ($clave === 'N3td0s' ) {
     
     $reporte=$_POST['reporte'];
     $divisa=$_POST['divisa'];
+    $linea=$_POST['linea'];
 
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
     $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
@@ -40,14 +41,26 @@ if ($clave === 'N3td0s' ) {
     }    
     elseif ($reporte=='mes') {
 
+        if ($linea=='todos') {
+            if ($divisa== 'dl') {
 
-        if ($divisa== 'dl') {
+                header("refresh:1;url= report-ventas-mes-todo-dolares.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
+            }    else {
+    
+                header("refresh:1;url= report-ventas-mes-todo-bolivares.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
+            }
+        }else {
+            if ($divisa== 'dl') {
 
-            header("refresh:1;url= report-ventas-mes-todo-dolares.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
-        }    else {
-
-            header("refresh:1;url= report-ventas-mes-todo-bolivares.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
+                header("refresh:1;url= report-ventas-mes-marcas-dolares.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
+            }    else {
+    
+                header("refresh:1;url= report-ventas-mes-marcas-bolivares.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
+            }
         }
+
+
+
 
         
 

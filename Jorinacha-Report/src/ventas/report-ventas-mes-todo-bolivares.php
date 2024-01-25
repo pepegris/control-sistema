@@ -10,6 +10,7 @@ include '../../services/adm/ventas/diarias.php';
 if ($_GET) {
 
   $divisa = $_GET['divisa'];
+  $linea=$_GET['linea'];
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
@@ -152,12 +153,12 @@ if ($_GET) {
         $fecha2 =  $Year .''. $Month .''  . $cantidad_Dias;
 
 
-        $factura = getFactura($sede, $fecha1, $fecha2, '');
+        $factura = getFactura($sede, $fecha1, $fecha2, '',$linea);
         $tasa_tot_neto_factura = $factura['tot_neto'];
 
 
 
-        $dev_cli = getDev_cli($sede, $fecha1, $fecha2, '');
+        $dev_cli = getDev_cli($sede, $fecha1, $fecha2, '',$linea);
         $tasa_tot_neto_dev_cli = $dev_cli['tot_neto'];
         $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
 
@@ -166,10 +167,10 @@ if ($_GET) {
         $tot_neto_factura = number_format($venta, 2, ',', '.');
 
 
-        $dev_cli_ven = getDev_cli($sede, $fecha1, $fecha2, 'ven2');
+        $dev_cli_ven = getDev_cli($sede, $fecha1, $fecha2, 'ven2',$linea);
         $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
 
-        $factura_ven = getFactura($sede, $fecha1, $fecha2, 'ven2');
+        $factura_ven = getFactura($sede, $fecha1, $fecha2, 'ven2',$linea);
 
         $venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
         $total_art_factura  = number_format($venta_art, 0, ',', '.');

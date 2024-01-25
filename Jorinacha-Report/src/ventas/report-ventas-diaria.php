@@ -12,6 +12,7 @@ if ($_GET) {
   $divisa = $_GET['divisa'];
   $fecha_titulo = date("d/m/Y", strtotime($_GET['fecha1']));
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
+  $linea='todos';
 
   $fecha = date("Ymd", strtotime($_GET['fecha1']));
 
@@ -122,10 +123,10 @@ if ($_GET) {
 
         $cod = Cliente($sedes_ar[$i]);
 
-        $factura = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'sin');
+        $factura = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'sin',$linea);
         $tasa_tot_neto_factura = $factura['tot_neto'] / $tasa_v_tasas;
 
-        $dev_cli = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'sin');
+        $dev_cli = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'sin',$linea);
         $tasa_tot_neto_dev_cli = $dev_cli['tot_neto'] / $tasa_v_tasas;
         $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
 
@@ -134,10 +135,10 @@ if ($_GET) {
         $tot_neto_factura = number_format($venta, 2, ',', '.');
 
 
-        $factura_ven = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'ven');
+        $factura_ven = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'ven',$linea);
         $total_art_factura =  number_format($factura_ven['total_art'], 0, ',', '.');
 
-        $dev_cli_ven = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'ven');
+        $dev_cli_ven = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'ven',$linea);
         $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
 
 

@@ -12,6 +12,7 @@ if ($_GET) {
   $divisa = "dl";
   $fecha_titulo = date("d/m/Y", strtotime($_GET['fecha1']));
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
+  $linea='todos';
 
   $fecha = date("Ymd", strtotime($_GET['fecha1']));
 
@@ -108,10 +109,10 @@ if ($_GET) {
 
         /* CONSULTAS */
 
-        $factura = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'sin');
-        $dev_cli = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'sin');
-        $factura_ven = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'ven');
-        $dev_cli_ven = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'ven');
+        $factura = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'sin',$linea);
+        $dev_cli = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'sin',$linea);
+        $factura_ven = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'ven',$linea);
+        $dev_cli_ven = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'ven',$linea);
         $dep_caj = getDep_caj($sedes_ar[$i], $fecha1, $fecha2, 'sin');
         $mov_ban = getMov_ban($sedes_ar[$i], $fecha1, $fecha2, 'sin');
         $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, $fecha2, 'sin');

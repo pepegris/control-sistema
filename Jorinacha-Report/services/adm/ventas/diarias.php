@@ -10,7 +10,7 @@ require "../../services/empresas.php";
 
 
 /* CONSULTAR ARTICULOS VENDIDOS*/
-function getFactura($sede, $fecha1, $fecha2, $data)
+function getFactura($sede, $fecha1, $fecha2, $data,$linea)
 {
 
     $database = Database($sede);
@@ -23,24 +23,63 @@ function getFactura($sede, $fecha1, $fecha2, $data)
 
             if ($data == 'ven') {
 
-                $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
-                JOIN factura ON factura.fact_num = reng_fac.fact_num
-                where anulada=0 AND fec_emis ='$fecha1'";
+                if ($linea !='todos') {
+                    $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
+                    JOIN factura ON factura.fact_num = reng_fac.fact_num
+                    inner join art on art.co_art=reng_fac.co_art
+                    where anulada=0 AND fec_emis ='$fecha1' and art.co_lin='$linea'";
+                }else {
+                    $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
+                    JOIN factura ON factura.fact_num = reng_fac.fact_num
+                    where anulada=0 AND fec_emis ='$fecha1'";
+                }
+
+
 
             }elseif ($data == 'ven2') {
 
-                $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
-                JOIN factura ON factura.fact_num = reng_fac.fact_num
-                where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
+
+                if ($linea !='todos') {
+                    $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
+                    JOIN factura ON factura.fact_num = reng_fac.fact_num
+                    inner join art on art.co_art=reng_fac.co_art
+                    where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2' and art.co_lin='$linea'";
+                }else {
+                    $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
+                    JOIN factura ON factura.fact_num = reng_fac.fact_num
+                    where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
+                }
+
+
 
             }elseif ($data == 'sin') {
 
-                $sql = "SELECT  SUM(tot_neto)  as tot_neto from factura
-                where anulada=0 AND fec_emis ='$fecha1'";
-            } else {
+                if ($linea !='todos') {
+                    $sql = "SELECT  SUM(tot_neto) as tot_neto from factura
+                    inner join reng_fac on reng_fac.fact_num = factura.fact_num
+                    inner join art on art.co_art=reng_fac.co_art
+                    where anulada=0 AND fec_emis ='$fecha1' and art.co_lin='$linea'";
+                }else {
+                    $sql = "SELECT  SUM(tot_neto)  as tot_neto from factura
+                    where anulada=0 AND fec_emis ='$fecha1'";
+                }
 
-                $sql = "SELECT  SUM(tot_neto) as tot_neto from factura
-                where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
+
+
+            }  else {
+
+
+                if ($linea !='todos') {
+                    $sql = "SELECT  SUM(tot_neto) as tot_neto from factura
+                    inner join reng_fac on reng_fac.fact_num = factura.fact_num
+                    inner join art on art.co_art=reng_fac.co_art
+                    where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2' and art.co_lin='$linea'";
+                }else {
+                    $sql = "SELECT  SUM(tot_neto) as tot_neto from factura
+                    where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
+                }
+
+
             }
 
 
@@ -77,7 +116,7 @@ function getFactura($sede, $fecha1, $fecha2, $data)
 }
 
 
-function getDev_cli($sede, $fecha1, $fecha2, $data)
+function getDev_cli($sede, $fecha1, $fecha2, $data , $linea)
 {
 
 
@@ -91,25 +130,70 @@ function getDev_cli($sede, $fecha1, $fecha2, $data)
 
             if ($data == 'sin') {
 
-                $sql = "SELECT SUM(dev_cli.tot_neto) as tot_neto  from dev_cli 
-                WHERE fec_emis ='$fecha1' and dev_cli.anulada =0 ";
+
+                if ($linea !='todos') {
+                    $sql = "SELECT SUM(dev_cli.tot_neto) as tot_neto  from dev_cli 
+                    inner join reng_dvc on reng_dvc.fact_num = dev_cli.fact_num
+                    inner join art on art.co_art=reng_dvc.co_art
+                    WHERE fec_emis >='$fecha1' and dev_cli.anulada =0 and art.co_lin='$linea'";
+    
+                }else {
+                    $sql = "SELECT SUM(dev_cli.tot_neto) as tot_neto  from dev_cli 
+                    WHERE fec_emis ='$fecha1' and dev_cli.anulada =0 ";
+                }
+
+
 
             } elseif ($data == 'ven') {
 
-                $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
-                JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
-                WHERE fec_emis ='$fecha1' and dev_cli.anulada =0";
+                if ($linea !='todos') {
+                    $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
+                    inner join reng_dvc on reng_dvc.fact_num = dev_cli.fact_num
+                    inner join art on art.co_art=reng_dvc.co_art
+                    WHERE fec_emis >='$fecha1' and dev_cli.anulada =0 and art.co_lin='$linea'";
+    
+                }else {
+                    $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
+                    JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
+                    WHERE fec_emis ='$fecha1' and dev_cli.anulada =0";
+                }
+
+
 
              } elseif ($data == 'ven2') {
 
-                $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
-                JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
-                WHERE fec_emis BETWEEN '$fecha1' AND '$fecha2' and dev_cli.anulada =0";
+                if ($linea !='todos') {
+                    $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
+                    inner join reng_dvc on reng_dvc.fact_num = dev_cli.fact_num
+                    inner join art on art.co_art=reng_dvc.co_art
+                    WHERE fec_emis >='$fecha1' and dev_cli.anulada =0 and art.co_lin='$linea'";
+    
+                }else {
+
+                    $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
+                    JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
+                    WHERE fec_emis BETWEEN '$fecha1' AND '$fecha2' and dev_cli.anulada =0";
+    
+                }
 
              }else {
 
-                $sql = "SELECT SUM(tot_neto) as tot_neto  from dev_cli 
-                WHERE fec_emis BETWEEN '$fecha1' AND '$fecha2' and dev_cli.anulada =0";
+                
+                if ($linea !='todos') {
+                    $sql = "SELECT SUM(tot_neto) as tot_neto from dev_cli 
+                    inner join reng_dvc on reng_dvc.fact_num = dev_cli.fact_num
+                    inner join art on art.co_art=reng_dvc.co_art
+                    WHERE fec_emis >='$fecha1' and dev_cli.anulada =0 and art.co_lin='$linea'";
+    
+                }else {
+
+                    $sql = "SELECT SUM(tot_neto) as tot_neto  from dev_cli 
+                    WHERE fec_emis BETWEEN '$fecha1' AND '$fecha2' and dev_cli.anulada =0";
+    
+                }
+
+
+
             }
 
 

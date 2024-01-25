@@ -41,7 +41,7 @@ if ($_GET) {
   <?php
 
 
-echo "<h4>En Dolares</h4>";
+echo "<h4>En Dolares Marca - $linea</h4>";
 
     $y=1;
   for ($k = 1; $k <= $Month_total; $k++) {
@@ -203,7 +203,7 @@ echo "<h4>En Dolares</h4>";
         $fecha2 =  $Year .''. $Month .''  . $cantidad_Dias;
 
 
-        $factura = getFactura($sede, $fecha1, $fecha2, '',$linea);
+        $factura = getFactura($sede, $fecha1, $fecha2, '' ,$linea);
         $tasa_tot_neto_factura = $factura['tot_neto'] / $tasa_v_tasas;
 
 
