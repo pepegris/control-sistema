@@ -112,17 +112,45 @@ echo "<h4>En Dolares</h4>";
         $sede = $sedes_ar[$i];
         $cod = Cliente($sede);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-        if ($sede == "Sucursal Caracas I" && $Month < 04  && $Year <= 2023) {
+        if ($Year < 2023) {
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+        if ($sede == "Sucursal Caracas I" ) {
           $sede = 'Comercial Merina';
           
         }
 
-        if ( $sede == "Comercial Merina" && $Year <  2023) {
+        
+////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+        if ($sede == "Sucursal Caracas II" ) {
+          $sede = 'Comercial Merina3';
 
-           $sede = 'Comercial Merina';
+        }
 
-        }elseif ($sede == "Comercial Merina" && $Month == 04  && $Year >= 2023) {
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        if ($sede == "Sucursal Maturin" ) {
+          $sede = 'Comercial Matur';
+    
+        }
+
+        
+////////////////////////////////////////////////////////////////////////////////////////////////////////////          
+        if ($sede == "Sucursal Cagua" ) {
+          $sede = 'Comercial Kagu';
+          
+        }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+
+        } else {
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+        if ($sede == "Sucursal Caracas I" && $Month < 04  && $Year <= 2023) {
+          $sede = 'Comercial Merina';
+          
+        }
+        if ($sede == "Comercial Merina" && $Month == 04  && $Year >= 2023) {
           $sede = 'Sucursal Caracas I';
           
         }
@@ -132,12 +160,7 @@ echo "<h4>En Dolares</h4>";
           $sede = 'Comercial Merina3';
 
         }
-
-        if ( $sede == "Comercial Merina3" && $Year <  2023) {
-
-           $sede = 'Comercial Merina3';
-
-        }elseif  ($sede == "Comercial Merina3" && $Month == 04   && $Year >=  2023) {
+        if  ($sede == "Comercial Merina3" && $Month == 04   && $Year >=  2023) {
           $sede = 'Sucursal Caracas II';
           
         }
@@ -148,24 +171,20 @@ echo "<h4>En Dolares</h4>";
           $sede = 'Comercial Matur';
     
         }
-        if ( $sede == 'Comercial Matur' && $Year <  2023) {
 
-          $sede = 'Comercial Matur';
-
-       }
         
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////          
         if ($sede == "Sucursal Cagua" && $Month < 06  && $Year <= 2023) {
           $sede = 'Comercial Kagu';
           
         }
-        if ( $sede == 'Comercial Kagu' && $Year <  2023) {
 
-          $sede = 'Comercial Kagu';
-
-       }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+
+        }
+        
+
 
 
 
