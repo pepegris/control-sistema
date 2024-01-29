@@ -32,11 +32,11 @@ if ($clave === 'N3td0s' ) {
 
     if ($reporte=='diario') {
 
-        header("refresh:1;url= report-ventas-diaria.php?fecha1=$fecha1&divisa=$divisa&sedes=$sedes");
+        header("refresh:1;url= report-ventas-diaria.php?fecha1=$fecha1&divisa=$divisa&sedes=$sedes&linea=$linea");
 
     }elseif ($reporte=='dias') {
 
-        header("refresh:1;url= report-ventas-diaria-todo.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
+        header("refresh:1;url= report-ventas-diaria-todo.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes&linea=$linea");
 
     }    
     elseif ($reporte=='mes') {
@@ -72,10 +72,10 @@ if ($clave === 'N3td0s' ) {
             
             if ($divisa== 'dl') {
 
-                header("refresh:1;url= report-ventas-acumulado-dolares.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=" . $sedes);
+                header("refresh:1;url= report-ventas-acumulado-dolares.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=" . $sedes);
             }    else {
 
-                header("refresh:1;url= report-ventas-acumulado.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=" . $sedes);
+                header("refresh:1;url= report-ventas-acumulado.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=" . $sedes);
             }
 
         }    else {
@@ -86,7 +86,7 @@ if ($clave === 'N3td0s' ) {
         
     }elseif ($reporte=='ventas'){
 
-        header("refresh:1;url= report-ventas-detalle.php?fecha1=$fecha1&divisa=$divisa&sedes=$sedes");
+        header("refresh:1;url= report-ventas-detalle.php?fecha1=$fecha1&linea=$linea&divisa=$divisa&sedes=$sedes");
 
         /* reporte de ventas de tienda en desarrollo */
 
@@ -99,11 +99,11 @@ if ($clave === 'N3td0s' ) {
 
     }elseif ($reporte=='ord'){
         
-        header("refresh:1;url= report-ventas-ordenes.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
+        header("refresh:1;url= report-ventas-ordenes.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
 
     } elseif ($reporte=='factura'){
         
-        header("refresh:1;url= report-ventas-facturas.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
+        header("refresh:1;url= report-ventas-facturas.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
 
     }
     else {
