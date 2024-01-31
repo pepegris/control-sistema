@@ -641,3 +641,123 @@ function getMov_banco($sede, $fecha)
         return 0;
     }
 }
+
+
+
+
+
+
+
+/* CONSULTAR MARCA*/
+function getLin_art($sede, $fecha1, $fecha2, $data,$linea)
+{
+
+    $database = Database($sede);
+    if ($database != null) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql="SELECT art.co_lin,lin_des from factura
+            inner join reng_fac on factura.fact_num = reng_fac.fact_num
+            inner join art on reng_fac.co_art = art.co_art
+            inner join lin_art on lin_art.co_lin = art.co_lin
+            where factura.anulada=0 and factura.fec_emis BETWEEN '$fecha1' AND '$fecha2'
+            group by art.co_lin,lin_des";
+
+
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $factura['co_lin'] = $row['co_lin'];
+                    $factura['lin_des'] = $row['lin_des'];
+                    break;
+                }
+
+                $res = $factura;
+            } else {
+
+                $factura['co_lin'] = 0;
+                $factura['lin_des'] = 0;
+
+                $res = $factura;
+            }
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
+
+
+
+
+
+/* CONSULTAR MARCA*/
+function getSub_lin($sede, $fecha1, $fecha2, $data,$linea)
+{
+
+    $database = Database($sede);
+    if ($database != null) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql="SELECT art.co_subl, subl_des , art.co_lin ,lin_des from factura
+            inner join reng_fac on factura.fact_num = reng_fac.fact_num
+            inner join art on reng_fac.co_art = art.co_art
+            inner join lin_art on lin_art.co_lin = art.co_lin
+            inner join sub_lin on sub_lin.co_subl = art.co_subl
+            where factura.anulada=0 and factura.fec_emis BETWEEN '$fecha1' AND '$fecha2'
+            group by art.co_subl,subl_des, art.co_lin ,lin_des
+            order by lin_des";
+
+
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $factura['co_subl'] = $row['co_subl'];
+                    $factura['subl_des'] = $row['subl_des'];
+                    $factura['co_lin'] = $row['co_lin'];
+                    $factura['lin_des'] = $row['lin_des'];
+                    break;
+                }
+
+                $res = $factura;
+            } else {
+
+                $factura['co_subl'] = 0;
+                $factura['subl_des'] = 0;
+                $factura['co_lin'] = 0;
+                $factura['lin_des'] = 0;
+
+                $res = $factura;
+            }
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
