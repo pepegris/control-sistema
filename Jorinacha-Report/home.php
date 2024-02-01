@@ -131,7 +131,7 @@ $cuenta_on = ucwords($cuenta_on);
         <div class="box">
         <i class="lni lni-invest-monitor"></i>
           <h5>Ventas</h5>
-          <h4>Pronto aun En Desarrollo</h4>
+          <h4>Reporte de Ventas de las Tiendas</h4>
         </div>
       </a>
 
@@ -141,7 +141,7 @@ $cuenta_on = ucwords($cuenta_on);
           
         <i class="lni lni-offer"></i>
           <h5>Devoluciones</h5>
-          <h4>Pronto aun En Desarrollo</h4>
+          <h4>Reporte de Devoluciones de las Tiendas</h4>
         </div>
       </a>
 
@@ -155,28 +155,28 @@ $cuenta_on = ucwords($cuenta_on);
           <h4>Fechas de las Replicas</h4>
         </div>
       </a>
-
+<!-- 
       <a href="src/art-stock-2/form.php">
         <div class="box">
           <i class="lni lni-coffee-cup"></i>
           <h5>Reporte Nuevo</h5>
           <h4>Pronto aun En Desarrollo</h4>
         </div>
-      </a>
+      </a> -->
 
-      <a href="src/art-especial/form.php">
+<!--       <a href="src/art-especial/form.php">
         <div class="box">
         <i class="lni lni-invention"></i>
           <h5>Reporte de Mov de Articulos</h5>
           <h4>Pronto aun En Desarrollo</h4>
         </div>
       </a>
-
+ -->
       <a href="src/report-inv/form.php">
         <div class="box">
         <i class="lni lni-graph"></i>
           <h5>Reporte de Valor de Inventario</h5>
-          <h4>Pronto aun En Desarrollo</h4>
+          <h4>Valores de Inventarios</h4>
         </div>
       </a>
 
@@ -186,9 +186,9 @@ $cuenta_on = ucwords($cuenta_on);
 
       <a href="src/ordenes-compra/form.php">
         <div class="box">
-          <i class="lni lni-signal"></i>
-          <h5>Desarrollo</h5>
-          <h4>Pronto aun En Desarrollo</h4>
+          <i class="lni lni-invention"></i>
+          <h5>Crear Ordenes de Compras</h5>
+          <h4>Generar Ordenes de Compras para las tiendas de su Despacho</h4>
         </div>
       </a>
 
