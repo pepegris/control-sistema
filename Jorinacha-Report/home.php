@@ -194,7 +194,7 @@ $cuenta_on = ucwords($cuenta_on);
 
 
 
-      <a href="src/ordenes-compra/form.php">
+      <a href="../../PreviaShop_2.0/index.html">
         <div class="box">
           <i class="lni lni-coffee-cup"></i>
           <h5>SITIO WEB</h5>
