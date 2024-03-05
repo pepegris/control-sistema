@@ -85,11 +85,8 @@ include '../../services/adm/replica/replica.php';
           if ($res3 == null) {
             $inventario = "";
           } else {
-            $inventario = "<img src='./img/cart-full.svg' alt=''>";
+            $inventario = "Inventario<img src='./img/cart-full.svg' alt=''>";
           }
-
-
-
 
 
 
