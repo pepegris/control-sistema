@@ -90,3 +90,42 @@ function Replica_detal($sede,$doc)
         return 0;
     }
 }
+
+
+
+function Inventario($sede)
+{
+
+
+    $database = Database($sede);
+
+
+    if ($database) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT TOP 1  cerrado from  fisico where cerrado = 0";
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            while ($row = sqlsrv_fetch_array($consulta)) {
+
+                $cerrado['cerrado'] = $row['cerrado'];
+                break;
+            }
+            $res = $cerrado;
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
