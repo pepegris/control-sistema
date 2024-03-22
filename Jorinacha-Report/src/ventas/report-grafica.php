@@ -1,3 +1,27 @@
+<?php
+ini_set('memory_limit', '4096M');
+ini_set('max_execution_time', 3600);
+
+#require "../../includes/log.php";
+include '../../includes/header2.php';
+include '../../services/mysql.php';
+include '../../services/adm/ventas/diarias.php';
+
+  $divisa = $_GET['divisa'];
+  $linea=$_GET['linea'];
+  $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
+  $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
+
+
+  $Day = date("d", strtotime($fecha2));
+  $Month_total = date("m", strtotime($fecha2));
+  $Year = date("Y", strtotime($fecha2));
+
+
+
+
+
+?>
 
   <html>
 
@@ -24,7 +48,8 @@
             inner join art  on art.co_art=reng_fac.co_art
             inner join lin_art on lin_art.co_lin=art.co_lin
             where factura.anulada =0 and factura.fec_emis between '20230101' and '20231231'
-            group by lin_art.lin_des ";
+            group by lin_art.lin_des 
+            order by total_art desc";
 
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
@@ -52,6 +77,7 @@
 
   <body>
     <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
-  </body>
 
-  </html>
+
+
+include '../../includes/footer.php'; ?>
