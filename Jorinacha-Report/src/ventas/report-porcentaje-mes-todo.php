@@ -19,12 +19,17 @@
           $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
           $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-          $sql = "SELECT TOP 5 art_des,co_art FROM art order by fe_us_in desc   ";
+          $sql = "SELECT SUM (CONVERT(numeric(10,0), reng_fac.total_art)) as total_art,lin_art.lin_des from factura 
+          inner join reng_fac on factura.fact_num=reng_fac.fact_num
+          inner join art  on art.co_art=reng_fac.co_art
+          inner join lin_art on lin_art.co_lin=art.co_lin
+          where factura.anulada =0 and factura.fec_emis between '20230101' and '20231231'
+          group by lin_art.lin_des ";
 
           $consulta = sqlsrv_query($conn, $sql);
           while ($row = sqlsrv_fetch_array($consulta)) {
 
-            echo "['" .$row['art_des']. "'," .$row['co_art']. "],";
+            echo "['" .$row['total_art']. "'," .$row['lin_des']. "],";
           }
 
 
