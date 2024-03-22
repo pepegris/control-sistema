@@ -29,7 +29,7 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-              echo "['" .$row['lin_des']. " " .$row['total_art']. "'," .$row['total_art']. "],";
+              echo "['" .$row['lin_des']. "'," .$row['total_art']. "],";
             }
 
 
