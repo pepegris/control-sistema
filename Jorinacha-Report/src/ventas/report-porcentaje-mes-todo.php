@@ -1,29 +1,4 @@
-<?php
-ini_set('memory_limit', '4096M');
-ini_set('max_execution_time', 3600);
 
-require "../../includes/log.php";
-include '../../includes/header2.php';
-include '../../services/mysql.php';
-include '../../services/adm/ventas/diarias.php';
-
-if ($_GET) {
-
-  $divisa = $_GET['divisa'];
-  $linea = $_GET['linea'];
-  $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
-  $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
-
-
-  $Day = date("d", strtotime($fecha2));
-  $Month_total = date("m", strtotime($fecha2));
-  $Year = date("Y", strtotime($fecha2));
-
-
-
-
-
-?>
   <html>
 
   <head>
@@ -74,15 +49,3 @@ if ($_GET) {
   </body>
 
   </html>
-
-
-<?php
-
-
-} else {
-  header("location: form.php");
-}
-
-
-
-include '../../includes/footer.php'; ?>
