@@ -16,7 +16,7 @@
           <?php
 
           $serverName = "172.16.1.39";
-          $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+          $connectionInfo = array("Database" => "PUECRUZ", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
           $conn = sqlsrv_connect($serverName, $connectionInfo);
 
           $sql = "SELECT SUM (CONVERT(numeric(10,0), reng_fac.total_art)) as total_art,lin_art.lin_des from factura 
