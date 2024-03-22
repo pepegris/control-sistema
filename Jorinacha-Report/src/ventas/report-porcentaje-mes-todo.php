@@ -24,7 +24,7 @@
           $consulta = sqlsrv_query($conn, $sql);
           while ($row = sqlsrv_fetch_array($consulta)) {
 
-            echo "['" .$row['art_des']. "'," .$row['co_art']. "],";
+            echo "['" .$row['art_des']. "','" .$row['co_art']. "'],";
           }
 
 
