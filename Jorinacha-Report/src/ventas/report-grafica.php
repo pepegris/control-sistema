@@ -23,7 +23,12 @@ include '../../services/adm/ventas/diarias.php';
 
 ?>
 
-  <html>
+<style>
+  body{
+    background-color: white;
+  }
+</style>
+
 
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -75,9 +80,8 @@ include '../../services/adm/ventas/diarias.php';
     </script>
   </head>
 
-  <body>
     <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
 
 
 
-include '../../includes/footer.php'; ?>
+<?php include '../../includes/footer.php'; ?>
