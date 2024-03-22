@@ -16,7 +16,7 @@
           <?php
 
           $serverName = "172.16.1.39";
-          $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+          $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
           $conn = sqlsrv_connect($serverName, $connectionInfo);
 
           $sql = "SELECT TOP 5 art_des,co_art FROM art order by fe_us_in desc   ";
