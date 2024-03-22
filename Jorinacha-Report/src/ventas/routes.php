@@ -36,7 +36,7 @@ if ($clave === 'N3td0s' ) {
 
     }elseif ($reporte=='por') {
 
-        header("refresh:1;url= report-porcentaje-mes-todo.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
+        header("refresh:1;url= report-grafica.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
 
     }    
     
