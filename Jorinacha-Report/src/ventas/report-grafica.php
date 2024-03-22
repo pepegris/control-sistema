@@ -104,13 +104,14 @@ include '../../services/adm/ventas/diarias.php';
           is3D: true,
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
         chart.draw(data, options);
       }
     </script>
   </head>
 
     <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+    <div id="piechart_3d2" style="width: 900px; height: 500px;"></div>
 
 
 
