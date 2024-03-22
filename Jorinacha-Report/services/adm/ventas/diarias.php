@@ -761,3 +761,58 @@ function getSub_lin($sede, $fecha1, $fecha2, $data,$linea)
         return 0;
     }
 }
+
+
+
+
+function getVendido_Grafica($sede, $fecha1, $fecha2)
+{
+
+    $database = Database($sede);
+    if ($database != null) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql="SELECT SUM (CONVERT(numeric(10,0), reng_fac.total_art)) as total_art,lin_art.lin_des from factura 
+            inner join reng_fac on factura.fact_num=reng_fac.fact_num
+            inner join art  on art.co_art=reng_fac.co_art
+            inner join lin_art on lin_art.co_lin=art.co_lin
+            where factura.anulada =0 and factura.fec_emis between '$fecha1' and '$fecha2'
+            group by lin_art.lin_des 
+            order by total_art desc";
+
+
+
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            if ($consulta != null) {
+                while ($row = sqlsrv_fetch_array($consulta)) {
+
+                    $factura['total_art'] = $row['total_art'];
+                    $factura['lin_des'] = $row['lin_des'];
+                    break;
+                }
+
+                $res = $factura;
+            } else {
+
+                $factura['total_art'] = 0;
+                $factura['lin_des'] = 'n';
+
+                $res = $factura;
+            }
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
