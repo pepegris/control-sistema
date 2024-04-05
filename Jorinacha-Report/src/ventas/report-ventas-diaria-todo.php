@@ -243,7 +243,7 @@ if ($_GET) {
 
                   if ($venta <= 1 & $total_art_factura == 0) {
 
-                    echo " <img src='./img/help.svg' alt=''> ";
+                    echo "1 <img src='./img/help.svg' alt=''> ";
                   }elseif (  $total_efec_dep_caj < $monto_h_mov_ban ) {
 
                     $diferencias = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
@@ -265,13 +265,13 @@ if ($_GET) {
 
                     if ($diferencias > 1) {
 
-                      echo "<img src='./img/help.svg' alt=''> ";
+                      echo "2<img src='./img/help.svg' alt=''> ";
                     } else {
 
                       echo "$diferencias";
                     }
                   } else {
-                    echo "<img src='./img/help.svg' alt=''> ";
+                    echo "3<img src='./img/help.svg' alt=''> ";
                   }
 
                   ?></td>
