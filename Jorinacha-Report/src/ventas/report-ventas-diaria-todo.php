@@ -244,7 +244,7 @@ if ($_GET) {
                   if ($venta <= 1 & $total_art_factura == 0) {
 
                     echo " <img src='./img/help.svg' alt=''> ";
-                  }elseif ($tot_neto_factura > 1 &  $total_efec_dep_caj > $monto_h_mov_ban ) {
+                  }elseif (  $total_efec_dep_caj > $monto_h_mov_ban ) {
 
                     $diferencias = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
                     #$diferencias = number_format($monto_ord_pago + $monto_ord_pago_ven + $monto_h_mov_ban - $tot_neto_factura, 2, ',', '.');
