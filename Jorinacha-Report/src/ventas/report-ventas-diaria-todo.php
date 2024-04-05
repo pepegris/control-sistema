@@ -240,6 +240,9 @@ if ($_GET) {
             <td><?= $monto_ord_pago_ven  ?></td>
 
             <td> <?php
+            if ($sedes_ar[$i]=='Comercial Puecruz') {
+              echo "$total_efec_dep_caj /// $monto_h_mov_ban \\\\\ $sedes_ar[$i]";
+            }
 
                   if ($venta <= 1 & $total_art_factura == 0) {
 
