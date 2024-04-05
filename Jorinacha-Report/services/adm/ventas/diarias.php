@@ -816,3 +816,27 @@ function getVendido_Grafica($sede, $fecha1, $fecha2)
         return 0;
     }
 }
+
+
+
+function insertVendido_Grafica( $linea_des, $total_art)
+{
+
+    
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "INSERT INTO art_grafica (linea_des,total_art) values ($linea_des,$total_art)";
+
+            sqlsrv_query($conn, $sql);
+
+            return $res;
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+
+}

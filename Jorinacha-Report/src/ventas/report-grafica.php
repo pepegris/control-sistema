@@ -47,7 +47,14 @@ $Year = date("Y", strtotime($fecha2));
         for ($i = 1; $i < count($sedes_ar); $i++) {
 
           $sede = $sedes_ar[$i];
-          $vendidos = getTasas($sede, $fecha1,$fecha2);
+          $vendidos = getVendido_Grafica($sede, $fecha1,$fecha2);
+
+          for ($e = 1; $e < count($vendidos); $e++) {
+
+            $vendidos = insertVendido_Grafica();
+            
+          }
+
         }
 
 
