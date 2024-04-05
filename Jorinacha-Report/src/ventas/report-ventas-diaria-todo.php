@@ -12,16 +12,18 @@ if ($_GET) {
   $divisa = $_GET['divisa'];
 
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
+  $fecha1 = date("Ymd", strtotime($_GET['fecha2']));
   $linea=$_GET['linea'];
 
   $Month = date("m", strtotime($fecha2));
   $Year = date("Y", strtotime($fecha2));
 
   $Day_total = date("d", strtotime($fecha2));
+  $Day_first = date("d", strtotime($fecha1));
 
 
 
-
+  echo "<center> $Day_first </center>";
 
 
 
