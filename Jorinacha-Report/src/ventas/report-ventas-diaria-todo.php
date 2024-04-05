@@ -239,7 +239,7 @@ if ($_GET) {
                     $diferencias = number_format($monto_ord_pago + $monto_ord_pago_ven + $monto_h_mov_ban - $tot_neto_factura, 2, ',', '.');
                     
                     echo "$diferencias";
-                  } elseif ($total_tarj_dep_caj > 1) {
+                  } /* elseif ($total_tarj_dep_caj > 1) {
 
                     #$diferencias = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
                     $diferencias = number_format($total_efec_dep_caj + $total_tarj_dep_caj + $monto_ord_pago + $monto_ord_pago_ven - $tot_neto_factura, 2, ',', '.');
@@ -251,7 +251,7 @@ if ($_GET) {
 
                       echo "$diferencias";
                     }
-                  } else {
+                  }  */else {
                     echo "<img src='./img/help.svg' alt=''> ";
                   }
 
