@@ -135,6 +135,17 @@ if ($_GET) {
             $tasa_v_tasas  = 1;
           }
 
+          $tot_neto_factura    =0;
+          $total_art_factura   =0;
+          $total_art_dev_cli =0;
+          $tot_neto_dev_cli   =0;
+          $total_art_dev_cli  =0;
+          $monto_h_mov_ban =0;
+          $total_efec_dep_caj  =0;
+          $total_tarj_dep_caj  =0;
+          $monto_ord_pago  =0;
+          $monto_ord_pago_ven  =0;
+
           $cod = Cliente($sedes_ar[$i]);
 
           $factura = getFactura($sedes_ar[$i], $fecha1, $fecha3, 'sin',$linea);
@@ -239,7 +250,7 @@ if ($_GET) {
                     $diferencias = number_format($monto_ord_pago + $monto_ord_pago_ven + $monto_h_mov_ban - $tot_neto_factura, 2, ',', '.');
                     
                     echo "$diferencias";
-                  } /* elseif ($total_tarj_dep_caj > 1) {
+                  } elseif ($total_tarj_dep_caj > 1) {
 
                     #$diferencias = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
                     $diferencias = number_format($total_efec_dep_caj + $total_tarj_dep_caj + $monto_ord_pago + $monto_ord_pago_ven - $tot_neto_factura, 2, ',', '.');
@@ -251,7 +262,7 @@ if ($_GET) {
 
                       echo "$diferencias";
                     }
-                  }  */else {
+                  } else {
                     echo "<img src='./img/help.svg' alt=''> ";
                   }
 
@@ -289,6 +300,9 @@ if ($_GET) {
 
           echo "</tr>";
         }
+
+        
+
 
         if ($divisa == 'dl') {
 
