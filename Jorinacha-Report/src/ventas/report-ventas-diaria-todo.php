@@ -51,11 +51,11 @@ if ($_GET) {
   } else {
     echo "<h4>En Bolivares</h4>";
   }
-  $w = 1;
+  $w=$Day_first ;
 
   for ($k = 0; $k < $Day_total; $k++) {
 
-    $w=$Day_first ;
+    
     if ($w < 10) {
 
       $dia = 0 . $w;
