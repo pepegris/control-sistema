@@ -55,13 +55,7 @@ if ($_GET) {
 
   for ($k = 0; $k < $Day_total; $k++) {
 
-    
-    if ($w < 10) {
 
-      $dia = 0 . $w;
-    } else {
-      $dia = $w;
-    }
     
     echo "<center> <h2>Ventas Diarias $dia/$Month/$Year</h2> </center>";
 
