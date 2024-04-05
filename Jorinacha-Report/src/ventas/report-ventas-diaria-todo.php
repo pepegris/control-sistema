@@ -243,7 +243,9 @@ if ($_GET) {
             if ($sedes_ar[$i]=='Comercial Puecruz') {
               echo var_dump((float)$total_efec_dep_caj);
               echo var_dump((float)$monto_h_mov_ban);
-              if (  (int)$total_efec_dep_caj > (int)$monto_h_mov_ban ) {
+              $efect= (float) $total_efec_dep_caj;
+              $ban=  (float)$monto_h_mov_ban;
+              if (  $efect > $ban ) {
               echo "si es menor";
               }
             }
