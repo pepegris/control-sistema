@@ -245,7 +245,7 @@ if ($_GET) {
               echo var_dump((float)$monto_h_mov_ban);
               $efect= (float) $total_efec_dep_caj;
               $ban=  (float)$monto_h_mov_ban;
-              if (  $efect >= $ban ) {
+              if (  $efect < $ban ) {
               echo "si es menor";
               }
             }
