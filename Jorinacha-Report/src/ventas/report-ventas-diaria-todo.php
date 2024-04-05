@@ -52,13 +52,11 @@ if ($_GET) {
     echo "<h4>En Bolivares</h4>";
   }
   $w=$Day_first ;
+  $dia = $w;
 
   for ($k = 0; $k < $Day_total; $k++) {
-
     
 
-      $dia = $w;
-    
     
     echo "<center> <h2>Ventas Diarias $dia/$Month/$Year</h2> </center>";
 
@@ -73,6 +71,13 @@ if ($_GET) {
     }
 
     $w++;
+
+    if ($w < 10) {
+
+      $dia = 0 . $w;
+    } else {
+      $dia = $w;
+    }
 
 
   ?>
