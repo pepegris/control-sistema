@@ -53,8 +53,8 @@ if ($_GET) {
   }
   $w=$Day_first ;
   $dia = $w;
-
-  for ($k = 1; $k < $Day_total; $k++) {
+  $total = $Day_total - $Day_first ;
+  for ($k = 0; $k < $total; $k++) {
     
 
     
