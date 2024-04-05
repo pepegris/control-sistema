@@ -240,20 +240,11 @@ if ($_GET) {
             <td><?= $monto_ord_pago_ven  ?></td>
 
             <td> <?php
-            if ($sedes_ar[$i]=='Comercial Puecruz') {
-              echo var_dump((float)$total_efec_dep_caj);
-              echo var_dump((float)$monto_h_mov_ban);
-              $efect= (float) $total_efec_dep_caj;
-              $ban=  (float)$monto_h_mov_ban;
-              if (  $efect < $ban ) {
-              echo "si es menor";
-              }
-            }
 
                   if ($venta <= 1 & $total_art_factura == 0) {
 
                     echo " <img src='./img/help.svg' alt=''> ";
-                  }elseif (  $total_efec_dep_caj > $monto_h_mov_ban ) {
+                  }elseif (  $total_efec_dep_caj < $monto_h_mov_ban ) {
 
                     $diferencias = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
                     #$diferencias = number_format($monto_ord_pago + $monto_ord_pago_ven + $monto_h_mov_ban - $tot_neto_factura, 2, ',', '.');
