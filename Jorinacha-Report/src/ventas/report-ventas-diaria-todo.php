@@ -257,6 +257,14 @@ if ($_GET) {
                     
                     echo "$diferencias";
                   } 
+
+                  elseif (   $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven  == $venta ) {
+
+                    $diferencias = number_format( $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
+                    #$diferencias = number_format($monto_ord_pago + $monto_ord_pago_ven + $monto_h_mov_ban - $tot_neto_factura, 2, ',', '.');
+                    
+                    echo "$diferencias";
+                  } 
                   
                   elseif ($tot_neto_factura > 1 & $monto_h_mov_ban > 1) {
 
