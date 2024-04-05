@@ -62,8 +62,8 @@ if ($_GET) {
     } else {
       $dia = $w;
     }
-
-    echo "<center> <h2>Ventas Diarias $dia/$Month/$Year</h2> </center>";
+    $ddia=$Day_first +$w;
+    echo "<center> <h2>Ventas Diarias $dia/$Month/$Year</h2> $ddia </center>";
 
 
     $fecha_2 = $Year . '/' . $Month . '/' . $dia;
