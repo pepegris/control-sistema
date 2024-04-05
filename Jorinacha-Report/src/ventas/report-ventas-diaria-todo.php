@@ -55,15 +55,15 @@ if ($_GET) {
 
   for ($k = 0; $k < $Day_total; $k++) {
 
-
+    $w=$Day_first ;
     if ($w < 10) {
 
       $dia = 0 . $w;
     } else {
       $dia = $w;
     }
-    $ddia=$Day_first +$w;
-    echo "<center> <h2>Ventas Diarias $dia/$Month/$Year</h2> $ddia </center>";
+    
+    echo "<center> <h2>Ventas Diarias $dia/$Month/$Year</h2> </center>";
 
 
     $fecha_2 = $Year . '/' . $Month . '/' . $dia;
