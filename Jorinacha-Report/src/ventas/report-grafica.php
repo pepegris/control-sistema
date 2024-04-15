@@ -48,12 +48,16 @@ $Year = date("Y", strtotime($fecha2));
 
           $sede = $sedes_ar[$i];
           $vendidos = getVendido_Grafica($sede, $fecha1,$fecha2);
+          var_dump(count($vendidos));
+          echo "<br>";
+          var_dump($vendidos);
 
+/* 
           for ($e = 1; $e < count($vendidos); $e++) {
 
             $vendidos = insertVendido_Grafica();
             
-          }
+          } */
 
         }
 
