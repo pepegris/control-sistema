@@ -22,11 +22,6 @@ if ($_GET) {
   $Day_first = date("d", strtotime($fecha1));
 
 
-
-  echo "<center> $Day_first </center>";
-
-
-
 ?>
 
   <style>
