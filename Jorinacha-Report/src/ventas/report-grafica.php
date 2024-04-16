@@ -35,6 +35,7 @@ include '../../services/adm/ventas/diarias.php';
 
     <script type="text/javascript">
 
+      // GRAFICAS GENERAL
       google.charts.load("current", {
         packages: ["corechart"]
       });
@@ -71,45 +72,14 @@ include '../../services/adm/ventas/diarias.php';
           is3D: true,
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        var chart = new google.visualization.PieChart(document.getElementById('barchart_div'));
         chart.draw(data, options);
       }
 
 
 
+      // VARIAS GRAFICAS
 
-
-
-
-      
-    </script>
-    
-  </head>
-
-
-
-
-
-
-
-
-    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-    <html>
-  <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
       // Load Charts and the corechart and barchart packages.
       google.charts.load('current', {'packages':['corechart']});
 
@@ -142,9 +112,26 @@ include '../../services/adm/ventas/diarias.php';
         var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
         barchart.draw(data, barchart_options);
       }
+
+
+
+
+      
     </script>
+    
   </head>
-<body>
+
+
+
+
+
+
+
+
+    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+
+
+
     <!--Table and divs that hold the pie charts-->
     <table class="columns">
       <tr>
@@ -152,10 +139,16 @@ include '../../services/adm/ventas/diarias.php';
         <td><div id="barchart_div" style="border: 1px solid #ccc"></div></td>
       </tr>
     </table>
-  </body>
-</html>
 
 
+
+
+
+
+
+
+
+    
 
 
 
