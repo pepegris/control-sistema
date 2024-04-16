@@ -84,8 +84,11 @@ include '../../services/adm/ventas/diarias.php';
 
 
 
-
-      function drawChart() {
+      google.charts.load("current", {
+        packages: ["corechart"]
+      });
+      google.charts.setOnLoadCallback(drawChart2);
+      function drawChart2() {
         var data = google.visualization.arrayToDataTable([
           ['Articulos', 'Total Vendidos'],
 
