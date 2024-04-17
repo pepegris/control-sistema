@@ -21,7 +21,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $sede = $sedes_ar[$i];
   $ventas=getVendido_Grafica($sede,'20230101','20231231');
-  $dev=getDev_Grafica($sede,'20230101','20231231','n');
+  $dev=getDev_Grafica($sede,'20230101','20231231');
 
 }
 
@@ -66,7 +66,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          $dev=getDev_Grafica($sede,'20230101','20231231',$row['linea_des']);
+          $dev=getDev_Grafica_fac($sede,$row['linea_des']);
           $total=$row['total_art']-$dev;
 
           echo "['" . $row['linea_des'] . " / " . $row['total_art'] . "'," . $total . "],";

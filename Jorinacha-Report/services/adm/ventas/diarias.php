@@ -767,7 +767,6 @@ function getVendido_Grafica($sede, $fecha1, $fecha2)
                 $res = true;
                 return $res;
             }
-
         } catch (\Throwable $th) {
 
             throw $th;
@@ -779,7 +778,7 @@ function getVendido_Grafica($sede, $fecha1, $fecha2)
 }
 
 
-function getDev_Grafica($sede, $fecha1, $fecha2,$consulta)
+function getDev_Grafica($sede, $fecha1, $fecha2)
 {
 
     $database = Database($sede);
@@ -790,44 +789,25 @@ function getDev_Grafica($sede, $fecha1, $fecha2,$consulta)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($consulta =='n') {
 
-                $sql = "SELECT SUM (CONVERT(numeric(10,0), reng_dvc.total_art)) as total_dev,lin_art.lin_des from dev_cli
+            $sql = "SELECT SUM (CONVERT(numeric(10,0), reng_dvc.total_art)) as total_dev,lin_art.lin_des from dev_cli
                 inner join reng_dvc  on dev_cli.fact_num=reng_dvc.fact_num
                 inner join art  on art.co_art=reng_dvc.co_art
                 inner join lin_art on lin_art.co_lin=art.co_lin
                 where dev_cli.anulada =0 and dev_cli.fec_emis between '$fecha1' and '$fecha2'
                 group by lin_art.lin_des 
                 order by total_dev desc";
-    
-                $consulta = sqlsrv_query($conn, $sql);
-    
-                $connectionInfo2 = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
-                $conn2 = sqlsrv_connect($serverName, $connectionInfo2);
-                while ($row = sqlsrv_fetch_array($consulta)) {
-    
-                    $total_art = $row['total_dev'];
-                    $linea_des = $row['lin_des'];
-                    $sql2 = "INSERT INTO art_grafica_dev (linea_des,mes,total_dev,tienda) values ('$linea_des','',$total_art,'$sede')";
-                    $consulta2 = sqlsrv_query($conn2, $sql2);
-                }
 
-            }else{
+            $consulta = sqlsrv_query($conn, $sql);
 
-                $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                WHERE linea_des ='$consulta'
-                group by linea_des
-                order by total_dev desc";
-    
-                $consulta = sqlsrv_query($conn, $sql);
-    
-                while ($row = sqlsrv_fetch_array($consulta)) {
-    
-                    $total_art = $row['total_dev'];
-                    break;
+            $connectionInfo2 = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn2 = sqlsrv_connect($serverName, $connectionInfo2);
+            while ($row = sqlsrv_fetch_array($consulta)) {
 
-                }
-                return $total_art;
+                $total_art = $row['total_dev'];
+                $linea_des = $row['lin_des'];
+                $sql2 = "INSERT INTO art_grafica_dev (linea_des,mes,total_dev,tienda) values ('$linea_des','',$total_art,'$sede')";
+                $consulta2 = sqlsrv_query($conn2, $sql2);
             }
 
 
@@ -841,6 +821,44 @@ function getDev_Grafica($sede, $fecha1, $fecha2,$consulta)
                 $res = true;
                 return $res;
             }
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
+
+
+
+
+/* CONSULTAR MARCA*/
+function getDev_Grafica_fac($sede, $consulta)
+{
+
+    $database = Database($sede);
+    if ($database != null) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => 'SISTEMAS', "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
+            WHERE linea_des ='$consulta'
+            group by linea_des
+            order by total_dev desc";
+            
+            $consulta = sqlsrv_query($conn, $sql);
+            
+            while ($row = sqlsrv_fetch_array($consulta)) {
+            
+                $total_art = $row['total_dev'];
+                break;
+            }
+            return $total_art;
 
         } catch (\Throwable $th) {
 
@@ -853,6 +871,7 @@ function getDev_Grafica($sede, $fecha1, $fecha2,$consulta)
 }
 
 
+
 function deleteVendido_Grafica()
 {
 
@@ -863,22 +882,14 @@ function deleteVendido_Grafica()
         $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
         $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-        for ($i=0; $i < 1; $i++) { 
-            
-            if ($i=0) {
+        $sql1 = "DELETE FROM art_grafica";
+        $consulta1 = sqlsrv_query($conn, $sql1);
 
-                $sql = "DELETE FROM art_grafica";
-                $consulta = sqlsrv_query($conn, $sql);
 
-            }else{
-                
-                $sql = "DELETE FROM art_grafica_dev";
-                $consulta = sqlsrv_query($conn, $sql);
-                
-            }
-        }
+        $sql2 = "DELETE FROM art_grafica_dev";
+        $consulta2 = sqlsrv_query($conn, $sql2);
 
-        if ($consulta == null) {
+        if ($consulta1 == null && $consulta2 == null ) {
 
             $res = false;
             return $res;
@@ -892,6 +903,7 @@ function deleteVendido_Grafica()
         throw $th;
     }
 }
+
 
 
 /* 
@@ -911,5 +923,3 @@ function deleteVendido_Grafica()
 
 ); 
 */
-
-
