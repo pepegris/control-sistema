@@ -24,7 +24,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   for ($e = 0; $e < count($ventas); $e++) {
     
-    $datos=insertVendido_Grafica($row[$e]['lin_des'], $row[$e]['total_art'], $sede);
+    $datos=insertVendido_Grafica($ventas[$e]['lin_des'], $ventas[$e]['total_art'], $sede);
     var_dump($datos);
 
   }
