@@ -65,7 +65,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         while ($row = sqlsrv_fetch_array($consulta)) {
 
           if ($row['total_art'] > 80000) {
-            $color='gree';
+            $color='green';
           }elseif ($row['total_art'] > 60000) {
             $color='yellow';
           }elseif ($row['total_art'] > 20000) {
