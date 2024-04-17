@@ -780,7 +780,7 @@ function getVendido_Grafica($sede, $fecha1, $fecha2)
 
 
 
-function insertVendido_Grafica($linea_des, $total_art, $sede)
+function deleteVendido_Grafica()
 {
 
 
@@ -790,7 +790,7 @@ function insertVendido_Grafica($linea_des, $total_art, $sede)
         $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
         $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-        $sql = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
+        $sql = "DELETE FROM art_grafica";
 
         $consulta = sqlsrv_query($conn, $sql);
 
