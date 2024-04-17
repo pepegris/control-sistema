@@ -78,6 +78,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
                        role: "annotation" },
                      2]);
 
+
       var options = {
         title: 'Modelos vendidos en Todas las Tiendas',
         width: 900,
@@ -86,7 +87,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         legend: { position: "none" },
       };
 
-      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
       chart.draw(view, options);
 
     }
@@ -162,7 +163,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 </head>
 
 <center>
-<div id="columnchart_values" style="width: 900px; height: 400px;"></div>
+<div id="barchart_values" style="width: 900px; height: 400px;"></div>
 </center>
 <br>
 <br>
