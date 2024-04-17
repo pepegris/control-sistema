@@ -150,8 +150,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       // Set options for Anthony's pie chart.
       var options = {
         title: 'How Much Pizza Anthony Ate Last Night',
-        width: 400,
-        height: 300
+        width: 600,
+        height: 500
       };
 
       // Instantiate and draw the chart for Anthony's pizza.
@@ -162,9 +162,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 </head>
 
 <center>
-<div id="columnchart_values" style="width: 100%; height: 900px;"></div>
+<div id="columnchart_values" style="width: 900px; height: 400px;"></div>
 </center>
-<br> 
+
 <!--Table and divs that hold the pie charts-->
 <table class="columns">
   <tr>
