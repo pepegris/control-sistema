@@ -67,6 +67,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         while ($row = sqlsrv_fetch_array($consulta)) {
 
           $dev=getDev_Grafica_fac($sede,$row['linea_des']);
+          var_dump($dev);
           $total=$row['total_art']-$dev;
 
           echo "['" . $row['linea_des'] . " / " . $row['total_art'] . "'," . $total . "],";
