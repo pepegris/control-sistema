@@ -831,7 +831,7 @@ function insertVendido_Grafica( $linea_des, $total_art ,$sede)
 
             $sql = "INSERT INTO art_grafica (linea_des,total_art,tienda) values ($linea_des,$total_art,$sede)";
 
-            sqlsrv_query($conn, $sql);
+            $res=sqlsrv_query($conn, $sql);
 
             return $res;
         } catch (\Throwable $th) {

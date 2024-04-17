@@ -21,12 +21,13 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   
   $sede = $sedes_ar[$i];
   $ventas=getVendido_Grafica($sede,'20230101','20231231');
-  var_dump($sede);
+  var_dump($ventas);
+  echo "<br>";
 
   while ($row = sqlsrv_fetch_array($ventas)) {
     
-    $ventas=getVendido_Grafica($row['lin_des'], $row['total_art'], $sede);
-    var_dump($ventas);
+    $datos=getVendido_Grafica($row['lin_des'], $row['total_art'], $sede);
+    var_dump($datos);
 
   }
 
