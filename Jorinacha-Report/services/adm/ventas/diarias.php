@@ -10,7 +10,7 @@ require "../../services/empresas.php";
 
 
 /* CONSULTAR ARTICULOS VENDIDOS*/
-function getFactura($sede, $fecha1, $fecha2, $data,$linea)
+function getFactura($sede, $fecha1, $fecha2, $data, $linea)
 {
 
     $database = Database($sede);
@@ -23,63 +23,52 @@ function getFactura($sede, $fecha1, $fecha2, $data,$linea)
 
             if ($data == 'ven') {
 
-                if ($linea !='todos') {
+                if ($linea != 'todos') {
                     $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
                     JOIN factura ON factura.fact_num = reng_fac.fact_num
                     inner join art on art.co_art=reng_fac.co_art
                     where anulada=0 AND fec_emis ='$fecha1' and art.co_lin='$linea'";
-                }else {
+                } else {
                     $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
                     JOIN factura ON factura.fact_num = reng_fac.fact_num
                     where anulada=0 AND fec_emis ='$fecha1'";
                 }
+            } elseif ($data == 'ven2') {
 
 
-
-            }elseif ($data == 'ven2') {
-
-
-                if ($linea !='todos') {
+                if ($linea != 'todos') {
                     $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
                     JOIN factura ON factura.fact_num = reng_fac.fact_num
                     inner join art on art.co_art=reng_fac.co_art
                     where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2' and art.co_lin='$linea'";
-                }else {
+                } else {
                     $sql = "SELECT   SUM(reng_fac.total_art) as total_art from reng_fac
                     JOIN factura ON factura.fact_num = reng_fac.fact_num
                     where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
                 }
+            } elseif ($data == 'sin') {
 
-
-
-            }elseif ($data == 'sin') {
-
-                if ($linea !='todos') {
+                if ($linea != 'todos') {
                     $sql = "SELECT  SUM(tot_neto) as tot_neto from factura
                     inner join reng_fac on reng_fac.fact_num = factura.fact_num
                     inner join art on art.co_art=reng_fac.co_art
                     where anulada=0 AND fec_emis ='$fecha1' and art.co_lin='$linea'";
-                }else {
+                } else {
                     $sql = "SELECT  SUM(tot_neto)  as tot_neto from factura
                     where anulada=0 AND fec_emis ='$fecha1'";
                 }
+            } else {
 
 
-
-            }  else {
-
-
-                if ($linea !='todos') {
+                if ($linea != 'todos') {
                     $sql = "SELECT  SUM(tot_neto) as tot_neto from factura
                     inner join reng_fac on reng_fac.fact_num = factura.fact_num
                     inner join art on art.co_art=reng_fac.co_art
                     where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2' and art.co_lin='$linea'";
-                }else {
+                } else {
                     $sql = "SELECT  SUM(tot_neto) as tot_neto from factura
                     where anulada=0 AND fec_emis BETWEEN '$fecha1' AND '$fecha2'";
                 }
-
-
             }
 
 
@@ -116,7 +105,7 @@ function getFactura($sede, $fecha1, $fecha2, $data,$linea)
 }
 
 
-function getDev_cli($sede, $fecha1, $fecha2, $data , $linea)
+function getDev_cli($sede, $fecha1, $fecha2, $data, $linea)
 {
 
 
@@ -131,69 +120,53 @@ function getDev_cli($sede, $fecha1, $fecha2, $data , $linea)
             if ($data == 'sin') {
 
 
-                if ($linea !='todos') {
+                if ($linea != 'todos') {
                     $sql = "SELECT SUM(dev_cli.tot_neto) as tot_neto  from dev_cli 
                     inner join reng_dvc on reng_dvc.fact_num = dev_cli.fact_num
                     inner join art on art.co_art=reng_dvc.co_art
                     WHERE fec_emis >='$fecha1' and dev_cli.anulada =0 and art.co_lin='$linea'";
-    
-                }else {
+                } else {
                     $sql = "SELECT SUM(dev_cli.tot_neto) as tot_neto  from dev_cli 
                     WHERE fec_emis ='$fecha1' and dev_cli.anulada =0 ";
                 }
-
-
-
             } elseif ($data == 'ven') {
 
-                if ($linea !='todos') {
+                if ($linea != 'todos') {
                     $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
                     inner join reng_dvc on reng_dvc.fact_num = dev_cli.fact_num
                     inner join art on art.co_art=reng_dvc.co_art
                     WHERE fec_emis >='$fecha1' and dev_cli.anulada =0 and art.co_lin='$linea'";
-    
-                }else {
+                } else {
                     $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
                     JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                     WHERE fec_emis ='$fecha1' and dev_cli.anulada =0";
                 }
+            } elseif ($data == 'ven2') {
 
-
-
-             } elseif ($data == 'ven2') {
-
-                if ($linea !='todos') {
+                if ($linea != 'todos') {
                     $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
                     inner join reng_dvc on reng_dvc.fact_num = dev_cli.fact_num
                     inner join art on art.co_art=reng_dvc.co_art
                     WHERE fec_emis >='$fecha1' and dev_cli.anulada =0 and art.co_lin='$linea'";
-    
-                }else {
+                } else {
 
                     $sql = "SELECT SUM(total_art) as total_art  from dev_cli 
                     JOIN reng_dvc ON dev_cli.fact_num = reng_dvc.fact_num
                     WHERE fec_emis BETWEEN '$fecha1' AND '$fecha2' and dev_cli.anulada =0";
-    
                 }
+            } else {
 
-             }else {
 
-                
-                if ($linea !='todos') {
+                if ($linea != 'todos') {
                     $sql = "SELECT SUM(tot_neto) as tot_neto from dev_cli 
                     inner join reng_dvc on reng_dvc.fact_num = dev_cli.fact_num
                     inner join art on art.co_art=reng_dvc.co_art
                     WHERE fec_emis >='$fecha1' and dev_cli.anulada =0 and art.co_lin='$linea'";
-    
-                }else {
+                } else {
 
                     $sql = "SELECT SUM(tot_neto) as tot_neto  from dev_cli 
                     WHERE fec_emis BETWEEN '$fecha1' AND '$fecha2' and dev_cli.anulada =0";
-    
                 }
-
-
-
             }
 
 
@@ -362,20 +335,17 @@ function getOrd_pago($sede, $fecha1, $fecha2, $data)
                 $sql = "SELECT SUM(monto) as monto from ord_pago
                 JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
                 WHERE fecha ='$fecha1' AND anulada = 0   AND ord_num < 6000000 AND cta_egre ='878'";
+            } elseif ($data == 'ven') {
 
-            }elseif ($data == 'ven') {
-
-               $sql = "SELECT SUM(monto) as monto from ord_pago
+                $sql = "SELECT SUM(monto) as monto from ord_pago
                 JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
                 WHERE fecha ='$fecha1' AND anulada = 0 AND benefici.ben_des<>'PREVIA SHOP' AND cta_egre <>'878' AND ord_num < 6000000";
-
-            }elseif ($data == 'ven2') {
+            } elseif ($data == 'ven2') {
 
                 $sql = "SELECT SUM(monto) as monto from ord_pago
                  JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
                  WHERE fecha BETWEEN '$fecha1' AND '$fecha2'  AND anulada = 0 AND benefici.ben_des<>'PREVIA SHOP' AND cta_egre <>'878' AND ord_num < 6000000";
-
-             }else {
+            } else {
 
                 $sql = "SELECT SUM(monto) as monto from ord_pago
                 JOIN benefici ON benefici.cod_ben = ord_pago.cod_ben
@@ -436,8 +406,6 @@ function getOrd_pago_inf($sede, $fecha1, $fecha2)
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
                     $ord_pago[] = $row;
-
-
                 }
 
                 $res = $ord_pago;
@@ -476,22 +444,20 @@ function getTasas($sede, $fecha1)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-            if ($sede =="Sucursal Caracas I" or $sede =="Comercial Merina") {
-                
+            if ($sede == "Sucursal Caracas I" or $sede == "Comercial Merina") {
+
                 $sql = "SELECT TOP 1 CONVERT(numeric(10,2), tasa_v) as tasa_v  from tasas 
                 where Convert(char(10), fecha, 111) <= '$fecha1'
                 ORDER BY fecha DESC";
-
-            }else{
+            } else {
 
                 $sql = "SELECT TOP 1 CONVERT(numeric(10,2), tasa_v) as tasa_v from tasas 
                 where Convert(char(10), fecha, 111) BETWEEN '$fecha1' AND  '$fecha1'
                 ORDER BY fecha DESC";
-                
             }
 
 
-            
+
             #$sql = "SELECT TOP 1 tasa_v from tasas 
             #where Convert(char(10), fecha, 111) <= '$fecha1'
             #ORDER BY fecha DESC";
@@ -532,7 +498,7 @@ function getTasas($sede, $fecha1)
 
 
 
-function getFacturaDetalles($sede, $fecha1,$fecha2)
+function getFacturaDetalles($sede, $fecha1, $fecha2)
 {
 
 
@@ -572,8 +538,6 @@ function getFacturaDetalles($sede, $fecha1,$fecha2)
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
                     $cobros[] = $row;
-
-
                 }
 
                 $res = $cobros;
@@ -619,8 +583,6 @@ function getMov_banco($sede, $fecha)
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
                     $mov_banc[] = $row;
-
-
                 }
 
                 $res = $mov_banc;
@@ -649,7 +611,7 @@ function getMov_banco($sede, $fecha)
 
 
 /* CONSULTAR MARCA*/
-function getLin_art($sede, $fecha1, $fecha2, $data,$linea)
+function getLin_art($sede, $fecha1, $fecha2, $data, $linea)
 {
 
     $database = Database($sede);
@@ -660,7 +622,7 @@ function getLin_art($sede, $fecha1, $fecha2, $data,$linea)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql="SELECT art.co_lin,lin_des from factura
+            $sql = "SELECT art.co_lin,lin_des from factura
             inner join reng_fac on factura.fact_num = reng_fac.fact_num
             inner join art on reng_fac.co_art = art.co_art
             inner join lin_art on lin_art.co_lin = art.co_lin
@@ -705,7 +667,7 @@ function getLin_art($sede, $fecha1, $fecha2, $data,$linea)
 
 
 /* CONSULTAR MARCA*/
-function getSub_lin($sede, $fecha1, $fecha2, $data,$linea)
+function getSub_lin($sede, $fecha1, $fecha2, $data, $linea)
 {
 
     $database = Database($sede);
@@ -716,7 +678,7 @@ function getSub_lin($sede, $fecha1, $fecha2, $data,$linea)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql="SELECT art.co_subl, subl_des , art.co_lin ,lin_des from factura
+            $sql = "SELECT art.co_subl, subl_des , art.co_lin ,lin_des from factura
             inner join reng_fac on factura.fact_num = reng_fac.fact_num
             inner join art on reng_fac.co_art = art.co_art
             inner join lin_art on lin_art.co_lin = art.co_lin
@@ -776,7 +738,7 @@ function getVendido_Grafica($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql="SELECT SUM (CONVERT(numeric(10,0), reng_fac.total_art)) as total_art,lin_art.lin_des from factura 
+            $sql = "SELECT SUM (CONVERT(numeric(10,0), reng_fac.total_art)) as total_art,lin_art.lin_des from factura 
             inner join reng_fac on factura.fact_num=reng_fac.fact_num
             inner join art  on art.co_art=reng_fac.co_art
             inner join lin_art on lin_art.co_lin=art.co_lin
@@ -786,34 +748,26 @@ function getVendido_Grafica($sede, $fecha1, $fecha2)
 
             $consulta = sqlsrv_query($conn, $sql);
 
-            if ($consulta != null) {
-                while ($row = sqlsrv_fetch_array($consulta)) {
+            $connectionInfo2 = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn2 = sqlsrv_connect($serverName, $connectionInfo2);
+            while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $total_art= $row['total_art'];
-                    $linea_des = $row['lin_des'];
-                    $sql2 = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
-                    $consulta2 = sqlsrv_query($conn, $sql2);
-
-                }
-
-                if ($consulta2 == null) {
-
-                    $res = false;
-                    return $res;
-                }else{
-    
-                    $res = true;
-                    return $res;
-                }
-            } else {
-
-                $factura['total_art'] = 0;
-                $factura['lin_des'] = 'n';
-
-                $res = $factura;
+                $total_art = $row['total_art'];
+                $linea_des = $row['lin_des'];
+                $sql2 = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
+                $consulta2 = sqlsrv_query($conn2, $sql2);
             }
 
-            return $res;
+            if ($consulta2 == null) {
+
+                $res = false;
+                return $res;
+            } else {
+
+                $res = true;
+                return $res;
+            }
+
         } catch (\Throwable $th) {
 
             throw $th;
@@ -826,35 +780,33 @@ function getVendido_Grafica($sede, $fecha1, $fecha2)
 
 
 
-function insertVendido_Grafica( $linea_des, $total_art ,$sede)
+function insertVendido_Grafica($linea_des, $total_art, $sede)
 {
 
-        
-        try {
 
-            $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
-            $conn = sqlsrv_connect($serverName, $connectionInfo);
+    try {
 
-            $sql = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $consulta = sqlsrv_query($conn, $sql);
+        $sql = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
 
-            if ($consulta == null) {
+        $consulta = sqlsrv_query($conn, $sql);
 
-                $res = false;
-                return $res;
-            }else{
+        if ($consulta == null) {
 
-                $res = true;
-                return $res;
-            }
+            $res = false;
+            return $res;
+        } else {
 
-        } catch (\Throwable $th) {
-
-            throw $th;
+            $res = true;
+            return $res;
         }
+    } catch (\Throwable $th) {
 
+        throw $th;
+    }
 }
 
 
