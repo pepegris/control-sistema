@@ -141,7 +141,7 @@ $Year = date("Y", strtotime($fecha2));
       };
 
       // Instantiate and draw the chart for Sarah's pizza.
-      var chart = new google.visualization.PieChart(document.getElementById('Sarah_chart_div'));
+      var chart = new google.visualization.PieChart(document.getElementById('Saarah_chart_div'));
       chart.draw(data, options);
     }
 
