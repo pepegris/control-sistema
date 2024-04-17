@@ -55,27 +55,23 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         <?php
 
         $serverName = "172.16.1.39";
-        $connectionInfo = array("Database" => "PUECRUZ", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
         $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-        $sql = "SELECT SUM (CONVERT(numeric(10,0), reng_fac.total_art)) as total_art,lin_art.lin_des from factura 
-            inner join reng_fac on factura.fact_num=reng_fac.fact_num
-            inner join art  on art.co_art=reng_fac.co_art
-            inner join lin_art on lin_art.co_lin=art.co_lin
-            where factura.anulada =0 and factura.fec_emis between '20230101' and '20231231'
-            group by lin_art.lin_des 
+        $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
+            group by linea_des
             order by total_art desc";
 
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          echo "['" . $row['lin_des'] . " / " . $row['total_art'] . "'," . $row['total_art'] . "],";
+          echo "['" . $row['linea_des'] . " / " . $row['total_art'] . "'," . $row['total_art'] . "],";
         }
         ?>
       ]);
 
       var options = {
-        title: 'Modelos vendidos por Puerto',
+        title: 'Modelos vendidos en Todas las Tiendas',
         is3D: true,
       };
 
@@ -169,4 +165,6 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 </table>
 
 
-<?php include '../../includes/footer.php'; ?>
+<?php
+  //deleteVendido_Grafica();
+ include '../../includes/footer.php'; ?>
