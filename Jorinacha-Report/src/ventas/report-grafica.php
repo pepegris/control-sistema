@@ -20,7 +20,8 @@ $Year = date("Y", strtotime($fecha2));
 for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $sede = $sedes_ar[$i];
-  $ventas=getVendido_Grafica($sede,'20230101','20231231');
+  getVendido_Grafica($sede,'20230101','20231231');
+  getDev_Grafica($sede,'20230101','20231231');
 
 }
 
@@ -79,7 +80,34 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       chart.draw(data, options);
     }
 
+    //---------------------------------------------------------------------------------------------||
 
+    google.charts.setOnLoadCallback(drawBackgroundColor);
+
+    function drawBackgroundColor() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('number', 'X');
+          data.addColumn('number', 'Dogs');
+
+          data.addRows([
+            [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
+            [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
+            [12, 30]
+          ]);
+
+          var options = {
+            hAxis: {
+              title: 'Time'
+            },
+            vAxis: {
+              title: 'Popularity'
+            },
+            backgroundColor: '#f1f8e9'
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        }
 
 
 
@@ -174,5 +202,5 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
 <?php
-  deleteVendido_Grafica();
+  //deleteVendido_Grafica();
  include '../../includes/footer.php'; ?>
