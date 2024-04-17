@@ -64,7 +64,16 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          echo " ['". $row['linea_des'] . "', " . $row['total_art'] . ", '#b87333'],";
+          if ($row['total_art'] < 20000) {
+            $color='red';
+          }if ($row['total_art'] < 60000) {
+            $color='yellow';
+          } else {
+            $color='green';
+          }
+          
+
+          echo " ['". $row['linea_des'] . "', " . $row['total_art'] . ", '$color'],";
 
         }
         ?>
@@ -87,7 +96,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         legend: { position: "none" },
       };
 
-      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
 
     }
@@ -163,7 +172,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 </head>
 
 <center>
-<div id="barchart_values" style="width: 900px; height: 400px;"></div>
+<div id="columnchart_values" style="width: 900px; height: 400px;"></div>
 </center>
 <br>
 <br>
