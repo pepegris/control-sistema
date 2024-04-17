@@ -64,13 +64,17 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          if ($row['total_art'] < 20000) {
-            $color='red';
-          }if ($row['total_art'] < 60000) {
+          if ($row['total_art'] > 80000) {
+            $color='gree';
+          }elseif ($row['total_art'] > 60000) {
             $color='yellow';
+          }elseif ($row['total_art'] > 20000) {
+            $color='orange';
           } else {
-            $color='green';
+            $color='red';
           }
+
+        
           
 
           echo " ['". $row['linea_des'] . "', " . $row['total_art'] . ", '$color'],";
