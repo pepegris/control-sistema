@@ -806,7 +806,7 @@ function getDev_Grafica($sede, $fecha1, $fecha2)
 
                 $total_art = $row['total_dev'];
                 $linea_des = $row['lin_des'];
-                $sql2 = "INSERT INTO art_grafica_dev (linea_des,mes,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
+                $sql2 = "INSERT INTO art_grafica_dev (linea_des,mes,total_dev,tienda) values ('$linea_des','',$total_art,'$sede')";
                 $consulta2 = sqlsrv_query($conn2, $sql2);
             }
 
@@ -872,7 +872,7 @@ function deleteVendido_Grafica()
     CREATE TABLE art_grafica_dev (
   linea_des VARCHAR(200) ,
   mes VARCHAR(200) ,
-  total_art INT  ,
+  total_dev INT  ,
   tienda VARCHAR(200) NOT NULL  ,
   )
 
