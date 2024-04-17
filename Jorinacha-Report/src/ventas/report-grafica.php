@@ -32,7 +32,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   inner join reng_fac on factura.fact_num=reng_fac.fact_num
   inner join art  on art.co_art=reng_fac.co_art
   inner join lin_art on lin_art.co_lin=art.co_lin
-  where factura.anulada =0 and factura.fec_emis between '$fecha1' and '$fecha2'
+  where factura.anulada =0 and factura.fec_emis between '20230101' and '20231231'
   group by lin_art.lin_des 
   order by total_art desc";
 
