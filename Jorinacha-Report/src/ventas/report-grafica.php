@@ -64,7 +64,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          echo " ['". $row['linea_des'] . "', " . $row['total_art'] . ", '#b87333'],";
+          echo " ['". $row['linea_des'] . "', " . $row['total_art'] . "],";
 
         }
         ?>
