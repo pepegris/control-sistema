@@ -45,6 +45,7 @@ for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
     $Month = 0 . $Month_beg;
   } else {
+
     $Month = $Month_beg;
   }
 
@@ -111,7 +112,7 @@ for ($k = $Month_beg; $k <= $Month_total; $k++) {
       chart.draw(data, options);
     }
 
-    deleteVendido_Grafica();
+    
 
     //---------------------------------------------------------------------------------------------||
     //---------------------------------------------------------------------------------------------||
@@ -154,7 +155,7 @@ for ($k = $Month_beg; $k <= $Month_total; $k++) {
         backgroundColor: '#f1f8e9'
       };
 
-      var chart = new google.visualization.LineChart(document.getElementById('Completo_chart_div'));
+      var chart = new google.visualization.PieChart(document.getElementById('Completo_chart_div'));
       chart.draw(data, options);
     }
 
@@ -193,7 +194,7 @@ for ($k = $Month_beg; $k <= $Month_total; $k++) {
         colors: ['#a52714', '#097138']
       };
 
-      var chart = new google.visualization.LineChart(document.getElementById('Detallado_chart_div'));
+      var chart = new google.visualization.PieChart(document.getElementById('Detallado_chart_div'));
       chart.draw(data, options);
     }
         //---------------------------------------------------------------------------------------------||
@@ -226,5 +227,5 @@ for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
 
 <?php
-
+deleteVendido_Grafica();
 include '../../includes/footer.php'; ?>
