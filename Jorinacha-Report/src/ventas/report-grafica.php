@@ -82,6 +82,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       chart.draw(data, options);
     }
 
+    deleteVendido_Grafica();
+
     //---------------------------------------------------------------------------------------------||
     //---------------------------------------------------------------------------------------------||
 
@@ -95,7 +97,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     function drawBackgroundColor() {
       var data = new google.visualization.DataTable();
       data.addColumn('number', 'X');
-      data.addColumn('number', 'Dogs');
+      data.addColumn('number', 'Ventas');
 
       data.addRows([
         [0, 0],
@@ -115,10 +117,10 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
       var options = {
         hAxis: {
-          title: 'Time'
+          title: 'Meses'
         },
         vAxis: {
-          title: 'Popularity'
+          title: 'Cantidad'
         },
         backgroundColor: '#f1f8e9'
       };
@@ -195,5 +197,5 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
 <?php
-//deleteVendido_Grafica();
+
 include '../../includes/footer.php'; ?>
