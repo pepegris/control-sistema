@@ -21,7 +21,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $sede = $sedes_ar[$i];
   getVendido_Grafica($sede,'20230101','20231231');
-  getDev_Grafica($sede,'20230101','20231231');
+  //getDev_Grafica($sede,'20230101','20231231');
 
 }
 
@@ -202,5 +202,5 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
 <?php
-  //deleteVendido_Grafica();
+  deleteVendido_Grafica();
  include '../../includes/footer.php'; ?>
