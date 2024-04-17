@@ -21,15 +21,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   
   $sede = $sedes_ar[$i];
   $ventas=getVendido_Grafica($sede,'20230101','20231231');
+  var_dump($ventas);
+  echo "$sede <br>";
 
-  for ($e = 0; $e < count($ventas); $e++) {
-    
-    $datos=insertVendido_Grafica($ventas[$e]['lin_des'], $ventas[$e]['total_art'], $sede);
-    var_dump($datos);
-    var_dump($ventas['lin_des'][$e]);
-    var_dump($ventas['total_art'][$e]);
-
-  }
 
 }
 

@@ -784,20 +784,27 @@ function getVendido_Grafica($sede, $fecha1, $fecha2)
             group by lin_art.lin_des 
             order by total_art desc";
 
-
-
-
             $consulta = sqlsrv_query($conn, $sql);
 
             if ($consulta != null) {
                 while ($row = sqlsrv_fetch_array($consulta)) {
 
-                    $factura['total_art'] = $row['total_art'];
-                    $factura['lin_des'] = $row['lin_des'];
-                    break;
+                    $total_art= $row['total_art'];
+                    $linea_des = $row['lin_des'];
+                    $sql2 = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
+                    $consulta2 = sqlsrv_query($conn, $sql2);
+
                 }
 
-                $res = $factura;
+                if ($consulta2 == null) {
+
+                    $res = false;
+                    return $res;
+                }else{
+    
+                    $res = true;
+                    return $res;
+                }
             } else {
 
                 $factura['total_art'] = 0;
