@@ -38,6 +38,8 @@ $Year = date("Y", strtotime($fecha2));
     google.charts.load('current', {
       'packages': ['corechart']
     });
+
+
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
@@ -151,6 +153,7 @@ $Year = date("Y", strtotime($fecha2));
     <!--Table and divs that hold the pie charts-->
     <table class="columns">
       <tr>
+        <td><div id="Sarah_chart_div" style="border: 1px solid #ccc"></div></td>
         <td><div id="Sarah_chart_div" style="border: 1px solid #ccc"></div></td>
         <td><div id="Anthony_chart_div" style="border: 1px solid #ccc"></div></td>
       </tr>
