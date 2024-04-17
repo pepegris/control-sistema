@@ -36,7 +36,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 }
 
 
-for ($k = $Month_beg; $k <= $Month_total; $k++) {
+/* for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
 
 
@@ -56,7 +56,7 @@ for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
  
 
-}
+} */
 
 ?>
 
