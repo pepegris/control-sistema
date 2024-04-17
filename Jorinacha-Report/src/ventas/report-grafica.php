@@ -162,8 +162,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 </head>
 
 <center>
-<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+<div id="columnchart_values" style="width: 1500px; height: 500px;"></div>
 </center>
+<br> <br>
 <!--Table and divs that hold the pie charts-->
 <table class="columns">
   <tr>
