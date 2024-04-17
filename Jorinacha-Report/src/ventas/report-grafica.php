@@ -38,13 +38,15 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $consulta = sqlsrv_query($conn, $sql);
 
-
+  $connectionInfo2 = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+  $conn2 = sqlsrv_connect($serverName, $connectionInfo2);
+  
   while ($row = sqlsrv_fetch_array($consulta)) {
 
     $total_art = $row['total_art'];
     $linea_des = $row['lin_des'];
     $sql2 = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
-    $consulta2 = sqlsrv_query($conn, $sql2);
+    $consulta2 = sqlsrv_query($conn2, $sql2);
     var_dump($consulta2);
   }
 
