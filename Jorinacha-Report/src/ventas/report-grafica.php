@@ -19,7 +19,7 @@ $Year = date("Y", strtotime($fecha2));
 
 for ($i = 1; $i < count($sedes_ar); $i++) {
   $sede = $sedes_ar[$i];
-/*   $sede = $sedes_ar[$i];
+  /*   $sede = $sedes_ar[$i];
   $ventas=getVendido_Grafica($sede,'20230101','20231231');
   var_dump($ventas);
   echo "$sede <br>"; */
@@ -27,8 +27,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   $serverName = "172.16.1.39";
   $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
   $conn = sqlsrv_connect($serverName, $connectionInfo);
-  
-  $sql="SELECT SUM (CONVERT(numeric(10,0), reng_fac.total_art)) as total_art,lin_art.lin_des from factura 
+
+  $sql = "SELECT SUM (CONVERT(numeric(10,0), reng_fac.total_art)) as total_art,lin_art.lin_des from factura 
   inner join reng_fac on factura.fact_num=reng_fac.fact_num
   inner join art  on art.co_art=reng_fac.co_art
   inner join lin_art on lin_art.co_lin=art.co_lin
@@ -38,33 +38,24 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $consulta = sqlsrv_query($conn, $sql);
 
-  if ($consulta != null) {
-      while ($row = sqlsrv_fetch_array($consulta)) {
 
-          $total_art= $row['total_art'];
-          $linea_des = $row['lin_des'];
-          $sql2 = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
-          $consulta2 = sqlsrv_query($conn, $sql2);
+  while ($row = sqlsrv_fetch_array($consulta)) {
 
-      }
-
-      if ($consulta2 == null) {
-
-          $res = false;
-          echo $res;
-      }else{
-
-          $res = true;
-          echo $res;
-      }
-  } else {
-
-
-      echo "no srive";
+    $total_art = $row['total_art'];
+    $linea_des = $row['lin_des'];
+    $sql2 = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
+    $consulta2 = sqlsrv_query($conn, $sql2);
   }
 
+  if ($consulta2 == null) {
 
+    $res = false;
+    echo $res;
+  } else {
 
+    $res = true;
+    echo $res;
+  }
 }
 
 
