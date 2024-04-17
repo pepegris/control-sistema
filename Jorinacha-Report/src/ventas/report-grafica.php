@@ -80,8 +80,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
       var options = {
         title: 'Modelos vendidos en Todas las Tiendas',
-        width: 600,
-        height: 400,
+        width: 900,
+        height: 700,
         bar: {groupWidth: "95%"},
         legend: { position: "none" },
       };
@@ -150,8 +150,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       // Set options for Anthony's pie chart.
       var options = {
         title: 'How Much Pizza Anthony Ate Last Night',
-        width: 600,
-        height: 500
+        width: 400,
+        height: 300
       };
 
       // Instantiate and draw the chart for Anthony's pizza.
