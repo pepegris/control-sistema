@@ -829,7 +829,7 @@ function insertVendido_Grafica( $linea_des, $total_art ,$sede)
             $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "INSERT INTO art_grafica (linea_des,total_art,tienda) values ($linea_des,$total_art,$sede)";
+            $sql = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
 
             $res=sqlsrv_query($conn, $sql);
 
@@ -840,3 +840,13 @@ function insertVendido_Grafica( $linea_des, $total_art ,$sede)
         }
 
 }
+
+
+/* CREATE TABLE art_grafica (
+  id INT IDENTITY NOT NULL PRIMARY KEY,
+  linea_des VARCHAR(200) ,
+  sub_linea VARCHAR(200) ,
+  total_art INT  ,
+  tienda VARCHAR(200) NOT NULL  ,
+
+); */
