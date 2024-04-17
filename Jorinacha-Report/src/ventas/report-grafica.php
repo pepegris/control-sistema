@@ -162,9 +162,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 </head>
 
 <center>
-<div id="columnchart_values" style="width: 1500px; height: 500px;"></div>
+<div id="columnchart_values" style="width: 100%; height: 900px;"></div>
 </center>
-<br> <br>
+<br> 
 <!--Table and divs that hold the pie charts-->
 <table class="columns">
   <tr>
@@ -179,5 +179,5 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
 <?php
-  //deleteVendido_Grafica();
+  deleteVendido_Grafica();
  include '../../includes/footer.php'; ?>
