@@ -21,9 +21,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   
   $sede = $sedes_ar[$i];
   $ventas=getVendido_Grafica($sede,'20230101','20231231');
-  var_dump($ventas);
-  var_dump($ventas[0]['lin_des']);
-  var_dump($ventas[2]['lin_des']);
+  var_dump($ventas['lin_des']);
+  var_dump($ventass['total_art']);
   echo "<br>";
 
   while ($row = sqlsrv_fetch_array($ventas)) {
