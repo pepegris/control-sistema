@@ -20,7 +20,7 @@ $Year = date("Y", strtotime($fecha2));
 for ($i = 1; $i < count($sedes_ar); $i++) {
   
   $sede = $sedes_ar[$i];
-  $ventas=getVendido_Grafica($sede,$fecha1,$fecha2);
+  $ventas=getVendido_Grafica($sede,'20230101','20231231');
 
   while ($row = sqlsrv_fetch_array($ventas)) {
     
