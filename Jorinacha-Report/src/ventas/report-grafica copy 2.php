@@ -17,6 +17,13 @@ $Day = date("d", strtotime($fecha2));
 $Month_total = date("m", strtotime($fecha2));
 $Year = date("Y", strtotime($fecha2));
 
+for ($i = 1; $i < count($sedes_ar); $i++) {
+
+  $sede = $sedes_ar[$i];
+  $ventas=getVendido_Grafica($sede,'20230101','20231231');
+
+}
+
 
 
 
@@ -33,9 +40,12 @@ $Year = date("Y", strtotime($fecha2));
 <head>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-    google.charts.load("current", {
-      packages: ["corechart"]
+    // Load Charts and the corechart package.
+    google.charts.load('current', {
+      'packages': ['corechart']
     });
+
+
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
@@ -44,44 +54,117 @@ $Year = date("Y", strtotime($fecha2));
 
         <?php
 
-        for ($i = 1; $i < count($sedes_ar); $i++) {
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-          $sede = $sedes_ar[$i];
-          $vendidos = getVendido_Grafica($sede, $fecha1,$fecha2);
-          var_dump(count($vendidos));
-          echo "<br>";
-          var_dump($vendidos);
+        $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
+            group by linea_des
+            order by total_art desc";
 
-/* 
-          for ($e = 1; $e < count($vendidos); $e++) {
-
-            $vendidos = insertVendido_Grafica();
-            
-          } */
-
-        }
-
-
+        $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          echo "['" . $row['lin_des'] . " / " . $row['total_art'] . "'," . $row['total_art'] . "],";
+          echo "['" . $row['linea_des'] . " / " . $row['total_art'] . "'," . $row['total_art'] . "],";
         }
         ?>
       ]);
 
       var options = {
-        title: 'Modelos vendidos por Puerto',
+        title: 'Modelos vendidos en Todas las Tiendas',
         is3D: true,
       };
 
       var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
       chart.draw(data, options);
     }
+
+
+
+
+
+
+
+    //---------------------------------------------------------------------------------------------||
+
+
+    // Draw the pie chart for Sarah's pizza when Charts is loaded.
+    google.charts.setOnLoadCallback(drawSarahChart);
+    // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+    google.charts.setOnLoadCallback(drawAnthonyChart);
+
+    // Callback that draws the pie chart for Sarah's pizza.
+    function drawSarahChart() {
+
+      // Create the data table for Sarah's pizza.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+        ['Mushrooms', 1],
+        ['Onions', 1],
+        ['Olives', 2],
+        ['Zucchini', 2],
+        ['Pepperoni', 1]
+      ]);
+
+      // Set options for Sarah's pie chart.
+      var options = {
+        title: 'How Much Pizza Sarah Ate Last Night',
+        width: 400,
+        height: 300
+      };
+
+      // Instantiate and draw the chart for Sarah's pizza.
+      var chart = new google.visualization.PieChart(document.getElementById('Sarah_chart_div'));
+      chart.draw(data, options);
+    }
+
+    // Callback that draws the pie chart for Anthony's pizza.
+    function drawAnthonyChart() {
+
+      // Create the data table for Anthony's pizza.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+        ['Mushrooms', 2],
+        ['Onions', 2],
+        ['Olives', 2],
+        ['Zucchini', 0],
+        ['Pepperoni', 3]
+      ]);
+
+      // Set options for Anthony's pie chart.
+      var options = {
+        title: 'How Much Pizza Anthony Ate Last Night',
+        width: 400,
+        height: 300
+      };
+
+      // Instantiate and draw the chart for Anthony's pizza.
+      var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
+      chart.draw(data, options);
+    }
   </script>
 </head>
 
-<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+<center>
+  <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+</center>
+<!--Table and divs that hold the pie charts-->
+<table class="columns">
+  <tr>
+    <td>
+      <div id="Sarah_chart_div" style="border: 1px solid #ccc"></div>
+    </td>
+    <td>
+      <div id="Anthony_chart_div" style="border: 1px solid #ccc"></div>
+    </td>
+  </tr>
+</table>
 
 
-
-<?php include '../../includes/footer.php'; ?>
+<?php
+  //deleteVendido_Grafica();
+ include '../../includes/footer.php'; ?>

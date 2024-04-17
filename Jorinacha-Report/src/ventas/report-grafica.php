@@ -50,8 +50,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
-        ['Articulos', 'Total Vendidos'],
-
+        ["Element", "Density", { role: "style" } ],
         <?php
 
         $serverName = "172.16.1.39";
@@ -65,18 +64,23 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          echo "['" . $row['linea_des'] . " / " . $row['total_art'] . "'," . $row['total_art'] . "],";
+          echo " ['". $row['linea_des'] . "', " . $row['total_art'] . ", '#b87333'],";
+
         }
         ?>
       ]);
 
       var options = {
         title: 'Modelos vendidos en Todas las Tiendas',
-        is3D: true,
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
       };
 
-      var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-      chart.draw(data, options);
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+    chart.draw(view, options);
+
     }
 
 
@@ -150,7 +154,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 </head>
 
 <center>
-  <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
 </center>
 <!--Table and divs that hold the pie charts-->
 <table class="columns">
