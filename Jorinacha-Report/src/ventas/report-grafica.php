@@ -20,7 +20,7 @@ $Year = date("Y", strtotime($fecha2));
 for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $sede = $sedes_ar[$i];
-  getVendido_Grafica($sede,'20230101','20231231');
+  $ventas=getVendido_Grafica($sede,'20230101','20231231');
   //getDev_Grafica($sede,'20230101','20231231');
 
 }
@@ -81,7 +81,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     }
 
     //---------------------------------------------------------------------------------------------||
-
+/* 
     google.charts.setOnLoadCallback(drawBackgroundColor);
 
     function drawBackgroundColor() {
@@ -107,7 +107,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
           var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
           chart.draw(data, options);
-        }
+        } */
 
 
 
