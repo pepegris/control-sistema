@@ -205,5 +205,5 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
 <?php
-  deleteVendido_Grafica();
+  //deleteVendido_Grafica();
  include '../../includes/footer.php'; ?>
