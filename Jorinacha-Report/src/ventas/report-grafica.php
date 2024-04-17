@@ -33,8 +33,10 @@ $Year = date("Y", strtotime($fecha2));
 <head>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-    google.charts.load("current", {
-      packages: ["corechart"]
+
+    // Load Charts and the corechart package.
+    google.charts.load('current', {
+      'packages': ['corechart']
     });
     google.charts.setOnLoadCallback(drawChart);
 
@@ -81,10 +83,6 @@ $Year = date("Y", strtotime($fecha2));
 
     //---------------------------------------------------------------------------------------------||
 
-    // Load Charts and the corechart package.
-    google.charts.load('current', {
-      'packages': ['corechart']
-    });
 
     // Draw the pie chart for Sarah's pizza when Charts is loaded.
     google.charts.setOnLoadCallback(drawSarahChart);
