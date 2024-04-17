@@ -69,7 +69,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
           $dev=getDev_Grafica_fac($sede,$row['linea_des']);
           $total=$row['total_art']-$dev;
 
-          echo "['" . $row['linea_des'] . " / " . $row['total_art'] . "'," . $total . "],";
+          echo "['" . $row['linea_des'] . " / " . $row['total_art'] . " - " . $dev . "'," . $total . "],";
         }
         ?>
       ]);
