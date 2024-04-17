@@ -12,7 +12,7 @@ $linea = $_GET['linea'];
 $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
 $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
-
+$Month_beg = date("m", strtotime($fecha1));
 $Day = date("d", strtotime($fecha2));
 $Month_total = date("m", strtotime($fecha2));
 $Year = date("Y", strtotime($fecha2));
@@ -20,13 +20,42 @@ $Year = date("Y", strtotime($fecha2));
 for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $sede = $sedes_ar[$i];
-  $ventas = getVendido_Grafica($sede, '20230101', '20231231');
-  $dev = getDev_Grafica($sede, '20230101', '20231231');
+  $ventas = getVendido_Grafica($sede, $fecha1, $fecha2);
+  $dev = getDev_Grafica($sede, $fecha1, $fecha2);
 }
 
 
+for ($i = 1; $i < count($sedes_ar); $i++) {
+
+  $sede = $sedes_ar[$i];
+  for ($i=0; $i < 11 ; $i++) { 
+    $ventas = getVendido_Grafica($sede, $fecha1, $fecha2);
+    $dev = getDev_Grafica($sede, $fecha1, $fecha2);
+  }
+  
+}
 
 
+for ($k = $Month_beg; $k <= $Month_total; $k++) {
+
+
+
+
+  if ($Month_beg < 10) {
+
+    $Month = 0 . $Month_beg;
+  } else {
+    $Month = $Month_beg;
+  }
+
+  $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year );
+  var_dump($cantidadDias);
+  $fecha_1 =  $Year .''. $Month .''  . '01';
+  $fecha_2 =  $Year .''. $Month .''  . $cantidadDias;
+
+ 
+
+}
 
 ?>
 
