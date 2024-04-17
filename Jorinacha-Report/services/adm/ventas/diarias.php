@@ -790,22 +790,8 @@ function getDev_Grafica($sede, $fecha1, $fecha2,$consulta)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            if ($consulta !='n') {
-                $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                WHERE linea_des ='$consulta'
-                group by linea_des
-                order by total_dev desc";
-    
-                $consulta = sqlsrv_query($conn, $sql);
-    
-                while ($row = sqlsrv_fetch_array($consulta)) {
-    
-                    $total_art = $row['total_dev'];
-                    break;
+            if ($consulta =='n') {
 
-                }
-                return $total_art;
-            }else{
                 $sql = "SELECT SUM (CONVERT(numeric(10,0), reng_dvc.total_art)) as total_dev,lin_art.lin_des from dev_cli
                 inner join reng_dvc  on dev_cli.fact_num=reng_dvc.fact_num
                 inner join art  on art.co_art=reng_dvc.co_art
@@ -825,6 +811,23 @@ function getDev_Grafica($sede, $fecha1, $fecha2,$consulta)
                     $sql2 = "INSERT INTO art_grafica_dev (linea_des,mes,total_dev,tienda) values ('$linea_des','',$total_art,'$sede')";
                     $consulta2 = sqlsrv_query($conn2, $sql2);
                 }
+
+            }else{
+
+                $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
+                WHERE linea_des ='$consulta'
+                group by linea_des
+                order by total_dev desc";
+    
+                $consulta = sqlsrv_query($conn, $sql);
+    
+                while ($row = sqlsrv_fetch_array($consulta)) {
+    
+                    $total_art = $row['total_dev'];
+                    break;
+
+                }
+                return $total_art;
             }
 
 
