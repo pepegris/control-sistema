@@ -43,6 +43,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     $total_art = $row['total_art'];
     $linea_des = $row['lin_des'];
+    var_dump($linea_des);
     $sql2 = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
     $consulta2 = sqlsrv_query($conn, $sql2);
   }
