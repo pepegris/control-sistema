@@ -796,7 +796,7 @@ function getDev_Grafica($sede, $fecha1, $fecha2)
             inner join lin_art on lin_art.co_lin=art.co_lin
 			where dev_cli.anulada =0 and dev_cli.fec_emis between '$fecha1' and '$fecha2'
             group by lin_art.lin_des 
-            order by total_art desc";
+            order by total_dev desc";
 
             $consulta = sqlsrv_query($conn, $sql);
 
