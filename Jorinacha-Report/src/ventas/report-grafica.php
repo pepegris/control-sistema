@@ -28,18 +28,13 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $sede = $sedes_ar[$i];
-  for ($i=0; $i < 11 ; $i++) { 
-    $ventas = getVendido_Grafica($sede, $fecha1, $fecha2);
-    $dev = getDev_Grafica($sede, $fecha1, $fecha2);
-  }
+  $ventas = getVendido_Grafica($sede, $fecha1, $fecha2);
+  $dev = getDev_Grafica($sede, $fecha1, $fecha2);
   
 }
 
 
-/* for ($k = $Month_beg; $k <= $Month_total; $k++) {
-
-
-
+ for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
   if ($Month_beg < 10) {
 
@@ -56,7 +51,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
  
 
-} */
+}
 
 ?>
 
