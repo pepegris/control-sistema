@@ -818,3 +818,5 @@ function deleteVendido_Grafica()
   tienda VARCHAR(200) NOT NULL  ,
 
 ); */
+
+
