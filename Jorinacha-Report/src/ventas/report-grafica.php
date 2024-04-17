@@ -17,6 +17,19 @@ $Day = date("d", strtotime($fecha2));
 $Month_total = date("m", strtotime($fecha2));
 $Year = date("Y", strtotime($fecha2));
 
+for ($i = 1; $i < count($sedes_ar); $i++) {
+  
+  $sede = $sedes_ar[$i];
+  $ventas=getVendido_Grafica($sede,$fecha1,$fecha2);
+
+  while ($row = sqlsrv_fetch_array($ventas)) {
+    
+    $ventas=getVendido_Grafica($row['lin_des'], $row['total_art'], $sede);
+
+  }
+
+}
+
 
 
 
@@ -87,8 +100,6 @@ $Year = date("Y", strtotime($fecha2));
 
     // Draw the pie chart for Sarah's pizza when Charts is loaded.
     google.charts.setOnLoadCallback(drawSarahChart);
-    google.charts.setOnLoadCallback(drawSaarahChart);
-
     // Draw the pie chart for the Anthony's pizza when Charts is loaded.
     google.charts.setOnLoadCallback(drawAnthonyChart);
 
@@ -119,9 +130,6 @@ $Year = date("Y", strtotime($fecha2));
       chart.draw(data, options);
     }
 
-    var chart = new google.visualization.PieChart(document.getElementById('Saarah_chart_div'));
-      chart.draw(data, options);
-
     // Callback that draws the pie chart for Anthony's pizza.
     function drawAnthonyChart() {
 
@@ -151,16 +159,14 @@ $Year = date("Y", strtotime($fecha2));
   </script>
 </head>
 
-<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
-
+<center>
+  <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+</center>
 <!--Table and divs that hold the pie charts-->
 <table class="columns">
   <tr>
     <td>
       <div id="Sarah_chart_div" style="border: 1px solid #ccc"></div>
-    </td>
-    <td>
-      <div id="Saarah_chart_div" style="border: 1px solid #ccc"></div>
     </td>
     <td>
       <div id="Anthony_chart_div" style="border: 1px solid #ccc"></div>
