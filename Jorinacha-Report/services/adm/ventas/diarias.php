@@ -822,7 +822,7 @@ function getVendido_Grafica($sede, $fecha1, $fecha2)
 function insertVendido_Grafica( $linea_des, $total_art ,$sede)
 {
 
-        $database = Database($sede);
+        
         try {
 
             $serverName = "172.16.1.39";
@@ -831,9 +831,18 @@ function insertVendido_Grafica( $linea_des, $total_art ,$sede)
 
             $sql = "INSERT INTO art_grafica (linea_des,sub_linea,total_art,tienda) values ('$linea_des','',$total_art,'$sede')";
 
-            sqlsrv_query($conn, $sql);
+            $consulta = sqlsrv_query($conn, $sql);
 
-            return 'iNSERT';
+            if ($consulta == null) {
+
+                $res = false;
+                return $res;
+            }else{
+
+                $res = true;
+                return $res;
+            }
+
         } catch (\Throwable $th) {
 
             throw $th;
