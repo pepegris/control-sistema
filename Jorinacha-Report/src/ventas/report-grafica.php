@@ -50,7 +50,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
-        ["Element", "Density", { role: "style" } ],
+        ['Articulos', 'Total Vendidos'],
+
         <?php
 
         $serverName = "172.16.1.39";
@@ -64,46 +65,20 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          if ($row['total_art'] > 80000) {
-            $color='green';
-          }elseif ($row['total_art'] > 60000) {
-            $color='yellow';
-          }elseif ($row['total_art'] > 20000) {
-            $color='orange';
-          } else {
-            $color='red';
-          }
-
-        
-          
-
-          echo " ['". $row['linea_des'] . "', " . $row['total_art'] . ", '$color'],";
-
+          echo "['" . $row['linea_des'] . " / " . $row['total_art'] . "'," . $row['total_art'] . "],";
         }
         ?>
       ]);
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                     { calc: "stringify",
-                       sourceColumn: 1,
-                       type: "string",
-                       role: "annotation" },
-                     2]);
-
-
       var options = {
         title: 'Modelos vendidos en Todas las Tiendas',
-        width: 900,
-        height: 700,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
+        is3D: true,
       };
 
-      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-      chart.draw(view, options);
-
+      var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+      chart.draw(data, options);
     }
+
 
 
 
@@ -176,7 +151,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 </head>
 
 <center>
-<div id="columnchart_values" style="width: 900px; height: 400px;"></div>
+<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
 </center>
 <br>
 <br>

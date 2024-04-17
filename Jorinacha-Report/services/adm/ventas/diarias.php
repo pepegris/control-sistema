@@ -810,13 +810,15 @@ function deleteVendido_Grafica()
 }
 
 
-/* CREATE TABLE art_grafica (
+/* 
+  CREATE TABLE art_grafica (
   id INT IDENTITY NOT NULL PRIMARY KEY,
   linea_des VARCHAR(200) ,
   sub_linea VARCHAR(200) ,
   total_art INT  ,
   tienda VARCHAR(200) NOT NULL  ,
 
-); */
+); 
+*/
 
 
