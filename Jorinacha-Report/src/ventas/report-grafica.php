@@ -124,6 +124,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
         $m = $Month_beg;
         $Month  = $Month_beg;
+        $u=1;
         for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
           $sql = "SELECT SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
@@ -132,11 +133,10 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
           $consulta = sqlsrv_query($conn, $sql);
           while ($row = sqlsrv_fetch_array($consulta)) {
 
-
-            echo "[$k," . $row['total_art']. "],";
+            $total=$row['total_art'];
+            echo "[$u,$total],";
           }
-
-
+          $u++;
 
           if ($m < 9) {
             $m++;
@@ -149,6 +149,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
         ?>
+
       ]);
 
       var options = {
