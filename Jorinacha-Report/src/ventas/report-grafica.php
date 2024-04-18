@@ -119,7 +119,6 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     google.charts.setOnLoadCallback(drawCurveTypes);
 
-    // Callback that draws the pie chart for Sarah's pizza.
     function drawCurveTypes() {
       var data = new google.visualization.DataTable();
       data.addColumn('number', 'X');
@@ -252,7 +251,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
         $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
             group by linea_des
-            order by total_art desc";
+            order by total_dev desc";
 
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
@@ -307,6 +306,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     </td>
   </tr>
 </table>
+
+
+
 
 
 <?php
