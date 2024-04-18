@@ -33,7 +33,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2,$Month);
   $dev = getDev_Grafica($sede, $fecha_1, $fecha_2,$Month);
-
+  echo $Month ;
   $m++;
   if ($m < 10) {
     $Month = 0 . $m;
