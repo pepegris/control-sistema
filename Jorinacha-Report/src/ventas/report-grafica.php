@@ -56,7 +56,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     background-color: white;
   }
 
-  h1 {
+  h1,h2 {
 
     color: black;
 
@@ -225,9 +225,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
       // Set options for Sarah's pie chart.
       var options = {
-        title: 'How Much Pizza Sarah Ate Last Night',
-        width: 500,
-        height: 400
+        title: 'Total de ventas',
+        width: 600,
+        height: 500
       };
 
       // Instantiate and draw the chart for Sarah's pizza.
@@ -265,9 +265,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
       // Set options for Anthony's pie chart.
       var options = {
-        title: 'How Much Pizza Anthony Ate Last Night',
-        width: 500,
-        height: 400
+        title: 'Total de Devoluciones',
+        width: 600,
+        height: 500
       };
 
       // Instantiate and draw the chart for Anthony's pizza.
@@ -288,7 +288,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 <br>
 <br>
 <center>
-  <h2> Graficas de Ventas por Mes desde <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+  <h2> Ventas por Mes desde <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   <div id="chart_div" style="width: 900px; height: 500px;"></div>
 </center>
 <br>
