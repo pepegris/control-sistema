@@ -23,7 +23,7 @@
       , 'Comercial Nachari',
       , 'Comercial Corina II',
       , 'Comercial Catica II',],
-        ]);
+  
 
         <?php
 
@@ -290,7 +290,7 @@
 
 
         ?>
-
+      ]);
 
       var options = {
           title: 'Company Performance',
