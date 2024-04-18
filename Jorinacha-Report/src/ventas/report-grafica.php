@@ -17,13 +17,6 @@ $Day = date("d", strtotime($fecha2));
 $Month_total = date("m", strtotime($fecha2));
 $Year = date("Y", strtotime($fecha2));
 
-for ($i = 1; $i < count($sedes_ar); $i++) {
-
-  $sede = $sedes_ar[$i];
-  $ventas = getVendido_Grafica($sede, $fecha1, $fecha2);
-  $dev = getDev_Grafica($sede, $fecha1, $fecha2);
-}
-
 
 for ($i = 1; $i < count($sedes_ar); $i++) {
 
@@ -39,7 +32,7 @@ echo "<hr>";
 
   if ($Month_beg < 10) {
 
-    $Month = 0 . $Month_beg;
+    $Month =  $Month_beg;
   } else {
 
     $Month = $Month_beg;
