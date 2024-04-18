@@ -23,6 +23,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   $sede = $sedes_ar[$i];
 
   $m = $Month_beg;
+  $Month  = $Month_beg;
   $t=0;
  for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
@@ -38,11 +39,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   echo$Month ;
 
   $m++;
-  if ($m > 10) {
-    $m;
-  } else {
+  if ($m < 10) {
     $Month = 0 . $m;
-  }
+  } 
 
   $t++;
 
