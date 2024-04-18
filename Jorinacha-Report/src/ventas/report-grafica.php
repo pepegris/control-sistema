@@ -117,11 +117,11 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     //---------------------------------------------------------------------------------------------||
 
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChartArea);
 
-    function drawChart() {
+    function drawChartArea() {
       var data = google.visualization.arrayToDataTable([
-          ['Mes', 'Sales', 'Expenses'],
+          ['Mes', 'Ventas por Mes', 'Devoluciones por Mes'],
         <?php
 
         $serverName = "172.16.1.39";

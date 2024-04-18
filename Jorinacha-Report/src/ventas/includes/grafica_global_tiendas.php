@@ -1,9 +1,9 @@
 <script type="text/javascript">
     //---------------------------------------------------------------------------------------------||
 
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChartGlobal);
 
-    function drawChart() {
+    function drawChartGlobal() {
 
       var data = google.visualization.arrayToDataTable([
     ['Mes', 'Sucursal Caracas I', 'Sucursal Caracas II"',
