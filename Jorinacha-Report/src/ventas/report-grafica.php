@@ -117,16 +117,17 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     //---------------------------------------------------------------------------------------------||
 
-    google.charts.setOnLoadCallback(drawBackgroundColor);
+    google.charts.setOnLoadCallback(drawCurveTypes);
 
     // Callback that draws the pie chart for Sarah's pizza.
-    function drawBackgroundColor() {
+    function drawCurveTypes() {
       var data = new google.visualization.DataTable();
       data.addColumn('number', 'X');
       data.addColumn('number', 'Ventas por Mes');
+      data.addColumn('number', 'Devoluciones por Mes');
 
       data.addRows([
-        [0, 0],
+        [0, 0,0],
 
 
         <?php
@@ -153,7 +154,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
           while ($row = sqlsrv_fetch_array($consulta)) {
 
             $total = $row['total_art'] - $total2;
-            echo "[$u,$total],";
+            echo "[$u,$total,$total2],";
             break;
           }
           $u++;
