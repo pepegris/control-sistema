@@ -24,8 +24,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $m = $Month_beg;
   $Month  = $Month_beg;
-  $t=0;
- for ($k = $Month_beg; $k <= $Month_total; $k++) {
+ for ($k = $Month_beg; $k < $Month_total; $k++) {
 
   $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year );
 
@@ -34,17 +33,11 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2,$Month);
   $dev = getDev_Grafica($sede, $fecha_1, $fecha_2,$Month);
-  echo $t;
-  echo "<br>";
-  echo$Month ;
 
   $m++;
   if ($m < 10) {
     $Month = 0 . $m;
   } 
-
-  $t++;
-
 }
   
 }
