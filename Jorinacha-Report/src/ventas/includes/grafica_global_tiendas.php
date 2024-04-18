@@ -6,7 +6,7 @@
     function drawChart() {
 
       var data = google.visualization.arrayToDataTable([
-    ['Mes',       , 'Sucursal Caracas I',
+    ['Mes', 'Sucursal Caracas I',
       , 'Sucursal Caracas II"',
       , 'Sucursal Cagua',
       , 'Sucursal Maturin',
@@ -22,7 +22,7 @@
       , 'Comercial Corina I',
       , 'Comercial Nachari',
       , 'Comercial Corina II',
-      , 'Comercial Catica II',],
+      , 'Comercial Catica II'],
   
 
         <?php
