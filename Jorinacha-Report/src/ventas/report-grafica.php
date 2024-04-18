@@ -55,6 +55,12 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   body {
     background-color: white;
   }
+  h1{
+
+    color: black;
+
+
+}
 </style>
 
 
