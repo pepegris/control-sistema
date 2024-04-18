@@ -411,14 +411,14 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         var piechart_options = {title:'Pie Chart: How Much Pizza I Ate Last Night',
                        width:600,
                        height:500};
-        var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
+        var piechart = new google.visualization.PieChart(document.getElementById('piechart_div_u'));
         piechart.draw(data, piechart_options);
 
         var barchart_options = {title:'Barchart: How Much Pizza I Ate Last Night',
                        width:600,
                        height:500,
                        legend: 'none'};
-        var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
+        var barchart = new google.visualization.BarChart(document.getElementById('barchart_div_u'));
         barchart.draw(data2, barchart_options);
       }
  
@@ -428,8 +428,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     <!--Table and divs that hold the pie charts-->
     <table class="columns">
       <tr>
-        <td><div id="piechart_div" style="border: 1px solid #ccc"></div></td>
-        <td><div id="barchart_div" style="border: 1px solid #ccc"></div></td>
+        <td><div id="piechart_div_u" style="border: 1px solid #ccc"></div></td>
+        <td><div id="barchart_div_u" style="border: 1px solid #ccc"></div></td>
       </tr>
     </table>
 
