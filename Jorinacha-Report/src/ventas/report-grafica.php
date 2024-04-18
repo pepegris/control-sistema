@@ -23,6 +23,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   $sede = $sedes_ar[$i];
 
   $m = $Month_beg;
+  $t=0;
  for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
   $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year );
@@ -40,8 +41,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   } else {
     $Month = 0 . $m;
   }
-  
-  
+  echo $t;
+  $t++;
 
 }
   
