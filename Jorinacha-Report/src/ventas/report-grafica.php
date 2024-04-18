@@ -33,7 +33,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2,$Month);
   $dev = getDev_Grafica($sede, $fecha_1, $fecha_2,$Month);
-  echo $Month ;
+  echo "$Month / $sede" ;
   echo "<br>";
   $m++;
   if ($m < 9) {
