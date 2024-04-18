@@ -30,13 +30,8 @@ echo "<hr>";
 
  for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
-  if ($Month_beg < 10) {
+    $Month = $Month_beg + 1;
 
-    $Month =  $Month_beg;
-  } else {
-
-    $Month = $Month_beg;
-  }
 
   $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year );
   echo " $Month - $cantidadDias";
