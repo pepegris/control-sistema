@@ -24,27 +24,24 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $m = $Month_beg;
   $Month  = $Month_beg;
- for ($k = $Month_beg; $k <= $Month_total; $k++) {
+  for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
-  $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year );
+    $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year);
 
-  $fecha_1 =  $Year .''. $Month .''  . '01';
-  $fecha_2 =  $Year .''. $Month .''  . $cantidadDias;
+    $fecha_1 =  $Year . '' . $Month . ''  . '01';
+    $fecha_2 =  $Year . '' . $Month . ''  . $cantidadDias;
 
-  $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2,$Month);
-  $dev = getDev_Grafica($sede, $fecha_1, $fecha_2,$Month);
-  
-  if ($m < 9) {
-    $m++;
-    $Month = 0 . $m;
-  } else {
-    $m++;
-    $Month = $m;
+    $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2, $Month);
+    $dev = getDev_Grafica($sede, $fecha_1, $fecha_2, $Month);
+
+    if ($m < 9) {
+      $m++;
+      $Month = 0 . $m;
+    } else {
+      $m++;
+      $Month = $m;
+    }
   }
-  
-  
-}
-  
 }
 
 
@@ -103,7 +100,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       chart.draw(data, options);
     }
 
-    
+
 
     //---------------------------------------------------------------------------------------------||
 
@@ -117,18 +114,41 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
       data.addRows([
         [0, 0],
-        [1, 10],
-        [2, 23],
-        [3, 17],
-        [4, 18],
-        [5, 9],
-        [6, 11],
-        [7, 27],
-        [8, 33],
-        [9, 40],
-        [10, 32],
-        [11, 35],
-        [12, 30]
+
+
+        <?php
+
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+        $m = $Month_beg;
+        $Month  = $Month_beg;
+        for ($k = $Month_beg; $k <= $Month_total; $k++) {
+
+          $sql = "SELECT SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
+          WHERE mes='$Month'";
+
+          $consulta = sqlsrv_query($conn, $sql);
+          while ($row = sqlsrv_fetch_array($consulta)) {
+
+
+            echo "[$k," . $row['total_art']. "],";
+          }
+
+
+
+          if ($m < 9) {
+            $m++;
+            $Month = 0 . $m;
+          } else {
+            $m++;
+            $Month = $m;
+          }
+        }
+
+
+        ?>
       ]);
 
       var options = {
@@ -150,61 +170,65 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     // Draw the pie chart for Sarah's pizza when Charts is loaded.
     google.charts.setOnLoadCallback(drawSarahChart);
 
-// Draw the pie chart for the Anthony's pizza when Charts is loaded.
-google.charts.setOnLoadCallback(drawAnthonyChart);
+    // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+    google.charts.setOnLoadCallback(drawAnthonyChart);
 
-// Callback that draws the pie chart for Sarah's pizza.
-function drawSarahChart() {
+    // Callback that draws the pie chart for Sarah's pizza.
+    function drawSarahChart() {
 
-  // Create the data table for Sarah's pizza.
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Topping');
-  data.addColumn('number', 'Slices');
-  data.addRows([
-    ['Mushrooms', 1],
-    ['Onions', 1],
-    ['Olives', 2],
-    ['Zucchini', 2],
-    ['Pepperoni', 1]
-  ]);
+      // Create the data table for Sarah's pizza.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+        ['Mushrooms', 1],
+        ['Onions', 1],
+        ['Olives', 2],
+        ['Zucchini', 2],
+        ['Pepperoni', 1]
+      ]);
 
-  // Set options for Sarah's pie chart.
-  var options = {title:'How Much Pizza Sarah Ate Last Night',
-                 width:400,
-                 height:300};
+      // Set options for Sarah's pie chart.
+      var options = {
+        title: 'How Much Pizza Sarah Ate Last Night',
+        width: 400,
+        height: 300
+      };
 
-  // Instantiate and draw the chart for Sarah's pizza.
-  var chart = new google.visualization.PieChart(document.getElementById('Sarah_chart_div'));
-  chart.draw(data, options);
-}
+      // Instantiate and draw the chart for Sarah's pizza.
+      var chart = new google.visualization.PieChart(document.getElementById('Sarah_chart_div'));
+      chart.draw(data, options);
+    }
 
-// Callback that draws the pie chart for Anthony's pizza.
-function drawAnthonyChart() {
+    // Callback that draws the pie chart for Anthony's pizza.
+    function drawAnthonyChart() {
 
-  // Create the data table for Anthony's pizza.
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Topping');
-  data.addColumn('number', 'Slices');
-  data.addRows([
-    ['Mushrooms', 2],
-    ['Onions', 2],
-    ['Olives', 2],
-    ['Zucchini', 0],
-    ['Pepperoni', 3]
-  ]);
+      // Create the data table for Anthony's pizza.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+        ['Mushrooms', 2],
+        ['Onions', 2],
+        ['Olives', 2],
+        ['Zucchini', 0],
+        ['Pepperoni', 3]
+      ]);
 
-  // Set options for Anthony's pie chart.
-  var options = {title:'How Much Pizza Anthony Ate Last Night',
-                 width:400,
-                 height:300};
+      // Set options for Anthony's pie chart.
+      var options = {
+        title: 'How Much Pizza Anthony Ate Last Night',
+        width: 400,
+        height: 300
+      };
 
-  // Instantiate and draw the chart for Anthony's pizza.
-  var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
-  chart.draw(data, options);
-}
-        //---------------------------------------------------------------------------------------------||
+      // Instantiate and draw the chart for Anthony's pizza.
+      var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
+      chart.draw(data, options);
+    }
     //---------------------------------------------------------------------------------------------||
-        //---------------------------------------------------------------------------------------------||
+    //---------------------------------------------------------------------------------------------||
+    //---------------------------------------------------------------------------------------------||
     //---------------------------------------------------------------------------------------------||
   </script>
 </head>
@@ -216,7 +240,7 @@ function drawAnthonyChart() {
 <br>
 <br>
 <center>
-<div id="chart_div" style="width: 900px; height: 500px;"></div>
+  <div id="chart_div" style="width: 900px; height: 500px;"></div>
 </center>
 <br>
 <br>
@@ -224,11 +248,15 @@ function drawAnthonyChart() {
 
 <!--Table and divs that hold the pie charts-->
 <table class="columns">
-      <tr>
-        <td><div id="Sarah_chart_div" style="border: 1px solid #ccc"></div></td>
-        <td><div id="Anthony_chart_div" style="border: 1px solid #ccc"></div></td>
-      </tr>
-    </table>
+  <tr>
+    <td>
+      <div id="Sarah_chart_div" style="border: 1px solid #ccc"></div>
+    </td>
+    <td>
+      <div id="Anthony_chart_div" style="border: 1px solid #ccc"></div>
+    </td>
+  </tr>
+</table>
 
 
 <?php
