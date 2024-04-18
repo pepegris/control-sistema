@@ -21,18 +21,18 @@ $Year = date("Y", strtotime($fecha2));
 for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $sede = $sedes_ar[$i];
-  $ventas = getVendido_Grafica($sede, $fecha1, $fecha2);
-  $dev = getDev_Grafica($sede, $fecha1, $fecha2);
-  
-}
 
-$m = $Month_beg;
+  $m = $Month_beg;
  for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
   $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year );
 
   $fecha_1 =  $Year .''. $Month .''  . '01';
   $fecha_2 =  $Year .''. $Month .''  . $cantidadDias;
+
+  $ventas = getVendido_Grafica($sede, $$fecha_1, $fecha_2,$Month);
+  $dev = getDev_Grafica($sede, $$fecha_1, $fecha_2,$Month);
+
 
   $m++;
   if ($m > 10) {
@@ -44,6 +44,10 @@ $m = $Month_beg;
   
 
 }
+  
+}
+
+
 
 ?>
 
