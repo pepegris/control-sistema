@@ -32,7 +32,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   $dev = getDev_Grafica($sede, $fecha1, $fecha2);
   
 }
-
+echo " $Month_beg - $Month_total";
+echo "<hr>";
 
  for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
