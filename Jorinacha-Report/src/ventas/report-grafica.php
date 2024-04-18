@@ -145,7 +145,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
           WHERE mes='$Month'";
           $consulta = sqlsrv_query($conn, $sql);
 
-          $sql2 = "SELECT SUM (CONVERT(numeric(10,0), total_art)) as total_dev  from art_grafica_dev
+          $sql2 = "SELECT SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
           WHERE mes='$Month'";
           $consulta2 = sqlsrv_query($conn, $sql2);
           $row2 = sqlsrv_fetch_array($consulta2);
