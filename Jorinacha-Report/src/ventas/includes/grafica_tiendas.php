@@ -67,7 +67,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -75,7 +75,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -173,7 +173,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -181,7 +181,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -283,7 +283,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -291,7 +291,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -393,7 +393,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -401,7 +401,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -502,7 +502,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -510,7 +510,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -612,7 +612,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -620,7 +620,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -723,7 +723,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -731,7 +731,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -831,7 +831,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -839,7 +839,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -942,7 +942,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -950,7 +950,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1053,7 +1053,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -1061,7 +1061,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1164,7 +1164,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -1172,7 +1172,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1274,7 +1274,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -1282,7 +1282,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1384,7 +1384,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -1392,7 +1392,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1494,7 +1494,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -1502,7 +1502,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1606,7 +1606,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -1614,7 +1614,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1717,7 +1717,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -1725,7 +1725,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1828,7 +1828,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Pie Chart: How Much Pizza I Ate Last Night',
+            title: 'Vemtas por Marcas',
             width: 600,
             height: 500
         };
@@ -1836,7 +1836,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Barchart: How Much Pizza I Ate Last Night',
+            title: 'Devoluciones por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
