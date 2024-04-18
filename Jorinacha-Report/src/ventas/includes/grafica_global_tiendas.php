@@ -6,23 +6,11 @@
     function drawChart() {
 
       var data = google.visualization.arrayToDataTable([
-    ['Mes', 'Sucursal Caracas I',
-      , 'Sucursal Caracas II"',
-      , 'Sucursal Cagua',
-      , 'Sucursal Maturin',
-      , 'Comercial Acari',
-      , 'Comercial Puecruz',
-      , 'Comercial Vallepa',
-      , 'Comercial Higue',
-      , 'Comercial Valena',
-      , 'Comercial Ojena',
-      , 'Comercial Punto Fijo',
-      , 'Comercial Trina',
-      , 'Comercial Apura',
-      , 'Comercial Corina I',
-      , 'Comercial Nachari',
-      , 'Comercial Corina II',
-      , 'Comercial Catica II'],
+    ['Mes', 'Sucursal Caracas I', 'Sucursal Caracas II"',
+       'Sucursal Cagua','Sucursal Maturin','Comercial Acari','Comercial Puecruz',
+       'Comercial Vallepa','Comercial Higue','Comercial Valena','Comercial Ojena',
+       'Comercial Punto Fijo','Comercial Trina','Comercial Apura','Comercial Corina I',
+       'Comercial Nachari','Comercial Corina II','Comercial Catica II'],
   
 
         <?php
