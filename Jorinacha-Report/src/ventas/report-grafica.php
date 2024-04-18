@@ -25,19 +25,23 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   $dev = getDev_Grafica($sede, $fecha1, $fecha2);
   
 }
-echo " $Month_beg - $Month_total";
-echo "<hr>";
+
 $m = $Month_beg;
  for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
   $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year );
-  echo " $Month - $cantidadDias";
-  echo "<br>";
+
   $fecha_1 =  $Year .''. $Month .''  . '01';
   $fecha_2 =  $Year .''. $Month .''  . $cantidadDias;
 
   $m++;
-  $Month = 0 . $m;
+  if ($m > 10) {
+    $m;
+  } else {
+    $Month = 0 . $m;
+  }
+  
+  
 
 }
 
