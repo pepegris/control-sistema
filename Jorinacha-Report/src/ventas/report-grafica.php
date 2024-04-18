@@ -35,7 +35,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   $dev = getDev_Grafica($sede, $fecha_1, $fecha_2,$Month);
   echo $Month ;
   $m++;
-  if ($m < 10) {
+  if ($m < 9) {
     $Month = 0 . $m;
   } 
 }
