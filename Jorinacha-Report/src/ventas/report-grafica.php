@@ -135,6 +135,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
             $total=$row['total_art'];
             echo "[$u,$total],";
+            break;
           }
           $u++;
 
