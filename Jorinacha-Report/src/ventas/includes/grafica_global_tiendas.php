@@ -257,8 +257,6 @@
             $row2_sede17 = sqlsrv_fetch_array($consulta2);
             $total2_sede17 = $row2_sede17['total_dev'];
             //////////////////////////////////////////////////////////////////
-
-
             $mes = Meses($Month);
             echo "['".$mes."',$total_sede1-$total2_sede1,$total2_sede1,
                     ,$total_sede2-$total2_sede2,$total2_sede2,
