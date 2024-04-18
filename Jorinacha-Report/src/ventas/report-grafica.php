@@ -226,8 +226,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       // Set options for Sarah's pie chart.
       var options = {
         title: 'Total de ventas',
-        width: 600,
-        height: 500
+        width: 500,
+        height: 400
       };
 
       // Instantiate and draw the chart for Sarah's pizza.
@@ -266,8 +266,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       // Set options for Anthony's pie chart.
       var options = {
         title: 'Total de Devoluciones',
-        width: 600,
-        height: 500
+        width: 500,
+        height: 400
       };
 
       // Instantiate and draw the chart for Anthony's pizza.
