@@ -55,18 +55,19 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   body {
     background-color: white;
   }
-  h1{
+
+  h1 {
 
     color: black;
 
 
-}
+  }
 </style>
 
 
 <head>
   <center>
-  <h1> Graficas de Ventas de <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h1> Graficas de Ventas de <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
   </center>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
@@ -122,7 +123,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     function drawBackgroundColor() {
       var data = new google.visualization.DataTable();
       data.addColumn('number', 'X');
-      data.addColumn('number', 'Ventas');
+      data.addColumn('number', 'Ventas por Mes');
 
       data.addRows([
         [0, 0],
@@ -136,16 +137,22 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
         $m = $Month_beg;
         $Month  = $Month_beg;
-        $u=1;
+        $u = 1;
         for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
           $sql = "SELECT SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
           WHERE mes='$Month'";
-
           $consulta = sqlsrv_query($conn, $sql);
+
+          $sql2 = "SELECT SUM (CONVERT(numeric(10,0), total_art)) as total_dev  from art_grafica_dev
+          WHERE mes='$Month'";
+          $consulta2 = sqlsrv_query($conn, $sql2);
+          $row2 = sqlsrv_fetch_array($consulta2);
+          $total2 = $row2['total_dev'];
+
           while ($row = sqlsrv_fetch_array($consulta)) {
 
-            $total=$row['total_art'];
+            $total = $row['total_art'] - $total2;
             echo "[$u,$total],";
             break;
           }
@@ -195,11 +202,25 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Slices');
       data.addRows([
-        ['Mushrooms', 1],
-        ['Onions', 1],
-        ['Olives', 2],
-        ['Zucchini', 2],
-        ['Pepperoni', 1]
+        <?php
+
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+        $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
+            group by linea_des
+            order by total_art desc";
+
+        $consulta = sqlsrv_query($conn, $sql);
+        while ($row = sqlsrv_fetch_array($consulta)) {
+
+          $dev = getDev_Grafica_fac($sede, $row['linea_des']);
+          $total = $row['total_art'] - $dev;
+
+          echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
+        }
+        ?>
       ]);
 
       // Set options for Sarah's pie chart.
@@ -254,6 +275,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 <br>
 <br>
 <center>
+  <h2> Graficas de Ventas por Mes desde <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   <div id="chart_div" style="width: 900px; height: 500px;"></div>
 </center>
 <br>
@@ -274,5 +296,5 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
 <?php
-//deleteVendido_Grafica();
+deleteVendido_Grafica();
 include '../../includes/footer.php'; ?>
