@@ -33,12 +33,17 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2,$Month);
   $dev = getDev_Grafica($sede, $fecha_1, $fecha_2,$Month);
-  echo "$Month / $sede" ;
+  echo "$Month / $sede $Month_total" ;
   echo "<br>";
-  $m++;
+  
   if ($m < 9) {
+    echo "<br> menor";
+    $m++;
     $Month = 0 . $m;
-  } 
+  } else {
+    echo "<br> mayor";
+    $m++;
+  }
 }
   
 }
