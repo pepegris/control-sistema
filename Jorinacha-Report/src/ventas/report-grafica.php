@@ -319,5 +319,6 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 <?php
 include 'includes/grafica_tiendas.php';
+include 'includes/grafica_global_tiendas.php';
 deleteVendido_Grafica();
 include '../../includes/footer.php'; ?>
