@@ -226,8 +226,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       // Set options for Sarah's pie chart.
       var options = {
         title: 'How Much Pizza Sarah Ate Last Night',
-        width: 400,
-        height: 300
+        width: 500,
+        height: 400
       };
 
       // Instantiate and draw the chart for Sarah's pizza.
@@ -243,18 +243,31 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Slices');
       data.addRows([
-        ['Mushrooms', 2],
-        ['Onions', 2],
-        ['Olives', 2],
-        ['Zucchini', 0],
-        ['Pepperoni', 3]
+        <?php
+
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+        $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_dev  from art_grafica_dev
+            group by linea_des
+            order by total_art desc";
+
+        $consulta = sqlsrv_query($conn, $sql);
+        while ($row = sqlsrv_fetch_array($consulta)) {
+
+          $total = $row['total_dev'] ;
+
+          echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
+        }
+        ?>
       ]);
 
       // Set options for Anthony's pie chart.
       var options = {
         title: 'How Much Pizza Anthony Ate Last Night',
-        width: 400,
-        height: 300
+        width: 500,
+        height: 400
       };
 
       // Instantiate and draw the chart for Anthony's pizza.
