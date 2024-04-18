@@ -27,11 +27,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 }
 echo " $Month_beg - $Month_total";
 echo "<hr>";
-
+$m = $Month_beg;
  for ($k = $Month_beg; $k <= $Month_total; $k++) {
-
-    $Month = $Month_beg + 1;
-
 
   $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year );
   echo " $Month - $cantidadDias";
@@ -39,7 +36,8 @@ echo "<hr>";
   $fecha_1 =  $Year .''. $Month .''  . '01';
   $fecha_2 =  $Year .''. $Month .''  . $cantidadDias;
 
- 
+  $m++;
+  $Month = 0 . $m;
 
 }
 
