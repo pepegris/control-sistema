@@ -45,7 +45,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   }
 
   $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year );
-  var_dump($cantidadDias);
+  echo "$cantidadDias";
   $fecha_1 =  $Year .''. $Month .''  . '01';
   $fecha_2 =  $Year .''. $Month .''  . $cantidadDias;
 
@@ -222,5 +222,5 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
 <?php
-//deleteVendido_Grafica();
+deleteVendido_Grafica();
 include '../../includes/footer.php'; ?>
