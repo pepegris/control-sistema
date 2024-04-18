@@ -56,7 +56,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     background-color: white;
   }
 
-  h1,h2 {
+  h1,h2,h3 {
 
     color: black;
 
@@ -318,5 +318,6 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
 <?php
-//deleteVendido_Grafica();
+include 'includes/grafica_tiendas.php';
+deleteVendido_Grafica();
 include '../../includes/footer.php'; ?>

@@ -901,6 +901,41 @@ function getDev_Grafica_fac($sede, $consulta)
         return 0;
     }
 }
+/* CONSULTAR MARCA*/
+function getDev_Grafica_fac2($sede, $consulta)
+{
+
+    $database = Database($sede);
+    if ($database != null) {
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => 'SISTEMAS', "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+            $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
+            WHERE linea_des ='$consulta' AND  = '$sede'
+            group by linea_des
+            order by total_dev desc";
+            
+            $consulta = sqlsrv_query($conn, $sql);
+            
+            while ($row = sqlsrv_fetch_array($consulta)) {
+            
+                $total_art = $row['total_dev'];
+                break;
+            }
+            return $total_art;
+
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    } else {
+
+        return 0;
+    }
+}
 
 
 
