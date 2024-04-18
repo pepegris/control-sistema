@@ -12,6 +12,9 @@ $linea = $_GET['linea'];
 $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
 $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
+$fecha_titulo1 = date("d/m/Y", strtotime($_GET['fecha1']));
+$fecha_titulo2 = date("d/m/Y", strtotime($_GET['fecha2']));
+
 $Month_beg = date("m", strtotime($fecha1));
 $Day = date("d", strtotime($fecha2));
 $Month_total = date("m", strtotime($fecha2));
@@ -56,6 +59,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
 <head>
+  <center>
+  <h1> Graficas de Ventas de <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+  </center>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     // Load Charts and the corechart package.
