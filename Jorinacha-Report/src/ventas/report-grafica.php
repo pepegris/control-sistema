@@ -45,7 +45,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   }
 
   $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year );
-  echo "$cantidadDias";
+  echo " $Month - $cantidadDias";
+  echo "<br>";
   $fecha_1 =  $Year .''. $Month .''  . '01';
   $fecha_2 =  $Year .''. $Month .''  . $cantidadDias;
 
