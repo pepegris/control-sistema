@@ -25,7 +25,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -52,7 +52,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -131,7 +131,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -158,7 +158,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -241,7 +241,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -268,7 +268,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -351,7 +351,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -378,7 +378,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -460,7 +460,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -487,7 +487,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -570,7 +570,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -597,7 +597,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -681,7 +681,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -708,7 +708,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -789,7 +789,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -816,7 +816,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -900,7 +900,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -927,7 +927,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -1011,7 +1011,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -1038,7 +1038,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -1122,7 +1122,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -1149,7 +1149,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -1232,7 +1232,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -1259,7 +1259,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -1342,7 +1342,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -1369,7 +1369,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -1452,7 +1452,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -1479,7 +1479,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -1564,7 +1564,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -1591,7 +1591,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -1675,7 +1675,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -1702,7 +1702,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
@@ -1786,7 +1786,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_art desc";
 
@@ -1813,7 +1813,7 @@
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                    WHERE = '$sede'
+                    WHERE tienda= '$sede'
                     group by linea_des
                     order by total_dev desc";
 
