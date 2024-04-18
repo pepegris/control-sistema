@@ -148,84 +148,60 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
     // Draw the pie chart for Sarah's pizza when Charts is loaded.
-    google.charts.setOnLoadCallback(drawBackgroundColor);
-    // Draw the pie chart for the Anthony's pizza when Charts is loaded.
-    google.charts.setOnLoadCallback(drawLineColors);
+    google.charts.setOnLoadCallback(drawSarahChart);
 
-    // Callback that draws the pie chart for Sarah's pizza.
-    function drawBackgroundColor() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'X');
-      data.addColumn('number', 'Ventas');
+// Draw the pie chart for the Anthony's pizza when Charts is loaded.
+google.charts.setOnLoadCallback(drawAnthonyChart);
 
-      data.addRows([
-        [0, 0],
-        [1, 10],
-        [2, 23],
-        [3, 17],
-        [4, 18],
-        [5, 9],
-        [6, 11],
-        [7, 27],
-        [8, 33],
-        [9, 40],
-        [10, 32],
-        [11, 35],
-        [12, 30]
-      ]);
+// Callback that draws the pie chart for Sarah's pizza.
+function drawSarahChart() {
 
-      var options = {
-        hAxis: {
-          title: 'Meses'
-        },
-        vAxis: {
-          title: 'Cantidad'
-        },
-        backgroundColor: '#f1f8e9'
-      };
+  // Create the data table for Sarah's pizza.
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Topping');
+  data.addColumn('number', 'Slices');
+  data.addRows([
+    ['Mushrooms', 1],
+    ['Onions', 1],
+    ['Olives', 2],
+    ['Zucchini', 2],
+    ['Pepperoni', 1]
+  ]);
 
-      var chart = new google.visualization.PieChart(document.getElementById('Completo_chart_div'));
-      chart.draw(data, options);
-    }
+  // Set options for Sarah's pie chart.
+  var options = {title:'How Much Pizza Sarah Ate Last Night',
+                 width:400,
+                 height:300};
 
+  // Instantiate and draw the chart for Sarah's pizza.
+  var chart = new google.visualization.PieChart(document.getElementById('Sarah_chart_div'));
+  chart.draw(data, options);
+}
 
+// Callback that draws the pie chart for Anthony's pizza.
+function drawAnthonyChart() {
 
-    function drawLineColors() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'X');
-      data.addColumn('number', 'Dogs');
-      data.addColumn('number', 'Cats');
-      data.addColumn('number', 'Birt');
+  // Create the data table for Anthony's pizza.
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Topping');
+  data.addColumn('number', 'Slices');
+  data.addRows([
+    ['Mushrooms', 2],
+    ['Onions', 2],
+    ['Olives', 2],
+    ['Zucchini', 0],
+    ['Pepperoni', 3]
+  ]);
 
-      data.addRows([
-        [0, 0, 0, 0],
-        [1, 10, 5, 15],
-        [2, 23, 15, 15],
-        [3, 17, 9, 15],
-        [4, 18, 10, 15],
-        [5, 9, 5, 15],
-        [6, 11, 3, 15],
-        [7, 27, 19, 15],
-        [8, 33, 25, 15],
-        [9, 40, 32, 15],
-        [10, 32, 24, 15],
-        [11, 35, 27, 15],
-        [12, 30, 22, 15]
-      ]);
+  // Set options for Anthony's pie chart.
+  var options = {title:'How Much Pizza Anthony Ate Last Night',
+                 width:400,
+                 height:300};
 
-      var options = {
-        hAxis: {
-          title: 'Time'
-        },
-        vAxis: {
-          title: 'Popularity'
-        },
-        colors: ['#a52714', '#097138']
-      };
-
-      var chart = new google.visualization.PieChart(document.getElementById('Detallado_chart_div'));
-      chart.draw(data, options);
-    }
+  // Instantiate and draw the chart for Anthony's pizza.
+  var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
+  chart.draw(data, options);
+}
         //---------------------------------------------------------------------------------------------||
     //---------------------------------------------------------------------------------------------||
         //---------------------------------------------------------------------------------------------||
@@ -246,15 +222,11 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 <!--Table and divs that hold the pie charts-->
 <table class="columns">
-  <tr>
-    <td>
-      <div id="Completo_chart_div" style="border: 1px solid #ccc"></div>
-    </td>
-    <td>
-      <div id="Detallado_chart_div" style="border: 1px solid #ccc"></div>
-    </td>
-  </tr>
-</table>
+      <tr>
+        <td><div id="Sarah_chart_div" style="border: 1px solid #ccc"></div></td>
+        <td><div id="Anthony_chart_div" style="border: 1px solid #ccc"></div></td>
+      </tr>
+    </table>
 
 
 <?php
