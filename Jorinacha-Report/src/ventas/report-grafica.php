@@ -25,8 +25,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   $m = $Month_beg;
   $Month  = $Month_beg;
  for ($k = $Month_beg; $k <= $Month_total; $k++) {
-  echo "$m";
-  echo "<br>";
+
   $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year );
 
   $fecha_1 =  $Year .''. $Month .''  . '01';
@@ -34,8 +33,6 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2,$Month);
   $dev = getDev_Grafica($sede, $fecha_1, $fecha_2,$Month);
-  echo "$Month / $sede $Month_total" ;
-  echo "<br>";
   
   if ($m < 9) {
     $m++;
@@ -109,6 +106,44 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     
 
     //---------------------------------------------------------------------------------------------||
+
+    google.charts.setOnLoadCallback(drawBackgroundColor);
+
+    // Callback that draws the pie chart for Sarah's pizza.
+    function drawBackgroundColor() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'X');
+      data.addColumn('number', 'Ventas');
+
+      data.addRows([
+        [0, 0],
+        [1, 10],
+        [2, 23],
+        [3, 17],
+        [4, 18],
+        [5, 9],
+        [6, 11],
+        [7, 27],
+        [8, 33],
+        [9, 40],
+        [10, 32],
+        [11, 35],
+        [12, 30]
+      ]);
+
+      var options = {
+        hAxis: {
+          title: 'Meses'
+        },
+        vAxis: {
+          title: 'Cantidad'
+        },
+        backgroundColor: '#f1f8e9'
+      };
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+
     //---------------------------------------------------------------------------------------------||
 
 
@@ -204,8 +239,10 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 <br>
 <br>
 <br>
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
 <br>
 <br>
+
 
 <!--Table and divs that hold the pie charts-->
 <table class="columns">
