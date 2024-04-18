@@ -226,8 +226,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       // Set options for Sarah's pie chart.
       var options = {
         title: 'Total de ventas',
-        width: 500,
-        height: 400
+        width: 600,
+        height: 500
       };
 
       // Instantiate and draw the chart for Sarah's pizza.
@@ -249,7 +249,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
         $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-        $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_dev  from art_grafica_dev
+        $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
             group by linea_des
             order by total_art desc";
 
@@ -266,8 +266,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       // Set options for Anthony's pie chart.
       var options = {
         title: 'Total de Devoluciones',
-        width: 500,
-        height: 400
+        width: 600,
+        height: 500
       };
 
       // Instantiate and draw the chart for Anthony's pizza.
