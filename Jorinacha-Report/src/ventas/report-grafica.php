@@ -37,13 +37,13 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   echo "<br>";
   
   if ($m < 9) {
-    echo "<br> menor";
     $m++;
     $Month = 0 . $m;
   } else {
-    echo "<br> mayor";
     $m++;
+    $Month = $m;
   }
+  echo "$m";
 }
   
 }
