@@ -11,7 +11,6 @@
        'Comercial Vallepa','Comercial Higue','Comercial Valena','Comercial Ojena',
        'Comercial Punto Fijo','Comercial Trina','Comercial Apura','Comercial Corina I',
        'Comercial Nachari','Comercial Corina II','Comercial Catica II'],
-  
 
         <?php
 
@@ -279,8 +278,8 @@
       ]);
 
       var options = {
-          title: 'Company Performance',
-          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+          title: 'Ventas Por Tiendas',
+          hAxis: {title: 'Meses',  titleTextStyle: {color: '#333'}},
           vAxis: {minValue: 0}
         };
       var chart = new google.visualization.AreaChart(document.getElementById('chart_div_global'));
@@ -292,7 +291,7 @@
 <br>
 <center>
   <h2> Ventas de Tiendas por Mes desde <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
-  <div id="chart_div_global" style="width: 900px; height: 500px;"></div>
+  <div id="chart_div_global" style="width: 100%; height: 500px;"></div>
 </center>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->

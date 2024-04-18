@@ -117,18 +117,11 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     //---------------------------------------------------------------------------------------------||
 
-    google.charts.setOnLoadCallback(drawCurveTypes);
+    google.charts.setOnLoadCallback(drawChart);
 
-    function drawCurveTypes() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'X');
-      data.addColumn('number', 'Ventas por Mes');
-      data.addColumn('number', 'Devoluciones por Mes');
-
-      data.addRows([
-        [0, 0,0],
-
-
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+          ['Mes', 'Sales', 'Expenses'],
         <?php
 
         $serverName = "172.16.1.39";
@@ -153,7 +146,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
           while ($row = sqlsrv_fetch_array($consulta)) {
 
             $total = $row['total_art'] - $total2;
-            echo "[$u,$total,$total2],";
+            $mes = Meses($Month);
+            echo "['".$mes."',$total,$total2],";
             break;
           }
           $u++;
@@ -173,15 +167,11 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       ]);
 
       var options = {
-        hAxis: {
-          title: 'Meses'
-        },
-        vAxis: {
-          title: 'Cantidad'
-        },
-        backgroundColor: '#f1f8e9'
-      };
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          title: 'Ventas Por Tiendas',
+          hAxis: {title: 'Meses',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+      var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
       chart.draw(data, options);
     }
 

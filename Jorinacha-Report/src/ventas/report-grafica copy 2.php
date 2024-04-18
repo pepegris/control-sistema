@@ -2,7 +2,7 @@
 ini_set('memory_limit', '4096M');
 ini_set('max_execution_time', 3600);
 
-#require "../../includes/log.php";
+require "../../includes/log.php";
 include '../../includes/header2.php';
 include '../../services/mysql.php';
 include '../../services/adm/ventas/diarias.php';
@@ -12,19 +12,40 @@ $linea = $_GET['linea'];
 $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
 $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
+$fecha_titulo1 = date("d/m/Y", strtotime($_GET['fecha1']));
+$fecha_titulo2 = date("d/m/Y", strtotime($_GET['fecha2']));
 
+$Month_beg = date("m", strtotime($fecha1));
 $Day = date("d", strtotime($fecha2));
 $Month_total = date("m", strtotime($fecha2));
 $Year = date("Y", strtotime($fecha2));
 
+
 for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $sede = $sedes_ar[$i];
-  $ventas=getVendido_Grafica($sede,'20230101','20231231');
 
+  $m = $Month_beg;
+  $Month  = $Month_beg;
+  for ($k = $Month_beg; $k <= $Month_total; $k++) {
+
+    $cantidadDias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year);
+
+    $fecha_1 =  $Year . '' . $Month . ''  . '01';
+    $fecha_2 =  $Year . '' . $Month . ''  . $cantidadDias;
+
+    $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2, $Month);
+    $dev = getDev_Grafica($sede, $fecha_1, $fecha_2, $Month);
+
+    if ($m < 9) {
+      $m++;
+      $Month = 0 . $m;
+    } else {
+      $m++;
+      $Month = $m;
+    }
+  }
 }
-
-
 
 
 
@@ -34,10 +55,20 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   body {
     background-color: white;
   }
+
+  h1,h2,h3 {
+
+    color: black;
+
+
+  }
 </style>
 
 
 <head>
+  <center>
+    <h1> Graficas de Ventas de <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+  </center>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     // Load Charts and the corechart package.
@@ -65,7 +96,10 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          echo "['" . $row['linea_des'] . " / " . $row['total_art'] . "'," . $row['total_art'] . "],";
+          $dev = getDev_Grafica_fac($sede, $row['linea_des']);
+          $total = $row['total_art'] - $dev;
+
+          echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
         }
         ?>
       ]);
@@ -81,15 +115,82 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
 
+    //---------------------------------------------------------------------------------------------||
+
+    google.charts.setOnLoadCallback(drawCurveTypes);
+
+    function drawCurveTypes() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'X');
+      data.addColumn('number', 'Ventas por Mes');
+      data.addColumn('number', 'Devoluciones por Mes');
+
+      data.addRows([
+        [0, 0,0],
 
 
+        <?php
 
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+        $m = $Month_beg;
+        $Month  = $Month_beg;
+        $u = 0 + $Month_beg;
+        for ($k = $Month_beg; $k <= $Month_total; $k++) {
+
+          $sql = "SELECT SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
+          WHERE mes='$Month'";
+          $consulta = sqlsrv_query($conn, $sql);
+
+          $sql2 = "SELECT SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
+          WHERE mes='$Month'";
+          $consulta2 = sqlsrv_query($conn, $sql2);
+          $row2 = sqlsrv_fetch_array($consulta2);
+          $total2 = $row2['total_dev'];
+
+          while ($row = sqlsrv_fetch_array($consulta)) {
+
+            $total = $row['total_art'] - $total2;
+            echo "[$u,$total,$total2],";
+            break;
+          }
+          $u++;
+
+          if ($m < 9) {
+            $m++;
+            $Month = 0 . $m;
+          } else {
+            $m++;
+            $Month = $m;
+          }
+        }
+
+
+        ?>
+
+      ]);
+
+      var options = {
+        hAxis: {
+          title: 'Meses'
+        },
+        vAxis: {
+          title: 'Cantidad'
+        },
+        backgroundColor: '#f1f8e9'
+      };
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
 
     //---------------------------------------------------------------------------------------------||
 
 
     // Draw the pie chart for Sarah's pizza when Charts is loaded.
     google.charts.setOnLoadCallback(drawSarahChart);
+
     // Draw the pie chart for the Anthony's pizza when Charts is loaded.
     google.charts.setOnLoadCallback(drawAnthonyChart);
 
@@ -101,18 +202,32 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Slices');
       data.addRows([
-        ['Mushrooms', 1],
-        ['Onions', 1],
-        ['Olives', 2],
-        ['Zucchini', 2],
-        ['Pepperoni', 1]
+        <?php
+
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+        $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
+            group by linea_des
+            order by total_art desc";
+
+        $consulta = sqlsrv_query($conn, $sql);
+        while ($row = sqlsrv_fetch_array($consulta)) {
+
+          $dev = getDev_Grafica_fac($sede, $row['linea_des']);
+          $total = $row['total_art'] - $dev;
+
+          echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
+        }
+        ?>
       ]);
 
       // Set options for Sarah's pie chart.
       var options = {
-        title: 'How Much Pizza Sarah Ate Last Night',
-        width: 400,
-        height: 300
+        title: 'Total de ventas',
+        width: 600,
+        height: 500
       };
 
       // Instantiate and draw the chart for Sarah's pizza.
@@ -128,30 +243,58 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Slices');
       data.addRows([
-        ['Mushrooms', 2],
-        ['Onions', 2],
-        ['Olives', 2],
-        ['Zucchini', 0],
-        ['Pepperoni', 3]
+        <?php
+
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+        $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
+            group by linea_des
+            order by total_dev desc";
+
+        $consulta = sqlsrv_query($conn, $sql);
+        while ($row = sqlsrv_fetch_array($consulta)) {
+
+          $total = $row['total_dev'] ;
+
+          echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
+        }
+        ?>
       ]);
 
       // Set options for Anthony's pie chart.
       var options = {
-        title: 'How Much Pizza Anthony Ate Last Night',
-        width: 400,
-        height: 300
+        title: 'Total de Devoluciones',
+        width: 600,
+        height: 500
       };
 
       // Instantiate and draw the chart for Anthony's pizza.
       var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
       chart.draw(data, options);
     }
+    //---------------------------------------------------------------------------------------------||
+    //---------------------------------------------------------------------------------------------||
+    //---------------------------------------------------------------------------------------------||
+    //---------------------------------------------------------------------------------------------||
   </script>
 </head>
 
 <center>
   <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
 </center>
+<br>
+<br>
+<br>
+<center>
+  <h2> Ventas por Mes desde <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+  <div id="chart_div" style="width: 900px; height: 500px;"></div>
+</center>
+<br>
+<br>
+
+
 <!--Table and divs that hold the pie charts-->
 <table class="columns">
   <tr>
@@ -165,6 +308,19 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 </table>
 
 
+
+
+
+
+
+
+
+
+
 <?php
-  //deleteVendido_Grafica();
- include '../../includes/footer.php'; ?>
+
+include 'includes/grafica_global_tiendas.php';
+include 'includes/grafica_tiendas.php';
+
+deleteVendido_Grafica();
+include '../../includes/footer.php'; ?>
