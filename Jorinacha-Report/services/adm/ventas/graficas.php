@@ -2,30 +2,7 @@
 
 function getVendido_Grafica($sede, $fecha1, $fecha2,$mes)
 {
-    $dato=(int)$mes;
-    if ($sede=='Sucursal Caracas I' && $dato == 4) {
-        $dato++;
-    }elseif ($sede=='Sucursal Caracas II' && $dato == 4 ) {
-        $dato++;
-    }elseif ($sede=='Sucursal Cagua' && $dato == 6) {
-        $dato++;
-    }elseif ($sede=='Sucursal Maturin'&& $dato == 10) {
-        $dato++;
-    }else {
-        $dato;
-    }
-    if ($sede=='Sucursal Caracas I' && $dato < 4) {
-        $database = Database("Comercial Merina");
-    }elseif ($sede=='Sucursal Caracas II' && $dato < 4 ) {
-        $database = Database("Comercial Merina3");
-    }elseif ($sede=='Sucursal Cagua' && $dato < 6) {
-        $database = Database("Comercial Kagu");
-    }elseif ($sede=='Sucursal Maturin'&& $dato < 10) {
-        $database = Database("Comercial Matur");
-    }else {
-        $database = Database($sede);
-    }
-
+    $database = Database($sede);
     
     if ($database != null) {
         try {
@@ -78,29 +55,8 @@ function getVendido_Grafica($sede, $fecha1, $fecha2,$mes)
 function getDev_Grafica($sede, $fecha1, $fecha2,$mes)
 {
 
-    $dato=(int)$mes;
-    if ($sede=='Sucursal Caracas I' && $dato == 4) {
-        $dato++;
-    }elseif ($sede=='Sucursal Caracas II' && $dato == 4 ) {
-        $dato++;
-    }elseif ($sede=='Sucursal Cagua' && $dato == 6) {
-        $dato++;
-    }elseif ($sede=='Sucursal Maturin'&& $dato == 10) {
-        $dato++;
-    }else {
-        $dato;
-    }
-    if ($sede=='Sucursal Caracas I' && $dato < 4) {
-        $database = Database("Comercial Merina");
-    }elseif ($sede=='Sucursal Caracas II' && $dato < 4 ) {
-        $database = Database("Comercial Merina3");
-    }elseif ($sede=='Sucursal Cagua' && $dato < 6) {
-        $database = Database("Comercial Kagu");
-    }elseif ($sede=='Sucursal Maturin'&& $dato < 10) {
-        $database = Database("Comercial Matur");
-    }else {
-        $database = Database($sede);
-    }
+    $database = Database($sede);
+
 
     if ($database != null) {
         try {

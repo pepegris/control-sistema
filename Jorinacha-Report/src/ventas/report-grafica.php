@@ -35,6 +35,20 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     $fecha_1 =  $Year . '' . $Month . ''  . '01';
     $fecha_2 =  $Year . '' . $Month . ''  . $cantidadDias;
 
+    $dato =(int)$m;
+    
+    if ($sede == 'Sucursal Caracas I' && $dato <= 3 && $Year == '2023') {
+      $sede = "Comercial Merina";
+      var_dump($dato);
+    } elseif ($sede == 'Sucursal Caracas II' && $dato <= 3 && $Year == '2023') {
+      $sede = "Comercial Merina3";
+    } elseif ($sede == 'Sucursal Cagua' && $dato <= 5 && $Year == '2023') {
+      $sede = "Comercial Kagu";
+    } elseif ($sede == 'Sucursal Maturin' && $dato <= 9 && $Year == '2023') {
+      $sede = "Comercial Matur";
+    } else {
+      $sede = $sedes_ar[$i];
+    }
 
     $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2, $Month);
     $dev = getDev_Grafica($sede, $fecha_1, $fecha_2, $Month);
@@ -58,7 +72,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     background-color: white;
   }
 
-  h1,h2,h3 {
+  h1,
+  h2,
+  h3 {
 
     color: black;
 
@@ -123,7 +139,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     function drawChartArea() {
       var data = google.visualization.arrayToDataTable([
-          ['Mes', 'Ventas por Mes', 'Devoluciones por Mes'],
+        ['Mes', 'Ventas por Mes', 'Devoluciones por Mes'],
         <?php
 
         $serverName = "172.16.1.39";
@@ -149,7 +165,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
             $total = $row['total_art'] - $total2;
             $mes = Meses($Month);
-            echo "['".$mes."',$total,$total2],";
+            echo "['" . $mes . "',$total,$total2],";
             break;
           }
           $u++;
@@ -169,10 +185,17 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       ]);
 
       var options = {
-          title: 'Ventas Por Tiendas',
-          hAxis: {title: 'Meses',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0}
-        };
+        title: 'Ventas Por Tiendas',
+        hAxis: {
+          title: 'Meses',
+          titleTextStyle: {
+            color: '#333'
+          }
+        },
+        vAxis: {
+          minValue: 0
+        }
+      };
       var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
       chart.draw(data, options);
     }
@@ -248,7 +271,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          $total = $row['total_dev'] ;
+          $total = $row['total_dev'];
 
           echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
         }
