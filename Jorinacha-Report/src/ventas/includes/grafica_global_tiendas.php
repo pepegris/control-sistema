@@ -250,8 +250,8 @@
             $total_sede4-$total2_sede4,$total_sede5-$total2_sede5,$total_sede6-$total2_sede6,
             $total_sede7-$total2_sede7,$total_sede8-$total2_sede8,$total_sede9-$total2_sede9,
             $total_sede10-$total2_sede10,$total_sede11-$total2_sede11,$total_sede12-$total2_sede12,
-            $total_sede13-$total2_sede13,$total_sede14-$total2_sede14,
-            $total_sede15-$total2_sede15,$total_sede16-$total2_sede16,$total_sede17-$total2_sede17
+            $total_sede13-$total2_sede13,$total_sede14-$total2_sede14,$total_sede15-$total2_sede15,
+            $total_sede16-$total2_sede16,$total_sede17-$total2_sede17
                 ],";
 
           if ($m < 9) {
