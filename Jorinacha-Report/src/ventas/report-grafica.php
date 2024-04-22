@@ -6,6 +6,7 @@ require "../../includes/log.php";
 include '../../includes/header2.php';
 include '../../services/mysql.php';
 include '../../services/adm/ventas/diarias.php';
+include '../../services/adm/ventas/graficas.php';
 
 $divisa = $_GET['divisa'];
 $linea = $_GET['linea'];
@@ -33,6 +34,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     $fecha_1 =  $Year . '' . $Month . ''  . '01';
     $fecha_2 =  $Year . '' . $Month . ''  . $cantidadDias;
+
 
     $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2, $Month);
     $dev = getDev_Grafica($sede, $fecha_1, $fecha_2, $Month);
