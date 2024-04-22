@@ -88,7 +88,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -194,7 +194,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -304,7 +304,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -414,7 +414,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -523,7 +523,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -633,7 +633,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -744,7 +744,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -852,7 +852,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -963,7 +963,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1074,7 +1074,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1185,7 +1185,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1295,7 +1295,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1405,7 +1405,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1515,7 +1515,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1627,7 +1627,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1738,7 +1738,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1849,7 +1849,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h1> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>

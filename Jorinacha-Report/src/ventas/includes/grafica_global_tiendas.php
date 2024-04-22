@@ -20,6 +20,8 @@
 
         $m = $Month_beg;
         $Month  = $Month_beg;
+        var_dump($m);
+        var_dump($Month);
         for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
             ///////////////////////////////////////////////////////////////////
@@ -296,7 +298,7 @@
 
 <br>
 <center>
-  <h2> Ventas de Tiendas por Mes desde <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+  <h1> Ventas de Tiendas por Mes desde <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
   <div id="chart_div_global" style="width: 100%; height: 500px;"></div>
 </center>
 
