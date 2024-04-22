@@ -244,15 +244,31 @@
             $row2_sede17 = sqlsrv_fetch_array($consulta2);
             $total2_sede17 = $row2_sede17['total_dev'];
             //////////////////////////////////////////////////////////////////
+            $sede1_t=$total_sede1-$total2_sede1;
+            $sede2_t=$total_sede2-$total2_sede2;
+            $sede3_t=$total_sede3-$total2_sede3;
+            $sede4_t=$total_sede4-$total2_sede4;
+            $sede5_t=$total_sede5-$total2_sede5;
+            $sede6_t=$total_sede6-$total2_sede6;
+            $sede7_t=$total_sede7-$total2_sede7;
+            $sede8_t=$total_sede8-$total2_sede8;
+            $sede9_t=$total_sede9-$total2_sede9;
+            $sede10_t=$total_sede10-$total2_sede10;
+            $sede11_t=$total_sede11-$total2_sede11;
+            $sede12_t=$total_sede12-$total2_sede12;
+            $sede13_t=$total_sede13-$total2_sede13;
+            $sede14_t=$total_sede14-$total2_sede14;
+            $sede15_t=$total_sede15-$total2_sede15;
+            $sede16_t=$total_sede16-$total2_sede16;
+            $sede17_t=$total_sede17-$total2_sede17;
             $mes = Meses($Month);
             echo "['".$mes."',
-            $total_sede1-$total2_sede1,$total_sede2-$total2_sede2,$total_sede3-$total2_sede3,
-            $total_sede4-$total2_sede4,$total_sede5-$total2_sede5,$total_sede6-$total2_sede6,
-            $total_sede7-$total2_sede7,$total_sede8-$total2_sede8,$total_sede9-$total2_sede9,
-            $total_sede10-$total2_sede10,$total_sede11-$total2_sede11,$total_sede12-$total2_sede12,
-            $total_sede13-$total2_sede13,$total_sede14-$total2_sede14,$total_sede15-$total2_sede15,
-            $total_sede16-$total2_sede16,$total_sede17-$total2_sede17
-                ],";
+            $sede1_t,$sede2_t,$sede3_t,
+            $sede4_t,$sede5_t,$sede6_t,
+            $sede7_t,$sede8_t,$sede9_t,
+            $sede10_t,$sede11_t,$sede12_t,
+            $sede13_t,$sede14_t,$sede15_t,
+            $sede16_t,$sede17_t ],";
 
           if ($m < 9) {
             $m++;
