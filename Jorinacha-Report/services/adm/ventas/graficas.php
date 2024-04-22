@@ -3,13 +3,13 @@
 function getVendido_Grafica($sede, $fecha1, $fecha2,$mes)
 {
     $dato=(int)$mes;
-    if ($sede=='Sucursal Caracas I' && $dato < 4) {
+    if ($sede=='Sucursal Caracas I' && $dato <= 4) {
         $database = Database("Comercial Merina");
-    }elseif ($sede=='Sucursal Caracas II' && $dato < 4 ) {
+    }elseif ($sede=='Sucursal Caracas II' && $dato <= 4 ) {
         $database = Database("Comercial Merina3");
-    }elseif ($sede=='Sucursal Cagua' && $dato < 6) {
+    }elseif ($sede=='Sucursal Cagua' && $dato <= 6) {
         $database = Database("Comercial Kagu");
-    }elseif ($sede=='Sucursal Maturin'&& $dato < 10) {
+    }elseif ($sede=='Sucursal Maturin'&& $dato <= 10) {
         $database = Database("Comercial Matur");
     }else {
         $database = Database($sede);
@@ -68,18 +68,18 @@ function getDev_Grafica($sede, $fecha1, $fecha2,$mes)
 {
 
     $dato=(int)$mes;
-    if ($sede=='Sucursal Caracas I' && $dato < 4) {
+    if ($sede=='Sucursal Caracas I' && $dato <= 4) {
         $database = Database("Comercial Merina");
-    }elseif ($sede=='Sucursal Caracas II' && $dato < 4 ) {
+    }elseif ($sede=='Sucursal Caracas II' && $dato <= 4 ) {
         $database = Database("Comercial Merina3");
-    }elseif ($sede=='Sucursal Cagua' && $dato < 6) {
+    }elseif ($sede=='Sucursal Cagua' && $dato <= 6) {
         $database = Database("Comercial Kagu");
-    }elseif ($sede=='Sucursal Maturin'&& $dato < 10) {
+    }elseif ($sede=='Sucursal Maturin'&& $dato <= 10) {
         $database = Database("Comercial Matur");
     }else {
         $database = Database($sede);
     }
-    
+
     if ($database != null) {
         try {
 
