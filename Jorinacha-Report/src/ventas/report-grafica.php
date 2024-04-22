@@ -35,8 +35,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     $fecha_1 =  $Year . '' . $Month . ''  . '01';
     $fecha_2 =  $Year . '' . $Month . ''  . $cantidadDias;
 
-/*     $dato =(int)$m;
-    
+     $dato =(int)$m;
+    echo $dato;
+    echo "<br>";
     if ($sede == 'Sucursal Caracas I' && $dato <= 3 && $Year == '2023') {
       $sede = "Comercial Merina";
       var_dump($dato);
@@ -48,7 +49,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       $sede = "Comercial Matur";
     } else {
       $sede = $sedes_ar[$i];
-    } */
+    } 
 
     $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2, $Month);
     $dev = getDev_Grafica($sede, $fecha_1, $fecha_2, $Month);
