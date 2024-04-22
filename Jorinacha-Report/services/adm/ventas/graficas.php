@@ -1,5 +1,6 @@
 <?php
 
+
 function getVendido_Grafica($sede, $fecha1, $fecha2,$mes)
 {
     $database = Database($sede);
