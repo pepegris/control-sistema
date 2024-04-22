@@ -35,24 +35,16 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     $fecha_1 =  $Year . '' . $Month . ''  . '01';
     $fecha_2 =  $Year . '' . $Month . ''  . $cantidadDias;
 
-     $dato =(int)$m;
+    echo "$Month ";
 
     if ($sede == 'Sucursal Caracas I' && $Month <= 3 && $Year == '2023') {
       $sede = "Comercial Merina";
-      echo "$Month/$sede";
-      echo "<br>";
     } elseif ($sede == 'Sucursal Caracas II' && $Month <= 3 && $Year == '2023') {
       $sede = "Comercial Merina3";
-      echo "$Month/$sede";
-      echo "<br>";
     } elseif ($sede == 'Sucursal Cagua' && $Month <= 5 && $Year == '2023') {
       $sede = "Comercial Kagu";
-      echo "$Month/$sede";
-      echo "<br>";
     } elseif ($sede == 'Sucursal Maturin' && $Month <= 9 && $Year == '2023') {
       $sede = "Comercial Matur";
-      echo "$Month/$sede";
-      echo "<br>";
     } else {
       $sede = $sedes_ar[$i];
     } 
