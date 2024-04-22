@@ -79,7 +79,7 @@ function getDev_Grafica($sede, $fecha1, $fecha2,$mes)
     }else {
         $database = Database($sede);
     }
-    $database = Database($sede);
+    
     if ($database != null) {
         try {
 
