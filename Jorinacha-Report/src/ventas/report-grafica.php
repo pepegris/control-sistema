@@ -35,8 +35,6 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     $fecha_1 =  $Year . '' . $Month . ''  . '01';
     $fecha_2 =  $Year . '' . $Month . ''  . $cantidadDias;
 
-    echo "$Month / $sede <br>";
-
     if ($sede == 'Sucursal Caracas I' && $Month <= 3 && $Year == '2023') {
       $sede = "Comercial Merina";
     } elseif ($sede == 'Sucursal Caracas II' && $Month <= 3 && $Year == '2023') {
