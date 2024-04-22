@@ -20,8 +20,7 @@
 
         $m = $Month_beg;
         $Month  = $Month_beg;
-        var_dump($m);
-        var_dump($Month);
+
         for ($k = $Month_beg; $k <= $Month_total; $k++) {
 
             ///////////////////////////////////////////////////////////////////
