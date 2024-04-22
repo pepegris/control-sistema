@@ -45,8 +45,16 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       $sede = "Comercial Kagu";
     } elseif ($sede == 'Sucursal Maturin' && $Month <= 9 && $Year == '2023') {
       $sede = "Comercial Matur";
-    } else {
-      $sede = $sedes_ar[$i];
+    } 
+
+    if ($sede == 'Comercial Merina' && $Month > 3 && $Year == '2023') {
+      $sede = "Sucursal Caracas I";
+    } elseif ($sede == 'Comercial Merina3' && $Month > 3 && $Year == '2023') {
+      $sede = "Sucursal Caracas II";
+    } elseif ($sede == 'Comercial Kagu' && $Month > 5 && $Year == '2023') {
+      $sede = "Sucursal Cagua";
+    } elseif ($sede == 'Comercial Matur' && $Month > 9 && $Year == '2023') {
+      $sede = "Sucursal Maturin";
     } 
 
     $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2, $Month);
