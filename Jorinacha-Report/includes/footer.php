@@ -17,7 +17,13 @@
 	</div>
 
 </footer>
+<?php
+$serverName = "172.16.1.39";
+$connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+$conn = sqlsrv_connect($serverName, $connectionInfo);
+sqlsrv_close( $conn );
 
+ ?>
 
 <!-- <script src="../../assets/navidad/nieve.js"></script> -->
 </body>
