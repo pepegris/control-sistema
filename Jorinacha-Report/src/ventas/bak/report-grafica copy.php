@@ -298,27 +298,6 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     //---------------------------------------------------------------------------------------------||
     //---------------------------------------------------------------------------------------------||
     //---------------------------------------------------------------------------------------------||
-
-
-    google.charts.setOnLoadCallback(drawTable);
-
-function drawTable() {
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Name');
-  data.addColumn('number', 'Salary');
-  data.addColumn('boolean', 'Full Time Employee');
-  data.addRows([
-    ['Mike',  {v: 10000, f: '$10,000'}, true],
-    ['Jim',   {v:8000,   f: '$8,000'},  false],
-    ['Alice', {v: 12500, f: '$12,500'}, true],
-    ['Bob',   {v: 7000,  f: '$7,000'},  true]
-  ]);
-
-  var table = new google.visualization.Table(document.getElementById('table_div'));
-
-  table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
-}
-
   </script>
 </head>
 
@@ -349,36 +328,7 @@ function drawTable() {
 </table>
 
 
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Accordion Item #1
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-      <div id="table_div"></div>
 
-      </div>
-    </div>
-  </div>
-
-
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Accordion Item #2
-      </button>
-    </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
-    </div>
-  </div>
-
-</div>
 
 
 
