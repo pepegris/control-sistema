@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../assets/navidad/nieve.css">
 
     <link rel="stylesheet" href="../../assets/css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap-5.3.3/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link rel="stylesheet" href="../../assets/css/home.css">
     <link rel="stylesheet" href="../../assets/css/form.css">
