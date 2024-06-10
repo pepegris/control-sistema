@@ -1,7 +1,4 @@
 <?php
-
-
-
 require "../../services/empresas.php";
 
 function Replica($sede)
