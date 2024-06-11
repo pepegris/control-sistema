@@ -118,6 +118,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
             group by linea_des
             order by total_art desc";
+            var_dump($sede);
 
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
