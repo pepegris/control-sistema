@@ -28,6 +28,8 @@
 
 
         $consulta = sqlsrv_query($conn, $sql);
+        $total_vendido=0;
+        $total_dev=0;
         $n=1;
         while ($row = sqlsrv_fetch_array($consulta)) {
 
@@ -66,7 +68,6 @@
             <td><?= $total_vendido ?></td>
             <td><?= $total_dev ?></td>
 
-            ?>
         </tr>
 
     </tbody>
