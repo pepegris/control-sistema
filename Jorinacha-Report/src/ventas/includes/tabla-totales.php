@@ -41,8 +41,8 @@
             </tr>
         <?php
 
-        $total_vendido=+$total;
-        $total_dev=+$dev;
+        $total_vendido+=$total;
+        $total_dev+=$dev;
 
         $n++;
         }
