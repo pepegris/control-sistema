@@ -79,7 +79,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
 
     color: black;
 
@@ -315,9 +316,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 <br>
 <br>
 
-<?php
-
-include 'includes/tabla-totales.php'; ?>
+<h2>Detalles de las Ventas</h2>
+<?php include 'includes/tabla-totales.php'; ?>
 
 
 

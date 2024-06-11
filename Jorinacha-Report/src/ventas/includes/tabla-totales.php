@@ -1,4 +1,4 @@
-<table class="table table-light table-striped" id="tblData">
+<table class="table table-secondary table-striped" id="tblData">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -44,7 +44,7 @@
         <tr>
 
             <td colspan="2">
-                <h4>Total</h4>
+                <h3>Total</h3>
             </td>
             <td><?= $total_vendido ?></td>
             <td><?= $total_dev ?></td>
