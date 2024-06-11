@@ -22,7 +22,14 @@
         while ($row = sqlsrv_fetch_array($consulta)) {
 
             $dev = getDev_Grafica_fac($sede, $row['linea_des']);
+            if ($dev !=null) {
+                $dev;
+            } else {
+                $dev=0;
+            }
+
             $total = $row['total_art'] - $dev;
+            
             
         ?>
             <tr>
