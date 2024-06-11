@@ -1,4 +1,4 @@
-<table class="table table-dark table-striped" id="tblData">
+<table class="table table-light table-striped" id="tblData">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -23,7 +23,7 @@
 
             $dev = getDev_Grafica_fac($sede, $row['linea_des']);
             $total = $row['total_art'] - $dev;
-            $n++;
+            
         ?>
             <tr>
                 <th scope='row'><?= $n ?></th>
@@ -37,14 +37,13 @@
         $total_vendido=+$total;
         $total_dev=+$dev;
 
-
+        $n++;
         }
         ?>
 
         <tr>
-            <th></th>
-            <td colspan="1"></td>
-            <td>
+
+            <td colspan="2">
                 <h4>Total</h4>
             </td>
             <td><?= $total_vendido ?></td>

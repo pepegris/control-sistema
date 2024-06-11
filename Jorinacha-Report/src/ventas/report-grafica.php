@@ -319,17 +319,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 include 'includes/tabla-totales.php'; ?>
 
-<!--Table and divs that hold the pie charts-->
-<table class="columns">
-  <tr>
-    <td>
-      <div id="Sarah_chart_div" style="border: 1px solid #ccc"></div>
-    </td>
-    <td>
-      <div id="Anthony_chart_div" style="border: 1px solid #ccc"></div>
-    </td>
-  </tr>
-</table>
+
 
 
 
