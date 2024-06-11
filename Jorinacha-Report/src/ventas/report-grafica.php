@@ -88,6 +88,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
   }
+  .btn{
+    background-color: black;
+  }
 </style>
 
 
@@ -325,6 +328,6 @@ include 'includes/grafica_global_tiendas.php';
 include 'includes/grafica_tiendas.php';
 
 deleteVendido_Grafica(); ?>
-<center><input type="button" class="btn btn-dark" name="imprimir" value="PDF" onclick="window.print();"> </center>
+<center><input type="button" class="btn" name="imprimir" value="PDF" onclick="window.print();"> </center>
 <?php include '../../includes/footer.php'; ?>
 
