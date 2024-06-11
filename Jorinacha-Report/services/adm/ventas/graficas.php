@@ -180,7 +180,7 @@ function getDev_Grafica_fac2($sede, $consulta)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-            WHERE linea_des ='$consulta' AND  = '$sede'
+            WHERE linea_des ='$consulta' AND  tienda= '$sede'
             group by linea_des
             order by total_dev desc";
             

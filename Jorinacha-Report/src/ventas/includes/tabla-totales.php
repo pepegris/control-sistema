@@ -33,7 +33,12 @@
         $n=1;
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-            $dev = getDev_Grafica_fac($sede, $row['linea_des']);
+            if ($busqueda==true) {
+                $dev = getDev_Grafica_fac($sede, $row['linea_des']);
+            }else {
+                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
+            } 
+            
             if ($dev !=null) {
                 $dev;
             } else {
