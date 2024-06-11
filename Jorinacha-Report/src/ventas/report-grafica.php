@@ -326,3 +326,5 @@ include 'includes/grafica_tiendas.php';
 
 deleteVendido_Grafica(); 
 include '../../includes/footer.php'; ?>
+
+<center><input type="button" name="imprimir" value="Imprimir" onclick="window.print();"> </center>
