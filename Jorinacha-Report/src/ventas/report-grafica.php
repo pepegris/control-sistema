@@ -90,7 +90,6 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   }
   #boton{
     background-color: black;
-    color: black;
   }
 </style>
 
