@@ -21,6 +21,8 @@ $Day = date("d", strtotime($fecha2));
 $Month_total = date("m", strtotime($fecha2));
 $Year = date("Y", strtotime($fecha2));
 
+$busqueda=true;
+
 
 for ($i = 1; $i < count($sedes_ar); $i++) {
 
@@ -317,19 +319,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 <br>
 
 <center><h2>Detalles de las Ventas</h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
-
-
-
-
-
-
-
-
-
-
-<?php
-
+<?php include 'includes/tabla-totales.php'; 
+$busqueda=false;
 include 'includes/grafica_global_tiendas.php';
 include 'includes/grafica_tiendas.php';
 

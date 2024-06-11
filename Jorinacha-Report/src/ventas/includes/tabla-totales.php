@@ -10,13 +10,23 @@
     <tbody>
         <?php
 
+
         $serverName = "172.16.1.39";
         $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
         $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-        $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                group by linea_des
-                order by total_art desc";
+        if ($busqueda==true) {
+            $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
+            group by linea_des
+            order by total_art desc";
+        }else {
+            $sql = "SELECT linea_des,SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
+            WHERE tienda= '$sede'
+            group by linea_des
+            order by total_art desc";
+        }
+
+
         $consulta = sqlsrv_query($conn, $sql);
         $n=1;
         while ($row = sqlsrv_fetch_array($consulta)) {
