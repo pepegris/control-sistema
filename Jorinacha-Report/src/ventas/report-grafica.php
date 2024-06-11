@@ -324,7 +324,7 @@ $busqueda=false;
 include 'includes/grafica_global_tiendas.php';
 include 'includes/grafica_tiendas.php';
 
-deleteVendido_Grafica(); 
-include '../../includes/footer.php'; ?>
+deleteVendido_Grafica(); ?>
+<center><input type="button" class="btn btn-dark" name="imprimir" value="PDF" onclick="window.print();"> </center>
+<?php include '../../includes/footer.php'; ?>
 
-<center><input type="button" name="imprimir" value="Imprimir" onclick="window.print();"> </center>
