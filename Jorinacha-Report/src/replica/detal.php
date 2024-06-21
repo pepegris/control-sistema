@@ -109,7 +109,7 @@ if (isset($_GET['sede'])) {
 
             ?>
         </ul>
-        <form action='vendedor.php<?=$sede?>' method="get">
+        <form action='vendedor.php?sede=<?=$sede?>' method="get">
         <div class="form-group">
             <label for="vendedor" class="form-label ">Buscar Vendedor</label>
             <input type="search" name="vendedor" id="">
