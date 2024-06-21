@@ -48,6 +48,7 @@ include '../../services/adm/replica/replica.php';
 
 if (isset($_GET['sede'])) {
     $sede = $_GET['sede'];
+    $vendedor = $_GET['vendedor'];
 
     $res1 = Replica_detal($sede, 'factura');
     $factura1 = $res1['fec_emis'];
