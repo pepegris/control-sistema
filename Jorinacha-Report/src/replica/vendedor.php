@@ -71,10 +71,7 @@ if (isset($_GET['sede'])) {
     $res4 = Replica_detal($sede, 'mov_ban');
     $mov_ban4 = $res4['fec_emis'];
     $mov_ban = $mov_ban4->format('d-m-Y');
-} else {
-    header("location: form.php");
-}
-
+} 
 
 
 ?>
