@@ -417,7 +417,7 @@ if ($Month_total > $Month_beg) {
 }
 ?>
 <center>
-  <div id="columnchart_material_todo" style="width: 800px; height: 500px;"></div>
+  <div id="columnchart_material_todo" style="width: 950px; height: 600px;"></div>
 </center>
 <?php
 include 'includes/despachos/grafica_tiendas.php';
