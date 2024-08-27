@@ -148,7 +148,7 @@ if ($_GET) {
           <td style="color:red"><?=  $dif_stock ?></td>
 
           <td><?= $costo  ?></td>
-          <td><?= $teorico_total_costo  ?></td>
+          <td><?= number_format($teorico_total_costo, 1, ',', '.')  ?></td>
           <td><?= $real_total_costo  ?></td>
           <td style="color:red"><?=  number_format($dif_costo, 1, ',', '.') ?></td>
 
