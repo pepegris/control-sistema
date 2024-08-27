@@ -342,7 +342,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     function drawChartC() {
       var data = google.visualization.arrayToDataTable([
-        ['TIENDAS', 'Despachado', 'Bultos', ],
+        ['TIENDAS', 'Despachado', 'Bultos' ],
 
         <?php
 
