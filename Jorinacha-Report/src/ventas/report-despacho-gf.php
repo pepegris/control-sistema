@@ -338,9 +338,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     google.charts.load('current', {
       'packages': ['bar']
     });
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChartC);
 
-    function drawChart() {
+    function drawChartC() {
       var data = google.visualization.arrayToDataTable([
         ['TIENDAS', 'Despachado', 'Bultos', ],
 
@@ -377,7 +377,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         }
       };
 
-      var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material_todo'));
 
       chart.draw(data, google.charts.Bar.convertOptions(options));
     }
@@ -414,7 +414,7 @@ if ($Month_total > $Month_beg) {
   include 'includes/despachos/grafica_global_tiendas.php';
 }
 ?>
-<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+<div id="columnchart_material_todo" style="width: 800px; height: 500px;"></div>
 <?php
 include 'includes/despachos/grafica_tiendas.php';
 
