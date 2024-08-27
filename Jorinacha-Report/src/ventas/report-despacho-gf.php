@@ -352,13 +352,13 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         for ($i = 1; $i < count($sedes_ar); $i++) {
           $sede = $sedes_ar[$i];
           $sql_sede1 = "SELECT SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                        where and tienda= '$sede'";
+                        where  tienda= '$sede'";
           $consulta_sede1 = sqlsrv_query($conn, $sql_sede1);
           $row_sede1 = sqlsrv_fetch_array($consulta_sede1);
           $total_sede1 = $row_sede1['total_art'];
 
           $sql2_sede1 = "SELECT SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                          where and tienda= '$sede'";
+                          where  tienda= '$sede'";
           $consulta2_sede1 = sqlsrv_query($conn, $sql2_sede1);
           $row2_sede1 = sqlsrv_fetch_array($consulta2);
           $total2_sede1 = $row2_sede1['total_dev'];
