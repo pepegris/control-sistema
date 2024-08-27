@@ -343,7 +343,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       var data = google.visualization.arrayToDataTable([
         ['TIENDAS', 'Despachado', 'Bultos' ],
         ['a',123,59],
-
+        ['b',13,99],
 
 
 
