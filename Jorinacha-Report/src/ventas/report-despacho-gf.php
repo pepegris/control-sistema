@@ -342,31 +342,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     function drawChartC() {
       var data = google.visualization.arrayToDataTable([
         ['TIENDAS', 'Despachado', 'Bultos' ],
+        ['a',123,59],
 
-        <?php
 
-
-        for ($i = 1; $i < count($sedes_ar); $i++) {
-
-          $serverName = "172.16.1.39";
-          $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
-          $conn = sqlsrv_connect($serverName, $connectionInfo);
-          $sede = $sedes_ar[$i];
-          $sql_sede1 = "SELECT SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
-                        where  tienda= '$sede'";
-          $consulta_sede1 = sqlsrv_query($conn, $sql_sede1);
-          $row_sede1 = sqlsrv_fetch_array($consulta_sede1);
-          $total_sede1 = $row_sede1['total_art'];
-
-          $sql2_sede1 = "SELECT SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
-                          where  tienda= '$sede'";
-          $consulta2_sede1 = sqlsrv_query($conn, $sql2_sede1);
-          $row2_sede1 = sqlsrv_fetch_array($consulta2);
-          $total2_sede1 = $row2_sede1['total_dev'];
-
-          echo "['".$sede."', ".$total_sede1.", ".$total2_sede1."],";
-        }
-        ?>
 
 
       ]);
