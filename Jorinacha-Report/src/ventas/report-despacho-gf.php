@@ -359,7 +359,7 @@ if ($Month_total > $Month_beg) {
 
 
 <center>
-  <h2>Detalles de las Despachos</h2>
+  <h2>Detalles de los Despachos</h2>
 </center>
 <?php include 'includes/despachos/tabla-totales.php';
 $busqueda = false;
