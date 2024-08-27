@@ -28,6 +28,9 @@ if (isset($_POST)) {
     }elseif ($pedidos=='fallas'){
         header("refresh:2;url= report-art-stock-fallas.php?linea=$linea&fecha1=$fecha1&fecha2=$fecha2&almacen=$almacen&sedes=" . $sedes);
 
+    }elseif ($pedidos=='fallas'){
+        header("refresh:1;url= report-despacho-gf.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&almacen=$almacena&sedes=$sedes");
+
     }
     else {
         header('refresh:1;url= form.php');

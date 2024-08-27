@@ -38,6 +38,10 @@ if ($clave === 'N3td0s' ) {
 
         header("refresh:1;url= report-grafica.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
 
+    }  elseif ($reporte=='des') {
+
+        header("refresh:1;url= report-despacho-gf.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
+
     }    
     
     elseif ($reporte=='dias') {

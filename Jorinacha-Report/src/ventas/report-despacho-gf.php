@@ -6,7 +6,7 @@ require "../../includes/log.php";
 include '../../includes/header2.php';
 include '../../services/mysql.php';
 include '../../services/adm/ventas/diarias.php';
-include '../../services/adm/ventas/graficas.php';
+include '../../services/adm/ventas/despacho.php';
 
 $divisa = $_GET['divisa'];
 $linea = $_GET['linea'];
@@ -27,6 +27,8 @@ $busqueda=true;
 for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $sede = $sedes_ar[$i];
+  $tipo='factura';
+  
 
   $m = $Month_beg;
   $Month  = $Month_beg;
@@ -39,26 +41,46 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     if ($sede == 'Sucursal Caracas I' && $Month <= 3 && $Year == '2023') {
       $sede = "Comercial Merina";
+      $tipo='factura';
     } elseif ($sede == 'Sucursal Caracas II' && $Month <= 3 && $Year == '2023') {
       $sede = "Comercial Merina3";
+      $tipo='factura';
     } elseif ($sede == 'Sucursal Cagua' && $Month <= 5 && $Year == '2023') {
       $sede = "Comercial Kagu";
+      $tipo='factura';
     } elseif ($sede == 'Sucursal Maturin' && $Month <= 9 && $Year == '2023') {
       $sede = "Comercial Matur";
+      $tipo='factura';
     } 
 
     if ($sede == 'Comercial Merina' && $Month > 3 && $Year == '2023') {
       $sede = "Sucursal Caracas I";
+      $tipo='orden';
     } elseif ($sede == 'Comercial Merina3' && $Month > 3 && $Year == '2023') {
       $sede = "Sucursal Caracas II";
+      $tipo='orden';
     } elseif ($sede == 'Comercial Kagu' && $Month > 5 && $Year == '2023') {
       $sede = "Sucursal Cagua";
+      $tipo='orden';
     } elseif ($sede == 'Comercial Matur' && $Month > 9 && $Year == '2023') {
       $sede = "Sucursal Maturin";
+      $tipo='orden';
     } 
 
-    $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2, $Month);
-    $dev = getDev_Grafica($sede, $fecha_1, $fecha_2, $Month);
+    $sede_cliente = Cliente($sede);
+    if ($tipo=='factura') {
+
+      $ventas = getFactura_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
+      $dev = getBultos_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
+      
+      
+    }else {
+
+      $ventas = getOrdenes_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
+      $dev = getBultos_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
+      
+    }
+
 
     if ($m < 9) {
       $m++;
@@ -96,7 +118,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 <head>
   <center>
-    <h1> Graficas de Ventas de <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
+    <h1> Graficas de Despachos de <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h1>
   </center>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
@@ -110,7 +132,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
-        ['Articulos', 'Total Vendidos'],
+        ['Articulos', 'Total Despachados'],
 
         <?php
 
@@ -125,8 +147,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          $dev = getDev_Grafica_fac($sede, $row['linea_des']);
-          $total = $row['total_art'] - $dev;
+        
+          $total = $row['total_art'] ;
 
           echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
         }
@@ -134,7 +156,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       ]);
 
       var options = {
-        title: 'Modelos vendidos en Todas las Tiendas',
+        title: 'Modelos Despachados en Todas las Tiendas',
         is3D: true,
       };
 
@@ -150,7 +172,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     function drawChartArea() {
       var data = google.visualization.arrayToDataTable([
-        ['Mes', 'Ventas por Mes', 'Devoluciones por Mes'],
+        ['Mes', 'Despachos por Mes', 'Bultos por Mes'],
         <?php
 
         $serverName = "172.16.1.39";
@@ -174,7 +196,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
           while ($row = sqlsrv_fetch_array($consulta)) {
 
-            $total = $row['total_art'] - $total2;
+            $total = $row['total_art'] ;
             $mes = Meses($Month);
             echo "['" . $mes . "',$total,$total2],";
             break;
@@ -196,7 +218,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       ]);
 
       var options = {
-        title: 'Ventas Por Tiendas',
+        title: 'Despachos Por Tiendas',
         hAxis: {
           title: 'Meses',
           titleTextStyle: {
@@ -241,8 +263,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          $dev = getDev_Grafica_fac($sede, $row['linea_des']);
-          $total = $row['total_art'] - $dev;
+          $total = $row['total_art'] ;
 
           echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
         }
@@ -251,7 +272,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
       // Set options for Sarah's pie chart.
       var options = {
-        title: 'Total de ventas',
+        title: 'Total de Despachados',
         width: 600,
         height: 500
       };
@@ -291,7 +312,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
       // Set options for Anthony's pie chart.
       var options = {
-        title: 'Total de Devoluciones',
+        title: 'Total de Bultos',
         width: 600,
         height: 500
       };
@@ -315,17 +336,17 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 <br>
 <br>
 <center>
-  <h2> Ventas por Mes desde <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+  <h2> Despachos por Mes desde <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   <div id="chart_div" style="width: 900px; height: 500px;"></div>
 </center>
 <br>
 <br>
 
-<center><h2>Detalles de las Ventas</h2></center>
-<?php include 'includes/ventas/tabla-totales.php'; 
+<center><h2>Detalles de las Despachos</h2></center>
+<?php include 'includes/despachos/tabla-totales.php'; 
 $busqueda=false;
-include 'includes/ventas/grafica_global_tiendas.php';
-include 'includes/ventas/grafica_tiendas.php';
+include 'includes/despachos/grafica_global_tiendas.php';
+include 'includes/despachos/grafica_tiendas.php';
 
 deleteVendido_Grafica(); ?>
 <center><input type="button" id='boton' class="btn btn-dark" name="imprimir" value="PDF" onclick="window.print();"> </center>

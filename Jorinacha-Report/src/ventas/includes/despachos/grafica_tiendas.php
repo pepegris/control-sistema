@@ -32,8 +32,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -67,7 +67,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -75,7 +75,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -102,7 +102,7 @@
 </table>
 
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -142,8 +142,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -177,7 +177,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -185,7 +185,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -211,7 +211,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
 
@@ -253,8 +253,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -288,7 +288,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -296,7 +296,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -322,7 +322,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
 
@@ -364,8 +364,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -399,7 +399,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -407,7 +407,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -433,7 +433,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
 
@@ -474,8 +474,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -509,7 +509,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -517,7 +517,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -543,7 +543,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
 
@@ -585,8 +585,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -620,7 +620,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -628,7 +628,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -654,7 +654,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -698,8 +698,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -733,7 +733,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -741,7 +741,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -767,7 +767,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -808,8 +808,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -843,7 +843,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -851,7 +851,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -877,7 +877,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -921,8 +921,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -956,7 +956,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -964,7 +964,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -990,7 +990,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -1034,8 +1034,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -1069,7 +1069,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -1077,7 +1077,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1103,7 +1103,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -1147,8 +1147,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -1182,7 +1182,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -1190,7 +1190,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1216,7 +1216,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -1259,8 +1259,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -1294,7 +1294,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -1302,7 +1302,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1328,7 +1328,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -1371,8 +1371,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -1406,7 +1406,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -1414,7 +1414,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1440,7 +1440,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -1483,8 +1483,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -1518,7 +1518,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -1526,7 +1526,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1552,7 +1552,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -1597,8 +1597,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -1632,7 +1632,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -1640,7 +1640,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1666,7 +1666,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -1710,8 +1710,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -1745,7 +1745,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -1753,7 +1753,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1779,7 +1779,7 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
 
@@ -1822,8 +1822,8 @@
             $consulta = sqlsrv_query($conn, $sql);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $dev = getDev_Grafica_fac2($sede, $row['linea_des']);
-                $total = $row['total_art'] - $dev;
+                
+                $total = $row['total_art'] ;
 
                 echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
             }
@@ -1857,7 +1857,7 @@
         ]);
 
         var piechart_options = {
-            title: 'Vemtas por Marcas',
+            title: 'Despachados por Marcas',
             width: 600,
             height: 500
         };
@@ -1865,7 +1865,7 @@
         piechart.draw(data, piechart_options);
 
         var barchart_options = {
-            title: 'Devoluciones por Marcas',
+            title: 'Bultos por Marcas',
             width: 600,
             height: 500,
             legend: 'none'
@@ -1891,6 +1891,6 @@
     </tr>
 </table>
 <center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
-<?php include 'includes/tabla-totales.php'; ?>
+<?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
