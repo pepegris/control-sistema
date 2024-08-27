@@ -348,7 +348,7 @@ $busqueda=false;
 include 'includes/despachos/grafica_global_tiendas.php';
 include 'includes/despachos/grafica_tiendas.php';
 
-deleteVendido_Grafica(); ?>
+/* deleteVendido_Grafica(); */ ?>
 <center><input type="button" id='boton' class="btn btn-dark" name="imprimir" value="PDF" onclick="window.print();"> </center>
 <?php include '../../includes/footer.php'; ?>
 
