@@ -345,11 +345,13 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         ['TIENDAS', 'Despachado', 'Bultos', ],
 
         <?php
-        $serverName = "172.16.1.39";
-        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
-        $conn = sqlsrv_connect($serverName, $connectionInfo);
+
 
         for ($i = 1; $i < count($sedes_ar); $i++) {
+
+          $serverName = "172.16.1.39";
+          $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+          $conn = sqlsrv_connect($serverName, $connectionInfo);
           $sede = $sedes_ar[$i];
           $sql_sede1 = "SELECT SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
                         where  tienda= '$sede'";
