@@ -348,7 +348,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-        for ($i = 1; $i < count($sedes_ar); $i++) {
+        for ($i = 12; $i < count($sedes_ar); $i++) {
 
 
           $sede = $sedes_ar[$i];
