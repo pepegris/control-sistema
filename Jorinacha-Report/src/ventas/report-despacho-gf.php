@@ -361,7 +361,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
           $sql2_sede1 = "SELECT SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
                           where  tienda= '$sede'";
           $consulta2_sede1 = sqlsrv_query($conn, $sql2_sede1);
-          $row2_sede1 = sqlsrv_fetch_array($consulta2);
+          $row2_sede1 = sqlsrv_fetch_array($consulta2_sede1);
           $total2_sede1 = $row2_sede1['total_dev'];
 
           echo "['" . $sede . "', " . $total_sede1 . ", " . $total2_sede1 . "],";
