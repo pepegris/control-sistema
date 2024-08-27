@@ -131,9 +131,10 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   </center>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
+
     // Load Charts and the corechart package.
     google.charts.load('current', {
-      'packages': ['corechart']
+      'packages': ['corechart','bar']
     });
 
 
@@ -335,9 +336,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     //---------------------------------------------------------------------------------------------||
     //---------------------------------------------------------------------------------------------||
 
-    google.charts.load('current', {
-      'packages': ['bar']
-    });
+
     google.charts.setOnLoadCallback(drawChartC);
 
     function drawChartC() {
