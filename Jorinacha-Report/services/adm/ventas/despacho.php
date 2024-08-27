@@ -116,7 +116,7 @@ function getOrdenes_Grafica($sede, $fecha1, $fecha2,$mes,$sede_cliente)
 
 
 
-function getBultos_Grafica($sede, $fecha1, $fecha2,$mes,$sede_cliente)
+function getBultos_Grafica_ord($sede, $fecha1, $fecha2,$mes,$sede_cliente)
 {
 
 
@@ -174,6 +174,67 @@ function getBultos_Grafica($sede, $fecha1, $fecha2,$mes,$sede_cliente)
         }
 
 }
+
+
+function getBultos_Grafica_factura($sede, $fecha1, $fecha2,$mes,$sede_cliente)
+{
+
+
+        try {
+
+            $serverName = "172.16.1.39";
+            $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+
+            $sql = "SELECT SUM (CONVERT(numeric(10,0), reng_fac.total_uni)) as total_dev,lin_art.lin_des from factura 
+                inner join reng_fac on factura.fact_num=reng_fac.fact_num
+                inner join art  on art.co_art=reng_fac.co_art
+                inner join lin_art on lin_art.co_lin=art.co_lin
+                where factura.anulada =0 and factura.fec_emis between '$fecha1' and '$fecha2' and co_cli='$sede_cliente'
+                group by lin_art.lin_des 
+                order by total_dev desc";
+
+            $consulta = sqlsrv_query($conn, $sql);
+
+            $connectionInfo2 = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $conn2 = sqlsrv_connect($serverName, $connectionInfo2);
+            while ($row = sqlsrv_fetch_array($consulta)) {
+
+                if ($sede == 'Comercial Merina' ) {
+                    $sede = "Sucursal Caracas I";
+                  } elseif ($sede == 'Comercial Merina3' ) {
+                    $sede = "Sucursal Caracas II";
+                  } elseif ($sede == 'Comercial Kagu' ) {
+                    $sede = "Sucursal Cagua";
+                  } elseif ($sede == 'Comercial Matur') {
+                    $sede = "Sucursal Maturin";
+                  } 
+
+                $total_art = $row['total_dev'];
+                $linea_des = $row['lin_des'];
+                $sql2 = "INSERT INTO art_grafica_dev (linea_des,mes,total_dev,tienda) values ('$linea_des','$mes',$total_art,'$sede')";
+                $consulta2 = sqlsrv_query($conn2, $sql2);
+            }
+
+
+
+            if ($consulta2 == null) {
+
+                $res = false;
+                return $res;
+            } else {
+
+                $res = true;
+                return $res;
+            }
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+
+}
+
 
 
 /* CONSULTAR MARCA*/

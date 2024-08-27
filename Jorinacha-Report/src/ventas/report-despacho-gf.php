@@ -71,13 +71,13 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     if ($tipo=='factura') {
 
       $ventas = getFactura_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
-      $dev = getBultos_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
+      $dev = getBultos_Grafica_factura($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
       
       
     }else {
 
       $ventas = getOrdenes_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
-      $dev = getBultos_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
+      $dev = getBultos_Grafica_ord($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
       
     }
 
