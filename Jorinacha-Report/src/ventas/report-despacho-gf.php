@@ -28,6 +28,17 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $sede = $sedes_ar[$i];
   $tipo='factura';
+
+  if ($sede == 'Sucursal Caracas I' ) {
+    $tipo='nota';
+  } elseif ($sede == 'Sucursal Caracas II' ) {
+    $sede = "Comercial Merina3";
+    $tipo='nota';
+  } elseif ($sede == 'Sucursal Cagua' ) {
+    $tipo='nota';
+  } elseif ($sede == 'Sucursal Maturin' ) {
+    $tipo='nota';
+  } 
   
 
   $m = $Month_beg;
@@ -55,16 +66,16 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     if ($sede == 'Comercial Merina' && $Month > 3 && $Year == '2023') {
       $sede = "Sucursal Caracas I";
-      $tipo='orden';
+      $tipo='nota';
     } elseif ($sede == 'Comercial Merina3' && $Month > 3 && $Year == '2023') {
       $sede = "Sucursal Caracas II";
-      $tipo='orden';
+      $tipo='nota';
     } elseif ($sede == 'Comercial Kagu' && $Month > 5 && $Year == '2023') {
       $sede = "Sucursal Cagua";
-      $tipo='orden';
+      $tipo='nota';
     } elseif ($sede == 'Comercial Matur' && $Month > 9 && $Year == '2023') {
       $sede = "Sucursal Maturin";
-      $tipo='orden';
+      $tipo='nota';
     } 
 
     $sede_cliente = Cliente($sede);
