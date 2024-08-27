@@ -363,7 +363,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
           $row2_sede1 = sqlsrv_fetch_array($consulta2);
           $total2_sede1 = $row2_sede1['total_dev'];
 
-          echo "['$sede', $total_sede1, $total2_sede1],";
+          echo "['".$sede."', ".$total_sede1.", ".$total2_sede1."],";
         }
         ?>
 
