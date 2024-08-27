@@ -45,7 +45,7 @@
                 $dev=0;
             }
 
-            $total = $row['total_art'] - $dev;
+            $total = $row['total_art'];
             
             
         ?>

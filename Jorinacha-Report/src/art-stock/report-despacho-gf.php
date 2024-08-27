@@ -21,14 +21,25 @@ $Day = date("d", strtotime($fecha2));
 $Month_total = date("m", strtotime($fecha2));
 $Year = date("Y", strtotime($fecha2));
 
-$busqueda=true;
+$busqueda = true;
 
 
 for ($i = 1; $i < count($sedes_ar); $i++) {
 
   $sede = $sedes_ar[$i];
-  $tipo='factura';
-  
+  $tipo = 'factura';
+
+  if ($sede == 'Sucursal Caracas I') {
+    $tipo = 'nota';
+  } elseif ($sede == 'Sucursal Caracas II') {
+    $sede = "Comercial Merina3";
+    $tipo = 'nota';
+  } elseif ($sede == 'Sucursal Cagua') {
+    $tipo = 'nota';
+  } elseif ($sede == 'Sucursal Maturin') {
+    $tipo = 'nota';
+  }
+
 
   $m = $Month_beg;
   $Month  = $Month_beg;
@@ -41,44 +52,41 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     if ($sede == 'Sucursal Caracas I' && $Month <= 3 && $Year == '2023') {
       $sede = "Comercial Merina";
-      $tipo='factura';
+      $tipo = 'factura';
     } elseif ($sede == 'Sucursal Caracas II' && $Month <= 3 && $Year == '2023') {
       $sede = "Comercial Merina3";
-      $tipo='factura';
+      $tipo = 'factura';
     } elseif ($sede == 'Sucursal Cagua' && $Month <= 5 && $Year == '2023') {
       $sede = "Comercial Kagu";
-      $tipo='factura';
+      $tipo = 'factura';
     } elseif ($sede == 'Sucursal Maturin' && $Month <= 9 && $Year == '2023') {
       $sede = "Comercial Matur";
-      $tipo='factura';
-    } 
+      $tipo = 'factura';
+    }
 
     if ($sede == 'Comercial Merina' && $Month > 3 && $Year == '2023') {
       $sede = "Sucursal Caracas I";
-      $tipo='orden';
+      $tipo = 'nota';
     } elseif ($sede == 'Comercial Merina3' && $Month > 3 && $Year == '2023') {
       $sede = "Sucursal Caracas II";
-      $tipo='orden';
+      $tipo = 'nota';
     } elseif ($sede == 'Comercial Kagu' && $Month > 5 && $Year == '2023') {
       $sede = "Sucursal Cagua";
-      $tipo='orden';
+      $tipo = 'nota';
     } elseif ($sede == 'Comercial Matur' && $Month > 9 && $Year == '2023') {
       $sede = "Sucursal Maturin";
-      $tipo='orden';
-    } 
+      $tipo = 'nota';
+    }
 
     $sede_cliente = Cliente($sede);
-    if ($tipo=='factura') {
+    if ($tipo == 'factura') {
 
-      $ventas = getFactura_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
-      $dev = getBultos_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
-      
-      
-    }else {
+      $ventas = getFactura_Grafica($sede, $fecha_1, $fecha_2, $Month, $sede_cliente);
+      $dev = getBultos_Grafica_factura($sede, $fecha_1, $fecha_2, $Month, $sede_cliente);
+    } else {
 
-      $ventas = getOrdenes_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
-      $dev = getBultos_Grafica($sede, $fecha_1, $fecha_2, $Month,$sede_cliente);
-      
+      $ventas = getOrdenes_Grafica($sede, $fecha_1, $fecha_2, $Month, $sede_cliente);
+      $dev = getBultos_Grafica_ord($sede, $fecha_1, $fecha_2, $Month, $sede_cliente);
     }
 
 
@@ -110,7 +118,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
   }
-  #boton{
+
+  #boton {
     background-color: black;
   }
 </style>
@@ -124,7 +133,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   <script type="text/javascript">
     // Load Charts and the corechart package.
     google.charts.load('current', {
-      'packages': ['corechart']
+      'packages': ['corechart', 'bar']
     });
 
 
@@ -147,8 +156,8 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-        
-          $total = $row['total_art'] ;
+
+          $total = $row['total_art'];
 
           echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
         }
@@ -196,7 +205,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
           while ($row = sqlsrv_fetch_array($consulta)) {
 
-            $total = $row['total_art'] ;
+            $total = $row['total_art'];
             $mes = Meses($Month);
             echo "['" . $mes . "',$total,$total2],";
             break;
@@ -263,7 +272,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $consulta = sqlsrv_query($conn, $sql);
         while ($row = sqlsrv_fetch_array($consulta)) {
 
-          $total = $row['total_art'] ;
+          $total = $row['total_art'];
 
           echo "['" . $row['linea_des'] . " / " . $total . "'," . $total . "],";
         }
@@ -326,6 +335,54 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     //---------------------------------------------------------------------------------------------||
     //---------------------------------------------------------------------------------------------||
 
+
+    google.charts.setOnLoadCallback(drawChartC);
+
+    function drawChartC() {
+      var data = google.visualization.arrayToDataTable([
+        ['TIENDAS', 'Despachado', 'Bultos'],
+
+        <?php
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
+
+
+        for ($i = 1; $i < count($sedes_ar); $i++) {
+
+
+          $sede = $sedes_ar[$i];
+          $sql_sede1 = "SELECT SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
+                        where  tienda= '$sede'";
+          $consulta_sede1 = sqlsrv_query($conn, $sql_sede1);
+          $row_sede1 = sqlsrv_fetch_array($consulta_sede1);
+          $total_sede1 = $row_sede1['total_art'];
+
+          $sql2_sede1 = "SELECT SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
+                          where  tienda= '$sede'";
+          $consulta2_sede1 = sqlsrv_query($conn, $sql2_sede1);
+          $row2_sede1 = sqlsrv_fetch_array($consulta2_sede1);
+          $total2_sede1 = $row2_sede1['total_dev'];
+
+          if ($total_sede1 != null) {
+            echo "['" . $sede . "', " . $total_sede1 . ", " . $total2_sede1 . "],";
+          }
+        }
+        ?>
+
+      ]);
+
+      var options = {
+        chart: {
+          title: 'Total de bultos y articulos despachados',
+          subtitle: "Graficas de todas las tiendas",
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material_todo'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
   </script>
 </head>
 
@@ -335,20 +392,36 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 <br>
 <br>
 <br>
-<center>
-  <h2> Despachos por Mes desde <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
-  <div id="chart_div" style="width: 900px; height: 500px;"></div>
+<?php
+if ($Month_total > $Month_beg) {
+
+  echo "
+  <center>
+  <h2> Despachos por Mes desde  $fecha_titulo1  hasta  $fecha_titulo2 </h2>
+  <div id='chart_div' style='width: 900px; height: 500px;'></div>
 </center>
 <br>
-<br>
+<br>";
+}
 
-<center><h2>Detalles de las Despachos</h2></center>
-<?php include 'includes/tabla-totales.php'; 
-$busqueda=false;
-include 'includes/grafica_global_tiendas.php';
-include 'includes/grafica_tiendas.php';
+?>
 
-deleteVendido_Grafica(); ?>
+
+<center>
+  <h2>Detalles de los Despachos</h2>
+</center>
+<?php include 'includes/despachos/tabla-totales.php';
+$busqueda = false;
+if ($Month_total > $Month_beg) {
+  include 'includes/despachos/grafica_global_tiendas.php';
+}
+?>
+<center>
+  <div id="columnchart_material_todo" style="width: 950px; height: 600px;"></div>
+</center>
+<?php
+include 'includes/despachos/grafica_tiendas.php';
+
+deleteVendido_Grafica();  ?>
 <center><input type="button" id='boton' class="btn btn-dark" name="imprimir" value="PDF" onclick="window.print();"> </center>
 <?php include '../../includes/footer.php'; ?>
-
