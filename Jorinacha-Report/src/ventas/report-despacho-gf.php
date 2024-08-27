@@ -348,7 +348,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
         $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-        for ($i = 12; $i < count($sedes_ar); $i++) {
+        for ($i = 1; $i < count($sedes_ar); $i++) {
 
 
           $sede = $sedes_ar[$i];
@@ -364,7 +364,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
           $row2_sede1 = sqlsrv_fetch_array($consulta2_sede1);
           $total2_sede1 = $row2_sede1['total_dev'];
 
-          echo "['" . $sede . "', " . $total_sede1 . ", " . $total2_sede1 . "],";
+          if ($consulta_sede1 != null) {
+            echo "['" . $sede . "', " . $total_sede1 . ", " . $total2_sede1 . "],";
+          }
         }
         ?>
 
@@ -420,6 +422,6 @@ if ($Month_total > $Month_beg) {
 <?php
 include 'includes/despachos/grafica_tiendas.php';
 
-/* deleteVendido_Grafica(); */ ?>
+deleteVendido_Grafica();  ?>
 <center><input type="button" id='boton' class="btn btn-dark" name="imprimir" value="PDF" onclick="window.print();"> </center>
 <?php include '../../includes/footer.php'; ?>
