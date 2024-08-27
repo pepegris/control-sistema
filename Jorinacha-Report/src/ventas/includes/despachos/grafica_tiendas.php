@@ -88,7 +88,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -101,7 +101,7 @@
     </tr>
 </table>
 
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 
@@ -198,7 +198,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -210,7 +210,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -309,7 +309,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -321,7 +321,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -420,7 +420,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -432,7 +432,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -530,7 +530,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -542,7 +542,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -641,7 +641,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -653,7 +653,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -754,7 +754,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -766,7 +766,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -864,7 +864,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -876,7 +876,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -977,7 +977,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -989,7 +989,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -1090,7 +1090,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1102,7 +1102,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -1203,7 +1203,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1215,7 +1215,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -1315,7 +1315,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1327,7 +1327,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -1427,7 +1427,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1439,7 +1439,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -1539,7 +1539,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1551,7 +1551,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -1653,7 +1653,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1665,7 +1665,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
@@ -1766,7 +1766,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1778,7 +1778,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
@@ -1878,7 +1878,7 @@
 
 <!--Table and divs that hold the pie charts-->
 <center>
-    <h2> Ventas <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
+    <h2> Despachos <?= $sede ?> <?= $fecha_titulo1  ?> hasta <?= $fecha_titulo2  ?></h2>
   </center>
 <table class="columns">
     <tr>
@@ -1890,7 +1890,7 @@
         </td>
     </tr>
 </table>
-<center><h2>Detalles de las Ventas <?= $sede ?></h2></center>
+<center><h2>Detalles de los Despachos <?= $sede ?></h2></center>
 <?php include 'includes/despachos/tabla-totales.php'; ?>
 
 <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
