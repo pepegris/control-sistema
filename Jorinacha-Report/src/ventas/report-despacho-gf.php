@@ -131,10 +131,9 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
   </center>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-
     // Load Charts and the corechart package.
     google.charts.load('current', {
-      'packages': ['corechart','bar']
+      'packages': ['corechart', 'bar']
     });
 
 
@@ -341,11 +340,33 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
 
     function drawChartC() {
       var data = google.visualization.arrayToDataTable([
-        ['TIENDAS', 'Despachado', 'Bultos' ],
-        ['a',123,59],
-        ['b',13,99],
+        ['TIENDAS', 'Despachado', 'Bultos'],
+
+        <?php
+        $serverName = "172.16.1.39";
+        $connectionInfo = array("Database" => "SISTEMAS", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+        $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
+        for ($i = 1; $i < count($sedes_ar); $i++) {
+
+
+          $sede = $sedes_ar[$i];
+          $sql_sede1 = "SELECT SUM (CONVERT(numeric(10,0), total_art)) as total_art  from art_grafica
+                        where  tienda= '$sede'";
+          $consulta_sede1 = sqlsrv_query($conn, $sql_sede1);
+          $row_sede1 = sqlsrv_fetch_array($consulta_sede1);
+          $total_sede1 = $row_sede1['total_art'];
+
+          $sql2_sede1 = "SELECT SUM (CONVERT(numeric(10,0), total_dev)) as total_dev  from art_grafica_dev
+                          where  tienda= '$sede'";
+          $consulta2_sede1 = sqlsrv_query($conn, $sql2_sede1);
+          $row2_sede1 = sqlsrv_fetch_array($consulta2);
+          $total2_sede1 = $row2_sede1['total_dev'];
+
+          echo "['" . $sede . "', " . $total_sede1 . ", " . $total2_sede1 . "],";
+        }
+        ?>
 
       ]);
 
@@ -393,10 +414,12 @@ if ($Month_total > $Month_beg) {
   include 'includes/despachos/grafica_global_tiendas.php';
 }
 ?>
-<div id="columnchart_material_todo" style="width: 800px; height: 500px;"></div>
+<center>
+  <div id="columnchart_material_todo" style="width: 800px; height: 500px;"></div>
+</center>
 <?php
 include 'includes/despachos/grafica_tiendas.php';
 
-deleteVendido_Grafica(); ?>
+/* deleteVendido_Grafica(); */ ?>
 <center><input type="button" id='boton' class="btn btn-dark" name="imprimir" value="PDF" onclick="window.print();"> </center>
 <?php include '../../includes/footer.php'; ?>
