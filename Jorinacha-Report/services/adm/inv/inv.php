@@ -267,7 +267,7 @@ function getreng_stock_teorico($marca,$database,$fecha1,$alma)
             ON F.num_fis=RF.num_fis
             INNER JOIN art 
             ON art.co_art=RF.co_art
-            WHERE RF.co_alma='$alma'  and art.co_lin='$marca' and f.fecha_fis='$fecha1' ";
+            WHERE RF.co_alma='$alma'  and art.co_lin='$marca' and f.fecha_fis>='$fecha1' ";
 
             $consulta = sqlsrv_query($conn, $sql);
 
