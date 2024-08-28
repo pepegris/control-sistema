@@ -60,7 +60,7 @@ function getLin_art($fecha,$database,$alma)
    JOIN art ON reng_fis.co_art = art.co_art
    JOIN lin_art ON lin_art.co_lin = art.co_lin
    JOIN fisico ON reng_fis.num_fis = fisico.num_fis
-   where fisico.fecha_fis='$fecha'
+   where fisico.fecha_fis>='$fecha'
    UNION
    SELECT DISTINCT lin_art.lin_des ,art.co_lin 
    from st_almac
@@ -126,7 +126,7 @@ function getInv_fis($marca,$database,$fecha1)
     FROM reng_fis
     join art on art.co_art = reng_fis.co_art 
     INNER JOIN fisico ON fisico.num_fis=reng_fis.num_fis
-    where art.co_lin= '$marca' and fisico.fecha_fis='$fecha1'";
+    where art.co_lin= '$marca' and fisico.fecha_fis>='$fecha1'";
 
     $consulta = sqlsrv_query($conn, $sql);
 
