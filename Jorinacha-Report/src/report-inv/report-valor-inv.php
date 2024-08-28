@@ -91,8 +91,8 @@ if ($_GET) {
 
           <td style="color:red"><?= $dif_stock   ?></td>
 
-          <td><?= $costo_teor     ?></td>
-          <td><?= $costo_real   ?></td>
+          <td><?= number_format($costo_teor , 1, ',', '.')       ?></td>
+          <td><?= number_format( $costo_real, 1, ',', '.')    ?></td>
 
           <td style="color:red"><?= number_format($dif_costo , 1, ',', '.')    ?></td>
 
