@@ -149,7 +149,7 @@ if ($_GET) {
 
           <td><?= $costo  ?></td>
           <td><?= number_format($teorico_total_costo, 1, ',', '.')  ?></td>
-          <td><?= $real_total_costo  ?></td>
+          <td><?= number_format($real_total_costo, 1, ',', '.')   ?></td>
           <td style="color:red"><?=  number_format($dif_costo, 1, ',', '.') ?></td>
 
           <td><?= $precio  ?></td>
