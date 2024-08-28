@@ -310,7 +310,7 @@ function getreng_stock_real($marca,$database,$fecha1,$co_art)
             ON F.num_fis=RF.num_fis
             INNER JOIN art 
             ON art.co_art=RF.co_art
-            WHERE art.co_lin='$marca' and f.fecha_fis='$fecha1' and rf.co_Art='$co_art' ";
+            WHERE art.co_lin='$marca' and f.fecha_fis>='$fecha1' and rf.co_Art='$co_art' ";
 
             $consulta = sqlsrv_query($conn, $sql);
 
