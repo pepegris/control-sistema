@@ -48,9 +48,10 @@ include '../../services/adm/inv/inv.php';
 
         <?php 
       }
-
+      
       
       ?>
+      <option value="DEV_EMP2">DEV_EMP2</option>
       </select> 
 
 
