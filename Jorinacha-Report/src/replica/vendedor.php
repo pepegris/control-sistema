@@ -109,13 +109,6 @@ if (isset($_GET['sede'])) {
         </ul>
     </div>
 
-    <form action='vendedor.php<?=$sede?>' method="get">
-        <div class="form-group">
-            <input type="search" name="vendedor" id="">
-        </div>
-        <center><button type="submit" class="btn btn-primary">Buscar</button></center>
-    </form>
-
 
 </div>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
