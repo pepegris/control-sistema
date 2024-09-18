@@ -36,6 +36,10 @@ if (isset($_POST)  ) {
 
 
         $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$ordenes_tot_neto,$ordenes_iva);
+        if ($orden == false) {
+            echo "no";
+            break;
+        }
         $Reng_Factura = Reng_Factura($tienda,$fecha1,$ordenes_fact_num );
 
     
