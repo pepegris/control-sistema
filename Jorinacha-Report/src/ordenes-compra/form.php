@@ -63,7 +63,7 @@ include '../../services/adm/ordenes-compra/ordenes-compra.php';
       <select name="corregir" id="">
 
         <option value="IMPORTADO">No</option>
-        <option value="error">Si</option>
+        <option value="">Si</option>
 
 
 
