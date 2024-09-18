@@ -178,8 +178,8 @@ function Ordenes_Compra($sede,$fact_num,$contrib,$saldo,$tot_bruto,$tot_neto,$iv
     if ($database) {
         try {
 
-            $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $serverName = "26.248.191.230";
+            $connectionInfo = array("Database" => "PUFIJO21", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
@@ -246,8 +246,8 @@ $cos_pro_om)
     if ($database) {
         try {
 
-            $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $serverName = "26.248.191.230";
+            $connectionInfo = array("Database" => "PUFIJO21", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
@@ -308,8 +308,8 @@ function Con_Reng_Ordenes($sede,$fact_num,$reng_num)
     if ($database) {
         try {
 
-            $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $serverName = "26.248.191.230";
+            $connectionInfo = array("Database" => "PUFIJO21", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
