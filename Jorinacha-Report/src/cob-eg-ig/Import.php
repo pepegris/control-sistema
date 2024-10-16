@@ -37,6 +37,9 @@ if (isset($_POST)) {
     echo "<center><h3 style='color:white'>$mensaje</h3></center>";
     echo "<center><a href='Import-database.php' class='btn btn-success'>Volver</a></center>";
 ?>
+
+<div id="hasta5Min" style="color: red; font-weight: bolder;"></div>
+<div id="despues5Min" style="color: green; font-weight: bolder;"></div>
 <script type="module" src="">
     hasta5Min = document.getElementById("hasta5Min");
         despues5Min = document.getElementById("despues5Min");
@@ -66,8 +69,7 @@ if (isset($_POST)) {
             }
         },1000);
 </script>
-<div id="hasta5Min" style="color: red; font-weight: bolder;"></div>
-<div id="despues5Min" style="color: green; font-weight: bolder;"></div>
+
 <?php
 
 } else {
