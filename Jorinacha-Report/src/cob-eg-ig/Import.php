@@ -8,7 +8,7 @@ if (isset($_POST)) {
 
 
     $scripts=$_POST['scripts'];
-/* 
+
     if ($scripts== 'backups') {
 
       $query=getImport();
@@ -33,7 +33,7 @@ if (isset($_POST)) {
 
         header('refresh:1;url= Import-database.php');
 
-    } */
+    } 
     echo "<center><h3 style='color:white'>$mensaje</h3></center>";
     echo "<center><a href='Import-database.php' class='btn btn-success'>Volver</a></center>";
 
@@ -43,15 +43,15 @@ if (isset($_POST)) {
     exit;
 }
 ?>
-<div id="hasta5Min" style="color: red; font-weight: bolder;"></div>
-<div id="despues5Min" style="color: green; font-weight: bolder;"></div>
+<div id="hasta45Min" style="color: red; font-weight: bolder;"></div>
+<div id="despues45Min" style="color: green; font-weight: bolder;"></div>
 <script>
-    hasta5Min = document.getElementById("hasta5Min");
-        despues5Min = document.getElementById("despues5Min");
-        // Declaro variables para después de los 5 minutos.
+    hasta45Min = document.getElementById("hasta45Min");
+        despues45Min = document.getElementById("despues45Min");
+        // Declaro variables para después de los 45 minutos.
         let sec= 0, min = 0, hour = 0;
-        // Para contar hasta los 5 minutos
-        let startMin = 5*60, cronometro = 0;
+        // Para contar hasta los 45 minutos
+        let startMin = 45*60, cronometro = 0;
         // Creo la funcion
         setInterval(function (){
             if(cronometro >= startMin){
@@ -64,15 +64,15 @@ if (isset($_POST)) {
                         min = 0;
                     }
                 }
-                console.log(`Ha pasado 5 Min. Empezamos a contar: ${hour} Horas, ${min} Minutos y ${sec} Segundos.`);
-                hasta5Min.style.display = 'none';
-                despues5Min.innerHTML = `Ha pasado 5 Min. Empezamos a contar: ${hour} Horas, ${min} Minutos y ${sec} Segundos.`;
+                console.log(`Ha pasado 45 Min. Empezamos a contar: ${hour} Horas, ${min} Minutos y ${sec} Segundos.`);
+                hasta45Min.style.display = 'none';
+                despues45Min.innerHTML = `Ha pasado 45 Min. Empezamos a contar: ${hour} Horas, ${min} Minutos y ${sec} Segundos.`;
             }else{
                 cronometro++
-                console.log(`Tiempo restante a 5 Min ${startMin - cronometro} segundos`);
-                hasta5Min.innerHTML = `Tiempo restante a 5 Min &rarr; ${startMin - cronometro} segundos`;
+                console.log(`Tiempo restante a 45 Min ${startMin - cronometro} segundos`);
+                hasta45Min.innerHTML = `Tiempo restante a 45 Min &rarr; ${startMin - cronometro} segundos`;
             }
         },1000);
 </script>
-<div id="hasta5Min" style="color: red; font-weight: bolder;"></div>
-<div id="despues5Min" style="color: green; font-weight: bolder;"></div>
+<div id="hasta45Min" style="color: red; font-weight: bolder;"></div>
+<div id="despues45Min" style="color: green; font-weight: bolder;"></div>
