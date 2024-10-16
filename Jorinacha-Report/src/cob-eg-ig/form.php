@@ -95,11 +95,12 @@ if (isset($_POST)  ) {
       <br>
       <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
       <br>
+      <center><a href='Import-database.php' class='btn btn-warning'>Importar Base de Datos</a></center>
     </div>
   </form>
 </div>
 
-<center><a href='Import-database.php' class='btn btn-success'>Importar Base de Datos</a></center>
+
 
 
 
