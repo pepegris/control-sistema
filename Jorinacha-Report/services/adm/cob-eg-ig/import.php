@@ -16,13 +16,13 @@ function getImport()
         $consulta = sqlsrv_query($conn, $sql);
 
 
-        if ($consulta == null) {
+        if ($consulta != null) {
 
-            $res = false;
+            $res = true;
             return $res;
         }else{
 
-            $res = true;
+            $res = false;
             return $res;
         }
 
@@ -51,13 +51,13 @@ function getRestore()
         $consulta = sqlsrv_query($conn, $sql);
 
 
-        if ($consulta == null) {
+        if ($consulta != null) {
 
-            $res = false;
+            $res = true;
             return $res;
         }else{
 
-            $res = true;
+            $res = false;
             return $res;
         }
 
