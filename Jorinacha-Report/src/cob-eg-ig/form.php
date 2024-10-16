@@ -99,6 +99,8 @@ if (isset($_POST)  ) {
   </form>
 </div>
 
+<center><a href='Import-database.php' class='btn btn-success'>Importar Base de Datos</a></center>
+
 
 
 
