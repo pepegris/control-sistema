@@ -8,7 +8,7 @@ if (isset($_POST)) {
 
 
     $scripts=$_POST['scripts'];
-
+/* 
     if ($scripts== 'backups') {
 
       $query=getImport();
@@ -33,7 +33,7 @@ if (isset($_POST)) {
 
         header('refresh:1;url= Import-database.php');
 
-    }
+    } */
     echo "<center><h3 style='color:white'>$mensaje</h3></center>";
     echo "<center><a href='Import-database.php' class='btn btn-success'>Volver</a></center>";
 ?>
