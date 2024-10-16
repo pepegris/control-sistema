@@ -16,7 +16,7 @@ include '../../services/sqlserver.php';
 </style>
 
 <center>
-  <h1>Backups para IntegraciÓn</h1>
+  <h1>Backups para Integración</h1>
 </center>
 
 <div id="body">
@@ -25,7 +25,9 @@ include '../../services/sqlserver.php';
 
     <div class="fieldset">
 
-
+    <center>
+        <legend >Importar Información</legend>
+      </center>
       <div class="form-group">
         <label for="scripts" class="form-label">Script</label>
         <select name="scripts" id="">
@@ -38,7 +40,7 @@ include '../../services/sqlserver.php';
 
       
       <br>
-      <center><button type="submit" class="btn btn-success">Ingresar</button></center>
+      <center><button type="submit" class="btn btn-success">Ejecutar</button></center>
       <br>
     </div>
   </form>
