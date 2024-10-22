@@ -4,7 +4,7 @@
 /* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA*/
 require "../../services/empresas.php";
 
-function Cliente($sede)
+/* function Cliente($sede)
 {
 
     $bd = array(
@@ -31,7 +31,7 @@ function Cliente($sede)
 
     return $bd[$sede];
 }
-
+ */
 
 /* CONSULTAR TODAS LAS LINEA DE ARTICULOS*/
 function getLin_art_all()
