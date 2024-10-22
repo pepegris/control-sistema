@@ -164,14 +164,14 @@ $cuenta_on = ucwords($cuenta_on);
         </div>
       </a> -->
 
-<!--       <a href="src/art-especial/form.php">
+       <a href="src/art-especial/form.php">
         <div class="box">
         <i class="lni lni-invention"></i>
           <h5>Reporte de Mov de Articulos</h5>
           <h4>Pronto aun En Desarrollo</h4>
         </div>
       </a>
- -->
+
       <a href="src/report-inv/form.php">
         <div class="box">
         <i class="lni lni-graph"></i>
