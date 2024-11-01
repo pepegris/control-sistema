@@ -160,6 +160,25 @@ if ($_GET) {
             $sede = 'Comercial Kagu';
             
           }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+          if ($sede == 'Sucursal Coro1' && $Month <= 10 && $Year == '2024') {
+            $sede = "Comercial Trina";
+          }elseif ($sede == 'Comercial Trina' && $Month > 10 && $Year == '2024') {
+            $sede = "Sucursal Coro3";
+          }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+          if ($sede == 'Sucursal Coro2' && $Month <= 10 && $Year == '2024') {
+            $sede = "Comercial Corina I";
+          }elseif ($sede == 'Comercial Corina I' && $Month > 10 && $Year == '2024') {
+            $sede = "Sucursal Coro3";
+          }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////             
+          if ($sede == 'Sucursal Coro3' && $Month <= 10 && $Year == '2024') {
+            $sede = "Comercial Corina II";
+          }elseif ($sede == 'Comercial Corina II' && $Month > 10 && $Year == '2024') {
+            $sede = "Sucursal Coro3";
+          }
+          
 
 
           $fecha =  $Year .'/'. $Month .'/'  . $d;

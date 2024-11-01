@@ -10,7 +10,7 @@ include '../../services/adm/ventas/diarias.php';
 if ($_GET) {
 
   $divisa = $_GET['divisa'];
-  $linea=$_GET['linea'];
+  $linea = $_GET['linea'];
   $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
   $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
@@ -25,7 +25,7 @@ if ($_GET) {
 
 ?>
 
-<style>
+  <style>
     img {
 
 
@@ -39,9 +39,9 @@ if ($_GET) {
 
 
   <?php
-    echo "<h4>En Bolivares Marcas - $linea</h4>";
+  echo "<h4>En Bolivares Marcas - $linea</h4>";
 
-    $y=1;
+  $y = 1;
   for ($k = 1; $k <= $Month_total; $k++) {
 
 
@@ -63,267 +63,278 @@ if ($_GET) {
 
 
 
-  <table class="table table-dark table-striped" id="tblData">
-    <thead>
+    <table class="table table-dark table-striped" id="tblData">
+      <thead>
 
 
 
-      <tr>
-        <th scope="col">Cod</th>
-        <th scope='col'>Empresa</th>
-
-        <th scope='col'>Ventas</th>
-        <th scope='col'>Pares</th>
-
-        <th scope='col'>Devol</th>
-        <th scope='col'>Pares Dev</th>
-
-        <th scope='col'>Depositos</th>
-        <th scope='col'>Efectivo</th>
-        <th scope='col'>Tarjeta</th>
-
-        <th scope='col'>Divisas</th>
-        <th scope='col'>Gastos</th>
-
-
-        <th scope='col'>Cierre Caja</th>
-      </tr>
-
-    </thead>
-    <tbody>
-
-      <?php
-
-      $cantidad_Dias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year);
-
-
-      for ($i = 1; $i < count($sedes_ar); $i++) {
-
-        $tasa_tot_neto_factura = 0;
-        $tasa_tot_neto_dev_cli = 0;
-        $venta = 0;
-        $tasa_total_efec_dep_caj = 0;
-        $tasa_total_tarj_dep_caj = 0;
-        $tasa_monto_h_mov_ban = 0;
-        $tasa_monto_ord_pago = 0;
-        $tasa_monto_ord_pago_ven = 0;
-
-        $sede = $sedes_ar[$i];
-        $cod = Cliente($sede);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-        if ($sede == "Sucursal Caracas I" && $Month < 04  && $Year <= 2023) {
-          $sede = 'Comercial Merina';
-          
-        }
-
-        if ($sede == "Comercial Merina" && $Month == 04  && $Year <= 2023) {
-          $sede = 'Sucursal Caracas I';
-          
-        }
-        
-////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-        if ($sede == "Sucursal Caracas II" && $Month < 04  && $Year <= 2023) {
-          $sede = 'Comercial Merina3';
-
-        }
-
-        if ($sede == "Comercial Merina3" && $Month == 04   && $Year <= 2023) {
-          $sede = 'Sucursal Caracas II';
-          
-        }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        if ($sede == "Sucursal Maturin" && $Month < 10  && $Year <= 2023) {
-          $sede = 'Comercial Matur';
-    
-        }
-        
-////////////////////////////////////////////////////////////////////////////////////////////////////////////          
-        if ($sede == "Sucursal Cagua" && $Month < 06  && $Year <= 2023) {
-          $sede = 'Comercial Kagu';
-          
-        }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-
-
-        $fecha1 =  $Year .''. $Month .''  . '01';
-        $fecha2 =  $Year .''. $Month .''  . $cantidad_Dias;
-
-
-        $factura = getFactura($sede, $fecha1, $fecha2, '',$linea);
-        $tasa_tot_neto_factura = $factura['tot_neto'];
-
-
-
-        $dev_cli = getDev_cli($sede, $fecha1, $fecha2, '',$linea);
-        $tasa_tot_neto_dev_cli = $dev_cli['tot_neto'];
-        $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
-
-
-        $venta = $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
-        $tot_neto_factura = number_format($venta, 2, ',', '.');
-
-
-        $dev_cli_ven = getDev_cli($sede, $fecha1, $fecha2, 'ven2',$linea);
-        $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
-
-        $factura_ven = getFactura($sede, $fecha1, $fecha2, 'ven2',$linea);
-
-        $venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
-        $total_art_factura  = number_format($venta_art, 0, ',', '.');
-
-
-        $dep_caj = getDep_caj($sede, $fecha1, $fecha2, '');
-        $tasa_total_efec_dep_caj = $dep_caj['total_efec'];
-        $tasa_total_tarj_dep_caj = $dep_caj['total_tarj'];
-        $total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
-        $total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
-
-        $mov_ban = getMov_ban($sede, $fecha1, $fecha2, '');
-        $tasa_monto_h_mov_ban = $mov_ban['monto_h'];
-        $monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
-
-        $ord_pago = getOrd_pago($sede, $fecha1, $fecha2, '');
-        $tasa_monto_ord_pago = $ord_pago['monto'];
-        $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
-
-        $ord_pago_ven = getOrd_pago($sede, $fecha1, $fecha2, 'ven2');
-        $tasa_monto_ord_pago_ven = $ord_pago_ven['monto'];
-        $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
-
-
-        /* totales */
-
-
-
-        $total_venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
-        $total_venta_pares += $venta_art;
-
-        $total_devol += $tasa_tot_neto_dev_cli;
-        $total_devol_pares += $dev_cli_ven['total_art'];
-
-        $total_depositos += $tasa_monto_h_mov_ban;
-
-        $total_efectivo += $tasa_total_efec_dep_caj;
-        $total_tarjeta += $tasa_total_tarj_dep_caj;
-
-        $total_pagos += $tasa_monto_ord_pago;
-        $total_gastos += $tasa_monto_ord_pago_ven;
-
-      ?>
         <tr>
+          <th scope="col">Cod</th>
+          <th scope='col'>Empresa</th>
 
-          <td><?= $cod   ?></td>
-          <td><?= $sede  ?></td>
+          <th scope='col'>Ventas</th>
+          <th scope='col'>Pares</th>
+
+          <th scope='col'>Devol</th>
+          <th scope='col'>Pares Dev</th>
+
+          <th scope='col'>Depositos</th>
+          <th scope='col'>Efectivo</th>
+          <th scope='col'>Tarjeta</th>
+
+          <th scope='col'>Divisas</th>
+          <th scope='col'>Gastos</th>
 
 
-          <td><?= $tot_neto_factura    ?></td>
-          <td><?= $total_art_factura   ?></td>
+          <th scope='col'>Cierre Caja</th>
+        </tr>
 
-          <td><?= $tot_neto_dev_cli   ?></td>
-          <td><?= $total_art_dev_cli  ?></td>
-
-          <td><?= $monto_h_mov_ban ?></td>
-
-
-          <td><?= $total_efec_dep_caj  ?></td>
-          <td><?= $total_tarj_dep_caj  ?></td>
-
-          <td><?= $monto_ord_pago  ?></td>
-          <td><?= $monto_ord_pago_ven  ?></td>
-
+      </thead>
+      <tbody>
 
         <?php
 
-        $total_diferencias += $diferencias;
+        $cantidad_Dias = cal_days_in_month(CAL_GREGORIAN, $Month, $Year);
 
-        $caja = number_format($tasa_monto_ord_pago + $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
 
-        if ($venta <= 1 & $total_art_factura == 0) {
+        for ($i = 1; $i < count($sedes_ar); $i++) {
 
-          echo "<td> <img src='./img/help.svg' alt=''> </td>";
-        } elseif ($caja == 0) {
+          $tasa_tot_neto_factura = 0;
+          $tasa_tot_neto_dev_cli = 0;
+          $venta = 0;
+          $tasa_total_efec_dep_caj = 0;
+          $tasa_total_tarj_dep_caj = 0;
+          $tasa_monto_h_mov_ban = 0;
+          $tasa_monto_ord_pago = 0;
+          $tasa_monto_ord_pago_ven = 0;
 
-          echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
-        } elseif ($total_tarj_dep_caj > 1) {
+          $sede = $sedes_ar[$i];
+          $cod = Cliente($sede);
 
-          $caja2 = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
-
-          if ($caja2 > 1) {
-
-            echo "<td><img src='./img/help.svg' alt=''> </td>";
-          } else {
-
-            echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+          if ($sede == "Sucursal Caracas I" && $Month < 04  && $Year <= 2023) {
+            $sede = 'Comercial Merina';
           }
-        } elseif ($monto_h_mov_ban < 1) {
 
-          echo "<td> <img src='./img/help.svg' alt=''> </td>";
-        } else {
-          echo "<td> <img src='./img/cross-circle.svg' alt=''> </td>";
-        }
+          if ($sede == "Comercial Merina" && $Month == 04  && $Year <= 2023) {
+            $sede = 'Sucursal Caracas I';
+          }
 
-        echo "</tr>";
-      }
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+          if ($sede == "Sucursal Caracas II" && $Month < 04  && $Year <= 2023) {
+            $sede = 'Comercial Merina3';
+          }
 
-      if ($divisa == 'dl') {
+          if ($sede == "Comercial Merina3" && $Month == 04   && $Year <= 2023) {
+            $sede = 'Sucursal Caracas II';
+          }
 
-        $simb = '$';
-      } else {
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        $simb = 'Bs';
-      }
+          if ($sede == "Sucursal Maturin" && $Month < 10  && $Year <= 2023) {
+            $sede = 'Comercial Matur';
+          }
+
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////          
+          if ($sede == "Sucursal Cagua" && $Month < 06  && $Year <= 2023) {
+            $sede = 'Comercial Kagu';
+          }
+
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+          if ($sede == 'Sucursal Coro1' && $Month <= 10 && $Year == '2024') {
+            $sede = "Comercial Trina";
+          } elseif ($sede == 'Comercial Trina' && $Month > 10 && $Year == '2024') {
+            $sede = "Sucursal Coro3";
+          }
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+          if ($sede == 'Sucursal Coro2' && $Month <= 10 && $Year == '2024') {
+            $sede = "Comercial Corina I";
+          } elseif ($sede == 'Comercial Corina I' && $Month > 10 && $Year == '2024') {
+            $sede = "Sucursal Coro3";
+          }
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////             
+          if ($sede == 'Sucursal Coro3' && $Month <= 10 && $Year == '2024') {
+            $sede = "Comercial Corina II";
+          } elseif ($sede == 'Comercial Corina II' && $Month > 10 && $Year == '2024') {
+            $sede = "Sucursal Coro3";
+          }
+
+
+          $fecha1 =  $Year . '' . $Month . ''  . '01';
+          $fecha2 =  $Year . '' . $Month . ''  . $cantidad_Dias;
+
+
+          $factura = getFactura($sede, $fecha1, $fecha2, '', $linea);
+          $tasa_tot_neto_factura = $factura['tot_neto'];
+
+
+
+          $dev_cli = getDev_cli($sede, $fecha1, $fecha2, '', $linea);
+          $tasa_tot_neto_dev_cli = $dev_cli['tot_neto'];
+          $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
+
+
+          $venta = $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+          $tot_neto_factura = number_format($venta, 2, ',', '.');
+
+
+          $dev_cli_ven = getDev_cli($sede, $fecha1, $fecha2, 'ven2', $linea);
+          $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
+
+          $factura_ven = getFactura($sede, $fecha1, $fecha2, 'ven2', $linea);
+
+          $venta_art = $factura_ven['total_art'] - $dev_cli_ven['total_art'];
+          $total_art_factura  = number_format($venta_art, 0, ',', '.');
+
+
+          $dep_caj = getDep_caj($sede, $fecha1, $fecha2, '');
+          $tasa_total_efec_dep_caj = $dep_caj['total_efec'];
+          $tasa_total_tarj_dep_caj = $dep_caj['total_tarj'];
+          $total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
+          $total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
+
+          $mov_ban = getMov_ban($sede, $fecha1, $fecha2, '');
+          $tasa_monto_h_mov_ban = $mov_ban['monto_h'];
+          $monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
+
+          $ord_pago = getOrd_pago($sede, $fecha1, $fecha2, '');
+          $tasa_monto_ord_pago = $ord_pago['monto'];
+          $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
+
+          $ord_pago_ven = getOrd_pago($sede, $fecha1, $fecha2, 'ven2');
+          $tasa_monto_ord_pago_ven = $ord_pago_ven['monto'];
+          $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
+
+
+          /* totales */
+
+
+
+          $total_venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+          $total_venta_pares += $venta_art;
+
+          $total_devol += $tasa_tot_neto_dev_cli;
+          $total_devol_pares += $dev_cli_ven['total_art'];
+
+          $total_depositos += $tasa_monto_h_mov_ban;
+
+          $total_efectivo += $tasa_total_efec_dep_caj;
+          $total_tarjeta += $tasa_total_tarj_dep_caj;
+
+          $total_pagos += $tasa_monto_ord_pago;
+          $total_gastos += $tasa_monto_ord_pago_ven;
 
         ?>
+          <tr>
+
+            <td><?= $cod   ?></td>
+            <td><?= $sede  ?></td>
+
+
+            <td><?= $tot_neto_factura    ?></td>
+            <td><?= $total_art_factura   ?></td>
+
+            <td><?= $tot_neto_dev_cli   ?></td>
+            <td><?= $total_art_dev_cli  ?></td>
+
+            <td><?= $monto_h_mov_ban ?></td>
+
+
+            <td><?= $total_efec_dep_caj  ?></td>
+            <td><?= $total_tarj_dep_caj  ?></td>
+
+            <td><?= $monto_ord_pago  ?></td>
+            <td><?= $monto_ord_pago_ven  ?></td>
+
+
+          <?php
+
+          $total_diferencias += $diferencias;
+
+          $caja = number_format($tasa_monto_ord_pago + $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
+
+          if ($venta <= 1 & $total_art_factura == 0) {
+
+            echo "<td> <img src='./img/help.svg' alt=''> </td>";
+          } elseif ($caja == 0) {
+
+            echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
+          } elseif ($total_tarj_dep_caj > 1) {
+
+            $caja2 = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
+
+            if ($caja2 > 1) {
+
+              echo "<td><img src='./img/help.svg' alt=''> </td>";
+            } else {
+
+              echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
+            }
+          } elseif ($monto_h_mov_ban < 1) {
+
+            echo "<td> <img src='./img/help.svg' alt=''> </td>";
+          } else {
+            echo "<td> <img src='./img/cross-circle.svg' alt=''> </td>";
+          }
+
+          echo "</tr>";
+        }
+
+        if ($divisa == 'dl') {
+
+          $simb = '$';
+        } else {
+
+          $simb = 'Bs';
+        }
+
+          ?>
 
 
 
-        <tr>
-          <td colspan="2">
-            <h3>Totales</h3>
-          </td>
+          <tr>
+            <td colspan="2">
+              <h3>Totales</h3>
+            </td>
 
 
 
-          <td><b><?= $simb ?><?= number_format($total_venta, 2, ',', '.')  ?></b></td>
-          <td><b><?= number_format($total_venta_pares, 0, '', '.')  ?></b></td>
+            <td><b><?= $simb ?><?= number_format($total_venta, 2, ',', '.')  ?></b></td>
+            <td><b><?= number_format($total_venta_pares, 0, '', '.')  ?></b></td>
 
 
-          <td><b><?= $simb ?><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
-          <td><b><?= number_format($total_devol_pares, 0, '', '.')  ?></b></td>
+            <td><b><?= $simb ?><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
+            <td><b><?= number_format($total_devol_pares, 0, '', '.')  ?></b></td>
 
-          <td><b><?= $simb ?><?= number_format($total_depositos, 2, ',', '.')  ?></b></td>
+            <td><b><?= $simb ?><?= number_format($total_depositos, 2, ',', '.')  ?></b></td>
 
-          <td><b><?= $simb ?><?= number_format($total_efectivo, 2, ',', '.')  ?></b></td>
-          <td><b><?= $simb ?><?= number_format($total_tarjeta, 2, ',', '.')  ?></b></td>
+            <td><b><?= $simb ?><?= number_format($total_efectivo, 2, ',', '.')  ?></b></td>
+            <td><b><?= $simb ?><?= number_format($total_tarjeta, 2, ',', '.')  ?></b></td>
 
-          <td><b><?= $simb ?><?= number_format($total_pagos, 2, ',', '.')  ?></b></td>
-          <td><b><?= $simb ?><?= number_format($total_gastos, 2, ',', '.')  ?></b></td>
+            <td><b><?= $simb ?><?= number_format($total_pagos, 2, ',', '.')  ?></b></td>
+            <td><b><?= $simb ?><?= number_format($total_gastos, 2, ',', '.')  ?></b></td>
 
-          <td></td>
+            <td></td>
 
-        </tr>
+          </tr>
 
-    </tbody>
+      </tbody>
 
 
-  </table>
+    </table>
 
 
 <?php
 
-$total_venta =0;
-$total_venta_pares =0;
-$total_devol =0;
-$total_devol_pares =0;
-$total_depositos =0;
-$total_efectivo =0;
-$total_tarjeta =0;
-$total_pagos =0;
-$total_gastos =0;
+    $total_venta = 0;
+    $total_venta_pares = 0;
+    $total_devol = 0;
+    $total_devol_pares = 0;
+    $total_depositos = 0;
+    $total_efectivo = 0;
+    $total_tarjeta = 0;
+    $total_pagos = 0;
+    $total_gastos = 0;
   }
 } else {
   header("location: form.php");
