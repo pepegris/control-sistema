@@ -182,7 +182,8 @@ function getReng_com($sede,  $co_art)
 
             # $sql = "EXEC getPedidos_t ,'$cliente', '$co_art' ";
 
-            if ($sede== 'CARACAS1' or $sede== 'CARACAS2' or $sede== 'CAGUA' or $sede== 'MATURIN') {
+            if ($sede== 'CARACAS1' or $sede== 'CARACAS2' or $sede== 'CAGUA' or $sede== 'MATURIN'
+                or $sede== 'CORO1' or $sede== 'CORO2' or $sede== 'CORO3') {
                 $sql = "SELECT TOP 1 reng_ndr.total_art,not_rec.fact_num,not_rec.fec_emis
                         FROM reng_ndr
                         JOIN not_rec ON reng_ndr.fact_num =not_rec.fact_num

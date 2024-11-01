@@ -34,7 +34,16 @@ function getVendido_Grafica($sede, $fecha1, $fecha2,$mes)
                     $sede = "Sucursal Cagua";
                   } elseif ($sede == 'Comercial Matur') {
                     $sede = "Sucursal Maturin";
-                  } 
+                  } elseif ($sede == "Comercial Trina") {
+                    $sede = 'Sucursal Coro1' ;
+                  }
+                  elseif ($sede =="Comercial Corina I" ) {
+                    $sede ='Sucursal Coro2' ;
+                  }
+                  elseif ($sede == "Comercial Corina II") {
+                    $sede = 'Sucursal Coro3';
+                  }
+
 
                 $total_art = $row['total_art'];
                 $linea_des = $row['lin_des'];
@@ -99,7 +108,16 @@ function getDev_Grafica($sede, $fecha1, $fecha2,$mes)
                     $sede = "Sucursal Cagua";
                   } elseif ($sede == 'Comercial Matur') {
                     $sede = "Sucursal Maturin";
-                  } 
+                  } elseif ($sede == "Comercial Trina") {
+                    $sede = 'Sucursal Coro1' ;
+                  }
+                  elseif ($sede =="Comercial Corina I" ) {
+                    $sede ='Sucursal Coro2' ;
+                  }
+                  elseif ($sede == "Comercial Corina II") {
+                    $sede = 'Sucursal Coro3';
+                  }
+
 
                 $total_art = $row['total_dev'];
                 $linea_des = $row['lin_des'];

@@ -10,13 +10,13 @@ $sedes_tiendas = array(
     "CARACAS1",
     "CARACAS2",
     "MATURIN",
+    "CORO1",
+    "CORO2",
+    "CORO3",
     
-    "CORINA1",
-    "CORINA2",
     "PUFIJO",
     
     "VALENA",
-    "TRINA",
     "CAGUA" ,
     "NACHARI",
     "HIGUE",

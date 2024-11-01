@@ -78,6 +78,23 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       $tipo = 'nota';
     }
 
+    if ($sede == 'Sucursal Coro1' && $Month <= 10 && $Year == '2024') {
+      $sede = "Comercial Trina";
+    } elseif ($sede == 'Comercial Trina' && $Month > 10 && $Year == '2024') {
+      $sede = "Sucursal Coro3";
+    }
+   
+    if ($sede == 'Sucursal Coro2' && $Month <= 10 && $Year == '2024') {
+      $sede = "Comercial Corina I";
+    } elseif ($sede == 'Comercial Corina I' && $Month > 10 && $Year == '2024') {
+      $sede = "Sucursal Coro3";
+    }         
+    if ($sede == 'Sucursal Coro3' && $Month <= 10 && $Year == '2024') {
+      $sede = "Comercial Corina II";
+    } elseif ($sede == 'Comercial Corina II' && $Month > 10 && $Year == '2024') {
+      $sede = "Sucursal Coro3";
+    }
+
     $sede_cliente = Cliente($sede);
     if ($tipo == 'factura') {
 

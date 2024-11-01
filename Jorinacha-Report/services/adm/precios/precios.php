@@ -12,22 +12,27 @@ function Cliente($sede)
     $bd = array(
         "Sucursal Caracas I"    =>     'S01',
         "Sucursal Caracas II"    =>     'S02',
-        "Comercial Corina I"    =>     'T18',
-        "Comercial Corina II"    =>     'T22',
-        "Comercial Punto Fijo"    =>     'T13',
-        "Comercial Matur"    =>     'T07',
-        "Comercial Valena"    =>     'T10',
-        "Comercial Trina"    =>     'T16',
         "Sucursal Cagua" => 'S03',
-        "Comercial Nachari"    =>     'T19',
-        "Comercial Higue"    =>     'T09',
-        "Comercial Apura"    =>     'T17',
-        "Comercial Vallepa"    =>     'T06',
-        "Comercial Ojena"    =>     'T12',
-        "Comercial Puecruz"    =>     'T05',
-        "Comercial Acari"    =>     'T04',
-        "Comercial Catica II"    =>     'T24',
+        "Sucursal Maturin" => 'S04',
+        "Sucursal Coro1" => 'S05',
+        "Sucursal Coro2" => 'S06',
+        "Sucursal Coro3" => 'S07',
 
+
+        "Comercial Acari"    =>     'T04',
+        "Comercial Puecruz"    =>     'T05',
+        "Comercial Vallepa"    =>     'T06',
+
+        "Comercial Higue"    =>     'T09',
+        "Comercial Valena"    =>     'T10',
+        "Comercial Ojena"    =>     'T12',
+        "Comercial Punto Fijo"    =>     'T13',
+        "Comercial Trina"    =>     'T16',
+        "Comercial Apura"    =>     'T17',
+        "Comercial Corina I"    =>     'T18',
+        "Comercial Nachari"    =>     'T19',
+        "Comercial Corina II"    =>     'T22',
+        "Comercial Catica II"    =>     'T24',
     );
 
     return $bd[$sede];

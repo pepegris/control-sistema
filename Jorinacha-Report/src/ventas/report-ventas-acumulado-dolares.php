@@ -123,61 +123,7 @@ if ($_GET) {
           }
            echo $d;
 
-          if ($sede == "Sucursal Caracas I" && $Month < 04  && $Year <= 2023) {
-            $sede = 'Comercial Merina';
-            
-          }elseif ( $sede == "Sucursal Caracas I" && $Month == 04 && $d < 13 && $Year <= 2023){
-            $sede = 'Comercial Merina';
-          }
-
-          if ($sede == "Comercial Merina" && $Month == 04 && $d > 13 && $Year <= 2023) {
-            $sede = 'Sucursal Caracas I';
-            
-          }
-          
-////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-          if ($sede == "Sucursal Caracas II" && $Month < 04  && $Year <= 2023) {
-            $sede = 'Comercial Merina3';
-
-          }elseif ( $sede == "Sucursal Caracas II" && $Month == 04   && $d < 20 && $Year <= 2023){
-            $sede = 'Comercial Merina3';
-          }
-
-          if ($sede == "Comercial Merina3" && $Month == 04 && $d > 13 && $Year <= 2023) {
-            $sede = 'Sucursal Caracas II';
-            
-          }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          
-          if ($sede == "Sucursal Maturin" && $Month < 10  && $Year <= 2023) {
-            $sede = 'Comercial Matur';
-      
-          }
-          
-////////////////////////////////////////////////////////////////////////////////////////////////////////////          
-          if ($sede == "Sucursal Cagua" && $Month < 06  && $Year <= 2023) {
-            $sede = 'Comercial Kagu';
-            
-          }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-          if ($sede == 'Sucursal Coro1' && $Month <= 10 && $Year == '2024') {
-            $sede = "Comercial Trina";
-          }elseif ($sede == 'Comercial Trina' && $Month > 10 && $Year == '2024') {
-            $sede = "Sucursal Coro3";
-          }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-          if ($sede == 'Sucursal Coro2' && $Month <= 10 && $Year == '2024') {
-            $sede = "Comercial Corina I";
-          }elseif ($sede == 'Comercial Corina I' && $Month > 10 && $Year == '2024') {
-            $sede = "Sucursal Coro3";
-          }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////             
-          if ($sede == 'Sucursal Coro3' && $Month <= 10 && $Year == '2024') {
-            $sede = "Comercial Corina II";
-          }elseif ($sede == 'Comercial Corina II' && $Month > 10 && $Year == '2024') {
-            $sede = "Sucursal Coro3";
-          }
+           require "../../services/empresas-fechas.php";
           
 
 
@@ -196,7 +142,7 @@ if ($_GET) {
           $factura = getFactura($sede, $fecha, $fecha2, 'sin');
           $tasa_tot_neto_factura += $factura['tot_neto'] / $tasa_v_tasas;
 
-          $dev_cli = getDev_cli($sede, $fecha, $fecha2, 'sin');
+          $dev_cli = getDev_cli($sede, $fecha, $fecha2, 'sin','todos');
           $tasa_tot_neto_dev_cli += $dev_cli['tot_neto'] / $tasa_v_tasas;
 
 
@@ -243,7 +189,7 @@ if ($_GET) {
         $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
 
 
-        $dev_cli_ven = getDev_cli($sede, $fecha1, $fecha2, 'ven2');
+        $dev_cli_ven = getDev_cli($sede, $fecha1, $fecha2, 'ven2','todos');
         $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
 
         $factura_ven = getFactura($sede, $fecha1, $fecha2, 'ven2');

@@ -14,6 +14,9 @@ function Cliente($sede)
         "Sucursal Caracas II"    =>     'S02',
         "Sucursal Cagua" => 'S03',
         "Sucursal Maturin"    =>     'S04',
+        "Sucursal Coro1" => 'S05',
+        "Sucursal Coro2" => 'S06',
+        "Sucursal Coro3" => 'S07',
 
         "Comercial Corina I"    =>     'T18',
         "Comercial Corina II"    =>     'T22',
