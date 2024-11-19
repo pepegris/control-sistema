@@ -66,8 +66,10 @@ include '../../services/sqlserver.php';
         <option value="mes">Ventas Detalladas por Mes</option> 
         <option value="por">Grafica de las Ventas</option> 
         <option value="des">Grafica de Despachos</option> 
+        <option value="ordenes">Ordenes de Pagos</option> 
         <option value="ord">Detalles de Ord de Pagos</option> 
         <option value="factura">Detalles de Facturas, Cobros y Devoluciones</option> 
+        <option value="cashea">Cashea</option> 
         
 
       </select> 

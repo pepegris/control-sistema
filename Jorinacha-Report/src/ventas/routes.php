@@ -111,7 +111,11 @@ if ($clave === 'N3td0s' ) {
         
         header("refresh:1;url= report-ventas-ordenes.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
 
-    } elseif ($reporte=='factura'){
+    } elseif ($reporte=='ord'){
+        
+        header("refresh:1;url= report-ordenes.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
+
+    }elseif ($reporte=='factura'){
         
         header("refresh:1;url= report-ventas-facturas.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
 
