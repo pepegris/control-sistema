@@ -17,7 +17,7 @@ if ($_GET) {
     $Year = date("Y", strtotime($fecha2));
 
     for ($i = 0; $i < 20; $i += 1) {
-        $sedes[] = $_GET[$i];
+        $sedes_ar[] = $_GET[$i];
     }
 
 ?>
@@ -95,9 +95,9 @@ if ($_GET) {
             <?php
 
             $e = 1;
-            for ($i = 1; $i < count($sedes); $i++) {
-                if ($sedes[$e] != null) {
-                    $sede = $sedes[$e];
+            for ($i = 1; $i < count($sedes_ar); $i++) {
+                if ($sedes_ar[$e] != null) {
+                    $sede = $sedes_ar[$e];
 
             ?>
                     <tr>
@@ -118,15 +118,15 @@ if ($_GET) {
 
                             
 
-                            $res0 = getOrdenes_Pag($sedes[$e], $fecha);
+                            $res0 = getOrdenes_Pag($sedes_ar[$e], $fecha);
                             $monto = number_format($res0['monto'], 2, ',', '.');
                             $total_dia_monto[$fecha] += $res0['monto'];
                             # SUMANDO TIENDA
-                            $total_monto[$sedes[$e]] += $res0['monto'];
+                            $total_monto[$sedes_ar[$e]] += $res0['monto'];
 
                             if ($r >= $Day) {
 
-                                $total = number_format($total_monto[$sedes[$e]], 2, ',', '.');
+                                $total = number_format($total_monto[$sedes_ar[$e]], 2, ',', '.');
                                 echo "<td>$total</td>";
                                 $total = 0;
                             } else {
@@ -165,7 +165,7 @@ if ($_GET) {
                     if ($r >= $Day) {
                         $e = 1;
                         for ($i = 0; $i < count($total_dia_monto); $i++) {
-                            $total_t += $total_monto[$sedes[$e]];
+                            $total_t += $total_monto[$sedes_ar[$e]];
                             $e++;
                         }
                         $total = number_format($total_t, 2, ',', '.');
