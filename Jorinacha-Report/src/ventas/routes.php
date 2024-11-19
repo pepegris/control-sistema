@@ -111,7 +111,7 @@ if ($clave === 'N3td0s' ) {
         
         header("refresh:1;url= report-ventas-ordenes.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
 
-    } elseif ($reporte=='ord'){
+    } elseif ($reporte=='ordenes'){
         
         header("refresh:1;url= report-ordenes.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
 
