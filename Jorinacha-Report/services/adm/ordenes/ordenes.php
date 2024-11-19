@@ -9,13 +9,13 @@ function getTasa( $fecha)
 {
 
 
-
+    $database='CAGUA';
 
     if ($database) {
         try {
 
             $serverName = "172.16.1.39";
-            $connectionInfo = array("Database" => "KAGU", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+            $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
             $sql = "SELECT TOP 1 tasa_v from tasas 
