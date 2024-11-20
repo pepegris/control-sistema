@@ -134,6 +134,7 @@ function getDeposito_Cashea($sede, $cob_num)
 
                 $res = $dep_caj;
             }
+            return $res;
         } catch (\Throwable $th) {
 
             throw $th;
