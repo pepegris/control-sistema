@@ -48,12 +48,14 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
       <tr>
         <th scope='col'>N°</th>
         <th scope='col'>Tienda</th>
-        <th scope='col'>Deposito</th>
         <th scope='col'>Fecha</th>
-        <th scope='col'>Descripción</th>
         <th scope='col'>Factura</th>
+        <th scope='col'>Cobros</th>
+        <th scope='col'>CI</th>
+        <th scope='col'>Cliente</th>
         <th scope='col'>Monto</th>
-        <th scope='col'>Caja</th>
+        <th scope='col'>Deposito</th>
+        <th scope='col'>Descripción</th>
 
       </tr>
     </thead>
@@ -64,51 +66,46 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
 
 
 
-        $res = getDeposito_Cashea($sede, $fecha1, $fecha2 );
+        $res = getCobros_Cashea($sede, $fecha1, $fecha2 );
  
         $n = 1;
         for ($i = 0; $i < count($res); $i++) {
 
 
-          $co_art = $res[$i]['co_art'];
-          $co_lin = $res[$i]['lin_des'];
-          $co_subl = $res[$i]['subl_des'];
-          $co_cat = $res[$i]['cat_des'];
-          $co_color = $res[$i]['des_col'];
-          $ubicacion = $res[$i]['ubicacion'];
-          $stock_act = round($res[$i]['stock_act']);
+          $cob_num = $res[$i]['cob_num'];
+          $fec_cob = $res[$i]['fec_cob'];
+          $doc_num = $res[$i]['doc_num'];
+          $mont_doc = $res[$i]['mont_doc'];
 
-          $total_stock_act_dev_cli += $stock_act;
 
-          $dev_cli_fact = $res[$i]['dev_cli_fact'];
-          $dev_cli_comentario = $res[$i]['dev_cli_comentario'];
-          $dev_cli_fec_emis = $res[$i]['dev_cli_fec_emis'];
-          $fecha_dev_cli = 'fecha';
-          $reng_dvc_total_art = round($res[$i]['reng_dvc_total_art']);
+          $total_mont_doc += $mont_doc;
 
-          $total_stock_reng_dvc += $reng_dvc_total_art;
+          $res2 =getFactura_Cashea($sede, $doc_num );
 
-          $res2 = getCompras($sede,  $fecha2 , $co_art );
+          $co_cli = $res2[$i]['co_cli'];
+          $cli_des = $res2[$i]['cli_des'];
 
-          $compras_fact = $res2[$i]['compras_fact'];
-          #$com_fecha = $res2[$i]['com_fecha'];
-          $fecha_com = 'fecha';
-          $com_total_art = round($res2[$i]['com_total_art']);
+          $res3 = getDeposito_Cashea($sede, $cob_num);
 
-          $total_stock_com_total_art += $com_total_art;
+          $dep_num = $res3[$i]['dep_num'];
+          $descrip = $res3[$i]['descrip'];
 
           echo "
         <tr>
         <th scope='row'>$n</th>
         <td>$sede</td>
+        <td>$fec_cob</td>
+
+        <td>$doc_num</td>
+        <td>$cob_num </td>
+        
+        <td>$co_cli</td>
+        <td>$cli_des</td>
+        
+        <td>$mont_doc</td>
+
         <td>$dep_num</td>
-        <td>$fecha</td>
         <td>$descrip</td>
-        <td>$doc_num </td>
-        <td>$monto</td>
-        <td>$caja </td>
-
-
 
 
         </tr>";
@@ -122,18 +119,15 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
       echo "
       <tr>
     
-      <th colspan='5' ></th>
+      <th colspan='6' ></th>
       <th  >Totales:</th>
-      <td>" . $total_stock_act_dev_cli . "</td>
+      <td>" . $total_mont_doc . "</td>
       </tr>
       </tbody>
       </table>";
 
 
-      $total_stock_act_dev_cli =0;
-      $total_stock_com_total_art =0;
-      $total_stock_reng_dvc =0;
-
+      $total_mont_doc =0;
 
 
 
