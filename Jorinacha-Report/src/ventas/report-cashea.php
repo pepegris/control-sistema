@@ -95,7 +95,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         <tr>
         <th scope='row'>$n</th>
         <td>$sede</td>
-        <td>$fecha</td>
+        <td></td>
 
         <td>$doc_num</td>
         <td>$cob_num </td>
