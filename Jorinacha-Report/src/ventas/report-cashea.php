@@ -68,6 +68,8 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
 
         $res = getCobros_Cashea($sede, $fecha1, $fecha2 );
         var_dump($res);
+        var_dump($res[0]['cob_num']);
+        var_dump($res[1]['cob_num']);
         $n = 1;
         $total_mont_doc=0;
         for ($i = 0; $i < count($res); $i++) {
