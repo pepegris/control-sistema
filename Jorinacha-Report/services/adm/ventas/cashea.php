@@ -20,7 +20,7 @@ function getCobros_Cashea($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "SELECT cobros.cob_num,cobros.fec_cob,reng_cob.doc_num  ,CONVERT(numeric(10,2), reng_tip.mont_doc) from cobros
+            $sql = "SELECT cobros.cob_num,cobros.fec_cob,reng_cob.doc_num  ,CONVERT(numeric(10,2), reng_tip.mont_doc) as mont_doc from cobros
                     join reng_tip on cobros.cob_num=reng_tip.cob_num
                     join reng_cob on cobros.cob_num=reng_cob.cob_num
                     where cod_caja='CASHEA' and cobros.fec_cob between '$fecha1' and '$fecha2'";
