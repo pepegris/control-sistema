@@ -42,7 +42,7 @@ if ($clave === 'N3td0s' ) {
 
         header("refresh:1;url= report-despacho-gf.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
 
-    }  elseif ($reporte=='des') {
+    }  elseif ($reporte=='cashea') {
 
         header("refresh:1;url= report-cashea.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
 
