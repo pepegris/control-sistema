@@ -73,11 +73,12 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         for ($i = 0; $i < count($res); $i++) {
 
 
-            var_dump($cob_num);
+            
           $cob_num = $res[$i]['cob_num'];
           $fec_cob = $res[$i]['fec_cob'];
           $doc_num = $res[$i]['doc_num'];
           $mont_doc = $res[$i]['mont_doc'];
+          var_dump($cob_num);
             break;
 
           $total_mont_doc += $mont_doc;
