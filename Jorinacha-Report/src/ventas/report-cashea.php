@@ -76,7 +76,6 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
           $fec_cob = $res[$i]['fec_cob'];
           $doc_num = $res[$i]['doc_num'];
           $mont_doc = $res[$i]['mont_doc'];
-          $fecha = $fec_cob->format("d-m-Y");
 
 
           $total_mont_doc += $mont_doc;
