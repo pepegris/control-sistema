@@ -40,9 +40,9 @@ if ($_GET) {
 
   <?php
   echo "<h4>En Bolivares</h4>";
-
-  $y = 1;
-  for ($k = 1; $k <= $Month_total; $k++) {
+  $num=(int)$Month_total;
+  $y = $num;
+  for ($k = $num; $k <= $Month_total; $k++) {
 
 
 
