@@ -111,9 +111,9 @@ if ($_GET) {
           $sede = $sedes_ar[$i];
           $cod = Cliente($sede);
 
-          require "../../services/empresas-fechas.php";
+    /*       require "../../services/empresas-fechas.php";
 
-
+ */
           $fecha1 =  $Year . '' . $Month . ''  . '01';
           $fecha2 =  $Year . '' . $Month . ''  . $cantidad_Dias;
 
