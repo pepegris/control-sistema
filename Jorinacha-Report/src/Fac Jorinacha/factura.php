@@ -35,7 +35,8 @@
 
 		.flex-container {
 			display: flex;
-			justify-content: space-between;
+			justify-content: space-evenly;
+
 		}
 
 		.flex-container>.div {
@@ -73,7 +74,7 @@
 
 
 
-
+<!-- 
 			<div class="col-xs-6 text-right">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -102,7 +103,7 @@
 				<div class="col-xs-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4> <?php echo "Caracas " . date("d") . " del " . date("m") . " de " . date("Y"); ?>
+							<h4> 
 
 							</h4>
 						</div>
@@ -117,7 +118,7 @@
 					</div>
 				</div>
 
-			</div>
+			</div> -->
 			<pre></pre>
 			<table class="table table-bordered">
 				<thead>
