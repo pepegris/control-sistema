@@ -1,3 +1,32 @@
+<?php
+ini_set('memory_limit', '4096M');
+ini_set('max_execution_time', 3600);
+
+require "../../includes/log.php";
+include '../../services/mysql.php';
+include '../../services/adm/Fac Jorinacha/fac.php';
+
+
+if ($_POST) {
+	$empresa = $_POST['empresa'];
+	$factura = $_POST['factura'];
+
+	$res0 = getFact($factura);
+	$fact_num = $row['fact_num'];
+	$fec_emis = $row['fec_emis'];
+	$tot_bruto = $row['tot_bruto'];
+	$iva =  $row['iva'];
+	$tot_neto = $row['tot_neto'];
+	$cli_des = $row['cli_des'];
+	$direc1 =  $row['direc1'];
+	$telefonos =  $row['telefonos'];
+	$rif =  $row['rif'];
+
+	$fecha = $fec_emis->format('d-m-Y');
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,24 +74,6 @@
 
 
 
-	if ($_POST) {
-		$empresa = $_POST['empresa'];
-		$factura = $_POST['factura'];
-
-		$res0 = getFact($factura);
-		$fact_num = $row['fact_num'];
-		$fec_emis = $row['fec_emis'];
-		$tot_bruto = $row['tot_bruto'];
-		$iva =  $row['iva'];
-		$tot_neto = $row['tot_neto'];
-		$cli_des = $row['cli_des'];
-		$direc1 =  $row['direc1'];
-		$telefonos =  $row['telefonos'];
-		$rif =  $row['rif'];
-
-		$fecha = $fec_emis->format('d-m-Y');
-
-	}
 
 	?>
 	<br><br><br><br><br>
