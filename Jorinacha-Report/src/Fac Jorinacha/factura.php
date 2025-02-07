@@ -155,7 +155,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					<?php
 					}
 					?>
-					<tr></tr>
+					<tr><td></td></tr>
 					<tr style="line-height: 1; padding: 1px; text-align:right;">
 
 						<td colspan="4">
