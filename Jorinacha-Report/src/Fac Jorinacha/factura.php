@@ -48,6 +48,20 @@
 	if ($_POST) {
 		$empresa = $_POST['empresa'];
 		$factura = $_POST['factura'];
+
+		$res0 = getFact($factura);
+		$fact_num = $row['fact_num'];
+		$fec_emis = $row['fec_emis'];
+		$tot_bruto = $row['tot_bruto'];
+		$iva =  $row['iva'];
+		$tot_neto = $row['tot_neto'];
+		$cli_des = $row['cli_des'];
+		$direc1 =  $row['direc1'];
+		$telefonos =  $row['telefonos'];
+		$rif =  $row['rif'];
+
+		$fecha = $fec_emis->format('d-m-Y');
+
 	}
 
 	?>
@@ -59,14 +73,14 @@
 
 		<div class="flex-container">
 			<div class="div">
-				<h4>CLIENTE:
+				<h4>CLIENTE: <?= $cli_des ?>
 				</h4>
-				<h4>TELEFONO:
+				<h4>TELEFONO: <?= $telefonos ?>
 				</h4>
 				<h4>RIF:
 				</h4>
 			</div>
-			<div class="div">2</div>
+			<div class="div"></div>
 			<div class="div">
 				<h4>CLIENTE:
 				</h4>
