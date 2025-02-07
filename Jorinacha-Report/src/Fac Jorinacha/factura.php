@@ -17,31 +17,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 	<title>Factura</title>
 
 	<style>
-		@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
 
-		body,
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			font-family: 'Bree Serif', serif;
-		}
-
-		@media (max-width: 900px) {
-			#panel input {
-				width: 105px;
-				height: 30px;
-			}
-
-			#factura input {
-				width: 150px;
-				height: 30px;
-			}
-
-
-		}
 
 		.flex-container {
 			display: flex;
@@ -81,7 +57,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 	?>
 	<br><br><br><br><br>
 	<br><br><br><br><br>
-	<br><br><br><br><br>
+
 
 	<div class="container">
 
