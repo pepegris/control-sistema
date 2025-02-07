@@ -11,7 +11,7 @@ if ($_GET) {
 	$empresa = $_GET['empresa'];
 	$factura = $_GET['factura'];
 	var_dump((int)$factura);
-	$res_fact = getFact($factura);
+	$res_fact = getFact((int)$factura);
 	var_dump($res_fact);
 	$fact_num = $res_fact['fact_num'];
 	#$fec_emis = $res_fact['fec_emis'];
@@ -22,6 +22,7 @@ if ($_GET) {
 	$direc1 =  $res_fact['direc1'];
 	$telefonos =  $res_fact['telefonos'];
 	$rif =  $res_fact['rif'];
+	var_dump($cli_des);
 
 	#$fecha = $fec_emis->format('d-m-Y');
 
