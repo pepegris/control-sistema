@@ -71,7 +71,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 	?>
 	<br><br><br><br><br><br>
-	<br><br><br><br><br><br>
+	<br><br><br><br><br>
 
 
 	<div class="container">
