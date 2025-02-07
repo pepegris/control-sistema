@@ -68,9 +68,7 @@
 
 		<div class="flex-container">
 			<div class="div">
-				<div class="col-xs-6 text-right">
-					<div class="panel panel-default">
-						<div class="panel-heading">
+
 							<h4>CLIENTE:
 							</h4>
 							<h4>TELEFONO:
@@ -78,15 +76,11 @@
 							<h4>RIF:
 							</h4>
 
-						</div>
 
-					</div>
 				</div>
 
 				<div class="div">
-					<div class="col-xs-6 text-right">
-						<div class="panel panel-default">
-							<div class="panel-heading">
+
 								<h4>CLIENTE:
 								</h4>
 								<h4>TELEFONO:
@@ -94,10 +88,7 @@
 								<h4>RIF:
 								</h4>
 
-							</div>
-
-						</div>
-					</div>
+	
 				</div>
 				<div class="row">
 
