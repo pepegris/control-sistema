@@ -53,7 +53,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 		$res_fact = getFact((int)$factura);
 
 		$fact_num = $res_fact['fact_num'];
-		#$fec_emis = $res_fact['fec_emis'];
+		$fec_emis = $res_fact['fec_emis'];
 		$tot_bruto = $res_fact['tot_bruto'];
 		$iva =  $res_fact['iva'];
 		$tot_neto = $res_fact['tot_neto'];
@@ -64,7 +64,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 		$rif =  $res_fact['rif'];
 
 
-		#$fecha = $fec_emis->format('d-m-Y');
+		$fecha = $fec_emis->format('d-m-Y');
 
 	}
 
