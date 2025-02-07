@@ -106,13 +106,13 @@ include '../../services/adm/fac_jorinacha/fac.php';
 						<th>
 							<h6>DESCRIPCION</h6>
 						</th>
-						<th style="text-align: right;">
+						<th >
 							<h6>CANT</h6>
 						</th>
-						<th style="text-align: right;">
+						<th >
 							<h6>PRECIO</h6>
 						</th>
-						<th style="text-align: right;">
+						<th >
 							<h6>IMPORTE</h6>
 						</th>
 
@@ -151,9 +151,9 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					}
 					?>
 
-					<tr>
+					<tr style="line-height: 1; padding: 1px;">
 
-						<td colspan="3" style="text-align: right;">
+						<td colspan="3" >
 							Total Pares : <?= $total_pares; ?>
 							Total Bultos :  *,***.**
 						</td>
@@ -161,9 +161,9 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 					</tr>
 
-					<tr>
+					<tr style="line-height: 1; padding: 1px;">
 
-						<td  colspan="3" style="text-align: right;">
+						<td  colspan="3" >
 
 							<p> <b>Sub Total: </b><?= $tot_bruto; ?></p>
 							<p><b>%Desc. % :</b>0.00</p>
