@@ -150,7 +150,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					<?php
 					}
 					?>
-
+					<tr></tr>
 					<tr style="line-height: 1; padding: 1px; text-align:right;">
 
 						<td colspan="4" >
@@ -158,8 +158,8 @@ include '../../services/adm/fac_jorinacha/fac.php';
 							Total Bultos :  *,***.**
 						</td>
 						</tr>
-						<tr style="line-height: 1; padding: 1px; text-align:right;">
-						<td  colspan="3" >
+						<tr style="line-height: 1; padding: 1px; text-align:right; border: 1px solid;">
+						<td  colspan="4" >
 
 							<p> <b>Sub Total: </b><?= $tot_bruto; ?></p>
 							<p><b>%Desc. % :</b>0.00</p>
