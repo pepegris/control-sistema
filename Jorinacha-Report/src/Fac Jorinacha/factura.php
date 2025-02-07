@@ -66,143 +66,131 @@
 
 	<div class="container">
 
-	<div class="flex-container">
-				<div class="div">1</div>
-				<div class="div">2</div>
-				<div class="div">3</div>
-			</div>
-		<div class="row">
-
-
-
-
-
-<!-- 
-			<div class="col-xs-6 text-right">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4>CLIENTE:
-						</h4>
-						<h4>TELEFONO:
-						</h4>
-						<h4>RIF:
-						</h4>
-
-					</div>
-					<div class="panel-body" id="factura">
-						<h4>Orden Nº :
-							NUMERO
-						</h4>
-					</div>
-				</div>
-			</div>
-
-			<hr />
-
-
-			<h1 style="text-align: center;">Nota de Entrega</h1>
-
-			<div class="row">
-				<div class="col-xs-12">
+		<div class="flex-container">
+			<div class="div">
+				<div class="col-xs-6 text-right">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4> 
-
+							<h4>CLIENTE:
 							</h4>
+							<h4>TELEFONO:
+							</h4>
+							<h4>RIF:
+							</h4>
+
 						</div>
-						<div class="panel-body" id="panel">
 
+					</div>
+				</div>
 
-							<h4>Destino: DIR /
-								Equipo: Descrip
-							</h4>
+				<div class="div">
+					<div class="col-xs-6 text-right">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4>CLIENTE:
+								</h4>
+								<h4>TELEFONO:
+								</h4>
+								<h4>RIF:
+								</h4>
+
+							</div>
 
 						</div>
 					</div>
 				</div>
-
-			</div> -->
-			<pre></pre>
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th style="text-align: center;">
-							<h4>DESCRIPCION</h4>
-						</th>
-						<th style="text-align: center;">
-							<h4>CANT</h4>
-						</th>
-						<th style="text-align: center;">
-							<h4>PRECIO</h4>
-						</th>
-						<th style="text-align: center;">
-							<h4>IMPORTE</h4>
-						</th>
-
-					</tr>
-				</thead>
-				<tbody>
-
-					<tr>
-						<td style="text-align: center;">EQUIOP</td>
-
-						<td style="text-align: center;">ESTA</td>
-
-						<td class=" text-align: center; ">A></td>
-						<td class=" text-align: center;">B></td>
-
-
-					</tr>
-
-
-					<tr>
-						<td style="text-align: center;">EQUIOP</td>
-
-						<td style="text-align: center;">ESTA</td>
-
-						<td class=" text-align: center; ">A></td>
-						<td class=" text-align: center;">B></td>
-
-
-					</tr>
-
-					<tr>
-						<td>&nbsp;</td>
-						<td><a href="#"> &nbsp; </a></td>
-						<td class="text-right">&nbsp;</td>
-						<td class="text-right ">&nbsp;</td>
-
-					</tr>
-
-					<tr>
-
-						<td colspan="3" style="text-align: right;">Recibido Firma :</td>
-						<td style="text-align: right;">
-							<hr>
-						</td>
-
-
-					</tr>
-
-
-				</tbody>
-			</table>
+				<div class="row">
 
 
 
 
 
-		</div>
 
 
 
-		<p class="text-right ">der</p>
-		<p class="text-right "><b>Dir: </b>der</p>
-		<p class="text-right "><b>Tlf: </b>der/p>
+
+
+					<pre></pre>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th style="text-align: center;">
+									<h4>DESCRIPCION</h4>
+								</th>
+								<th style="text-align: center;">
+									<h4>CANT</h4>
+								</th>
+								<th style="text-align: center;">
+									<h4>PRECIO</h4>
+								</th>
+								<th style="text-align: center;">
+									<h4>IMPORTE</h4>
+								</th>
+
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr>
+								<td style="text-align: center;">EQUIOP</td>
+
+								<td style="text-align: center;">ESTA</td>
+
+								<td class=" text-align: center; ">A></td>
+								<td class=" text-align: center;">B></td>
+
+
+							</tr>
+
+
+							<tr>
+								<td style="text-align: center;">EQUIOP</td>
+
+								<td style="text-align: center;">ESTA</td>
+
+								<td class=" text-align: center; ">A></td>
+								<td class=" text-align: center;">B></td>
+
+
+							</tr>
+
+							<tr>
+								<td>&nbsp;</td>
+								<td><a href="#"> &nbsp; </a></td>
+								<td class="text-right">&nbsp;</td>
+								<td class="text-right ">&nbsp;</td>
+
+							</tr>
+
+							<tr>
+
+								<td colspan="3" style="text-align: right;">Recibido Firma :</td>
+								<td style="text-align: right;">
+									<hr>
+								</td>
+
+
+							</tr>
+
+
+						</tbody>
+					</table>
 
 
 
-	</div>
+
+
+				</div>
+
+
+
+				<p class="text-right ">der</p>
+				<p class="text-right "><b>Dir: </b>der</p>
+				<p class="text-right "><b>Tlf: </b>der/p>
+
+
+
+			</div>
 
 
 </head>
