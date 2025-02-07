@@ -34,19 +34,19 @@ function getFact( $fact_num)
 
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $consulta['fact_num'] = $row['fact_num'];
-                $consulta['fec_emis'] = $row['fec_emis'];
-                $consulta['tot_bruto'] = $row['tot_bruto'];
-                $consulta['iva'] =  $row['iva'];
-                $consulta['tot_neto'] = $row['tot_neto'];
-                $consulta['cli_des'] = $row['cli_des'];
-                $consulta['direc1'] =  $row['direc1'];
-                $consulta['telefonos'] =  $row['telefonos'];
-                $consulta['rif'] =  $row['rif'];
+                $factura['fact_num'] = $row['fact_num'];
+                $factura['fec_emis'] = $row['fec_emis'];
+                $factura['tot_bruto'] = $row['tot_bruto'];
+                $factura['iva'] =  $row['iva'];
+                $factura['tot_neto'] = $row['tot_neto'];
+                $factura['cli_des'] = $row['cli_des'];
+                $factura['direc1'] =  $row['direc1'];
+                $factura['telefonos'] =  $row['telefonos'];
+                $factura['rif'] =  $row['rif'];
 
                 break;
             }
-            $res = $consulta;
+            $res = $factura;
             return $res;
         } catch (\Throwable $th) {
 
