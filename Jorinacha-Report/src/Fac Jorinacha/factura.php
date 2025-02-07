@@ -77,7 +77,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 	<div class="container">
 
 		<div class="flex-container">
-			<div class="div" style=" font-size: 15px; line-height: 0.1;padding: -2px;">
+			<div class="div" style=" font-size: 18px; line-height: 0.1;padding: -2px;">
 				<h6>CLIENTE: <?= $cli_des; ?>
 				</h6>
 				<h6>COD CLIENTE: <?= $co_cli; ?>
@@ -90,7 +90,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 				</h6>
 			</div>
 			<div class="div"></div>
-			<div class="div" style=" font-size: 15px; line-height: 0.1;padding: -2px;">
+			<div class="div" style=" font-size: 18px; line-height: 0.1;padding: -2px;">
 				<h6>FACTURA NUM: <?= $fact_num; ?>
 				</h6>
 				<h6>FECHA:
@@ -166,7 +166,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					<tr style="line-height: 1; padding: 1px; text-align:right;">
 						<td colspan="4" style="line-height: 1; padding: 1px; text-align:right; ">
 
-							<p> <b>Sub Total: </b><?= $tot_bruto; ?></p>
+							<p> <b>Sub Total: </b><?= number_format($tot_bruto,  ',', '.'); ?></p>
 							<p><b>%Desc. % :</b>0.00</p>
 							<p><b>I.V.A 16% : </b><?= $iva; ?></p>
 							<p><b>Neto: </b><?= $tot_neto; ?></p>
