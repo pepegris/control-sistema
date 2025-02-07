@@ -57,19 +57,20 @@ include '../../services/adm/fac_jorinacha/fac.php';
 	if ($_GET) {
 		$empresa = $_GET['empresa'];
 		$factura = $_GET['factura'];
-		var_dump((int)$factura);
+
 		$res_fact = getFact((int)$factura);
-		var_dump($res_fact);
+
 		$fact_num = $res_fact['fact_num'];
 		#$fec_emis = $res_fact['fec_emis'];
 		$tot_bruto = $res_fact['tot_bruto'];
 		$iva =  $res_fact['iva'];
 		$tot_neto = $res_fact['tot_neto'];
 		$cli_des = $res_fact['cli_des'];
+		$co_cli = $res_fact['co_cli'];
 		$direc1 =  $res_fact['direc1'];
 		$telefonos =  $res_fact['telefonos'];
 		$rif =  $res_fact['rif'];
-		var_dump($cli_des);
+
 
 		#$fecha = $fec_emis->format('d-m-Y');
 
@@ -86,21 +87,25 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 		<div class="flex-container">
 			<div class="div">
-				<h4>CLIENTE: <?= $cli_des; ?>
-				</h4>
-				<h4>TELEFONO: <?= $telefonos; ?>
-				</h4>
-				<h4>RIF: <?= $rif; ?>
-				</h4>
+				<h5>CLIENTE: <?= $cli_des; ?>
+				</h5>
+				<h5>COD CLIENTE: <?= $co_cli; ?>
+				</h5>
+				<h5>TELEFONO: <?= $telefonos; ?>
+				</h5>
+				<h5>RIF: <?= $rif; ?>
+				</h5>
+				<h5>DIR: <?= $direc1; ?>
+				</h5>
 			</div>
 			<div class="div"></div>
 			<div class="div">
-				<h4>CLIENTE:
-				</h4>
-				<h4>TELEFONO:
-				</h4>
-				<h4>RIF:
-				</h4>
+				<h5>FACTURA NUM: <?= $fact_num; ?>
+				</h5>
+				<h5>FECHA:  
+				</h5>
+				<h5>CONDICION: CREDITO 30 DIAS
+				</h5>
 			</div>
 		</div>
 		<div class="row">
