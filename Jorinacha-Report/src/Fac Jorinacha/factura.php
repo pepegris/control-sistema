@@ -27,9 +27,7 @@
 
 <?php 
 
- require '../includes/conexion_control.php';
- require_once '../includes/datos_empresa.php';
- 
+
  
  if ($_POST) {
     $empresa = $_POST['empresa'];
