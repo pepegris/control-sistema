@@ -37,7 +37,6 @@ include '../../services/adm/fac_jorinacha/fac.php';
 		}
 
 		table{
-			display: flex;
 			align-items: center;
 			justify-content: center;
 		}
@@ -165,7 +164,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 						</td>
 					</tr>
 					<tr style="line-height: 1; padding: 1px; text-align:right;">
-						<td colspan="4" style="line-height: 1; padding: 1px; text-align:right; border: 1px solid;">
+						<td colspan="4" style="line-height: 1; padding: 1px; text-align:right; ">
 
 							<p> <b>Sub Total: </b><?= $tot_bruto; ?></p>
 							<p><b>%Desc. % :</b>0.00</p>
