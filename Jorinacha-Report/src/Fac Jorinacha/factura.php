@@ -39,7 +39,7 @@
 			background-color: DodgerBlue;
 		}
 
-		.flex-container>div {
+		.flex-container>.div {
 			background-color: #f1f1f1;
 			width: 100px;
 			margin: 10px;
@@ -67,9 +67,9 @@
 		<div class="row">
 
 			<div class="flex-container">
-				<div>1</div>
-				<div>2</div>
-				<div>3</div>
+				<div class="div">1</div>
+				<div lass="div">2</div>
+				<div lass="div">3</div>
 			</div>
 
 
