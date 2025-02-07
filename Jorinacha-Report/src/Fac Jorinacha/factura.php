@@ -7,27 +7,6 @@ include '../../services/mysql.php';
 include '../../services/adm/fac_jorinacha/fac.php';
 
 
-if ($_GET) {
-	$empresa = $_GET['empresa'];
-	$factura = $_GET['factura'];
-	var_dump((int)$factura);
-	$res_fact = getFact((int)$factura);
-	var_dump($res_fact);
-	$fact_num = $res_fact['fact_num'];
-	#$fec_emis = $res_fact['fec_emis'];
-	$tot_bruto = $res_fact['tot_bruto'];
-	$iva =  $res_fact['iva'];
-	$tot_neto = $res_fact['tot_neto'];
-	$cli_des = $res_fact['cli_des'];
-	$direc1 =  $res_fact['direc1'];
-	$telefonos =  $res_fact['telefonos'];
-	$rif =  $res_fact['rif'];
-	var_dump($cli_des);
-
-	#$fecha = $fec_emis->format('d-m-Y');
-
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,6 +53,27 @@ if ($_GET) {
 
 	<?php
 
+
+	if ($_GET) {
+		$empresa = $_GET['empresa'];
+		$factura = $_GET['factura'];
+		var_dump((int)$factura);
+		$res_fact = getFact((int)$factura);
+		var_dump($res_fact);
+		$fact_num = $res_fact['fact_num'];
+		#$fec_emis = $res_fact['fec_emis'];
+		$tot_bruto = $res_fact['tot_bruto'];
+		$iva =  $res_fact['iva'];
+		$tot_neto = $res_fact['tot_neto'];
+		$cli_des = $res_fact['cli_des'];
+		$direc1 =  $res_fact['direc1'];
+		$telefonos =  $res_fact['telefonos'];
+		$rif =  $res_fact['rif'];
+		var_dump($cli_des);
+
+		#$fecha = $fec_emis->format('d-m-Y');
+
+	}
 
 
 
