@@ -147,8 +147,8 @@ include '../../services/adm/fac_jorinacha/fac.php';
 						<tr style="line-height: 1; padding: 1px;">
 							<td style="font-size: 15px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
 							<td style="text-align: center;  font-size: 15px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
-							<td class=" text-align: center; font-size: 15px; line-height: 1;padding: 1px;"><?= $prec_vta; ?></td>
-							<td class=" text-align: center; font-size: 15px; line-height: 1;padding: 1px;"><?= $reng_neto; ?></td>
+							<td class=" text-align: center; font-size: 15px; line-height: 1;padding: 1px;"><?= number_format($prec_vta,  2,',', '.') ; ?></td>
+							<td class=" text-align: center; font-size: 15px; line-height: 1;padding: 1px;"><?= number_format($reng_neto,  2,',', '.') ; ?></td>
 
 
 						</tr>
@@ -167,9 +167,9 @@ include '../../services/adm/fac_jorinacha/fac.php';
 						<td colspan="4" style="line-height: 1; padding: 1px; text-align:right; ">
 
 							<p> <b>Sub Total: </b><?= number_format($tot_bruto,  2,',', '.'); ?></p>
-							<p><b>%Desc. % :</b>0.00</p>
-							<p><b>I.V.A 16% : </b><?= $iva; ?></p>
-							<p><b>Neto: </b><?= $tot_neto; ?></p>
+							<p><b>%Desc. % :</b>0,00</p>
+							<p><b>I.V.A 16% : </b><?= number_format($iva,  2,',', '.'); ?></p>
+							<p><b>Neto: </b><?=number_format($tot_neto,  2,',', '.'); ?></p>
 
 						</td>
 
