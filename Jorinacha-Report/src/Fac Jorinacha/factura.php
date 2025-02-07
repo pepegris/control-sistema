@@ -102,7 +102,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 			<div class="div">
 				<h5>FACTURA NUM: <?= $fact_num; ?>
 				</h5>
-				<h5>FECHA:  
+				<h5>FECHA:
 				</h5>
 				<h5>CONDICION: CREDITO 30 DIAS
 				</h5>
@@ -113,52 +113,6 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 
 
-
-			<!-- 
-			<div class="col-xs-6 text-right">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4>CLIENTE:
-						</h4>
-						<h4>TELEFONO:
-						</h4>
-						<h4>RIF:
-						</h4>
-
-					</div>
-					<div class="panel-body" id="factura">
-						<h4>Orden Nº :
-							NUMERO
-						</h4>
-					</div>
-				</div>
-			</div>
-
-			<hr />
-
-
-			<h1 style="text-align: center;">Nota de Entrega</h1>
-
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4> 
-
-							</h4>
-						</div>
-						<div class="panel-body" id="panel">
-
-
-							<h4>Destino: DIR /
-								Equipo: Descrip
-							</h4>
-
-						</div>
-					</div>
-				</div>
-
-			</div> -->
 			<pre></pre>
 			<table class="table table-bordered">
 				<thead>
@@ -180,29 +134,37 @@ include '../../services/adm/fac_jorinacha/fac.php';
 				</thead>
 				<tbody>
 
+
+					<?php
+
+					$res_reng_fact = get_Reng_Fact((int)$factura);
+					for ($e = 0; $e < count($res_reng_fact); $e++) {
+
+						$art_des = $res_reng_fact[$e]['art_des'];
+						$total_art = $res_reng_fact[$e]['total_art'];
+						$prec_vta = $res_reng_fact[$e]['prec_vta'];
+						$reng_neto = $res_reng_fact[$e]['reng_neto'];
+
+					
+
+
+
+					?>
+					
+
 					<tr>
-						<td style="text-align: center;">EQUIOP</td>
+						<td style="text-align: center;"><?= $art_des; ?></td>
 
-						<td style="text-align: center;">ESTA</td>
+						<td style="text-align: center;"><?= $total_art; ?></td>
 
-						<td class=" text-align: center; ">A></td>
-						<td class=" text-align: center;">B></td>
+						<td class=" text-align: center; "><?= $prec_vta; ?></td>
+						<td class=" text-align: center;"><?= $reng_neto; ?></td>
 
 
 					</tr>
-
-
-					<tr>
-						<td style="text-align: center;">EQUIOP</td>
-
-						<td style="text-align: center;">ESTA</td>
-
-						<td class=" text-align: center; ">A></td>
-						<td class=" text-align: center;">B></td>
-
-
-					</tr>
-
+					<?php
+					}
+					?>
 					<tr>
 						<td>&nbsp;</td>
 						<td><a href="#"> &nbsp; </a></td>
