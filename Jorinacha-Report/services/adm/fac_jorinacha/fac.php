@@ -19,7 +19,7 @@ function getFact( $fact_num)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-            $sql = "SELECT fact_num,fec_emis,clientes.rif,FACTURA.co_cli,
+            $sql = "SELECT fact_num,convert(varchar(10), fec_emis, 103) as fec_emis ,clientes.rif,FACTURA.co_cli,
                     CONVERT(numeric(10,2), tot_bruto)as tot_bruto,
                     CONVERT(numeric(10,2), FACTURA.iva)as iva,
                     CONVERT(numeric(10,2), tot_neto) as tot_neto ,

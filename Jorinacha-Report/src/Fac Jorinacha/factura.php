@@ -64,7 +64,6 @@ include '../../services/adm/fac_jorinacha/fac.php';
 		$rif =  $res_fact['rif'];
 
 
-		$fecha = $fec_emis->format('d-m-Y');
 
 	}
 
