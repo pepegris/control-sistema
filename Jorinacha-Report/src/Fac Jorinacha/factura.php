@@ -72,26 +72,26 @@ include '../../services/adm/fac_jorinacha/fac.php';
 	<div class="container">
 
 		<div class="flex-container">
-			<div class="div">
-				<h5>CLIENTE: <?= $cli_des; ?>
-				</h5>
-				<h5>COD CLIENTE: <?= $co_cli; ?>
-				</h5>
-				<h5>TELEFONO: <?= $telefonos; ?>
-				</h5>
-				<h5>RIF: <?= $rif; ?>
-				</h5>
-				<h5>DIR: <?= $direc1; ?>
-				</h5>
+			<div class="div" style="text-align: center; font-size: 12px; line-height: 0.1;padding: -2px;">
+				<h6>CLIENTE: <?= $cli_des; ?>
+				</h6>
+				<h6>COD CLIENTE: <?= $co_cli; ?>
+				</h6>
+				<h6>TELEFONO: <?= $telefonos; ?>
+				</h6>
+				<h6>RIF: <?= $rif; ?>
+				</h6>
+				<h6>DIR: <?= $direc1; ?>
+				</h6>
 			</div>
 			<div class="div"></div>
-			<div class="div">
-				<h5>FACTURA NUM: <?= $fact_num; ?>
-				</h5>
-				<h5>FECHA:
-				</h5>
-				<h5>CONDICION: CREDITO 30 DIAS
-				</h5>
+			<div class="div" style="text-align: center; font-size: 12px; line-height: 0.1;padding: -2px;">
+				<h6>FACTURA NUM: <?= $fact_num; ?>
+				</h6>
+				<h6>FECHA:
+				</h6>
+				<h6>CONDICION: CREDITO 30 DIAS
+				</h6>
 			</div>
 		</div>
 		<div class="row">
@@ -103,17 +103,17 @@ include '../../services/adm/fac_jorinacha/fac.php';
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th style="text-align: center;">
-							<h4>DESCRIPCION</h4>
+						<th style="text-align: center; font-size: 12px; line-height: 0.1;padding: -2px;">
+							<h6>DESCRIPCION</h6>
 						</th>
-						<th style="text-align: center;">
-							<h4>CANT</h4>
+						<th style="text-align: center; font-size: 12px; line-height: 0.1;padding: -2px;">
+							<h6>CANT</h6>
 						</th>
-						<th style="text-align: center;">
-							<h4>PRECIO</h4>
+						<th style="text-align: center; font-size: 12px; line-height: 0.1;padding: -2px;">
+							<h6>PRECIO</h6>
 						</th>
-						<th style="text-align: center;">
-							<h4>IMPORTE</h4>
+						<th style="text-align: center; font-size: 12px; line-height: 0.1;padding: -2px;">
+							<h6>IMPORTE</h6>
 						</th>
 
 					</tr>
@@ -139,10 +139,10 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					
 
 					<tr style="line-height: 0.1; padding: -2px;">
-						<td style="font-size: 12px; line-height: 0.1;"><?= $art_des; ?></td>
-						<td style="text-align: center;  font-size: 12px; line-height: 0.1;"><?= $total_art; ?></td>
-						<td class=" text-align: center; font-size: 12px; line-height: 0.1;"><?= $prec_vta; ?></td>
-						<td class=" text-align: center; font-size: 12px; line-height: 0.1;"><?= $reng_neto; ?></td>
+						<td style="font-size: 12px; line-height: 0.1; padding: -2px;"><?= $art_des; ?></td>
+						<td style="text-align: center;  font-size: 12px; line-height: 0.1;padding: -2px;"><?= $total_art; ?></td>
+						<td class=" text-align: center; font-size: 12px; line-height: 0.1;padding: -2px;"><?= $prec_vta; ?></td>
+						<td class=" text-align: center; font-size: 12px; line-height: 0.1;padding: -2px;"><?= $reng_neto; ?></td>
 
 
 					</tr>
