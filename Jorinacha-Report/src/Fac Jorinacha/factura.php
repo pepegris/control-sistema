@@ -79,25 +79,25 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 		<div class="flex-container">
 			<div class="div" >
-				<h3>CLIENTE: <?= $cli_des; ?>
-				</h3>
-				<h3>COD CLIENTE: <?= $co_cli; ?>
-				</h3>
-				<h3>TELEFONO: <?= $telefonos; ?>
-				</h3>
-				<h3>RIF: <?= $rif; ?>
-				</h3>
-				<h3>DIR: <?= $direc1; ?>
-				</h3>
+				<h5>CLIENTE: <?= $cli_des; ?>
+				</h5>
+				<h5>COD CLIENTE: <?= $co_cli; ?>
+				</h5>
+				<h5>TELEFONO: <?= $telefonos; ?>
+				</h5>
+				<h5>RIF: <?= $rif; ?>
+				</h5>
+				<h5>DIR: <?= $direc1; ?>
+				</h5>
 			</div>
 			<div class="div"></div>
 			<div class="div" >
-				<h3>FACTURA NUM: <?= $fact_num; ?>
-				</h3>
-				<h3>FECHA:
-				</h3>
-				<h3>CONDICION: CREDITO 30 DIAS
-				</h3>
+				<h5>FACTURA NUM: <?= $fact_num; ?>
+				</h5>
+				<h5>FECHA:
+				</h5>
+				<h5>CONDICION: CREDITO 30 DIAS
+				</h5>
 			</div>
 		</div>
 		<div class="row">
@@ -110,16 +110,16 @@ include '../../services/adm/fac_jorinacha/fac.php';
 				<thead style=" text-align: center; line-height: 0.1;padding: -2px;">
 					<tr>
 						<th>
-							<h3>DESCRIPCION</h3>
+							<h5>DESCRIPCION</h5>
 						</th>
 						<th>
-							<h3>CANT</h3>
+							<h5>CANT</h5>
 						</th>
 						<th>
-							<h3>PRECIO</h3>
+							<h5>PRECIO</h5>
 						</th>
 						<th>
-							<h3>IMPORTE</h3>
+							<h5>IMPORTE</h5>
 						</th>
 
 					</tr>
@@ -146,10 +146,10 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 
 						<tr style="line-height: 1; padding: 1px;">
-							<td style="font-size: 18px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
-							<td style="text-align: center;  font-size: 18px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
-							<td style=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= $prec_vta ; ?></td>
-							<td style=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= $reng_neto ; ?></td>
+							<td style="font-size: 17px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
+							<td style="text-align: center;  font-size: 17px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
+							<td style=" text-align: right; font-size: 17px; line-height: 1;padding: 1px;"><?= $prec_vta ; ?></td>
+							<td style=" text-align: right; font-size: 17px; line-height: 1;padding: 1px;"><?= $reng_neto ; ?></td>
 
 
 						</tr>
@@ -157,7 +157,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					}
 					?>
 					<tr><td></td></tr>
-					<tr style="line-height: 1; padding: 1px; text-align:right; font-size: 18px;">
+					<tr style="line-height: 1; padding: 1px; text-align:right; font-size: 17px;">
 
 						<td colspan="4">
 							Total Pares : <?= $total_pares; ?>  
@@ -165,7 +165,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 						</td>
 					</tr>
 					<tr style="line-height: 1; padding: 1px; text-align:right;">
-						<td colspan="4" style="line-height: 1; padding: 1px; text-align:right; font-size: 18px; ">
+						<td colspan="4" style="line-height: 1; padding: 1px; text-align:right; font-size: 17px; ">
 
 							<p> <b>Sub Total: </b><?= number_format($tot_bruto,  2,',', '.'); ?></p>
 							<p><b>%Desc. % :</b>0,00</p>
