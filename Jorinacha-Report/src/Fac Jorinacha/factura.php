@@ -68,8 +68,8 @@
 
 			<div class="flex-container">
 				<div class="div">1</div>
-				<div lass="div">2</div>
-				<div lass="div">3</div>
+				<div class="div">2</div>
+				<div class="div">3</div>
 			</div>
 
 
