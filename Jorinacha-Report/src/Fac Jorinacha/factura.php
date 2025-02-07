@@ -37,6 +37,8 @@
 
 ?>
 <br>
+<br>
+<br><br><br><br><br>
 		<div class="container">
 			<div class="row">
             
@@ -89,22 +91,34 @@
 	<thead >
 		<tr >
 			<th style="text-align: center;">
-				<h4>Equipo</h4>
+				<h4>DESCRIPCION</h4>
 			</th>
 			<th style="text-align: center;">
-				<h4>Estado</h4>
+				<h4>CANT</h4>
 			</th>
 			<th style="text-align: center;">
-				<h4>Descipcion</h4>
+				<h4>PRECIO</h4>
 			</th>
 			<th style="text-align: center;">
-				<h4>Fecha</h4>
+				<h4>IMPORTE</h4>
 			</th>
 			
 		</tr>
 	</thead>
 	<tbody>
 	
+		<tr>
+			<td style="text-align: center;">EQUIOP</td>
+
+			<td style="text-align: center;">ESTA</td>
+			
+			<td class=" text-align: center; ">A></td>
+			<td class=" text-align: center;">B></td>
+			
+			
+		</tr>
+
+			
 		<tr>
 			<td style="text-align: center;">EQUIOP</td>
 
