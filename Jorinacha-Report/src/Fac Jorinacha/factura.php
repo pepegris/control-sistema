@@ -4,7 +4,7 @@ ini_set('max_execution_time', 3600);
 
 require "../../includes/log.php";
 include '../../services/mysql.php';
-include '../../services/adm/Fac Jorinacha/fac.php';
+include '../../services/adm/fac_jorinacha/fac.php';
 
 
 if ($_GET) {
