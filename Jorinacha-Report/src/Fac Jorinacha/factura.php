@@ -66,7 +66,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 
 	?>
-	<br><br><br><br><br>
+	<br><br><br><br><br><br>
 
 
 	<div class="container">
@@ -101,18 +101,18 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 			<pre></pre>
 			<table class="">
-				<thead  style=" text-align: center; line-height: 0.1;padding: -2px;">
+				<thead style=" text-align: center; line-height: 0.1;padding: -2px;">
 					<tr>
-						<th >
+						<th>
 							<h6>DESCRIPCION</h6>
 						</th>
-						<th >
+						<th>
 							<h6>CANT</h6>
 						</th>
-						<th >
+						<th>
 							<h6>PRECIO</h6>
 						</th>
-						<th >
+						<th>
 							<h6>IMPORTE</h6>
 						</th>
 
@@ -124,6 +124,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					<?php
 
 					$res_reng_fact = get_Reng_Fact((int)$factura);
+					$total_pares=0;
 					for ($e = 0; $e < count($res_reng_fact); $e++) {
 
 						$art_des = $res_reng_fact[$e]['art_des'];
@@ -131,37 +132,36 @@ include '../../services/adm/fac_jorinacha/fac.php';
 						$prec_vta = $res_reng_fact[$e]['prec_vta'];
 						$reng_neto = $res_reng_fact[$e]['reng_neto'];
 
-					
+						$total_pares+=$total_art;
 
 
 
 					?>
-					
-
-					<tr style="line-height: 1; padding: 1px;">
-						<td style="font-size: 12px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
-						<td style="text-align: center;  font-size: 12px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
-						<td class=" text-align: center; font-size: 12px; line-height: 1;padding: 1px;"><?= $prec_vta; ?></td>
-						<td class=" text-align: center; font-size: 12px; line-height: 1;padding: 1px;"><?= $reng_neto; ?></td>
 
 
-					</tr>
+						<tr style="line-height: 1; padding: 1px;">
+							<td style="font-size: 12px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
+							<td style="text-align: center;  font-size: 12px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
+							<td class=" text-align: center; font-size: 12px; line-height: 1;padding: 1px;"><?= $prec_vta; ?></td>
+							<td class=" text-align: center; font-size: 12px; line-height: 1;padding: 1px;"><?= $reng_neto; ?></td>
+
+
+						</tr>
 					<?php
 					}
 					?>
-					<tr>
-						<td>&nbsp;</td>
-						<td><a href="#"> &nbsp; </a></td>
-						<td class="text-right">&nbsp;</td>
-						<td class="text-right ">&nbsp;</td>
 
-					</tr>
 
 					<tr>
 
-						<td colspan="3" style="text-align: right;">Recibido Firma :</td>
+						<td colspan="3" style="text-align: right;">Total Pares : <?= $total_pares; ?></td>
 						<td style="text-align: right;">
-							<hr>
+						
+							<p > <b>Sub Total: </b><?= $tot_bruto; ?></p>
+							<p ><b>%Desc. % :</b>0.00</p>
+							<p ><b>I.V.A 16% : </b><?= $iva; ?></p>
+							<p ><b>Neto: </b><?= $tot_neto; ?></p>
+
 						</td>
 
 
@@ -179,9 +179,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 
 
-		<p class="text-right ">der</p>
-		<p class="text-right "><b>Dir: </b>der</p>
-		<p class="text-right "><b>Tlf: </b>der/p>
+
 
 
 
