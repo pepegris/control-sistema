@@ -77,7 +77,7 @@
 				</h4>
 				<h4>TELEFONO: <?= $telefonos ?>
 				</h4>
-				<h4>RIF:
+				<h4>RIF: <?= $rif ?>
 				</h4>
 			</div>
 			<div class="div"></div>
