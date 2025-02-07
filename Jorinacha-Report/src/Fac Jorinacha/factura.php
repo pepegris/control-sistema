@@ -138,11 +138,11 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					?>
 					
 
-					<tr style="line-height: 0.1; padding: -2px;">
-						<td style="font-size: 12px; line-height: 0.1; padding: -2px;"><?= $art_des; ?></td>
-						<td style="text-align: center;  font-size: 12px; line-height: 0.1;padding: -2px;"><?= $total_art; ?></td>
-						<td class=" text-align: center; font-size: 12px; line-height: 0.1;padding: -2px;"><?= $prec_vta; ?></td>
-						<td class=" text-align: center; font-size: 12px; line-height: 0.1;padding: -2px;"><?= $reng_neto; ?></td>
+					<tr style="line-height: 1; padding: 1px;">
+						<td style="font-size: 12px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
+						<td style="text-align: center;  font-size: 12px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
+						<td class=" text-align: center; font-size: 12px; line-height: 1;padding: 1px;"><?= $prec_vta; ?></td>
+						<td class=" text-align: center; font-size: 12px; line-height: 1;padding: 1px;"><?= $reng_neto; ?></td>
 
 
 					</tr>
