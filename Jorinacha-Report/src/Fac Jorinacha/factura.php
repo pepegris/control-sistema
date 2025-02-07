@@ -77,7 +77,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 	<div class="container">
 
 		<div class="flex-container">
-			<div class="div" style=" font-size: 18px; line-height: 0.1;padding: -2px;">
+			<div class="div" >
 				<h6>CLIENTE: <?= $cli_des; ?>
 				</h6>
 				<h6>COD CLIENTE: <?= $co_cli; ?>
@@ -90,7 +90,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 				</h6>
 			</div>
 			<div class="div"></div>
-			<div class="div" style=" font-size: 18px; line-height: 0.1;padding: -2px;">
+			<div class="div" >
 				<h6>FACTURA NUM: <?= $fact_num; ?>
 				</h6>
 				<h6>FECHA:
