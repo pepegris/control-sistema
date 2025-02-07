@@ -77,7 +77,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 	<div class="container">
 
 		<div class="flex-container">
-			<div class="div" style=" font-size: 12px; line-height: 0.1;padding: -2px;">
+			<div class="div" style=" font-size: 15px; line-height: 0.1;padding: -2px;">
 				<h6>CLIENTE: <?= $cli_des; ?>
 				</h6>
 				<h6>COD CLIENTE: <?= $co_cli; ?>
@@ -90,7 +90,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 				</h6>
 			</div>
 			<div class="div"></div>
-			<div class="div" style=" font-size: 12px; line-height: 0.1;padding: -2px;">
+			<div class="div" style=" font-size: 15px; line-height: 0.1;padding: -2px;">
 				<h6>FACTURA NUM: <?= $fact_num; ?>
 				</h6>
 				<h6>FECHA:
@@ -145,10 +145,10 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 
 						<tr style="line-height: 1; padding: 1px;">
-							<td style="font-size: 12px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
-							<td style="text-align: center;  font-size: 12px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
-							<td class=" text-align: center; font-size: 12px; line-height: 1;padding: 1px;"><?= $prec_vta; ?></td>
-							<td class=" text-align: center; font-size: 12px; line-height: 1;padding: 1px;"><?= $reng_neto; ?></td>
+							<td style="font-size: 15px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
+							<td style="text-align: center;  font-size: 15px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
+							<td class=" text-align: center; font-size: 15px; line-height: 1;padding: 1px;"><?= $prec_vta; ?></td>
+							<td class=" text-align: center; font-size: 15px; line-height: 1;padding: 1px;"><?= $reng_neto; ?></td>
 
 
 						</tr>
@@ -159,7 +159,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					<tr style="line-height: 1; padding: 1px; text-align:right;">
 
 						<td colspan="4">
-							Total Pares : <?= $total_pares; ?>
+							Total Pares : <?= $total_pares; ?>  
 							Total Bultos : *,***.**
 						</td>
 					</tr>
