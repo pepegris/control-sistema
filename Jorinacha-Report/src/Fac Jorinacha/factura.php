@@ -106,13 +106,13 @@ include '../../services/adm/fac_jorinacha/fac.php';
 						<th>
 							<h6>DESCRIPCION</h6>
 						</th>
-						<th>
+						<th style="text-align: right;">
 							<h6>CANT</h6>
 						</th>
-						<th>
+						<th style="text-align: right;">
 							<h6>PRECIO</h6>
 						</th>
-						<th>
+						<th style="text-align: right;">
 							<h6>IMPORTE</h6>
 						</th>
 
@@ -124,7 +124,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					<?php
 
 					$res_reng_fact = get_Reng_Fact((int)$factura);
-					$total_pares=0;
+					$total_pares = 0;
 					for ($e = 0; $e < count($res_reng_fact); $e++) {
 
 						$art_des = $res_reng_fact[$e]['art_des'];
@@ -132,7 +132,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 						$prec_vta = $res_reng_fact[$e]['prec_vta'];
 						$reng_neto = $res_reng_fact[$e]['reng_neto'];
 
-						$total_pares+=$total_art;
+						$total_pares += $total_art;
 
 
 
@@ -151,16 +151,24 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					}
 					?>
 
+					<tr>
+
+						<td colspan="3" style="text-align: right;">
+							Total Pares : <?= $total_pares; ?>
+							Total Bultos :  *,***.**
+						</td>
+
+
+					</tr>
 
 					<tr>
 
-						<td colspan="3" style="text-align: right;">Total Pares : <?= $total_pares; ?></td>
-						<td style="text-align: right;">
-						
-							<p > <b>Sub Total: </b><?= $tot_bruto; ?></p>
-							<p ><b>%Desc. % :</b>0.00</p>
-							<p ><b>I.V.A 16% : </b><?= $iva; ?></p>
-							<p ><b>Neto: </b><?= $tot_neto; ?></p>
+						<td  colspan="3" style="text-align: right;">
+
+							<p> <b>Sub Total: </b><?= $tot_bruto; ?></p>
+							<p><b>%Desc. % :</b>0.00</p>
+							<p><b>I.V.A 16% : </b><?= $iva; ?></p>
+							<p><b>Neto: </b><?= $tot_neto; ?></p>
 
 						</td>
 
