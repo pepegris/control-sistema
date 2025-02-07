@@ -13,7 +13,7 @@ if ($_GET) {
 
 	$res_fact = getFact($factura);
 	$fact_num = $res_fact['fact_num'];
-	$fec_emis = $res_fact['fec_emis'];
+	#$fec_emis = $res_fact['fec_emis'];
 	$tot_bruto = $res_fact['tot_bruto'];
 	$iva =  $res_fact['iva'];
 	$tot_neto = $res_fact['tot_neto'];
@@ -22,7 +22,7 @@ if ($_GET) {
 	$telefonos =  $res_fact['telefonos'];
 	$rif =  $res_fact['rif'];
 
-	$fecha = $fec_emis->format('d-m-Y');
+	#$fecha = $fec_emis->format('d-m-Y');
 
 }
 
