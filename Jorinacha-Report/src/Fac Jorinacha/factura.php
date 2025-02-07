@@ -35,8 +35,7 @@
 
 		.flex-container {
 			display: flex;
-			justify-content: space-evenly;
-			background-color: DodgerBlue;
+			justify-content: space-between;
 		}
 
 		.flex-container>.div {
