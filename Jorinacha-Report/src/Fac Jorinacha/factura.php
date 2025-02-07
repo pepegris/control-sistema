@@ -135,8 +135,8 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 						$art_des = $res_reng_fact[$e]['art_des'];
 						$total_art = $res_reng_fact[$e]['total_art'];
-						$prec_vta = $res_reng_fact[$e]['prec_vta'];
-						$reng_neto = $res_reng_fact[$e]['reng_neto'];
+						$prec_vta = number_format($res_reng_fact[$e]['prec_vta'],  2,',', '.');
+						$reng_neto = number_format($res_reng_fact[$e]['reng_neto'],  2,',', '.');
 
 						$total_pares += $total_art;
 
@@ -148,8 +148,8 @@ include '../../services/adm/fac_jorinacha/fac.php';
 						<tr style="line-height: 1; padding: 1px;">
 							<td style="font-size: 18px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
 							<td style="text-align: center;  font-size: 18px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
-							<td class=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= number_format($prec_vta,  2,',', '.') ; ?></td>
-							<td class=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= number_format($reng_neto,  2,',', '.') ; ?></td>
+							<td class=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= $prec_vta ; ?></td>
+							<td class=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= $reng_neto ; ?></td>
 
 
 						</tr>
