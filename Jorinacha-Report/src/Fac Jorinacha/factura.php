@@ -7,20 +7,20 @@ include '../../services/mysql.php';
 include '../../services/adm/Fac Jorinacha/fac.php';
 
 
-if ($_POST) {
-	$empresa = $_POST['empresa'];
-	$factura = $_POST['factura'];
+if ($_GET) {
+	$empresa = $_GET['empresa'];
+	$factura = $_GET['factura'];
 
-	$res0 = getFact($factura);
-	$fact_num = $row['fact_num'];
-	$fec_emis = $row['fec_emis'];
-	$tot_bruto = $row['tot_bruto'];
-	$iva =  $row['iva'];
-	$tot_neto = $row['tot_neto'];
-	$cli_des = $row['cli_des'];
-	$direc1 =  $row['direc1'];
-	$telefonos =  $row['telefonos'];
-	$rif =  $row['rif'];
+	$res_fact = getFact($factura);
+	$fact_num = $res_fact['fact_num'];
+	$fec_emis = $res_fact['fec_emis'];
+	$tot_bruto = $res_fact['tot_bruto'];
+	$iva =  $res_fact['iva'];
+	$tot_neto = $res_fact['tot_neto'];
+	$cli_des = $res_fact['cli_des'];
+	$direc1 =  $res_fact['direc1'];
+	$telefonos =  $res_fact['telefonos'];
+	$rif =  $res_fact['rif'];
 
 	$fecha = $fec_emis->format('d-m-Y');
 
