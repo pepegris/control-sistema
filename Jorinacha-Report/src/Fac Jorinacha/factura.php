@@ -148,8 +148,8 @@ include '../../services/adm/fac_jorinacha/fac.php';
 						<tr style="line-height: 1; padding: 1px;">
 							<td style="font-size: 18px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
 							<td style="text-align: center;  font-size: 18px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
-							<td class=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= $prec_vta ; ?></td>
-							<td class=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= $reng_neto ; ?></td>
+							<td style=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= $prec_vta ; ?></td>
+							<td style=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= $reng_neto ; ?></td>
 
 
 						</tr>
