@@ -198,8 +198,6 @@ include '../../services/adm/fac_jorinacha/fac.php';
 </head>
 
 <body>
-	<center><input type="button" name="imprimir" value="Imprimir" onclick="window.print();"> </center>
-	<br>
 
 </body>
 
