@@ -146,10 +146,10 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 
 						<tr style="line-height: 1; padding: 1px;">
-							<td style="font-size: 20px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
-							<td style="text-align: center;  font-size: 20px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
-							<td class=" text-align: center; font-size: 20px; line-height: 1;padding: 1px;"><?= number_format($prec_vta,  2,',', '.') ; ?></td>
-							<td class=" text-align: center; font-size: 20px; line-height: 1;padding: 1px;"><?= number_format($reng_neto,  2,',', '.') ; ?></td>
+							<td style="font-size: 18px; line-height: 1; padding: 1px;"><?= $art_des; ?></td>
+							<td style="text-align: center;  font-size: 18px; line-height: 1;padding: 1px;"><?= $total_art; ?></td>
+							<td class=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= number_format($prec_vta,  2,',', '.') ; ?></td>
+							<td class=" text-align: right; font-size: 18px; line-height: 1;padding: 1px;"><?= number_format($reng_neto,  2,',', '.') ; ?></td>
 
 
 						</tr>
@@ -157,7 +157,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					}
 					?>
 					<tr><td></td></tr>
-					<tr style="line-height: 1; padding: 1px; text-align:right;">
+					<tr style="line-height: 1; padding: 1px; text-align:right; font-size: 18px;">
 
 						<td colspan="4">
 							Total Pares : <?= $total_pares; ?>  
@@ -165,7 +165,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 						</td>
 					</tr>
 					<tr style="line-height: 1; padding: 1px; text-align:right;">
-						<td colspan="4" style="line-height: 1; padding: 1px; text-align:right; ">
+						<td colspan="4" style="line-height: 1; padding: 1px; text-align:right; font-size: 18px; ">
 
 							<p> <b>Sub Total: </b><?= number_format($tot_bruto,  2,',', '.'); ?></p>
 							<p><b>%Desc. % :</b>0,00</p>
