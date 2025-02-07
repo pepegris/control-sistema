@@ -139,7 +139,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					?>
 					
 
-					<tr>
+					<tr style="line-height: 0.1; padding: 0.1px;">
 						<td style="font-size: 12px; line-height: 0.1;"><?= $art_des; ?></td>
 						<td style="text-align: center;  font-size: 12px; line-height: 0.1;"><?= $total_art; ?></td>
 						<td class=" text-align: center; font-size: 12px; line-height: 0.1;"><?= $prec_vta; ?></td>
