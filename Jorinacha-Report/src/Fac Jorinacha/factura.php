@@ -164,7 +164,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 							Total Bultos : *,***.**
 						</td>
 					</tr>
-					<tr style="line-height: 1; padding: 1px; text-align:right; border: 1px solid;">
+					<tr style="line-height: 1; padding: 1px; text-align:right;">
 						<td colspan="4" style="line-height: 1; padding: 1px; text-align:right; border: 1px solid;">
 
 							<p> <b>Sub Total: </b><?= $tot_bruto; ?></p>
