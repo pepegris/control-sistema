@@ -63,14 +63,15 @@
 	<br><br><br><br><br>
 	<br><br><br><br><br>
 	<br><br><br><br><br>
-	<div class="container">
-		<div class="row">
-
-			<div class="flex-container">
+	<div class="flex-container">
 				<div class="div">1</div>
 				<div class="div">2</div>
 				<div class="div">3</div>
 			</div>
+	<div class="container">
+		<div class="row">
+
+
 
 
 
