@@ -140,12 +140,10 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					
 
 					<tr>
-						<td style="font-size: 10px;"><?= $art_des; ?></td>
-
-						<td style="text-align: center;"><?= $total_art; ?></td>
-
-						<td class=" text-align: center; "><?= $prec_vta; ?></td>
-						<td class=" text-align: center;"><?= $reng_neto; ?></td>
+						<td style="font-size: 12px; line-height: 0.1;"><?= $art_des; ?></td>
+						<td style="text-align: center;  font-size: 12px; line-height: 0.1;"><?= $total_art; ?></td>
+						<td class=" text-align: center; font-size: 12px; line-height: 0.1;"><?= $prec_vta; ?></td>
+						<td class=" text-align: center; font-size: 12px; line-height: 0.1;"><?= $reng_neto; ?></td>
 
 
 					</tr>
