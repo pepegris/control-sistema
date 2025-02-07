@@ -17,6 +17,17 @@ include '../../services/adm/fac_jorinacha/fac.php';
 	<title>Factura</title>
 
 	<style>
+		@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
+
+		body,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-family: 'Bree Serif', serif;
+		}
 
 
 		.flex-container {
@@ -129,7 +140,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 					
 
 					<tr>
-						<td style="text-align: center;"><?= $art_des; ?></td>
+						<td style="font-size: 10px;"><?= $art_des; ?></td>
 
 						<td style="text-align: center;"><?= $total_art; ?></td>
 
