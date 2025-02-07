@@ -25,7 +25,7 @@ include '../../services/sqlserver.php';
 <div id="body">
 
 
-  <form action="routes.php" method="POST">
+  <form action="factura.php" method="POST">
 
     <div class="fieldset">
       <br>
