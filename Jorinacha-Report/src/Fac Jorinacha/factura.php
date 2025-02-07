@@ -90,11 +90,11 @@ include '../../services/adm/fac_jorinacha/fac.php';
 				<h5>DIR: <?= $direc1; ?>
 				</h5>
 			</div>
-			<div class="div"></div>
+		
 			<div class="div" >
 				<h5>FACTURA NUM: <?= $fact_num; ?>
 				</h5>
-				<h5>FECHA:
+				<h5>FECHA: <?= $fec_emis; ?>
 				</h5>
 				<h5>CONDICION: CREDITO 30 DIAS
 				</h5>
