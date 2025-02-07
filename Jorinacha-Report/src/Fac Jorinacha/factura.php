@@ -10,7 +10,7 @@ include '../../services/adm/Fac Jorinacha/fac.php';
 if ($_GET) {
 	$empresa = $_GET['empresa'];
 	$factura = $_GET['factura'];
-	var_dump($factura);
+	var_dump((int)$factura);
 	$res_fact = getFact($factura);
 	var_dump($res_fact);
 	$fact_num = $res_fact['fact_num'];
