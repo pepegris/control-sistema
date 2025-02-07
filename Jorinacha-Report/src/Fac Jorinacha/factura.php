@@ -106,7 +106,7 @@ include '../../services/adm/fac_jorinacha/fac.php';
 
 
 			<pre></pre>
-			<table class="">
+			<table class="table">
 				<thead style=" text-align: center; line-height: 0.1;padding: -2px;">
 					<tr>
 						<th>
