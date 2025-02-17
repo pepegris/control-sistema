@@ -11,6 +11,8 @@ $sedes_ar = array(
     "Sucursal Coro1" ,
     "Sucursal Coro2" ,
     "Sucursal Coro3" ,
+    "Sucursal PtoFijo1" ,
+    "Sucursal PtoFijo2" ,
 
 
     "Comercial Acari" ,
@@ -19,9 +21,7 @@ $sedes_ar = array(
     "Comercial Higue" ,
     "Comercial Valena" ,
     "Comercial Ojena" ,
-    "Comercial Punto Fijo" ,
     "Comercial Apura" ,
-    "Comercial Nachari" ,
     "Comercial Catica II" ,
 );
 
@@ -95,6 +95,8 @@ function Database($sede)
         "Sucursal Coro1" => 'CORO1',
         "Sucursal Coro2" => 'CORO2',
         "Sucursal Coro3" => 'CORO3',
+        "Sucursal PtoFijo1" => 'PTOFIJO1',
+        "Sucursal PtoFijo2" => 'PTOFIJO2',
 
         
         "Comercial Acari" => 'ACARI',
@@ -132,6 +134,8 @@ function Cliente($sede)
         "Sucursal Coro1" => 'S05',
         "Sucursal Coro2" => 'S06',
         "Sucursal Coro3" => 'S07',
+        "Sucursal PtoFijo1" => 'S08',
+        "Sucursal PtoFijo2" => 'S09',
 
 
         "Comercial Acari"    =>     'T04',
