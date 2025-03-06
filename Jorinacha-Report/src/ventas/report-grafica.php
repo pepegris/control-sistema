@@ -55,10 +55,10 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       $sede = "Comercial Corina II";
     }
 
-    elseif ($sede == 'Sucursal PtoFijo1' && $Month <= 02 && $Year == '2024') {
+    elseif ($sede == 'Sucursal PtoFijo1'  && $Year == '2024') {
       $sede = "Comercial Punto Fijo";
     }
-    elseif ($sede == 'Sucursal PtoFijo2' && $Month <= 02 && $Year == '2024') {
+    elseif ($sede == 'Sucursal PtoFijo2'  && $Year == '2024') {
       $sede = "Comercial Nachari";
     }
 
