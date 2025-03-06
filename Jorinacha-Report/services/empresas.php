@@ -5,7 +5,7 @@
 $sedes_ar = array(
     "Previa Shop",
     "Sucursal Caracas I",
-    #"Sucursal Caracas II",
+    "Sucursal Caracas II",
     "Sucursal Cagua",
     "Sucursal Maturin",
     "Sucursal Coro1" ,
