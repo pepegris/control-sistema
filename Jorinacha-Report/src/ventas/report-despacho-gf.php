@@ -84,11 +84,11 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       $sede = "Comercial Corina II";
       $tipo = 'factura';
     }
-    elseif ($sede == 'Sucursal PtoFijo1'  && $Year == '2025') {
+    elseif ($sede == 'Sucursal PtoFijo1'  && $Year == '2024') {
       $sede = "Comercial Punto Fijo";
       $tipo = 'factura';
     }
-    elseif ($sede == 'Sucursal PtoFijo2'  && $Year == '2025') {
+    elseif ($sede == 'Sucursal PtoFijo2'  && $Year == '2024') {
       $sede = "Comercial Nachari";
       $tipo = 'factura';
     }
