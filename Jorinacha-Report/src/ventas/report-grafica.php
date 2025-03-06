@@ -55,6 +55,14 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       $sede = "Comercial Corina II";
     }
 
+    elseif ($sede == 'Sucursal PtoFijo1' && $Month <= 02 && $Year == '2025') {
+      $sede = "Comercial Punto Fijo";
+    }
+    elseif ($sede == 'Sucursal PtoFijo2' && $Month <= 02 && $Year == '2025') {
+      $sede = "Comercial Nachari";
+    }
+
+
 
     if ($sede == 'Comercial Merina' && $Month > 3 && $Year == '2023') {
       $sede = "Sucursal Caracas I";
@@ -65,12 +73,20 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     } elseif ($sede == 'Comercial Matur' && $Month > 9 && $Year == '2023') {
       $sede = "Sucursal Maturin";
     } elseif ($sede == 'Comercial Trina' && $Month > 10 && $Year == '2024') {
-      $sede = "Sucursal Coro3";
+      $sede = "Sucursal Coro1";
     }elseif ($sede == 'Comercial Corina I' && $Month > 10 && $Year == '2024') {
-      $sede = "Sucursal Coro3";
+      $sede = "Sucursal Coro2";
     }elseif ($sede == 'Comercial Corina II' && $Month > 10 && $Year == '2024') {
       $sede = "Sucursal Coro3";
     }
+
+    elseif ($sede == "Comercial Punto Fijo" && $Month > 02 && $Year == '2025') {
+      $sede = 'Sucursal PtoFijo1';
+    }
+    elseif ($sede == "Comercial Nachari" && $Month > 02 && $Year == '2025') {
+      $sede = 'Sucursal PtoFijo2';
+    }
+
 
 
     $ventas = getVendido_Grafica($sede, $fecha_1, $fecha_2, $Month);

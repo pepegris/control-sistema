@@ -44,6 +44,10 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
     $tipo = 'nota';
   }elseif ($sede == 'Sucursal Coro3') {
     $tipo = 'nota';
+  }elseif ($sede == 'Sucursal PtoFijo1') {
+    $tipo = 'nota';
+  }elseif ($sede == 'Sucursal PtoFijo2') {
+    $tipo = 'nota';
   }
 
 
@@ -80,6 +84,15 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       $sede = "Comercial Corina II";
       $tipo = 'factura';
     }
+    elseif ($sede == 'Sucursal PtoFijo1' && $Month <= 02 && $Year == '2025') {
+      $sede = "Comercial Punto Fijo";
+      $tipo = 'factura';
+    }
+    elseif ($sede == 'Sucursal PtoFijo2' && $Month <= 02 && $Year == '2025') {
+      $sede = "Comercial Nachari";
+      $tipo = 'factura';
+    }
+
 
 
     if ($sede == 'Comercial Merina' && $Month > 3 && $Year == '2023') {
@@ -95,13 +108,21 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       $sede = "Sucursal Maturin";
       $tipo = 'nota';
     }elseif ($sede == 'Comercial Trina' && $Month > 10 && $Year == '2024') {
-      $sede = "Sucursal Coro3";
+      $sede = "Sucursal Coro1";
       $tipo = 'nota';
     }elseif ($sede == 'Comercial Corina I' && $Month > 10 && $Year == '2024') {
-      $sede = "Sucursal Coro3";
+      $sede = "Sucursal Coro2";
       $tipo = 'nota';
     }elseif ($sede == 'Comercial Corina II' && $Month > 10 && $Year == '2024') {
       $sede = "Sucursal Coro3";
+      $tipo = 'nota';
+    }
+    elseif ($sede == "Comercial Punto Fijo" && $Month > 02 && $Year == '2025') {
+      $sede = 'Sucursal PtoFijo1';
+      $tipo = 'nota';
+    }
+    elseif ($sede == "Comercial Nachari" && $Month > 02 && $Year == '2025') {
+      $sede = 'Sucursal PtoFijo2';
       $tipo = 'nota';
     }
 
