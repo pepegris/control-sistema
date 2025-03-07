@@ -1,10 +1,10 @@
 <?php
 
 
-function getVendido_Grafica($sede, $fecha1, $fecha2,$mes)
+function getVendido_Grafica($sede, $fecha1, $fecha2, $mes)
 {
     $database = Database($sede);
-    
+
     if ($database != null) {
         try {
 
@@ -26,23 +26,25 @@ function getVendido_Grafica($sede, $fecha1, $fecha2,$mes)
             $conn2 = sqlsrv_connect($serverName, $connectionInfo2);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                if ($sede == 'Comercial Merina' ) {
+                if ($sede == 'Comercial Merina') {
                     $sede = "Sucursal Caracas I";
-                  } elseif ($sede == 'Comercial Merina3' ) {
+                } elseif ($sede == 'Comercial Merina3') {
                     $sede = "Sucursal Caracas II";
-                  } elseif ($sede == 'Comercial Kagu' ) {
+                } elseif ($sede == 'Comercial Kagu') {
                     $sede = "Sucursal Cagua";
-                  } elseif ($sede == 'Comercial Matur') {
+                } elseif ($sede == 'Comercial Matur') {
                     $sede = "Sucursal Maturin";
-                  } elseif ($sede == "Comercial Trina") {
-                    $sede = 'Sucursal Coro1' ;
-                  }
-                  elseif ($sede =="Comercial Corina I" ) {
-                    $sede ='Sucursal Coro2' ;
-                  }
-                  elseif ($sede == "Comercial Corina II") {
+                } elseif ($sede == "Comercial Trina") {
+                    $sede = 'Sucursal Coro1';
+                } elseif ($sede == "Comercial Corina I") {
+                    $sede = 'Sucursal Coro2';
+                } elseif ($sede == "Comercial Corina II") {
                     $sede = 'Sucursal Coro3';
-                  }
+                } elseif ($sede == 'Comercial Punto Fijo'  ) {
+                    $sede = "Sucursal PtoFijo1";
+                } elseif ($sede == 'Comercial Nachari'  ) {
+                    $sede = "Sucursal PtoFijo2";
+                }
 
 
                 $total_art = $row['total_art'];
@@ -72,7 +74,7 @@ function getVendido_Grafica($sede, $fecha1, $fecha2,$mes)
 
 
 
-function getDev_Grafica($sede, $fecha1, $fecha2,$mes)
+function getDev_Grafica($sede, $fecha1, $fecha2, $mes)
 {
 
     $database = Database($sede);
@@ -100,23 +102,26 @@ function getDev_Grafica($sede, $fecha1, $fecha2,$mes)
             $conn2 = sqlsrv_connect($serverName, $connectionInfo2);
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                if ($sede == 'Comercial Merina' ) {
+                if ($sede == 'Comercial Merina') {
                     $sede = "Sucursal Caracas I";
-                  } elseif ($sede == 'Comercial Merina3' ) {
+                } elseif ($sede == 'Comercial Merina3') {
                     $sede = "Sucursal Caracas II";
-                  } elseif ($sede == 'Comercial Kagu' ) {
+                } elseif ($sede == 'Comercial Kagu') {
                     $sede = "Sucursal Cagua";
-                  } elseif ($sede == 'Comercial Matur') {
+                } elseif ($sede == 'Comercial Matur') {
                     $sede = "Sucursal Maturin";
-                  } elseif ($sede == "Comercial Trina") {
-                    $sede = 'Sucursal Coro1' ;
-                  }
-                  elseif ($sede =="Comercial Corina I" ) {
-                    $sede ='Sucursal Coro2' ;
-                  }
-                  elseif ($sede == "Comercial Corina II") {
+                } elseif ($sede == "Comercial Trina") {
+                    $sede = 'Sucursal Coro1';
+                } elseif ($sede == "Comercial Corina I") {
+                    $sede = 'Sucursal Coro2';
+                } elseif ($sede == "Comercial Corina II") {
                     $sede = 'Sucursal Coro3';
-                  }
+                } elseif ($sede == 'Comercial Punto Fijo'  ) {
+                    $sede = "Sucursal PtoFijo1";
+                } elseif ($sede == 'Comercial Nachari'  ) {
+                    $sede = "Sucursal PtoFijo2";
+                }
+
 
 
                 $total_art = $row['total_dev'];
@@ -166,16 +171,15 @@ function getDev_Grafica_fac($sede, $consulta)
             WHERE linea_des ='$consulta'
             group by linea_des
             order by total_dev desc";
-            
+
             $consulta = sqlsrv_query($conn, $sql);
-            
+
             while ($row = sqlsrv_fetch_array($consulta)) {
-            
+
                 $total_art = $row['total_dev'];
                 break;
             }
             return $total_art;
-
         } catch (\Throwable $th) {
 
             throw $th;
@@ -201,16 +205,15 @@ function getDev_Grafica_fac2($sede, $consulta)
             WHERE linea_des ='$consulta' AND  tienda= '$sede'
             group by linea_des
             order by total_dev desc";
-            
+
             $consulta = sqlsrv_query($conn, $sql);
-            
+
             while ($row = sqlsrv_fetch_array($consulta)) {
-            
+
                 $total_art = $row['total_dev'];
                 break;
             }
             return $total_art;
-
         } catch (\Throwable $th) {
 
             throw $th;
@@ -240,7 +243,7 @@ function deleteVendido_Grafica()
         $sql2 = "DELETE FROM art_grafica_dev";
         $consulta2 = sqlsrv_query($conn, $sql2);
 
-        if ($consulta1 == null && $consulta2 == null ) {
+        if ($consulta1 == null && $consulta2 == null) {
 
             $res = false;
             return $res;
@@ -274,6 +277,3 @@ function deleteVendido_Grafica()
 
 ); 
 */
-
-
-?>

@@ -131,6 +131,7 @@ include '../../services/sqlserver.php';
 
       <br>
       <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
+      
       <br>
     </div>
   </form>
