@@ -23,6 +23,7 @@ $sedes_ar = array(
     "Comercial Ojena" ,
     "Comercial Apura" ,
     "Comercial Catica II" ,
+    "Comercial Punto Fijo",
 );
 
 
