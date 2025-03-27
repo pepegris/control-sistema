@@ -124,6 +124,9 @@ function Cliente($sede)
         "Sucursal Coro1" => 'S05',
         "Sucursal Coro2" => 'S06',
         "Sucursal Coro3" => 'S07',
+        "Sucursal PtoFijo1" => 'S08',
+        "Sucursal PtoFijo2" => 'S09',
+
 
 
         "Comercial Acari"    =>     'T04',
