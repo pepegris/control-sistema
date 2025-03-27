@@ -12,14 +12,14 @@ $sedes_ar = array(
     "Sucursal Coro1" ,
     "Sucursal Coro2" ,
     "Sucursal Coro3" ,
+    "Sucursal PtoFijo1" ,
+    "Sucursal PtoFijo2" ,
 
     "Comercial Matur" ,
     
-    "Comercial Corina I",
-    "Comercial Corina II",
+
     "Comercial Punto Fijo",
     "Comercial Valena",
-    "Comercial Trina",
     "Comercial Nachari",
     "Comercial Higue",
     "Comercial Apura",
@@ -54,6 +54,8 @@ function Database2($sede)
         "Sucursal Coro1" => 'C_CORO1',
         "Sucursal Coro2" => 'C_CORO2',
         "Sucursal Coro3" => 'C_CORO3',
+        "Sucursal PtoFijo1" => 'C_PTOFIJO1',
+        "Sucursal PtoFijo2" => 'C_PTOFIJO2',
 
         "Comercial Matur" => 'C_MATUR',
 
