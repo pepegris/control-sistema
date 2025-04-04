@@ -23,7 +23,8 @@ function Factura_Ordenes($sede,$fecha,$campo7)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-            if ($cliente =='S07' or $cliente =='S06' or $cliente =='S05' or
+            if ($cliente =='S10' or $cliente =='S09' or $cliente =='S08' or
+                $cliente =='S07' or $cliente =='S06' or $cliente =='S05' or
                 $cliente =='S04' or $cliente =='S03' 
                 or $cliente =='S02' or $cliente =='S01'  ) {
 
@@ -95,9 +96,10 @@ function Reng_Factura($sede,$fecha,$fact_num)
 
 
 
-            if ($cliente =='S07' or $cliente =='S06' or $cliente =='S05' or
-            $cliente =='S04' or $cliente =='S03' 
-            or $cliente =='S02' or $cliente =='S01'  ) {
+            if ($cliente =='S10' or $cliente =='S09' or $cliente =='S08' or
+                $cliente =='S07' or $cliente =='S06' or $cliente =='S05' or
+                $cliente =='S04' or $cliente =='S03' 
+                or $cliente =='S02' or $cliente =='S01'  ) {
 
                 $sql = "SELECT not_ent.fact_num,reng_num,reng_nde.co_art, 
                 CONVERT(numeric(10,0), reng_nde.total_art) AS total_art, CONVERT(numeric(10,2), reng_nde.prec_vta) AS prec_vta,
@@ -371,9 +373,10 @@ function Up_Factura_Ordenes($sede,$fecha,$fact_num,$status1,$status2)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-            if ($cliente =='S07' or $cliente =='S06' or $cliente =='S05' or
-            $cliente =='S04' or $cliente =='S03' 
-            or $cliente =='S02' or $cliente =='S01'  ) {
+            if ($cliente =='S10' or $cliente =='S09' or $cliente =='S08' or
+                $cliente =='S07' or $cliente =='S06' or $cliente =='S05' or
+                $cliente =='S04' or $cliente =='S03' 
+                or $cliente =='S02' or $cliente =='S01'  ) {
 
                 $sql = "UPDATE not_ent SET campo7='IMPORTADO' WHERE co_cli='$cliente' AND FEC_EMIS='$fecha' AND fact_num='$fact_num' AND anulada=0";
                 $documento="Nota de Entrega $fact_num";        
