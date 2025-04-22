@@ -1,20 +1,25 @@
 <?php
 
 
-
 $sedes_ar = array(
     "Previa Shop",
+    "Inv Jorinacha",
     "Sucursal Caracas I",
     "Sucursal Caracas II",
     "Sucursal Cagua",
-    /*"Sucursal Maturin",*/
+    "Sucursal Maturin",
+    "Sucursal Coro1" ,
+    "Sucursal Coro2" ,
+    "Sucursal Coro3" ,
+    "Sucursal PtoFijo1" ,
+    "Sucursal PtoFijo2" ,
+    
+
     "Comercial Matur" ,
     
-    "Comercial Corina I",
-    "Comercial Corina II",
+
     "Comercial Punto Fijo",
     "Comercial Valena",
-    "Comercial Trina",
     "Comercial Nachari",
     "Comercial Higue",
     "Comercial Apura",
@@ -29,31 +34,38 @@ $sedes_ar = array(
 
 
 
+
 function Database2($sede)
 {
 
     $bd = array(
-        "Previa Shop" => 'PREVIA_A',
-        "Sucursal Caracas I" => 'CARACAS1',
-        "Sucursal Caracas II" => 'CARACAS2',
-        "Sucursal Cagua" => 'CAGUA',
-       /* "Sucursal Maturin" => 'MATURIN',*/
-        "Comercial Matur" => 'MATURA21',
-        
+        "Previa Shop" => 'C_PREVIA',
+        "Inv Jorinacha" => 'C_JORINA',
+        "Sucursal Caracas I" => 'C_CARACAS1',
+        "Sucursal Caracas II" => 'C_CARACAS2',
+        "Sucursal Cagua" => 'C_CAGUA',
+        "Sucursal Maturin" => 'C_MATURIN',
+        "Sucursal Coro1" => 'C_CORO1',
+        "Sucursal Coro2" => 'C_CORO2',
+        "Sucursal Coro3" => 'C_CORO3',
+        "Sucursal PtoFijo1" => 'C_PTOFIJO1',
+        "Sucursal PtoFijo2" => 'C_PTOFIJO2',
 
-        "Comercial Corina I" => 'CORINA21',
-        "Comercial Corina II" => 'CORI2_21',
-        "Comercial Punto Fijo" => 'PUFIJO21',
-        "Comercial Valena" => 'VALENA21',
-        "Comercial Trina" => 'TRAINA21',    
-        "Comercial Nachari" => 'NACHAR21',
-        "Comercial Higue" => 'HIGUE21',
-        "Comercial Apura" => 'APURA21',
-        "Comercial Vallepa" => 'VALLEP21',
-        "Comercial Ojena" => 'OJENA21',
-        "Comercial Puecruz" => 'PUECRU21',
-        "Comercial Acari" => 'ACARI21',
-        "Comercial Catica II" => 'CATICA21',
+        "Comercial Matur" => 'C_MATUR',
+
+        "Comercial Corina I" => 'C_CORINA1',
+        "Comercial Corina II" => 'C_CORINA2',
+        "Comercial Punto Fijo" => 'C_PUFIJO',
+        "Comercial Valena" => 'C_VALENA',
+        "Comercial Trina" => 'C_TRINA',
+        "Comercial Nachari" => 'C_NACHARI',
+        "Comercial Higue" => 'C_HIGUE',
+        "Comercial Apura" => 'C_APURA',
+        "Comercial Vallepa" => 'C_VALLEPA',
+        "Comercial Ojena" => 'C_OJENA',
+        "Comercial Puecruz" => 'C_PUECRUZ',
+        "Comercial Acari" => 'C_ACARI',
+        "Comercial Catica II" => 'C_CATICA2',
     );
 
     return $bd[$sede];
@@ -65,10 +77,16 @@ function Database($sede)
 
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
+        "Inv Jorinacha" => 'JORINA',
         "Sucursal Caracas I" => 'CARACAS1',
         "Sucursal Caracas II" => 'CARACAS2',
         "Sucursal Cagua" => 'CAGUA',
-        /*"Sucursal Maturin" => 'MATURIN',*/
+        "Sucursal Maturin" => 'MATURIN',
+        "Sucursal Coro1" => 'CORO1',
+        "Sucursal Coro2" => 'CORO2',
+        "Sucursal Coro3" => 'CORO3',
+
+
         "Comercial Matur" => 'MATUR',
 
         "Comercial Corina I" => 'CORINA1',
@@ -96,28 +114,35 @@ function Cliente($sede)
         "Sucursal Caracas I"    =>     'S01',
         "Sucursal Caracas II"    =>     'S02',
         "Sucursal Cagua" => 'S03',
-        /*"Sucursal Maturin" => 'S04',*/
-        "Comercial Matur"    =>     'T07',
-        
+        "Sucursal Maturin" => 'S04',
+        "Sucursal Coro1" => 'S05',
+        "Sucursal Coro2" => 'S06',
+        "Sucursal Coro3" => 'S07',
+        "Sucursal PtoFijo1" => 'S08',
+        "Sucursal PtoFijo2" => 'S09',
 
-        "Comercial Corina I"    =>     'T18',
-        "Comercial Corina II"    =>     'T22',
-        "Comercial Punto Fijo"    =>     'T13',
-        "Comercial Valena"    =>     'T10',
-        "Comercial Trina"    =>     'T16',
-        "Comercial Nachari"    =>     'T19',
-        "Comercial Higue"    =>     'T09',
-        "Comercial Apura"    =>     'T17',
-        "Comercial Vallepa"    =>     'T06',
-        "Comercial Ojena"    =>     'T12',
-        "Comercial Puecruz"    =>     'T05',
+
+
         "Comercial Acari"    =>     'T04',
+        "Comercial Puecruz"    =>     'T05',
+        "Comercial Vallepa"    =>     'T06',
+
+        "Comercial Higue"    =>     'T09',
+        "Comercial Valena"    =>     'T10',
+        "Comercial Ojena"    =>     'T12',
+        "Comercial Punto Fijo"    =>     'T13',
+        "Comercial Trina"    =>     'T16',
+        "Comercial Apura"    =>     'T17',
+        "Comercial Corina I"    =>     'T18',
+        "Comercial Nachari"    =>     'T19',
+        "Comercial Corina II"    =>     'T22',
         "Comercial Catica II"    =>     'T24',
 
     );
 
     return $bd[$sede];
 }
+
 
 function getReng_tip($sede, $tip_cob, $fecha1, $fecha2)
 {
