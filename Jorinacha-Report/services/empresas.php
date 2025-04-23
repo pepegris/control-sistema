@@ -5,7 +5,6 @@
 $sedes_ar = array(
     "Previa Shop",
     "Sucursal Caracas I",
-    "Sucursal Caracas II",
     "Sucursal Cagua",
     "Sucursal Maturin",
     "Sucursal Coro1" ,
@@ -18,10 +17,8 @@ $sedes_ar = array(
 
     "Comercial Acari" ,
     "Comercial Puecruz" ,
-    "Comercial Vallepa" ,
     "Comercial Higue" ,
     "Comercial Valena" ,
-    "Comercial Ojena" ,
     "Comercial Apura" ,
     "Comercial Catica II" ,
     
