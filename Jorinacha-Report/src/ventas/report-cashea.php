@@ -66,9 +66,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
 
 
         $res = getCobros_Cashea($sede, $fecha1, $fecha2 );
-        //var_dump($res);
-        var_dump($res[0]['cob_num']);
-        var_dump($res[1]['cob_num']);
+
         $n = 1;
         $total_mont_doc=0;
         for ($i = 0; $i < count($res); $i++) {
@@ -76,6 +74,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
 
           $cob_num = $res[$i]['cob_num'];
           $fec_cob = $res[$i]['fec_cob'];
+          $fecha = $fec_cob->format('d-m-Y');
           $doc_num = $res[$i]['doc_num'];
           $mont_doc = $res[$i]['mont_doc'];
           $tot_neto = $res[$i]['tot_neto'];
@@ -90,7 +89,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         <tr>
         <th scope='row'>$n</th>
         <td>$sede</td>
-        <td></td>
+        <td>$fecha</td>
 
         <td>$doc_num</td>
         <td>$cob_num </td>
