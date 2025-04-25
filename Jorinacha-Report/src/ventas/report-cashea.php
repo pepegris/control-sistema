@@ -116,6 +116,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
       <th colspan='6' ></th>
       <th  >Totales:</th>
       <td>" . $total_mont_doc . "</td>
+      <th  ></th>
       </tr>
       </tbody>
       </table>";
