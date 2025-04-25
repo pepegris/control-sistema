@@ -53,9 +53,8 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         <th scope='col'>Cobros</th>
         <th scope='col'>CI</th>
         <th scope='col'>Cliente</th>
-        <th scope='col'>Monto</th>
-        <th scope='col'>Deposito</th>
-        <th scope='col'>Descripción</th>
+        <th scope='col'>Monto por Cobrar</th>
+        <th scope='col'>Monto de la Factura</th>
 
       </tr>
     </thead>
@@ -75,25 +74,17 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         for ($i = 0; $i < count($res); $i++) {
 
 
-            
           $cob_num = $res[$i]['cob_num'];
           $fec_cob = $res[$i]['fec_cob'];
           $doc_num = $res[$i]['doc_num'];
           $mont_doc = $res[$i]['mont_doc'];
-          var_dump($cob_num);
-            break;
+          $tot_neto = $res[$i]['tot_neto'];
+          $co_cli = $res[$i]['co_cli'];
+          $cli_des = $res[$i]['cli_des'];
+
 
           $total_mont_doc += $mont_doc;
 
-          $res2 =getFactura_Cashea($sede, $doc_num );
-
-          $co_cli = $res2[$i]['co_cli'];
-          $cli_des = $res2[$i]['cli_des'];
-
-          $res3 = getDeposito_Cashea($sede, $cob_num);
-
-          $dep_num = $res3[$i]['dep_num'];
-          $descrip = $res3[$i]['descrip'];
 
           echo "
         <tr>
@@ -108,9 +99,8 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         <td>$cli_des</td>
         
         <td>$mont_doc</td>
+        <td>$tot_neto</td>
 
-        <td>$dep_num</td>
-        <td>$descrip</td>
 
 
         </tr>";

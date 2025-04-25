@@ -20,10 +20,13 @@ function getCobros_Cashea($sede, $fecha1, $fecha2)
             $connectionInfo = array("Database" => "$database", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-            $sql = "SELECT cobros.cob_num,cobros.fec_cob,reng_cob.doc_num  ,CONVERT(numeric(10,2), reng_tip.mont_doc) as mont_doc from cobros
+            $sql = "SELECT cobros.cob_num,cobros.fec_cob,reng_cob.doc_num  ,CONVERT(numeric(10,2), reng_tip.mont_doc) as mont_doc, 
+                    factura.tot_neto ,clientes.co_cli,clientes.cli_des from cobros
                     join reng_tip on cobros.cob_num=reng_tip.cob_num
                     join reng_cob on cobros.cob_num=reng_cob.cob_num
-                    where cod_caja='CASHEA' and cobros.fec_cob between '$fecha1' and '$fecha2'";
+					join factura on reng_cob.doc_num=factura.fact_num
+					join clientes on clientes.co_cli=factura.co_cli
+                    where cod_caja='CASHEA' and cobros.fec_cob between '$fecha1' and '$fecha2' and cobros.anulado=0";
 
 
 
@@ -36,6 +39,9 @@ function getCobros_Cashea($sede, $fecha1, $fecha2)
                 $cobros['fec_cob'] = $row['fec_cob'];
                 $cobros['doc_num'] = $row['doc_num'];
                 $cobros['mont_doc'] = $row['mont_doc'];
+                $cobros['tot_neto'] = $row['tot_neto'];
+                $cobros['co_cli'] = $row['co_cli'];
+                $cobros['cli_des'] = $row['cli_des'];
 
             }
 
