@@ -35,14 +35,15 @@ function getCobros_Cashea($sede, $fecha1, $fecha2)
 
             while ($row = sqlsrv_fetch_array($consulta)) {
 
-                $cobros['cob_num'] = $row['cob_num'];
+/*                 $cobros['cob_num'] = $row['cob_num'];
                 $cobros['fec_cob'] = $row['fec_cob'];
                 $cobros['doc_num'] = $row['doc_num'];
                 $cobros['mont_doc'] = $row['mont_doc'];
                 $cobros['tot_neto'] = $row['tot_neto'];
                 $cobros['co_cli'] = $row['co_cli'];
                 $cobros['cli_des'] = $row['cli_des'];
-
+ */
+                $cobros[] = $row;
             }
 
             $res = $cobros;
