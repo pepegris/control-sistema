@@ -55,7 +55,7 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         <th scope='col'>Cliente</th>
         <th scope='col'>Monto por Cobrar</th>
         <th scope='col'>Monto de la Factura</th>
-        <th scope='col'>Pares Vendidos</th
+
 
       </tr>
     </thead>
