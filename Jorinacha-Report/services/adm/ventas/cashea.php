@@ -37,7 +37,7 @@ function getCobros_Cashea($sede, $fecha1, $fecha2)
                     join reng_cob on cobros.cob_num=reng_cob.cob_num
 					join factura on reng_cob.doc_num=factura.fact_num
 					join clientes on clientes.co_cli=factura.co_cli
-                    where   cobros.fec_cob between '$fecha1' and '$fecha2' and cobros.anulado=0 and banco='CASHEA'  or cod_caja='CASHEA'"; 
+                    where  cod_caja='CASHEA' and  cobros.fec_cob between '$fecha1' and '$fecha2' and cobros.anulado=0"; 
 
 
 
