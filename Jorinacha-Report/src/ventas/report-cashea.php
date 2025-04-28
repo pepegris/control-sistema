@@ -81,11 +81,10 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
           $tot_neto = $res[$i]['tot_neto'];
           $co_cli = $res[$i]['co_cli'];
           $cli_des = $res[$i]['cli_des'];
-          $total_art = $res[$i]['total_art'];
+          
 
 
           $total_mont_doc += $mont_doc;
-          $total_total_art += $total_art;
 
 
           echo "
@@ -102,8 +101,6 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
         
         <td>$mont_doc</td>
         <td>$tot_neto</td>
-
-        <td>$total_art</td>
 
 
 
@@ -122,14 +119,12 @@ for ($e = 1; $e < count($sedes_ar); $e++) {
       <th  >Totales:</th>
       <td>" . $total_mont_doc . "</td>
       <th  ></th>
-      <td>" . $total_total_art . "</td>
       </tr>
       </tbody>
       </table>";
 
 
       $total_mont_doc =0;
-      $total_total_art =0;
 
 
 
