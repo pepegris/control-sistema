@@ -15,7 +15,6 @@ $sedes_ar = array(
     "Sucursal Ojeda" ,
     "Sucursal Valle" ,
 
-    "Comercial Vallepa" ,
     "Comercial Acari" ,
     
     "Comercial Puecruz" ,
