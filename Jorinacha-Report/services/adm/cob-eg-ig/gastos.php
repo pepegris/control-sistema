@@ -96,6 +96,10 @@ function Database($sede)
         "Sucursal Coro1" => 'CORO1',
         "Sucursal Coro2" => 'CORO2',
         "Sucursal Coro3" => 'CORO3',
+        "Sucursal PtoFijo1" => 'PTOFIJO1',
+        "Sucursal PtoFijo2" => 'PTOFIJO2',
+        "Sucursal Ojeda" => 'OJEDA',
+        "Sucursal Valle" => 'VAPASCUA',
 
 
         "Comercial Matur" => 'MATUR',
