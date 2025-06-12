@@ -14,14 +14,16 @@ $sedes_ar = array(
     "Sucursal PtoFijo2" ,
     "Sucursal Ojeda" ,
     "Sucursal Valle" ,
+    "Sucursal Guigue" ,
 
+    "Comercial Catica II" ,
     "Comercial Acari" ,
     
     "Comercial Puecruz" ,
     "Comercial Higue" ,
     "Comercial Valena" ,
     "Comercial Apura" ,
-    "Comercial Catica II" ,
+    
     
 );
 
@@ -99,6 +101,7 @@ function Database($sede)
         "Sucursal PtoFijo2" => 'PTOFIJO2',
         "Sucursal Ojeda" => 'OJEDA',
         "Sucursal Valle" => 'VAPASCUA', 
+        "Sucursal Guigue" => 'GUIGUE', 
 
         
         "Comercial Acari" => 'ACARI',
