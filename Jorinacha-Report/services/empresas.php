@@ -143,6 +143,7 @@ function Cliente($sede)
         "Sucursal PtoFijo2" => 'S09',
         "Sucursal Ojeda" => 'S10',
         "Sucursal Valle" => 'S11', 
+        "Sucursal Valle" => 'S12', 
         
 
 
