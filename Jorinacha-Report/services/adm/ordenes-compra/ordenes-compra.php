@@ -97,7 +97,7 @@ function Reng_Factura($sede,$fecha,$fact_num)
 
 
 
-            if ($cliente =='T12' or
+            if ($cliente =='S12' or $cliente =='S11' or
                 $cliente =='S10' or $cliente =='S09' or $cliente =='S08' or
                 $cliente =='S07' or $cliente =='S06' or $cliente =='S05' or
                 $cliente =='S04' or $cliente =='S03' 
@@ -375,7 +375,7 @@ function Up_Factura_Ordenes($sede,$fecha,$fact_num,$status1,$status2)
             $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 
-            if ($cliente =='T12' or
+            if ($cliente =='S12' or $cliente =='S11' or
                 $cliente =='S10' or $cliente =='S09' or $cliente =='S08' or
                 $cliente =='S07' or $cliente =='S06' or $cliente =='S05' or
                 $cliente =='S04' or $cliente =='S03' 
