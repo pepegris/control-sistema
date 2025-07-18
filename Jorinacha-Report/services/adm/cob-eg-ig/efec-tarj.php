@@ -13,10 +13,12 @@ $sedes_ar = array(
     "Sucursal Coro3" ,
     "Sucursal PtoFijo1" ,
     "Sucursal PtoFijo2" ,
+    "Sucursal Ojeda" ,
+    "Sucursal Valle" ,
+    "Sucursal GuiGue",
+    
     
 
-    "Comercial Matur" ,
-    
 
     "Comercial Punto Fijo",
     "Comercial Valena",
@@ -29,8 +31,6 @@ $sedes_ar = array(
     "Comercial Acari",
     "Comercial Catica II",
 );
-
-
 
 
 
@@ -50,8 +50,10 @@ function Database2($sede)
         "Sucursal Coro3" => 'C_CORO3',
         "Sucursal PtoFijo1" => 'C_PTOFIJO1',
         "Sucursal PtoFijo2" => 'C_PTOFIJO2',
+        "Sucursal Ojeda" => 'C_OJEDA',
+        "Sucursal Valle" => 'C_VAPASCUA',
+        "Sucursal GuiGue"=> 'C_GUIGUE',
 
-        "Comercial Matur" => 'C_MATUR',
 
         "Comercial Corina I" => 'C_CORINA1',
         "Comercial Corina II" => 'C_CORINA2',
@@ -67,6 +69,7 @@ function Database2($sede)
         "Comercial Acari" => 'C_ACARI',
         "Comercial Catica II" => 'C_CATICA2',
     );
+
 
     return $bd[$sede];
 }
@@ -85,9 +88,14 @@ function Database($sede)
         "Sucursal Coro1" => 'CORO1',
         "Sucursal Coro2" => 'CORO2',
         "Sucursal Coro3" => 'CORO3',
+        "Sucursal PtoFijo1" => 'PTOFIJO1',
+        "Sucursal PtoFijo2" => 'PTOFIJO2',
+        "Sucursal Ojeda" => 'OJEDA',
+        "Sucursal Valle" => 'VAPASCUA',
+        "Sucursal GuiGue"=> 'GUIGUE',
 
 
-        "Comercial Matur" => 'MATUR',
+
 
         "Comercial Corina I" => 'CORINA1',
         "Comercial Corina II" => 'CORINA2',
@@ -103,6 +111,7 @@ function Database($sede)
         "Comercial Acari" => 'ACARI',
         "Comercial Catica II" => 'CATICA2',
     );
+
 
     return $bd[$sede];
 }
@@ -120,6 +129,9 @@ function Cliente($sede)
         "Sucursal Coro3" => 'S07',
         "Sucursal PtoFijo1" => 'S08',
         "Sucursal PtoFijo2" => 'S09',
+        "Sucursal Ojeda" => 'S10',
+        "Sucursal Valle" => 'S11',
+        "Sucursal GuiGue"=> 'S12',
 
 
 

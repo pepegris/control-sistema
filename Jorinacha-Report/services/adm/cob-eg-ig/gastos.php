@@ -16,10 +16,10 @@ $sedes_ar = array(
     "Sucursal PtoFijo2" ,
     "Sucursal Ojeda" ,
     "Sucursal Valle" ,
+    "Sucursal GuiGue",
+    
     
 
-    "Comercial Matur" ,
-    
 
     "Comercial Punto Fijo",
     "Comercial Valena",
@@ -61,8 +61,8 @@ function Database2($sede)
         "Sucursal PtoFijo2" => 'C_PTOFIJO2',
         "Sucursal Ojeda" => 'C_OJEDA',
         "Sucursal Valle" => 'C_VAPASCUA',
+        "Sucursal GuiGue"=> 'C_GUIGUE',
 
-        "Comercial Matur" => 'C_MATUR',
 
         "Comercial Corina I" => 'C_CORINA1',
         "Comercial Corina II" => 'C_CORINA2',
@@ -100,9 +100,10 @@ function Database($sede)
         "Sucursal PtoFijo2" => 'PTOFIJO2',
         "Sucursal Ojeda" => 'OJEDA',
         "Sucursal Valle" => 'VAPASCUA',
+        "Sucursal GuiGue"=> 'GUIGUE',
 
 
-        "Comercial Matur" => 'MATUR',
+
 
         "Comercial Corina I" => 'CORINA1',
         "Comercial Corina II" => 'CORINA2',
@@ -137,6 +138,7 @@ function Cliente($sede)
         "Sucursal PtoFijo2" => 'S09',
         "Sucursal Ojeda" => 'S10',
         "Sucursal Valle" => 'S11',
+        "Sucursal GuiGue"=> 'S12',
 
 
 
