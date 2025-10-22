@@ -19,8 +19,7 @@ $sedes_ar = array(
 
 
     "Comercial Acari" ,
-    
-    "Comercial Puecruz" ,
+
     "Comercial Higue" ,
     "Comercial Valena" ,
     "Comercial Apura" ,
