@@ -16,6 +16,7 @@ $sedes_ar = array(
     "Sucursal Valle" ,
     "Sucursal Guigue" ,
     "Sucursal Puerto",
+    "Sucursal Acarigua",
 
 
     "Comercial Acari" ,
@@ -103,9 +104,9 @@ function Database($sede)
         "Sucursal Valle" => 'VAPASCUA', 
         "Sucursal Guigue" => 'GUIGUE', 
         "Sucursal Puerto"=> 'PUERTO',
+        "Sucursal Acarigua"=> 'ACARIGUA',
 
         
-        "Comercial Acari" => 'ACARI',
         "Comercial Puecruz" => 'PUECRUZ',
         "Comercial Vallepa" => 'VALLEPA',
         "Comercial Higue" => 'HIGUE',
@@ -146,6 +147,7 @@ function Cliente($sede)
         "Sucursal Valle" => 'S11', 
         "Sucursal Guigue" => 'S12', 
         "Sucursal Puerto"=> 'S13',
+        "Sucursal Acarigua"=> 'S14',
         
   
 
