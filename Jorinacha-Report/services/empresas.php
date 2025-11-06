@@ -19,8 +19,6 @@ $sedes_ar = array(
     "Sucursal Acarigua",
 
 
-    "Comercial Acari" ,
-
     "Comercial Higue" ,
     "Comercial Valena" ,
     "Comercial Apura" ,
@@ -107,6 +105,7 @@ function Database($sede)
         "Sucursal Acarigua"=> 'ACARIGUA',
 
         
+        "Comercial Acari" => 'ACARI',
         "Comercial Puecruz" => 'PUECRUZ',
         "Comercial Vallepa" => 'VALLEPA',
         "Comercial Higue" => 'HIGUE',
