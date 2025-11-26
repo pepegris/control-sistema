@@ -4,108 +4,11 @@
 /* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA*/
 
 
-$sedes_ar = array(
-    "Previa Shop",
-    "Comercial Merina",
-    "Comercial Merina III",
-    "Comercial Corina I",
-    "Comercial Corina II",
-    "Comercial Punto Fijo",
-    "Comercial Matur",
-    "Comercial Valena",
-    "Comercial Trina",
-    "Comercial Kagu",
-    "Comercial Nachari",
-    "Comercial Higue",
-    "Comercial Apura",
-    "Comercial Vallepa",
-    "Comercial Ojena",
-    "Comercial Puecruz",
-    "Comercial Acari",
-    "Comercial Catica II",
-);
+
+require "../../services/empresas.php";
 
 
 
-function Database2($sede)
-{
-
-    $bd = array(
-        "Previa Shop" => 'PREVIA_A',
-        "Comercial Merina" => 'MERINA21',
-        "Comercial Merina III" => 'MRIA3A21',
-        "Comercial Corina I" => 'CORINA21',
-        "Comercial Corina II" => 'CORI2_21',
-        "Comercial Punto Fijo" => 'PUFIJO21',
-        "Comercial Matur" => 'MATURA21',
-        "Comercial Valena" => 'VALENA21',
-        "Comercial Trina" => 'TRAINA21',
-        "Comercial Kagu" => 'KAGUA21',
-        "Comercial Nachari" => 'NACHAR21',
-        "Comercial Higue" => 'HIGUE21',
-        "Comercial Apura" => 'APURA21',
-        "Comercial Vallepa" => 'VALLEP21',
-        "Comercial Ojena" => 'OJENA21',
-        "Comercial Puecruz" => 'PUECRU21',
-        "Comercial Acari" => 'ACARI21',
-        "Comercial Catica II" => 'CATICA21',
-    );
-
-    return $bd[$sede];
-}
-function Database($sede)
-{
-
-    $bd = array(
-        "Previa Shop" => 'PREVIA_A',
-        "Comercial Merina" => 'MERINA',
-        "Comercial Merina III" => 'MERINA3',
-        "Comercial Corina I" => 'CORINA1',
-        "Comercial Corina II" => 'CORINA2',
-        "Comercial Punto Fijo" => 'PUFIJO',
-        "Comercial Matur" => 'MATUR',
-        "Comercial Valena" => 'VALENA',
-        "Comercial Trina" => 'TRINA',
-        "Comercial Kagu" => 'KAGU',
-        "Comercial Nachari" => 'NACHARI',
-        "Comercial Higue" => 'HIGUE',
-        "Comercial Apura" => 'APURA',
-        "Comercial Vallepa" => 'VALLEPA',
-        "Comercial Ojena" => 'OJENA',
-        "Comercial Puecruz" => 'PUECRUZ',
-        "Comercial Acari" => 'ACARI',
-        "Comercial Catica II" => 'CATICA2',
-    );
-
-    return $bd[$sede];
-}
-
-function Cliente($sede)
-{
-
-    $bd = array(
-        "Comercial Merina"    =>     'T15',
-        "Comercial Merina III"    =>     'T23',
-        "Comercial Corina I"    =>     'T18',
-        "Comercial Corina II"    =>     'T22',
-        "Comercial Punto Fijo"    =>     'T13',
-        "Comercial Matur"    =>     'T07',
-        "Comercial Valena"    =>     'T10',
-        "Comercial Trina"    =>     'T16',
-        "Comercial Kagu"    =>     'T03',
-        "Comercial Nachari"    =>     'T19',
-        "Comercial Higue"    =>     'T09',
-        "Comercial Apura"    =>     'T17',
-        "Comercial Vallepa"    =>     'T06',
-        "Comercial Ojena"    =>     'T12',
-        "Comercial Puecruz"    =>     'T05',
-        "Comercial Acari"    =>     'T04',
-        "Comercial Catica II"    =>     'T24',
-
-    );
-
-    return $bd[$sede];
-}
 
 
 
@@ -151,7 +54,7 @@ function getArt($sede, $linea, $co_art, $almacen)
 
             #$sql ="EXEC getArt '$sede' , '$co_art', '$linea'  ";
 
-            if ($sede== 'Previa Shop' and $almacen== 0) {
+            if ($sede== 'Previa Shop' and $almacen== 0 and $co_art == 0) {
 
                 $sql ="SELECT  LTRIM(RTRIM(art.co_art)) as  co_art ,LTRIM(RTRIM(sub_lin.subl_des)) as  co_subl,LTRIM(RTRIM(cat_art.cat_des)) as  co_cat,
                 prec_vta3,prec_vta4,prec_vta5,art.stock_act , LTRIM(RTRIM(colores.des_col)) as co_color, LTRIM(RTRIM(lin_art.lin_des)) as co_lin,art.ubicacion
@@ -160,12 +63,12 @@ function getArt($sede, $linea, $co_art, $almacen)
                 JOIN sub_lin on art.co_subl = sub_lin.co_subl
                 JOIN cat_art on art.co_cat=cat_art.co_cat
                 JOIN colores on art.co_color=colores.co_col
-                where art.co_lin='$linea' AND art.prec_vta5 >= 1
+                where art.co_lin='$linea' AND art.prec_vta5 >= 0.5 AND art.fe_us_in >= '20170101'  AND art.anulado=0
                 order by art.co_subl   desc";
                 
 
            
-            } elseif ($almacen== 'BOLE' and $sede== 'Previa Shop') {
+            } elseif ($almacen== 'BOLE' and $sede== 'Previa Shop' and $co_art != 0) {
 
                 $sql ="SELECT stock_act FROM st_almac WHERE co_art='$co_art' AND co_alma='BOLE'";
 
@@ -177,7 +80,7 @@ function getArt($sede, $linea, $co_art, $almacen)
                 JOIN sub_lin on art.co_subl = sub_lin.co_subl
                 JOIN cat_art on art.co_cat=cat_art.co_cat
                 JOIN colores on art.co_color=colores.co_col
-                where art.co_lin='$linea' AND art.prec_vta5 >= 1 AND art.co_art='$co_art' ";
+                where art.co_lin='$linea' AND art.prec_vta5 >= 0.5 AND art.co_art='$co_art' ";
             }
             
 
