@@ -10,7 +10,7 @@ include '../../includes/header.php';
 include '../../services/mysql.php';
 
 // IMPORTANTE: Incluimos el archivo de lógica que contiene las nuevas funciones Batch
-include '../../services/adm/fallas/fallas.php'; 
+include '../../services/adm/fallas/fallas-report.php'; 
 
 // --- Validación de Parámetros ---
 if (!isset($_GET['linea'])) {
