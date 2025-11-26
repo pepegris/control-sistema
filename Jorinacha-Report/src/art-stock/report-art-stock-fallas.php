@@ -130,6 +130,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
     /* Colores Semánticos */
     .text-stock { color: #ffd700; font-weight: bold; } /* Amarillo */
     .text-venta { color: #00ff99; font-weight: bold; } /* Verde Neon */
+    .text-negative { color: #ff4444; font-weight: bold; } /* ROJO (NEGATIVOS) */
     .text-muted-custom { color: #666; }
     
     .total-row { background-color: #0d6efd !important; color: white; font-weight: bold; }
@@ -156,6 +157,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
         th { background-color: #ddd; font-weight: bold; text-align: center; }
         .text-stock { background-color: #fff2cc; color: #000; font-weight: bold; }
         .text-venta { background-color: #d9ead3; color: #000; font-weight: bold; }
+        .text-negative { color: #ff0000; font-weight: bold; } /* ROJO PARA EXCEL */
         .total-row { background-color: #cfe2f3; font-weight: bold; }
     </style>
 <?php endif; ?>
@@ -263,8 +265,8 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                     // 2. FILTRO DE "CERO ACTIVIDAD"
                     $es_activo = false;
 
-                    // A. Chequear si tiene stock en central
-                    if ($stock_real_previa > 0) {
+                    // A. Chequear si tiene stock en central (positivo o negativo cuenta como activo)
+                    if ($stock_real_previa != 0) {
                         $es_activo = true;
                     }
 
@@ -276,7 +278,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                                 $s_tmp = isset($CACHE_STOCK_TIENDAS[$sede][$codigo]) ? round($CACHE_STOCK_TIENDAS[$sede][$codigo]['stock']) : 0;
                                 $v_tmp = isset($CACHE_VENTAS_TIENDAS[$sede][$codigo]) ? round($CACHE_VENTAS_TIENDAS[$sede][$codigo]) : 0;
                                 
-                                if ($s_tmp > 0 || $v_tmp > 0) {
+                                if ($s_tmp != 0 || $v_tmp != 0) {
                                     $es_activo = true;
                                     break;
                                 }
@@ -295,10 +297,15 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                     $gran_total_previa += $stock_real_previa;
 
                     // Estilo Central
+                    $colorTxt = "color: #666;";
+                    if ($stock_real_previa > 0) $colorTxt = "color: white;";
+                    elseif ($stock_real_previa < 0) $colorTxt = "color: #ff4444;"; // ROJO PARA NEGATIVO CENTRAL
+
                     if ($is_export) {
                          $stylePrevia = "text-align:center; font-weight:bold;";
+                         if ($stock_real_previa < 0) $stylePrevia .= " color: red;";
                     } else {
-                         $stylePrevia = ($stock_real_previa > 0) ? "font-size:1.1em; font-weight:bold; color: white;" : "color: #666;";
+                         $stylePrevia = "font-size:1.1em; font-weight:bold; $colorTxt";
                          $stylePrevia .= " background-color:#333; border-right: 3px solid #666; text-align:center;";
                     }
                     
@@ -341,14 +348,26 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                                 // Estilos
                                 if ($is_export) {
                                     // Para Excel: Estilos simples o clases definidas arriba
-                                    $classStock = ($stock_tienda > 0) ? "text-stock" : "";
-                                    $classVenta = ($venta_tienda > 0) ? "text-venta" : "";
+                                    if ($stock_tienda > 0) $classStock = "text-stock";
+                                    elseif ($stock_tienda < 0) $classStock = "text-negative";
+                                    else $classStock = "";
+
+                                    if ($venta_tienda > 0) $classVenta = "text-venta";
+                                    elseif ($venta_tienda < 0) $classVenta = "text-negative";
+                                    else $classVenta = "";
+
                                     $styleCellS = "text-align:center;";
                                     $styleCellV = "text-align:center;";
                                 } else {
-                                    // Para Web: Estilos oscuros
-                                    $classStock = ($stock_tienda > 0) ? "text-stock" : "text-muted-custom";
-                                    $classVenta = ($venta_tienda > 0) ? "text-venta" : "text-muted-custom";
+                                    // Para Web: Estilos oscuros con rojo si negativo
+                                    if ($stock_tienda > 0) $classStock = "text-stock";
+                                    elseif ($stock_tienda < 0) $classStock = "text-negative";
+                                    else $classStock = "text-muted-custom";
+
+                                    if ($venta_tienda > 0) $classVenta = "text-venta";
+                                    elseif ($venta_tienda < 0) $classVenta = "text-negative";
+                                    else $classVenta = "text-muted-custom";
+
                                     $styleCellS = "border-left:1px solid #444;";
                                     $styleCellV = "";
                                 }

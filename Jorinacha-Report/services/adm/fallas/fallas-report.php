@@ -271,3 +271,5 @@ function getArt_stock_tiendas($sede, $co_art) {
     return $art;
 }
 ?>
+
+
