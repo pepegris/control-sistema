@@ -14,7 +14,6 @@ include '../../services/adm/fallas/fallas-report.php';
 
 // --- Validación de Parámetros ---
 if (!isset($_GET['linea'])) {
-    // Si no hay parámetros, redirigir o mostrar error
     echo "<script>window.location='form.php';</script>";
     exit;
 }
@@ -28,21 +27,30 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 ?>
 
 <style>
-    /* Estilos para compactar la tabla y manejar el scroll */
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #2c2c2c; color: white; }
-    h2 { text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; }
+    /* 1. CAMBIO DE FONDO SOLICITADO */
+    body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        background-color: #242943; /* Color solicitado */
+        color: white; 
+    }
+    
+    h2 { text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; color: #fff; }
     
     .table-responsive {
-        max-height: 80vh; /* Altura máxima de la tabla */
+        max-height: 80vh; 
         overflow: auto;
         box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        border: 1px solid #444;
+        margin-top: 15px;
     }
 
     #tblData { 
         font-size: 11px; 
         white-space: nowrap; 
-        border-collapse: separate; /* Necesario para sticky headers */
+        border-collapse: separate; 
         border-spacing: 0;
+        background-color: #242943; /* Fondo tabla igual al body */
+        width: 100%;
     }
 
     #tblData th, #tblData td { 
@@ -51,17 +59,61 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
         border: 1px solid #444;
     }
 
-    /* Columnas Fijas (Sticky) a la izquierda */
-    .sticky-col-1 { position: sticky; left: 0; background-color: #212529; z-index: 10; border-right: 2px solid #555; }
-    .sticky-col-2 { position: sticky; left: 30px; background-color: #212529; z-index: 10; border-right: 2px solid #555; }
+    /* 3. COLUMNAS FIJAS (STICKY) */
+    /* Columna #: Fija a la izquierda del todo */
+    .sticky-col-1 { 
+        position: sticky; 
+        left: 0; 
+        background-color: #1f2235; 
+        z-index: 10; 
+        border-right: 1px solid #555; 
+        width: 30px;
+        text-align: center;
+    }
     
-    /* Encabezados Fijos (Sticky) arriba */
-    thead th { position: sticky; top: 0; background-color: #1a1d20; z-index: 20; color: white; }
+    /* Columna Código: Fija después del # */
+    .sticky-col-2 { 
+        position: sticky; 
+        left: 30px; /* Ancho aprox de col 1 */
+        background-color: #1f2235; 
+        z-index: 10; 
+        border-right: 1px solid #555; 
+        min-width: 90px;
+    }
+
+    /* Columna Modelo: Fija después del Código (NUEVO) */
+    .sticky-col-3 { 
+        position: sticky; 
+        left: 120px; /* 30px (#) + 90px (Cod) aprox */
+        background-color: #1f2235; 
+        z-index: 10; 
+        border-right: 2px solid #999; /* Borde más grueso para separar de la data */
+        min-width: 100px;
+        font-weight: bold;
+        color: #ddd;
+    }
     
+    /* Encabezados Fijos Arriba */
+    thead th { 
+        position: sticky; 
+        top: 0; 
+        background-color: #1a1d20; 
+        z-index: 20; 
+        color: white; 
+        border-bottom: 2px solid #00ff99;
+        height: 40px;
+    }
+    
+    /* Asegurar que las intersecciones de sticky (esquina superior izq) tengan z-index mayor */
+    thead th.sticky-col-1, thead th.sticky-col-2, thead th.sticky-col-3 {
+        z-index: 30;
+        background-color: #1a1d20;
+    }
+
     /* Colores Semánticos */
     .text-stock { color: #ffd700; font-weight: bold; } /* Amarillo */
     .text-venta { color: #00ff99; font-weight: bold; } /* Verde Neon */
-    .text-muted-custom { color: #555; }
+    .text-muted-custom { color: #666; }
     
     .total-row { background-color: #0d6efd !important; color: white; font-weight: bold; }
     .total-row td { border-top: 2px solid white; }
@@ -70,7 +122,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 <div class="container-fluid">
     <center>
         <h2>Reporte de Fallas y Stock</h2>
-        <p class="text-muted">Rango: <?= date("d/m/Y", strtotime($fecha1)) ?> - <?= date("d/m/Y", strtotime($fecha2)) ?></p>
+        <p class="text-muted" style="color:#aaa !important;">Rango: <?= date("d/m/Y", strtotime($fecha1)) ?> - <?= date("d/m/Y", strtotime($fecha2)) ?></p>
     </center>
     
     <?php
@@ -87,42 +139,36 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
     // -------------------------------------------------------------------------
     // PASO 2: PREPARAR DATOS MASIVOS (BATCH PROCESSING)
-    // Extraemos todos los códigos en un array simple
     // -------------------------------------------------------------------------
     $listaCodigos = array_column($articulosMaster, 'co_art');
     
-    // Inicializamos Arrays de Caché (Memoria)
     $CACHE_PEDIDOS = [];
     $CACHE_STOCK_TIENDAS = [];
     $CACHE_VENTAS_TIENDAS = [];
 
     // -------------------------------------------------------------------------
-    // PASO 3: PRE-CARGA (CONSULTAS INTELIGENTES)
-    // Aquí ocurre la optimización: 1 Consulta por Tienda en vez de 1 consulta por artículo
+    // PASO 3: PRE-CARGA DE DATOS
     // -------------------------------------------------------------------------
     
-    // A. Cargar todos los pedidos pendientes de una vez
+    // A. Cargar pedidos
     $CACHE_PEDIDOS = getBatchPedidos($listaCodigos);
 
-    // B. Cargar Stock y Ventas de cada tienda
+    // B. Cargar Stock y Ventas Tiendas
     foreach ($sedes_ar as $sede) {
         if ($sede != null && $sede != 'Previa Shop') {
-            // Trae el stock de TODOS los artículos en la lista para esta sede
             $CACHE_STOCK_TIENDAS[$sede] = getBatchStock($sede, $listaCodigos);
-            
-            // Trae las ventas de TODOS los artículos en la lista para esta sede
             $CACHE_VENTAS_TIENDAS[$sede] = getBatchVentas($sede, $listaCodigos, $fecha1, $fecha2);
         }
     }
     
-    // Variables para totales de columna (verticales)
+    // Variables para totales de columna
     $totales_stock_tienda = [];
     $totales_venta_tienda = [];
     $gran_total_previa = 0;
     ?>
 
     <!-- ----------------------------------------------------------------------- -->
-    <!-- PASO 4: RENDERIZADO (Puro acceso a memoria, muy rápido) -->
+    <!-- PASO 4: RENDERIZADO -->
     <!-- ----------------------------------------------------------------------- -->
     <div class="table-responsive">
         <table class="table table-dark table-hover" id="tblData">
@@ -130,15 +176,14 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                 <tr>
                     <th scope="col" class="sticky-col-1">#</th>
                     <th scope='col' class="sticky-col-2">Código</th>
+                    <th scope='col' class="sticky-col-3">Modelo</th> <!-- MOVIDO AQUÍ -->
                     <th scope='col'>Descripción</th>
-                    <th scope='col'>Modelo</th>
                     <th scope='col'>Ref</th>
                     <th scope='col'>Color</th>
                     <th scope='col'>Precio</th>
                     <th scope='col' style="background-color:#333; border-right: 3px solid #666;">STOCK<br>CENTRAL</th>
 
                     <?php
-                    // Generar cabeceras dinámicas de tiendas
                     foreach ($sedes_ar as $sede) {
                         if ($sede != null && $sede != 'Previa Shop') {
                             echo "<th scope='col' class='text-center' style='color:#ffd700; border-left:1px solid #444;'>Stock<br><small>$sede</small></th>";
@@ -156,25 +201,51 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                     
                     // --- Datos Previa Shop (Central) ---
                     $stock_fisico = round($art['stock_act']);
-                    
-                    // Leemos los pedidos desde la memoria (Array Cache)
                     $pedidos_pend = isset($CACHE_PEDIDOS[$codigo]) ? round($CACHE_PEDIDOS[$codigo]) : 0;
-                    
-                    // Stock Real = Físico - Comprometido
                     $stock_real_previa = $stock_fisico - $pedidos_pend;
+                    
+                    // 2. FILTRO DE "CERO ACTIVIDAD" (SOLICITUD)
+                    $es_activo = false;
+
+                    // A. Chequear si tiene stock en central
+                    if ($stock_real_previa > 0) {
+                        $es_activo = true;
+                    }
+
+                    // B. Si no tiene en central, chequear todas las tiendas
+                    if (!$es_activo) {
+                        foreach ($sedes_ar as $sede) {
+                            if ($sede != null && $sede != 'Previa Shop') {
+                                // Consultar cache sin loop pesado
+                                $s_tmp = isset($CACHE_STOCK_TIENDAS[$sede][$codigo]) ? round($CACHE_STOCK_TIENDAS[$sede][$codigo]['stock']) : 0;
+                                $v_tmp = isset($CACHE_VENTAS_TIENDAS[$sede][$codigo]) ? round($CACHE_VENTAS_TIENDAS[$sede][$codigo]) : 0;
+                                
+                                if ($s_tmp > 0 || $v_tmp > 0) {
+                                    $es_activo = true;
+                                    break; // Ya encontramos actividad, salimos del bucle interno
+                                }
+                            }
+                        }
+                    }
+
+                    // C. Si sigue inactivo después de revisar todo, saltar fila
+                    if (!$es_activo) {
+                        continue;
+                    }
+                    
+                    // --- SI LLEGA AQUI, SE MUESTRA ---
                     
                     // Acumulamos total general
                     $gran_total_previa += $stock_real_previa;
 
-                    // Estilo condicional para Central
                     $stylePrevia = ($stock_real_previa > 0) ? "font-size:1.1em; font-weight:bold; color: white;" : "color: #666;";
                     $precio = number_format($art['prec_vta5'], 2);
                 ?>
                     <tr>
                         <td class="sticky-col-1"><?= $n ?></td>
                         <td class="sticky-col-2"><strong><?= $codigo ?></strong></td>
-                        <td title="<?= $art['ubicacion'] ?>"><?= substr($art['ubicacion'], 0, 20) ?>...</td>
-                        <td><?= $art['co_subl'] ?></td>
+                        <td class="sticky-col-3"><?= $art['co_subl'] ?></td> <!-- MODELO -->
+                        <td title="<?= $art['ubicacion'] ?>"><?= substr($art['ubicacion'], 0, 25) ?>...</td>
                         <td><?= $art['co_lin'] ?></td>
                         <td><?= $art['co_color'] ?></td>
                         <td>$<?= $precio ?></td>
@@ -183,31 +254,27 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                         </td>
 
                         <?php
-                        // --- Datos Tiendas (Leídos desde Cache) ---
+                        // --- Datos Tiendas ---
                         foreach ($sedes_ar as $sede) {
                             if ($sede != null && $sede != 'Previa Shop') {
                                 
-                                // 1. STOCK TIENDA
                                 $stock_tienda = 0;
-                                // Verificamos si existe el dato en el array masivo
                                 if (isset($CACHE_STOCK_TIENDAS[$sede][$codigo])) {
                                     $stock_tienda = round($CACHE_STOCK_TIENDAS[$sede][$codigo]['stock']);
                                 }
 
-                                // 2. VENTA TIENDA
                                 $venta_tienda = 0;
                                 if (isset($CACHE_VENTAS_TIENDAS[$sede][$codigo])) {
                                     $venta_tienda = round($CACHE_VENTAS_TIENDAS[$sede][$codigo]);
                                 }
 
-                                // 3. ACUMULADORES VERTICALES
+                                // Acumuladores Verticales (Solo sumamos si la fila se muestra)
                                 if (!isset($totales_stock_tienda[$sede])) $totales_stock_tienda[$sede] = 0;
                                 if (!isset($totales_venta_tienda[$sede])) $totales_venta_tienda[$sede] = 0;
                                 
                                 $totales_stock_tienda[$sede] += $stock_tienda;
                                 $totales_venta_tienda[$sede] += $venta_tienda;
 
-                                // 4. ESTILOS
                                 $classStock = ($stock_tienda > 0) ? "text-stock" : "text-muted-custom";
                                 $classVenta = ($venta_tienda > 0) ? "text-venta" : "text-muted-custom";
                         ?>
