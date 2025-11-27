@@ -98,7 +98,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
         min-width: 90px;
     }
 
-    /* Columna Modelo: Fija después del Código (NUEVO) */
+    /* Columna Modelo: Fija después del Código */
     .sticky-col-3 { 
         position: sticky; 
         left: 120px; /* 30px (#) + 90px (Cod) aprox */
@@ -220,6 +220,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
     $totales_stock_tienda = [];
     $totales_venta_tienda = [];
     $gran_total_previa = 0;
+    $gran_total_ventas_global = 0; // NUEVO ACUMULADOR DE VENTAS TOTALES
     ?>
 
     <!-- ----------------------------------------------------------------------- -->
@@ -236,6 +237,8 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                     <th scope='col'>Ref</th>
                     <th scope='col'>Color</th>
                     <th scope='col'>Precio</th>
+                    <!-- NUEVA COLUMNA DE VENTAS TOTALES -->
+                    <th scope='col' style="<?= $is_export ? 'background-color:#ccc;' : 'background-color:#333; color:#00ff99; border-left:1px solid #666;' ?>">TOTAL<br>VENTAS</th>
                     <th scope='col' style="<?= $is_export ? 'background-color:#ccc;' : 'background-color:#333; border-right: 3px solid #666;' ?>">STOCK<br>CENTRAL</th>
 
                     <?php
@@ -262,23 +265,30 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                     $pedidos_pend = isset($CACHE_PEDIDOS[$codigo]) ? round($CACHE_PEDIDOS[$codigo]) : 0;
                     $stock_real_previa = $stock_fisico - $pedidos_pend;
                     
-                    // 2. FILTRO DE "CERO ACTIVIDAD"
-                    $es_activo = false;
-
-                    // A. Chequear si tiene stock en central (positivo o negativo cuenta como activo)
-                    if ($stock_real_previa != 0) {
-                        $es_activo = true;
+                    // --- CALCULAR TOTAL VENTAS DE ESTE ARTÍCULO (SUMA DE TIENDAS) ---
+                    $total_ventas_row = 0;
+                    foreach ($sedes_ar as $sede) {
+                        if ($sede != null && $sede != 'Previa Shop') {
+                            if (isset($CACHE_VENTAS_TIENDAS[$sede][$codigo])) {
+                                $total_ventas_row += round($CACHE_VENTAS_TIENDAS[$sede][$codigo]);
+                            }
+                        }
                     }
 
-                    // B. Si no tiene en central, chequear todas las tiendas
+                    // --- FILTRO INTELIGENTE DE ACTIVIDAD ---
+                    $es_activo = false;
+
+                    // 1. Si tiene Stock Central
+                    if ($stock_real_previa != 0) $es_activo = true;
+                    // 2. Si tiene Ventas Totales
+                    if ($total_ventas_row != 0) $es_activo = true;
+
+                    // 3. Si no, verificar Stocks de Tiendas
                     if (!$es_activo) {
                         foreach ($sedes_ar as $sede) {
                             if ($sede != null && $sede != 'Previa Shop') {
-                                // Consultar cache
                                 $s_tmp = isset($CACHE_STOCK_TIENDAS[$sede][$codigo]) ? round($CACHE_STOCK_TIENDAS[$sede][$codigo]['stock']) : 0;
-                                $v_tmp = isset($CACHE_VENTAS_TIENDAS[$sede][$codigo]) ? round($CACHE_VENTAS_TIENDAS[$sede][$codigo]) : 0;
-                                
-                                if ($s_tmp != 0 || $v_tmp != 0) {
+                                if ($s_tmp != 0) {
                                     $es_activo = true;
                                     break;
                                 }
@@ -286,27 +296,28 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                         }
                     }
 
-                    // C. Saltar fila si inactivo
-                    if (!$es_activo) {
-                        continue;
-                    }
+                    // Saltar fila si inactivo
+                    if (!$es_activo) continue;
                     
                     // --- RENDER ---
                     
-                    // Acumulamos total general
+                    // Acumulamos totales generales
                     $gran_total_previa += $stock_real_previa;
+                    $gran_total_ventas_global += $total_ventas_row;
 
                     // Estilo Central
                     $colorTxt = "color: #666;";
                     if ($stock_real_previa > 0) $colorTxt = "color: white;";
-                    elseif ($stock_real_previa < 0) $colorTxt = "color: #ff4444;"; // ROJO PARA NEGATIVO CENTRAL
+                    elseif ($stock_real_previa < 0) $colorTxt = "color: #ff4444;";
 
                     if ($is_export) {
                          $stylePrevia = "text-align:center; font-weight:bold;";
                          if ($stock_real_previa < 0) $stylePrevia .= " color: red;";
+                         $styleTotalVentas = "text-align:center; font-weight:bold;";
                     } else {
                          $stylePrevia = "font-size:1.1em; font-weight:bold; $colorTxt";
                          $stylePrevia .= " background-color:#333; border-right: 3px solid #666; text-align:center;";
+                         $styleTotalVentas = "font-size:1.1em; font-weight:bold; color:#00ff99; text-align:center; border-left:1px solid #666;";
                     }
                     
                     $precio = number_format($art['prec_vta5'], 2);
@@ -319,6 +330,11 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                         <td><?= $art['co_lin'] ?></td>
                         <td><?= $art['co_color'] ?></td>
                         <td>$<?= $precio ?></td>
+                        <!-- CELDA TOTAL VENTAS -->
+                        <td style="<?= $styleTotalVentas ?>">
+                            <?= $total_ventas_row ?>
+                        </td>
+                        <!-- CELDA STOCK CENTRAL -->
                         <td style="<?= $stylePrevia ?>">
                             <?= $stock_real_previa ?>
                         </td>
@@ -347,7 +363,6 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
                                 // Estilos
                                 if ($is_export) {
-                                    // Para Excel: Estilos simples o clases definidas arriba
                                     if ($stock_tienda > 0) $classStock = "text-stock";
                                     elseif ($stock_tienda < 0) $classStock = "text-negative";
                                     else $classStock = "";
@@ -359,7 +374,6 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                                     $styleCellS = "text-align:center;";
                                     $styleCellV = "text-align:center;";
                                 } else {
-                                    // Para Web: Estilos oscuros con rojo si negativo
                                     if ($stock_tienda > 0) $classStock = "text-stock";
                                     elseif ($stock_tienda < 0) $classStock = "text-negative";
                                     else $classStock = "text-muted-custom";
@@ -387,6 +401,9 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                 <!-- FILA DE TOTALES -->
                 <tr class="total-row">
                     <td colspan="7" class="text-right" style="text-align: right; padding-right: 15px;">TOTALES GENERALES:</td>
+                    <!-- TOTAL VENTAS GLOBAL -->
+                    <td class="text-center" style="font-size: 1.2em; border-left:1px solid #ddd; color:#00ff99;"><?= $gran_total_ventas_global ?></td>
+                    <!-- STOCK CENTRAL GLOBAL -->
                     <td class="text-center" style="<?= $is_export ? '' : 'border-right: 3px solid #ddd;' ?> font-size: 1.2em;"><?= $gran_total_previa ?></td>
                     <?php
                     foreach ($sedes_ar as $sede) {
