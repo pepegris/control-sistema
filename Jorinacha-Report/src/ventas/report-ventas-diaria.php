@@ -7,6 +7,15 @@ include '../../services/mysql.php'; // Solo para traer las empresas ($sedes_ar)
 include '../../services/db_connection.php'; // NUEVA CONEXION
 include '../../services/adm/ventas/diarias.php'; // FUNCIONES OPTIMIZADAS
 
+
+// TEMPORAL: PON ESTO ANTES DE if (!$_GET)
+$test_conn = ConectarSQLServer("NombreDeUnaBDQueSabesQueExiste"); 
+if (!$test_conn) {
+    echo "¡ERROR DE CONEXIÓN GLOBAL! Revisa db_connection.php y las credenciales.";
+    die( print_r( sqlsrv_errors(), true)); 
+}
+sqlsrv_close($test_conn);
+// FIN TEMPORAL
 if (!$_GET) { header("location: form.php"); exit; }
 
 $divisa = $_GET['divisa'];
