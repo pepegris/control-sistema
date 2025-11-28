@@ -1,7 +1,8 @@
 <?php
-// ../../services/adm/ventas/diarias.php
+// Nota: Se asume que la función Database($sede) y la lista $sedes_ar se cargan
+// desde otro archivo (por ejemplo, ../../services/mysql.php).
 
-// Función genérica para Totales de Factura
+// --- Función genérica para Totales de Factura ---
 function getFactura($conn, $fecha1, $fecha2, $tipo, $linea) {
     if (!$conn) return ['total_art' => 0, 'tot_neto' => 0];
 
@@ -19,12 +20,12 @@ function getFactura($conn, $fecha1, $fecha2, $tipo, $linea) {
     $sql .= " WHERE f.anulada = 0 ";
     $params = [];
 
-    // Filtro de fechas
+    // Filtro de fechas (CORRECCIÓN YYYYMMDD)
     if ($tipo == 'ven' || $tipo == 'sin') {
-        $sql .= " AND f.fec_emis = ? ";
+        $sql .= " AND CONVERT(VARCHAR(8), f.fec_emis, 112) = ? ";
         $params[] = $fecha1;
     } else {
-        $sql .= " AND f.fec_emis BETWEEN ? AND ? ";
+        $sql .= " AND CONVERT(VARCHAR(8), f.fec_emis, 112) BETWEEN ? AND ? ";
         $params[] = $fecha1;
         $params[] = $fecha2;
     }
@@ -42,14 +43,14 @@ function getFactura($conn, $fecha1, $fecha2, $tipo, $linea) {
         $valor = sqlsrv_get_field($stmt, 0);
     }
     
-    // Normalizamos la salida para que coincida con tu estructura anterior
+    // Normalizamos la salida
     return [
         'total_art' => ($tipo == 'ven' || $tipo == 'ven2') ? $valor : 0,
         'tot_neto'  => ($tipo == 'sin' || $tipo == 'sin2') ? $valor : 0
     ];
 }
 
-// Función Devoluciones
+// --- Función Devoluciones ---
 function getDev_cli($conn, $fecha1, $fecha2, $tipo, $linea) {
     if (!$conn) return ['total_art' => 0, 'tot_neto' => 0];
 
@@ -64,11 +65,12 @@ function getDev_cli($conn, $fecha1, $fecha2, $tipo, $linea) {
     $sql .= " WHERE d.anulada = 0 ";
     $params = [];
 
+    // Filtro de fechas (CORRECCIÓN YYYYMMDD)
     if ($tipo == 'ven' || $tipo == 'sin') {
-        $sql .= " AND d.fec_emis = ? ";
+        $sql .= " AND CONVERT(VARCHAR(8), d.fec_emis, 112) = ? ";
         $params[] = $fecha1;
     } else {
-        $sql .= " AND d.fec_emis BETWEEN ? AND ? ";
+        $sql .= " AND CONVERT(VARCHAR(8), d.fec_emis, 112) BETWEEN ? AND ? ";
         $params[] = $fecha1; 
         $params[] = $fecha2;
     }
@@ -87,11 +89,12 @@ function getDev_cli($conn, $fecha1, $fecha2, $tipo, $linea) {
     ];
 }
 
-// Depósitos de Caja (Z)
+// --- Depósitos de Caja (Z) ---
 function getDep_caj($conn, $fecha1) {
     if (!$conn) return ['total_efec' => 0, 'total_tarj' => 0];
     
-    $sql = "SELECT SUM(total_efec), SUM(total_tarj) FROM dep_caj WHERE fecha = ?";
+    // CORRECCIÓN YYYYMMDD
+    $sql = "SELECT SUM(total_efec), SUM(total_tarj) FROM dep_caj WHERE CONVERT(VARCHAR(8), fecha, 112) = ?";
     $stmt = sqlsrv_query($conn, $sql, [$fecha1]);
     
     if ($stmt && sqlsrv_fetch($stmt)) {
@@ -100,22 +103,24 @@ function getDep_caj($conn, $fecha1) {
     return ['total_efec' => 0, 'total_tarj' => 0];
 }
 
-// Movimientos Banco (Depósitos confirmados)
+// --- Movimientos Banco (Depósitos confirmados) ---
 function getMov_ban($conn, $fecha1) {
     if (!$conn) return ['monto_h' => 0];
     
+    // CORRECCIÓN YYYYMMDD
     // OJO: Asumo que cta_egre='045' es tu cuenta puente o caja principal
-    $sql = "SELECT SUM(monto_h) FROM mov_ban WHERE fecha = ? AND anulado = 0 AND origen = 'DEP' AND cta_egre='045'";
+    $sql = "SELECT SUM(monto_h) FROM mov_ban WHERE CONVERT(VARCHAR(8), fecha, 112) = ? AND anulado = 0 AND origen = 'DEP' AND cta_egre='045'";
     $stmt = sqlsrv_query($conn, $sql, [$fecha1]);
     
     return ['monto_h' => ($stmt && sqlsrv_fetch($stmt)) ? sqlsrv_get_field($stmt, 0) : 0];
 }
 
-// Ordenes de Pago (Gastos y Vales)
+// --- Ordenes de Pago (Gastos y Vales) ---
 function getOrd_pago($conn, $fecha1, $tipo) {
     if (!$conn) return ['monto' => 0];
 
-    $sql = "SELECT SUM(o.monto) FROM ord_pago o JOIN benefici b ON b.cod_ben = o.cod_ben WHERE o.fecha = ? AND o.anulada = 0 AND o.ord_num < 6000000 ";
+    // CORRECCIÓN YYYYMMDD
+    $sql = "SELECT SUM(o.monto) FROM ord_pago o JOIN benefici b ON b.cod_ben = o.cod_ben WHERE CONVERT(VARCHAR(8), o.fecha, 112) = ? AND o.anulada = 0 AND o.ord_num < 6000000 ";
     
     if ($tipo == 'sin') { // Gastos generales
         $sql .= " AND o.cta_egre = '878'";
@@ -127,12 +132,13 @@ function getOrd_pago($conn, $fecha1, $tipo) {
     return ['monto' => ($stmt && sqlsrv_fetch($stmt)) ? sqlsrv_get_field($stmt, 0) : 0];
 }
 
-// Tasas (Dólar)
+// --- Tasas (Dólar) ---
 function getTasas($conn, $fecha) {
     if (!$conn) return ['tasa_v' => 1];
     
+    // CORRECCIÓN YYYYMMDD
     // Busca la tasa de ese día o la más reciente anterior
-    $sql = "SELECT TOP 1 tasa_v FROM tasas WHERE fecha <= ? ORDER BY fecha DESC";
+    $sql = "SELECT TOP 1 tasa_v FROM tasas WHERE CONVERT(VARCHAR(8), fecha, 112) <= ? ORDER BY fecha DESC";
     $stmt = sqlsrv_query($conn, $sql, [$fecha]);
     
     return ['tasa_v' => ($stmt && sqlsrv_fetch($stmt)) ? sqlsrv_get_field($stmt, 0) : 1];
