@@ -4,146 +4,336 @@ ini_set('max_execution_time', 3600);
 
 require "../../includes/log.php";
 include '../../includes/header2.php';
-include '../../services/mysql.php'; // Contiene $sedes_ar y require empresas.php
-include '../../services/adm/ventas/diarias.php'; // Funciones "Old Way" con fix de fecha
+include '../../services/mysql.php';
+include '../../services/adm/ventas/diarias.php';
 
-if (!isset($_GET['fecha1'])) { header("location: form.php"); exit; }
+if ($_GET) {
 
-$divisa = $_GET['divisa'];
-$fecha_input = $_GET['fecha1'];
-$fecha_titulo = date("d/m/Y", strtotime($fecha_input));
-$fecha_sql = date("Ymd", strtotime($fecha_input));
-$linea = 'todos';
+  $divisa = $_GET['divisa'];
+  $fecha_titulo = date("d/m/Y", strtotime($_GET['fecha1']));
+  $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
+  $linea='todos';
+
+  $fecha = date("Ymd", strtotime($_GET['fecha1']));
+
+  $Day = date("d", strtotime($fecha));
+  $Month = date("m", strtotime($fecha));
+  $Year = date("Y", strtotime($fecha));
+
+
+
+
+  /* $fecha_2 =  $fecha; */
+
+  $fecha_2 = $Year .'/'. $Month .'/' . $Day ;
+    
+
+
+
 ?>
 
-<style>
-    .text-end { text-align: right; }
-    .text-center { text-align: center; }
-    .diff-pos { color: #ffc107; font-weight: bold; }
-    .diff-neg { color: #dc3545; font-weight: bold; }
-    .ok-icon { filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%); width: 20px; }
-</style>
+  <style>
+    img {
 
-<center>
+
+      width: 28px;
+    }
+  </style>
+
+
+  <link rel='stylesheet' href='responm.css'>
+
+
+
+
+  <center>
     <h1>Ventas Diarias <?= $fecha_titulo ?></h1>
-    <h4>En <?= ($divisa == 'dl') ? "Dolares" : "Bolivares" ?></h4>
-</center>
+  </center>
 
-<table class="table table-dark table-striped table-sm" id="tblData">
+  <?php
+
+  if ($divisa == 'dl') {
+
+    echo "<h4>En Dolares</h4>";
+  } else {
+    echo "<h4>En Bolivares</h4>";
+  }
+
+  ?>
+
+
+
+  <table class="table table-dark table-striped" id="tblData">
     <thead>
-        <tr class="text-center">
-            <th>Empresa</th>
-            <?= ($divisa == 'dl') ? "<th>Tasa</th>" : "" ?>
-            <th>Ventas Neta</th>
-            <th>Pares</th>
-            <th>Devol ($)</th>
-            <th style="border-left: 1px solid #555;">Depositos</th>
-            <th>Efectivo</th>
-            <th>Tarjeta</th>
-            <th>Divisas</th>
-            <th>Prov/Varios</th>
-            <th style="border-left: 1px solid #555;">Diferencia</th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php
-    $tot_ventas = $tot_pares = $tot_devol = 0;
-    $tot_depositos = $tot_efectivo = $tot_tarjeta = $tot_gastos = $tot_otros = 0;
-    $tot_dif = 0;
 
-    // BUCLE EMPIEZA EN 1 (Salta Previa Shop)
-    for ($i = 1; $i < count($sedes_ar); $i++) {
-        $sede = $sedes_ar[$i]; // Pasamos el NOMBRE (String), no la conexión
 
-        // 1. OBTENER TASA
-        $tasa = 1;
+
+      <tr>
+        <th scope="col">Cod</th>
+        <th scope='col'>Empresa</th>
+
+        <?php
+
         if ($divisa == 'dl') {
-            $arr_tasa = getTasas($sede, $fecha_sql);
-            $tasa = ($arr_tasa['tasa_v'] > 0) ? $arr_tasa['tasa_v'] : 1;
+
+          echo "<th scope='col'>Tasa</th>";
         }
 
-        // 2. OBTENER DATOS (Usando funciones originales corregidas)
-        $fac     = getFactura($sede, $fecha_sql, null, 'sin', $linea);
-        $fac_art = getFactura($sede, $fecha_sql, null, 'ven', $linea);
-        $dev     = getDev_cli($sede, $fecha_sql, null, 'sin', $linea);
-        $dev_art = getDev_cli($sede, $fecha_sql, null, 'ven', $linea);
-
-        $caja    = getDep_caj($sede, $fecha_sql, null, 'sin');
-        $banco   = getMov_ban($sede, $fecha_sql, null, 'sin');
-        $o_gasto = getOrd_pago($sede, $fecha_sql, null, 'sin');
-        $o_prov  = getOrd_pago($sede, $fecha_sql, null, 'ven');
-
-        // 3. CALCULOS
-        $venta_neta  = ($fac['tot_neto'] - $dev['tot_neto']) / $tasa;
-        $pares       = $fac_art['total_art'] - $dev_art['total_art'];
-        $monto_devol = $dev['tot_neto'] / $tasa;
-
-        $depositos   = $banco['monto_h'] / $tasa;
-        $efectivo    = $caja['total_efec'] / $tasa;
-        $tarjeta     = $caja['total_tarj'] / $tasa;
-        $gastos      = $o_gasto['monto'] / $tasa;
-        $otros       = $o_prov['monto'] / $tasa;
-
-        // 4. CUADRE (Matemático)
-        $dinero = $depositos + $efectivo + $tarjeta + $gastos + $otros;
-        $diferencia = $dinero - $venta_neta;
-
-        // ACUMULADOS
-        $tot_ventas += $venta_neta;
-        $tot_pares += $pares;
-        $tot_devol += $monto_devol;
-        $tot_depositos += $depositos;
-        $tot_efectivo += $efectivo;
-        $tot_tarjeta += $tarjeta;
-        $tot_gastos += $gastos;
-        $tot_otros += $otros;
-        $tot_dif += $diferencia;
         ?>
-        
+
+        <th scope='col'>Ventas</th>
+        <th scope='col'>Pares</th>
+
+        <th scope='col'>Devol</th>
+        <th scope='col'>Pares Dev</th>
+
+        <th scope='col'>Depositos</th>
+        <th scope='col'>Efectivo</th>
+        <th scope='col'>Tarjeta</th>
+
+        <th scope='col'>Divisas</th>
+        <th scope='col'>Gastos</th>
+
+        <th scope='col'>Cuadre Caja</th>
+
+        <th scope='col'>Cierre Caja</th>
+      </tr>
+
+    </thead>
+    <tbody>
+
+      <?php
+
+      for ($i = 1; $i < count($sedes_ar); $i++) {
+
+        if ($divisa == 'dl') {
+
+          $tasas = getTasas($sedes_ar[$i],  $fecha_2);
+           
+          if ($tasas != null) {
+            $tasa_v_tasas = $tasas['tasa_v'];
+          } else {
+            $tasa_v_tasas;
+          }
+
+
+        } else {
+          $tasa_v_tasas  = 1;
+        }
+
+        $cod = Cliente($sedes_ar[$i]);
+
+        $factura = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'sin',$linea);
+        $tasa_tot_neto_factura = $factura['tot_neto'] / $tasa_v_tasas;
+
+        $dev_cli = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'sin',$linea);
+        $tasa_tot_neto_dev_cli = $dev_cli['tot_neto'] / $tasa_v_tasas;
+        $tot_neto_dev_cli = number_format($tasa_tot_neto_dev_cli, 2, ',', '.');
+
+
+        $venta = $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+        $tot_neto_factura = number_format($venta, 2, ',', '.');
+
+
+        $factura_ven = getFactura($sedes_ar[$i], $fecha1, $fecha2, 'ven',$linea);
+        $total_art_factura =  number_format($factura_ven['total_art'], 0, ',', '.');
+
+        $dev_cli_ven = getDev_cli($sedes_ar[$i], $fecha1, $fecha2, 'ven',$linea);
+        $total_art_dev_cli = number_format($dev_cli_ven['total_art'], 0, ',', '.');
+
+
+        $dep_caj = getDep_caj($sedes_ar[$i], $fecha1, $fecha2, 'sin');
+        $tasa_total_efec_dep_caj = $dep_caj['total_efec'] / $tasa_v_tasas;
+        $tasa_total_tarj_dep_caj = $dep_caj['total_tarj'] / $tasa_v_tasas;
+        $total_efec_dep_caj = number_format($tasa_total_efec_dep_caj, 2, ',', '.');
+        $total_tarj_dep_caj = number_format($tasa_total_tarj_dep_caj, 2, ',', '.');
+
+        $mov_ban = getMov_ban($sedes_ar[$i], $fecha1, $fecha2, 'sin');
+        $tasa_monto_h_mov_ban = $mov_ban['monto_h'] / $tasa_v_tasas;
+        $monto_h_mov_ban = number_format($tasa_monto_h_mov_ban, 2, ',', '.');
+
+        $ord_pago = getOrd_pago($sedes_ar[$i], $fecha1, $fecha2, 'sin');
+        $tasa_monto_ord_pago = $ord_pago['monto'] / $tasa_v_tasas;
+        $monto_ord_pago = number_format($tasa_monto_ord_pago, 2, ',', '.');
+
+        $ord_pago_ven = getOrd_pago($sedes_ar[$i], $fecha1, $fecha2, 'ven');
+        $tasa_monto_ord_pago_ven = $ord_pago_ven['monto'] / $tasa_v_tasas;
+        $monto_ord_pago_ven = number_format($tasa_monto_ord_pago_ven, 2, ',', '.');
+
+
+        /* totales */
+
+        $pares=$total_art_factura - $total_art_dev_cli  ;
+
+        $total_venta += $tasa_tot_neto_factura - $tasa_tot_neto_dev_cli;
+        $total_venta_pares +=  $pares;
+
+        $total_devol += $tasa_tot_neto_dev_cli;
+        $total_devol_pares += $dev_cli_ven['total_art'];
+
+        $total_depositos += $tasa_monto_h_mov_ban;
+
+        $total_efectivo += $tasa_total_efec_dep_caj;
+        $total_tarjeta += $tasa_total_tarj_dep_caj;
+
+        $total_pagos += $tasa_monto_ord_pago;
+        $total_gastos += $tasa_monto_ord_pago_ven;
+
+      ?>
         <tr>
-            <td><?= $sede ?></td>
-            
-            <?php if ($divisa == 'dl'): ?>
-                <td class="text-end"><?= number_format($tasa, 2, ',', '.') ?></td>
-            <?php endif; ?>
 
-            <td class="text-end"><?= number_format($venta_neta, 2, ',', '.') ?></td>
-            <td class="text-end"><?= number_format($pares, 0, ',', '.') ?></td>
-            <td class="text-end"><?= number_format($monto_devol, 2, ',', '.') ?></td>
+          <td><?= $cod   ?></td>
+          <td><?= $sedes_ar[$i]  ?></td>
 
-            <td class="text-end" style="border-left: 1px solid #555;"><?= number_format($depositos, 2, ',', '.') ?></td>
-            <td class="text-end"><?= number_format($efectivo, 2, ',', '.') ?></td>
-            <td class="text-end"><?= number_format($tarjeta, 2, ',', '.') ?></td>
-            <td class="text-end"><?= number_format($gastos, 2, ',', '.') ?></td>
-            <td class="text-end"><?= number_format($otros, 2, ',', '.') ?></td>
+          <?php
 
-            <td class="text-center" style="border-left: 1px solid #555;">
-                <?php 
-                if (abs($diferencia) < 1) { 
-                     echo "<img src='./img/checkmark-circle.svg' class='ok-icon'>"; 
+          if ($divisa == 'dl') {
+
+            $tasa_dia = number_format($tasa_v_tasas, 2, ',', '.');
+
+            echo "<td>$tasa_dia</td>";
+          }
+
+          ?>
+
+
+          <td><?= $tot_neto_factura    ?></td>
+          <td><?= $total_art_factura - $total_art_dev_cli   ?></td>
+
+          <td><?= $tot_neto_dev_cli   ?></td>
+          <td><?= $total_art_dev_cli  ?></td>
+
+          <td><?= $monto_h_mov_ban ?></td>
+
+
+          <td><?= $total_efec_dep_caj  ?></td>
+          <td><?= $total_tarj_dep_caj  ?></td>
+
+          <td><?= $monto_ord_pago  ?></td>
+          <td><?= $monto_ord_pago_ven  ?></td>
+
+          <td> <?php
+
+                if ($venta <= 1 & $total_art_factura == 0) {
+
+                  echo " <img src='./img/help.svg' alt=''> ";
+
+                }elseif ($tot_neto_factura > 1 & $monto_h_mov_ban > 1) {
+
+                  $diferencias = number_format($tasa_monto_ord_pago + $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
+                  echo "$diferencias";
+
+                } elseif ($total_tarj_dep_caj > 1) {
+
+                  $diferencias = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
+
+                  if ($diferencias > 1) {
+
+                    echo "<img src='./img/help.svg' alt=''> ";
+
+                  } else {
+
+                    echo "$diferencias";
+                    
+                  }
                 } else {
-                     $clase = ($diferencia < 0) ? 'diff-neg' : 'diff-pos';
-                     echo "<span class='$clase'>" . number_format($diferencia, 2, ',', '.') . "</span>";
-                     if ($diferencia < -5) echo " <img src='./img/help.svg' width='16'>";
+                  echo "<img src='./img/help.svg' alt=''> ";
                 }
-                ?>
-            </td>
+
+                ?></td>
+
+        <?php
+
+        $total_diferencias += $diferencias;
+
+        $caja = number_format($tasa_monto_ord_pago + $tasa_monto_ord_pago_ven + $tasa_monto_h_mov_ban - $venta, 2, ',', '.');
+
+        if ($venta <= 1 & $total_art_factura == 0) {
+
+          echo "<td> <img src='./img/help.svg' alt=''> </td>";
+
+        }  elseif ($caja == 0) {
+
+          echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
+
+        } elseif ($total_tarj_dep_caj > 1) {
+
+          $caja2 = number_format($tasa_total_efec_dep_caj + $tasa_total_tarj_dep_caj + $tasa_monto_ord_pago + $tasa_monto_ord_pago_ven - $venta, 2, ',', '.');
+
+          if ($caja2 > 1) {
+
+            echo "<td><img src='./img/help.svg' alt=''> </td>";
+
+          } else {
+
+            echo "<td> <img src='./img/checkmark-circle.svg' alt=''> </td>";
+            
+          }
+
+        }elseif ($monto_h_mov_ban < 1) {
+
+          echo "<td> <img src='./img/help.svg' alt=''> </td>";
+
+        }
+        else {
+          echo "<td> <img src='./img/cross-circle.svg' alt=''> </td>";
+        }
+
+        echo "</tr>";
+      }
+
+      if ($divisa == 'dl') {
+
+        $simb = '$';
+        $colspan = 3;
+      } else {
+
+        $simb = 'Bs';
+        $colspan = 2;
+      }
+
+        ?>
+
+
+
+        <tr>
+          <td colspan="<?= $colspan ?>">
+            <h3>Totales</h3>
+          </td>
+
+
+
+          <td><b><?= $simb ?><?= number_format($total_venta, 2, ',', '.')  ?></b></td>
+          <td><b><?= $total_venta_pares ?></b></td>
+
+          <td><b><?= $simb ?><?= number_format($total_devol, 2, ',', '.')  ?></b></td>
+          <td><b><?= number_format($total_devol_pares, 0, '', '.')  ?></b></td>
+
+          <td><b><?= $simb ?><?= number_format($total_depositos, 2, ',', '.')  ?></b></td>
+
+          <td><b><?= $simb ?><?= number_format($total_efectivo, 2, ',', '.')  ?></b></td>
+          <td><b><?= $simb ?><?= number_format($total_tarjeta, 2, ',', '.')  ?></b></td>
+
+          <td><b><?= $simb ?><?= number_format($total_pagos, 2, ',', '.')  ?></b></td>
+          <td><b><?= $simb ?><?= number_format($total_gastos, 2, ',', '.')  ?></b></td>
+          <td><b><?= $simb ?><?= number_format($total_diferencias, 2, ',', '.')  ?></b></td>
+
+
+          <td></td>
+
         </tr>
-    <?php } // Fin for ?>
 
-    <tr class="table-secondary" style="border-top: 2px solid white; font-weight:bold;">
-        <td colspan="<?= ($divisa=='dl') ? 2 : 1 ?>" class="text-end">TOTALES:</td>
-        <td class="text-end"><?= number_format($tot_ventas, 2, ',', '.') ?></td>
-        <td class="text-end"><?= number_format($tot_pares, 0, ',', '.') ?></td>
-        <td class="text-end"><?= number_format($tot_devol, 2, ',', '.') ?></td>
-        <td class="text-end" style="border-left: 1px solid #555;"><?= number_format($tot_depositos, 2, ',', '.') ?></td>
-        <td class="text-end"><?= number_format($tot_efectivo, 2, ',', '.') ?></td>
-        <td class="text-end"><?= number_format($tot_tarjeta, 2, ',', '.') ?></td>
-        <td class="text-end"><?= number_format($tot_gastos, 2, ',', '.') ?></td>
-        <td class="text-end"><?= number_format($tot_otros, 2, ',', '.') ?></td>
-        <td class="text-center" style="border-left: 1px solid #555;"><?= number_format($tot_dif, 2, ',', '.') ?></td>
-    </tr>
     </tbody>
-</table>
 
-<?php include '../../includes/footer.php'; ?>
+
+  </table>
+
+
+<?php
+} else {
+  header("location: form.php");
+}
+
+
+
+include '../../includes/footer.php'; ?>
