@@ -1,5 +1,4 @@
 <?php
-// report-cashea.php
 ini_set('memory_limit', '4096M');
 ini_set('max_execution_time', 3600);
 
@@ -8,171 +7,151 @@ include '../../includes/header.php';
 include '../../services/mysql.php';
 include '../../services/adm/ventas/cashea.php';
 
-if (!isset($_GET['fecha1'])) {
-    header("location: form.php");
-    exit;
-}
 
-$fecha_titulo1 = date("d/m/Y", strtotime($_GET['fecha1']));
-$fecha_titulo2 = date("d/m/Y", strtotime($_GET['fecha2']));
-$fecha1 = date("Ymd", strtotime($_GET['fecha1']));
-$fecha2 = date("Ymd", strtotime($_GET['fecha2']));
+if (isset($_GET)) {
+
+
+  $fecha_titulo1 = date("d/m/Y", strtotime($_GET['fecha1']));
+  $fecha_titulo2 = date("d/m/Y", strtotime($_GET['fecha2']));
+  $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
+  $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
+
+  
+
 ?>
 
-<style>
-    html { scroll-behavior: smooth; }
-    .text-end { text-align: right !important; }
-    
-    /* Encabezado de Tienda */
-    .store-header {
-        background-color: #444;
-        color: #fff;
-        padding: 10px;
-        margin-top: 40px;
-        margin-bottom: 5px;
-        border-radius: 5px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        scroll-margin-top: 60px;
-    }
-    .store-title { font-size: 1.3rem; margin: 0; }
-    
-    /* Índice */
-    .index-box { background: #2c3e50; padding: 15px; border-radius: 8px; margin-bottom: 30px; }
-    .btn-index { margin: 3px; font-size: 0.85rem; background-color: #34495e; border: 1px solid #555; color: white; }
-    .btn-index:hover { background-color: #1abc9c; color: white; }
-    
-    .btn-top { float: right; font-size: 0.8rem; color: #1abc9c; text-decoration: none; margin-top: 5px; }
-</style>
+  <center>
+    <h1>Factura por Cashea <?= $fecha_titulo1 ?> - <?= $fecha_titulo2  ?></h1>
+  </center>
 
-<center>
-    <h1>Reporte Facturación Cashea</h1>
-    <h4>Desde <?= $fecha_titulo1 ?> Hasta <?= $fecha_titulo2 ?></h4>
-</center>
+  <?php
 
-<div class="container-fluid">
+
+
+
+
+
+
+for ($e = 1; $e < count($sedes_ar); $e++) {
+
+  $sede = $sedes_ar[$e];
+
+  ?>
+
+<center><h1><?= $sede  ?></h1></center>
+  
+  <table class='table table-dark table-striped'>
+    <thead>
+<!-- 				-->
+
+
+      <tr>
+        <th scope='col'>N°</th>
+        <th scope='col'>Tienda</th>
+        <th scope='col'>Fecha</th>
+        <th scope='col'>Factura</th>
+        <th scope='col'>Cobros</th>
+        <th scope='col'>CI</th>
+        <th scope='col'>Cliente</th>
+        <th scope='col'>Monto por Cobrar</th>
+        <th scope='col'>Monto de la Factura</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      
+
+      <?php
+
+
+
+        $res = getCobros_Cashea($sede, $fecha1, $fecha2 );
+
+        $n = 1;
+        $total_mont_doc=0;
+        for ($i = 0; $i < count($res); $i++) {
+
+
+          $cob_num = $res[$i]['cob_num'];
+          $fec_cob = $res[$i]['fec_cob'];
+          $fecha = $fec_cob->format('d-m-Y');
+          $doc_num = $res[$i]['doc_num'];
+          $mont_doc = $res[$i]['mont_doc'];
+          $tot_neto = $res[$i]['tot_neto'];
+          $co_cli = $res[$i]['co_cli'];
+          $cli_des = $res[$i]['cli_des'];
+          
+
+
+          $total_mont_doc += $mont_doc;
+
+
+          echo "
+        <tr>
+        <th scope='row'>$n</th>
+        <td>$sede</td>
+        <td>$fecha</td>
+
+        <td>$doc_num</td>
+        <td>$cob_num </td>
+        
+        <td>$co_cli</td>
+        <td>$cli_des</td>
+        
+        <td>$mont_doc</td>
+        <td>$tot_neto</td>
+
+
+
+        </tr>";
+          $n++;
+        }
+ 
+
+
+
+
+      echo "
+      <tr>
+    
+      <th colspan='6' ></th>
+      <th  >Totales:</th>
+      <td>" . $total_mont_doc . "</td>
+      <th  ></th>
+      </tr>
+      </tbody>
+      </table>";
+
+
+      $total_mont_doc =0;
+
+
+
+
+      /*         <td>" . $total_stock_act_dev_pro . "</td>
+        <td>" . $total_stock_com . "</td>
+        <td>" . $total_stock_reng_dvp . "</td> */
+
+
+
+
+
+
+      }
+
+      ?>
+
+
 
     <?php
-    $indice_links = [];
-    $contenido_tablas = "";
-    $gran_total_cashea = 0;
 
-    // Bucle empieza en 1 para saltar Previa Shop
-    for ($e = 1; $e < count($sedes_ar); $e++) {
 
-        $sede = $sedes_ar[$e];
-        $anchor_id = "sede_" . $e;
+  } else {
+    header("location: form.php");
+  }
 
-        // 1. Obtener Datos
-        $res = getCobros_Cashea($sede, $fecha1, $fecha2);
 
-        // 2. Si hay datos, procesar
-        if (!empty($res) && is_array($res)) {
-            
-            $count = count($res);
-            // Agregar al índice
-            $indice_links[] = "<a href='#$anchor_id' class='btn btn-sm btn-index'>$sede <span class='badge bg-light text-dark'>$count</span></a>";
-            
-            $subtotal_sede = 0;
-            
-            // Iniciar Buffer
-            ob_start();
-    ?>
-            <div id="<?= $anchor_id ?>" class="store-header">
-                <h3 class="store-title"><?= $sede ?></h3>
-                <span class="badge bg-warning text-dark">Cashea</span>
-            </div>
 
-            <div class="table-responsive">
-                <table class='table table-dark table-striped table-hover table-sm'>
-                    <thead>
-                        <tr>
-                            <th scope='col'>N°</th>
-                            <th scope='col'>Fecha</th>
-                            <th scope='col'>Factura</th>
-                            <th scope='col'>Cobro</th>
-                            <th scope='col'>CI / RIF</th>
-                            <th scope='col'>Cliente</th>
-                            <th scope='col' class="text-end">Monto Factura</th>
-                            <th scope='col' class="text-end">Monto Cashea</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    $n = 1;
-                    for ($i = 0; $i < count($res); $i++) {
 
-                        $cob_num  = $res[$i]['cob_num'];
-                        $fecha    = "";
-                        if(isset($res[$i]['fec_cob'])) {
-                             // Manejo seguro si es objeto DateTime o string
-                             $fecha = ($res[$i]['fec_cob'] instanceof DateTime) ? $res[$i]['fec_cob']->format('d-m-Y') : $res[$i]['fec_cob'];
-                        }
-                        
-                        $doc_num  = $res[$i]['doc_num'];
-                        $mont_doc = $res[$i]['mont_doc'];
-                        $tot_neto = $res[$i]['tot_neto'];
-                        $co_cli   = $res[$i]['co_cli'];
-                        $cli_des  = $res[$i]['cli_des'];
-
-                        $subtotal_sede += $mont_doc;
-                    ?>
-                        <tr>
-                            <th scope='row'><?= $n ?></th>
-                            <td><?= $fecha ?></td>
-                            <td><?= $doc_num ?></td>
-                            <td><?= $cob_num ?></td>
-                            <td><?= $co_cli ?></td>
-                            <td><?= $cli_des ?></td>
-                            <td class="text-end text-muted"><?= number_format($tot_neto, 2, ',', '.') ?></td>
-                            <td class="text-end fw-bold text-warning"><?= number_format($mont_doc, 2, ',', '.') ?></td>
-                        </tr>
-                    <?php
-                        $n++;
-                    } // Fin for filas
-                    
-                    $gran_total_cashea += $subtotal_sede;
-                    ?>
-                    
-                    <tr class="table-secondary fw-bold">
-                        <td colspan="7" class="text-end">Total Cashea <?= $sede ?>:</td>
-                        <td class="text-end"><?= number_format($subtotal_sede, 2, ',', '.') ?></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <a href="#top-index" class="btn-top">⬆ Volver al Inicio</a>
-                <div style="clear:both; margin-bottom: 20px;"></div>
-            </div>
-
-    <?php
-            $contenido_tablas .= ob_get_clean();
-        } // Fin if empty
-    } // Fin for sedes
-    ?>
-
-    <?php if (!empty($indice_links)): ?>
-        <div id="top-index" class="index-box">
-            <h5 class="text-white border-bottom pb-2">Tiendas con Movimientos Cashea:</h5>
-            <div class="d-flex flex-wrap">
-                <?php foreach ($indice_links as $link) echo $link; ?>
-            </div>
-        </div>
-    <?php else: ?>
-        <div class="alert alert-info text-center mt-4">No se encontraron movimientos de Cashea en este rango de fechas.</div>
-    <?php endif; ?>
-
-    <?= $contenido_tablas ?>
-
-    <?php if ($gran_total_cashea > 0): ?>
-        <div class="card bg-dark text-white text-center mt-4 mb-5" style="border: 2px solid #ffc107;">
-            <div class="card-body">
-                <h2>Total Global Cashea</h2>
-                <h1 class="text-warning"><?= number_format($gran_total_cashea, 2, ',', '.') ?></h1>
-            </div>
-        </div>
-    <?php endif; ?>
-
-</div>
-
-<?php include '../../includes/footer.php'; ?>
+  include '../../includes/footer.php'; ?>
