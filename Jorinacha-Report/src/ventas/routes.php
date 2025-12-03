@@ -4,139 +4,117 @@ include '../../includes/loading.php';
 include '../../services/sqlserver.php';
 include '../../services/mysql.php';
 
-if (isset($_POST)  ) {
+// Verificamos si se envió el formulario
+if (isset($_POST['clave'])) {
 
+    $clave = $_POST['clave'];
 
-    $clave=$_POST['clave'];
+    if ($clave === 'N3td0s') {
+        
+        // Recoger variables
+        $reporte = $_POST['reporte'];
+        $divisa  = $_POST['divisa'];
+        $linea   = $_POST['linea'];
 
+        $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
+        
+        // Lógica de fecha: Si no ponen fecha2, asume que es el mismo día que fecha1
+        $fecha2 = (!empty($_POST['fecha2'])) ? date("Ymd", strtotime($_POST['fecha2'])) : $fecha1;
 
+        // --- CORRECCIÓN CRÍTICA DE SEDES ---
+        // Capturamos el array directamente. Si no seleccionaron nada, enviamos array vacío.
+        $array_sedes = isset($_POST['sedes']) ? $_POST['sedes'] : [];
+        
+        // Serializamos para pasar por URL (Formato seguro para PHP)
+        $sedes = urlencode(serialize($array_sedes));
 
+        // Inicializamos URL
+        $url = "";
 
-if ($clave === 'N3td0s' ) {
-    
-    $reporte=$_POST['reporte'];
-    $divisa=$_POST['divisa'];
-    $linea=$_POST['linea'];
+        // --- SISTEMA DE RUTEO (SWITCH) ---
+        switch ($reporte) {
+            case 'diario':
+                $url = "report-ventas-diaria.php?fecha1=$fecha1&divisa=$divisa&sedes=$sedes&linea=$linea";
+                break;
 
-    $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
-    $fecha2 = date("Ymd", strtotime($_POST['fecha2']));  
+            case 'por':
+                $url = "report-grafica.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes";
+                break;
 
-  
-    
-      for ($i = 0; $i < 20; $i += 1) {
-        $sedes[] = $_POST[$i];
-      }
-    
-      $sedes = serialize($sedes);
-      $sedes = urlencode($sedes);
+            case 'des':
+                $url = "report-despacho-gf.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes";
+                break;
 
-    if ($reporte=='diario') {
+            case 'cashea':
+                $url = "report-cashea.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes";
+                break;
 
-        header("refresh:1;url= report-ventas-diaria.php?fecha1=$fecha1&divisa=$divisa&sedes=$sedes&linea=$linea");
+            case 'lysto': // Nuevo reporte Lysto
+                $url = "report-lysto.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes";
+                break;
 
-    }elseif ($reporte=='por') {
+            case 'dias':
+                $url = "report-ventas-diaria-todo.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes&linea=$linea";
+                break;
 
-        header("refresh:1;url= report-grafica.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
+            case 'mes':
+                // Lógica especial para el reporte mensual dependiendo si es marcas o todo
+                if ($linea == 'todos') {
+                    $base = ($divisa == 'dl') ? "report-ventas-mes-todo-dolares.php" : "report-ventas-mes-todo-bolivares.php";
+                } else {
+                    $base = ($divisa == 'dl') ? "report-ventas-mes-marcas-dolares.php" : "report-ventas-mes-marcas-bolivares.php";
+                }
+                $url = "$base?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes";
+                break;
 
-    }  elseif ($reporte=='des') {
+            case 'acumulado':
+                if (!empty($_POST['fecha2'])) { // Validación específica para acumulado
+                    $base = ($divisa == 'dl') ? "report-ventas-acumulado-dolares.php" : "report-ventas-acumulado.php";
+                    $url = "$base?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes";
+                } else {
+                    // Si falta fecha2 en acumulado, error
+                    echo "<script>alert('El reporte acumulado requiere Fecha Hasta');</script>";
+                    header('refresh:0;url= form.php');
+                    exit;
+                }
+                break;
 
-        header("refresh:1;url= report-despacho-gf.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
+            case 'ventas':
+                $url = "report-ventas-detalle.php?fecha1=$fecha1&linea=$linea&divisa=$divisa&sedes=$sedes";
+                break;
 
-    }  elseif ($reporte=='cashea') {
+            case 'ord':
+                $url = "report-ventas-ordenes.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes";
+                break;
 
-        header("refresh:1;url= report-cashea.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes");
+            case 'ordenes':
+                $url = "report-ordenes.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes";
+                break;
 
-    }    
-    
-    elseif ($reporte=='dias') {
+            case 'factura':
+                $url = "report-ventas-facturas.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes";
+                break;
 
-        header("refresh:1;url= report-ventas-diaria-todo.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=$sedes&linea=$linea");
-
-    }    
-    elseif ($reporte=='mes') {
-
-        if ($linea=='todos') {
-            if ($divisa== 'dl') {
-
-                header("refresh:1;url= report-ventas-mes-todo-dolares.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
-            }    else {
-    
-                header("refresh:1;url= report-ventas-mes-todo-bolivares.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
-            }
-        }else {
-            if ($divisa== 'dl') {
-
-                header("refresh:1;url= report-ventas-mes-marcas-dolares.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
-            }    else {
-    
-                header("refresh:1;url= report-ventas-mes-marcas-bolivares.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
-            }
+            default:
+                header('refresh:1;url= form.php');
+                exit;
         }
 
-
-
-
-        
-
-    } 
-    
-    elseif ($reporte=='acumulado') {
-
-        if ($fecha2) {
-            
-            if ($divisa== 'dl') {
-
-                header("refresh:1;url= report-ventas-acumulado-dolares.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=" . $sedes);
-            }    else {
-
-                header("refresh:1;url= report-ventas-acumulado.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=" . $sedes);
-            }
-
-        }    else {
-
+        // REDIRECCIÓN FINAL
+        if (!empty($url)) {
+            header("refresh:1;url=$url");
+        } else {
             header('refresh:1;url= form.php');
-
         }
-        
-    }elseif ($reporte=='ventas'){
 
-        header("refresh:1;url= report-ventas-detalle.php?fecha1=$fecha1&linea=$linea&divisa=$divisa&sedes=$sedes");
-
-        /* reporte de ventas de tienda en desarrollo */
-
-/*         if ($fecha2) {
-            header("refresh:1;url= report-ventas-tiendas.php?fecha1=$fecha1&fecha2=$fecha2&divisa=$divisa&sedes=" . $sedes);
-        }    else {
-            header('refresh:1;url= form.php');
-        } */
-        
-
-    }elseif ($reporte=='ord'){
-        
-        header("refresh:1;url= report-ventas-ordenes.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
-
-    } elseif ($reporte=='ordenes'){
-        
-        header("refresh:1;url= report-ordenes.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
-
-    }elseif ($reporte=='factura'){
-        
-        header("refresh:1;url= report-ventas-facturas.php?fecha1=$fecha1&fecha2=$fecha2&linea=$linea&divisa=$divisa&sedes=$sedes");
-
+    } else {
+        // Clave incorrecta
+        echo "<script>alert('Clave Incorrecta');</script>";
+        header('refresh:0;url= form.php');
     }
-    else {
-
-        header('refresh:1;url= form.php');
-
-    }
-
-}else {
-
-    header('refresh:1;url= form.php');
-
-}
 
 } else {
+    // Acceso directo sin POST
     header('refresh:1;url= form.php');
-    exit;
 }
+?>
