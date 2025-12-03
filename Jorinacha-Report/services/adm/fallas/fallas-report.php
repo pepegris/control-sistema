@@ -1,4 +1,5 @@
 <?php
+// fallas-report.php
 /* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA */
 require_once "../../services/empresas.php"; // Usamos require_once para seguridad
 
@@ -70,7 +71,7 @@ function getArt($sede, $linea, $co_art, $almacen) {
 
     // Caso: Listado General (El más usado en el reporte)
     if ($sede == 'Previa Shop' and $almacen == 0 and $co_art == 0) {
-        // USO DE LEFT JOIN: Evita que desaparezcan articulos si falta color/cat/subl
+        // AGREGE: LEFT JOIN escalas y el campo des_esc
         $sql = "SELECT 
                     RTRIM(art.co_art) as co_art,
                     ISNULL(RTRIM(sub_lin.subl_des), 'S/D') as co_subl, 
@@ -79,12 +80,14 @@ function getArt($sede, $linea, $co_art, $almacen) {
                     art.stock_act, 
                     ISNULL(RTRIM(colores.des_col), 'S/D') as co_color, 
                     ISNULL(RTRIM(lin_art.lin_des), 'S/D') as co_lin, 
+                    ISNULL(RTRIM(escalas.des_esc), '-') as escala,  /* <--- NUEVO CAMPO */
                     art.ubicacion
                 FROM art 
                 LEFT JOIN lin_art ON art.co_lin = lin_art.co_lin
                 LEFT JOIN sub_lin ON art.co_subl = sub_lin.co_subl
                 LEFT JOIN cat_art ON art.co_cat = cat_art.co_cat
                 LEFT JOIN colores ON art.co_color = colores.co_col
+                LEFT JOIN escalas ON art.co_esc = escalas.co_esc    /* <--- NUEVO JOIN */
                 WHERE art.co_lin = ? AND art.anulado = 0
                 ORDER BY art.co_subl DESC";
         
