@@ -20,25 +20,47 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 ?>
 
 <style>
+    /* Estilos generales */
+    html { scroll-behavior: smooth; } /* Desplazamiento suave */
+    
     .text-end { text-align: right !important; }
     .text-center { text-align: center !important; }
     .fw-bold { font-weight: bold; }
     
-    /* Estilo para el título de cada tienda */
+    /* Estilos del Índice */
+    .index-container {
+        background-color: #2c3e50;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        border: 1px solid #444;
+    }
+    .index-title { color: #fff; font-size: 1.1rem; margin-bottom: 10px; border-bottom: 1px solid #555; padding-bottom: 5px; }
+    .btn-index {
+        margin: 3px;
+        font-size: 0.85rem;
+        background-color: #34495e;
+        border: 1px solid #555;
+        color: #ecf0f1;
+    }
+    .btn-index:hover { background-color: #3498db; color: white; }
+    
+    /* Encabezados de Tienda */
     .store-header {
         background-color: #444;
         color: #fff;
         padding: 10px;
-        margin-top: 30px;
+        margin-top: 40px; /* Espacio para que el ancla no quede tapada */
         margin-bottom: 5px;
         border-radius: 5px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        scroll-margin-top: 80px; /* Ajuste para menú fijo si tienes */
     }
     .store-title { font-size: 1.2rem; margin: 0; }
     
-    /* Totales globales flotantes o fijos al final */
+    /* Totales y botón volver */
     .grand-total-box {
         background-color: #222;
         border: 2px solid #555;
@@ -46,6 +68,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
         margin-top: 40px;
         border-radius: 10px;
     }
+    .btn-top { text-decoration: none; color: #3498db; font-size: 0.8rem; float: right; margin-top: 5px; cursor: pointer; }
 </style>
 
 <center>
@@ -56,50 +79,65 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 <div class="container-fluid">
 
     <?php
-    // Totales Generales (De todas las tiendas juntas)
+    // Variables para almacenar contenido
+    $indice_links = []; // Array para guardar los botones del índice
+    $contenido_tablas = ""; // String gigante para guardar las tablas HTML
+    
     $gran_total_bs = 0;
     $gran_total_usd = 0;
 
-    // Bucle de Tiendas (Empieza en 1 para saltar Previa Shop)
+    // BUCLE DE PROCESAMIENTO
     for ($i = 1; $i < count($sedes_ar); $i++) {
         
         $sede = $sedes_ar[$i];
         $cod_cliente = Cliente($sede);
+        
+        // Crear un ID único para el ancla (ej: store_1, store_2)
+        $anchor_id = "store_" . $i;
 
-        // 1. Consultar datos de esta sede
+        // 1. Consultar datos
         $res_factura = getFacturaDetalles($sede, $fecha1, $fecha2);
 
-        // 2. Solo dibujamos tabla SI HAY DATOS
+        // 2. Si hay datos, procesamos y guardamos en memoria
         if (!empty($res_factura) && is_array($res_factura)) {
             
-            // Totales por Sede (Se reinician en cada vuelta del bucle)
+            // A. Agregar al Índice
+            $count_regs = count($res_factura);
+            $indice_links[] = "<a href='#$anchor_id' class='btn btn-sm btn-index'>$sede <span class='badge bg-secondary'>$count_regs</span></a>";
+            
+            // B. Generar HTML de la Tabla (Concatenamos a la variable $contenido_tablas)
             $subtotal_sede_bs = 0;
             $subtotal_sede_usd = 0;
-    ?>
             
-            <div class="store-header">
-                <h3 class="store-title"><?= $sede ?> <small>(<?= $cod_cliente ?>)</small></h3>
-                <span class="badge bg-primary"><?= count($res_factura) ?> Registros</span>
+            // Iniciamos buffer de salida para capturar HTML limpio
+            ob_start(); 
+            ?>
+            
+            <div id="<?= $anchor_id ?>" class="store-header">
+                <h3 class="store-title"><?= $sede ?> <small class="text-muted" style="font-size:0.7em">(<?= $cod_cliente ?>)</small></h3>
+                <div>
+                    <span class="badge bg-primary"><?= $count_regs ?> Registros</span>
+                </div>
             </div>
 
             <div class="table-responsive">
                 <table class="table table-dark table-striped table-sm table-hover mb-0">
                     <thead>
                         <tr>
-                            <th scope='col'>Fecha</th>
-                            <th scope='col'>Doc</th>
-                            <th scope='col'>Num Fact</th>
-                            <th scope='col' class="text-end">Monto Fact</th>
-                            <th scope='col'>Num Cob</th>
-                            <th scope='col'>Tipo</th>
-                            <th scope='col' class="text-end">Monto Cob</th>
-                            <th scope='col'>Caja</th>
-                            <th scope='col'>Desc Caja</th>
+                            <th>Fecha</th>
+                            <th>Doc</th>
+                            <th>Num Fact</th>
+                            <th class="text-end">Monto Fact</th>
+                            <th>Num Cob</th>
+                            <th>Tipo</th>
+                            <th class="text-end">Monto Cob</th>
+                            <th>Caja</th>
+                            <th>Desc Caja</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
-                    for ($x = 0; $x < count($res_factura); $x++) {
+                    for ($x = 0; $x < $count_regs; $x++) {
                         
                         $tp_doc_cob = $res_factura[$x]['tp_doc_cob'];
                         $doc_num    = $res_factura[$x]['FACTURA'];
@@ -110,14 +148,12 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                         $cod_caja   = $res_factura[$x]['cod_caja'];
                         $des_caja   = $res_factura[$x]['des_caja'];
                         
-                        // Fecha
                         $fecha = "";
                         if (isset($res_factura[$x]['fec_cob']) && $res_factura[$x]['fec_cob'] instanceof DateTime) {
                             $fecha = $res_factura[$x]['fec_cob']->format("d/m/Y");
                         }
 
-                        // Lógica de Acumulados (Ajusta la palabra clave según tus cajas)
-                        // Si la descripción de caja dice "Dolar" o "USD", suma a dolares. Sino a Bs.
+                        // Acumuladores
                         if (strpos(strtolower($des_caja), 'dolar') !== false || strpos(strtolower($des_caja), 'usd') !== false || strpos(strtolower($des_caja), 'divisa') !== false) {
                             $subtotal_sede_usd += $mont_doc;
                         } else {
@@ -138,7 +174,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                     <?php 
                     } // Fin for facturas 
                     
-                    // Sumamos al Gran Total
+                    // Sumar al Global
                     $gran_total_bs += $subtotal_sede_bs;
                     $gran_total_usd += $subtotal_sede_usd;
                     ?>
@@ -150,13 +186,36 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                     </tr>
                     </tbody>
                 </table>
+                <a href="#top-index" class="btn-top">⬆ Volver al Índice</a>
+                <div style="clear:both; margin-bottom: 20px;"></div>
             </div>
             
-    <?php
+            <?php
+            // Capturamos todo el HTML generado arriba y lo agregamos a la variable gigante
+            $contenido_tablas .= ob_get_clean();
+            
         } // Fin if empty
     } // Fin for sedes
     ?>
 
+    <?php if (!empty($indice_links)): ?>
+        <div id="top-index" class="index-container">
+            <div class="index-title">Índice de Tiendas (Clic para ir)</div>
+            <div class="d-flex flex-wrap">
+                <?php 
+                foreach ($indice_links as $link) {
+                    echo $link;
+                }
+                ?>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="alert alert-warning text-center">No se encontraron facturas en el rango de fechas seleccionado.</div>
+    <?php endif; ?>
+
+    <?= $contenido_tablas ?>
+
+    <?php if (!empty($indice_links)): ?>
     <div class="grand-total-box">
         <h2 class="text-center text-white">TOTALES CONSOLIDADOS</h2>
         <div class="row text-center mt-3">
@@ -168,6 +227,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
             </div>
         </div>
     </div>
+    <?php endif; ?>
 
 </div>
 
