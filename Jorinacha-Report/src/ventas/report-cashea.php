@@ -23,6 +23,16 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
     html { scroll-behavior: smooth; }
     .text-end { text-align: right !important; }
     
+    /* ESTILOS CASHEA (AMARILLO) */
+    .text-cashea { color: #ffc107 !important; } 
+    .bg-cashea { background-color: #ffc107 !important; color: #000; }
+    .border-cashea { border: 2px solid #ffc107 !important; }
+    
+    .btn-index { margin: 3px; font-size: 0.85rem; background-color: #34495e; border: 1px solid #555; color: white; }
+    .btn-index:hover { background-color: #ffc107; color: #000; border-color: #ffc107; }
+    
+    .btn-top { float: right; font-size: 0.8rem; color: #ffc107; text-decoration: none; margin-top: 5px; }
+
     /* Encabezado de Tienda */
     .store-header {
         background-color: #444;
@@ -38,16 +48,12 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
     }
     .store-title { font-size: 1.3rem; margin: 0; }
     
-    /* Índice */
+    /* Índice Box */
     .index-box { background: #2c3e50; padding: 15px; border-radius: 8px; margin-bottom: 30px; }
-    .btn-index { margin: 3px; font-size: 0.85rem; background-color: #34495e; border: 1px solid #555; color: white; }
-    .btn-index:hover { background-color: #1abc9c; color: white; }
-    
-    .btn-top { float: right; font-size: 0.8rem; color: #1abc9c; text-decoration: none; margin-top: 5px; }
 </style>
 
 <center>
-    <h1>Reporte Facturación Cashea</h1>
+    <h1>Reporte Facturación <span class="text-cashea">Cashea</span></h1>
     <h4>Desde <?= $fecha_titulo1 ?> Hasta <?= $fecha_titulo2 ?></h4>
 </center>
 
@@ -81,7 +87,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
     ?>
             <div id="<?= $anchor_id ?>" class="store-header">
                 <h3 class="store-title"><?= $sede ?></h3>
-                <span class="badge bg-warning text-dark">Cashea</span>
+                <span class="badge bg-cashea">Cashea</span>
             </div>
 
             <div class="table-responsive">
@@ -126,7 +132,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                             <td><?= $co_cli ?></td>
                             <td><?= $cli_des ?></td>
                             <td class="text-end text-muted"><?= number_format($tot_neto, 2, ',', '.') ?></td>
-                            <td class="text-end fw-bold text-warning"><?= number_format($mont_doc, 2, ',', '.') ?></td>
+                            <td class="text-end fw-bold text-cashea"><?= number_format($mont_doc, 2, ',', '.') ?></td>
                         </tr>
                     <?php
                         $n++;
@@ -165,10 +171,10 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
     <?= $contenido_tablas ?>
 
     <?php if ($gran_total_cashea > 0): ?>
-        <div class="card bg-dark text-white text-center mt-4 mb-5" style="border: 2px solid #ffc107;">
+        <div class="card bg-dark text-white text-center mt-4 mb-5 border-cashea">
             <div class="card-body">
                 <h2>Total Global Cashea</h2>
-                <h1 class="text-warning"><?= number_format($gran_total_cashea, 2, ',', '.') ?></h1>
+                <h1 class="text-cashea"><?= number_format($gran_total_cashea, 2, ',', '.') ?></h1>
             </div>
         </div>
     <?php endif; ?>
