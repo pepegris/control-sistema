@@ -154,7 +154,6 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
     }
     
     // Variables para totales
-    $totales_stock_tienda = [];
     $totales_venta_tienda = [];
     $gran_total_previa = 0;
     $gran_total_ventas_global = 0;
