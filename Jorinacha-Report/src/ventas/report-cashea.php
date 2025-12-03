@@ -153,7 +153,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
     <?php if (!empty($indice_links)): ?>
         <div id="top-index" class="index-box">
-            <h5 class="text-white border-bottom pb-2">Tiendas con Movimientos Cashea:</h5>
+            <h5 class="text-white border-bottom pb-2">Tiendas con Movimientos Cashea (Clic para ir):</h5>
             <div class="d-flex flex-wrap">
                 <?php foreach ($indice_links as $link) echo $link; ?>
             </div>
