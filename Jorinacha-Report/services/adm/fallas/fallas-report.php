@@ -17,7 +17,7 @@ function getConnection($dbName) {
         return $db_connections[$dbName];
     }
 
-    $serverName = "172.16.1.39"; 
+    $serverName = "172.16.1.19"; 
     $connectionInfo = array(
         "Database" => $dbName,
         "UID" => "mezcla",
@@ -62,7 +62,7 @@ function getLin_art_all() {
 }
 
 function getArt($sede, $linea, $co_art, $almacen) {
-    $database = Database($sede);
+    $database = Database2($sede);
     $conn = getConnection($database);
 
     if (!$conn) return [];
@@ -122,7 +122,7 @@ function getArt($sede, $linea, $co_art, $almacen) {
 function getBatchStock($sede, $listaArticulos) {
     if (empty($listaArticulos)) return [];
     
-    $database = Database($sede);
+    $database = Database2($sede);
     if (!$database) return [];
     
     $conn = getConnection($database);
@@ -157,7 +157,7 @@ function getBatchStock($sede, $listaArticulos) {
 function getBatchVentas($sede, $listaArticulos, $fecha1, $fecha2) {
     if (empty($listaArticulos)) return [];
 
-    $database = Database($sede);
+    $database = Database2($sede);
     if (!$database) return [];
     
     $conn = getConnection($database);
@@ -243,7 +243,7 @@ function getPedidos($sede, $co_art) {
 }
 
 function getReng_fac($sede, $co_art, $f1, $f2) {
-    $db = Database($sede);
+    $db = Database2($sede);
     if(!$db) return 0;
     $conn = getConnection($db);
     if(!$conn) return 0;
@@ -258,7 +258,7 @@ function getReng_fac($sede, $co_art, $f1, $f2) {
 }
 
 function getArt_stock_tiendas($sede, $co_art) {
-    $db = Database($sede);
+    $db = Database2($sede);
     if(!$db) return [];
     $conn = getConnection($db);
     if(!$conn) return [];

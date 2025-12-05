@@ -85,14 +85,24 @@ function Database2($sede)
 
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
+
         "Sucursal Caracas I" => 'CARACAS1',
         "Sucursal Caracas II" => 'CARACAS2',
         "Sucursal Cagua" => 'CAGUA',
-
         "Sucursal Maturin" => 'MATURIN',
+        "Sucursal Coro1" => 'CORO1',
+        "Sucursal Coro2" => 'CORO2',
+        "Sucursal Coro3" => 'CORO3',
+        "Sucursal PtoFijo1" => 'PTOFIJO1',
+        "Sucursal PtoFijo2" => 'PTOFIJO2',
+        "Sucursal Ojeda" => 'OJEDA',
+        "Sucursal Valle" => 'VAPASCUA',
+        "Sucursal Guigue" => 'GUIGUE',
+        "Sucursal Puerto" => 'PUERTO',
+        "Sucursal Acarigua" => 'ACARIGUA',
 
 
-        "Comercial Acari" => 'ACARI21',
+        "Comercial Acari" => 'ACARI',
         "Comercial Puecruz" => 'PUECRU21',
         "Comercial Vallepa" => 'VALLEP21',
         "Comercial Higue" => 'HIGUE21',
@@ -101,11 +111,15 @@ function Database2($sede)
         "Comercial Punto Fijo" => 'PUFIJO21',
         "Comercial Trina" => 'TRAINA21',
         "Comercial Apura" => 'APURA21',
-        "Comercial Corina I" => 'CORINA21',
+        "Comercial Corina I" => 'CORINA1',
         "Comercial Nachari" => 'NACHAR21',
-        "Comercial Corina II" => 'CORI2_21',
-        "Comercial Catica II" => 'CATICA21',
+        "Comercial Corina II" => 'CORINA2',
+        "Comercial Catica II" => 'CATICA2',
 
+        "Comercial Merina" => 'MERINA',
+        "Comercial Merina3" => 'MERINA3',
+        "Comercial Kagu" => 'KAGU',
+        "Comercial Matur" => 'MATUR',
 
 
     );

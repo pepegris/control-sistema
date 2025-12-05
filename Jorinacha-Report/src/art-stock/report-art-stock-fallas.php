@@ -1,33 +1,26 @@
 <?php
-// =============================================================================
-// REPORTE OPTIMIZADO: STOCK Y FALLAS (MULTI-SEDE)
-// =============================================================================
+//report-art-stock-fallas.php
 ini_set('memory_limit', '4096M');
 ini_set('max_execution_time', 3600);
 
-// Detectar si solicitan Excel
 $is_export = isset($_GET['export']) && $_GET['export'] == 1;
 
 if ($is_export) {
-    // Cabeceras para forzar descarga como Excel (.xls)
     header("Pragma: public");
     header("Expires: 0");
     header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
     header("Content-Type: application/vnd.ms-excel; charset=UTF-8");
     header("Content-Disposition: attachment; filename=Reporte_Fallas_" . date('Ymd_His') . ".xls");
     header("Content-Transfer-Encoding: binary");
-    echo "\xEF\xBB\xBF"; // BOM para caracteres UTF-8 (ñ, tildes) en Excel
+    echo "\xEF\xBB\xBF"; 
 } else {
-    // Solo incluir log y headers visuales si NO es exportación
     require "../../includes/log.php";
     include '../../includes/header.php';
 }
 
 include '../../services/mysql.php';
-// IMPORTANTE: Incluimos el archivo de lógica que contiene las nuevas funciones Batch
 include '../../services/adm/fallas/fallas-report.php'; 
 
-// --- Validación de Parámetros ---
 if (!isset($_GET['linea'])) {
     if (!$is_export) echo "<script>window.location='form.php';</script>";
     exit;
@@ -35,22 +28,17 @@ if (!isset($_GET['linea'])) {
 
 $linea = $_GET['linea'];
 $almacen = isset($_GET['almacen']) ? $_GET['almacen'] : '0';
-
-// Formato de fechas para SQL Server (YYYYMMDD)
 $fecha1 = date("Ymd", strtotime($_GET['fecha1']));
 $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 ?>
 
 <?php if (!$is_export): ?>
-<!-- ESTILOS VISUALES (SOLO PARA PANTALLA) -->
 <style>
-    /* 1. CAMBIO DE FONDO SOLICITADO */
     body { 
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        background-color: #242943; /* Color solicitado */
+        background-color: #242943; 
         color: white; 
     }
-    
     h2 { text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; color: #fff; }
     
     .table-responsive {
@@ -66,7 +54,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
         white-space: nowrap; 
         border-collapse: separate; 
         border-spacing: 0;
-        background-color: #242943; /* Fondo tabla igual al body */
+        background-color: #242943; 
         width: 100%;
     }
 
@@ -76,88 +64,38 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
         border: 1px solid #444;
     }
 
-    /* 3. COLUMNAS FIJAS (STICKY) */
-    /* Columna #: Fija a la izquierda del todo */
-    .sticky-col-1 { 
-        position: sticky; 
-        left: 0; 
-        background-color: #1f2235; 
-        z-index: 10; 
-        border-right: 1px solid #555; 
-        width: 30px;
-        text-align: center;
-    }
+    /* COLUMNAS FIJAS */
+    .sticky-col-1 { position: sticky; left: 0; background-color: #1f2235; z-index: 10; border-right: 1px solid #555; width: 30px; text-align: center; }
+    .sticky-col-2 { position: sticky; left: 30px; background-color: #1f2235; z-index: 10; border-right: 1px solid #555; min-width: 90px; }
+    .sticky-col-3 { position: sticky; left: 120px; background-color: #1f2235; z-index: 10; border-right: 2px solid #999; min-width: 100px; font-weight: bold; color: #ddd; }
     
-    /* Columna Código: Fija después del # */
-    .sticky-col-2 { 
-        position: sticky; 
-        left: 30px; /* Ancho aprox de col 1 */
-        background-color: #1f2235; 
-        z-index: 10; 
-        border-right: 1px solid #555; 
-        min-width: 90px;
-    }
-
-    /* Columna Modelo: Fija después del Código */
-    .sticky-col-3 { 
-        position: sticky; 
-        left: 120px; /* 30px (#) + 90px (Cod) aprox */
-        background-color: #1f2235; 
-        z-index: 10; 
-        border-right: 2px solid #999; /* Borde más grueso para separar de la data */
-        min-width: 100px;
-        font-weight: bold;
-        color: #ddd;
-    }
-    
-    /* Encabezados Fijos Arriba */
     thead th { 
-        position: sticky; 
-        top: 0; 
-        background-color: #1a1d20; 
-        z-index: 20; 
-        color: white; 
-        border-bottom: 2px solid #00ff99;
-        height: 40px;
+        position: sticky; top: 0; background-color: #1a1d20; z-index: 20; 
+        color: white; border-bottom: 2px solid #00ff99; height: 40px; 
     }
     
-    /* Asegurar que las intersecciones de sticky (esquina superior izq) tengan z-index mayor */
-    thead th.sticky-col-1, thead th.sticky-col-2, thead th.sticky-col-3 {
-        z-index: 30;
-        background-color: #1a1d20;
-    }
+    thead th.sticky-col-1, thead th.sticky-col-2, thead th.sticky-col-3 { z-index: 30; background-color: #1a1d20; }
 
-    /* Colores Semánticos */
-    .text-stock { color: #ffd700; font-weight: bold; } /* Amarillo */
-    .text-venta { color: #00ff99; font-weight: bold; } /* Verde Neon */
-    .text-negative { color: #ff4444; font-weight: bold; } /* ROJO (NEGATIVOS) */
+    /* Colores */
+    .text-stock { color: #ffd700; font-weight: bold; } 
+    .text-venta { color: #00ff99; font-weight: bold; } 
+    .text-negative { color: #ff4444; font-weight: bold; } 
     .text-muted-custom { color: #666; }
-    
     .total-row { background-color: #0d6efd !important; color: white; font-weight: bold; }
     .total-row td { border-top: 2px solid white; }
 
-    /* Botonera */
     .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .btn-excel { 
-        background-color: #198754; 
-        color: white; 
-        padding: 8px 15px; 
-        text-decoration: none; 
-        border-radius: 4px; 
-        font-weight: bold;
-        border: 1px solid #146c43;
-    }
+    .btn-excel { background-color: #198754; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: bold; border: 1px solid #146c43; }
     .btn-excel:hover { background-color: #157347; color: white; }
 </style>
 <?php else: ?>
-    <!-- ESTILOS BASICOS PARA EXCEL (Fondo blanco, bordes negros) -->
     <style>
         table { border-collapse: collapse; width: 100%; }
         th, td { border: 1px solid #000; padding: 5px; }
         th { background-color: #ddd; font-weight: bold; text-align: center; }
         .text-stock { background-color: #fff2cc; color: #000; font-weight: bold; }
         .text-venta { background-color: #d9ead3; color: #000; font-weight: bold; }
-        .text-negative { color: #ff0000; font-weight: bold; } /* ROJO PARA EXCEL */
+        .text-negative { color: #ff0000; font-weight: bold; }
         .total-row { background-color: #cfe2f3; font-weight: bold; }
     </style>
 <?php endif; ?>
@@ -172,8 +110,7 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
     
     <?php if (!$is_export): ?>
     <div class="toolbar">
-        <div></div> <!-- Espaciador -->
-        <!-- BOTÓN DE EXPORTACIÓN -->
+        <div></div>
         <a href="?linea=<?=urlencode($_GET['linea'])?>&almacen=<?=urlencode($almacen)?>&fecha1=<?=urlencode($_GET['fecha1'])?>&fecha2=<?=urlencode($_GET['fecha2'])?>&export=1" class="btn-excel" target="_blank">
             &#x1F4E5; Descargar Excel
         </a>
@@ -181,9 +118,6 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
     <?php endif; ?>
     
     <?php
-    // -------------------------------------------------------------------------
-    // PASO 1: OBTENER LISTA MAESTRA
-    // -------------------------------------------------------------------------
     $articulosMaster = getArt('Previa Shop', $linea, 0, 0);
 
     if (empty($articulosMaster)) {
@@ -192,23 +126,11 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
         exit;
     }
 
-    // -------------------------------------------------------------------------
-    // PASO 2: PREPARAR DATOS MASIVOS (BATCH PROCESSING)
-    // -------------------------------------------------------------------------
     $listaCodigos = array_column($articulosMaster, 'co_art');
-    
-    $CACHE_PEDIDOS = [];
+    $CACHE_PEDIDOS = getBatchPedidos($listaCodigos);
     $CACHE_STOCK_TIENDAS = [];
     $CACHE_VENTAS_TIENDAS = [];
 
-    // -------------------------------------------------------------------------
-    // PASO 3: PRE-CARGA DE DATOS
-    // -------------------------------------------------------------------------
-    
-    // A. Cargar pedidos
-    $CACHE_PEDIDOS = getBatchPedidos($listaCodigos);
-
-    // B. Cargar Stock y Ventas Tiendas
     foreach ($sedes_ar as $sede) {
         if ($sede != null && $sede != 'Previa Shop') {
             $CACHE_STOCK_TIENDAS[$sede] = getBatchStock($sede, $listaCodigos);
@@ -216,16 +138,12 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
         }
     }
     
-    // Variables para totales de columna
     $totales_stock_tienda = [];
     $totales_venta_tienda = [];
     $gran_total_previa = 0;
-    $gran_total_ventas_global = 0; // NUEVO ACUMULADOR DE VENTAS TOTALES
+    $gran_total_ventas_global = 0;
     ?>
 
-    <!-- ----------------------------------------------------------------------- -->
-    <!-- PASO 4: RENDERIZADO -->
-    <!-- ----------------------------------------------------------------------- -->
     <div class="<?= $is_export ? '' : 'table-responsive' ?>">
         <table class="table table-dark table-hover" id="tblData" border="1">
             <thead>
@@ -233,11 +151,14 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                     <th scope="col" class="<?= $is_export ? '' : 'sticky-col-1' ?>">#</th>
                     <th scope='col' class="<?= $is_export ? '' : 'sticky-col-2' ?>">Código</th>
                     <th scope='col' class="<?= $is_export ? '' : 'sticky-col-3' ?>">Modelo</th>
+                    
+                    <th scope='col'>Escala</th>
+                    
                     <th scope='col'>Descripción</th>
                     <th scope='col'>Ref</th>
                     <th scope='col'>Color</th>
                     <th scope='col'>Precio</th>
-                    <!-- NUEVA COLUMNA DE VENTAS TOTALES -->
+                    
                     <th scope='col' style="<?= $is_export ? 'background-color:#ccc;' : 'background-color:#333; color:#00ff99; border-left:1px solid #666;' ?>">TOTAL<br>VENTAS</th>
                     <th scope='col' style="<?= $is_export ? 'background-color:#ccc;' : 'background-color:#333; border-right: 3px solid #666;' ?>">STOCK<br>CENTRAL</th>
 
@@ -260,12 +181,12 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                 foreach ($articulosMaster as $art) {
                     $codigo = trim($art['co_art']);
                     
-                    // --- Datos Previa Shop (Central) ---
+                    // Datos Central
                     $stock_fisico = round($art['stock_act']);
                     $pedidos_pend = isset($CACHE_PEDIDOS[$codigo]) ? round($CACHE_PEDIDOS[$codigo]) : 0;
                     $stock_real_previa = $stock_fisico - $pedidos_pend;
                     
-                    // --- CALCULAR TOTAL VENTAS DE ESTE ARTÍCULO (SUMA DE TIENDAS) ---
+                    // Ventas Globales
                     $total_ventas_row = 0;
                     foreach ($sedes_ar as $sede) {
                         if ($sede != null && $sede != 'Previa Shop') {
@@ -275,15 +196,11 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                         }
                     }
 
-                    // --- FILTRO INTELIGENTE DE ACTIVIDAD ---
+                    // Filtro Activo
                     $es_activo = false;
-
-                    // 1. Si tiene Stock Central
                     if ($stock_real_previa != 0) $es_activo = true;
-                    // 2. Si tiene Ventas Totales
                     if ($total_ventas_row != 0) $es_activo = true;
 
-                    // 3. Si no, verificar Stocks de Tiendas
                     if (!$es_activo) {
                         foreach ($sedes_ar as $sede) {
                             if ($sede != null && $sede != 'Previa Shop') {
@@ -296,16 +213,13 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                         }
                     }
 
-                    // Saltar fila si inactivo
                     if (!$es_activo) continue;
                     
-                    // --- RENDER ---
-                    
-                    // Acumulamos totales generales
+                    // Acumuladores
                     $gran_total_previa += $stock_real_previa;
                     $gran_total_ventas_global += $total_ventas_row;
 
-                    // Estilo Central
+                    // Estilos
                     $colorTxt = "color: #666;";
                     if ($stock_real_previa > 0) $colorTxt = "color: white;";
                     elseif ($stock_real_previa < 0) $colorTxt = "color: #ff4444;";
@@ -321,40 +235,31 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                     }
                     
                     $precio = number_format($art['prec_vta5'], 2);
+                    
+                    // ESCALA (Usamos co_cat como pediste)
+                    $escala = $art['co_cat']; 
                 ?>
                     <tr>
                         <td class="<?= $is_export ? '' : 'sticky-col-1' ?>"><?= $n ?></td>
                         <td class="<?= $is_export ? '' : 'sticky-col-2' ?>"><strong><?= $codigo ?></strong></td>
                         <td class="<?= $is_export ? '' : 'sticky-col-3' ?>"><?= $art['co_subl'] ?></td>
+                        
+                        <td class="text-center"><?= $escala ?></td>
+                        
                         <td title="<?= $art['ubicacion'] ?>"><?= substr($art['ubicacion'], 0, 25) ?>...</td>
                         <td><?= $art['co_lin'] ?></td>
                         <td><?= $art['co_color'] ?></td>
                         <td>$<?= $precio ?></td>
-                        <!-- CELDA TOTAL VENTAS -->
-                        <td style="<?= $styleTotalVentas ?>">
-                            <?= $total_ventas_row ?>
-                        </td>
-                        <!-- CELDA STOCK CENTRAL -->
-                        <td style="<?= $stylePrevia ?>">
-                            <?= $stock_real_previa ?>
-                        </td>
+                        <td style="<?= $styleTotalVentas ?>"><?= $total_ventas_row ?></td>
+                        <td style="<?= $stylePrevia ?>"><?= $stock_real_previa ?></td>
 
                         <?php
-                        // --- Datos Tiendas ---
                         foreach ($sedes_ar as $sede) {
                             if ($sede != null && $sede != 'Previa Shop') {
                                 
-                                $stock_tienda = 0;
-                                if (isset($CACHE_STOCK_TIENDAS[$sede][$codigo])) {
-                                    $stock_tienda = round($CACHE_STOCK_TIENDAS[$sede][$codigo]['stock']);
-                                }
+                                $stock_tienda = isset($CACHE_STOCK_TIENDAS[$sede][$codigo]) ? round($CACHE_STOCK_TIENDAS[$sede][$codigo]['stock']) : 0;
+                                $venta_tienda = isset($CACHE_VENTAS_TIENDAS[$sede][$codigo]) ? round($CACHE_VENTAS_TIENDAS[$sede][$codigo]) : 0;
 
-                                $venta_tienda = 0;
-                                if (isset($CACHE_VENTAS_TIENDAS[$sede][$codigo])) {
-                                    $venta_tienda = round($CACHE_VENTAS_TIENDAS[$sede][$codigo]);
-                                }
-
-                                // Acumuladores
                                 if (!isset($totales_stock_tienda[$sede])) $totales_stock_tienda[$sede] = 0;
                                 if (!isset($totales_venta_tienda[$sede])) $totales_venta_tienda[$sede] = 0;
                                 
@@ -363,25 +268,13 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
 
                                 // Estilos
                                 if ($is_export) {
-                                    if ($stock_tienda > 0) $classStock = "text-stock";
-                                    elseif ($stock_tienda < 0) $classStock = "text-negative";
-                                    else $classStock = "";
-
-                                    if ($venta_tienda > 0) $classVenta = "text-venta";
-                                    elseif ($venta_tienda < 0) $classVenta = "text-negative";
-                                    else $classVenta = "";
-
+                                    $classStock = ($stock_tienda > 0) ? "text-stock" : (($stock_tienda < 0) ? "text-negative" : "");
+                                    $classVenta = ($venta_tienda > 0) ? "text-venta" : (($venta_tienda < 0) ? "text-negative" : "");
                                     $styleCellS = "text-align:center;";
                                     $styleCellV = "text-align:center;";
                                 } else {
-                                    if ($stock_tienda > 0) $classStock = "text-stock";
-                                    elseif ($stock_tienda < 0) $classStock = "text-negative";
-                                    else $classStock = "text-muted-custom";
-
-                                    if ($venta_tienda > 0) $classVenta = "text-venta";
-                                    elseif ($venta_tienda < 0) $classVenta = "text-negative";
-                                    else $classVenta = "text-muted-custom";
-
+                                    $classStock = ($stock_tienda > 0) ? "text-stock" : (($stock_tienda < 0) ? "text-negative" : "text-muted-custom");
+                                    $classVenta = ($venta_tienda > 0) ? "text-venta" : (($venta_tienda < 0) ? "text-negative" : "text-muted-custom");
                                     $styleCellS = "border-left:1px solid #444;";
                                     $styleCellV = "";
                                 }
@@ -395,15 +288,12 @@ $fecha2 = date("Ymd", strtotime($_GET['fecha2']));
                     </tr>
                 <?php
                     $n++;
-                } // Fin foreach articulos
+                } 
                 ?>
 
-                <!-- FILA DE TOTALES -->
                 <tr class="total-row">
-                    <td colspan="7" class="text-right" style="text-align: right; padding-right: 15px;">TOTALES GENERALES:</td>
-                    <!-- TOTAL VENTAS GLOBAL -->
+                    <td colspan="8" class="text-right" style="text-align: right; padding-right: 15px;">TOTALES GENERALES:</td>
                     <td class="text-center" style="font-size: 1.2em; border-left:1px solid #ddd; color:#00ff99;"><?= $gran_total_ventas_global ?></td>
-                    <!-- STOCK CENTRAL GLOBAL -->
                     <td class="text-center" style="<?= $is_export ? '' : 'border-right: 3px solid #ddd;' ?> font-size: 1.2em;"><?= $gran_total_previa ?></td>
                     <?php
                     foreach ($sedes_ar as $sede) {
