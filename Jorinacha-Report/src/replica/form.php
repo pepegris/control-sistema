@@ -116,6 +116,20 @@ include '../../services/adm/replica/replica.php';
   </div>
 
 </div>
+
+<div class="d-grid gap-2 col-6 mx-auto"> <a href="import-database.php" class="btn btn-dark btn-lg">
+        📂 Ejecutar Import-Database
+    </a>
+
+    <a href="#" class="btn btn-dark btn-lg disabled">
+        📦 Crear Artículos (De Previa_A a 16 Tiendas)
+    </a>
+
+    <a href="#" class="btn btn-dark btn-lg disabled">
+        💲 Actualizar Precios (De Previa_A a 16 Tiendas)
+    </a>
+
+</div>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <br><br><br>
 
