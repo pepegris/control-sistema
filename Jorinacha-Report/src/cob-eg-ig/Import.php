@@ -1,9 +1,10 @@
 <?php
 require '../../includes/log.php';
 include '../../includes/header.php';
+require '../../services/sqlserver.php'; // Necesario para obtener la hora y conexión
 include '../../services/adm/cob-eg-ig/import.php';
 
-// 1. Evitar timeouts de PHP
+// 1. Evitar timeouts
 set_time_limit(0); 
 
 $proceso_activo = false;
@@ -11,22 +12,36 @@ $titulo = "";
 $script_js = "";
 $variant_js = "neo"; 
 $error_msg = "";
+$startTimestamp = time(); // Valor por defecto (hora web) por si falla SQL
 
 if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     
     $script = $_POST['scripts'];
     $clave  = $_POST['clave'];
-    
-    // Capturar checkbox
     $include_old = isset($_POST['old_companies']) ? true : false;
     $isNeo = !$include_old; 
-    
     $variant_js = $isNeo ? "neo" : "full";
 
-    if ($clave !== 'N3td0s') { // <--- TU CLAVE
+    if ($clave !== 'N3td0s') { 
         echo "<script>alert('⛔ Contraseña incorrecta.'); window.location='Import-database.php';</script>";
         exit;
     }
+
+    // =================================================================
+    // PASO CRÍTICO: CAPTURAR HORA DEL SERVIDOR SQL (.39)
+    // =================================================================
+    // Consultamos la hora exacta de SQL Server ANTES de iniciar el proceso.
+    // Esto será nuestro "Punto Cero".
+    if (isset($conn) && $conn) {
+        $sqlTime = "SELECT GETDATE() as server_time";
+        $stmtTime = sqlsrv_query($conn, $sqlTime);
+        if ($stmtTime && $rowTime = sqlsrv_fetch_array($stmtTime, SQLSRV_FETCH_ASSOC)) {
+            // Convertimos el objeto DateTime de SQL a Timestamp Unix (segundos)
+            // Le restamos 5 segundos por seguridad (latencia de red)
+            $startTimestamp = $rowTime['server_time']->getTimestamp() - 5;
+        }
+    }
+    // =================================================================
 
     $inicio_exitoso = false;
     $nombreJobDisplay = $isNeo ? "(Versión Rápida - Neo)" : "(Versión Completa)";
@@ -39,9 +54,7 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
         $inicio_exitoso = triggerJob('restore', $isNeo);
     }
 
-    // --- FORZAR PANTALLA DE CARGA ---
-    // Incluso si triggerJob devuelve false (porque ya corre), mostramos la carga
-    // y dejamos que check_files.php nos diga el progreso real.
+    // Forzamos la pantalla de carga siempre
     $proceso_activo = true; 
     $script_js = $script; 
 
@@ -68,16 +81,15 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
 
 <div class="container">
     <div class="status-card">
-        
         <div id="loadingSection">
             <h3 style="color:#74b9ff"><?= $titulo ?></h3>
             <hr style="border-color:#555">
             <div class="percent-box" id="percentDisplay">0%</div>
-            <p class="status-detail" id="statusMsg">Escaneando archivos en disco...</p>
+            <p class="status-detail" id="statusMsg">Sincronizando con SQL Server...</p>
             <div class="progress-container">
                 <div id="progressBar" class="progress-bar"></div>
             </div>
-            <p class="small mt-4 text-muted"><i class="fa fa-sync fa-spin"></i> Tiempo Real (Archivos .BAK)</p>
+            <p class="small mt-4 text-muted"><i class="fa fa-sync fa-spin"></i> Tiempo Real</p>
         </div>
 
         <div id="resultSection" style="display: none;">
@@ -86,14 +98,15 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
             <p id="resultMsg" class="lead"></p>
             <br><a href="Import-database.php" class="btn btn-primary btn-lg">Volver</a>
         </div>
-
     </div>
 </div>
 
 <script>
-    // Variables PHP pasadas a JS
     const scriptType = "<?= $script_js ?>";
     
+    // AQUI USAMOS LA HORA EXACTA QUE NOS DIO EL SERVIDOR SQL (.39)
+    const startTime = "<?= $startTimestamp ?>"; 
+
     const percentDisplay = document.getElementById('percentDisplay');
     const statusMsg = document.getElementById('statusMsg');
     const progressBar = document.getElementById('progressBar');
@@ -108,55 +121,40 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     function checkStatus() {
         intentos++;
 
-        // AQUI ESTÁ EL CAMBIO: Usamos check_files.php
-        fetch(`../../services/adm/cob-eg-ig/check_files.php`)
+        // Enviamos la hora del servidor SQL (?since=...)
+        fetch(`../../services/adm/cob-eg-ig/check_files.php?since=${startTime}`)
             .then(response => response.json())
             .then(data => {
                 console.log("Intento " + intentos, data);
 
-                if (data.status === 'error') {
-                    // Si check_files da error (ej. no encuentra Z:), lo mostramos
-                    statusMsg.innerText = "Error: " + data.msg;
-                    statusMsg.style.color = "orange";
-                    return;
-                }
-
                 if (data.status === 'ok') {
-                    // Actualizar UI con datos de archivos
                     percentDisplay.innerText = data.percent + "%";
                     statusMsg.innerText = data.msg;
                     progressBar.style.width = data.percent + "%";
                     progressBar.innerText = data.processed + " / " + data.total;
 
-                    // Si terminó (100% o running false)
-                    if (!data.running || data.percent >= 100) {
+                    // Finalizar si llega al 100%
+                    if (data.processed >= data.total) {
                         clearInterval(polling);
-                        mostrarResultado(1); // Éxito
+                        mostrarResultado(1);
                     }
                 }
             })
-            .catch(err => {
-                console.error("Error conexión", err);
-                statusMsg.innerText = "Error conectando con el monitor de archivos.";
-                statusMsg.style.color = "red";
-            });
+            .catch(err => console.error("Error conexión", err));
     }
 
     function mostrarResultado(status) {
         setTimeout(() => {
             loadingSec.style.display = 'none';
             resultSec.style.display = 'block';
-            
-            // Asumimos éxito si check_files terminó
             resultIcon.innerHTML = '✅'; 
             resultTitle.innerText = '¡Backups Listos!'; 
             resultTitle.className = 'success';
-            resultMsg.innerText = 'Se han generado todos los archivos .BAK correctamente.';
+            resultMsg.innerText = 'El proceso ha finalizado correctamente.';
         }, 1000);
     }
 
-    // Iniciar el polling cada 2 segundos
-    const polling = setInterval(checkStatus, 2000);
+    const polling = setInterval(checkStatus, 3000);
     checkStatus(); 
 </script>
 
