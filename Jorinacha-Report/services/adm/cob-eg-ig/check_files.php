@@ -1,16 +1,19 @@
 <?php
-// Archivo: services/adm/cob-eg-ig/check_files.php
-
 header('Content-Type: application/json');
 
-// 1. CONFIGURACIÓN
+// 1. CONFIGURACIÓN DE LA RUTA
 // ---------------------------------------------
-// OJO: Si Z: no funciona (por permisos de servicio), usa la ruta de red directa:
- $directorio = "//172.16.1.39/CarpetaCompartida/"; 
-//$directorio = "Z:/"; 
-$total_esperado = 36; // Ajusta esto al total real de tus bases de datos (según tu lista de exclusión)
+// PHP maneja mejor las rutas de red con barras normales "/"
+// Opción A: Usando el nombre del servidor (Si el hosting lo reconoce)
+$directorio = "//Sql2k8/bak/"; 
 
-// 2. LÓGICA
+// Opción B: Si falla el nombre, usa la IP directa (Más seguro)
+// $directorio = "//172.16.1.39/bak/"; 
+
+// Total de bases de datos a esperar (ajusta este número)
+$total_esperado = 18; 
+
+// 2. INICIALIZAR RESPUESTA
 // ---------------------------------------------
 $response = [
     'status' => 'ok',
@@ -18,50 +21,71 @@ $response = [
     'percent' => 0,
     'processed' => 0,
     'total' => $total_esperado,
-    'msg' => 'Buscando archivos en Z: ...'
+    'msg' => 'Conectando a carpeta compartida...'
 ];
 
-// Verificar si el directorio es accesible
+// 3. VALIDACIÓN DE ACCESO (DEBUG)
+// ---------------------------------------------
+// Intentamos abrir el directorio para ver si PHP tiene permisos
 if (!is_dir($directorio)) {
-    echo json_encode([
-        'status' => 'error', 
-        'msg' => 'No se puede leer la unidad Z:\ (Revise permisos del servicio Web)'
-    ]);
+    // Si falla, intentamos ver si es un problema de error exacto
+    $error = error_get_last();
+    $response['status'] = 'error';
+    $response['msg'] = "No se puede leer la ruta: $directorio. Verifique permisos de red para el usuario IUSR/Apache.";
+    echo json_encode($response);
     exit;
 }
 
-// Obtener todos los .BAK
-$archivos = glob($directorio . "*.BAK");
-$archivos_nuevos = 0;
+// 4. LÓGICA DE CONTEO
+// ---------------------------------------------
+// Usamos glob para buscar archivos .BAK
+// NOTA: glob() a veces falla en rutas de red en Windows.
+// Usamos scandir como alternativa más robusta.
+$archivos_encontrados = 0;
+$archivos = scandir($directorio);
 $ahora = time();
+$ventana_tiempo = 20 * 60; // 20 minutos atrás
 
-// Contamos solo los archivos modificados en los últimos 20 minutos
-// (Así sabemos que son de ESTE proceso y no del backup de ayer)
-$ventana_tiempo = 20 * 60; // 20 minutos en segundos
+if ($archivos === false) {
+    $response['status'] = 'error';
+    $response['msg'] = "La carpeta existe pero no se pueden leer los archivos.";
+    echo json_encode($response);
+    exit;
+}
 
 foreach ($archivos as $archivo) {
-    if (file_exists($archivo)) {
-        $fecha_mod = filemtime($archivo);
-        // Si el archivo fue modificado recientemente, cuenta como "Procesado"
-        if (($ahora - $fecha_mod) < $ventana_tiempo) {
-            $archivos_nuevos++;
+    // Ignorar . y ..
+    if ($archivo == '.' || $archivo == '..') continue;
+
+    // Verificar extensión
+    if (strtoupper(pathinfo($archivo, PATHINFO_EXTENSION)) == 'BAK') {
+        
+        $ruta_completa = $directorio . $archivo;
+        
+        // Verificar fecha de modificación
+        // El @ evita errores si el archivo está bloqueado por SQL escribiendo
+        $fecha_mod = @filemtime($ruta_completa);
+        
+        if ($fecha_mod && ($ahora - $fecha_mod) < $ventana_tiempo) {
+            $archivos_encontrados++;
         }
     }
 }
 
-// 3. CÁLCULO DE PORCENTAJE
+// 5. CALCULO FINAL
 // ---------------------------------------------
-$response['processed'] = $archivos_nuevos;
+$response['processed'] = $archivos_encontrados;
+$response['msg'] = "Monitoreando: $archivos_encontrados de $total_esperado archivos listos.";
 
-if ($archivos_nuevos >= $total_esperado) {
+if ($archivos_encontrados >= $total_esperado) {
     $response['percent'] = 100;
-    $response['running'] = false; // Terminó
-    $response['run_status'] = 1;  // Éxito
-    $response['msg'] = "Backup Finalizado.";
+    $response['running'] = false; // Detener monitor
+    $response['run_status'] = 1;  // Éxito visual
+    $response['msg'] = "¡Backup Completo!";
 } else {
-    $porcentaje = round(($archivos_nuevos / $total_esperado) * 100);
+    // Evitar división por cero
+    $porcentaje = ($total_esperado > 0) ? round(($archivos_encontrados / $total_esperado) * 100) : 0;
     $response['percent'] = $porcentaje;
-    $response['msg'] = "Generando Backups ($archivos_nuevos de $total_esperado)...";
 }
 
 echo json_encode($response);
