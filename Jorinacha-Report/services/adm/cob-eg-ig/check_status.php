@@ -2,18 +2,23 @@
 // RUTA: ../../services/adm/cob-eg-ig/check_status.php
 header('Content-Type: application/json');
 
-$script = isset($_GET['script']) ? $_GET['script'] : ''; // 'backups' o 'restore'
-$variant = isset($_GET['variant']) ? $_GET['variant'] : 'neo'; // 'neo' o 'full'
+// Evitar cache de navegador
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
-// --- CONFIGURACIÓN DE TOTALES (CORREGIDA) ---
-// Neo = 18 bases de datos (Según tu script de restauración reducido)
-// Full = 28 bases de datos (Total con las viejas)
+$script = isset($_GET['script']) ? $_GET['script'] : ''; 
+$variant = isset($_GET['variant']) ? $_GET['variant'] : 'neo'; 
+
+// --- CONFIGURACIÓN DE TOTALES ---
+// Neo = 18 bases (ajustado a tu script corto)
+// Full = 28 bases (ajustado al total con viejas)
 $TOTAL_DBS_A_PROCESAR = ($variant == 'neo') ? 18 : 28; 
 
 $RUTA_BACKUPS = "Z:/"; 
 
 // 1. DEFINICIÓN DE SERVIDORES Y JOBS
-$suffix = ($variant == 'neo') ? " neo" : ""; // Si es neo, el Job se llama "INTEGRACION ... neo"
+$suffix = ($variant == 'neo') ? " neo" : ""; 
 
 if ($script == 'backups') {
     $serverName = "172.16.1.39";      
@@ -62,23 +67,33 @@ $mensaje_estado = "Iniciando Job $jobName...";
 if ($script == 'backups') {
     // --- BACKUPS: Contar archivos en Z:\ ---
     if (is_dir($RUTA_BACKUPS)) {
+        
+        // IMPORTANTE: Limpiar caché de estado de archivos para ver cambios en tiempo real
+        clearstatcache(); 
+        
         $archivos = glob($RUTA_BACKUPS . "*.BAK"); 
+        
+        // Obtenemos la hora de inicio. Si por error no viene, usamos la hora actual.
         $startTimestamp = $startTime ? $startTime->getTimestamp() : time();
 
         foreach ($archivos as $archivo) {
-            // Contamos solo los modificados DESPUES de iniciar el job
-            // Le damos 1 minuto de holgura por diferencias de reloj entre servidores
-            if (filemtime($archivo) >= ($startTimestamp - 60)) {
+            // CORRECCIÓN: Aumentamos el margen de tolerancia.
+            // Contamos archivos modificados desde 20 minutos ANTES del inicio del Job.
+            // Esto arregla el problema si el Job arrancó antes de que abrieras la página.
+            // 1200 segundos = 20 minutos.
+            if (filemtime($archivo) >= ($startTimestamp - 1200)) {
                 $items_procesados++;
             }
         }
-        // Tope visual para que no pase del 100% si hay archivos basura
+        
+        // Tope visual (por si hay archivos basura viejos que entraron en el rango)
         if ($items_procesados > $TOTAL_DBS_A_PROCESAR) $items_procesados = $TOTAL_DBS_A_PROCESAR;
         
         $mensaje_estado = "Generados $items_procesados de $TOTAL_DBS_A_PROCESAR backups";
     } else {
+        // Fallback si no hay acceso a Z: Simulamos carga para que no parezca roto
         $items_procesados = 1; 
-        $mensaje_estado = "Ejecutando en servidor...";
+        $mensaje_estado = "Procesando en segundo plano...";
     }
 
 } elseif ($script == 'restore') {
@@ -110,6 +125,9 @@ if (!$isRunning && $runStatus == 1) {
     $progreso_percent = 100;
     $items_procesados = $TOTAL_DBS_A_PROCESAR;
     $mensaje_estado = "Proceso Completado Exitosamente";
+} elseif (!$isRunning && $runStatus == 0 && $script == 'restore') {
+     // Si falló pero estamos en restore, el mensaje cambia
+     $mensaje_estado = "Proceso detenido con errores";
 }
 
 echo json_encode([
