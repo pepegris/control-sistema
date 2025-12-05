@@ -4,8 +4,8 @@ ini_set('display_errors', 0);
 error_reporting(E_ALL);
 header('Content-Type: application/json');
 
-// 1. CONEXIÓN AL SERVIDOR DESTINO (DONDE SE EJECUTA EL RESTORE)
-// IMPORTANTE: Cambia esta IP por la del servidor de Integración si es distinta
+// 1. CONEXIÓN AL SERVIDOR DESTINO (.19)
+// Asegúrate que esta IP sea la correcta
 $serverName = "172.16.1.19"; 
 $connectionInfo = array(
     "Database" => "msdb", 
@@ -22,20 +22,18 @@ if ($conn === false) {
 }
 
 // 2. CONFIGURACIÓN
-// Conté 18 bases de datos en tu script de restore
 $total_esperado = 18; 
 
-// 3. RECIBIR HORA DE INICIO
-$fecha_sql = isset($_GET['since']) ? $_GET['since'] : date('Y-m-d H:i:s', time() - 600);
-// Limpieza de seguridad
-$fecha_sql = preg_replace('/[^0-9 \-:.]/', '', $fecha_sql); 
+// 3. RECIBIR ÚLTIMO ID
+// Si no viene, usamos un numero altísimo para no mostrar nada viejo
+$last_id = isset($_GET['last_id']) ? intval($_GET['last_id']) : 999999999;
 
-// 4. CONSULTA AL HISTORIAL DE RESTAURACIONES
-// Contamos cuántas bases de datos han terminado de restaurarse desde la hora del clic
+// 4. CONSULTA POR ID
+// Solo contamos las restauraciones nuevas (cuyo ID sea mayor al que teníamos al inicio)
 $sql = "
     SELECT COUNT(DISTINCT destination_database_name) as TotalRestores
     FROM msdb.dbo.restorehistory
-    WHERE restore_date >= '$fecha_sql'
+    WHERE restore_history_id > $last_id
 ";
 
 $stmt = sqlsrv_query($conn, $sql);
@@ -47,7 +45,7 @@ if ($stmt && $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
 
 sqlsrv_close($conn);
 
-// 5. RESPUESTA JSON
+// 5. RESPUESTA
 $response = [
     'status'    => 'ok',
     'running'   => true,
