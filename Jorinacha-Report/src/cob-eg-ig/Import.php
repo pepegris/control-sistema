@@ -109,15 +109,17 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     const resultTitle = document.getElementById('resultTitle');
     const resultMsg = document.getElementById('resultMsg');
 
-    // Contador para detectar timeouts si check_status falla
-    let errorCount = 0; 
+    let intentos = 0; 
+    let erroresConexion = 0;
 
     function checkStatus() {
+        intentos++; // Contamos cuántas veces hemos preguntado
+
         fetch(`../../services/adm/cob-eg-ig/check_status.php?script=${scriptType}&variant=${variantType}`)
             .then(response => response.json())
             .then(data => {
-                // Reset de errores si responde bien
-                errorCount = 0;
+                erroresConexion = 0;
+                console.log("Intento " + intentos, data); // Míralo en F12 -> Console
 
                 if (data.status === 'ok') {
                     // Actualizar UI
@@ -126,22 +128,31 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
                     progressBar.style.width = data.percent + "%";
                     progressBar.innerText = data.processed + " / " + data.total;
 
-                    // Si terminó (running = false), mostrar resultado final
+                    // === LA SOLUCIÓN ESTÁ AQUÍ ===
+                    // Si dice que NO está corriendo (!data.running)
                     if (!data.running) {
+                        
+                        // Si llevamos menos de 5 intentos (aprox 15 segundos)
+                        // NO le creemos que terminó. Asumimos que está arrancando.
+                        if (intentos <= 5) {
+                            statusMsg.innerText = "Iniciando motor SQL (Espere)...";
+                            console.log("Ignorando fin prematuro (Race Condition)");
+                            return; 
+                        }
+
+                        // Si ya pasaron 15 segundos y sigue diciendo que no corre, entonces sí terminó.
                         clearInterval(polling);
                         mostrarResultado(data.run_status);
                     }
                 } else {
-                    // Si el JSON dice status != ok (ej: job no encontrado)
-                    // Podríamos mostrar error, pero esperamos unos intentos
                     statusMsg.innerText = "Esperando respuesta del Job...";
                 }
             })
             .catch(err => {
                 console.error("Error conexión", err);
-                errorCount++;
-                if(errorCount > 5) { // Si falla 5 veces seguidas
-                    statusMsg.innerText = "Perdida conexión con el monitor.";
+                erroresConexion++;
+                if(erroresConexion > 5) {
+                    statusMsg.innerText = "Error de conexión con el monitor.";
                     statusMsg.style.color = "orange";
                 }
             });
@@ -151,6 +162,8 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
         setTimeout(() => {
             loadingSec.style.display = 'none';
             resultSec.style.display = 'block';
+            
+            // Status 1 = Éxito, Status 0 o 3 = Fallo/Cancelado
             if (status == 1) { 
                 resultIcon.innerHTML = '✅'; 
                 resultTitle.innerText = '¡Éxito!'; 
@@ -160,13 +173,15 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
                 resultIcon.innerHTML = '❌'; 
                 resultTitle.innerText = 'Finalizado'; 
                 resultTitle.className = 'error';
-                resultMsg.innerText = 'El proceso terminó (Revise logs si hubo error).';
+                resultMsg.innerText = 'El proceso terminó (Revise logs en el servidor).';
             }
         }, 1000);
     }
 
-    // Iniciar el polling
+    // Iniciar el polling cada 3 segundos
     const polling = setInterval(checkStatus, 3000);
+    
+    // Ejecutar inmediatamente la primera vez
     checkStatus(); 
 </script>
 
