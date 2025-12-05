@@ -1,17 +1,13 @@
 <?php
-// 1. CONFIGURACIÓN DE ERRORES (Para evitar pantalla blanca)
-ini_set('display_errors', 0); // Lo ponemos en 0 para no ensuciar el JSON
+// Configuración para que el JSON salga limpio
+ini_set('display_errors', 0);
 error_reporting(E_ALL);
 header('Content-Type: application/json');
 
-// =======================================================================
-// 2. CONEXIÓN DIRECTA A SQL SERVER
-// =======================================================================
-// Como sqlserver.php no nos da una conexión global, la creamos aquí mismo.
+// 1. CONEXIÓN DIRECTA (Usando credenciales de sysadmin)
 $serverName = "172.16.1.39";
-// Usamos 'master' para comandos de sistema, con las credenciales que me mostraste
 $connectionInfo = array(
-    "Database" => "master", 
+    "Database" => "msdb", // Conectamos a la base de datos de sistema
     "UID" => "mezcla", 
     "PWD" => "Zeus33$", 
     "CharacterSet" => "UTF-8"
@@ -19,90 +15,70 @@ $connectionInfo = array(
 
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-// Si falla la conexión, devolvemos JSON de error y salimos
 if ($conn === false) {
-    $errores = sqlsrv_errors();
-    $msg = "Error conectando a SQL (172.16.1.39): " . ($errores[0]['message'] ?? 'Desconocido');
-    echo json_encode(['status' => 'error', 'msg' => $msg]);
+    $errors = sqlsrv_errors();
+    echo json_encode(['status' => 'error', 'msg' => 'Error Conexión SQL: ' . ($errors[0]['message'] ?? 'Desconocido')]);
     exit;
 }
 
-// =======================================================================
-// 3. CONFIGURACIÓN DE LA BÚSQUEDA
-// =======================================================================
-// Ruta LOCAL en el servidor 172.16.1.39 (Doble barra invertida es OBLIGATORIA)
-$ruta_local_sql = 'C:\\BAK\\'; 
+// 2. CONFIGURACIÓN
 $total_esperado = 18; 
 
-// =======================================================================
-// 4. CONSULTA INTELIGENTE (xp_dirtree)
-// =======================================================================
-// Le pedimos a SQL Server que mire su propio disco C:
+// 3. CONSULTA AL HISTORIAL (La forma más segura)
+// Cuenta cuántas bases de datos distintas han terminado su backup en los últimos 60 minutos.
+// type = 'D' asegura que sean Backups Completos (Full)
 $sql = "
-    DECLARE @FileList TABLE (FileName NVARCHAR(255), Depth INT, IsFile INT);
-    
-    -- El 1, 1 indica profundidad 1 (solo esa carpeta) y que incluya archivos
-    INSERT INTO @FileList
-    EXEC master.sys.xp_dirtree '$ruta_local_sql', 1, 1;
-    
-    -- Filtramos solo los .BAK
-    SELECT FileName FROM @FileList WHERE IsFile = 1 AND FileName LIKE '%.BAK';
+    SELECT COUNT(DISTINCT database_name) as TotalBackups
+    FROM msdb.dbo.backupset
+    WHERE type = 'D' 
+    AND backup_finish_date >= DATEADD(minute, -60, GETDATE())
 ";
 
 $stmt = sqlsrv_query($conn, $sql);
 
-// Respuesta inicial
-$response = [
-    'status' => 'ok',
-    'running' => true,
-    'percent' => 0,
-    'processed' => 0,
-    'total' => $total_esperado,
-    'msg' => 'Escaneando disco C:\BAK\ en el servidor...'
-];
-
 if ($stmt === false) {
-    $response['status'] = 'error';
     $errors = sqlsrv_errors();
-    $response['msg'] = "Error ejecutando xp_dirtree: " . ($errors[0]['message'] ?? 'Error SQL');
-    echo json_encode($response);
+    echo json_encode(['status' => 'error', 'msg' => 'Error Query MSDB: ' . ($errors[0]['message'] ?? 'Desconocido')]);
     exit;
 }
 
-// =======================================================================
-// 5. CONTAR RESULTADOS
-// =======================================================================
-$archivos_encontrados = 0;
-
-while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-    $archivos_encontrados++;
+// 4. LEER RESULTADO
+$procesados = 0;
+if ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+    $procesados = $row['TotalBackups'];
 }
 
-// Cerrar conexión para liberar recursos
+// Liberar recursos
 sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 
-// =======================================================================
-// 6. RESPUESTA FINAL
-// =======================================================================
-$response['processed'] = $archivos_encontrados;
+// 5. RESPUESTA JSON
+$response = [
+    'status'    => 'ok',
+    'running'   => true,
+    'percent'   => 0,
+    'processed' => $procesados,
+    'total'     => $total_esperado,
+    'msg'       => "Verificando historial..."
+];
 
-if ($archivos_encontrados >= $total_esperado) {
+// Lógica de porcentaje
+if ($procesados >= $total_esperado) {
     $response['percent']    = 100;
     $response['running']    = false; 
     $response['run_status'] = 1;     
-    $response['msg']        = "¡Backups Completados!";
+    $response['msg']        = "¡Todos los backups registrados!";
 } else {
-    // Calculamos porcentaje
-    $porcentaje = ($total_esperado > 0) ? round(($archivos_encontrados / $total_esperado) * 100) : 0;
+    // Calculamos porcentaje visual
+    $porcentaje = ($total_esperado > 0) ? round(($procesados / $total_esperado) * 100) : 0;
     
-    // Tope visual 99% si falta poco
-    if ($porcentaje >= 100 && $archivos_encontrados < $total_esperado) {
+    // Si matemáticamente da 100% (por redondeo) pero faltan archivos, forzamos 99%
+    if ($porcentaje >= 100 && $procesados < $total_esperado) {
         $porcentaje = 99;
     }
 
     $response['percent'] = $porcentaje;
-    $response['msg']     = "Archivos creados: $archivos_encontrados de $total_esperado...";
+    $response['msg']     = "Backups finalizados: $procesados de $total_esperado";
 }
 
 echo json_encode($response);
