@@ -6,8 +6,8 @@ header('Content-Type: application/json');
 // 1. CONFIGURACIÓN
 // ---------------------------------------------
 // OJO: Si Z: no funciona (por permisos de servicio), usa la ruta de red directa:
-// $directorio = "//172.16.1.39/CarpetaCompartida/"; 
-$directorio = "Z:/"; 
+ $directorio = "//172.16.1.39/CarpetaCompartida/"; 
+//$directorio = "Z:/"; 
 $total_esperado = 36; // Ajusta esto al total real de tus bases de datos (según tu lista de exclusión)
 
 // 2. LÓGICA
