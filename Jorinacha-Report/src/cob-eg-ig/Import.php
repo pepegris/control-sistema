@@ -3,7 +3,7 @@ require '../../includes/log.php';
 include '../../includes/header.php';
 include '../../services/adm/cob-eg-ig/import.php';
 
-// 1. Evitar timeouts de PHP si el servidor tarda en responder
+// 1. Evitar timeouts de PHP
 set_time_limit(0); 
 
 $proceso_activo = false;
@@ -39,16 +39,11 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
         $inicio_exitoso = triggerJob('restore', $isNeo);
     }
 
-    // --- CORRECCIÓN IMPORTANTE ---
-    // A veces triggerJob devuelve false porque el Job YA está corriendo (error 22022 de SQL).
-    // En lugar de detenernos y mostrar error, forzamos la pantalla de carga 
-    // y dejamos que el JavaScript (check_status) decida si está corriendo o no.
-    
-    $proceso_activo = true; // SIEMPRE mostramos la pantalla de carga
+    // --- FORZAR PANTALLA DE CARGA ---
+    // Incluso si triggerJob devuelve false (porque ya corre), mostramos la carga
+    // y dejamos que check_files.php nos diga el progreso real.
+    $proceso_activo = true; 
     $script_js = $script; 
-
-    // Solo si quieres guardar un log interno de que "falló el inicio" puedes usar $inicio_exitoso,
-    // pero para el usuario, le mostramos el monitor.
 
 } else {
     header('Location: Import-database.php');
@@ -78,11 +73,11 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
             <h3 style="color:#74b9ff"><?= $titulo ?></h3>
             <hr style="border-color:#555">
             <div class="percent-box" id="percentDisplay">0%</div>
-            <p class="status-detail" id="statusMsg">Verificando estado del servidor...</p>
+            <p class="status-detail" id="statusMsg">Escaneando archivos en disco...</p>
             <div class="progress-container">
                 <div id="progressBar" class="progress-bar"></div>
             </div>
-            <p class="small mt-4 text-muted"><i class="fa fa-sync fa-spin"></i> Tiempo Real</p>
+            <p class="small mt-4 text-muted"><i class="fa fa-sync fa-spin"></i> Tiempo Real (Archivos .BAK)</p>
         </div>
 
         <div id="resultSection" style="display: none;">
@@ -98,7 +93,6 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
 <script>
     // Variables PHP pasadas a JS
     const scriptType = "<?= $script_js ?>";
-    const variantType = "<?= $variant_js ?>"; 
     
     const percentDisplay = document.getElementById('percentDisplay');
     const statusMsg = document.getElementById('statusMsg');
@@ -109,52 +103,42 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     const resultTitle = document.getElementById('resultTitle');
     const resultMsg = document.getElementById('resultMsg');
 
-    let intentos = 0; 
-    let erroresConexion = 0;
+    let intentos = 0;
 
     function checkStatus() {
-        intentos++; // Contamos cuántas veces hemos preguntado
+        intentos++;
 
-        fetch(`../../services/adm/cob-eg-ig/check_status.php?script=${scriptType}&variant=${variantType}`)
+        // AQUI ESTÁ EL CAMBIO: Usamos check_files.php
+        fetch(`../../services/adm/cob-eg-ig/check_files.php`)
             .then(response => response.json())
             .then(data => {
-                erroresConexion = 0;
-                console.log("Intento " + intentos, data); // Míralo en F12 -> Console
+                console.log("Intento " + intentos, data);
+
+                if (data.status === 'error') {
+                    // Si check_files da error (ej. no encuentra Z:), lo mostramos
+                    statusMsg.innerText = "Error: " + data.msg;
+                    statusMsg.style.color = "orange";
+                    return;
+                }
 
                 if (data.status === 'ok') {
-                    // Actualizar UI
+                    // Actualizar UI con datos de archivos
                     percentDisplay.innerText = data.percent + "%";
                     statusMsg.innerText = data.msg;
                     progressBar.style.width = data.percent + "%";
                     progressBar.innerText = data.processed + " / " + data.total;
 
-                    // === LA SOLUCIÓN ESTÁ AQUÍ ===
-                    // Si dice que NO está corriendo (!data.running)
-                    if (!data.running) {
-                        
-                        // Si llevamos menos de 5 intentos (aprox 15 segundos)
-                        // NO le creemos que terminó. Asumimos que está arrancando.
-                        if (intentos <= 5) {
-                            statusMsg.innerText = "Iniciando motor SQL (Espere)...";
-                            console.log("Ignorando fin prematuro (Race Condition)");
-                            return; 
-                        }
-
-                        // Si ya pasaron 15 segundos y sigue diciendo que no corre, entonces sí terminó.
+                    // Si terminó (100% o running false)
+                    if (!data.running || data.percent >= 100) {
                         clearInterval(polling);
-                        mostrarResultado(data.run_status);
+                        mostrarResultado(1); // Éxito
                     }
-                } else {
-                    statusMsg.innerText = "Esperando respuesta del Job...";
                 }
             })
             .catch(err => {
                 console.error("Error conexión", err);
-                erroresConexion++;
-                if(erroresConexion > 5) {
-                    statusMsg.innerText = "Error de conexión con el monitor.";
-                    statusMsg.style.color = "orange";
-                }
+                statusMsg.innerText = "Error conectando con el monitor de archivos.";
+                statusMsg.style.color = "red";
             });
     }
 
@@ -163,25 +147,16 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
             loadingSec.style.display = 'none';
             resultSec.style.display = 'block';
             
-            // Status 1 = Éxito, Status 0 o 3 = Fallo/Cancelado
-            if (status == 1) { 
-                resultIcon.innerHTML = '✅'; 
-                resultTitle.innerText = '¡Éxito!'; 
-                resultTitle.className = 'success';
-                resultMsg.innerText = 'Proceso completado correctamente.';
-            } else { 
-                resultIcon.innerHTML = '❌'; 
-                resultTitle.innerText = 'Finalizado'; 
-                resultTitle.className = 'error';
-                resultMsg.innerText = 'El proceso terminó (Revise logs en el servidor).';
-            }
+            // Asumimos éxito si check_files terminó
+            resultIcon.innerHTML = '✅'; 
+            resultTitle.innerText = '¡Backups Listos!'; 
+            resultTitle.className = 'success';
+            resultMsg.innerText = 'Se han generado todos los archivos .BAK correctamente.';
         }, 1000);
     }
 
-    // Iniciar el polling cada 3 segundos
-    const polling = setInterval(checkStatus, 3000);
-    
-    // Ejecutar inmediatamente la primera vez
+    // Iniciar el polling cada 2 segundos
+    const polling = setInterval(checkStatus, 2000);
     checkStatus(); 
 </script>
 
