@@ -1,18 +1,16 @@
 <?php
 require '../../includes/log.php';
 include '../../includes/header.php';
-// Agregamos la conexión SQL Server explícita para poder llamar al SP de limpieza
-require '../../services/sqlserver.php'; 
 include '../../services/adm/cob-eg-ig/import.php';
+
+// 1. Evitar timeouts de PHP si el servidor tarda en responder
+set_time_limit(0); 
 
 $proceso_activo = false;
 $titulo = "";
 $script_js = "";
-$variant_js = "neo"; // Por defecto Neo
+$variant_js = "neo"; 
 $error_msg = "";
-
-// Aumentamos el tiempo de espera de PHP para que no se corte mientras limpia
-set_time_limit(0); 
 
 if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     
@@ -25,7 +23,7 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     
     $variant_js = $isNeo ? "neo" : "full";
 
-    if ($clave !== 'N3td0s') {
+    if ($clave !== 'N3td0s') { // <--- TU CLAVE
         echo "<script>alert('⛔ Contraseña incorrecta.'); window.location='Import-database.php';</script>";
         exit;
     }
@@ -35,39 +33,22 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
 
     if ($script == 'backups') {
         $titulo = "Generando Backups $nombreJobDisplay";
-        
-        // =================================================================
-        // BLOQUE NUEVO: EJECUTAR LIMPIEZA PREVIA (Delete .BAK)
-        // =================================================================
-        // Esto pausará la carga de la página hasta que el Job DELETE termine.
-        if (isset($conn) && $conn) {
-            // Ejecutamos el SP que espera a que termine el borrado
-            $sql_clean = "EXEC [SISTEMAS].[dbo].[sp_GestionarBackups] @EjecutarLimpieza = 1";
-            $stmt_clean = sqlsrv_query($conn, $sql_clean);
-            
-            if ($stmt_clean === false) {
-                // Opcional: Manejar error si la limpieza falla, 
-                // o dejar que continue bajo riesgo.
-                // die(print_r(sqlsrv_errors(), true));
-            }
-        }
-        // =================================================================
-
-        // Ahora que ya se borró todo, lanzamos el backup original
-        // Esto mantiene tu barra de progreso funcionando
         $inicio_exitoso = triggerJob('backups', $isNeo);
-
     } elseif ($script == 'restore') {
         $titulo = "Restaurando Data $nombreJobDisplay";
         $inicio_exitoso = triggerJob('restore', $isNeo);
     }
 
-    if ($inicio_exitoso) {
-        $proceso_activo = true;
-        $script_js = $script; 
-    } else {
-        $error_msg = "No se pudo iniciar el Job en SQL Server.";
-    }
+    // --- CORRECCIÓN IMPORTANTE ---
+    // A veces triggerJob devuelve false porque el Job YA está corriendo (error 22022 de SQL).
+    // En lugar de detenernos y mostrar error, forzamos la pantalla de carga 
+    // y dejamos que el JavaScript (check_status) decida si está corriendo o no.
+    
+    $proceso_activo = true; // SIEMPRE mostramos la pantalla de carga
+    $script_js = $script; 
+
+    // Solo si quieres guardar un log interno de que "falló el inicio" puedes usar $inicio_exitoso,
+    // pero para el usuario, le mostramos el monitor.
 
 } else {
     header('Location: Import-database.php');
@@ -93,38 +74,29 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
 <div class="container">
     <div class="status-card">
         
-        <?php if ($proceso_activo): ?>
-            <div id="loadingSection">
-                <h3 style="color:#74b9ff"><?= $titulo ?></h3>
-                <hr style="border-color:#555">
-                <p class="small text-success">✅ Limpieza previa completada</p>
-                
-                <div class="percent-box" id="percentDisplay">0%</div>
-                <p class="status-detail" id="statusMsg">Iniciando Backup...</p>
-                <div class="progress-container">
-                    <div id="progressBar" class="progress-bar"></div>
-                </div>
-                <p class="small mt-4 text-muted"><i class="fa fa-sync fa-spin"></i> Tiempo Real</p>
+        <div id="loadingSection">
+            <h3 style="color:#74b9ff"><?= $titulo ?></h3>
+            <hr style="border-color:#555">
+            <div class="percent-box" id="percentDisplay">0%</div>
+            <p class="status-detail" id="statusMsg">Verificando estado del servidor...</p>
+            <div class="progress-container">
+                <div id="progressBar" class="progress-bar"></div>
             </div>
+            <p class="small mt-4 text-muted"><i class="fa fa-sync fa-spin"></i> Tiempo Real</p>
+        </div>
 
-            <div id="resultSection" style="display: none;">
-                <div id="resultIcon" class="result-icon"></div>
-                <h2 id="resultTitle"></h2>
-                <p id="resultMsg" class="lead"></p>
-                <br><a href="Import-database.php" class="btn btn-primary btn-lg">Volver</a>
-            </div>
-
-        <?php else: ?>
-            <h2 style="color:red">Error</h2>
-            <p><?= $error_msg ?></p>
-            <a href="Import-database.php" class="btn btn-light">Volver</a>
-        <?php endif; ?>
+        <div id="resultSection" style="display: none;">
+            <div id="resultIcon" class="result-icon"></div>
+            <h2 id="resultTitle"></h2>
+            <p id="resultMsg" class="lead"></p>
+            <br><a href="Import-database.php" class="btn btn-primary btn-lg">Volver</a>
+        </div>
 
     </div>
 </div>
 
-<?php if ($proceso_activo): ?>
 <script>
+    // Variables PHP pasadas a JS
     const scriptType = "<?= $script_js ?>";
     const variantType = "<?= $variant_js ?>"; 
     
@@ -137,24 +109,42 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     const resultTitle = document.getElementById('resultTitle');
     const resultMsg = document.getElementById('resultMsg');
 
+    // Contador para detectar timeouts si check_status falla
+    let errorCount = 0; 
+
     function checkStatus() {
         fetch(`../../services/adm/cob-eg-ig/check_status.php?script=${scriptType}&variant=${variantType}`)
             .then(response => response.json())
             .then(data => {
+                // Reset de errores si responde bien
+                errorCount = 0;
+
                 if (data.status === 'ok') {
-                    
+                    // Actualizar UI
                     percentDisplay.innerText = data.percent + "%";
                     statusMsg.innerText = data.msg;
                     progressBar.style.width = data.percent + "%";
                     progressBar.innerText = data.processed + " / " + data.total;
 
+                    // Si terminó (running = false), mostrar resultado final
                     if (!data.running) {
                         clearInterval(polling);
                         mostrarResultado(data.run_status);
                     }
+                } else {
+                    // Si el JSON dice status != ok (ej: job no encontrado)
+                    // Podríamos mostrar error, pero esperamos unos intentos
+                    statusMsg.innerText = "Esperando respuesta del Job...";
                 }
             })
-            .catch(err => console.error("Error conexión", err));
+            .catch(err => {
+                console.error("Error conexión", err);
+                errorCount++;
+                if(errorCount > 5) { // Si falla 5 veces seguidas
+                    statusMsg.innerText = "Perdida conexión con el monitor.";
+                    statusMsg.style.color = "orange";
+                }
+            });
     }
 
     function mostrarResultado(status) {
@@ -162,18 +152,22 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
             loadingSec.style.display = 'none';
             resultSec.style.display = 'block';
             if (status == 1) { 
-                resultIcon.innerHTML = '✅'; resultTitle.innerText = '¡Éxito!'; resultTitle.className = 'success';
+                resultIcon.innerHTML = '✅'; 
+                resultTitle.innerText = '¡Éxito!'; 
+                resultTitle.className = 'success';
                 resultMsg.innerText = 'Proceso completado correctamente.';
             } else { 
-                resultIcon.innerHTML = '❌'; resultTitle.innerText = 'Fallo'; resultTitle.className = 'error';
-                resultMsg.innerText = 'El Job se detuvo con errores.';
+                resultIcon.innerHTML = '❌'; 
+                resultTitle.innerText = 'Finalizado'; 
+                resultTitle.className = 'error';
+                resultMsg.innerText = 'El proceso terminó (Revise logs si hubo error).';
             }
         }, 1000);
     }
 
+    // Iniciar el polling
     const polling = setInterval(checkStatus, 3000);
     checkStatus(); 
 </script>
-<?php endif; ?>
 
 <?php include '../../includes/footer.php'; ?>
