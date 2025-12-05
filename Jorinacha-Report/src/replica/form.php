@@ -1,121 +1,78 @@
-<?php
-ini_set('memory_limit', '4096M');
-ini_set('max_execution_time', 3600);
-
-require '../../includes/log.php';
-include '../../includes/header.php';
-include '../../services/mysql.php';
-include '../../services/adm/replica/replica.php';
-
-?>
-<link rel="stylesheet" href="../../assets/css/animations.css">
-<style>
-  img {
-
-
-    width: 23px;
-  }
-
-  ul {
-    margin-top: 10px;
-  }
-
-
-
-  @media (max-width: 900px) {
-
-    ul li {
-      font-size: 10px;
-    }
-
-    img {
-
-
-      width: 19px;
-    }
-
-    ul {
-      margin-top: 10px;
-    }
-
-  }
-</style>
-
-
 <div id="body">
-
   <div class="slideExpandUp">
     <ul class="list-group">
-      <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
-        <center><b>Replica</b></center>
-
+      <li class="list-group-item disabled" style="background-color:black; color:white;" aria-disabled="true">
+        <center><b>Estado de Réplica (Facturación)</b></center>
       </li>
+      
       <?php
+      // 1. Definir fechas de referencia UNA SOLA VEZ antes del bucle (Optimización)
+      $fecha_actual_str = date("d-m-Y");
+      $now_warning = new DateTime(date("d-m-Y", strtotime("-2 day"))); // 2 días atrás (Amarillo)
+      $now_danger  = new DateTime(date("d-m-Y", strtotime("-5 day"))); // 5 días atrás (Sincronizando/Rojo)
 
       for ($i = 0; $i < count($sedes_ar); $i++) {
+        
+        $sede = $sedes_ar[$i];
 
-        if ($sedes_ar[$i] != 'Previa Shop') {
+        if ($sede != 'Previa Shop') {
 
-          $sede = $sedes_ar[$i];
+          // A. Obtener datos
+          $res_replica = Replica($sede);
+          $res_inventario = Inventario($sede);
 
-          $res = Replica($sedes_ar[$i]);
-          $res1 = $res['fec_emis'];
-
-          if ($res1 == null) {
-
-            $fecha = 'Sincronizando';
-          } else {
-
-            $fecha = $res1->format('d-m-Y');
-
-            $fecha_actual = date("d-m-Y");
-
-            $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 2 day"));
-            $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 5 day"));
-
-            $past = new DateTime($fecha);
-            $now_1 = new DateTime($fecha1);
-            $now_2 = new DateTime($fecha2);
+          // B. Procesar Inventario (Icono)
+          $icon_inventario = "";
+          if ($res_inventario != null && isset($res_inventario['cerrado'])) {
+             $icon_inventario = " <span class='badge badge-info' style='font-size:0.8em'>Inventario <img src='./img/cart-full.svg' style='width:15px'></span>";
           }
 
+          // C. Procesar Fechas y Estado
+          $fecha_mostrar = 'Sin Conexión';
+          $icon_status = './img/cloud-off.svg'; // Icono por defecto (Error)
+          $li_style = ""; // Estilo por defecto
 
-
-          $res3 = Inventario($sedes_ar[$i]);
-
-          if ($res3 == null) {
-            $inventario = "";
+          // Verificamos si la consulta trajo datos
+          if ($res_replica != null && isset($res_replica['fec_emis'])) {
+              
+              // Es un objeto DateTime de SQL Server
+              $obj_fecha = $res_replica['fec_emis']; 
+              $fecha_mostrar = $obj_fecha->format('d-m-Y');
+              
+              // Comparaciones
+              if ($obj_fecha >= $now_warning) {
+                  // Caso: AL DÍA (Menos de 2 días)
+                  $icon_status = './img/cloud-check.svg';
+                  
+              } elseif ($obj_fecha >= $now_danger) {
+                  // Caso: RETRASO LEVE (Entre 2 y 5 días)
+                  $icon_status = './img/cloud-sync.svg'; 
+                  
+              } else {
+                  // Caso: DESACTUALIZADO (Más de 5 días)
+                  $icon_status = './img/cloud-upload.svg';
+              }
           } else {
-            $inventario = "Inventario<img src='./img/cart-full.svg' alt=''>";
+              // Caso: No conectó o devolvió null
+              $fecha_mostrar = "Sincronizando...";
+              $icon_status = './img/cloud-upload.svg'; 
           }
 
-
-
-          if ($past  >= $now_1) {
-
-            echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> /  $fecha</span> <img src='./img/cloud-check.svg' alt=''> $inventario </li>";
-          } elseif ($past  >= $now_2) {
-            echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> /  $fecha</span>  <img src='./img/cloud-sync.svg' alt=''> $inventario </li>";
-          } else {
-            echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> /  $fecha</span>  <img src='./img/cloud-upload.svg' alt=''>  $inventario </li>";
-          }
+          // D. Renderizar
+          echo "
+          <li class='list-group-item d-flex justify-content-between align-items-center'>
+            <span>
+                <b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> 
+                <span style='color:#555; font-size:0.9em; margin-left:5px;'>/ $fecha_mostrar</span>
+            </span>
+            <span>
+                $icon_inventario
+                <img src='$icon_status' alt='status' title='Estado de réplica'>
+            </span>
+          </li>";
         }
       }
-
-
-
-
       ?>
-
     </ul>
   </div>
-
-
-
-
-
-
 </div>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<br><br><br>
-
-<?php include '../../includes/footer.php'; ?>

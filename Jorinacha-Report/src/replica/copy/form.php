@@ -1,6 +1,6 @@
 <?php
-ini_set('memory_limit','4096M');
-ini_set('max_execution_time',3600);
+ini_set('memory_limit', '4096M');
+ini_set('max_execution_time', 3600);
 
 require '../../includes/log.php';
 include '../../includes/header.php';
@@ -60,39 +60,44 @@ include '../../services/adm/replica/replica.php';
 
           $res = Replica($sedes_ar[$i]);
           $res1 = $res['fec_emis'];
-          
-          if ($res1==null) {
+
+          if ($res1 == null) {
 
             $fecha = 'Sincronizando';
-
-          }else{
+          } else {
 
             $fecha = $res1->format('d-m-Y');
 
             $fecha_actual = date("d-m-Y");
 
-            $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 3 day"));
-            $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 7 day"));
+            $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 2 day"));
+            $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 5 day"));
 
             $past = new DateTime($fecha);
             $now_1 = new DateTime($fecha1);
             $now_2 = new DateTime($fecha2);
-  
           }
 
 
 
-            if ($past  >= $now_1) {
+          $res3 = Inventario($sedes_ar[$i]);
 
-              echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  $fecha</span> <img src='./img/cloud-check.svg' alt=''> </li>";
-            } elseif ($past  >= $now_2) {
-              echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  $fecha</span>  <img src='./img/cloud-sync.svg' alt=''> </li>";
-            } else {
-              echo "<li class='list-group-item'><span><b style='color:black'> $sede </b> /  $fecha</span>  <img src='./img/cloud-upload.svg' alt=''> </li>";
-            }
+          if ($res3 == null) {
+            $inventario = "";
+          } else {
+            $inventario = "Inventario<img src='./img/cart-full.svg' alt=''>";
+          }
 
-            
 
+
+          if ($past  >= $now_1) {
+
+            echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> /  $fecha</span> <img src='./img/cloud-check.svg' alt=''> $inventario </li>";
+          } elseif ($past  >= $now_2) {
+            echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> /  $fecha</span>  <img src='./img/cloud-sync.svg' alt=''> $inventario </li>";
+          } else {
+            echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> /  $fecha</span>  <img src='./img/cloud-upload.svg' alt=''>  $inventario </li>";
+          }
         }
       }
 
@@ -105,7 +110,7 @@ include '../../services/adm/replica/replica.php';
   </div>
 
 
-<a href='href="detal.php?sede=<?php echo $sede?>"'></a>
+
 
 
 
