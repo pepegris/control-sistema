@@ -8,13 +8,13 @@ function ejecutarJob($ip, $jobName) {
 
         if (!$conn) return false;
 
+        // Ejecutar el Job específico
         $sql = "EXEC dbo.sp_start_job N'$jobName'";
         $consulta = sqlsrv_query($conn, $sql);
 
-        // Si falla, verificamos si es porque ya está corriendo (Error 22022)
         if ($consulta === false) {
             $errors = sqlsrv_errors();
-            // Si el error es "Request to run job... refused because the job is already running", retornamos true
+            // Si el error es 22022 (Ya está corriendo), lo tomamos como éxito
             if (isset($errors[0]['code']) && $errors[0]['code'] == 22022) {
                 return true; 
             }
@@ -27,13 +27,18 @@ function ejecutarJob($ip, $jobName) {
     }
 }
 
-function getImport() {
-    // Iniciar Backup en el servidor .39
-    return ejecutarJob("172.16.1.39", "INTEGRACION BACKUPS");
-}
-
-function getRestore() {
-    // Iniciar Restore en el servidor .19
-    return ejecutarJob("172.16.1.19", "INTEGRACION RESTORE");
+// Funciones wrapper simplificadas
+function triggerJob($type, $isNeo) {
+    $suffix = $isNeo ? " neo" : ""; // Agrega " neo" si no es completo
+    
+    if ($type == 'backups') {
+        // Ejemplo: INTEGRACION BACKUPS neo
+        return ejecutarJob("172.16.1.39", "INTEGRACION BACKUPS" . $suffix);
+    } 
+    elseif ($type == 'restore') {
+        // Ejemplo: INTEGRACION RESTORE neo
+        return ejecutarJob("172.16.1.19", "INTEGRACION RESTORE" . $suffix);
+    }
+    return false;
 }
 ?>

@@ -2,21 +2,25 @@
 // RUTA: ../../services/adm/cob-eg-ig/check_status.php
 header('Content-Type: application/json');
 
-// --- CONFIGURACIÓN ---
-// Lista de bases de datos que procesas (Basado en tu script SQL anterior)
-// Es importante que este número sea cercano a la realidad para que la barra sea precisa.
-$TOTAL_DBS_A_PROCESAR = 28; 
-$RUTA_BACKUPS = "Z:/"; // Asegurate que PHP tenga permiso de lectura aquí
+$script = isset($_GET['script']) ? $_GET['script'] : ''; // 'backups' o 'restore'
+$variant = isset($_GET['variant']) ? $_GET['variant'] : 'neo'; // 'neo' o 'full'
 
-$script = isset($_GET['script']) ? $_GET['script'] : '';
+// --- CONFIGURACIÓN DE TOTALES (CORREGIDA) ---
+// Neo = 18 bases de datos (Según tu script de restauración reducido)
+// Full = 28 bases de datos (Total con las viejas)
+$TOTAL_DBS_A_PROCESAR = ($variant == 'neo') ? 18 : 28; 
 
-// 1. DEFINICIÓN DE SERVIDORES
+$RUTA_BACKUPS = "Z:/"; 
+
+// 1. DEFINICIÓN DE SERVIDORES Y JOBS
+$suffix = ($variant == 'neo') ? " neo" : ""; // Si es neo, el Job se llama "INTEGRACION ... neo"
+
 if ($script == 'backups') {
     $serverName = "172.16.1.39";      
-    $jobName = "INTEGRACION BACKUPS"; 
+    $jobName = "INTEGRACION BACKUPS" . $suffix; 
 } elseif ($script == 'restore') {
     $serverName = "172.16.1.19";      
-    $jobName = "INTEGRACION RESTORE"; 
+    $jobName = "INTEGRACION RESTORE" . $suffix; 
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Script invalido']);
     exit;
@@ -53,35 +57,32 @@ $startTime = $row['start_execution_date'];
 // 3. CALCULAR PROGRESO REAL
 $items_procesados = 0;
 $progreso_percent = 0;
-$mensaje_estado = "Iniciando...";
+$mensaje_estado = "Iniciando Job $jobName...";
 
 if ($script == 'backups') {
-    // --- LÓGICA BACKUPS (LEYENDO ARCHIVOS EN Z:\) ---
-    // Buscamos archivos .BAK modificados desde que arrancó el Job
-    
+    // --- BACKUPS: Contar archivos en Z:\ ---
     if (is_dir($RUTA_BACKUPS)) {
-        $archivos = glob($RUTA_BACKUPS . "*.BAK"); // O *.bak dependiendo del sistema
-        $contador = 0;
-        $startTimestamp = $startTime ? $startTime->getTimestamp() : time(); // Hora inicio Job
+        $archivos = glob($RUTA_BACKUPS . "*.BAK"); 
+        $startTimestamp = $startTime ? $startTime->getTimestamp() : time();
 
         foreach ($archivos as $archivo) {
-            // Si la fecha de modificación del archivo es MAYOR a la hora de inicio del Job
-            if (filemtime($archivo) >= $startTimestamp) {
-                $contador++;
+            // Contamos solo los modificados DESPUES de iniciar el job
+            // Le damos 1 minuto de holgura por diferencias de reloj entre servidores
+            if (filemtime($archivo) >= ($startTimestamp - 60)) {
+                $items_procesados++;
             }
         }
-        $items_procesados = $contador;
+        // Tope visual para que no pase del 100% si hay archivos basura
+        if ($items_procesados > $TOTAL_DBS_A_PROCESAR) $items_procesados = $TOTAL_DBS_A_PROCESAR;
+        
         $mensaje_estado = "Generados $items_procesados de $TOTAL_DBS_A_PROCESAR backups";
     } else {
-        $mensaje_estado = "No se puede leer Z:/";
-        // Si no lee Z, simulamos un 10% para que sepa que corre
         $items_procesados = 1; 
+        $mensaje_estado = "Ejecutando en servidor...";
     }
 
 } elseif ($script == 'restore') {
-    // --- LÓGICA RESTORE (CONSULTANDO SQL HISTORY) ---
-    // Contamos cuántas DB se han restaurado desde la hora de inicio del Job
-    
+    // --- RESTORE: Consultar historial de restauración ---
     if ($startTime) {
         $sqlRestore = "SELECT COUNT(DISTINCT destination_database_name) as total 
                        FROM msdb.dbo.restorehistory 
@@ -91,6 +92,9 @@ if ($script == 'backups') {
         if ($stmtRes && $rowRes = sqlsrv_fetch_array($stmtRes, SQLSRV_FETCH_ASSOC)) {
             $items_procesados = $rowRes['total'];
         }
+        
+        if ($items_procesados > $TOTAL_DBS_A_PROCESAR) $items_procesados = $TOTAL_DBS_A_PROCESAR;
+        
         $mensaje_estado = "Restauradas $items_procesados de $TOTAL_DBS_A_PROCESAR bases";
     }
 }
@@ -101,10 +105,11 @@ if ($TOTAL_DBS_A_PROCESAR > 0) {
 }
 if ($progreso_percent > 100) $progreso_percent = 100;
 
-// Si el Job ya terminó (éxito), forzamos 100%
+// FORZAR 100% SI TERMINÓ CON ÉXITO
 if (!$isRunning && $runStatus == 1) {
     $progreso_percent = 100;
-    $mensaje_estado = "Proceso Completado";
+    $items_procesados = $TOTAL_DBS_A_PROCESAR;
+    $mensaje_estado = "Proceso Completado Exitosamente";
 }
 
 echo json_encode([

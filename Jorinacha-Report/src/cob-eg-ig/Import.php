@@ -6,12 +6,19 @@ include '../../services/adm/cob-eg-ig/import.php';
 $proceso_activo = false;
 $titulo = "";
 $script_js = "";
+$variant_js = "neo"; // Por defecto Neo
 $error_msg = "";
 
-// Validación inicial (igual que antes)
 if (isset($_POST['scripts']) && isset($_POST['clave'])) {
+    
     $script = $_POST['scripts'];
     $clave  = $_POST['clave'];
+    
+    // Capturar checkbox (Si no está marcado, $_POST no trae nada, asumimos neo)
+    $include_old = isset($_POST['old_companies']) ? true : false;
+    $isNeo = !$include_old; // Si quiere viejas, NO es neo. Si no quiere, ES neo.
+    
+    $variant_js = $isNeo ? "neo" : "full";
 
     if ($clave !== 'N3td0s') {
         echo "<script>alert('⛔ Contraseña incorrecta.'); window.location='Import-database.php';</script>";
@@ -19,12 +26,14 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     }
 
     $inicio_exitoso = false;
+    $nombreJobDisplay = $isNeo ? "(Versión Rápida - Neo)" : "(Versión Completa)";
+
     if ($script == 'backups') {
-        $titulo = "Generando Backups (.BAK en Z:\\)";
-        $inicio_exitoso = getImport();
+        $titulo = "Generando Backups $nombreJobDisplay";
+        $inicio_exitoso = triggerJob('backups', $isNeo);
     } elseif ($script == 'restore') {
-        $titulo = "Restaurando Data (Servidor .19)";
-        $inicio_exitoso = getRestore();
+        $titulo = "Restaurando Data $nombreJobDisplay";
+        $inicio_exitoso = triggerJob('restore', $isNeo);
     }
 
     if ($inicio_exitoso) {
@@ -33,6 +42,7 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     } else {
         $error_msg = "No se pudo iniciar el Job en SQL Server.";
     }
+
 } else {
     header('Location: Import-database.php');
     exit;
@@ -43,23 +53,15 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     body { background-color: #1a1a1a; color: white; font-family: sans-serif; }
     .status-card {
         background-color: #2d3436;
-        border-radius: 15px;
-        padding: 40px;
-        max-width: 600px;
-        margin: 50px auto;
-        text-align: center;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        border-radius: 15px; padding: 40px; max-width: 600px;
+        margin: 50px auto; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
-    
-    /* Porcentaje Grande */
     .percent-box { font-size: 4rem; font-weight: bold; color: #00ff99; margin: 10px 0; }
     .status-detail { font-size: 1.2rem; color: #b2bec3; margin-bottom: 20px; }
-    
-    /* Barra */
     .progress-container { width: 100%; background-color: #444; border-radius: 10px; height: 25px; overflow: hidden; }
     .progress-bar { height: 100%; background-color: #0984e3; width: 0%; transition: width 0.5s; font-size: 0.9rem; line-height: 25px; color: white; font-weight: bold;}
-    
     .result-icon { font-size: 4rem; margin-bottom: 20px; }
+    .success { color: #00b894; } .error { color: #d63031; }
 </style>
 
 <div class="container">
@@ -69,26 +71,19 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
             <div id="loadingSection">
                 <h3 style="color:#74b9ff"><?= $titulo ?></h3>
                 <hr style="border-color:#555">
-                
                 <div class="percent-box" id="percentDisplay">0%</div>
-                
-                <p class="status-detail" id="statusMsg">Conectando con el servidor...</p>
-                
+                <p class="status-detail" id="statusMsg">Conectando...</p>
                 <div class="progress-container">
                     <div id="progressBar" class="progress-bar"></div>
                 </div>
-                
-                <p class="small mt-4 text-muted">
-                    <i class="fa fa-sync fa-spin"></i> Monitoreando en tiempo real...
-                </p>
+                <p class="small mt-4 text-muted"><i class="fa fa-sync fa-spin"></i> Tiempo Real</p>
             </div>
 
             <div id="resultSection" style="display: none;">
                 <div id="resultIcon" class="result-icon"></div>
                 <h2 id="resultTitle"></h2>
                 <p id="resultMsg" class="lead"></p>
-                <br>
-                <a href="Import-database.php" class="btn btn-primary btn-lg">Volver al Menú</a>
+                <br><a href="Import-database.php" class="btn btn-primary btn-lg">Volver</a>
             </div>
 
         <?php else: ?>
@@ -103,10 +98,11 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
 <?php if ($proceso_activo): ?>
 <script>
     const scriptType = "<?= $script_js ?>";
+    const variantType = "<?= $variant_js ?>"; // 'neo' o 'full'
+    
     const percentDisplay = document.getElementById('percentDisplay');
     const statusMsg = document.getElementById('statusMsg');
     const progressBar = document.getElementById('progressBar');
-    
     const loadingSec = document.getElementById('loadingSection');
     const resultSec = document.getElementById('resultSection');
     const resultIcon = document.getElementById('resultIcon');
@@ -114,20 +110,18 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     const resultMsg = document.getElementById('resultMsg');
 
     function checkStatus() {
-        fetch(`../../services/adm/cob-eg-ig/check_status.php?script=${scriptType}`)
+        // Pasamos el script y la variante (neo/full) al monitor
+        fetch(`../../services/adm/cob-eg-ig/check_status.php?script=${scriptType}&variant=${variantType}`)
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'ok') {
                     
-                    // ACTUALIZAR BARRA Y TEXTOS EN TIEMPO REAL
-                    let percent = data.percent;
-                    percentDisplay.innerText = percent + "%";
+                    percentDisplay.innerText = data.percent + "%";
                     statusMsg.innerText = data.msg;
-                    progressBar.style.width = percent + "%";
+                    progressBar.style.width = data.percent + "%";
                     progressBar.innerText = data.processed + " / " + data.total;
 
                     if (!data.running) {
-                        // EL JOB TERMINÓ
                         clearInterval(polling);
                         mostrarResultado(data.run_status);
                     }
@@ -137,25 +131,19 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     }
 
     function mostrarResultado(status) {
-        setTimeout(() => { // Pequeña pausa para ver el 100%
+        setTimeout(() => {
             loadingSec.style.display = 'none';
             resultSec.style.display = 'block';
-
             if (status == 1) { 
-                resultIcon.innerHTML = '✅';
-                resultTitle.innerText = '¡Operación Exitosa!';
-                resultTitle.style.color = '#00ff99';
-                resultMsg.innerText = 'Todos las bases de datos fueron procesadas correctamente.';
+                resultIcon.innerHTML = '✅'; resultTitle.innerText = '¡Éxito!'; resultTitle.className = 'success';
+                resultMsg.innerText = 'Proceso completado correctamente.';
             } else { 
-                resultIcon.innerHTML = '❌';
-                resultTitle.innerText = 'Proceso con Errores';
-                resultTitle.style.color = '#ff4444';
-                resultMsg.innerText = 'El Job de SQL se detuvo inesperadamente o falló.';
+                resultIcon.innerHTML = '❌'; resultTitle.innerText = 'Fallo'; resultTitle.className = 'error';
+                resultMsg.innerText = 'El Job se detuvo con errores.';
             }
         }, 1000);
     }
 
-    // Consultar cada 3 segundos
     const polling = setInterval(checkStatus, 3000);
     checkStatus(); 
 </script>
