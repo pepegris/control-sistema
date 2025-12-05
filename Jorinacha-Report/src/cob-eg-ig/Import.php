@@ -1,51 +1,58 @@
 <?php
 require '../../includes/log.php';
 include '../../includes/header.php';
-require '../../services/sqlserver.php'; // Necesario para obtener la hora y conexión
+// Incluimos import.php para la función triggerJob
 include '../../services/adm/cob-eg-ig/import.php';
 
-// 1. Evitar timeouts
+// 1. Evitar timeouts visuales
 set_time_limit(0); 
 
 $proceso_activo = false;
 $titulo = "";
 $script_js = "";
 $variant_js = "neo"; 
-$error_msg = "";
-$startTimestamp = time(); // Valor por defecto (hora web) por si falla SQL
+$startString = date('Y-m-d H:i:s'); // Hora por defecto (web) por seguridad
 
 if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     
     $script = $_POST['scripts'];
     $clave  = $_POST['clave'];
+    
+    // Checkbox de empresas viejas
     $include_old = isset($_POST['old_companies']) ? true : false;
     $isNeo = !$include_old; 
     $variant_js = $isNeo ? "neo" : "full";
 
+    // Validación de clave
     if ($clave !== 'N3td0s') { 
         echo "<script>alert('⛔ Contraseña incorrecta.'); window.location='Import-database.php';</script>";
         exit;
     }
 
     // =================================================================
-    // PASO CRÍTICO: CAPTURAR HORA DEL SERVIDOR SQL (.39)
+    // PASO 1: OBTENER LA HORA EXACTA DEL SERVIDOR SQL
     // =================================================================
-    // Consultamos la hora exacta de SQL Server ANTES de iniciar el proceso.
-    // Esto será nuestro "Punto Cero".
-    if (isset($conn) && $conn) {
-        $sqlTime = "SELECT GETDATE() as server_time";
-        $stmtTime = sqlsrv_query($conn, $sqlTime);
+    // Nos conectamos un momento para pedir la hora (GETDATE)
+    // Así sincronizamos el monitor con el reloj de la base de datos.
+    $serverName = "172.16.1.39";
+    $connectionInfo = array("Database" => "master", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
+    $connTime = sqlsrv_connect($serverName, $connectionInfo);
+
+    if ($connTime) {
+        // Pedimos la fecha en formato texto estándar (YYYY-MM-DD HH:MM:SS)
+        $sqlTime = "SELECT CONVERT(varchar, GETDATE(), 120) as server_time";
+        $stmtTime = sqlsrv_query($connTime, $sqlTime);
         if ($stmtTime && $rowTime = sqlsrv_fetch_array($stmtTime, SQLSRV_FETCH_ASSOC)) {
-            // Convertimos el objeto DateTime de SQL a Timestamp Unix (segundos)
-            // Le restamos 5 segundos por seguridad (latencia de red)
-            $startTimestamp = $rowTime['server_time']->getTimestamp() - 5;
+            $startString = $rowTime['server_time'];
         }
+        sqlsrv_close($connTime);
     }
     // =================================================================
 
     $inicio_exitoso = false;
     $nombreJobDisplay = $isNeo ? "(Versión Rápida - Neo)" : "(Versión Completa)";
 
+    // Ejecutar el Job (Backups o Restore)
     if ($script == 'backups') {
         $titulo = "Generando Backups $nombreJobDisplay";
         $inicio_exitoso = triggerJob('backups', $isNeo);
@@ -54,7 +61,7 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
         $inicio_exitoso = triggerJob('restore', $isNeo);
     }
 
-    // Forzamos la pantalla de carga siempre
+    // Siempre mostramos pantalla de carga para monitorear
     $proceso_activo = true; 
     $script_js = $script; 
 
@@ -81,15 +88,16 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
 
 <div class="container">
     <div class="status-card">
+        
         <div id="loadingSection">
             <h3 style="color:#74b9ff"><?= $titulo ?></h3>
             <hr style="border-color:#555">
             <div class="percent-box" id="percentDisplay">0%</div>
-            <p class="status-detail" id="statusMsg">Sincronizando con SQL Server...</p>
+            <p class="status-detail" id="statusMsg">Iniciando motor SQL...</p>
             <div class="progress-container">
                 <div id="progressBar" class="progress-bar"></div>
             </div>
-            <p class="small mt-4 text-muted"><i class="fa fa-sync fa-spin"></i> Tiempo Real</p>
+            <p class="small mt-4 text-muted"><i class="fa fa-sync fa-spin"></i> Tiempo Real (Historial MSDB)</p>
         </div>
 
         <div id="resultSection" style="display: none;">
@@ -98,14 +106,15 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
             <p id="resultMsg" class="lead"></p>
             <br><a href="Import-database.php" class="btn btn-primary btn-lg">Volver</a>
         </div>
+
     </div>
 </div>
 
 <script>
     const scriptType = "<?= $script_js ?>";
     
-    // AQUI USAMOS LA HORA EXACTA QUE NOS DIO EL SERVIDOR SQL (.39)
-    const startTime = "<?= $startTimestamp ?>"; 
+    // Pasamos la fecha exacta (texto) a JS, codificada para que viaje bien en la URL
+    const startTime = encodeURIComponent("<?= $startString ?>"); 
 
     const percentDisplay = document.getElementById('percentDisplay');
     const statusMsg = document.getElementById('statusMsg');
@@ -121,39 +130,45 @@ if (isset($_POST['scripts']) && isset($_POST['clave'])) {
     function checkStatus() {
         intentos++;
 
-        // Enviamos la hora del servidor SQL (?since=...)
+        // Enviamos la fecha al monitor (?since=...)
         fetch(`../../services/adm/cob-eg-ig/check_files.php?since=${startTime}`)
             .then(response => response.json())
             .then(data => {
                 console.log("Intento " + intentos, data);
 
                 if (data.status === 'ok') {
+                    // Actualizar Barra
                     percentDisplay.innerText = data.percent + "%";
                     statusMsg.innerText = data.msg;
                     progressBar.style.width = data.percent + "%";
                     progressBar.innerText = data.processed + " / " + data.total;
 
-                    // Finalizar si llega al 100%
+                    // Finalizar SOLO si se completan los archivos esperados
                     if (data.processed >= data.total) {
                         clearInterval(polling);
                         mostrarResultado(1);
                     }
                 }
             })
-            .catch(err => console.error("Error conexión", err));
+            .catch(err => {
+                console.error("Error conexión", err);
+                statusMsg.innerText = "Conectando al servidor...";
+            });
     }
 
     function mostrarResultado(status) {
         setTimeout(() => {
             loadingSec.style.display = 'none';
             resultSec.style.display = 'block';
+            
             resultIcon.innerHTML = '✅'; 
-            resultTitle.innerText = '¡Backups Listos!'; 
+            resultTitle.innerText = '¡Proceso Terminado!'; 
             resultTitle.className = 'success';
-            resultMsg.innerText = 'El proceso ha finalizado correctamente.';
+            resultMsg.innerText = 'Los backups se generaron correctamente.';
         }, 1000);
     }
 
+    // Consultar cada 3 segundos
     const polling = setInterval(checkStatus, 3000);
     checkStatus(); 
 </script>
