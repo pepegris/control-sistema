@@ -1,78 +1,113 @@
-<div id="body">
-  <div class="slideExpandUp">
-    <ul class="list-group">
-      <li class="list-group-item disabled" style="background-color:black; color:white;" aria-disabled="true">
-        <center><b>Estado de Réplica (Facturación)</b></center>
-      </li>
-      
-      <?php
-      // 1. Definir fechas de referencia UNA SOLA VEZ antes del bucle (Optimización)
-      $fecha_actual_str = date("d-m-Y");
-      $now_warning = new DateTime(date("d-m-Y", strtotime("-2 day"))); // 2 días atrás (Amarillo)
-      $now_danger  = new DateTime(date("d-m-Y", strtotime("-5 day"))); // 5 días atrás (Sincronizando/Rojo)
-
-      for ($i = 0; $i < count($sedes_ar); $i++) {
-        
-        $sede = $sedes_ar[$i];
-
-        if ($sede != 'Previa Shop') {
-
-          // A. Obtener datos
-          $res_replica = Replica($sede);
-          $res_inventario = Inventario($sede);
-
-          // B. Procesar Inventario (Icono)
-          $icon_inventario = "";
-          if ($res_inventario != null && isset($res_inventario['cerrado'])) {
-             $icon_inventario = " <span class='badge badge-info' style='font-size:0.8em'>Inventario <img src='./img/cart-full.svg' style='width:15px'></span>";
-          }
-
-          // C. Procesar Fechas y Estado
-          $fecha_mostrar = 'Sin Conexión';
-          $icon_status = './img/cloud-off.svg'; // Icono por defecto (Error)
-          $li_style = ""; // Estilo por defecto
-
-          // Verificamos si la consulta trajo datos
-          if ($res_replica != null && isset($res_replica['fec_emis'])) {
-              
-              // Es un objeto DateTime de SQL Server
-              $obj_fecha = $res_replica['fec_emis']; 
-              $fecha_mostrar = $obj_fecha->format('d-m-Y');
-              
-              // Comparaciones
-              if ($obj_fecha >= $now_warning) {
-                  // Caso: AL DÍA (Menos de 2 días)
-                  $icon_status = './img/cloud-check.svg';
-                  
-              } elseif ($obj_fecha >= $now_danger) {
-                  // Caso: RETRASO LEVE (Entre 2 y 5 días)
-                  $icon_status = './img/cloud-sync.svg'; 
-                  
-              } else {
-                  // Caso: DESACTUALIZADO (Más de 5 días)
-                  $icon_status = './img/cloud-upload.svg';
-              }
-          } else {
-              // Caso: No conectó o devolvió null
-              $fecha_mostrar = "Sincronizando...";
-              $icon_status = './img/cloud-upload.svg'; 
-          }
-
-          // D. Renderizar
-          echo "
-          <li class='list-group-item d-flex justify-content-between align-items-center'>
-            <span>
-                <b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> 
-                <span style='color:#555; font-size:0.9em; margin-left:5px;'>/ $fecha_mostrar</span>
-            </span>
-            <span>
-                $icon_inventario
-                <img src='$icon_status' alt='status' title='Estado de réplica'>
-            </span>
-          </li>";
+<?php
+// ACTIVAR REPORTE DE ERRORES (Solo para depurar, quita esto cuando esté listo)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Administrativa</title>
+    <style>
+        /* ESTILOS ANTERIORES (DISEÑO LIMPIO) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
         }
-      }
-      ?>
-    </ul>
-  </div>
-</div>
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px; /* Ancho para el formulario */
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        input[type="date"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Para que el padding no rompa el ancho */
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff; /* Azul administrativo */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Estilos para alertas o mensajes */
+        .alert {
+            padding: 10px;
+            background-color: #ffeeba;
+            color: #856404;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Consulta de Ventas</h2>
+        
+        <form action="detal.php" method="POST">
+            <div class="form-group">
+                <label for="fecha_ini">Fecha Inicio:</label>
+                <input type="date" name="fecha_ini" id="fecha_ini" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_fin">Fecha Fin:</label>
+                <input type="date" name="fecha_fin" id="fecha_fin" required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Consultar Reporte</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
