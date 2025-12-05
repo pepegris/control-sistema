@@ -1,113 +1,122 @@
 <?php
-// ACTIVAR REPORTE DE ERRORES (Solo para depurar, quita esto cuando esté listo)
+// --- ACTIVAR VISUALIZACIÓN DE ERRORES ---
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+// ----------------------------------------
+
+ini_set('memory_limit', '4096M');
+ini_set('max_execution_time', 3600);
+
+require '../../includes/log.php';
+include '../../includes/header.php';
+include '../../services/mysql.php';
+include '../../services/adm/replica/replica.php';
+
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta Administrativa</title>
-    <style>
-        /* ESTILOS ANTERIORES (DISEÑO LIMPIO) */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-        }
+<link rel="stylesheet" href="../../assets/css/animations.css">
+<style>
+  img {
+    width: 23px;
+  }
 
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px; /* Ancho para el formulario */
-        }
+  ul {
+    margin-top: 10px;
+  }
 
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-        }
+  @media (max-width: 900px) {
+    ul li {
+      font-size: 10px;
+    }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+    img {
+      width: 19px;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #666;
-            font-weight: bold;
-        }
+    ul {
+      margin-top: 10px;
+    }
+  }
+</style>
 
-        input[type="date"],
-        input[type="text"],
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box; /* Para que el padding no rompa el ancho */
-            font-size: 14px;
-        }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff; /* Azul administrativo */
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
+<div id="body">
 
-        button:hover {
-            background-color: #0056b3;
-        }
-        
-        /* Estilos para alertas o mensajes */
-        .alert {
-            padding: 10px;
-            background-color: #ffeeba;
-            color: #856404;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
+  <div class="slideExpandUp">
+    <ul class="list-group">
+      <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
+        <center><b>Replica</b></center>
 
-    <div class="container">
-        <h2>Consulta de Ventas</h2>
-        
-        <form action="detal.php" method="POST">
-            <div class="form-group">
-                <label for="fecha_ini">Fecha Inicio:</label>
-                <input type="date" name="fecha_ini" id="fecha_ini" required>
-            </div>
+      </li>
+      <?php
+      // ADVERTENCIA: Si $sedes_ar no está definido en los includes, esto dará error o no mostrará nada.
+      if (isset($sedes_ar) && is_array($sedes_ar)) {
+          for ($i = 0; $i < count($sedes_ar); $i++) {
 
-            <div class="form-group">
-                <label for="fecha_fin">Fecha Fin:</label>
-                <input type="date" name="fecha_fin" id="fecha_fin" required>
-            </div>
+            if ($sedes_ar[$i] != 'Previa Shop') {
 
-            <div class="form-group">
-                <button type="submit">Consultar Reporte</button>
-            </div>
-        </form>
-    </div>
+              $sede = $sedes_ar[$i];
 
-</body>
-</html>
+              $res = Replica($sedes_ar[$i]);
+              
+              // Verificamos si $res trajo datos antes de intentar acceder al array
+              if($res) {
+                  $res1 = $res['fec_emis'];
+
+                  if ($res1 == null) {
+                    $fecha = 'Sincronizando';
+                    $past = null; // Inicializar para evitar error undefined variable
+                  } else {
+                    // Aseguramos que res1 sea un objeto DateTime antes de usar format
+                    if (is_object($res1)) {
+                        $fecha = $res1->format('d-m-Y');
+                    } else {
+                        // Si viene como string desde la BD
+                        $fecha = $res1; 
+                    }
+
+                    $fecha_actual = date("d-m-Y");
+
+                    $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 2 day"));
+                    $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 5 day"));
+
+                    $past = new DateTime($fecha);
+                    $now_1 = new DateTime($fecha1);
+                    $now_2 = new DateTime($fecha2);
+                  }
+              } else {
+                  $fecha = "Sin Datos";
+                  $past = null;
+              }
+
+              $res3 = Inventario($sedes_ar[$i]);
+
+              if ($res3 == null) {
+                $inventario = "";
+              } else {
+                $inventario = "Inventario<img src='./img/cart-full.svg' alt=''>";
+              }
+
+
+              // Lógica de visualización
+              if ($past != null && isset($now_1) && $past >= $now_1) {
+                echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> /  $fecha</span> <img src='./img/cloud-check.svg' alt=''> $inventario </li>";
+              } elseif ($past != null && isset($now_2) && $past >= $now_2) {
+                echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> /  $fecha</span>  <img src='./img/cloud-sync.svg' alt=''> $inventario </li>";
+              } else {
+                echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> /  $fecha</span>  <img src='./img/cloud-upload.svg' alt=''>  $inventario </li>";
+              }
+            }
+          }
+      } else {
+          echo "<div class='alert alert-danger'>Error: La variable <b>\$sedes_ar</b> no está definida. Revisa replica.php o mysql.php</div>";
+      }
+      ?>
+
+    </ul>
+  </div>
+
+</div>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<br><br><br>
+
+<?php include '../../includes/footer.php'; ?>
