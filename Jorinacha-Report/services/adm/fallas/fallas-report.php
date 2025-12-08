@@ -97,7 +97,7 @@ function getArt($sede, $linea, $co_art, $almacen) {
     } else {
         $sql = "SELECT RTRIM(art.co_art) as co_art, art.stock_act, art.prec_vta5, art.ubicacion
                 FROM art 
-                WHERE art.co_lin = ? AND art.co_art = ? AND co_alma='BOLE'";
+                WHERE art.co_lin = ? AND art.co_art = ?";
         $params[] = $linea;
         $params[] = $co_art;
     }
