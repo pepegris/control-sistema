@@ -86,7 +86,7 @@ function getArt($sede, $linea, $co_art, $almacen) {
                 LEFT JOIN sub_lin ON art.co_subl = sub_lin.co_subl
                 LEFT JOIN cat_art ON art.co_cat = cat_art.co_cat
                 LEFT JOIN colores ON art.co_color = colores.co_col
-                WHERE art.co_lin = ? AND art.anulado = 0
+                WHERE art.co_lin = ? AND art.anulado = 0 AND co_alma='BOLE'
                 ORDER BY art.co_subl DESC";
         
         $params[] = $linea;
@@ -97,7 +97,7 @@ function getArt($sede, $linea, $co_art, $almacen) {
     } else {
         $sql = "SELECT RTRIM(art.co_art) as co_art, art.stock_act, art.prec_vta5, art.ubicacion
                 FROM art 
-                WHERE art.co_lin = ? AND art.co_art = ?";
+                WHERE art.co_lin = ? AND art.co_art = ? AND co_alma='BOLE'";
         $params[] = $linea;
         $params[] = $co_art;
     }
