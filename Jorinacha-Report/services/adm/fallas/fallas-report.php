@@ -86,7 +86,8 @@ function getArt($sede, $linea, $co_art, $almacen) {
                 LEFT JOIN sub_lin ON art.co_subl = sub_lin.co_subl
                 LEFT JOIN cat_art ON art.co_cat = cat_art.co_cat
                 LEFT JOIN colores ON art.co_color = colores.co_col
-                WHERE art.co_lin = ? AND art.anulado = 0 AND co_alma='BOLE'
+                LEFT JOIN st_almac ON art.co_art = st_almac.co_art AND st_almac.co_alma = 'BOLE'
+                WHERE art.co_lin = ? AND art.anulado = 0 
                 ORDER BY art.co_subl DESC";
         
         $params[] = $linea;
