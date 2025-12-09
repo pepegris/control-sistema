@@ -10,9 +10,11 @@ $ruta_config = '../../services/adm/replica/config_replicas.php';
 if (!file_exists($ruta_config)) $ruta_config = 'config_replicas.php';
 include $ruta_config;
 
-// Credenciales Remotas (Asegúrate de que sean estas para las tiendas VPN)
-$usr_remoto = "mezcla";
-$pwd_remoto = "Zeus33$";
+// --- CREDENCIALES REMOTAS (CORREGIDAS) ---
+// Usamos comillas simples '' para que el signo $ se lea como texto, no como variable.
+$usr_remoto = 'mezcla';
+$pwd_remoto = 'Zeus33$';
+// ----------------------------------------
 
 ?>
 <!DOCTYPE html>
@@ -82,7 +84,6 @@ $pwd_remoto = "Zeus33$";
     $res = sqlsrv_query($conn_local, $sql_art);
     if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_articulos[] = $row;
 
-    // Resumen visual
     echo "<ul style='color:#ccc; font-family:monospace;'>";
     echo "<li>Colores: " . count($data_colores) . " | Líneas: " . count($data_lineas) . " | SubLíneas: " . count($data_sublineas) . "</li>";
     echo "<li>Categorías: " . count($data_cat) . " | Artículos: <b>" . count($data_articulos) . "</b></li>";
@@ -103,20 +104,27 @@ $pwd_remoto = "Zeus33$";
         
         $log_tienda = "";
         $modo_offline = false; 
-        $error_vpn_msg = ""; // Para guardar por qué falló la VPN
+        $error_vpn_msg = ""; 
         
         // --- INTENTO 1: VPN ---
-        // AUMENTAMOS TIMEOUT A 20 SEGUNDOS
-        $connInfo = array("Database"=>$config['db_remota'], "UID"=>$usr_remoto, "PWD"=>$pwd_remoto, "LoginTimeout"=>20);
+        // Array reescrito para eliminar caracteres fantasma
+        $connInfo = array(
+            "Database" => $config['db_remota'],
+            "UID" => $usr_remoto,
+            "PWD" => $pwd_remoto,
+            "CharacterSet" => "UTF-8",
+            "LoginTimeout" => 20
+        );
+
+        // Usamos @ para que PHP no muestre warnings en pantalla
         $conn_destino = @sqlsrv_connect($config['ip'], $connInfo);
 
         // Si falla VPN, capturamos el error y probamos local
         if (!$conn_destino) {
-            // Capturar el error real de SQL Server
             if( ($errors = sqlsrv_errors() ) != null) {
                 $error_vpn_msg = $errors[0]['message'];
             } else {
-                $error_vpn_msg = "Tiempo de espera agotado o servidor inalcanzable.";
+                $error_vpn_msg = "Tiempo de espera agotado o IP inalcanzable.";
             }
 
             $modo_offline = true;
@@ -176,9 +184,7 @@ $pwd_remoto = "Zeus33$";
                 $stmt = sqlsrv_query($conn_destino, $sql);
                 if(!$stmt) throw new Exception("Error Art: {$a['co_art']}");
                 
-                $rows_affected = sqlsrv_rows_affected($stmt);
-                
-                if ($rows_affected > 0) {
+                if (sqlsrv_rows_affected($stmt) > 0) {
                     $arts_insertados++;
                     $lista_detallada[] = "<span class='highlight-code'>{$a['co_art']}</span> {$a['art_des']}";
                 }
@@ -196,12 +202,9 @@ $pwd_remoto = "Zeus33$";
             sqlsrv_commit($conn_destino);
 
             if ($modo_offline) {
-                // FALLBACK: Mostramos por qué falló la VPN
-                // Cortamos el error si es muy largo
                 $error_corto = substr($error_vpn_msg, 0, 150) . "...";
                 echo_card($tienda, "WARNING", $log_tienda . "<br>⚠️ <b>Guardado en Local ({$config['db_local']}).</b><br><small style='color:#ff9999'>Error VPN: $error_corto</small>", false);
             } else {
-                // ÉXITO REMOTO
                 echo_card($tienda, "OK", $log_tienda . "<br><small style='color:#666'>BD Remota: {$config['db_remota']}</small>", false);
             }
 
