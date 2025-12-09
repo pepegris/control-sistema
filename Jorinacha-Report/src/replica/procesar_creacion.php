@@ -10,10 +10,9 @@ $ruta_config = '../../services/adm/replica/config_replicas.php';
 if (!file_exists($ruta_config)) $ruta_config = 'config_replicas.php';
 include $ruta_config;
 
-// --- CREDENCIALES (SIMPLIFICADAS Y LIMPIAS) ---
+// CREDENCIALES (Limpias)
 $usr_remoto = 'mezcla';
 $pwd_remoto = 'Zeus33$';
-// ----------------------------------------------
 
 ?>
 <!DOCTYPE html>
@@ -83,7 +82,6 @@ $pwd_remoto = 'Zeus33$';
     $res = sqlsrv_query($conn_local, $sql_art);
     if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_articulos[] = $row;
 
-    // Resumen visual
     echo "<ul style='color:#ccc; font-family:monospace;'>";
     echo "<li>Colores: " . count($data_colores) . " | Líneas: " . count($data_lineas) . " | SubLíneas: " . count($data_sublineas) . "</li>";
     echo "<li>Categorías: " . count($data_cat) . " | Artículos: <b>" . count($data_articulos) . "</b></li>";
@@ -106,39 +104,39 @@ $pwd_remoto = 'Zeus33$';
         $modo_offline = false; 
         $error_vpn_msg = ""; 
         
-        // --- INTENTO 1: CONEXIÓN VPN (ARRAY REESCRITO DESDE CERO) ---
-        // Nota: He quitado 'CharacterSet' para evitar conflictos raros con el driver
+        // CORRECCIÓN CRÍTICA: Usamos $config['db'] (nombre VPN) en lugar de 'db_remota'
+        $nombre_db_vpn = trim($config['db']);     // <-- AQUÍ ESTABA EL ERROR
+        $nombre_db_local = trim($config['db_local']);
+        $ip_vpn = trim($config['ip']);
+
+        // --- INTENTO 1: CONEXIÓN VPN ---
         $connInfo = array(
-            "Database" => $config['db_remota'],
+            "Database" => $nombre_db_vpn,
             "UID"      => $usr_remoto,
             "PWD"      => $pwd_remoto,
             "LoginTimeout" => 20
         );
 
-        // Intento de conexión con supresión de error visual (@)
-        $conn_destino = @sqlsrv_connect($config['ip'], $connInfo);
+        $conn_destino = @sqlsrv_connect($ip_vpn, $connInfo);
 
-        // Si falla la VPN...
+        // Si falla VPN...
         if (!$conn_destino) {
-            
-            // Capturamos el error para mostrarlo en el log
             if( ($errors = sqlsrv_errors() ) != null) {
                 $error_vpn_msg = $errors[0]['message'];
             } else {
                 $error_vpn_msg = "Error desconocido de conexión.";
             }
-
-            // Activamos modo local
             $modo_offline = true;
-            $conn_destino = ConectarSQLServer($config['db_local']);
+            
+            // Fallback Local
+            $conn_destino = ConectarSQLServer($nombre_db_local);
         }
 
         if (!$conn_destino) {
-            echo_card($tienda, "FAIL", "❌ Error Crítico: No conecta remoto ({$config['db_remota']}) ni local ({$config['db_local']}).", true);
+            echo_card($tienda, "FAIL", "❌ Error Crítico: No conecta remoto ($nombre_db_vpn) ni local ($nombre_db_local).", true);
             continue;
         }
 
-        // --- TRANSACCIÓN Y EJECUCIÓN ---
         sqlsrv_begin_transaction($conn_destino);
         $errores_sql = "";
 
@@ -204,14 +202,13 @@ $pwd_remoto = 'Zeus33$';
 
             sqlsrv_commit($conn_destino);
 
-            // Reporte final de la tarjeta
             if ($modo_offline) {
                 // FALLBACK
                 $error_corto = substr($error_vpn_msg, 0, 100) . "...";
-                echo_card($tienda, "WARNING", $log_tienda . "<br>⚠️ <b>Guardado en Local ({$config['db_local']}).</b><br><small style='color:#ff9999'>Fallo VPN: $error_corto</small>", false);
+                echo_card($tienda, "WARNING", $log_tienda . "<br>⚠️ <b>Guardado en Local ($nombre_db_local).</b><br><small style='color:#ff9999'>Fallo VPN: $error_corto</small>", false);
             } else {
                 // ÉXITO REMOTO
-                echo_card($tienda, "OK", $log_tienda . "<br><small style='color:#666'>BD Remota: {$config['db_remota']}</small>", false);
+                echo_card($tienda, "OK", $log_tienda . "<br><small style='color:#666'>BD Remota: $nombre_db_vpn</small>", false);
             }
 
         } catch (Exception $e) {
