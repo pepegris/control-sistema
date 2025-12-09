@@ -107,7 +107,7 @@ include '../../services/adm/replica/replica.php';
         📂 Ejecutar Import-Database
     </a>
 
-    <a href="panel_control_replicas.php" class="btn btn-dark btn-lg" style="border: 1px solid #00ff99;">
+    <a href="panel_control_replicas.php" class="btn btn-dark btn-lg" >
         🔄 Reiniciar Suscripciones (Panel Control)
     </a>
 
