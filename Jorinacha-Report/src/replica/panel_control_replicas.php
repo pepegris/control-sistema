@@ -1,12 +1,13 @@
 <?php
-// Configuración para que no se corte si tarda mucho
+// Configuración
 ini_set('max_execution_time', 300); 
 
-// Credenciales ADMIN que me diste
+// Credenciales ADMIN
 $usuario_admin = "mezcla";
 $clave_admin   = "Zeus33$";
 
-// Array extraído de tu foto (Servidor Remoto -> Base de Datos)
+// Array MAESTRO: IP de VPN + Nombre de Instancia (si aplica)
+// Extraído de tus capturas de pantalla
 $lista_replicas = [
     'ACARIGUA'     => ['ip' => '26.35.57.24',           'db' => 'ACARIGUA'],
     'APURE'        => ['ip' => '26.77.57.145',          'db' => 'APURA'],
@@ -52,73 +53,89 @@ $lista_replicas = [
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <title>Test Conexión VPN IPs</title>
     <style>
-        body { background: #222; color: #fff; font-family: monospace; }
-        table { width: 100%; border-collapse: collapse; }
-        td, th { border: 1px solid #444; padding: 8px; }
-        .ok { color: #0f0; font-weight: bold; }
-        .fail { color: #f00; font-weight: bold; }
+        body { background: #121212; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; padding: 20px; }
+        h2 { border-bottom: 2px solid #00ff99; padding-bottom: 10px; display: inline-block; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #1e1e1e; }
+        th, td { border: 1px solid #333; padding: 12px 15px; text-align: left; }
+        th { background-color: #2c2c2c; color: #00ff99; }
+        tr:hover { background-color: #252525; }
+        .ok { color: #00ff99; font-weight: bold; background: rgba(0, 255, 153, 0.1); }
+        .fail { color: #ff5555; font-weight: bold; background: rgba(255, 85, 85, 0.1); }
+        .ip-tag { font-family: monospace; background: #333; padding: 2px 6px; border-radius: 4px; color: #fff; }
     </style>
 </head>
 <body>
-    <h2>📡 Test de Conexión (Usuario: <?= $usuario_admin ?>)</h2>
+
+    <h2>📡 Test de Conexión Directa por VPN</h2>
+    <p>Intentando conectar usando usuario <code><?= $usuario_admin ?></code> directo a las IPs.</p>
+
     <table>
         <thead>
             <tr>
                 <th>Tienda</th>
-                <th>Servidor Objetivo</th>
+                <th>IP / Instancia Objetivo</th>
                 <th>Base de Datos</th>
-                <th>Resultado</th>
-                <th>Mensaje</th>
+                <th>Estado</th>
+                <th>Detalle</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($lista_replicas as $nombre => $datos): ?>
             <tr>
                 <td><?= $nombre ?></td>
-                <td><?= $datos['servidor'] ?></td>
+                <td><span class="ip-tag"><?= $datos['ip'] ?></span></td>
                 <td><?= $datos['db'] ?></td>
                 
                 <?php
-                // Intentar conexión directa
+                // Configuración de conexión
                 $connectionInfo = array(
                     "Database" => $datos['db'], 
                     "UID" => $usuario_admin, 
                     "PWD" => $clave_admin,
-                    "LoginTimeout" => 5 // 5 segundos maximo de espera por tienda
+                    "LoginTimeout" => 4 // 4 segundos es suficiente para IPs directas
                 );
                 
-                $conn = sqlsrv_connect($datos['servidor'], $connectionInfo);
+                // Intento de conexión
+                $conn = sqlsrv_connect($datos['ip'], $connectionInfo);
                 
                 if ($conn) {
-                    // Contamos articulos para asegurar lectura
+                    // Prueba de fuego: Leer algo
                     $sql = "SELECT COUNT(*) as c FROM art";
                     $stmt = sqlsrv_query($conn, $sql);
-                    $qty = 0;
+                    
                     if ($stmt && $row = sqlsrv_fetch_array($stmt)) {
-                        $qty = $row['c'];
+                         echo "<td class='ok'>✅ CONECTADO</td>";
+                         echo "<td>Lectura OK. Arts: <b>" . number_format($row['c']) . "</b></td>";
+                    } else {
+                         echo "<td class='ok'>⚠️ CONECTA PERO...</td>";
+                         echo "<td>No se pudo leer la tabla 'art'. Posible error de permisos.</td>";
                     }
-                    echo "<td class='ok'>CONECTADO</td>";
-                    echo "<td>Acceso Correcto. (Arts: $qty)</td>";
                     sqlsrv_close($conn);
                 } else {
-                    echo "<td class='fail'>FALLÓ</td>";
-                    // Capturar error
-                    $err = "";
+                    echo "<td class='fail'>❌ SIN CONEXIÓN</td>";
+                    
+                    $err = "Desconocido";
                     if (($errors = sqlsrv_errors()) != null) {
-                        foreach ($errors as $error) {
-                            $err .= "SQLSTATE: ".$error['SQLSTATE']." - ".$error['message']." ";
-                        }
+                        // Tomamos solo el mensaje principal del error
+                        $err = $errors[0]['message'];
+                        
+                        // Simplificamos errores comunes de red
+                        if (strpos($err, 'TCP Provider') !== false) $err = "TimeOut / No llega a la IP";
+                        if (strpos($err, 'Login failed') !== false) $err = "Clave/Usuario Incorrecto";
                     }
-                    echo "<td style='font-size:10px; color:#aaa;'>".substr($err, 0, 100)."...</td>";
+                    echo "<td style='font-size: 0.85em; color: #aaa;'>$err</td>";
                 }
                 ?>
             </tr>
             <?php 
-                flush(); // Forzar a pintar la tabla fila por fila
+                flush(); // Actualiza la pantalla paso a paso
             ?>
             <?php endforeach; ?>
         </tbody>
     </table>
+
 </body>
 </html>
