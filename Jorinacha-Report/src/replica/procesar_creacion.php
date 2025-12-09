@@ -1,19 +1,16 @@
 <?php
-// Aumentamos tiempo (puede tardar si son muchos artículos)
+// Aumentamos tiempo de ejecución
 ini_set('max_execution_time', 600); 
 
 require '../../includes/log.php';
-
-// 1. INCLUIR TU CONEXIÓN CENTRALIZADA
 require '../../services/db_connection.php'; 
 
-// Carga de configuración de las 16 tiendas (IPs y Nombres DB)
+// Carga de configuración
 $ruta_config = '../../services/adm/replica/config_replicas.php';
 if (!file_exists($ruta_config)) $ruta_config = 'config_replicas.php';
 include $ruta_config;
 
-// Credenciales para conexión directa por VPN (Si son distintas a las locales)
-// Si son iguales a las de db_connection.php, podríamos reusarlas, pero las definimos aquí por seguridad.
+// Credenciales Remotas
 $usr_remoto = "mezcla";
 $pwd_remoto = "Zeus33$";
 
@@ -26,11 +23,7 @@ $pwd_remoto = "Zeus33$";
     <link rel="stylesheet" href="assets/css/replica_panel.css">
     <link rel="stylesheet" href="assets/css/replica_procesar.css">
     <style>
-        .st-warning { 
-            background: rgba(255, 215, 0, 0.15); 
-            color: var(--accent-yellow); 
-            border: 1px solid var(--accent-yellow); 
-        }
+        .st-warning { background: rgba(255, 215, 0, 0.15); color: var(--accent-yellow); border: 1px solid var(--accent-yellow); }
     </style>
 </head>
 <body>
@@ -45,18 +38,18 @@ $pwd_remoto = "Zeus33$";
         die("<div class='warning-card'><h3>Error: Sin fecha</h3></div><a href='panel_crear_articulos.php' class='back-btn'>Volver</a>");
     }
 
-    $fecha_raw = $_POST['fecha_inicio']; 
-    // Formato YYYYMMDD para comparar con Profit (fe_us_in)
+    $fecha_raw = $_POST['fecha_inicio']; // Viene como YYYY-MM-DD desde el HTML
+    
+    // -------------------------------------------------------------
+    // CONVERSIÓN CRÍTICA PARA PROFIT PLUS
+    // Transformamos '2024-01-01' a '20240101'
     $fecha_profit = date("Ymd", strtotime($fecha_raw)); 
-    
+    // -------------------------------------------------------------
+
     echo "<div class='log-card' style='border-color:var(--accent-green);'>";
-    echo "<h3 style='color:var(--accent-green)'>🔍 Buscando en PREVIA_A data desde: $fecha_raw</h3>";
+    echo "<h3 style='color:var(--accent-green)'>🔍 Buscando en PREVIA_A desde: $fecha_profit</h3>";
     
-    // ---------------------------------------------------------
     // 1. OBTENER DATA ORIGEN (PREVIA_A - LOCAL)
-    // ---------------------------------------------------------
-    
-    // USAMOS TU FUNCIÓN NUEVA: ConectarSQLServer
     $conn_local = ConectarSQLServer('PREVIA_A'); 
     
     if (!$conn_local) {
@@ -64,43 +57,32 @@ $pwd_remoto = "Zeus33$";
     }
 
     // A) COLORES
-    $sql_col = "SELECT LTRIM(RTRIM(co_col)) as co_col, LTRIM(RTRIM(des_col)) as des_col FROM colores WHERE fe_us_in >= '$fecha_profit'";
-    $res_col = sqlsrv_query($conn_local, $sql_col);
     $data_colores = [];
-    if($res_col) while($row = sqlsrv_fetch_array($res_col, SQLSRV_FETCH_ASSOC)) $data_colores[] = $row;
+    $res = sqlsrv_query($conn_local, "SELECT LTRIM(RTRIM(co_col)) as co_col, LTRIM(RTRIM(des_col)) as des_col FROM colores WHERE fe_us_in >= '$fecha_profit'");
+    if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_colores[] = $row;
 
     // B) LÍNEAS
-    $sql_lin = "SELECT LTRIM(RTRIM(co_lin)) as co_lin, LTRIM(RTRIM(lin_des)) as lin_des FROM lin_art WHERE fe_us_in >= '$fecha_profit'";
-    $res_lin = sqlsrv_query($conn_local, $sql_lin);
     $data_lineas = [];
-    if($res_lin) while($row = sqlsrv_fetch_array($res_lin, SQLSRV_FETCH_ASSOC)) $data_lineas[] = $row;
+    $res = sqlsrv_query($conn_local, "SELECT LTRIM(RTRIM(co_lin)) as co_lin, LTRIM(RTRIM(lin_des)) as lin_des FROM lin_art WHERE fe_us_in >= '$fecha_profit'");
+    if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_lineas[] = $row;
 
     // C) SUBLÍNEAS
-    $sql_sub = "SELECT LTRIM(RTRIM(co_subl)) as co_subl, LTRIM(RTRIM(subl_des)) as subl_des, LTRIM(RTRIM(co_lin)) as co_lin FROM sub_lin WHERE fe_us_in >= '$fecha_profit'";
-    $res_sub = sqlsrv_query($conn_local, $sql_sub);
     $data_sublineas = [];
-    if($res_sub) while($row = sqlsrv_fetch_array($res_sub, SQLSRV_FETCH_ASSOC)) $data_sublineas[] = $row;
+    $res = sqlsrv_query($conn_local, "SELECT LTRIM(RTRIM(co_subl)) as co_subl, LTRIM(RTRIM(subl_des)) as subl_des, LTRIM(RTRIM(co_lin)) as co_lin FROM sub_lin WHERE fe_us_in >= '$fecha_profit'");
+    if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_sublineas[] = $row;
 
     // D) CATEGORÍAS
-    $sql_cat = "SELECT LTRIM(RTRIM(co_cat)) as co_cat, LTRIM(RTRIM(cat_des)) as cat_des FROM cat_art WHERE fe_us_in >= '$fecha_profit'";
-    $res_cat = sqlsrv_query($conn_local, $sql_cat);
     $data_cat = [];
-    if($res_cat) while($row = sqlsrv_fetch_array($res_cat, SQLSRV_FETCH_ASSOC)) $data_cat[] = $row;
+    $res = sqlsrv_query($conn_local, "SELECT LTRIM(RTRIM(co_cat)) as co_cat, LTRIM(RTRIM(cat_des)) as cat_des FROM cat_art WHERE fe_us_in >= '$fecha_profit'");
+    if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_cat[] = $row;
 
     // E) ARTÍCULOS
-    $sql_art = "SELECT 
-                    LTRIM(RTRIM(co_art)) as co_art, 
-                    LTRIM(RTRIM(art_des)) as art_des, 
-                    LTRIM(RTRIM(co_lin)) as co_lin, 
-                    LTRIM(RTRIM(co_subl)) as co_subl, 
-                    LTRIM(RTRIM(co_cat)) as co_cat, 
-                    LTRIM(RTRIM(co_color)) as co_color, 
-                    prec_vta4, 
-                    prec_vta5 
-                FROM art WHERE fe_us_in >= '$fecha_profit'";
-    $res_art = sqlsrv_query($conn_local, $sql_art);
     $data_articulos = [];
-    if($res_art) while($row = sqlsrv_fetch_array($res_art, SQLSRV_FETCH_ASSOC)) $data_articulos[] = $row;
+    $sql_art = "SELECT LTRIM(RTRIM(co_art)) as co_art, LTRIM(RTRIM(art_des)) as art_des, LTRIM(RTRIM(co_lin)) as co_lin, 
+                LTRIM(RTRIM(co_subl)) as co_subl, LTRIM(RTRIM(co_cat)) as co_cat, LTRIM(RTRIM(co_color)) as co_color, 
+                prec_vta4, prec_vta5 FROM art WHERE fe_us_in >= '$fecha_profit'";
+    $res = sqlsrv_query($conn_local, $sql_art);
+    if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_articulos[] = $row;
 
     // Resumen visual
     echo "<ul style='color:#ccc; font-family:monospace;'>";
@@ -108,8 +90,11 @@ $pwd_remoto = "Zeus33$";
     echo "<li>Categorías: " . count($data_cat) . " | Artículos: <b>" . count($data_articulos) . "</b></li>";
     echo "</ul></div>";
 
-    if (count($data_articulos) == 0 && count($data_lineas) == 0 && count($data_colores) == 0) {
-        echo "<div class='warning-card'><h3>Nada nuevo</h3><p>No hay registros creados desde esa fecha.</p></div>";
+    if (empty($data_articulos) && empty($data_lineas) && empty($data_colores) && empty($data_cat)) {
+        // Guardamos la fecha aunque no haya nada para no repetir la búsqueda mañana
+        file_put_contents('assets/ultima_fecha.txt', $fecha_raw);
+        
+        echo "<div class='warning-card'><h3>Nada nuevo</h3><p>No hay registros creados desde el $fecha_profit.</p></div>";
         echo "<a href='panel_crear_articulos.php' class='btn-return'>Volver</a>";
         exit;
     }
@@ -123,22 +108,18 @@ $pwd_remoto = "Zeus33$";
         $log_tienda = "";
         $modo_offline = false; 
         
-        // --- INTENTO 1: CONEXIÓN REMOTA (VPN DIRECTA) ---
-        $connInfo = array("Database"=>$config['db'], "UID"=>$usr_remoto, "PWD"=>$pwd_remoto, "LoginTimeout"=>4);
-        
-        // Usamos @ para suprimir error visual
+        // --- INTENTO 1: VPN ---
+        $connInfo = array("Database"=>$config['db_remota'], "UID"=>$usr_remoto, "PWD"=>$pwd_remoto, "LoginTimeout"=>4);
         $conn_destino = @sqlsrv_connect($config['ip'], $connInfo);
 
-        // --- INTENTO 2: FALLBACK A LOCAL (Usando tu función db_connection.php) ---
+        // --- INTENTO 2: FALLBACK LOCAL ---
         if (!$conn_destino) {
             $modo_offline = true;
-            // ConectarSQLServer conecta a 172.16.1.39 automáticamente
-            $conn_destino = ConectarSQLServer($config['db']);
+            $conn_destino = ConectarSQLServer($config['db_local']);
         }
 
-        // Si fallan ambos
         if (!$conn_destino) {
-            echo_card($tienda, "FAIL", "❌ Error Crítico: No conecta ni por VPN ({$config['ip']}) ni Localmente ({$config['db']}).", true);
+            echo_card($tienda, "FAIL", "❌ Error Crítico: No conecta remoto ({$config['db_remota']}) ni local ({$config['db_local']}).", true);
             continue;
         }
 
@@ -153,28 +134,24 @@ $pwd_remoto = "Zeus33$";
                         BEGIN INSERT INTO colores (co_col, des_col, co_us_in, co_sucu) VALUES ('{$c['co_col']}', '{$c['des_col']}', '003', 'PPAL') END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error Color: {$c['co_col']}");
             }
-
             // CATEGORÍAS
             foreach ($data_cat as $c) {
                 $sql = "IF NOT EXISTS (SELECT co_cat FROM cat_art WHERE co_cat = '{$c['co_cat']}')
                         BEGIN INSERT INTO cat_art (co_cat, cat_des, co_us_in, co_sucu, movil) VALUES ('{$c['co_cat']}', '{$c['cat_des']}', '003', 'PPAL', 0) END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error Cat: {$c['co_cat']}");
             }
-
             // LÍNEAS
             foreach ($data_lineas as $l) {
                 $sql = "IF NOT EXISTS (SELECT co_lin FROM lin_art WHERE co_lin = '{$l['co_lin']}')
                         BEGIN INSERT INTO lin_art (co_lin, lin_des, co_us_in, co_sucu) VALUES ('{$l['co_lin']}', '{$l['lin_des']}', '003', 'PPAL') END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error Lin: {$l['co_lin']}");
             }
-
             // SUBLÍNEAS
             foreach ($data_sublineas as $s) {
                 $sql = "IF NOT EXISTS (SELECT co_subl FROM sub_lin WHERE co_subl = '{$s['co_subl']}' AND co_lin = '{$s['co_lin']}')
                         BEGIN INSERT INTO sub_lin (co_subl, subl_des, co_lin, co_us_in, co_sucu, movil) VALUES ('{$s['co_subl']}', '{$s['subl_des']}', '{$s['co_lin']}', '003', 'PPAL', 0) END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error SubL: {$s['co_subl']}");
             }
-
             // ARTÍCULOS
             $arts_insertados = 0;
             foreach ($data_articulos as $a) {
@@ -202,13 +179,10 @@ $pwd_remoto = "Zeus33$";
 
             sqlsrv_commit($conn_destino);
 
-            // Reportar Estado
             if ($modo_offline) {
-                // Amarillo: Guardado en Local (172.16.1.39)
-                echo_card($tienda, "WARNING", $log_tienda . "<br>⚠️ Sin VPN. <b>Guardado en SQL2K8 Local.</b> Replicará automáticamente.", false);
+                echo_card($tienda, "WARNING", $log_tienda . "<br>⚠️ Sin VPN. <b>Guardado en Local ({$config['db_local']}).</b>", false);
             } else {
-                // Verde: Guardado Remoto directo
-                echo_card($tienda, "OK", $log_tienda, false);
+                echo_card($tienda, "OK", $log_tienda . "<br><small style='color:#666'>BD Remota: {$config['db_remota']}</small>", false);
             }
 
         } catch (Exception $e) {
@@ -221,28 +195,21 @@ $pwd_remoto = "Zeus33$";
         flush(); ob_flush(); 
     }
 
-    // --- FUNCIÓN PARA MOSTRAR TARJETAS ---
+    // GUARDAMOS LA FECHA AL FINAL DE TODO
+    file_put_contents('assets/ultima_fecha.txt', $fecha_raw);
+
     function echo_card($tienda, $status, $log, $is_error) {
-        if ($status == "OK") {
-            $badge_class = "st-ok"; $badge_text = "ENVIADO A TIENDA"; $icon = "✅";
-        } elseif ($status == "WARNING") {
-            $badge_class = "st-warning"; $badge_text = "GUARDADO LOCAL"; $icon = "🟠";
-        } else {
-            $badge_class = "st-fail"; $badge_text = "ERROR"; $icon = "❌";
-        }
+        if ($status == "OK") { $badge_class = "st-ok"; $badge_text = "ENVIADO A TIENDA"; $icon = "✅"; }
+        elseif ($status == "WARNING") { $badge_class = "st-warning"; $badge_text = "GUARDADO LOCAL"; $icon = "🟠"; }
+        else { $badge_class = "st-fail"; $badge_text = "ERROR"; $icon = "❌"; }
         
         echo "<div class='log-card'>";
-        echo "  <div class='log-header'>";
-        echo "      <h3>$icon $tienda</h3>";
-        echo "      <span class='status-badge $badge_class'>$badge_text</span>";
-        echo "  </div>";
+        echo "  <div class='log-header'><h3>$icon $tienda</h3><span class='status-badge $badge_class'>$badge_text</span></div>";
         echo "  <div class='console-output'>$log</div>";
         echo "</div>";
     }
     ?>
-    
     <a href="panel_crear_articulos.php" class="btn-return">← Volver al Formulario</a>
 </div>
-
 </body>
 </html>

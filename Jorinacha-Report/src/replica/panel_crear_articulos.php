@@ -1,6 +1,17 @@
 <?php
 require '../../includes/log.php';
-// No cargamos config_replicas aquí, lo cargará el procesador
+
+// --- LÓGICA DE FECHA GUARDADA ---
+$archivo_fecha = 'assets/ultima_fecha.txt';
+$fecha_por_defecto = date('Y-m-d'); // Por defecto hoy
+
+// Si el archivo existe y tiene datos, usamos esa fecha
+if (file_exists($archivo_fecha)) {
+    $fecha_guardada = file_get_contents($archivo_fecha);
+    if (!empty($fecha_guardada)) {
+        $fecha_por_defecto = trim($fecha_guardada);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,8 +34,8 @@ require '../../includes/log.php';
             <div class="warning-text">
                 <h3>DISTRIBUCIÓN DE ARTÍCULOS NUEVOS</h3>
                 <p>
-                    Este proceso buscará en <b>PREVIA_A</b> todos los artículos, líneas, colores y categorías creados a partir de la fecha seleccionada 
-                    y los creará automáticamente en las 16 tiendas remotas si no existen.
+                    Este proceso buscará en <b>PREVIA_A</b> todos los artículos creados a partir de la fecha seleccionada 
+                    y los creará automáticamente en las 16 tiendas.
                 </p>
             </div>
         </div>
@@ -32,11 +43,13 @@ require '../../includes/log.php';
         <form action="procesar_creacion.php" method="POST" style="background: var(--card-bg); padding: 40px; border-radius: 10px; border: 1px solid var(--border-color); max-width: 600px; margin: 0 auto;">
             
             <h3 style="margin-top:0; color:white; text-align:center;">Selecciona Fecha de Inicio</h3>
-            <p style="text-align:center; color:#aaa; font-size:0.9em;">Se buscarán artículos creados DESDE esta fecha:</p>
+            <p style="text-align:center; color:#aaa; font-size:0.9em;">
+                Última fecha procesada: <b style="color:var(--accent-green);"><?= $fecha_por_defecto ?></b>
+            </p>
 
             <div style="text-align: center; margin: 30px 0;">
                 <input type="date" name="fecha_inicio" required 
-                       value="<?= date('Y-m-d') ?>"
+                       value="<?= $fecha_por_defecto ?>"
                        style="padding: 15px; font-size: 1.5em; border-radius: 5px; border: 2px solid var(--accent-green); background: #1a1d20; color: white; text-align: center;">
             </div>
 
