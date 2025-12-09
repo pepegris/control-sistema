@@ -8,22 +8,44 @@ $clave_admin   = "Zeus33$";
 
 // Array extraído de tu foto (Servidor Remoto -> Base de Datos)
 $lista_replicas = [
-    'ACARIGUA'     => ['servidor' => 'SRVPREV',              'db' => 'ACARIGUA'],
-    'APURE'        => ['servidor' => 'SRVPREV',              'db' => 'APURA'],
-    'CAGUA'        => ['servidor' => 'KAGU-PREV\KAGUPREV',   'db' => 'CAGUA'],
-    'CARACAS 1'    => ['servidor' => 'SRVPREV',              'db' => 'CARACAS1'],
-    'CORO 1'       => ['servidor' => 'SRVPREV',              'db' => 'CORO1'],
-    'CORO 2'       => ['servidor' => 'SRVPREV',              'db' => 'CORO2'],
-    'CORO 3'       => ['servidor' => 'SRVPREV\CORINA2',      'db' => 'CORO3'],
-    'GUIGUE'       => ['servidor' => 'SRVPREV\CATICA2',      'db' => 'GUIGE_A'],
-    'HIGUEROTE'    => ['servidor' => 'SRVPREV',              'db' => 'HIGUE'],
-    'MATURIN'      => ['servidor' => 'SRVPREV',              'db' => 'MATURIN'],
-    'OJEDA'        => ['servidor' => 'SRVPREV\OJENA',        'db' => 'OJEDA'],
-    'PUNTO FIJO 1' => ['servidor' => 'SRVPREV\PUFIJO',       'db' => 'PTOFIJO1'],
-    'PUNTO FIJO 2' => ['servidor' => 'NACHARIPREV\NACHARI',  'db' => 'PTOFIJO2'],
-    'PUERTO'       => ['servidor' => 'SRVPREV',              'db' => 'PUERTOX'],
-    'VALENCIA'     => ['servidor' => 'SRVPREV\VALENA',       'db' => 'VALE_A21'],
-    'VALLE PASCUA' => ['servidor' => 'SRVPREV\VALLE',        'db' => 'VAPASCUA']
+    'ACARIGUA'     => ['ip' => '26.35.57.24',           'db' => 'ACARIGUA'],
+    'APURE'        => ['ip' => '26.77.57.145',          'db' => 'APURA'],
+    
+    // Cagua usa instancia \KAGUPREV
+    'CAGUA'        => ['ip' => '26.179.47.19\KAGUPREV', 'db' => 'CAGUA'],
+    
+    'CARACAS 1'    => ['ip' => '26.163.49.171',         'db' => 'CARACAS1'],
+    'CORO 1'       => ['ip' => '26.40.138.208',         'db' => 'CORO1'],
+    'CORO 2'       => ['ip' => '26.10.12.209',          'db' => 'CORO2'],
+    
+    // Coro 3 usa instancia \CORINA2
+    'CORO 3'       => ['ip' => '26.20.32.25\CORINA2',   'db' => 'CORO3'],
+    
+    // Guigue usa instancia \CATICA2
+    'GUIGUE'       => ['ip' => '26.160.180.159\CATICA2','db' => 'GUIGE_A'],
+    
+    // "HGUE" en la VPN parece ser Higuerote
+    'HIGUEROTE'    => ['ip' => '26.185.48.247',         'db' => 'HIGUE'],
+    
+    'MATURIN'      => ['ip' => '26.25.243.193',         'db' => 'MATURIN'],
+    
+    // Ojeda usa instancia \OJENA
+    'OJEDA'        => ['ip' => '26.173.204.113\OJENA',  'db' => 'OJEDA'],
+    
+    // Pto Fijo 1 usa instancia \PUFIJO (VPN dice "PUFIJO")
+    'PUNTO FIJO 1' => ['ip' => '26.248.191.230\PUFIJO', 'db' => 'PTOFIJO1'],
+    
+    // Pto Fijo 2 usa instancia \NACHARI (VPN dice "PTOFIJO2")
+    'PUNTO FIJO 2' => ['ip' => '26.229.9.68\NACHARI',   'db' => 'PTOFIJO2'],
+    
+    // Puerto La Cruz (VPN dice "PUECRUZ")
+    'PUERTO'       => ['ip' => '26.80.3.26',            'db' => 'PUERTOX'],
+    
+    // Valencia usa instancia \VALENA
+    'VALENCIA'     => ['ip' => '26.42.16.172\VALENA',   'db' => 'VALE_A21'],
+    
+    // Valle de la Pascua usa instancia \VALLE
+    'VALLE PASCUA' => ['ip' => '26.214.82.1\VALLE',     'db' => 'VAPASCUA']
 ];
 ?>
 
