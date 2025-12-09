@@ -10,7 +10,7 @@ $ruta_config = '../../services/adm/replica/config_replicas.php';
 if (!file_exists($ruta_config)) $ruta_config = 'config_replicas.php';
 include $ruta_config;
 
-// Credenciales Remotas
+// Credenciales Remotas (Asegúrate de que sean estas para las tiendas VPN)
 $usr_remoto = "mezcla";
 $pwd_remoto = "Zeus33$";
 
@@ -24,25 +24,11 @@ $pwd_remoto = "Zeus33$";
     <link rel="stylesheet" href="assets/css/replica_procesar.css">
     <style>
         .st-warning { background: rgba(255, 215, 0, 0.15); color: var(--accent-yellow); border: 1px solid var(--accent-yellow); }
-        
-        /* NUEVO ESTILO: Cajita con scroll para la lista de artículos */
         .mini-list {
-            max-height: 150px; /* Altura máxima antes de hacer scroll */
-            overflow-y: auto;
-            background: rgba(0,0,0,0.4);
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 4px;
-            font-size: 0.85em;
-            border: 1px solid #444;
+            max-height: 150px; overflow-y: auto; background: rgba(0,0,0,0.4);
+            padding: 10px; margin-top: 10px; border-radius: 4px; font-size: 0.85em; border: 1px solid #444;
         }
-        .mini-list div {
-            border-bottom: 1px solid #333;
-            padding: 2px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        .mini-list div { border-bottom: 1px solid #333; padding: 2px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .mini-list div:last-child { border-bottom: none; }
         .highlight-code { color: var(--accent-green); font-weight: bold; margin-right: 5px; }
     </style>
@@ -65,7 +51,7 @@ $pwd_remoto = "Zeus33$";
     echo "<div class='log-card' style='border-color:var(--accent-green);'>";
     echo "<h3 style='color:var(--accent-green)'>🔍 Buscando en PREVIA_A desde: $fecha_profit</h3>";
     
-    // 1. OBTENER DATA ORIGEN (PREVIA_A - LOCAL)
+    // 1. OBTENER DATA ORIGEN
     $conn_local = ConectarSQLServer('PREVIA_A'); 
     
     if (!$conn_local) {
@@ -117,12 +103,22 @@ $pwd_remoto = "Zeus33$";
         
         $log_tienda = "";
         $modo_offline = false; 
+        $error_vpn_msg = ""; // Para guardar por qué falló la VPN
         
-        // --- Conexión ---
-        $connInfo = array("Database"=>$config['db_remota'], "UID"=>$usr_remoto, "PWD"=>$pwd_remoto, "LoginTimeout"=>4);
+        // --- INTENTO 1: VPN ---
+        // AUMENTAMOS TIMEOUT A 20 SEGUNDOS
+        $connInfo = array("Database"=>$config['db_remota'], "UID"=>$usr_remoto, "PWD"=>$pwd_remoto, "LoginTimeout"=>20);
         $conn_destino = @sqlsrv_connect($config['ip'], $connInfo);
 
+        // Si falla VPN, capturamos el error y probamos local
         if (!$conn_destino) {
+            // Capturar el error real de SQL Server
+            if( ($errors = sqlsrv_errors() ) != null) {
+                $error_vpn_msg = $errors[0]['message'];
+            } else {
+                $error_vpn_msg = "Tiempo de espera agotado o servidor inalcanzable.";
+            }
+
             $modo_offline = true;
             $conn_destino = ConectarSQLServer($config['db_local']);
         }
@@ -136,8 +132,6 @@ $pwd_remoto = "Zeus33$";
         $errores_sql = "";
 
         try {
-            // ... (INSERTS DE COLORES, CAT, LIN, SUBL IGUAL QUE ANTES) ...
-            
             // COLORES
             foreach ($data_colores as $c) {
                 $sql = "IF NOT EXISTS (SELECT co_col FROM colores WHERE co_col = '{$c['co_col']}') BEGIN INSERT INTO colores (co_col, des_col, co_us_in, co_sucu) VALUES ('{$c['co_col']}', '{$c['des_col']}', '003', 'PPAL') END";
@@ -159,9 +153,9 @@ $pwd_remoto = "Zeus33$";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error SubL: {$s['co_subl']}");
             }
 
-            // --- INSERTAR ARTÍCULOS Y CAPTURAR DETALLES ---
+            // ARTÍCULOS
             $arts_insertados = 0;
-            $lista_detallada = []; // Array para guardar nombres
+            $lista_detallada = [];
 
             foreach ($data_articulos as $a) {
                 $p4 = number_format((float)$a['prec_vta4'], 2, '.', '');
@@ -182,34 +176,32 @@ $pwd_remoto = "Zeus33$";
                 $stmt = sqlsrv_query($conn_destino, $sql);
                 if(!$stmt) throw new Exception("Error Art: {$a['co_art']}");
                 
-                // Verificar si realmente se insertó (filas afectadas > 0)
                 $rows_affected = sqlsrv_rows_affected($stmt);
                 
                 if ($rows_affected > 0) {
                     $arts_insertados++;
-                    // Guardamos el detalle para la lista visual
                     $lista_detallada[] = "<span class='highlight-code'>{$a['co_art']}</span> {$a['art_des']}";
                 }
             }
             
-            // Construir el mensaje final para la tarjeta
             if($arts_insertados > 0) {
                 $log_tienda .= "✔ <b>$arts_insertados</b> Artículos nuevos creados.<br>";
-                // Generar la cajita con scroll
                 $log_tienda .= "<div class='mini-list'>";
-                foreach($lista_detallada as $item) {
-                    $log_tienda .= "<div>$item</div>";
-                }
+                foreach($lista_detallada as $item) { $log_tienda .= "<div>$item</div>"; }
                 $log_tienda .= "</div>";
             } else {
-                $log_tienda .= "Datos verificados (Ya existían todos).";
+                $log_tienda .= "Datos verificados (Ya existían).";
             }
 
             sqlsrv_commit($conn_destino);
 
             if ($modo_offline) {
-                echo_card($tienda, "WARNING", $log_tienda . "<br>⚠️ Sin VPN. <b>Guardado en Local ({$config['db_local']}).</b>", false);
+                // FALLBACK: Mostramos por qué falló la VPN
+                // Cortamos el error si es muy largo
+                $error_corto = substr($error_vpn_msg, 0, 150) . "...";
+                echo_card($tienda, "WARNING", $log_tienda . "<br>⚠️ <b>Guardado en Local ({$config['db_local']}).</b><br><small style='color:#ff9999'>Error VPN: $error_corto</small>", false);
             } else {
+                // ÉXITO REMOTO
                 echo_card($tienda, "OK", $log_tienda . "<br><small style='color:#666'>BD Remota: {$config['db_remota']}</small>", false);
             }
 
