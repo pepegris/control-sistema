@@ -107,13 +107,13 @@ include '../../services/adm/replica/replica.php';
         📂 Ejecutar Import-Database
     </a>
 
-    <a href="panel_control_replicas.php" class="btn btn-dark btn-lg" >
+    <a href="panel_control_replicas.php" class="btn btn-dark btn-lg">
         🔄 Reiniciar Suscripciones (Panel Control)
     </a>
 
     <hr style="border-color: #666;">
 
-    <a href="#" class="btn btn-dark btn-lg disabled">
+    <a href="panel_crear_articulos.php" class="btn btn-dark btn-lg" style="border: 1px solid #ffd700; color: #ffd700;">
         📦 Crear Artículos (De Previa_A a 16 Tiendas)
     </a>
 
