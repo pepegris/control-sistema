@@ -10,11 +10,10 @@ $ruta_config = '../../services/adm/replica/config_replicas.php';
 if (!file_exists($ruta_config)) $ruta_config = 'config_replicas.php';
 include $ruta_config;
 
-// --- CREDENCIALES REMOTAS (CORREGIDAS) ---
-// Usamos comillas simples '' para que el signo $ se lea como texto, no como variable.
+// --- CREDENCIALES (SIMPLIFICADAS Y LIMPIAS) ---
 $usr_remoto = 'mezcla';
 $pwd_remoto = 'Zeus33$';
-// ----------------------------------------
+// ----------------------------------------------
 
 ?>
 <!DOCTYPE html>
@@ -84,6 +83,7 @@ $pwd_remoto = 'Zeus33$';
     $res = sqlsrv_query($conn_local, $sql_art);
     if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_articulos[] = $row;
 
+    // Resumen visual
     echo "<ul style='color:#ccc; font-family:monospace;'>";
     echo "<li>Colores: " . count($data_colores) . " | Líneas: " . count($data_lineas) . " | SubLíneas: " . count($data_sublineas) . "</li>";
     echo "<li>Categorías: " . count($data_cat) . " | Artículos: <b>" . count($data_articulos) . "</b></li>";
@@ -106,27 +106,29 @@ $pwd_remoto = 'Zeus33$';
         $modo_offline = false; 
         $error_vpn_msg = ""; 
         
-        // --- INTENTO 1: VPN ---
-        // Array reescrito para eliminar caracteres fantasma
+        // --- INTENTO 1: CONEXIÓN VPN (ARRAY REESCRITO DESDE CERO) ---
+        // Nota: He quitado 'CharacterSet' para evitar conflictos raros con el driver
         $connInfo = array(
             "Database" => $config['db_remota'],
-            "UID" => $usr_remoto,
-            "PWD" => $pwd_remoto,
-            "CharacterSet" => "UTF-8",
+            "UID"      => $usr_remoto,
+            "PWD"      => $pwd_remoto,
             "LoginTimeout" => 20
         );
 
-        // Usamos @ para que PHP no muestre warnings en pantalla
+        // Intento de conexión con supresión de error visual (@)
         $conn_destino = @sqlsrv_connect($config['ip'], $connInfo);
 
-        // Si falla VPN, capturamos el error y probamos local
+        // Si falla la VPN...
         if (!$conn_destino) {
+            
+            // Capturamos el error para mostrarlo en el log
             if( ($errors = sqlsrv_errors() ) != null) {
                 $error_vpn_msg = $errors[0]['message'];
             } else {
-                $error_vpn_msg = "Tiempo de espera agotado o IP inalcanzable.";
+                $error_vpn_msg = "Error desconocido de conexión.";
             }
 
+            // Activamos modo local
             $modo_offline = true;
             $conn_destino = ConectarSQLServer($config['db_local']);
         }
@@ -136,32 +138,33 @@ $pwd_remoto = 'Zeus33$';
             continue;
         }
 
+        // --- TRANSACCIÓN Y EJECUCIÓN ---
         sqlsrv_begin_transaction($conn_destino);
         $errores_sql = "";
 
         try {
-            // COLORES
+            // INSERT COLORES
             foreach ($data_colores as $c) {
                 $sql = "IF NOT EXISTS (SELECT co_col FROM colores WHERE co_col = '{$c['co_col']}') BEGIN INSERT INTO colores (co_col, des_col, co_us_in, co_sucu) VALUES ('{$c['co_col']}', '{$c['des_col']}', '003', 'PPAL') END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error Color: {$c['co_col']}");
             }
-            // CATEGORÍAS
+            // INSERT CATEGORÍAS
             foreach ($data_cat as $c) {
                 $sql = "IF NOT EXISTS (SELECT co_cat FROM cat_art WHERE co_cat = '{$c['co_cat']}') BEGIN INSERT INTO cat_art (co_cat, cat_des, co_us_in, co_sucu, movil) VALUES ('{$c['co_cat']}', '{$c['cat_des']}', '003', 'PPAL', 0) END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error Cat: {$c['co_cat']}");
             }
-            // LÍNEAS
+            // INSERT LÍNEAS
             foreach ($data_lineas as $l) {
                 $sql = "IF NOT EXISTS (SELECT co_lin FROM lin_art WHERE co_lin = '{$l['co_lin']}') BEGIN INSERT INTO lin_art (co_lin, lin_des, co_us_in, co_sucu) VALUES ('{$l['co_lin']}', '{$l['lin_des']}', '003', 'PPAL') END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error Lin: {$l['co_lin']}");
             }
-            // SUBLÍNEAS
+            // INSERT SUBLÍNEAS
             foreach ($data_sublineas as $s) {
                 $sql = "IF NOT EXISTS (SELECT co_subl FROM sub_lin WHERE co_subl = '{$s['co_subl']}' AND co_lin = '{$s['co_lin']}') BEGIN INSERT INTO sub_lin (co_subl, subl_des, co_lin, co_us_in, co_sucu, movil) VALUES ('{$s['co_subl']}', '{$s['subl_des']}', '{$s['co_lin']}', '003', 'PPAL', 0) END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error SubL: {$s['co_subl']}");
             }
 
-            // ARTÍCULOS
+            // INSERT ARTÍCULOS
             $arts_insertados = 0;
             $lista_detallada = [];
 
@@ -201,10 +204,13 @@ $pwd_remoto = 'Zeus33$';
 
             sqlsrv_commit($conn_destino);
 
+            // Reporte final de la tarjeta
             if ($modo_offline) {
-                $error_corto = substr($error_vpn_msg, 0, 150) . "...";
-                echo_card($tienda, "WARNING", $log_tienda . "<br>⚠️ <b>Guardado en Local ({$config['db_local']}).</b><br><small style='color:#ff9999'>Error VPN: $error_corto</small>", false);
+                // FALLBACK
+                $error_corto = substr($error_vpn_msg, 0, 100) . "...";
+                echo_card($tienda, "WARNING", $log_tienda . "<br>⚠️ <b>Guardado en Local ({$config['db_local']}).</b><br><small style='color:#ff9999'>Fallo VPN: $error_corto</small>", false);
             } else {
+                // ÉXITO REMOTO
                 echo_card($tienda, "OK", $log_tienda . "<br><small style='color:#666'>BD Remota: {$config['db_remota']}</small>", false);
             }
 
