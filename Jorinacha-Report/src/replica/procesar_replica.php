@@ -1,75 +1,53 @@
 <?php
 // procesar_replica.php
-// Aumentamos tiempo de ejecución (importante para conexiones lentas)
+// Aumentamos tiempo de ejecución
 ini_set('max_execution_time', 300); 
+require '../../includes/log.php';
+include '../../services/adm/replica/config_replicas.php';
 
-// --- 1. CARGA DE CONFIGURACIÓN INTELIGENTE ---
-// Intentamos cargar el config. Si no está en la ruta larga, buscamos en la misma carpeta.
-$ruta_config_servicios = '../../services/adm/replica/config_replicas.php';
-$ruta_config_local     = 'config_replicas.php';
-
-if (file_exists($ruta_config_servicios)) {
-    include $ruta_config_servicios;
-} elseif (file_exists($ruta_config_local)) {
-    include $ruta_config_local;
-} else {
-    die("<div style='background:red; color:white; padding:20px;'>
-            <h3>❌ Error Crítico</h3>
-            <p>No se encuentra el archivo <b>config_replicas.php</b>.</p>
-            <p>Verifica que esté en <code>$ruta_config_servicios</code> o en la misma carpeta de este archivo.</p>
-         </div>");
-}
-// ---------------------------------------------
-
-// --- CONFIGURACIÓN DE CREDENCIALES ---
+// --- CONFIGURACIÓN CRÍTICA ---
 $usuario_admin = "mezcla";
 $clave_admin   = "Zeus33$";
 
-// IDENTIFICADOR DEL SUSCRIPTOR (BASE MADRE)
-// IMPORTANTE: Si SQL Server fue instalado usando el nombre de la PC (Ej: SRVPREV),
-// usar la IP aquí podría dar error. Si falla, cambia esto por 'SRVPREV'.
+// AQUÍ ESTÁ EL CAMBIO: Usamos la IP que indicaste como identificador del Suscriptor
 $nombre_servidor_madre = '172.16.1.39'; 
-// -------------------------------------
+// Si esto falla, intenta cambiarlo nuevamente por 'SRVPREV' o el nombre del equipo.
+// -----------------------------
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $tienda_key = $_POST['tienda_key'];
     
-    // Verificamos que la tienda exista en el array cargado
-    if (!isset($lista_replicas[$tienda_key])) {
-        die("Error: La tienda '$tienda_key' no existe en config_replicas.php");
-    }
+    if (!isset($lista_replicas[$tienda_key])) die("Tienda no válida");
 
     $datos = $lista_replicas[$tienda_key];
     
     $ip_destino  = $datos['ip'];
     $db_destino  = $datos['db'];
-    $publicacion = $datos['publicacion']; // Ej: ACARIGUA
+    $publicacion = $datos['publicacion'];
 
     // 1. CONEXIÓN DIRECTA A LA TIENDA (PUBLICADOR)
     $connectionInfo = array(
         "Database" => $db_destino, 
         "UID" => $usuario_admin, 
         "PWD" => $clave_admin,
-        "LoginTimeout" => 15 // 15 segundos para intentar conectar
+        "LoginTimeout" => 15 // Damos 15 seg para conectar
     );
 
-    // Conectamos usando la IP de la VPN
+    // Conectamos a la IP de la VPN de la tienda
     $conn_remota = sqlsrv_connect($ip_destino, $connectionInfo);
 
     if (!$conn_remota) {
         die("<div style='background:black; color:white; padding:20px; font-family:sans-serif;'>
                 <h2 style='color:red;'>❌ Error de Conexión</h2>
                 <p>No se pudo conectar a la tienda <b>$tienda_key</b>.</p>
-                <p>IP Intentada: <b>$ip_destino</b></p>
+                <p>IP Intentada: $ip_destino</p>
                 <p>Base de Datos: $db_destino</p>
-                <hr>
-                <a href='panel_control_replicas.php' style='color:white;'>Volver</a>
              </div>");
     }
 
     // 2. EJECUTAR EL COMANDO DE REINICIO
-    // @upload_first = 'FALSE' -> Borra cambios locales pendientes y fuerza bajada nueva
+    // Le decimos a la tienda: "El suscriptor (172.16.1.39) quiere bajar todo de nuevo"
     $sql = "EXEC sp_reinitmergesubscription 
             @publication = ?, 
             @subscriber = ?, 
@@ -93,11 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p style='color:#ffff99;'>
                 Suscriptor identificado como: <b>$nombre_servidor_madre</b>
             </p>
-            <div style='background:#222; padding:15px; margin-top:20px; border-radius:5px;'>
-                <p style='color:#aaa; font-size:0.9em; margin:0;'>
-                    ℹ️ <b>Nota:</b> El proceso comenzará automáticamente la próxima vez que el Agente de Sincronización se ejecute en el servidor.
-                </p>
-            </div>
+            <p style='color:#aaa; font-size:0.9em;'>
+                La próxima sincronización descargará la base de datos completa.
+            </p>
             
             <br><br>
             <a href='panel_control_replicas.php' style='background:#0066cc; color:white; padding:15px 30px; text-decoration:none; border-radius:5px; font-weight:bold;'>
@@ -106,28 +82,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>";
     } else {
         // --- ERROR ---
-        echo "<div style='font-family:sans-serif; padding:40px; background:#222; color:white; height:100vh;'>";
+        echo "<div style='font-family:sans-serif; padding:20px; background:#222; color:white;'>";
         echo "<h1 style='color: #ff5555;'>❌ Error al ejecutar el Comando</h1>";
-        echo "<h3 style='color: #ccc;'>Conectamos a la tienda, pero el SP falló.</h3>";
         
         // Diagnóstico de error común
-        echo "<div style='background:#333; padding:20px; border-left:5px solid #ff5555; margin: 20px 0;'>";
-        echo "<h4 style='margin-top:0;'>💡 Posible Causa: Nombre del Suscriptor</h4>";
-        echo "<p>El script envió la IP <b>'$nombre_servidor_madre'</b> como nombre del suscriptor.</p>";
-        echo "<p>Si la réplica fue configurada usando el nombre del servidor (ej. <code>SRVPREV</code>), SQL Server rechazará la IP porque no coincide con el registro.</p>";
-        echo "<p><b>Solución:</b> Edita este archivo y cambia <code>\$nombre_servidor_madre</code> por el nombre real del servidor.</p>";
-        echo "</div>";
+        echo "<div style='background:#333; padding:15px; border-left:4px solid #ff5555;'>";
+        echo "<h3>Posible Causa: Nombre del Suscriptor incorrecto</h3>";
+        echo "<p>Intentamos usar la IP <b>'$nombre_servidor_madre'</b> como nombre del suscriptor.</p>";
+        echo "<p>Si la tienda conoce a la madre por nombre (ej. SRVPREV), SQL rechazará la IP.</p>";
+        echo "</div><br>";
         
         echo "<h3>Detalle Técnico del Error SQL:</h3>";
         if (($errors = sqlsrv_errors()) != null) {
             foreach ($errors as $error) {
-                echo "<div style='background:black; padding:10px; margin-bottom:5px; font-family:monospace;'>";
-                echo "Code: " . $error['code'] . "<br>";
-                echo "Message: <span style='color:#ffaaaa'>" . $error['message'] . "</span>";
-                echo "</div>";
+                echo "SQL Code: " . $error['code'] . "<br>";
+                echo "Mensaje: <b style='color:#ffaaaa'>" . $error['message'] . "</b><br><hr>";
             }
         }
-        echo "<br><br><a href='panel_control_replicas.php' style='background:#555; color:white; padding:10px 20px; text-decoration:none;'>← Volver</a>";
+        echo "<br><a href='panel_control_replicas.php' style='color:white;'>Volver</a>";
         echo "</div>";
     }
     
