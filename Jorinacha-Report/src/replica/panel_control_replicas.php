@@ -1,6 +1,7 @@
 <?php
 // 1. Integración
 require '../../includes/log.php';
+include '../../includes/header.php';
 
 // 2. Carga de Configuración
 $ruta_config = '../../services/adm/replica/config_replicas.php';
@@ -46,7 +47,7 @@ $pwd = "Zeus33$";
     .back-btn { display: inline-block; color: #ccc; margin-bottom: 15px; text-decoration: none; }
     .back-btn:hover { color: #fff; }
 </style>
-
+<br><br><br><br>
 <div id="body">
     <div class="container-custom">
         <a href="form.php" class="back-btn">← Volver al Reporte Principal</a>
@@ -129,3 +130,4 @@ function toggleAll(source) {
 }
 </script>
 
+<?php include '../../includes/footer.php'; ?>
