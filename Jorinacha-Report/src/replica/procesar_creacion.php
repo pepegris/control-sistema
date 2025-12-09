@@ -24,6 +24,27 @@ $pwd_remoto = "Zeus33$";
     <link rel="stylesheet" href="assets/css/replica_procesar.css">
     <style>
         .st-warning { background: rgba(255, 215, 0, 0.15); color: var(--accent-yellow); border: 1px solid var(--accent-yellow); }
+        
+        /* NUEVO ESTILO: Cajita con scroll para la lista de artículos */
+        .mini-list {
+            max-height: 150px; /* Altura máxima antes de hacer scroll */
+            overflow-y: auto;
+            background: rgba(0,0,0,0.4);
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            border: 1px solid #444;
+        }
+        .mini-list div {
+            border-bottom: 1px solid #333;
+            padding: 2px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .mini-list div:last-child { border-bottom: none; }
+        .highlight-code { color: var(--accent-green); font-weight: bold; margin-right: 5px; }
     </style>
 </head>
 <body>
@@ -38,14 +59,9 @@ $pwd_remoto = "Zeus33$";
         die("<div class='warning-card'><h3>Error: Sin fecha</h3></div><a href='panel_crear_articulos.php' class='back-btn'>Volver</a>");
     }
 
-    $fecha_raw = $_POST['fecha_inicio']; // Viene como YYYY-MM-DD desde el HTML
-    
-    // -------------------------------------------------------------
-    // CONVERSIÓN CRÍTICA PARA PROFIT PLUS
-    // Transformamos '2024-01-01' a '20240101'
+    $fecha_raw = $_POST['fecha_inicio']; 
     $fecha_profit = date("Ymd", strtotime($fecha_raw)); 
-    // -------------------------------------------------------------
-
+    
     echo "<div class='log-card' style='border-color:var(--accent-green);'>";
     echo "<h3 style='color:var(--accent-green)'>🔍 Buscando en PREVIA_A desde: $fecha_profit</h3>";
     
@@ -56,27 +72,23 @@ $pwd_remoto = "Zeus33$";
         die("❌ Error Crítico: No se pudo conectar a la base de datos local <b>PREVIA_A</b> en 172.16.1.39.");
     }
 
-    // A) COLORES
+    // --- RECOLECCIÓN DE DATOS ---
     $data_colores = [];
     $res = sqlsrv_query($conn_local, "SELECT LTRIM(RTRIM(co_col)) as co_col, LTRIM(RTRIM(des_col)) as des_col FROM colores WHERE fe_us_in >= '$fecha_profit'");
     if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_colores[] = $row;
 
-    // B) LÍNEAS
     $data_lineas = [];
     $res = sqlsrv_query($conn_local, "SELECT LTRIM(RTRIM(co_lin)) as co_lin, LTRIM(RTRIM(lin_des)) as lin_des FROM lin_art WHERE fe_us_in >= '$fecha_profit'");
     if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_lineas[] = $row;
 
-    // C) SUBLÍNEAS
     $data_sublineas = [];
     $res = sqlsrv_query($conn_local, "SELECT LTRIM(RTRIM(co_subl)) as co_subl, LTRIM(RTRIM(subl_des)) as subl_des, LTRIM(RTRIM(co_lin)) as co_lin FROM sub_lin WHERE fe_us_in >= '$fecha_profit'");
     if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_sublineas[] = $row;
 
-    // D) CATEGORÍAS
     $data_cat = [];
     $res = sqlsrv_query($conn_local, "SELECT LTRIM(RTRIM(co_cat)) as co_cat, LTRIM(RTRIM(cat_des)) as cat_des FROM cat_art WHERE fe_us_in >= '$fecha_profit'");
     if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_cat[] = $row;
 
-    // E) ARTÍCULOS
     $data_articulos = [];
     $sql_art = "SELECT LTRIM(RTRIM(co_art)) as co_art, LTRIM(RTRIM(art_des)) as art_des, LTRIM(RTRIM(co_lin)) as co_lin, 
                 LTRIM(RTRIM(co_subl)) as co_subl, LTRIM(RTRIM(co_cat)) as co_cat, LTRIM(RTRIM(co_color)) as co_color, 
@@ -91,9 +103,7 @@ $pwd_remoto = "Zeus33$";
     echo "</ul></div>";
 
     if (empty($data_articulos) && empty($data_lineas) && empty($data_colores) && empty($data_cat)) {
-        // Guardamos la fecha aunque no haya nada para no repetir la búsqueda mañana
         file_put_contents('assets/ultima_fecha.txt', $fecha_raw);
-        
         echo "<div class='warning-card'><h3>Nada nuevo</h3><p>No hay registros creados desde el $fecha_profit.</p></div>";
         echo "<a href='panel_crear_articulos.php' class='btn-return'>Volver</a>";
         exit;
@@ -108,11 +118,10 @@ $pwd_remoto = "Zeus33$";
         $log_tienda = "";
         $modo_offline = false; 
         
-        // --- INTENTO 1: VPN ---
+        // --- Conexión ---
         $connInfo = array("Database"=>$config['db_remota'], "UID"=>$usr_remoto, "PWD"=>$pwd_remoto, "LoginTimeout"=>4);
         $conn_destino = @sqlsrv_connect($config['ip'], $connInfo);
 
-        // --- INTENTO 2: FALLBACK LOCAL ---
         if (!$conn_destino) {
             $modo_offline = true;
             $conn_destino = ConectarSQLServer($config['db_local']);
@@ -123,37 +132,37 @@ $pwd_remoto = "Zeus33$";
             continue;
         }
 
-        // --- EJECUTAR INSERCIONES ---
         sqlsrv_begin_transaction($conn_destino);
         $errores_sql = "";
 
         try {
+            // ... (INSERTS DE COLORES, CAT, LIN, SUBL IGUAL QUE ANTES) ...
+            
             // COLORES
             foreach ($data_colores as $c) {
-                $sql = "IF NOT EXISTS (SELECT co_col FROM colores WHERE co_col = '{$c['co_col']}')
-                        BEGIN INSERT INTO colores (co_col, des_col, co_us_in, co_sucu) VALUES ('{$c['co_col']}', '{$c['des_col']}', '003', 'PPAL') END";
+                $sql = "IF NOT EXISTS (SELECT co_col FROM colores WHERE co_col = '{$c['co_col']}') BEGIN INSERT INTO colores (co_col, des_col, co_us_in, co_sucu) VALUES ('{$c['co_col']}', '{$c['des_col']}', '003', 'PPAL') END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error Color: {$c['co_col']}");
             }
             // CATEGORÍAS
             foreach ($data_cat as $c) {
-                $sql = "IF NOT EXISTS (SELECT co_cat FROM cat_art WHERE co_cat = '{$c['co_cat']}')
-                        BEGIN INSERT INTO cat_art (co_cat, cat_des, co_us_in, co_sucu, movil) VALUES ('{$c['co_cat']}', '{$c['cat_des']}', '003', 'PPAL', 0) END";
+                $sql = "IF NOT EXISTS (SELECT co_cat FROM cat_art WHERE co_cat = '{$c['co_cat']}') BEGIN INSERT INTO cat_art (co_cat, cat_des, co_us_in, co_sucu, movil) VALUES ('{$c['co_cat']}', '{$c['cat_des']}', '003', 'PPAL', 0) END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error Cat: {$c['co_cat']}");
             }
             // LÍNEAS
             foreach ($data_lineas as $l) {
-                $sql = "IF NOT EXISTS (SELECT co_lin FROM lin_art WHERE co_lin = '{$l['co_lin']}')
-                        BEGIN INSERT INTO lin_art (co_lin, lin_des, co_us_in, co_sucu) VALUES ('{$l['co_lin']}', '{$l['lin_des']}', '003', 'PPAL') END";
+                $sql = "IF NOT EXISTS (SELECT co_lin FROM lin_art WHERE co_lin = '{$l['co_lin']}') BEGIN INSERT INTO lin_art (co_lin, lin_des, co_us_in, co_sucu) VALUES ('{$l['co_lin']}', '{$l['lin_des']}', '003', 'PPAL') END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error Lin: {$l['co_lin']}");
             }
             // SUBLÍNEAS
             foreach ($data_sublineas as $s) {
-                $sql = "IF NOT EXISTS (SELECT co_subl FROM sub_lin WHERE co_subl = '{$s['co_subl']}' AND co_lin = '{$s['co_lin']}')
-                        BEGIN INSERT INTO sub_lin (co_subl, subl_des, co_lin, co_us_in, co_sucu, movil) VALUES ('{$s['co_subl']}', '{$s['subl_des']}', '{$s['co_lin']}', '003', 'PPAL', 0) END";
+                $sql = "IF NOT EXISTS (SELECT co_subl FROM sub_lin WHERE co_subl = '{$s['co_subl']}' AND co_lin = '{$s['co_lin']}') BEGIN INSERT INTO sub_lin (co_subl, subl_des, co_lin, co_us_in, co_sucu, movil) VALUES ('{$s['co_subl']}', '{$s['subl_des']}', '{$s['co_lin']}', '003', 'PPAL', 0) END";
                 if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error SubL: {$s['co_subl']}");
             }
-            // ARTÍCULOS
+
+            // --- INSERTAR ARTÍCULOS Y CAPTURAR DETALLES ---
             $arts_insertados = 0;
+            $lista_detallada = []; // Array para guardar nombres
+
             foreach ($data_articulos as $a) {
                 $p4 = number_format((float)$a['prec_vta4'], 2, '.', '');
                 $p5 = number_format((float)$a['prec_vta5'], 2, '.', '');
@@ -170,12 +179,31 @@ $pwd_remoto = "Zeus33$";
                             )
                         END";
                 
-                if(!sqlsrv_query($conn_destino, $sql)) throw new Exception("Error Art: {$a['co_art']}");
-                $arts_insertados++;
+                $stmt = sqlsrv_query($conn_destino, $sql);
+                if(!$stmt) throw new Exception("Error Art: {$a['co_art']}");
+                
+                // Verificar si realmente se insertó (filas afectadas > 0)
+                $rows_affected = sqlsrv_rows_affected($stmt);
+                
+                if ($rows_affected > 0) {
+                    $arts_insertados++;
+                    // Guardamos el detalle para la lista visual
+                    $lista_detallada[] = "<span class='highlight-code'>{$a['co_art']}</span> {$a['art_des']}";
+                }
             }
             
-            if($arts_insertados > 0) $log_tienda .= "✔ <b>$arts_insertados</b> Artículos procesados.";
-            else $log_tienda .= "Datos verificados (Ya existían).";
+            // Construir el mensaje final para la tarjeta
+            if($arts_insertados > 0) {
+                $log_tienda .= "✔ <b>$arts_insertados</b> Artículos nuevos creados.<br>";
+                // Generar la cajita con scroll
+                $log_tienda .= "<div class='mini-list'>";
+                foreach($lista_detallada as $item) {
+                    $log_tienda .= "<div>$item</div>";
+                }
+                $log_tienda .= "</div>";
+            } else {
+                $log_tienda .= "Datos verificados (Ya existían todos).";
+            }
 
             sqlsrv_commit($conn_destino);
 
@@ -195,7 +223,6 @@ $pwd_remoto = "Zeus33$";
         flush(); ob_flush(); 
     }
 
-    // GUARDAMOS LA FECHA AL FINAL DE TODO
     file_put_contents('assets/ultima_fecha.txt', $fecha_raw);
 
     function echo_card($tienda, $status, $log, $is_error) {
