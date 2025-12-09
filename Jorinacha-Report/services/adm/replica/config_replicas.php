@@ -4,7 +4,7 @@
 
  $lista_replicas = [
     'ACARIGUA'     => ['ip' => '26.35.57.24',           'db' => 'ACARIGUA', 'publicacion' => 'ACARIGUA'],
-    'APURE'        => ['ip' => '26.77.57.145',          'db' => 'APURA',    'publicacion' => 'APURA'],
+    'APURA'        => ['ip' => '26.77.57.145',          'db' => 'APURA',    'publicacion' => 'APURA'],
     'CAGUA'        => ['ip' => '26.179.47.19\KAGUPREV', 'db' => 'CAGUA',    'publicacion' => 'CAGUA'],
     'CARACAS 1'    => ['ip' => '26.163.49.171',         'db' => 'CARACAS1', 'publicacion' => 'CARACAS1'],
     'CORO 1'       => ['ip' => '26.40.138.208',         'db' => 'CORO1',    'publicacion' => 'CORO1'],
