@@ -28,6 +28,9 @@ include '../../services/adm/replica/replica.php';
 
 <div id="body">
 
+<br>
+
+
   <div class="slideExpandUp">
     <ul class="list-group">
       <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
