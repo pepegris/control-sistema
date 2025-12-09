@@ -10,7 +10,7 @@ $ruta_config = '../../services/adm/replica/config_replicas.php';
 if (!file_exists($ruta_config)) $ruta_config = 'config_replicas.php';
 include $ruta_config;
 
-// CREDENCIALES (Limpias)
+// CREDENCIALES
 $usr_remoto = 'mezcla';
 $pwd_remoto = 'Zeus33$';
 
@@ -82,13 +82,16 @@ $pwd_remoto = 'Zeus33$';
     $res = sqlsrv_query($conn_local, $sql_art);
     if($res) while($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) $data_articulos[] = $row;
 
+    // Resumen visual
     echo "<ul style='color:#ccc; font-family:monospace;'>";
     echo "<li>Colores: " . count($data_colores) . " | Líneas: " . count($data_lineas) . " | SubLíneas: " . count($data_sublineas) . "</li>";
     echo "<li>Categorías: " . count($data_cat) . " | Artículos: <b>" . count($data_articulos) . "</b></li>";
     echo "</ul></div>";
 
     if (empty($data_articulos) && empty($data_lineas) && empty($data_colores) && empty($data_cat)) {
+        // Guardamos la fecha de hoy para que la próxima vez busque desde aquí
         file_put_contents('assets/ultima_fecha.txt', $fecha_raw);
+        
         echo "<div class='warning-card'><h3>Nada nuevo</h3><p>No hay registros creados desde el $fecha_profit.</p></div>";
         echo "<a href='panel_crear_articulos.php' class='btn-return'>Volver</a>";
         exit;
@@ -104,8 +107,7 @@ $pwd_remoto = 'Zeus33$';
         $modo_offline = false; 
         $error_vpn_msg = ""; 
         
-        // CORRECCIÓN CRÍTICA: Usamos $config['db'] (nombre VPN) en lugar de 'db_remota'
-        $nombre_db_vpn = trim($config['db']);     // <-- AQUÍ ESTABA EL ERROR
+        $nombre_db_vpn = trim($config['db']);
         $nombre_db_local = trim($config['db_local']);
         $ip_vpn = trim($config['ip']);
 
@@ -119,7 +121,6 @@ $pwd_remoto = 'Zeus33$';
 
         $conn_destino = @sqlsrv_connect($ip_vpn, $connInfo);
 
-        // Si falla VPN...
         if (!$conn_destino) {
             if( ($errors = sqlsrv_errors() ) != null) {
                 $error_vpn_msg = $errors[0]['message'];
@@ -127,7 +128,6 @@ $pwd_remoto = 'Zeus33$';
                 $error_vpn_msg = "Error desconocido de conexión.";
             }
             $modo_offline = true;
-            
             // Fallback Local
             $conn_destino = ConectarSQLServer($nombre_db_local);
         }
@@ -221,7 +221,9 @@ $pwd_remoto = 'Zeus33$';
         flush(); ob_flush(); 
     }
 
+    // --- GUARDADO DE FECHA EN TXT ---
     file_put_contents('assets/ultima_fecha.txt', $fecha_raw);
+    // -------------------------------
 
     function echo_card($tienda, $status, $log, $is_error) {
         if ($status == "OK") { $badge_class = "st-ok"; $badge_text = "ENVIADO A TIENDA"; $icon = "✅"; }
