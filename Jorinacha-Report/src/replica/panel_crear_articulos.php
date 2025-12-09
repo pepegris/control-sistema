@@ -1,16 +1,13 @@
 <?php
 require '../../includes/log.php';
 
-// --- LÓGICA DE FECHA GUARDADA ---
+// Lógica de fecha (assets/ultima_fecha.txt)
 $archivo_fecha = 'assets/ultima_fecha.txt';
-$fecha_por_defecto = date('Y-m-d'); // Por defecto hoy
+$fecha_por_defecto = date('Y-m-d'); 
 
-// Si el archivo existe y tiene datos, usamos esa fecha
 if (file_exists($archivo_fecha)) {
     $fecha_guardada = file_get_contents($archivo_fecha);
-    if (!empty($fecha_guardada)) {
-        $fecha_por_defecto = trim($fecha_guardada);
-    }
+    if (!empty($fecha_guardada)) $fecha_por_defecto = trim($fecha_guardada);
 }
 ?>
 <!DOCTYPE html>
@@ -33,10 +30,7 @@ if (file_exists($archivo_fecha)) {
             <div class="warning-icon">📦</div>
             <div class="warning-text">
                 <h3>DISTRIBUCIÓN DE ARTÍCULOS NUEVOS</h3>
-                <p>
-                    Este proceso buscará en <b>PREVIA_A</b> todos los artículos creados a partir de la fecha seleccionada 
-                    y los creará automáticamente en las 16 tiendas.
-                </p>
+                <p>Se buscarán artículos en <b>PREVIA_A</b> desde la fecha indicada y se replicarán a las 16 tiendas.</p>
             </div>
         </div>
 
@@ -63,6 +57,8 @@ if (file_exists($archivo_fecha)) {
         </form>
 
     </div>
+
+    <?php include 'includes/loading_overlay.php'; ?>
 
 </body>
 </html>

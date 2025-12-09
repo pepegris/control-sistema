@@ -1,4 +1,5 @@
 <?php
+// panel_control_replicas.php
 // 1. Integración
 require '../../includes/log.php';
 
@@ -65,6 +66,7 @@ $pwd = "Zeus33$";
                             // Test de conexión (1 seg timeout)
                             $conectado = false;
                             $conn_info = array("Database"=>$datos['db'], "UID"=>$usr, "PWD"=>$pwd, "LoginTimeout"=>1);
+                            // Usamos @ para suprimir errores visuales en el ping
                             $conn = @sqlsrv_connect($datos['ip'], $conn_info);
                             
                             if ($conn) { 
@@ -128,6 +130,8 @@ $pwd = "Zeus33$";
         }
     }
     </script>
+
+    <?php include 'includes/loading_overlay.php'; ?>
 
 </body>
 </html>
