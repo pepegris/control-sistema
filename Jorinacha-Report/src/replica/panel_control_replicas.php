@@ -1,82 +1,133 @@
-<?php 
-// Asegúrate de que esta ruta sea correcta según donde guardaste el archivo config
+<?php
+// 1. Integración
 require '../../includes/log.php';
-include '../../services/adm/replica/config_replicas.php'; 
+include '../../includes/header.php';
+
+// 2. Carga de Configuración
+$ruta_config = '../../services/adm/replica/config_replicas.php';
+if (!file_exists($ruta_config)) $ruta_config = 'config_replicas.php';
+include $ruta_config;
+
+// Credenciales para el Test de Conexión
+$usr = "mezcla";
+$pwd = "Zeus33$";
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Control de Réplicas</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-    <style>
-        body { background-color: #1a1d20; color: white; padding: 20px; font-family: 'Segoe UI', sans-serif; }
-        
-        .btn-replica {
-            background-color: #000;
-            color: #fff;
-            border: 1px solid #444;
-            padding: 15px;
-            margin-bottom: 8px;
-            text-align: left;
-            width: 100%;
-            text-transform: uppercase;
-            font-weight: bold;
-            transition: all 0.2s;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .btn-replica:hover {
-            background-color: #222;
-            color: #00ff99;
-            border-color: #00ff99;
-            cursor: pointer;
-        }
-        
-        h3 { border-bottom: 2px solid #00ff99; padding-bottom: 10px; margin-bottom: 20px; }
-        
-        .back-btn { margin-bottom: 20px; display: inline-block; color: #aaa; text-decoration: none; }
-        .back-btn:hover { color: white; }
 
-        /* NUEVO ESTILO PARA QUE EL AMARILLO SE VEA BIEN */
-        .alert-warning-custom {
-            background-color: #2c2f33; /* Un gris un poco más claro que el fondo */
-            color: #ffd700; /* AMARILLO ORO BRILLANTE */
-            border: 1px solid #ffd700;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container" style="max-width: 700px;">
+<style>
+    .container-custom { max-width: 900px; margin: 0 auto; padding-top: 20px; }
     
-    <a href="form.php" class="back-btn">← Volver al Reporte Principal</a>
+    /* Estilos de Tabla */
+    .table-dark-custom { width: 100%; border-collapse: collapse; background: #222; }
+    .table-dark-custom th { background: #111; color: #00ff99; padding: 10px; text-transform: uppercase; border-bottom: 2px solid #00ff99; }
+    .table-dark-custom td { padding: 10px; border-bottom: 1px solid #333; color: white; vertical-align: middle; }
+    .table-dark-custom tr:hover { background: #2a2a2a; }
 
-    <h3>🔄 Reiniciar Suscripciones (Modo VPN)</h3>
-    
-    <div class="alert alert-warning-custom">
-        ⚠️ <b>ADVERTENCIA:</b> Al presionar "REINICIAR", la tienda borrará su base de datos local y descargará una copia nueva completa desde la central. <b>Hazlo solo si la réplica está rota.</b>
-    </div>
+    /* Badges de Estado */
+    .badge-ok { background: rgba(0, 255, 153, 0.2); color: #00ff99; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; border: 1px solid #00ff99; }
+    .badge-fail { background: rgba(255, 85, 85, 0.2); color: #ff5555; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; border: 1px solid #ff5555; }
 
-    <?php foreach ($lista_replicas as $nombre_tienda => $datos): ?>
-        <form action="procesar_replica.php" method="POST" onsubmit="return confirm('ATENCIÓN:\n\nVas a reiniciar la tienda: <?= $nombre_tienda ?>.\n\nEsto consumirá mucho ancho de banda.\n¿Estás 100% seguro?');">
+    /* Botón Maestro */
+    .btn-master {
+        background: linear-gradient(45deg, #000, #111);
+        border: 2px solid #ffd700;
+        color: #ffd700;
+        width: 100%;
+        padding: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .btn-master:hover { background: #ffd700; color: #000; box-shadow: 0 0 15px #ffd700; }
+    .btn-master:disabled { border-color: #555; color: #555; cursor: not-allowed; box-shadow: none; background: #222; }
+
+    .check-custom { transform: scale(1.5); cursor: pointer; accent-color: #00ff99; }
+    .back-btn { display: inline-block; color: #ccc; margin-bottom: 15px; text-decoration: none; }
+    .back-btn:hover { color: #fff; }
+</style>
+
+<div id="body">
+    <div class="container-custom">
+        <a href="form.php" class="back-btn">← Volver al Reporte Principal</a>
+        
+        <h3 style="color:white; border-bottom:2px solid #00ff99; padding-bottom:10px;">
+            🎛️ Consola de Reinicio Masivo
+        </h3>
+
+        <div style="background:#2c2f33; padding:15px; border-left:4px solid #ffd700; margin-bottom:20px; color:#fff;">
+            ⚠️ <b>ATENCIÓN:</b> Selecciona las tiendas. El sistema:
+            <ol style="margin-bottom:0; padding-left:20px; color:#ddd;">
+                <li>Detectará automáticamente Publicación y Suscriptor.</li>
+                <li>Reinicializará <b>TODAS</b> las suscripciones de esa tienda.</li>
+                <li>Generará una <b>NUEVA INSTANTÁNEA</b> inmediatamente.</li>
+            </ol>
+        </div>
+
+        <form action="procesar_replica.php" method="POST" id="formReplica" onsubmit="return confirm('¿Estás SEGURO de procesar las tiendas seleccionadas?\n\nEsto generará tráfico de red intenso.');">
             
-            <input type="hidden" name="tienda_key" value="<?= $nombre_tienda ?>">
-            
-            <button type="submit" class="btn-replica">
-                <div>
-                    <span style="font-size: 1.1em;">🏢 <?= $nombre_tienda ?></span>
-                    <br>
-                    <small style="color:#888; font-weight:normal; text-transform:none;">
-                        IP: <?= $datos['ip'] ?> | DB: <?= $datos['db'] ?>
-                    </small>
-                </div>
-                <div style="text-align:right;">
-                    <span style="font-size: 1.5em;">☢️</span><br>
-                    <span style="font-size: 0.7em; color: #ff5555;">REINICIAR</span>
-                </div>
+            <table class="table-dark-custom">
+                <thead>
+                    <tr>
+                        <th width="50"><input type="checkbox" id="checkAll" class="check-custom" onclick="toggleAll(this)"></th>
+                        <th>Tienda</th>
+                        <th>IP / Base de Datos</th>
+                        <th>Estado Conexión</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $activas = 0;
+                    foreach ($lista_replicas as $key => $datos): 
+                        // Test de conexión rápido (2 segundos timeout)
+                        $conectado = false;
+                        $conn_info = array("Database"=>$datos['db'], "UID"=>$usr, "PWD"=>$pwd, "LoginTimeout"=>2);
+                        $conn = sqlsrv_connect($datos['ip'], $conn_info);
+                        
+                        if ($conn) { $conectado = true; sqlsrv_close($conn); $activas++; }
+                    ?>
+                    <tr>
+                        <td style="text-align:center;">
+                            <?php if($conectado): ?>
+                                <input type="checkbox" name="tiendas[]" value="<?= $key ?>" class="check-custom item-check" checked>
+                            <?php else: ?>
+                                <input type="checkbox" disabled class="check-custom" style="accent-color: #555;">
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <b><?= $key ?></b>
+                        </td>
+                        <td style="font-family:monospace; color:#aaa;">
+                            <?= $datos['ip'] ?><br>
+                            <span style="color:#666;"><?= $datos['db'] ?></span>
+                        </td>
+                        <td>
+                            <?php if($conectado): ?>
+                                <span class="badge-ok">● CONECTADO</span>
+                            <?php else: ?>
+                                <span class="badge-fail">● SIN CONEXIÓN</span>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn-master" id="btnProcesar" <?= ($activas == 0) ? 'disabled' : '' ?>>
+                ☢️ EJECUTAR REINICIO MASIVO (<?= $activas ?>)
             </button>
         </form>
-    <?php endforeach; ?>
+    </div>
 </div>
 
-</body>
-</html>
+<script>
+function toggleAll(source) {
+    checkboxes = document.getElementsByClassName('item-check');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
+</script>
+
+<?php include '../../includes/footer.php'; ?>
