@@ -15,26 +15,13 @@ include '../../services/adm/replica/replica.php';
 ?>
 <link rel="stylesheet" href="../../assets/css/animations.css">
 <style>
-  img {
-    width: 23px;
-  }
-
-  ul {
-    margin-top: 10px;
-  }
+  img { width: 23px; }
+  ul { margin-top: 10px; }
 
   @media (max-width: 900px) {
-    ul li {
-      font-size: 10px;
-    }
-
-    img {
-      width: 19px;
-    }
-
-    ul {
-      margin-top: 10px;
-    }
+    ul li { font-size: 10px; }
+    img { width: 19px; }
+    ul { margin-top: 10px; }
   }
 </style>
 
@@ -45,37 +32,32 @@ include '../../services/adm/replica/replica.php';
     <ul class="list-group">
       <li class="list-group-item disabled" style="background-color:black" aria-disabled="true">
         <center><b>Replica</b></center>
-
       </li>
       <?php
-      // ADVERTENCIA: Si $sedes_ar no está definido en los includes, esto dará error o no mostrará nada.
+      // Validación de seguridad para evitar errores si no carga el array
       if (isset($sedes_ar) && is_array($sedes_ar)) {
           for ($i = 0; $i < count($sedes_ar); $i++) {
 
             if ($sedes_ar[$i] != 'Previa Shop') {
 
               $sede = $sedes_ar[$i];
-
               $res = Replica($sedes_ar[$i]);
               
-              // Verificamos si $res trajo datos antes de intentar acceder al array
               if($res) {
                   $res1 = $res['fec_emis'];
 
                   if ($res1 == null) {
                     $fecha = 'Sincronizando';
-                    $past = null; // Inicializar para evitar error undefined variable
+                    $past = null;
                   } else {
-                    // Aseguramos que res1 sea un objeto DateTime antes de usar format
+                    // Manejo seguro de fechas (Objeto vs String)
                     if (is_object($res1)) {
                         $fecha = $res1->format('d-m-Y');
                     } else {
-                        // Si viene como string desde la BD
                         $fecha = $res1; 
                     }
 
                     $fecha_actual = date("d-m-Y");
-
                     $fecha1 = date("d-m-Y", strtotime($fecha_actual . "- 2 day"));
                     $fecha2 = date("d-m-Y", strtotime($fecha_actual . "- 5 day"));
 
@@ -96,8 +78,7 @@ include '../../services/adm/replica/replica.php';
                 $inventario = "Inventario<img src='./img/cart-full.svg' alt=''>";
               }
 
-
-              // Lógica de visualización
+              // Lógica de Semáforo (Verde, Naranja, Rojo)
               if ($past != null && isset($now_1) && $past >= $now_1) {
                 echo "<li class='list-group-item'><span><b style='color:black'> <a href='detal.php?sede=$sede'>$sede</a> </b> /  $fecha</span> <img src='./img/cloud-check.svg' alt=''> $inventario </li>";
               } elseif ($past != null && isset($now_2) && $past >= $now_2) {
@@ -120,9 +101,17 @@ include '../../services/adm/replica/replica.php';
 <br>
 <br>
 
-<div class="d-grid gap-2 col-6 mx-auto"> <a href="import-database.php" class="btn btn-dark btn-lg">
+<div class="d-grid gap-2 col-6 mx-auto"> 
+    
+    <a href="import-database.php" class="btn btn-dark btn-lg">
         📂 Ejecutar Import-Database
     </a>
+
+    <a href="panel_control_replicas.php" class="btn btn-dark btn-lg" style="border: 1px solid #00ff99;">
+        🔄 Reiniciar Suscripciones (Panel Control)
+    </a>
+
+    <hr style="border-color: #666;">
 
     <a href="#" class="btn btn-dark btn-lg disabled">
         📦 Crear Artículos (De Previa_A a 16 Tiendas)
