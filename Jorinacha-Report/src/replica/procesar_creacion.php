@@ -48,9 +48,8 @@ $pwd_remoto = 'Zeus33$';
     $fecha_raw = $_POST['fecha_inicio']; 
     $fecha_profit = date("Ymd", strtotime($fecha_raw)); 
     
-    // --- DEFINIR RUTA ABSOLUTA PARA EL TXT ---
+    // Ruta absoluta del TXT
     $ruta_txt = __DIR__ . '/assets/ultima_fecha.txt'; 
-    // -----------------------------------------
 
     echo "<div class='log-card' style='border-color:var(--accent-green);'>";
     echo "<h3 style='color:var(--accent-green)'>🔍 Buscando en PREVIA_A desde: $fecha_profit</h3>";
@@ -93,10 +92,11 @@ $pwd_remoto = 'Zeus33$';
     echo "</ul></div>";
 
     if (empty($data_articulos) && empty($data_lineas) && empty($data_colores) && empty($data_cat)) {
-        // Guardamos fecha y salimos
-        if(file_put_contents($ruta_txt, $fecha_raw) === false) {
-            echo "<div style='color:red; background:black; padding:10px;'>❌ ERROR: No se pudo guardar la fecha en $ruta_txt (Revisa permisos).</div>";
-        }
+        
+        // --- CAMBIO AQUÍ: GUARDAMOS LA FECHA DE HOY ---
+        file_put_contents($ruta_txt, date('Y-m-d'));
+        // ----------------------------------------------
+
         echo "<div class='warning-card'><h3>Nada nuevo</h3><p>No hay registros creados desde el $fecha_profit.</p></div>";
         echo "<a href='panel_crear_articulos.php' class='btn-return'>Volver</a>";
         exit;
@@ -207,9 +207,11 @@ $pwd_remoto = 'Zeus33$';
             sqlsrv_commit($conn_destino);
 
             if ($modo_offline) {
+                // FALLBACK
                 $error_corto = substr($error_vpn_msg, 0, 100) . "...";
                 echo_card($tienda, "WARNING", $log_tienda . "<br>⚠️ <b>Guardado en Local ($nombre_db_local).</b><br><small style='color:#ff9999'>Fallo VPN: $error_corto</small>", false);
             } else {
+                // ÉXITO REMOTO
                 echo_card($tienda, "OK", $log_tienda . "<br><small style='color:#666'>BD Remota: $nombre_db_vpn</small>", false);
             }
 
@@ -223,15 +225,11 @@ $pwd_remoto = 'Zeus33$';
         flush(); ob_flush(); 
     }
 
-    // --- GUARDADO DE FECHA CON VALIDACIÓN ---
-    if(file_put_contents($ruta_txt, $fecha_raw) === false) {
-        echo "<div style='color:red; background:black; padding:20px; text-align:center;'>
-                <h2>⚠️ Error de Permisos</h2>
-                <p>No se pudo guardar la fecha en: <b>$ruta_txt</b></p>
-                <p>Debes dar permisos de 'Escritura' a la carpeta 'assets' para el usuario <b>IUSR</b> o <b>Todos</b>.</p>
-              </div>";
+    // --- CAMBIO AQUÍ TAMBIÉN: GUARDAMOS LA FECHA DE HOY AL FINALIZAR ---
+    if(file_put_contents($ruta_txt, date('Y-m-d')) === false) {
+        echo "<div style='color:red; background:black; padding:10px;'>❌ ERROR: No se pudo guardar la fecha en $ruta_txt (Revisa permisos).</div>";
     }
-    // ----------------------------------------
+    // -------------------------------------------------------------------
 
     function echo_card($tienda, $status, $log, $is_error) {
         if ($status == "OK") { $badge_class = "st-ok"; $badge_text = "ENVIADO A TIENDA"; $icon = "✅"; }
