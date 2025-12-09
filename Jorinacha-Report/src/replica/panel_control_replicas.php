@@ -1,6 +1,6 @@
 <?php 
 // Asegúrate de que esta ruta sea correcta según donde guardaste el archivo config
-include 'config_replicas.php'; 
+include '../../services/adm/replica/config_replicas.php'; 
 ?>
 <!DOCTYPE html>
 <html>

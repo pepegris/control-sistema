@@ -3,7 +3,7 @@
 // Aumentamos tiempo de ejecución
 ini_set('max_execution_time', 300); 
 
-include 'config_replicas.php';
+include '../../services/adm/replica/config_replicas.php';
 
 // --- CONFIGURACIÓN CRÍTICA ---
 $usuario_admin = "mezcla";
