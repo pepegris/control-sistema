@@ -1,25 +1,19 @@
 <?php
+// includes/log.php
 
- 
+// Solo iniciamos sesión si NO hay una activa
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
+// Verificamos el usuario logueado
+$cuenta_on = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 
-
- session_start();
-
-$cuenta_on=$_SESSION['username'];
-
-if (!isset($cuenta_on)) {
+if (!$cuenta_on) {
+    // Si no está logueado, lo mandamos al login general
     header("location:../../home.php");
+    exit;
 }
 
 $cuenta_on = ucwords($cuenta_on); 
-
-
- 
 ?>
-
-
-<!-- <a href="#" class="btn btn-dark" style="position: fixed;
-    bottom: 90%;
-    right: 5%;
-    font-size:30px;" >Usuario: <?=$cuenta_on?></a> -->

@@ -1,5 +1,10 @@
 <?php
-// Aumentamos tiempo de ejecución drásticamente (10 minutos)
+// procesar_replica.php
+
+// 1. SEGURIDAD
+require '../../includes/security.php';
+
+// Aumentamos tiempo de ejecución...
 ini_set('max_execution_time', 600); 
 
 require '../../includes/log.php';

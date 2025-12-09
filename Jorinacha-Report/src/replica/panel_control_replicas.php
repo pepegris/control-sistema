@@ -1,6 +1,9 @@
 <?php
 // panel_control_replicas.php
-// 1. Integración
+// 1. SEGURIDAD (Primero que todo)
+require '../../includes/security.php';
+
+// 2. Integración
 require '../../includes/log.php';
 
 // 2. Carga de Configuración
