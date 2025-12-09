@@ -116,16 +116,18 @@ include '../../services/adm/replica/replica.php';
 
     <hr style="border-color: #666;">
 
-    <a href="panel_crear_articulos.php" class="btn btn-dark btn-lg" style="border: 1px solid #ffd700; color: #ffd700;">
+    <a href="panel_crear_articulos.php" class="btn btn-dark btn-lg" >
         📦 Crear Artículos (De Previa_A a 16 Tiendas)
     </a>
 
-    <a href="#" class="btn btn-dark btn-lg disabled">
+    <a href="panel_actualizar_precios.php" class="btn btn-dark btn-lg" >
         💲 Actualizar Precios (De Previa_A a 16 Tiendas)
     </a>
 
 </div>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <br><br><br>
+
+
 
 <?php include '../../includes/footer.php'; ?>
