@@ -1,7 +1,6 @@
 <?php
 // 1. Integración
 require '../../includes/log.php';
-include '../../includes/header.php';
 
 // 2. Carga de Configuración
 $ruta_config = '../../services/adm/replica/config_replicas.php';
@@ -130,4 +129,3 @@ function toggleAll(source) {
 }
 </script>
 
-<?php include '../../includes/footer.php'; ?>
