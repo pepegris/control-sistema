@@ -1,0 +1,100 @@
+/* assets/css/replica_procesar.css */
+
+/* Contenedor específico para el reporte */
+.report-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+/* Tarjeta de Log Individual */
+.log-card {
+    background: var(--card-bg); /* Usa variable de replica_panel.css */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.log-header h3 {
+    margin: 0;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Consola negra interna */
+.console-output {
+    font-family: 'Consolas', 'Monaco', monospace;
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #ddd;
+    border-left: 3px solid var(--border-color);
+    line-height: 1.6;
+    word-wrap: break-word; /* Para evitar desbordes */
+}
+
+/* Badges de estado específicos del reporte */
+.status-badge {
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.st-ok { 
+    background: rgba(0, 255, 153, 0.15); 
+    color: var(--accent-green); 
+    border: 1px solid var(--accent-green); 
+}
+
+.st-fail { 
+    background: rgba(255, 85, 85, 0.15); 
+    color: var(--accent-red); 
+    border: 1px solid var(--accent-red); 
+}
+
+/* Botón Volver Grande */
+.btn-return {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--card-bg);
+    color: var(--text-muted);
+    padding: 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s;
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.btn-return:hover {
+    background: var(--accent-green);
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
