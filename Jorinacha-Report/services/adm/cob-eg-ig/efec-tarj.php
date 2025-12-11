@@ -5,33 +5,27 @@ $sedes_ar = array(
     "Previa Shop",
     "Inv Jorinacha",
     "Sucursal Caracas I",
-    "Sucursal Caracas II",
     "Sucursal Cagua",
     "Sucursal Maturin",
-    "Sucursal Coro1" ,
-    "Sucursal Coro2" ,
-    "Sucursal Coro3" ,
-    "Sucursal PtoFijo1" ,
-    "Sucursal PtoFijo2" ,
-    "Sucursal Ojeda" ,
-    "Sucursal Valle" ,
-    "Sucursal GuiGue",
+    "Sucursal Coro1",
+    "Sucursal Coro2",
+    "Sucursal Coro3",
+    "Sucursal PtoFijo1",
+    "Sucursal PtoFijo2",
+    "Sucursal Ojeda",
+    "Sucursal Valle",
+    "Sucursal Guigue",
     "Sucursal Puerto",
-    
-    
+    "Sucursal Acarigua",
 
 
-    "Comercial Punto Fijo",
-    "Comercial Valena",
-    "Comercial Nachari",
     "Comercial Higue",
+    "Comercial Valena",
     "Comercial Apura",
-    "Comercial Vallepa",
-    "Comercial Ojena",
-    "Comercial Puecruz",
-    "Comercial Acari",
-    "Comercial Catica II",
+
+
 );
+
 
 
 
