@@ -42,90 +42,59 @@ function getConnection($dbName) {
 }
 
 // =============================================================================
-// CONSULTA MASIVA DE STOCK (DOBLE VERIFICACIÓN: VPN vs LOCAL)
+// CONSULTA MASIVA DE STOCK (CAMBIO: PRIORIDAD VPN -> SI FALLA -> LOCAL)
 // =============================================================================
 function getBatchStock($sede, $listaArticulos) {
-    global $lista_replicas; // Usamos el array que viene de empresas.php
+    global $lista_replicas; 
     
     if (empty($listaArticulos)) return [];
 
     $cleanList = array_map(function($code) { return str_replace("'", "''", $code); }, $listaArticulos);
     $inList = "'" . implode("','", $cleanList) . "'";
+    
     $sql = "SELECT RTRIM(co_art) as co_art, stock_act, prec_vta5 FROM art WHERE co_art IN ($inList)";
 
-    $dataRemota = [];
-    $dataLocal = [];
-    $dataFinal = [];
+    $data = [];
+    $conn = false;
 
-    // --- A) INTENTO REMOTO (VPN) ---
+    // --- 1. INTENTO REMOTO (PRIORIDAD ALTA) ---
+    // Si logramos conectar a la VPN, usamos ESTOS datos y ya. No comparamos.
     if (isset($lista_replicas[$sede])) {
         $conf = $lista_replicas[$sede];
-        // Timeout corto (4s) para no congelar el reporte si no hay internet
-        $connRemota = getConnectionDinamica($conf['ip'], $conf['db'], 4); 
+        // Timeout corto (4s) para no pegar el reporte si la VPN está lenta
+        $conn = getConnectionDinamica($conf['ip'], $conf['db'], 4); 
+    }
+
+    // --- 2. INTENTO LOCAL (FALLBACK) ---
+    // Solo entramos aquí si la conexión de arriba ($conn) falló.
+    if (!$conn) {
+        // Buscamos el nombre local en el array, o usamos la función vieja como respaldo
+        $dbNameLocal = isset($lista_replicas[$sede]) ? $lista_replicas[$sede]['db_local'] : Database2($sede);
         
-        if ($connRemota) {
-            $stmt = sqlsrv_query($connRemota, $sql);
-            if ($stmt) {
-                while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-                    $dataRemota[trim($row['co_art'])] = [
-                        'stock'  => (float)$row['stock_act'],
-                        'precio' => (float)$row['prec_vta5']
-                    ];
-                }
+        if ($dbNameLocal) {
+            // Conexión local al 172.16.1.19 (Rápida)
+            $conn = getConnectionDinamica("172.16.1.19", $dbNameLocal, 10);
+        }
+    }
+
+    // --- 3. EJECUTAR CONSULTA (EN LA CONEXIÓN QUE HAYA GANADO) ---
+    if ($conn) {
+        $consulta = sqlsrv_query($conn, $sql);
+        if ($consulta) {
+            while ($row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)) {
+                $data[trim($row['co_art'])] = [
+                    'stock'  => (float)$row['stock_act'],
+                    'precio' => (float)$row['prec_vta5']
+                ];
             }
         }
     }
 
-    // --- B) INTENTO LOCAL (SQL2K8 - REPLICA) ---
-    // Si existe en el array usamos 'db_local', sino usamos Database2() legacy
-    $dbNameLocal = isset($lista_replicas[$sede]) ? $lista_replicas[$sede]['db_local'] : Database2($sede);
-    
-    if ($dbNameLocal) {
-        $connLocal = getConnectionDinamica("172.16.1.19", $dbNameLocal, 10);
-        if ($connLocal) {
-            $stmt = sqlsrv_query($connLocal, $sql);
-            if ($stmt) {
-                while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-                    $dataLocal[trim($row['co_art'])] = [
-                        'stock'  => (float)$row['stock_act'],
-                        'precio' => (float)$row['prec_vta5']
-                    ];
-                }
-            }
-        }
-    }
-
-    // --- C) FUSIÓN INTELIGENTE (MAX STOCK) ---
-    foreach ($listaArticulos as $codigo) {
-        $codigo = trim($codigo);
-        
-        $stockR = isset($dataRemota[$codigo]) ? $dataRemota[$codigo]['stock'] : 0;
-        $stockL = isset($dataLocal[$codigo])  ? $dataLocal[$codigo]['stock']  : 0;
-        
-        // REGLA DE ORO: Nos quedamos con el stock mayor (Asumiendo que la réplica puede estar atrasada o la VPN caída)
-        $stockFinal = max($stockR, $stockL);
-        
-        // PRECIO: Prioridad Remoto > Local
-        $precioFinal = 0;
-        if (isset($dataRemota[$codigo])) {
-            $precioFinal = $dataRemota[$codigo]['precio'];
-        } elseif (isset($dataLocal[$codigo])) {
-            $precioFinal = $dataLocal[$codigo]['precio'];
-        }
-
-        if ($stockFinal != 0 || $precioFinal != 0) {
-            $dataFinal[$codigo] = [
-                'stock' => $stockFinal,
-                'precio' => $precioFinal
-            ];
-        }
-    }
-
-    return $dataFinal;
+    return $data;
 }
 
 // =============================================================================
-// CONSULTA MASIVA DE VENTAS
+// CONSULTA MASIVA DE VENTAS (PRIORIDAD VPN -> LOCAL)
 // =============================================================================
 function getBatchVentas($sede, $listaArticulos, $fecha1, $fecha2) {
     global $lista_replicas;
@@ -176,7 +145,7 @@ function getBatchVentas($sede, $listaArticulos, $fecha1, $fecha2) {
 // =============================================================================
 
 function getBatchPedidos($listaArticulos) {
-    $conn = getConnection("PREVIA_A"); // Siempre local
+    $conn = getConnection("PREVIA_A"); 
     if (!$conn) return [];
 
     $cleanList = array_map(function($code) { return str_replace("'", "''", $code); }, $listaArticulos);
