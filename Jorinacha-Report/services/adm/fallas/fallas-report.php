@@ -1,179 +1,135 @@
 <?php
-// fallas-report.php
-/* OBTENER NOMBRE DE LA BASE DE DATO SELECCIONADA */
-require_once "../../services/empresas.php"; // Usamos require_once para seguridad
+// services/adm/fallas/fallas-report.php
+
+// 1. CARGAMOS LA CONFIGURACIÓN CENTRALIZADA
+require_once "../../services/empresas.php"; 
 
 // =============================================================================
-// GESTOR DE CONEXIONES (Cache)
-// Evita abrir 1700 conexiones. Reutiliza la conexión si la tienda ya está abierta.
+// GESTOR DE CONEXIONES (Cache con Timeout Inteligente)
 // =============================================================================
 $GLOBALS['db_connections'] = [];
 
-function getConnection($dbName) {
+function getConnectionDinamica($ip, $dbName, $timeout = 3) {
     global $db_connections;
+    $cacheKey = $ip . "_" . $dbName; // Clave única
 
-    // Si ya existe una conexión abierta y válida, la devolvemos
-    if (isset($db_connections[$dbName]) && $db_connections[$dbName]) {
-        return $db_connections[$dbName];
+    if (isset($db_connections[$cacheKey]) && $db_connections[$cacheKey]) {
+        return $db_connections[$cacheKey];
     }
 
-    $serverName = "172.16.1.19"; 
     $connectionInfo = array(
         "Database" => $dbName,
         "UID" => "mezcla",
         "PWD" => "Zeus33$",
         "CharacterSet" => "UTF-8",
-        "LoginTimeout" => 8 // 4 segundos maximo de espera por tienda
+        "LoginTimeout" => $timeout 
     );
 
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    // Usamos @ para suprimir errores visuales si la VPN falla
+    $conn = @sqlsrv_connect($ip, $connectionInfo);
     
     if ($conn) {
-        $db_connections[$dbName] = $conn;
+        $db_connections[$cacheKey] = $conn;
         return $conn;
     } else {
         return false;
     }
 }
 
-// =============================================================================
-// CONSULTA MAESTRA (Lista de Artículos)
-// =============================================================================
-
-function getLin_art_all() {
-    $conn = getConnection("PREVIA_A");
-    if(!$conn) return [];
-
-    $sql = "SELECT lin_art.co_lin, lin_art.lin_des 
-            FROM lin_art 
-            INNER JOIN art ON lin_art.co_lin=art.co_lin
-            WHERE art.anulado = 0 
-            GROUP BY lin_art.co_lin, lin_art.lin_des";
-
-    $consulta = sqlsrv_query($conn, $sql);
-    $lin_art = [];
-
-    if($consulta){
-        while ($row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)) {
-            $lin_art[] = $row;
-        }
-    }
-    return $lin_art;
-}
-
-function getArt($sede, $linea, $co_art, $almacen) {
-    $database = Database2($sede);
-    $conn = getConnection($database);
-
-    if (!$conn) return [];
-
-    $params = array();
-
-    // Caso: Listado General (El más usado en el reporte)
-    if ($sede == 'Previa Shop' and $almacen == 0 and $co_art == 0) {
-        // USO DE LEFT JOIN: Evita que desaparezcan articulos si falta color/cat/subl
-        $sql = "SELECT 
-                    RTRIM(art.co_art) as co_art,
-                    ISNULL(RTRIM(sub_lin.subl_des), 'S/D') as co_subl, 
-                    ISNULL(RTRIM(cat_art.cat_des), 'S/D') as co_cat,
-                    art.prec_vta3, 
-                    art.prec_vta4, 
-                    art.prec_vta5, 
-                    
-                    -- CAMBIO CLAVE: Traemos el stock de BOLE, pero lo llamamos 'stock_act'
-                    -- para que tu reporte PHP lo entienda sin cambios.
-                    ISNULL(st_almac.stock_act, 0) as stock_act, 
-                    
-                    ISNULL(RTRIM(colores.des_col), 'S/D') as co_color, 
-                    ISNULL(RTRIM(lin_art.lin_des), 'S/D') as co_lin, 
-                    art.ubicacion
-
-                FROM art 
-                LEFT JOIN lin_art ON art.co_lin = lin_art.co_lin
-                -- Join compuesto para evitar errores en Sublíneas
-                LEFT JOIN sub_lin ON art.co_lin = sub_lin.co_lin AND art.co_subl = sub_lin.co_subl
-                LEFT JOIN cat_art ON art.co_cat = cat_art.co_cat
-                LEFT JOIN colores ON art.co_color = colores.co_col
-                
-                -- JOIN ESPECÍFICO A LA TABLA DE ALMACENES 'BOLE'
-                LEFT JOIN st_almac ON art.co_art = st_almac.co_art AND st_almac.co_alma = 'BOLE'
-                
-                WHERE art.co_lin = ? AND art.anulado = 0 
-                ORDER BY art.co_subl DESC";
-        
-        $params[] = $linea;
-
-    } elseif ($almacen == 'BOLE' and $sede == 'Previa Shop' and $co_art != 0) {
-        $sql = "SELECT stock_act FROM st_almac WHERE co_art = ? AND co_alma='BOLE'";
-        $params[] = $co_art;
-    } else {
-        $sql = "SELECT RTRIM(art.co_art) as co_art, art.stock_act, art.prec_vta5, art.ubicacion
-                FROM art 
-                WHERE art.co_lin = ? AND art.co_art = ?";
-        $params[] = $linea;
-        $params[] = $co_art;
-    }
-
-    $consulta = sqlsrv_query($conn, $sql, $params);
-    $art = [];
-
-    if ($consulta) {
-        while ($row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)) {
-            $art[] = $row;
-        }
-    }
-    return $art;
+// Wrapper legacy (Compatible con reportes viejos)
+function getConnection($dbName) {
+    return getConnectionDinamica("172.16.1.19", $dbName, 10);
 }
 
 // =============================================================================
-// FUNCIONES BATCH (CARGA MASIVA OPTIMIZADA)
-// Estas son las funciones que hacen que el reporte vuele
+// CONSULTA MASIVA DE STOCK (DOBLE VERIFICACIÓN: VPN vs LOCAL)
 // =============================================================================
-
-/* 1. CONSULTA MASIVA DE STOCK EN TIENDAS */
 function getBatchStock($sede, $listaArticulos) {
+    global $lista_replicas; // Usamos el array que viene de empresas.php
+    
     if (empty($listaArticulos)) return [];
-    
-    $database = Database2($sede);
-    if (!$database) return [];
-    
-    $conn = getConnection($database);
-    if (!$conn) return [];
 
-    // Limpieza de comillas simples para seguridad
-    $cleanList = array_map(function($code) {
-        return str_replace("'", "''", $code); 
-    }, $listaArticulos);
-    
-    // Creamos una lista separada por comas: 'COD1','COD2','COD3'
+    $cleanList = array_map(function($code) { return str_replace("'", "''", $code); }, $listaArticulos);
     $inList = "'" . implode("','", $cleanList) . "'";
-    
     $sql = "SELECT RTRIM(co_art) as co_art, stock_act, prec_vta5 FROM art WHERE co_art IN ($inList)";
+
+    $dataRemota = [];
+    $dataLocal = [];
+    $dataFinal = [];
+
+    // --- A) INTENTO REMOTO (VPN) ---
+    if (isset($lista_replicas[$sede])) {
+        $conf = $lista_replicas[$sede];
+        // Timeout corto (4s) para no congelar el reporte si no hay internet
+        $connRemota = getConnectionDinamica($conf['ip'], $conf['db'], 4); 
+        
+        if ($connRemota) {
+            $stmt = sqlsrv_query($connRemota, $sql);
+            if ($stmt) {
+                while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+                    $dataRemota[trim($row['co_art'])] = [
+                        'stock'  => (float)$row['stock_act'],
+                        'precio' => (float)$row['prec_vta5']
+                    ];
+                }
+            }
+        }
+    }
+
+    // --- B) INTENTO LOCAL (SQL2K8 - REPLICA) ---
+    // Si existe en el array usamos 'db_local', sino usamos Database2() legacy
+    $dbNameLocal = isset($lista_replicas[$sede]) ? $lista_replicas[$sede]['db_local'] : Database2($sede);
     
-    $consulta = sqlsrv_query($conn, $sql);
-    $data = [];
-    
-    if ($consulta) {
-        while ($row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)) {
-            // Guardamos con el codigo como CLAVE para acceso instantaneo
-            $data[trim($row['co_art'])] = [
-                'stock' => $row['stock_act'],
-                'precio' => $row['prec_vta5']
+    if ($dbNameLocal) {
+        $connLocal = getConnectionDinamica("172.16.1.19", $dbNameLocal, 10);
+        if ($connLocal) {
+            $stmt = sqlsrv_query($connLocal, $sql);
+            if ($stmt) {
+                while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+                    $dataLocal[trim($row['co_art'])] = [
+                        'stock'  => (float)$row['stock_act'],
+                        'precio' => (float)$row['prec_vta5']
+                    ];
+                }
+            }
+        }
+    }
+
+    // --- C) FUSIÓN INTELIGENTE (MAX STOCK) ---
+    foreach ($listaArticulos as $codigo) {
+        $codigo = trim($codigo);
+        
+        $stockR = isset($dataRemota[$codigo]) ? $dataRemota[$codigo]['stock'] : 0;
+        $stockL = isset($dataLocal[$codigo])  ? $dataLocal[$codigo]['stock']  : 0;
+        
+        // REGLA DE ORO: Nos quedamos con el stock mayor (Asumiendo que la réplica puede estar atrasada o la VPN caída)
+        $stockFinal = max($stockR, $stockL);
+        
+        // PRECIO: Prioridad Remoto > Local
+        $precioFinal = 0;
+        if (isset($dataRemota[$codigo])) {
+            $precioFinal = $dataRemota[$codigo]['precio'];
+        } elseif (isset($dataLocal[$codigo])) {
+            $precioFinal = $dataLocal[$codigo]['precio'];
+        }
+
+        if ($stockFinal != 0 || $precioFinal != 0) {
+            $dataFinal[$codigo] = [
+                'stock' => $stockFinal,
+                'precio' => $precioFinal
             ];
         }
     }
-    return $data;
+
+    return $dataFinal;
 }
 
-/* 2. CONSULTA MASIVA DE VENTAS */
+// =============================================================================
+// CONSULTA MASIVA DE VENTAS
+// =============================================================================
 function getBatchVentas($sede, $listaArticulos, $fecha1, $fecha2) {
+    global $lista_replicas;
     if (empty($listaArticulos)) return [];
-
-    $database = Database2($sede);
-    if (!$database) return [];
-    
-    $conn = getConnection($database);
-    if (!$conn) return [];
 
     $cleanList = array_map(function($code) { return str_replace("'", "''", $code); }, $listaArticulos);
     $inList = "'" . implode("','", $cleanList) . "'";
@@ -185,42 +141,56 @@ function getBatchVentas($sede, $listaArticulos, $fecha1, $fecha2) {
             AND reng_fac.fec_lote BETWEEN ? AND ? 
             AND factura.anulada = 0
             GROUP BY reng_fac.co_art";
-
+    
     $params = array($fecha1, $fecha2);
-    $consulta = sqlsrv_query($conn, $sql, $params);
     $data = [];
+    $conn = false;
 
-    if ($consulta) {
-        while ($row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)) {
-            $data[trim($row['co_art'])] = $row['total_art'];
+    // 1. Prioridad VPN
+    if (isset($lista_replicas[$sede])) {
+        $conf = $lista_replicas[$sede];
+        $conn = getConnectionDinamica($conf['ip'], $conf['db'], 4);
+    }
+
+    // 2. Fallback Local
+    if (!$conn) {
+        $dbNameLocal = isset($lista_replicas[$sede]) ? $lista_replicas[$sede]['db_local'] : Database2($sede);
+        if ($dbNameLocal) {
+            $conn = getConnectionDinamica("172.16.1.19", $dbNameLocal, 10);
+        }
+    }
+
+    if ($conn) {
+        $consulta = sqlsrv_query($conn, $sql, $params);
+        if ($consulta) {
+            while ($row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)) {
+                $data[trim($row['co_art'])] = $row['total_art'];
+            }
         }
     }
     return $data;
 }
 
-/* 3. CONSULTA MASIVA DE PEDIDOS (PREVIA SHOP) */
-function getBatchPedidos($listaArticulos) {
-    if (empty($listaArticulos)) return [];
+// =============================================================================
+// FUNCIONES DE APOYO (Previa Shop Local)
+// =============================================================================
 
-    $conn = getConnection("PREVIA_A");
+function getBatchPedidos($listaArticulos) {
+    $conn = getConnection("PREVIA_A"); // Siempre local
     if (!$conn) return [];
 
     $cleanList = array_map(function($code) { return str_replace("'", "''", $code); }, $listaArticulos);
     $inList = "'" . implode("','", $cleanList) . "'";
 
-    // Traer sumatoria de pedidos pendientes BOLE
     $sql = "SELECT reng_ped.co_art, SUM(reng_ped.total_art) as total_art 
             FROM reng_ped 
             INNER JOIN pedidos ON reng_ped.fact_num = pedidos.fact_num
             WHERE reng_ped.co_art IN ($inList) 
-            AND pedidos.status <= 1 
-            AND pedidos.anulada = 0 
-            AND reng_ped.co_alma = 'BOLE'
+            AND pedidos.status <= 1 AND pedidos.anulada = 0 AND reng_ped.co_alma = 'BOLE'
             GROUP BY reng_ped.co_art";
 
     $consulta = sqlsrv_query($conn, $sql);
     $data = [];
-
     if ($consulta) {
         while ($row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)) {
             $data[trim($row['co_art'])] = $row['total_art'];
@@ -229,60 +199,50 @@ function getBatchPedidos($listaArticulos) {
     return $data;
 }
 
-// =============================================================================
-// FUNCIONES LEGACY (Mantenidas por compatibilidad, pero optimizadas)
-// =============================================================================
-
-function getPedidos($sede, $co_art) {
-    $cliente = Cliente($sede);
+function getArt($sede, $linea, $co_art, $almacen) {
     $conn = getConnection("PREVIA_A");
-    if(!$conn) return ['total_art' => 0, 'status' => 3];
+    if (!$conn) return [];
+    $params = array();
 
-    $params = array($co_art);
-    if ($cliente != null) {
-        $sql = "SELECT SUM(reng_ped.total_art) as total_art FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=pedidos.fact_num WHERE reng_ped.co_art = ? AND pedidos.co_cli=? AND pedidos.anulada=0 AND pedidos.status <= 1 AND reng_ped.co_alma = 'BOLE'";
-        $params[] = $cliente;
-    } else {
-        $sql = "SELECT SUM(reng_ped.total_art) as total_art FROM reng_ped INNER JOIN pedidos ON reng_ped.fact_num=pedidos.fact_num WHERE reng_ped.co_art = ? AND pedidos.status <= 1 AND pedidos.anulada=0 AND reng_ped.co_alma = 'BOLE'";
-    }
+    if ($sede == 'Previa Shop' and $almacen == 0 and $co_art == 0) {
+        $sql = "SELECT RTRIM(art.co_art) as co_art,
+                    ISNULL(RTRIM(sub_lin.subl_des), 'S/D') as co_subl, 
+                    ISNULL(RTRIM(cat_art.cat_des), 'S/D') as co_cat,
+                    art.prec_vta3, art.prec_vta4, art.prec_vta5, 
+                    ISNULL(st_almac.stock_act, 0) as stock_act, 
+                    ISNULL(RTRIM(colores.des_col), 'S/D') as co_color, 
+                    ISNULL(RTRIM(lin_art.lin_des), 'S/D') as co_lin, 
+                    art.ubicacion
+                FROM art 
+                LEFT JOIN lin_art ON art.co_lin = lin_art.co_lin
+                LEFT JOIN sub_lin ON art.co_lin = sub_lin.co_lin AND art.co_subl = sub_lin.co_subl
+                LEFT JOIN cat_art ON art.co_cat = cat_art.co_cat
+                LEFT JOIN colores ON art.co_color = colores.co_col
+                LEFT JOIN st_almac ON art.co_art = st_almac.co_art AND st_almac.co_alma = 'BOLE'
+                WHERE art.co_lin = ? AND art.anulado = 0 
+                ORDER BY art.co_subl DESC";
+        $params[] = $linea;
+    } else { return []; }
 
     $consulta = sqlsrv_query($conn, $sql, $params);
-    $pedidos = ['total_art' => 0, 'status' => 0];
-    if ($consulta && $row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)) {
-        $pedidos['total_art'] = $row['total_art'] ? $row['total_art'] : 0;
-    }
-    return $pedidos;
-}
-
-function getReng_fac($sede, $co_art, $f1, $f2) {
-    $db = Database2($sede);
-    if(!$db) return 0;
-    $conn = getConnection($db);
-    if(!$conn) return 0;
-    
-    $sql = "SELECT SUM(reng_fac.total_art) as total_art FROM reng_fac INNER JOIN factura ON reng_fac.fact_num=factura.fact_num WHERE reng_fac.co_art=? AND reng_fac.fec_lote BETWEEN ? AND ? AND factura.anulada=0";
-    $params = array($co_art, $f1, $f2);
-    $consulta = sqlsrv_query($conn, $sql, $params);
-    if ($consulta && $row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)) {
-        return $row['total_art'] ? $row['total_art'] : 0;
-    }
-    return 0;
-}
-
-function getArt_stock_tiendas($sede, $co_art) {
-    $db = Database2($sede);
-    if(!$db) return [];
-    $conn = getConnection($db);
-    if(!$conn) return [];
-    
-    $sql = "SELECT stock_act, prec_vta5 FROM art WHERE co_art = ?";
-    $consulta = sqlsrv_query($conn, $sql, array($co_art));
     $art = [];
-    if($consulta){
-        while($row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)){ $art[]=$row; }
+    if ($consulta) {
+        while ($row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)) {
+            $art[] = $row;
+        }
     }
     return $art;
 }
+
+function getLin_art_all() {
+    $conn = getConnection("PREVIA_A");
+    if(!$conn) return [];
+    $sql = "SELECT lin_art.co_lin, lin_art.lin_des FROM lin_art INNER JOIN art ON lin_art.co_lin=art.co_lin WHERE art.anulado = 0 GROUP BY lin_art.co_lin, lin_art.lin_des";
+    $consulta = sqlsrv_query($conn, $sql);
+    $lin_art = [];
+    if($consulta){
+        while ($row = sqlsrv_fetch_array($consulta, SQLSRV_FETCH_ASSOC)) { $lin_art[] = $row; }
+    }
+    return $lin_art;
+}
 ?>
-
-
