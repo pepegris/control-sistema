@@ -44,57 +44,57 @@ if (isset($_GET['q'])) {
         .radio-group { display: flex; gap: 15px; align-items: center; }
         .radio-group label { cursor: pointer; display: flex; align-items: center; gap: 5px; color: #fff; }
 
-        /* --- ESTILOS DE IMPRESIÓN TÉRMICA (CRÍTICOS) --- */
+        /* --- ESTILOS DE IMPRESIÓN (SOLIDEZ) --- */
         #areaImpresion { display: none; }
 
         @media print {
             .container, h1, h2, form, input, button, .panel, .size-selector { display: none !important; }
-            
             body { margin: 0; padding: 0; background: white; }
-            #areaImpresion { display: block !important; position: absolute; top: 0; left: 0; width: 100%; }
+            
+            #areaImpresion { 
+                display: block !important; 
+                position: absolute; 
+                top: 0; 
+                left: 0; 
+                width: 100%; 
+            }
 
             .etiqueta {
-                /* Ancho Fijo del Papel */
                 width: 2.25in; 
                 page-break-after: always;
-                
-                /* Flexbox para centrado perfecto */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                
-                /* Sin márgenes externos, el padding lo controla el contenedor interno */
                 margin: 0;
-                padding: 0;
+                padding: 0 4px; /* Pequeño padding lateral físico */
+                box-sizing: border-box;
                 overflow: hidden;
             }
 
             .eti-desc {
                 font-family: Arial, sans-serif;
-                font-weight: 900; /* Negrita máxima */
+                font-weight: 900;
                 color: black;
                 text-align: center;
                 line-height: 1;
                 white-space: nowrap;
                 overflow: hidden;
                 width: 100%;
-                /* Padding lateral para el texto también */
-                padding: 0 2mm; 
-                box-sizing: border-box;
+                margin-bottom: 2px;
             }
 
-            /* TRUCO PARA LOS HUEQUITOS BLANCOS: 
-               Forzar renderizado pixelado para evitar antialiasing */
+            /* TRUCO DE ESCALADO: 
+               La imagen generada es GRANDE (barras anchas), 
+               aquí la forzamos a caber en la etiqueta sin perder calidad */
             .barcode-img {
-                image-rendering: pixelated;
-                image-rendering: -moz-crisp-edges;
-                image-rendering: crisp-edges;
-                
-                /* Aseguramos que nunca toque los bordes */
-                max-width: 90%; 
-                height: auto;
+                width: 95%;       /* Ocupa casi todo el ancho disponible */
+                height: auto;     /* Altura proporcional */
+                max-height: 75%;  /* Que no se salga por abajo */
                 display: block;
+                
+                /* Algoritmo de renderizado para evitar bordes borrosos */
+                image-rendering: pixelated; 
             }
         }
     </style>
@@ -191,11 +191,11 @@ if (isset($_GET['q'])) {
         const medida = document.querySelector('input[name="medida"]:checked').value;
         let config = {};
         
-        // --- AJUSTES FINALES PARA TÉRMICA ---
+        // --- ESTRATEGIA: GENERAR GRANDE, ENCOGER CON CSS ---
         if (medida === 'grande') {
             config = {
                 heightCss: '1.25in',
-                barcodeHeight: 60, 
+                barcodeHeight: 80, // Generamos alto en memoria
                 descSize: '11px',
                 charLimit: 30
             };
@@ -204,9 +204,9 @@ if (isset($_GET['q'])) {
             // PEQUEÑA (2.25 x 0.75)
             config = {
                 heightCss: '0.75in',
-                barcodeHeight: 40,  // Altura en píxeles del canvas
-                descSize: '9px',    // Letra descripción
-                charLimit: 38       // Caracteres descripción
+                barcodeHeight: 60, // Generamos alto en memoria
+                descSize: '9px',   
+                charLimit: 40      
             };
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 0.75in; margin: 0; } }';
         }
@@ -214,45 +214,57 @@ if (isset($_GET['q'])) {
         colaImpresion.forEach(item => {
             for (let i = 0; i < item.cantidad; i++) {
                 
-                // 1. Crear el contenedor de la etiqueta
                 let div = document.createElement('div');
                 div.className = 'etiqueta';
                 div.style.height = config.heightCss;
 
-                // 2. Descripción
+                // Descripción
                 let desc = document.createElement('div');
                 desc.className = 'eti-desc';
                 desc.style.fontSize = config.descSize;
-                desc.style.marginBottom = '3px';
                 desc.innerText = item.art_des.substring(0, config.charLimit);
                 div.appendChild(desc);
 
-                // 3. GENERAR BARCODE EN CANVAS (MEMORIA)
+                // --- GENERACIÓN DEL CÓDIGO (SOLIDEZ) ---
                 let canvas = document.createElement('canvas');
                 try {
                     JsBarcode(canvas, item.co_art, {
                         format: "CODE128",
-                        width: 1,           // ANCHO 1: Hace que las barras sean finas y quepan
+                        
+                        // CLAVE: Ancho 2.0 (Barras muy gruesas y sólidas)
+                        // Luego el CSS (.barcode-img) se encarga de que quepa en el papel
+                        width: 2, 
+                        
                         height: config.barcodeHeight,
-                        displayValue: false, // Sin números abajo
-                        margin: 0,          // Sin margen en el canvas (lo controlamos con CSS)
+                        displayValue: false, // Sin números (estorban)
+                        margin: 20,          // Margen INTERNO blanco obligatorio
                         background: "#ffffff",
                         lineColor: "#000000"
                     });
                 } catch (e) { console.error(e); }
 
-                // 4. CONVERTIR CANVAS A IMAGEN PNG (Truco para negros sólidos)
+                // Convertir a Imagen PNG
                 let img = document.createElement('img');
                 img.src = canvas.toDataURL("image/png");
-                img.className = 'barcode-img'; // Clase CSS con image-rendering: pixelated
+                img.className = 'barcode-img'; 
                 
                 div.appendChild(img);
+                
+                // Código Texto (Opcional, para que el humano lea)
+                /*
+                let codeTxt = document.createElement('div');
+                codeTxt.style.fontSize = "9px";
+                codeTxt.style.fontFamily = "Arial";
+                codeTxt.style.fontWeight = "bold";
+                codeTxt.innerText = item.co_art;
+                div.appendChild(codeTxt);
+                */
+
                 contenedor.appendChild(div);
             }
         });
 
-        // Dar tiempo al navegador para procesar las imágenes base64
-        setTimeout(() => { window.print(); }, 500);
+        setTimeout(() => { window.print(); }, 800); // Un poco más de tiempo para procesar imágenes
     }
 </script>
 
