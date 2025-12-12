@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escaner Web</title>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    
+    <style>
+        body { font-family: sans-serif; padding: 20px; text-align: center; }
+        #reader { width: 100%; max-width: 500px; margin: 0 auto; }
+        #resultado { 
+            margin-top: 20px; 
+            padding: 10px; 
+            font-size: 1.2em; 
+            width: 80%; 
+            border: 2px solid #00ff99; 
+            border-radius: 5px; 
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Escaner de Barras</h1>
+    
+    <div id="reader"></div>
+
+    <h3>Código detectado:</h3>
+    <input type="text" id="resultado" placeholder="Escanea algo...">
+
+    <script>
+        // Función que se ejecuta cuando se detecta un código exitosamente
+        function onScanSuccess(decodedText, decodedResult) {
+            // Poner el valor en el input
+            document.getElementById('resultado').value = decodedText;
+            
+            // Opcional: Detener el escaneo tras leer uno (para ahorrar batería)
+            // html5QrcodeScanner.clear();
+            
+            // Opcional: Enviar automáticamente un formulario o hacer una consulta AJAX
+            // alert("Código leído: " + decodedText);
+        }
+
+        function onScanFailure(error) {
+            // Esto se ejecuta constantemente mientras busca códigos.
+            // Mejor dejarlo vacío para no saturar la consola.
+        }
+
+        // Configuración del escáner
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", 
+            { 
+                fps: 10, // Cuadros por segundo (velocidad de lectura)
+                qrbox: { width: 250, height: 250 } // Tamaño del cuadro de enfoque
+            },
+            /* verbose= */ false
+        );
+        
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    </script>
+
+</body>
+</html>
