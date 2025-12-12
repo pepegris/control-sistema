@@ -179,7 +179,6 @@ if (isset($_GET['q'])) {
     function actualizarCant(index, valor) { colaImpresion[index].cantidad = parseInt(valor); }
     function eliminar(index) { colaImpresion.splice(index, 1); renderizarCola(); }
     function limpiarCola() { colaImpresion = []; renderizarCola(); }
-
 function generarImpresion() {
         if (colaImpresion.length === 0) { alert("Agrega artículos primero"); return; }
 
@@ -189,33 +188,28 @@ function generarImpresion() {
         const medida = document.querySelector('input[name="medida"]:checked').value;
         let config = {};
         
-        // --- CONFIGURACIÓN OPTIMIZADA PARA GORILLA ---
+        // --- CONFIGURACIÓN OPTIMIZADA ---
         if (medida === 'grande') {
             // 2.25 x 1.25
             config = {
                 heightCss: '1.25in',
-                barcodeHeight: 40, 
-                barWidth: 1.5,      
-                fontSize: 12,
-                descSize: '10px',
+                barcodeHeight: 50,  // Barras bien altas
+                barWidth: 1.5,
                 margin: 10,
+                descSize: '10px',
+                codeSize: '11px',   // Tamaño del texto numérico abajo
                 showPrice: true
             };
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 1.25in; margin: 0; } }';
         } else {
-            // 2.25 x 0.75 (PEQUEÑA) - AJUSTE DE PRECISIÓN
+            // 2.25 x 0.75 (PEQUEÑA)
             config = {
                 heightCss: '0.75in',
-                barcodeHeight: 25,  
-                
-                // CLAVE PARA ESCANEO: Ancho 1.0 (el mínimo posible)
-                barWidth: 1.0,      
-                
-                fontSize: 9,        
-                descSize: '9px',    
-                
-                // MÁRGENES: Más espacio blanco a los lados = mejor lectura
-                margin: 15,         
+                barcodeHeight: 35,  // AUMENTADO: Barras más altas facilitan el escaneo
+                barWidth: 1.0,      // Fino para evitar manchas
+                margin: 15,         // Mucho espacio blanco a los lados
+                descSize: '8px',
+                codeSize: '9px',
                 showPrice: false 
             };
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 0.75in; margin: 0; } }';
@@ -227,28 +221,36 @@ function generarImpresion() {
                 div.className = 'etiqueta';
                 div.style.height = config.heightCss;
 
-                // Cortamos descripción un poco más si es la etiqueta pequeña
-                let maxChars = (medida === 'peque') ? 22 : 25;
-                let desc = item.art_des.substring(0, maxChars);
+                let desc = item.art_des.substring(0, 22); // Cortamos descripción
                 
-                let htmlContent = `<div class="eti-desc" style="font-size:${config.descSize}">${desc}</div>
+                // ESTRUCTURA NUEVA:
+                // 1. Descripción
+                // 2. SVG (Solo barras, sin números) -> Barras más altas
+                // 3. Código (Texto HTML) -> Más nítido
+                
+                let htmlContent = `
+                    <div class="eti-desc" style="font-size:${config.descSize}; margin-bottom:2px;">${desc}</div>
+                    
                     <svg class="barcode"
                         jsbarcode-format="CODE128"
                         jsbarcode-value="${item.co_art}"
                         jsbarcode-textmargin="0"
                         jsbarcode-fontoptions="bold"
+                        
                         jsbarcode-height="${config.barcodeHeight}" 
-                        
                         jsbarcode-width="${config.barWidth}"
-                        
-                        jsbarcode-displayValue="true"
-                        jsbarcode-fontSize="${config.fontSize}"
                         jsbarcode-margin="${config.margin}"
-                        jsbarcode-background="#ffffff"
-                        jsbarcode-lineColor="#000000"
-                        jsbarcode-flat="true"> 
-                    </svg>`;
-                    // jsbarcode-flat="true" ayuda a evitar antialiasing borroso
+                        
+                        jsbarcode-displayValue="false" 
+                        jsbarcode-flat="true">
+                    </svg>
+
+                    <div style="font-family:Arial; font-weight:bold; font-size:${config.codeSize}; line-height:1; letter-spacing:1px;">
+                        ${item.co_art}
+                    </div>
+                `;
+                // Nota: jsbarcode-displayValue="false" oculta los números generados por la librería
+                // y nosotros los ponemos manualmente en el div de abajo.
                 
                 if (config.showPrice) {
                     let precio = parseFloat(item.prec_vta5).toFixed(2);
