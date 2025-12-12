@@ -31,56 +31,60 @@ if (isset($_GET['q'])) {
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     
     <style>
-        /* ESTILOS DE PANTALLA */
+        <style>
+        /* ESTILOS DE PANTALLA (UI) */
         body { font-family: 'Segoe UI', sans-serif; background-color: #222; color: #eee; padding: 20px; }
         .container { max-width: 950px; margin: 0 auto; display: flex; gap: 20px; }
         .panel { background: #333; padding: 20px; border-radius: 8px; flex: 1; border: 1px solid #444; }
         h2 { color: #00ff99; margin-top: 0; font-size: 1.2rem;}
         
-        input[type="text"], input[type="number"] { padding: 10px; border-radius: 4px; border: 1px solid #555; background: #444; color: white; width: 100%; box-sizing: border-box; }
-        button { cursor: pointer; padding: 10px; border: none; border-radius: 4px; font-weight: bold; }
-        .btn-search { background: #00ff99; color: #000; width: 100%; margin-top: 10px; }
-        .btn-add { background: #0d6efd; color: white; margin-top: 5px; width: 100%; }
-        .btn-print { background: #ffd700; color: #000; width: 100%; font-size: 1.2em; margin-top: 20px; }
-        .btn-delete { background: #ff4444; color: white; padding: 5px 10px; }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { border-bottom: 1px solid #555; padding: 8px; text-align: left; font-size: 0.9em; }
-        tr:hover { background: #444; }
-
+        input, button { padding: 10px; margin-top: 5px; width: 100%; box-sizing: border-box; }
+        .btn-print { background: #ffd700; color: #000; font-size: 1.2em; font-weight: bold; cursor: pointer; }
+        
         /* SELECTOR DE MEDIDA */
         .size-selector { background: #222; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #555; }
-        .radio-group { display: flex; gap: 15px; align-items: center; }
-        .radio-group label { cursor: pointer; display: flex; align-items: center; gap: 5px; color: #fff; }
-        input[type="radio"] { accent-color: #ffd700; width: 18px; height: 18px; }
-
-        /* --- ESTILOS DE IMPRESIÓN BASE --- */
-        #areaImpresion { display: none; }
+        
+        /* --- ESTILOS DE IMPRESIÓN (MODIFICADO) --- */
+        #areaImpresion { display: none; } /* Oculto en pantalla */
 
         @media print {
-            body * { visibility: hidden; height: 0; overflow: hidden; }
-            #areaImpresion, #areaImpresion * { visibility: visible; height: auto; }
-            #areaImpresion { position: absolute; left: 0; top: 0; width: 100%; }
+            /* 1. OCULTAR TODO LO QUE NO SEA ETIQUETA */
+            .container, h1, h2, form, input, button, .panel { 
+                display: none !important; 
+            }
+            
+            body { 
+                margin: 0; 
+                padding: 0; 
+                background: white; 
+            }
+
+            /* 2. MOSTRAR ÁREA DE IMPRESIÓN */
+            #areaImpresion { 
+                display: block !important; 
+                position: absolute; 
+                top: 0; 
+                left: 0; 
+                width: 100%;
+                margin: 0;
+            }
 
             .etiqueta {
                 width: 2.25in;
-                /* La altura se define dinámicamente en el estilo inyectado */
-                page-break-after: always;
-                overflow: hidden;
+                /* height se define en el JS */
+                page-break-after: always; /* Importante para que no salgan pegadas */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 text-align: center;
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
+                overflow: hidden;
             }
 
-            .eti-desc { font-weight: bold; text-transform: uppercase; font-family: Arial, sans-serif; color: black; line-height: 1; text-align: center; white-space: nowrap; overflow: hidden; width: 95%; }
-            .eti-code { width: 95% !important; }
-            .eti-precio { font-weight: bold; font-family: Arial, sans-serif; color: black; margin-top: -2px; }
+            .eti-desc { font-weight: bold; font-family: Arial, sans-serif; color: black; line-height: 1; text-align: center; font-size: 10px; }
+            svg { max-width: 100%; }
         }
+    </style>
     </style>
     
     <style id="dynamicPageSize"></style>
