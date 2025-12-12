@@ -6,9 +6,11 @@ $busqueda = "";
 
 if (isset($_GET['q'])) {
     $busqueda = $_GET['q'];
+    // Conexión a la BD
     $conn = ConectarSQLServer('PREVIA_A'); 
     
     if ($conn) {
+        // Buscamos coincidencia en Código O Descripción
         $sql = "SELECT TOP 20 co_art, art_des, prec_vta5 
                 FROM art 
                 WHERE (co_art LIKE ? OR art_des LIKE ?) AND anulado = 0";
@@ -31,25 +33,35 @@ if (isset($_GET['q'])) {
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     
     <style>
-        <style>
-        /* ESTILOS DE PANTALLA (UI) */
+        /* --- ESTILOS DE PANTALLA (UI) --- */
         body { font-family: 'Segoe UI', sans-serif; background-color: #222; color: #eee; padding: 20px; }
         .container { max-width: 950px; margin: 0 auto; display: flex; gap: 20px; }
         .panel { background: #333; padding: 20px; border-radius: 8px; flex: 1; border: 1px solid #444; }
         h2 { color: #00ff99; margin-top: 0; font-size: 1.2rem;}
         
-        input, button { padding: 10px; margin-top: 5px; width: 100%; box-sizing: border-box; }
-        .btn-print { background: #ffd700; color: #000; font-size: 1.2em; font-weight: bold; cursor: pointer; }
-        
+        input[type="text"], input[type="number"] { padding: 10px; border-radius: 4px; border: 1px solid #555; background: #444; color: white; width: 100%; box-sizing: border-box; }
+        button { cursor: pointer; padding: 10px; border: none; border-radius: 4px; font-weight: bold; }
+        .btn-search { background: #00ff99; color: #000; width: 100%; margin-top: 10px; }
+        .btn-add { background: #0d6efd; color: white; margin-top: 5px; width: 100%; }
+        .btn-print { background: #ffd700; color: #000; width: 100%; font-size: 1.2em; margin-top: 20px; }
+        .btn-delete { background: #ff4444; color: white; padding: 5px 10px; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border-bottom: 1px solid #555; padding: 8px; text-align: left; font-size: 0.9em; }
+        tr:hover { background: #444; }
+
         /* SELECTOR DE MEDIDA */
         .size-selector { background: #222; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #555; }
-        
-        /* --- ESTILOS DE IMPRESIÓN (MODIFICADO) --- */
-        #areaImpresion { display: none; } /* Oculto en pantalla */
+        .radio-group { display: flex; gap: 15px; align-items: center; }
+        .radio-group label { cursor: pointer; display: flex; align-items: center; gap: 5px; color: #fff; }
+        input[type="radio"] { accent-color: #ffd700; width: 18px; height: 18px; }
+
+        /* --- ESTILOS DE IMPRESIÓN --- */
+        #areaImpresion { display: none; } /* Oculto en pantalla normal */
 
         @media print {
-            /* 1. OCULTAR TODO LO QUE NO SEA ETIQUETA */
-            .container, h1, h2, form, input, button, .panel { 
+            /* Ocultamos TODO lo que no sea la etiqueta de forma agresiva */
+            .container, h1, h2, form, input, button, .panel, .size-selector { 
                 display: none !important; 
             }
             
@@ -59,7 +71,7 @@ if (isset($_GET['q'])) {
                 background: white; 
             }
 
-            /* 2. MOSTRAR ÁREA DE IMPRESIÓN */
+            /* Mostramos el área de impresión */
             #areaImpresion { 
                 display: block !important; 
                 position: absolute; 
@@ -71,20 +83,22 @@ if (isset($_GET['q'])) {
 
             .etiqueta {
                 width: 2.25in;
-                /* height se define en el JS */
-                page-break-after: always; /* Importante para que no salgan pegadas */
+                /* La altura (height) se inyecta por JS */
+                page-break-after: always; /* Corte de página */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 text-align: center;
                 overflow: hidden;
+                margin: 0;
+                padding: 0;
             }
 
-            .eti-desc { font-weight: bold; font-family: Arial, sans-serif; color: black; line-height: 1; text-align: center; font-size: 10px; }
-            svg { max-width: 100%; }
+            .eti-desc { font-weight: bold; text-transform: uppercase; font-family: Arial, sans-serif; color: black; line-height: 1; text-align: center; white-space: nowrap; overflow: hidden; width: 95%; }
+            .eti-code { width: 95% !important; }
+            .eti-precio { font-weight: bold; font-family: Arial, sans-serif; color: black; margin-top: -2px; }
         }
-    </style>
     </style>
     
     <style id="dynamicPageSize"></style>
@@ -158,6 +172,7 @@ if (isset($_GET['q'])) {
     let colaImpresion = [];
 
     function agregarCola(articulo) {
+        // Evitar duplicados visuales, solo sumar cantidad
         let existe = colaImpresion.find(i => i.co_art === articulo.co_art);
         if (existe) {
             existe.cantidad++;
@@ -198,35 +213,35 @@ if (isset($_GET['q'])) {
         let config = {};
         
         if (medida === 'grande') {
-            // Configuración 2.25 x 1.25
+            // Configuración 2.25 x 1.25 (Pulgadas)
             config = {
                 heightCss: '1.25in',
-                barcodeHeight: 45, // Barras altas
+                barcodeHeight: 45, // Altura barras
                 fontSize: 11,
                 descSize: '10px',
                 showPrice: true
             };
-            // Inyectar CSS de página para Grande
+            // Inyectar CSS exacto para la impresora
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 1.25in; margin: 0; } }';
         } else {
-            // Configuración 2.25 x 0.75 (Pequeña)
+            // Configuración 2.25 x 0.75 (Pulgadas)
             config = {
                 heightCss: '0.75in',
-                barcodeHeight: 25, // Barras bajitas para que quepan
+                barcodeHeight: 25, // Barras más bajitas
                 fontSize: 10,
                 descSize: '9px',
-                showPrice: false // Ocultamos precio o lo hacemos muy pequeño porque no cabe bien
+                showPrice: false // Ocultar precio por espacio
             };
-            // Inyectar CSS de página para Pequeña
+            // Inyectar CSS exacto para la impresora
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 0.75in; margin: 0; } }';
         }
 
-        // 2. GENERAR HTML
+        // 2. GENERAR HTML DE ETIQUETAS
         colaImpresion.forEach(item => {
             for (let i = 0; i < item.cantidad; i++) {
                 let div = document.createElement('div');
                 div.className = 'etiqueta';
-                div.style.height = config.heightCss; // Altura dinámica
+                div.style.height = config.heightCss; // Altura dinámica aplicada al DIV
 
                 // Descripción recortada
                 let desc = item.art_des.substring(0, 25);
@@ -244,9 +259,10 @@ if (isset($_GET['q'])) {
                         jsbarcode-fontSize="${config.fontSize}">
                     </svg>`;
                 
-                // Precio solo si es la etiqueta grande (opcional)
+                // Precio (solo para la etiqueta grande)
                 if (config.showPrice) {
                     let precio = parseFloat(item.prec_vta5).toFixed(2);
+                    // Descomentar si quieres mostrar precio:
                     // htmlContent += `<div class="eti-precio" style="font-size:12px">Ref: $${precio}</div>`;
                 }
 
@@ -255,10 +271,15 @@ if (isset($_GET['q'])) {
             }
         });
 
-        // 3. RENDERIZAR CÓDIGOS
-        JsBarcode(".barcode").init();
+        // 3. RENDERIZAR CÓDIGOS DE BARRA (Librería)
+        try {
+            JsBarcode(".barcode").init();
+        } catch (e) {
+            console.error("Error generando código de barras:", e);
+        }
 
-        // 4. IMPRIMIR
+        // 4. LANZAR IMPRESIÓN
+        // setTimeout da tiempo al navegador para renderizar los SVG antes de abrir el diálogo
         setTimeout(() => { window.print(); }, 500);
     }
 </script>
