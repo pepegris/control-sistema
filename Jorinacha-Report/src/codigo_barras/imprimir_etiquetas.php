@@ -180,7 +180,7 @@ if (isset($_GET['q'])) {
     function eliminar(index) { colaImpresion.splice(index, 1); renderizarCola(); }
     function limpiarCola() { colaImpresion = []; renderizarCola(); }
 
-    function generarImpresion() {
+function generarImpresion() {
         if (colaImpresion.length === 0) { alert("Agrega artículos primero"); return; }
 
         const contenedor = document.getElementById('areaImpresion');
@@ -189,28 +189,33 @@ if (isset($_GET['q'])) {
         const medida = document.querySelector('input[name="medida"]:checked').value;
         let config = {};
         
-        // --- CONFIGURACIÓN TÉRMICA OPTIMIZADA ---
+        // --- CONFIGURACIÓN OPTIMIZADA PARA GORILLA ---
         if (medida === 'grande') {
             // 2.25 x 1.25
             config = {
                 heightCss: '1.25in',
                 barcodeHeight: 40, 
-                barWidth: 1.4,      // Un poco menos grueso para evitar sangrado térmico
+                barWidth: 1.5,      
                 fontSize: 12,
                 descSize: '10px',
-                margin: 10,         // Buen margen blanco
+                margin: 10,
                 showPrice: true
             };
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 1.25in; margin: 0; } }';
         } else {
-            // 2.25 x 0.75 (PEQUEÑA - AJUSTE CRÍTICO)
+            // 2.25 x 0.75 (PEQUEÑA) - AJUSTE DE PRECISIÓN
             config = {
                 heightCss: '0.75in',
-                barcodeHeight: 22,  // Altura suficiente para que el láser apunte
-                barWidth: 1.0,      // <--- ESTO ES LA CLAVE. Barras finas para que quepan y no se peguen
-                fontSize: 9,        // Números pequeños
-                descSize: '8px',    // Descripción pequeña
-                margin: 15,         // <--- MARGEN AMPLIADO. Obliga a tener blanco a los lados
+                barcodeHeight: 25,  
+                
+                // CLAVE PARA ESCANEO: Ancho 1.0 (el mínimo posible)
+                barWidth: 1.0,      
+                
+                fontSize: 9,        
+                descSize: '9px',    
+                
+                // MÁRGENES: Más espacio blanco a los lados = mejor lectura
+                margin: 15,         
                 showPrice: false 
             };
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 0.75in; margin: 0; } }';
@@ -233,13 +238,17 @@ if (isset($_GET['q'])) {
                         jsbarcode-textmargin="0"
                         jsbarcode-fontoptions="bold"
                         jsbarcode-height="${config.barcodeHeight}" 
+                        
                         jsbarcode-width="${config.barWidth}"
+                        
                         jsbarcode-displayValue="true"
                         jsbarcode-fontSize="${config.fontSize}"
                         jsbarcode-margin="${config.margin}"
                         jsbarcode-background="#ffffff"
-                        jsbarcode-lineColor="#000000">
+                        jsbarcode-lineColor="#000000"
+                        jsbarcode-flat="true"> 
                     </svg>`;
+                    // jsbarcode-flat="true" ayuda a evitar antialiasing borroso
                 
                 if (config.showPrice) {
                     let precio = parseFloat(item.prec_vta5).toFixed(2);
