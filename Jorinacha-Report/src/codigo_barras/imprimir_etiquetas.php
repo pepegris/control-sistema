@@ -6,11 +6,9 @@ $busqueda = "";
 
 if (isset($_GET['q'])) {
     $busqueda = $_GET['q'];
-    // Conexión a la BD
     $conn = ConectarSQLServer('PREVIA_A'); 
     
     if ($conn) {
-        // Buscamos coincidencia en Código O Descripción
         $sql = "SELECT TOP 20 co_art, art_des, prec_vta5 
                 FROM art 
                 WHERE (co_art LIKE ? OR art_des LIKE ?) AND anulado = 0";
@@ -33,7 +31,7 @@ if (isset($_GET['q'])) {
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     
     <style>
-        /* --- ESTILOS DE PANTALLA (UI) --- */
+        /* ESTILOS DE PANTALLA */
         body { font-family: 'Segoe UI', sans-serif; background-color: #222; color: #eee; padding: 20px; }
         .container { max-width: 950px; margin: 0 auto; display: flex; gap: 20px; }
         .panel { background: #333; padding: 20px; border-radius: 8px; flex: 1; border: 1px solid #444; }
@@ -50,53 +48,51 @@ if (isset($_GET['q'])) {
         th, td { border-bottom: 1px solid #555; padding: 8px; text-align: left; font-size: 0.9em; }
         tr:hover { background: #444; }
 
-        /* SELECTOR DE MEDIDA */
         .size-selector { background: #222; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #555; }
         .radio-group { display: flex; gap: 15px; align-items: center; }
         .radio-group label { cursor: pointer; display: flex; align-items: center; gap: 5px; color: #fff; }
         input[type="radio"] { accent-color: #ffd700; width: 18px; height: 18px; }
 
         /* --- ESTILOS DE IMPRESIÓN --- */
-        #areaImpresion { display: none; } /* Oculto en pantalla normal */
+        #areaImpresion { display: none; }
 
         @media print {
-            /* Ocultamos TODO lo que no sea la etiqueta de forma agresiva */
-            .container, h1, h2, form, input, button, .panel, .size-selector { 
-                display: none !important; 
-            }
-            
-            body { 
-                margin: 0; 
-                padding: 0; 
-                background: white; 
-            }
-
-            /* Mostramos el área de impresión */
-            #areaImpresion { 
-                display: block !important; 
-                position: absolute; 
-                top: 0; 
-                left: 0; 
-                width: 100%;
-                margin: 0;
-            }
+            .container, h1, h2, form, input, button, .panel, .size-selector { display: none !important; }
+            body { margin: 0; padding: 0; background: white; }
+            #areaImpresion { display: block !important; position: absolute; top: 0; left: 0; width: 100%; margin: 0; }
 
             .etiqueta {
                 width: 2.25in;
-                /* La altura (height) se inyecta por JS */
-                page-break-after: always; /* Corte de página */
+                /* Altura inyectada por JS */
+                page-break-after: always;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 text-align: center;
                 overflow: hidden;
-                margin: 0;
-                padding: 0;
+                
+                /* AJUSTE CRÍTICO: Márgenes internos para que nada toque los bordes */
+                padding: 0 4px; 
+                box-sizing: border-box;
             }
 
-            .eti-desc { font-weight: bold; text-transform: uppercase; font-family: Arial, sans-serif; color: black; line-height: 1; text-align: center; white-space: nowrap; overflow: hidden; width: 95%; }
-            .eti-code { width: 95% !important; }
+            .eti-desc { 
+                font-weight: bold; 
+                text-transform: uppercase; 
+                font-family: Arial, sans-serif; 
+                color: black; 
+                line-height: 1; 
+                text-align: center; 
+                white-space: nowrap; 
+                overflow: hidden; 
+                width: 100%; 
+                margin-bottom: 2px;
+            }
+            
+            /* El SVG se ajusta, pero JSBarcode controla el margen interno real */
+            .eti-code { max-width: 100%; }
+            
             .eti-precio { font-weight: bold; font-family: Arial, sans-serif; color: black; margin-top: -2px; }
         }
     </style>
@@ -107,7 +103,6 @@ if (isset($_GET['q'])) {
 <body>
 
 <div class="container">
-    
     <div class="panel">
         <h2>1. Buscar Artículo</h2>
         <form method="GET">
@@ -137,18 +132,11 @@ if (isset($_GET['q'])) {
 
     <div class="panel">
         <h2>2. Configuración</h2>
-        
         <div class="size-selector">
             <div style="margin-bottom:5px; font-weight:bold; color:#aaa; font-size:0.9em;">SELECCIONA TAMAÑO:</div>
             <div class="radio-group">
-                <label>
-                    <input type="radio" name="medida" value="grande" checked> 
-                    2.25" x 1.25" <br><small style="color:#888">(Grande)</small>
-                </label>
-                <label>
-                    <input type="radio" name="medida" value="peque"> 
-                    2.25" x 0.75" <br><small style="color:#888">(Pequeña)</small>
-                </label>
+                <label><input type="radio" name="medida" value="grande" checked> 2.25" x 1.25"</label>
+                <label><input type="radio" name="medida" value="peque"> 2.25" x 0.75"</label>
             </div>
         </div>
 
@@ -163,7 +151,6 @@ if (isset($_GET['q'])) {
         <button onclick="generarImpresion()" class="btn-print">🖨️ IMPRIMIR</button>
         <button onclick="limpiarCola()" style="width:100%; margin-top:10px; background:#555; color:#fff; padding:8px;">Limpiar Todo</button>
     </div>
-
 </div>
 
 <div id="areaImpresion"></div>
@@ -172,27 +159,19 @@ if (isset($_GET['q'])) {
     let colaImpresion = [];
 
     function agregarCola(articulo) {
-        // Evitar duplicados visuales, solo sumar cantidad
         let existe = colaImpresion.find(i => i.co_art === articulo.co_art);
-        if (existe) {
-            existe.cantidad++;
-        } else {
-            articulo.cantidad = 1;
-            colaImpresion.push(articulo);
-        }
+        if (existe) { existe.cantidad++; } else { articulo.cantidad = 1; colaImpresion.push(articulo); }
         renderizarCola();
     }
 
     function renderizarCola() {
         let html = '';
         colaImpresion.forEach((item, index) => {
-            html += `
-                <tr>
-                    <td><small style="color:#ffd700">${item.co_art}</small><br>${item.art_des.substring(0,12)}...</td>
-                    <td><input type="number" value="${item.cantidad}" min="1" onchange="actualizarCant(${index}, this.value)" style="width:50px; text-align:center;"></td>
-                    <td><button class="btn-delete" onclick="eliminar(${index})">X</button></td>
-                </tr>
-            `;
+            html += `<tr>
+                <td><small style="color:#ffd700">${item.co_art}</small><br>${item.art_des.substring(0,12)}...</td>
+                <td><input type="number" value="${item.cantidad}" min="1" onchange="actualizarCant(${index}, this.value)" style="width:50px; text-align:center;"></td>
+                <td><button class="btn-delete" onclick="eliminar(${index})">X</button></td>
+            </tr>`;
         });
         document.getElementById('listaCola').innerHTML = html;
     }
@@ -207,62 +186,58 @@ if (isset($_GET['q'])) {
         const contenedor = document.getElementById('areaImpresion');
         contenedor.innerHTML = ''; 
 
-        // 1. OBTENER CONFIGURACIÓN SEGÚN MEDIDA SELECCIONADA
         const medida = document.querySelector('input[name="medida"]:checked').value;
-        
         let config = {};
         
+        // --- AJUSTES DE PRECISIÓN PARA ESCÁNER ---
         if (medida === 'grande') {
-            // Configuración 2.25 x 1.25 (Pulgadas)
             config = {
                 heightCss: '1.25in',
-                barcodeHeight: 45, // Altura barras
-                fontSize: 11,
+                barcodeHeight: 35, // Bajamos altura (era 45)
+                barWidth: 1.5,     // Ancho de barra equilibrado
+                fontSize: 12,
                 descSize: '10px',
+                margin: 10,        // Margen BLANCO alrededor del código (Vital para escáner)
                 showPrice: true
             };
-            // Inyectar CSS exacto para la impresora
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 1.25in; margin: 0; } }';
         } else {
-            // Configuración 2.25 x 0.75 (Pulgadas)
             config = {
                 heightCss: '0.75in',
-                barcodeHeight: 25, // Barras más bajitas
+                barcodeHeight: 20, // Más bajita para que quepa (era 25)
+                barWidth: 1.3,     // Un poco más finas para que quepan completas
                 fontSize: 10,
                 descSize: '9px',
-                showPrice: false // Ocultar precio por espacio
+                margin: 5,         // Margen mínimo necesario
+                showPrice: false 
             };
-            // Inyectar CSS exacto para la impresora
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 0.75in; margin: 0; } }';
         }
 
-        // 2. GENERAR HTML DE ETIQUETAS
         colaImpresion.forEach(item => {
             for (let i = 0; i < item.cantidad; i++) {
                 let div = document.createElement('div');
                 div.className = 'etiqueta';
-                div.style.height = config.heightCss; // Altura dinámica aplicada al DIV
+                div.style.height = config.heightCss;
 
-                // Descripción recortada
                 let desc = item.art_des.substring(0, 25);
                 
-                // HTML interno
+                // NOTA: jsbarcode-margin añade espacio blanco seguro alrededor del código
                 let htmlContent = `<div class="eti-desc" style="font-size:${config.descSize}">${desc}</div>
                     <svg class="barcode"
                         jsbarcode-format="CODE128"
                         jsbarcode-value="${item.co_art}"
-                        jsbarcode-textmargin="0"
                         jsbarcode-fontoptions="bold"
                         jsbarcode-height="${config.barcodeHeight}" 
-                        jsbarcode-width="1.6"
+                        jsbarcode-width="${config.barWidth}"
                         jsbarcode-displayValue="true"
-                        jsbarcode-fontSize="${config.fontSize}">
+                        jsbarcode-fontSize="${config.fontSize}"
+                        jsbarcode-margin="${config.margin}" 
+                        jsbarcode-textmargin="0">
                     </svg>`;
                 
-                // Precio (solo para la etiqueta grande)
                 if (config.showPrice) {
                     let precio = parseFloat(item.prec_vta5).toFixed(2);
-                    // Descomentar si quieres mostrar precio:
                     // htmlContent += `<div class="eti-precio" style="font-size:12px">Ref: $${precio}</div>`;
                 }
 
@@ -271,15 +246,10 @@ if (isset($_GET['q'])) {
             }
         });
 
-        // 3. RENDERIZAR CÓDIGOS DE BARRA (Librería)
         try {
             JsBarcode(".barcode").init();
-        } catch (e) {
-            console.error("Error generando código de barras:", e);
-        }
+        } catch (e) { console.error(e); }
 
-        // 4. LANZAR IMPRESIÓN
-        // setTimeout da tiempo al navegador para renderizar los SVG antes de abrir el diálogo
         setTimeout(() => { window.print(); }, 500);
     }
 </script>
