@@ -189,26 +189,28 @@ if (isset($_GET['q'])) {
         const medida = document.querySelector('input[name="medida"]:checked').value;
         let config = {};
         
-        // --- AJUSTES DE PRECISIÓN PARA ESCÁNER ---
+        // --- CONFIGURACIÓN TÉRMICA OPTIMIZADA ---
         if (medida === 'grande') {
+            // 2.25 x 1.25
             config = {
                 heightCss: '1.25in',
-                barcodeHeight: 35, // Bajamos altura (era 45)
-                barWidth: 1.5,     // Ancho de barra equilibrado
+                barcodeHeight: 40, 
+                barWidth: 1.4,      // Un poco menos grueso para evitar sangrado térmico
                 fontSize: 12,
                 descSize: '10px',
-                margin: 10,        // Margen BLANCO alrededor del código (Vital para escáner)
+                margin: 10,         // Buen margen blanco
                 showPrice: true
             };
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 1.25in; margin: 0; } }';
         } else {
+            // 2.25 x 0.75 (PEQUEÑA - AJUSTE CRÍTICO)
             config = {
                 heightCss: '0.75in',
-                barcodeHeight: 20, // Más bajita para que quepa (era 25)
-                barWidth: 1.3,     // Un poco más finas para que quepan completas
-                fontSize: 10,
-                descSize: '9px',
-                margin: 5,         // Margen mínimo necesario
+                barcodeHeight: 22,  // Altura suficiente para que el láser apunte
+                barWidth: 1.0,      // <--- ESTO ES LA CLAVE. Barras finas para que quepan y no se peguen
+                fontSize: 9,        // Números pequeños
+                descSize: '8px',    // Descripción pequeña
+                margin: 15,         // <--- MARGEN AMPLIADO. Obliga a tener blanco a los lados
                 showPrice: false 
             };
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 0.75in; margin: 0; } }';
@@ -220,20 +222,23 @@ if (isset($_GET['q'])) {
                 div.className = 'etiqueta';
                 div.style.height = config.heightCss;
 
-                let desc = item.art_des.substring(0, 25);
+                // Cortamos descripción un poco más si es la etiqueta pequeña
+                let maxChars = (medida === 'peque') ? 22 : 25;
+                let desc = item.art_des.substring(0, maxChars);
                 
-                // NOTA: jsbarcode-margin añade espacio blanco seguro alrededor del código
                 let htmlContent = `<div class="eti-desc" style="font-size:${config.descSize}">${desc}</div>
                     <svg class="barcode"
                         jsbarcode-format="CODE128"
                         jsbarcode-value="${item.co_art}"
+                        jsbarcode-textmargin="0"
                         jsbarcode-fontoptions="bold"
                         jsbarcode-height="${config.barcodeHeight}" 
                         jsbarcode-width="${config.barWidth}"
                         jsbarcode-displayValue="true"
                         jsbarcode-fontSize="${config.fontSize}"
-                        jsbarcode-margin="${config.margin}" 
-                        jsbarcode-textmargin="0">
+                        jsbarcode-margin="${config.margin}"
+                        jsbarcode-background="#ffffff"
+                        jsbarcode-lineColor="#000000">
                     </svg>`;
                 
                 if (config.showPrice) {
