@@ -27,11 +27,11 @@ if (isset($_GET['q'])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Imprimir Etiquetas</title>
+    <title>Imprimir Etiquetas PRO</title>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     
     <style>
-        /* ESTILOS DE UI (PANTALLA) */
+        /* ESTILOS DE UI */
         body { font-family: 'Segoe UI', sans-serif; background-color: #222; color: #eee; padding: 20px; }
         .container { max-width: 950px; margin: 0 auto; display: flex; gap: 20px; }
         .panel { background: #333; padding: 20px; border-radius: 8px; flex: 1; border: 1px solid #444; }
@@ -42,22 +42,13 @@ if (isset($_GET['q'])) {
         th, td { border-bottom: 1px solid #555; padding: 8px; text-align: left; font-size: 0.9em; }
         .size-selector { background: #222; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #555; }
         .radio-group { display: flex; gap: 15px; align-items: center; }
-        .radio-group label { cursor: pointer; display: flex; align-items: center; gap: 5px; color: #fff; }
-
-        /* --- ESTILOS DE IMPRESIÓN (SOLIDEZ) --- */
+        
         #areaImpresion { display: none; }
 
         @media print {
             .container, h1, h2, form, input, button, .panel, .size-selector { display: none !important; }
             body { margin: 0; padding: 0; background: white; }
-            
-            #areaImpresion { 
-                display: block !important; 
-                position: absolute; 
-                top: 0; 
-                left: 0; 
-                width: 100%; 
-            }
+            #areaImpresion { display: block !important; position: absolute; top: 0; left: 0; width: 100%; }
 
             .etiqueta {
                 width: 2.25in; 
@@ -67,34 +58,17 @@ if (isset($_GET['q'])) {
                 justify-content: center;
                 align-items: center;
                 margin: 0;
-                padding: 0 4px; /* Pequeño padding lateral físico */
-                box-sizing: border-box;
+                padding: 0;
                 overflow: hidden;
             }
 
-            .eti-desc {
-                font-family: Arial, sans-serif;
-                font-weight: 900;
-                color: black;
-                text-align: center;
-                line-height: 1;
-                white-space: nowrap;
-                overflow: hidden;
+            /* La imagen debe ocupar exactamente el ancho sin estirarse raro */
+            .barcode-canvas {
                 width: 100%;
-                margin-bottom: 2px;
-            }
-
-            /* TRUCO DE ESCALADO: 
-               La imagen generada es GRANDE (barras anchas), 
-               aquí la forzamos a caber en la etiqueta sin perder calidad */
-            .barcode-img {
-                width: 95%;       /* Ocupa casi todo el ancho disponible */
-                height: auto;     /* Altura proporcional */
-                max-height: 75%;  /* Que no se salga por abajo */
-                display: block;
-                
-                /* Algoritmo de renderizado para evitar bordes borrosos */
+                height: auto;
+                /* Propiedades para evitar suavizado borroso */
                 image-rendering: pixelated; 
+                image-rendering: crisp-edges;
             }
         }
     </style>
@@ -189,25 +163,32 @@ if (isset($_GET['q'])) {
         contenedor.innerHTML = ''; 
 
         const medida = document.querySelector('input[name="medida"]:checked').value;
-        let config = {};
         
-        // --- ESTRATEGIA: GENERAR GRANDE, ENCOGER CON CSS ---
+        // --- CÁLCULOS MATEMÁTICOS PARA 203 DPI ---
+        // 1 pulgada = 203 puntos (pixels)
+        // Ancho 2.25" = 457 pixels
+        const DPI = 203;
+        const ANCHO_CANVAS = Math.floor(2.25 * DPI); 
+        
+        let ALTO_CANVAS;
+        let BARCODE_HEIGHT;
+        let CSS_HEIGHT;
+        let FONT_SIZE_DESC;
+        let CHAR_LIMIT;
+
         if (medida === 'grande') {
-            config = {
-                heightCss: '1.25in',
-                barcodeHeight: 80, // Generamos alto en memoria
-                descSize: '11px',
-                charLimit: 30
-            };
+            CSS_HEIGHT = '1.25in';
+            ALTO_CANVAS = Math.floor(1.25 * DPI); // ~253px
+            BARCODE_HEIGHT = 120; // En pixeles reales
+            FONT_SIZE_DESC = "30px Arial"; // Fuente grande para canvas HD
+            CHAR_LIMIT = 30;
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 1.25in; margin: 0; } }';
         } else {
-            // PEQUEÑA (2.25 x 0.75)
-            config = {
-                heightCss: '0.75in',
-                barcodeHeight: 60, // Generamos alto en memoria
-                descSize: '9px',   
-                charLimit: 40      
-            };
+            CSS_HEIGHT = '0.75in';
+            ALTO_CANVAS = Math.floor(0.75 * DPI); // ~152px
+            BARCODE_HEIGHT = 90; // Ocupa buena parte
+            FONT_SIZE_DESC = "24px Arial"; 
+            CHAR_LIMIT = 35;
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 0.75in; margin: 0; } }';
         }
 
@@ -216,55 +197,60 @@ if (isset($_GET['q'])) {
                 
                 let div = document.createElement('div');
                 div.className = 'etiqueta';
-                div.style.height = config.heightCss;
+                div.style.height = CSS_HEIGHT;
 
-                // Descripción
-                let desc = document.createElement('div');
-                desc.className = 'eti-desc';
-                desc.style.fontSize = config.descSize;
-                desc.innerText = item.art_des.substring(0, config.charLimit);
-                div.appendChild(desc);
-
-                // --- GENERACIÓN DEL CÓDIGO (SOLIDEZ) ---
+                // --- DIBUJO MANUAL EN CANVAS (PIXEL PERFECTO) ---
                 let canvas = document.createElement('canvas');
+                canvas.width = ANCHO_CANVAS;
+                canvas.height = ALTO_CANVAS;
+                canvas.className = 'barcode-canvas';
+                
+                let ctx = canvas.getContext('2d');
+                
+                // 1. Fondo Blanco Puro (Evita transparencias raras)
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect(0, 0, ANCHO_CANVAS, ALTO_CANVAS);
+                
+                // 2. Texto Descripción (Centrado arriba)
+                ctx.fillStyle = "#000000";
+                ctx.font = "bold " + FONT_SIZE_DESC;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
+                let texto = item.art_des.substring(0, CHAR_LIMIT);
+                ctx.fillText(texto, ANCHO_CANVAS / 2, 5); // 5px padding top
+
+                // 3. Generar Código de Barras en un Canvas Temporal
+                let tempCanvas = document.createElement('canvas');
                 try {
-                    JsBarcode(canvas, item.co_art, {
+                    JsBarcode(tempCanvas, item.co_art, {
                         format: "CODE128",
-                        
-                        // CLAVE: Ancho 2.0 (Barras muy gruesas y sólidas)
-                        // Luego el CSS (.barcode-img) se encarga de que quepa en el papel
-                        width: 2, 
-                        
-                        height: config.barcodeHeight,
-                        displayValue: false, // Sin números (estorban)
-                        margin: 20,          // Margen INTERNO blanco obligatorio
-                        background: "#ffffff",
+                        width: 3,           // Ancho 3 (Para alta resolución)
+                        height: BARCODE_HEIGHT,
+                        displayValue: false, // Sin números
+                        margin: 20,          // Margen blanco interno
+                        background: "#FFFFFF",
                         lineColor: "#000000"
                     });
-                } catch (e) { console.error(e); }
+                } catch(e) {}
 
-                // Convertir a Imagen PNG
-                let img = document.createElement('img');
-                img.src = canvas.toDataURL("image/png");
-                img.className = 'barcode-img'; 
+                // 4. Pegar el código de barras centrado en el Canvas Principal
+                // Calculamos posición vertical para que quede debajo del texto
+                let posY = (medida === 'grande') ? 45 : 35; 
                 
-                div.appendChild(img);
+                // Centrar horizontalmente la imagen del barcode
+                let destX = (ANCHO_CANVAS - tempCanvas.width) / 2;
                 
-                // Código Texto (Opcional, para que el humano lea)
-                /*
-                let codeTxt = document.createElement('div');
-                codeTxt.style.fontSize = "9px";
-                codeTxt.style.fontFamily = "Arial";
-                codeTxt.style.fontWeight = "bold";
-                codeTxt.innerText = item.co_art;
-                div.appendChild(codeTxt);
-                */
+                // IMPORTANTE: Disable smoothing para evitar bordes grises
+                ctx.imageSmoothingEnabled = false; 
+                ctx.drawImage(tempCanvas, destX, posY);
 
+                // Agregar al HTML
+                div.appendChild(canvas);
                 contenedor.appendChild(div);
             }
         });
 
-        setTimeout(() => { window.print(); }, 800); // Un poco más de tiempo para procesar imágenes
+        setTimeout(() => { window.print(); }, 800);
     }
 </script>
 
