@@ -31,69 +31,71 @@ if (isset($_GET['q'])) {
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     
     <style>
-        /* ESTILOS DE PANTALLA */
+        /* ESTILOS DE UI (PANTALLA) */
         body { font-family: 'Segoe UI', sans-serif; background-color: #222; color: #eee; padding: 20px; }
         .container { max-width: 950px; margin: 0 auto; display: flex; gap: 20px; }
         .panel { background: #333; padding: 20px; border-radius: 8px; flex: 1; border: 1px solid #444; }
         h2 { color: #00ff99; margin-top: 0; font-size: 1.2rem;}
-        
-        input[type="text"], input[type="number"] { padding: 10px; border-radius: 4px; border: 1px solid #555; background: #444; color: white; width: 100%; box-sizing: border-box; }
-        button { cursor: pointer; padding: 10px; border: none; border-radius: 4px; font-weight: bold; }
-        .btn-search { background: #00ff99; color: #000; width: 100%; margin-top: 10px; }
-        .btn-add { background: #0d6efd; color: white; margin-top: 5px; width: 100%; }
-        .btn-print { background: #ffd700; color: #000; width: 100%; font-size: 1.2em; margin-top: 20px; }
-        .btn-delete { background: #ff4444; color: white; padding: 5px 10px; }
-
+        input, button { padding: 10px; margin-top:5px; width: 100%; box-sizing: border-box; }
+        .btn-print { background: #ffd700; color: #000; font-weight: bold; cursor: pointer; }
         table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         th, td { border-bottom: 1px solid #555; padding: 8px; text-align: left; font-size: 0.9em; }
-        tr:hover { background: #444; }
-
         .size-selector { background: #222; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #555; }
         .radio-group { display: flex; gap: 15px; align-items: center; }
         .radio-group label { cursor: pointer; display: flex; align-items: center; gap: 5px; color: #fff; }
-        input[type="radio"] { accent-color: #ffd700; width: 18px; height: 18px; }
 
-        /* --- ESTILOS DE IMPRESIÓN --- */
+        /* --- ESTILOS DE IMPRESIÓN TÉRMICA (CRÍTICOS) --- */
         #areaImpresion { display: none; }
 
         @media print {
             .container, h1, h2, form, input, button, .panel, .size-selector { display: none !important; }
+            
             body { margin: 0; padding: 0; background: white; }
-            #areaImpresion { display: block !important; position: absolute; top: 0; left: 0; width: 100%; margin: 0; }
+            #areaImpresion { display: block !important; position: absolute; top: 0; left: 0; width: 100%; }
 
             .etiqueta {
-                width: 2.25in;
-                /* Altura inyectada por JS */
+                /* Ancho Fijo del Papel */
+                width: 2.25in; 
                 page-break-after: always;
+                
+                /* Flexbox para centrado perfecto */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                text-align: center;
-                overflow: hidden;
                 
-                /* AJUSTE CRÍTICO: Márgenes internos para que nada toque los bordes */
-                padding: 0 4px; 
+                /* Sin márgenes externos, el padding lo controla el contenedor interno */
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            .eti-desc {
+                font-family: Arial, sans-serif;
+                font-weight: 900; /* Negrita máxima */
+                color: black;
+                text-align: center;
+                line-height: 1;
+                white-space: nowrap;
+                overflow: hidden;
+                width: 100%;
+                /* Padding lateral para el texto también */
+                padding: 0 2mm; 
                 box-sizing: border-box;
             }
 
-            .eti-desc { 
-                font-weight: bold; 
-                text-transform: uppercase; 
-                font-family: Arial, sans-serif; 
-                color: black; 
-                line-height: 1; 
-                text-align: center; 
-                white-space: nowrap; 
-                overflow: hidden; 
-                width: 100%; 
-                margin-bottom: 2px;
+            /* TRUCO PARA LOS HUEQUITOS BLANCOS: 
+               Forzar renderizado pixelado para evitar antialiasing */
+            .barcode-img {
+                image-rendering: pixelated;
+                image-rendering: -moz-crisp-edges;
+                image-rendering: crisp-edges;
+                
+                /* Aseguramos que nunca toque los bordes */
+                max-width: 90%; 
+                height: auto;
+                display: block;
             }
-            
-            /* El SVG se ajusta, pero JSBarcode controla el margen interno real */
-            .eti-code { max-width: 100%; }
-            
-            .eti-precio { font-weight: bold; font-family: Arial, sans-serif; color: black; margin-top: -2px; }
         }
     </style>
     
@@ -107,7 +109,7 @@ if (isset($_GET['q'])) {
         <h2>1. Buscar Artículo</h2>
         <form method="GET">
             <input type="text" name="q" placeholder="Código o descripción..." value="<?= htmlspecialchars($busqueda) ?>" autofocus>
-            <button type="submit" class="btn-search">🔍 Buscar</button>
+            <button type="submit" class="btn-search" style="background:#00ff99;">🔍 Buscar</button>
         </form>
 
         <?php if (!empty($resultados)): ?>
@@ -121,7 +123,7 @@ if (isset($_GET['q'])) {
                                     <b style="color:#00ff99"><?= $art['co_art'] ?></b><br>
                                     <small><?= substr($art['art_des'], 0, 28) ?></small>
                                 </td>
-                                <td><button class="btn-add" onclick='agregarCola(<?= json_encode($art) ?>)'>➕</button></td>
+                                <td><button class="btn-add" style="background:#0d6efd; color:white;" onclick='agregarCola(<?= json_encode($art) ?>)'>➕</button></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -149,7 +151,7 @@ if (isset($_GET['q'])) {
         </div>
 
         <button onclick="generarImpresion()" class="btn-print">🖨️ IMPRIMIR</button>
-        <button onclick="limpiarCola()" style="width:100%; margin-top:10px; background:#555; color:#fff; padding:8px;">Limpiar Todo</button>
+        <button onclick="limpiarCola()" style="width:100%; margin-top:10px; background:#555; color:#fff;">Limpiar Todo</button>
     </div>
 </div>
 
@@ -170,7 +172,7 @@ if (isset($_GET['q'])) {
             html += `<tr>
                 <td><small style="color:#ffd700">${item.co_art}</small><br>${item.art_des.substring(0,12)}...</td>
                 <td><input type="number" value="${item.cantidad}" min="1" onchange="actualizarCant(${index}, this.value)" style="width:50px; text-align:center;"></td>
-                <td><button class="btn-delete" onclick="eliminar(${index})">X</button></td>
+                <td><button onclick="eliminar(${index})" style="background:#ff4444; color:white;">X</button></td>
             </tr>`;
         });
         document.getElementById('listaCola').innerHTML = html;
@@ -179,7 +181,8 @@ if (isset($_GET['q'])) {
     function actualizarCant(index, valor) { colaImpresion[index].cantidad = parseInt(valor); }
     function eliminar(index) { colaImpresion.splice(index, 1); renderizarCola(); }
     function limpiarCola() { colaImpresion = []; renderizarCola(); }
-function generarImpresion() {
+
+    function generarImpresion() {
         if (colaImpresion.length === 0) { alert("Agrega artículos primero"); return; }
 
         const contenedor = document.getElementById('areaImpresion');
@@ -188,84 +191,67 @@ function generarImpresion() {
         const medida = document.querySelector('input[name="medida"]:checked').value;
         let config = {};
         
-        // --- CONFIGURACIÓN TÉCNICA ---
+        // --- AJUSTES FINALES PARA TÉRMICA ---
         if (medida === 'grande') {
-            // 57mm x 32mm
             config = {
                 heightCss: '1.25in',
-                barcodeHeight: 60,  // Barras muy altas (sin números)
-                barWidth: 1.5,
-                fontSize: '11px',   // Tamaño letra descripción
-                charLimit: 30,      // Cuántas letras del nombre mostrar
-                containerPadding: '0 2mm', // Margen lateral seguro
-                showPrice: true
+                barcodeHeight: 60, 
+                descSize: '11px',
+                charLimit: 30
             };
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 1.25in; margin: 0; } }';
         } else {
-            // 57mm x 19mm (PEQUEÑA)
+            // PEQUEÑA (2.25 x 0.75)
             config = {
                 heightCss: '0.75in',
-                
-                // AJUSTES CRÍTICOS PARA ESCANEO
-                barcodeHeight: 45,  // Barras ALTA (ocupan casi todo el alto)
-                barWidth: 1.2,      // Grosor medio para legibilidad
-                
-                fontSize: '9px',    // Descripción pequeña para que quepa más texto
-                charLimit: 40,      // Mostrar nombre casi completo
-                
-                // ESTO EVITA QUE TOQUE LOS BORDES
-                containerPadding: '0 6mm', // 5mm de blanco a cada lado OBLIGATORIO
-                
-                showPrice: false 
+                barcodeHeight: 40,  // Altura en píxeles del canvas
+                descSize: '9px',    // Letra descripción
+                charLimit: 38       // Caracteres descripción
             };
             document.getElementById('dynamicPageSize').innerHTML = '@media print { @page { size: 2.25in 0.75in; margin: 0; } }';
         }
 
         colaImpresion.forEach(item => {
             for (let i = 0; i < item.cantidad; i++) {
+                
+                // 1. Crear el contenedor de la etiqueta
                 let div = document.createElement('div');
                 div.className = 'etiqueta';
-                
-                // Aplicamos estilos dinámicos al contenedor
                 div.style.height = config.heightCss;
-                div.style.padding = config.containerPadding; // Aquí aplicamos el margen lateral
-                
-                // Descripción más larga
-                let desc = item.art_des.substring(0, config.charLimit);
-                
-                let htmlContent = `
-                    <div class="eti-desc" style="font-size:${config.fontSize}; margin-bottom:2px;">${desc}</div>
-                    
-                    <svg class="barcode"
-                        jsbarcode-format="CODE128"
-                        jsbarcode-value="${item.co_art}"
-                        jsbarcode-textmargin="0"
-                        jsbarcode-fontoptions="bold"
-                        
-                        jsbarcode-height="${config.barcodeHeight}" 
-                        jsbarcode-width="${config.barWidth}"
-                        jsbarcode-margin="0" 
-                        
-                        jsbarcode-displayValue="false" 
-                        jsbarcode-flat="true">
-                    </svg>
-                `;
-                // Nota: jsbarcode-margin="0" porque el margen lo controla el div padre con padding
-                
-                if (config.showPrice) {
-                    let precio = parseFloat(item.prec_vta5).toFixed(2);
-                    // htmlContent += `<div class="eti-precio" style="font-size:12px">Ref: $${precio}</div>`;
-                }
 
-                div.innerHTML = htmlContent;
+                // 2. Descripción
+                let desc = document.createElement('div');
+                desc.className = 'eti-desc';
+                desc.style.fontSize = config.descSize;
+                desc.style.marginBottom = '3px';
+                desc.innerText = item.art_des.substring(0, config.charLimit);
+                div.appendChild(desc);
+
+                // 3. GENERAR BARCODE EN CANVAS (MEMORIA)
+                let canvas = document.createElement('canvas');
+                try {
+                    JsBarcode(canvas, item.co_art, {
+                        format: "CODE128",
+                        width: 1,           // ANCHO 1: Hace que las barras sean finas y quepan
+                        height: config.barcodeHeight,
+                        displayValue: false, // Sin números abajo
+                        margin: 0,          // Sin margen en el canvas (lo controlamos con CSS)
+                        background: "#ffffff",
+                        lineColor: "#000000"
+                    });
+                } catch (e) { console.error(e); }
+
+                // 4. CONVERTIR CANVAS A IMAGEN PNG (Truco para negros sólidos)
+                let img = document.createElement('img');
+                img.src = canvas.toDataURL("image/png");
+                img.className = 'barcode-img'; // Clase CSS con image-rendering: pixelated
+                
+                div.appendChild(img);
                 contenedor.appendChild(div);
             }
         });
 
-        try {
-            JsBarcode(".barcode").init();
-        } catch (e) { console.error(e); }
-
+        // Dar tiempo al navegador para procesar las imágenes base64
         setTimeout(() => { window.print(); }, 500);
     }
 </script>
