@@ -14,7 +14,7 @@ $sedes_ar = array(
     "Sucursal PtoFijo2",
     "Sucursal Ojeda",
     "Sucursal Valle",
-    "Sucursal Guigue",
+    "Sucursal GuiGue",
     "Sucursal Puerto",
     "Sucursal Acarigua",
 
