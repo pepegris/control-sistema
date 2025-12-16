@@ -10,7 +10,7 @@ require_once "../../services/db_connection.php";
 // LEER DATOS DEL FRONTEND
 $input = json_decode(file_get_contents('php://input'), true);
 $articuloAAnalizar = $input['codigo'] ?? '';
-$apiKey = "TU_API_KEY_GEMINI"; // ⚠️ Pega tu Key aquí
+$apiKey = "AIzaSyAv_LmWLvbm4QmbfTJ0927cOHpHYEY5KP4"; // ⚠️ Pega tu Key aquí
 
 if (empty($articuloAAnalizar)) {
     echo json_encode(['error' => 'No se recibió el código del artículo']);
