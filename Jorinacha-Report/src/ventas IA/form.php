@@ -1,90 +1,238 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicción IA - Profit Plus</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
-        input { padding: 12px; width: 80%; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; font-size: 16px; }
-        button { background: #2563EB; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; transition: 0.3s; }
-        button:hover { background: #1d4ed8; }
-        button:disabled { background: #93c5fd; cursor: wait; }
-        
-        #resultado { margin-top: 20px; display: none; text-align: left; background: #eff6ff; padding: 15px; border-radius: 8px; border-left: 5px solid #2563EB; }
-        .loader { display: none; margin: 20px auto; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .stat-num { font-size: 2em; font-weight: bold; color: #1e3a8a; }
-        .label { font-size: 0.85em; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
-    </style>
-</head>
-<body>
+<?php
+require '../../includes/log.php';
+include '../../includes/header.php';
+?>
 
-<div class="card">
-    <h2>🔮 Predicción de Demanda</h2>
-    <p>Ingresa el código del artículo en Profit Plus</p>
-    
-    <input type="text" id="codigo" placeholder="Ej: SERV001" autocomplete="off">
-    <br>
-    <button onclick="predecirDemanda()" id="btnPredecir">Analizar con IA</button>
-    
-    <div class="loader" id="loader"></div>
+<style>
+    /* Fondo solicitado */
+    body {
+        background-color: #242943 !important;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-    <div id="resultado">
-        <div class="label">Predicción Próximo Mes</div>
-        <div class="stat-num" id="prediccion_val">--</div>
-        <hr style="border: 0; border-top: 1px solid #dbeafe; margin: 10px 0;">
-        <p><strong>📈 Tendencia:</strong> <span id="tendencia_val"></span></p>
-        <p><strong>💡 Sugerencia:</strong> <span id="accion_val"></span></p>
-        <small style="color: #999; font-size: 10px;" id="debug_info"></small>
+    /* Contenedor principal */
+    .ia-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.05); /* Efecto cristal sutil */
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .form-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 8px; font-weight: bold; color: #a0a0a0; }
+    
+    input, select {
+        width: 100%;
+        padding: 12px;
+        background: #1a1d2e;
+        border: 1px solid #3b3f5c;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    
+    input:focus, select:focus { outline: none; border-color: #5c6ac4; }
+
+    /* Autocomplete sugerencias */
+    #sugerencias {
+        background: #1a1d2e;
+        border: 1px solid #3b3f5c;
+        max-height: 150px;
+        overflow-y: auto;
+        position: absolute;
+        width: 90%; /* Ajustar según contenedor */
+        z-index: 1000;
+        display: none;
+    }
+    .sugerencia-item {
+        padding: 10px;
+        cursor: pointer;
+        border-bottom: 1px solid #2d324a;
+    }
+    .sugerencia-item:hover { background: #5c6ac4; }
+    .code-span { color: #aaa; font-size: 0.8em; margin-right: 10px; }
+
+    .btn-ia {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        color: white;
+        padding: 15px 30px;
+        font-size: 18px;
+        border-radius: 50px;
+        cursor: pointer;
+        width: 100%;
+        transition: transform 0.2s;
+        font-weight: bold;
+    }
+    .btn-ia:hover { transform: scale(1.02); }
+
+    /* Resultado */
+    #resultado-panel {
+        display: none;
+        margin-top: 30px;
+        background: rgba(0, 255, 127, 0.1);
+        border: 1px solid #00ff7f;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    .big-number { font-size: 3em; font-weight: bold; color: #00ff7f; }
+</style>
+
+<div class="ia-container">
+    <h2 style="text-align: center; margin-bottom: 30px;">🔮 Predicción de Demanda IA</h2>
+
+    <div class="form-group" style="position: relative;">
+        <label>Buscar Producto (Escribe para autocompletar)</label>
+        <input type="text" id="input_busqueda" placeholder="Ej: Tornillo, Aceite, Filtro..." autocomplete="off">
+        <input type="hidden" id="codigo_seleccionado">
+        <div id="sugerencias"></div>
+    </div>
+
+    <div style="text-align: center; color: #666; margin: 15px 0;">--- O BUSCAR POR GRUPOS ---</div>
+
+    <div class="row">
+        <div class="col-md-6 form-group"> <label>Línea</label>
+            <select id="select_linea">
+                <option value="">-- Seleccionar Línea --</option>
+            </select>
+        </div>
+        <div class="col-md-6 form-group">
+            <label>Sub-Línea</label>
+            <select id="select_sublinea" disabled>
+                <option value="">-- Seleccione Línea primero --</option>
+            </select>
+        </div>
+    </div>
+
+    <button class="btn-ia" id="btnProcesar" onclick="consultarIA()">✨ Generar Predicción</button>
+    <div id="loader" style="display:none; text-align:center; margin-top:20px;">Conectando a 17 Sucursales y a Gemini IA...</div>
+
+    <div id="resultado-panel">
+        <h3>Resultado del Análisis</h3>
+        <div class="big-number" id="res_cantidad">0</div>
+        <p><strong>Tendencia:</strong> <span id="res_tendencia"></span></p>
+        <p><strong>Acción Recomendada:</strong> <span id="res_accion"></span></p>
     </div>
 </div>
 
 <script>
-async function predecirDemanda() {
-    const codigo = document.getElementById('codigo').value;
-    const btn = document.getElementById('btnPredecir');
-    const loader = document.getElementById('loader');
-    const resultadoDiv = document.getElementById('resultado');
+// 1. CARGA INICIAL DE LÍNEAS
+document.addEventListener("DOMContentLoaded", () => {
+    fetch('ajax_datos_maestros.php?accion=lineas')
+    .then(r => r.json())
+    .then(data => {
+        const sel = document.getElementById('select_linea');
+        data.forEach(d => {
+            let opt = document.createElement('option');
+            opt.value = d.codigo;
+            opt.innerText = d.nombre;
+            sel.appendChild(opt);
+        });
+    });
+});
 
-    if(!codigo) return alert("Escribe un código de artículo");
+// 2. CAMBIO EN LÍNEA -> CARGAR SUBLÍNEAS
+document.getElementById('select_linea').addEventListener('change', function() {
+    const linea = this.value;
+    const subSel = document.getElementById('select_sublinea');
+    
+    // Limpiar formulario de producto si se usa línea
+    document.getElementById('input_busqueda').value = ''; 
+    document.getElementById('codigo_seleccionado').value = '';
 
-    // UI Loading state
-    btn.disabled = true;
-    btn.innerText = "Consultando 17 tiendas...";
-    loader.style.display = 'block';
-    resultadoDiv.style.display = 'none';
+    subSel.innerHTML = '<option value="">-- Todas las Sub-líneas --</option>';
+    
+    if (linea) {
+        subSel.disabled = false;
+        fetch(`ajax_datos_maestros.php?accion=sublineas&linea=${linea}`)
+        .then(r => r.json())
+        .then(data => {
+            data.forEach(d => {
+                let opt = document.createElement('option');
+                opt.value = d.codigo;
+                opt.innerText = d.nombre;
+                subSel.appendChild(opt);
+            });
+        });
+    } else {
+        subSel.disabled = true;
+    }
+});
+
+// 3. AUTOCOMPLETADO DE PRODUCTOS
+const inputBusqueda = document.getElementById('input_busqueda');
+const sugerenciasDiv = document.getElementById('sugerencias');
+
+inputBusqueda.addEventListener('input', function() {
+    const q = this.value;
+    if (q.length < 3) { sugerenciasDiv.style.display = 'none'; return; }
+
+    // Limpiar selectores si escribe producto
+    document.getElementById('select_linea').value = "";
+    document.getElementById('select_sublinea').value = "";
+    document.getElementById('select_sublinea').disabled = true;
+
+    fetch(`ajax_datos_maestros.php?accion=buscar_art&q=${q}`)
+    .then(r => r.json())
+    .then(data => {
+        sugerenciasDiv.innerHTML = '';
+        if (data.length > 0) {
+            sugerenciasDiv.style.display = 'block';
+            data.forEach(item => {
+                let div = document.createElement('div');
+                div.className = 'sugerencia-item';
+                div.innerHTML = `<span class="code-span">${item.codigo}</span> ${item.descripcion}`;
+                div.onclick = () => {
+                    inputBusqueda.value = item.descripcion; // Mostrar nombre
+                    document.getElementById('codigo_seleccionado').value = item.codigo; // Guardar ID oculto
+                    sugerenciasDiv.style.display = 'none';
+                };
+                sugerenciasDiv.appendChild(div);
+            });
+        }
+    });
+});
+
+// 4. CONSULTA FINAL AL BACKEND
+async function consultarIA() {
+    const prod = document.getElementById('codigo_seleccionado').value;
+    const lin = document.getElementById('select_linea').value;
+    const sub = document.getElementById('select_sublinea').value;
+
+    if (!prod && !lin) {
+        alert("Por favor selecciona un Producto O una Línea para analizar.");
+        return;
+    }
+
+    // UI Loading
+    document.getElementById('btnProcesar').disabled = true;
+    document.getElementById('loader').style.display = 'block';
+    document.getElementById('resultado-panel').style.display = 'none';
 
     try {
-        const response = await fetch('backend_prediccion.php', {
+        const res = await fetch('backend_prediccion.php', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ codigo: codigo })
+            body: JSON.stringify({ producto: prod, linea: lin, sublinea: sub })
         });
+        const json = await res.json();
 
-        const json = await response.json();
-
-        if(json.success) {
-            document.getElementById('prediccion_val').innerText = json.data.prediccion + " unds";
-            document.getElementById('tendencia_val').innerText = json.data.tendencia;
-            document.getElementById('accion_val').innerText = json.data.accion;
-            document.getElementById('debug_info').innerText = json.debug;
-            resultadoDiv.style.display = 'block';
+        if (json.success) {
+            document.getElementById('res_cantidad').innerText = json.data.prediccion;
+            document.getElementById('res_tendencia').innerText = json.data.tendencia;
+            document.getElementById('res_accion').innerText = json.data.accion;
+            document.getElementById('resultado-panel').style.display = 'block';
         } else {
-            alert("Error: " + (json.error || "Desconocido"));
+            alert("Error: " + json.error);
         }
-
     } catch (e) {
-        console.error(e);
-        alert("Error de conexión con el servidor.");
+        alert("Error de conexión");
     } finally {
-        btn.disabled = false;
-        btn.innerText = "Analizar con IA";
-        loader.style.display = 'none';
+        document.getElementById('btnProcesar').disabled = false;
+        document.getElementById('loader').style.display = 'none';
     }
 }
 </script>
-
-</body>
-</html>
