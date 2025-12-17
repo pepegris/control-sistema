@@ -7,53 +7,60 @@ require_once "../../services/empresas.php";
 require_once "../../services/db_connection.php";
 
 $input = json_decode(file_get_contents('php://input'), true);
-
-// ⚠️ PEGA TU API KEY AQUÍ
+// ⚠️ TU CLAVE
 $apiKey = "AIzaSyCcDEFD1k_unQiRUl9YaDcf9V-G1KE7PSc"; 
 
 $modelosDisponibles = ["gemini-1.5-flash", "gemini-flash-latest", "gemini-2.5-flash"];
 
 // DATOS
+$modoReporte = $input['modo'] ?? 'prediccion'; // 'prediccion' O 'compras'
 $producto  = $input['producto'] ?? '';
 $linea     = $input['linea'] ?? '';
 $sublinea  = $input['sublinea'] ?? '';
 $meses     = intval($input['meses'] ?? 12);
 if (!in_array($meses, [3, 6, 9, 12])) { $meses = 12; }
 
-// --- FECHAS DINÁMICAS ---
+// FECHAS
 $hoy = date("d-m-Y");
-$diasRestantesMes = date("t") - date("j"); // Días que faltan para terminar el mes actual
+$diasRestantesMes = date("t") - date("j");
 $nombreMesActual = date("F");
-$nombreMesProximo = date("F Y", strtotime("+1 month")); // Ej: January 2026
+$nombreMesProximo = date("F Y", strtotime("+1 month"));
 
 // FILTROS
-$modoAnalisis = "";
+$descFiltro = "";
 $filtroVenta = ""; $filtroDevol = ""; $paramsSQL = [];
 
 if (!empty($producto)) {
-    $modoAnalisis = "PRODUCTO (Código: $producto)";
+    $descFiltro = "PRODUCTO ESPECÍFICO (Código: $producto)";
     $filtroVenta = " AND rf.co_art = ? ";
     $filtroDevol = " AND rd.co_art = ? ";
     $paramsSQL = [$producto, $producto]; 
 } elseif (!empty($linea)) {
-    $modoAnalisis = "LÍNEA: $linea";
+    $descFiltro = "LÍNEA: $linea";
     $filtroVenta = " AND a.co_lin = ? ";
     $filtroDevol = " AND a.co_lin = ? ";
     $paramsSQL = [$linea, $linea];
     if (!empty($sublinea)) {
-        $modoAnalisis .= " / SUB: $sublinea";
+        $descFiltro .= " / SUB: $sublinea";
         $filtroVenta .= " AND a.co_sub = ? ";
         $filtroDevol .= " AND a.co_sub = ? ";
         $paramsSQL[] = $sublinea;
         $paramsSQL[] = $sublinea;
     }
-} else { echo json_encode(['error' => 'Falta selección.']); exit; }
+} else { 
+    // Si quiere "Todo", limitamos para no explotar la IA
+    if($modoReporte == 'compras'){
+        $descFiltro = "TOP 50 ARTÍCULOS MÁS VENDIDOS (Análisis General)";
+    } else {
+        echo json_encode(['error' => 'Para predicción numérica selecciona al menos una línea.']); exit;
+    }
+}
 
 // --- ESTRUCTURAS DE DATOS ---
-$datosCompletos = []; 
+$datosCompletos = []; // Para el gráfico (Modo Predicción)
+$analisisDetallado = []; // Para la tabla (Modo Compras)
 $rankingTiendas = []; 
 $tiendasConsultadas = 0;
-$datosGrafica = []; // Inicialización importante
 
 foreach ($lista_replicas as $nombreSede => $datos) {
     $conn = ConectarSQLServer_local_vpn($datos['db'], $datos['ip']);
@@ -63,38 +70,55 @@ foreach ($lista_replicas as $nombreSede => $datos) {
     $tiendasConsultadas++;
     $ventaTotalSede = 0; 
 
-    // SQL (Ventas + Devoluciones)
-    // ⚠️ AQUI ESTA LA CORRECCIÓN: dev_cli unida con reng_dvc
-    $sql = "
-        SELECT 'V' as tipo, YEAR(f.fec_emis) as anio, MONTH(f.fec_emis) as mes, SUM(rf.total_art) as cantidad
-        FROM factura f
-        INNER JOIN reng_fac rf ON f.fact_num = rf.fact_num
-        INNER JOIN art a ON rf.co_art = a.co_art
-        WHERE f.anulada = 0 AND f.fec_emis >= DATEADD(month, -$meses, GETDATE()) $filtroVenta
-        GROUP BY YEAR(f.fec_emis), MONTH(f.fec_emis)
-        
-        UNION ALL
-        
-        SELECT 'D' as tipo, YEAR(d.fec_emis) as anio, MONTH(d.fec_emis) as mes, SUM(rd.total_art) as cantidad
-        FROM dev_cli d
-        INNER JOIN reng_dvc rd ON d.fact_num = rd.fact_num
-        INNER JOIN art a ON rd.co_art = a.co_art
-        WHERE d.anulada = 0 AND d.fec_emis >= DATEADD(month, -$meses, GETDATE()) $filtroDevol
-        GROUP BY YEAR(d.fec_emis), MONTH(d.fec_emis)
-    ";
+    // SQL ADAPTATIVO
+    if ($modoReporte == 'prediccion') {
+        // SQL LIGERO (Solo montos y fechas)
+        $sql = "
+            SELECT 'V' as tipo, YEAR(f.fec_emis) as anio, MONTH(f.fec_emis) as mes, SUM(rf.total_art) as cantidad
+            FROM factura f INNER JOIN reng_fac rf ON f.fact_num = rf.fact_num INNER JOIN art a ON rf.co_art = a.co_art
+            WHERE f.anulada = 0 AND f.fec_emis >= DATEADD(month, -$meses, GETDATE()) $filtroVenta
+            GROUP BY YEAR(f.fec_emis), MONTH(f.fec_emis)
+            UNION ALL
+            SELECT 'D' as tipo, YEAR(d.fec_emis) as anio, MONTH(d.fec_emis) as mes, SUM(rd.total_art) as cantidad
+            FROM dev_cli d INNER JOIN reng_dvc rd ON d.fact_num = rd.fact_num INNER JOIN art a ON rd.co_art = a.co_art
+            WHERE d.anulada = 0 AND d.fec_emis >= DATEADD(month, -$meses, GETDATE()) $filtroDevol
+            GROUP BY YEAR(d.fec_emis), MONTH(d.fec_emis)
+        ";
+    } else {
+        // SQL DETALLADO (Trae descripciones para analizar Tallas/Colores)
+        // Limitamos a TOP 100 items por tienda para no saturar tokens
+        $sql = "
+            SELECT TOP 100 'V' as tipo, a.art_des as descripcion, SUM(rf.total_art) as cantidad
+            FROM factura f INNER JOIN reng_fac rf ON f.fact_num = rf.fact_num INNER JOIN art a ON rf.co_art = a.co_art
+            WHERE f.anulada = 0 AND f.fec_emis >= DATEADD(month, -$meses, GETDATE()) $filtroVenta
+            GROUP BY a.art_des
+            ORDER BY SUM(rf.total_art) DESC
+        ";
+    }
 
     $stmt = sqlsrv_query($conn, $sql, $paramsSQL);
     if ($stmt) {
         while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-            $key = $row['anio'] . "-" . str_pad($row['mes'], 2, "0", STR_PAD_LEFT);
-            if (!isset($datosCompletos[$key])) $datosCompletos[$key] = ['ventas' => 0, 'devoluciones' => 0];
-
-            if ($row['tipo'] == 'V') {
-                $datosCompletos[$key]['ventas'] += $row['cantidad'];
-                $ventaTotalSede += $row['cantidad'];
+            
+            if ($modoReporte == 'prediccion') {
+                // Lógica Vieja (Agrupar por Fecha)
+                $key = $row['anio'] . "-" . str_pad($row['mes'], 2, "0", STR_PAD_LEFT);
+                if (!isset($datosCompletos[$key])) $datosCompletos[$key] = ['ventas' => 0, 'devoluciones' => 0];
+                if ($row['tipo'] == 'V') {
+                    $datosCompletos[$key]['ventas'] += $row['cantidad'];
+                    $ventaTotalSede += $row['cantidad'];
+                } else {
+                    $datosCompletos[$key]['devoluciones'] += $row['cantidad'];
+                    $ventaTotalSede -= $row['cantidad'];
+                }
             } else {
-                $datosCompletos[$key]['devoluciones'] += $row['cantidad'];
-                $ventaTotalSede -= $row['cantidad'];
+                // Lógica Nueva (Agrupar por Descripción para Tallas/Colores)
+                // Estructura: [Descripcion => [Tienda A => 5, Tienda B => 10]]
+                $desc = trim($row['descripcion']);
+                if (!isset($analisisDetallado[$desc])) $analisisDetallado[$desc] = [];
+                if (!isset($analisisDetallado[$desc][$nombreSede])) $analisisDetallado[$desc][$nombreSede] = 0;
+                $analisisDetallado[$desc][$nombreSede] += $row['cantidad'];
+                $ventaTotalSede += $row['cantidad'];
             }
         }
     }
@@ -102,43 +126,64 @@ foreach ($lista_replicas as $nombreSede => $datos) {
     sqlsrv_close($conn);
 }
 
-if (empty($datosCompletos)) { echo json_encode(['error' => "Sin datos."]); exit; }
-ksort($datosCompletos);
-arsort($rankingTiendas);
-$topTiendas = array_slice($rankingTiendas, 0, 5); 
+// --- GENERACIÓN DE PROMPTS SEGÚN MODO ---
 
-// Gráfica Frontend (Ventas Netas)
-foreach ($datosCompletos as $mes => $vals) {
-    $neto = $vals['ventas'] - $vals['devoluciones'];
-    $datosGrafica[$mes] = $neto > 0 ? $neto : 0;
+if ($modoReporte == 'prediccion') {
+    // ... (Lógica de Predicción Numérica igual que antes) ...
+    if (empty($datosCompletos)) { echo json_encode(['error' => "Sin datos."]); exit; }
+    ksort($datosCompletos);
+    arsort($rankingTiendas);
+    $topTiendas = array_slice($rankingTiendas, 0, 5);
+    
+    foreach ($datosCompletos as $mes => $vals) {
+        $neto = $vals['ventas'] - $vals['devoluciones'];
+        $datosGrafica[$mes] = $neto > 0 ? $neto : 0;
+    }
+
+    $prompt = "Eres Gerente de Supply Chain. Analiza: $descFiltro. Hoy: $hoy.
+    DATOS: " . json_encode($datosCompletos) . " TOP TIENDAS: " . json_encode($topTiendas) . "
+    Predice cierre de $nombreMesActual y total $nombreMesProximo.
+    JSON: {\"prediccion_cierre\": int, \"prediccion_enero\": int, \"tendencia\": string, \"alerta_calidad\": string, \"accion\": string}";
+
+} else {
+    // --- MODO 2: ASISTENTE DE COMPRAS ---
+    if (empty($analisisDetallado)) { echo json_encode(['error' => "Sin datos de ventas para analizar."]); exit; }
+    
+    // Limpiamos data para enviar solo lo relevante (Top 30 productos globales)
+    // Esto es vital para no exceder el límite de caracteres de la IA
+    $resumenEnvio = array_slice($analisisDetallado, 0, 40); 
+
+    $prompt = "
+    Eres un Comprador Experto en Retail/Moda para Venezuela.
+    Estás planificando las compras para el resto de $nombreMesActual y $nombreMesProximo.
+    CONTEXTO VENEZUELA: Considera temporadas (Navidad, Regreso a Clases, Sequía) y la logística compleja.
+    
+    DATOS DE VENTAS POR TIENDA (Producto: {Tienda: Cantidad}): " . json_encode($resumenEnvio) . "
+
+    TU TAREA:
+    1. Analiza los nombres de los productos para detectar patrones de TALLAS (S, M, L, XL, Números) y COLORES preferidos.
+    2. Identifica qué tiendas están vendiendo más (necesitan stock) y cuáles menos.
+    3. Genera una lista de sugerencias de compra.
+
+    RESPONDE SOLO EN ESTE JSON VÁLIDO:
+    {
+        \"analisis_tallas_colores\": \"Resumen de qué tallas/colores se mueven más (Ej: 'Dominio de Talla M y colores oscuros')\",
+        \"recomendaciones\": [
+            {
+                \"articulo\": \"Nombre genérico o específico\",
+                \"cantidad_sugerida\": numero_entero_global,
+                \"prioridad\": \"Alta/Media/Baja\",
+                \"distribucion_sugerida\": \"Texto breve (Ej: 'Enviar 60% a Caracas, resto a Occidente')\",
+                \"razon\": \"Por qué comprar esto (Ej: 'Alta rotación en todas las sedes')\"
+            },
+            ... (Máximo 5 recomendaciones clave)
+        ],
+        \"tiendas_criticas\": \"Nombres de 2-3 tiendas que urgen inventario\"
+    }";
 }
-
-// --- PROMPT AVANZADO (CIERRE + PROYECCIÓN) ---
-$prompt = "
-Eres un Gerente Experto en Supply Chain. Analiza: $modoAnalisis.
-Fecha hoy: $hoy. Quedan $diasRestantesMes días para terminar $nombreMesActual.
-
-DATOS HISTÓRICOS (Mes: {Ventas, Devoluciones}): " . json_encode($datosCompletos) . "
-TOP TIENDAS: " . json_encode($topTiendas) . "
-
-OBJETIVOS:
-1. CIERRE DE MES ($nombreMesActual): Predice cuánto se venderá SOLAMENTE en los días que faltan ($diasRestantesMes días restantes).
-2. MES SIGUIENTE ($nombreMesProximo): Predice la venta del mes completo entrante.
-3. Evalúa calidad y tendencias geográficas.
-
-RESPONDE SOLO JSON:
-{
-    \"prediccion_cierre\": numero_entero (Solo lo que falta para cerrar el mes),
-    \"prediccion_enero\": numero_entero (Todo el mes siguiente),
-    \"tendencia\": \"Texto breve sobre comportamiento y geografía\",
-    \"alerta_calidad\": \"Texto breve sobre devoluciones\",
-    \"accion\": \"Estrategia recomendada\"
-}";
 
 // --- CONEXIÓN IA ---
 $respuestaExitosa = null;
-$ultimoHttpCode = 0; // Para debug
-
 foreach ($modelosDisponibles as $modeloActual) {
     $url = "https://generativelanguage.googleapis.com/v1beta/models/$modeloActual:generateContent?key=" . $apiKey;
     $ch = curl_init($url);
@@ -149,9 +194,7 @@ foreach ($modelosDisponibles as $modeloActual) {
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $ultimoHttpCode = $httpCode; // Guardamos el último código por si falla
     curl_close($ch);
-
     if ($httpCode == 200 && $response) {
         $jsonResponse = json_decode($response, true);
         if (isset($jsonResponse['candidates'][0]['content']['parts'][0]['text'])) {
@@ -161,42 +204,36 @@ foreach ($modelosDisponibles as $modeloActual) {
     }
 }
 
-// --- RESPUESTA AL FRONTEND ---
-
+// --- OUTPUT ---
 if ($respuestaExitosa) {
     $txt = str_replace(['```json', '```'], '', $respuestaExitosa);
     $dataIA = json_decode($txt, true);
-
+    
     if (json_last_error() === JSON_ERROR_NONE) {
+        $response = ['success' => true, 'modo' => $modoReporte, 'data' => $dataIA];
         
-        // CÁLCULO: Venta real acumulada del mes en curso
-        $keyMesActual = date("Y") . "-" . date("m"); // Ej: "2025-12"
-        $acumuladoMesActual = 0;
-        
-        if (isset($datosCompletos[$keyMesActual])) {
-            $vals = $datosCompletos[$keyMesActual];
-            $acumuladoMesActual = ($vals['ventas'] - $vals['devoluciones']);
+        // Si es predicción, agregamos extras
+        if($modoReporte == 'prediccion') {
+            // (Tu lógica de cálculo acumulado anterior...)
+            $keyMesActual = date("Y") . "-" . date("m");
+            $acumuladoMesActual = isset($datosCompletos[$keyMesActual]) ? ($datosCompletos[$keyMesActual]['ventas'] - $datosCompletos[$keyMesActual]['devoluciones']) : 0;
             if($acumuladoMesActual < 0) $acumuladoMesActual = 0;
-        }
 
-        echo json_encode([
-            'success' => true, 
-            'data' => $dataIA, 
-            'historia' => $datosGrafica,
-            'meta' => [
+            $response['historia'] = $datosGrafica ?? [];
+            $response['meta'] = [
                 'mes_actual' => $nombreMesActual,
                 'mes_proximo' => $nombreMesProximo,
                 'dias_restantes' => $diasRestantesMes,
                 'venta_acumulada_real' => $acumuladoMesActual
-            ]
-        ]);
+            ];
+        }
+        echo json_encode($response);
     } else {
         echo json_encode(['error' => 'Error JSON IA']);
     }
 } else {
-    // Modo Detective para errores
     $errorJson = json_decode($response, true);
     $msg = isset($errorJson['error']['message']) ? $errorJson['error']['message'] : "Error desconocido";
-    echo json_encode(['error' => "Fallo IA ($ultimoHttpCode): $msg"]);
+    echo json_encode(['error' => "Fallo IA: $msg"]);
 }
 ?>
