@@ -249,18 +249,29 @@ if ($modoReporte == 'prediccion') {
 
 // --- CONEXIÓN IA ---
 $respuestaExitosa = null;
+$ultimoError = "";
+$ultimoHttpCode = 0;
+
+// Usamos solo el modelo más estable para evitar errores de nombres
+$modelosDisponibles = ["gemini-1.5-flash"]; 
 
 foreach ($modelosDisponibles as $modeloActual) {
     $url = "https://generativelanguage.googleapis.com/v1beta/models/$modeloActual:generateContent?key=" . $apiKey;
+    
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
     curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(["contents" => [["parts" => [["text" => $prompt]]]]]));
+    // Agregamos JSON_UNESCAPED_UNICODE para evitar errores con tildes/ñ en el JSON
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(["contents" => [["parts" => [["text" => $prompt]]]]], JSON_UNESCAPED_UNICODE));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $errorCurl = curl_error($ch);
     curl_close($ch);
+
+    $ultimoHttpCode = $httpCode;
 
     if ($httpCode == 200 && $response) {
         $jsonResponse = json_decode($response, true);
@@ -268,9 +279,43 @@ foreach ($modelosDisponibles as $modeloActual) {
             $respuestaExitosa = $jsonResponse['candidates'][0]['content']['parts'][0]['text'];
             break;
         }
+    } else {
+        // Guardamos el error para mostrartelo si falla
+        $ultimoError = "HTTP $httpCode. Resp: " . $response . ". CurlErr: " . $errorCurl;
     }
 }
 
+// --- OUTPUT FINAL ---
+if ($respuestaExitosa) {
+    // Limpieza de Markdown (```json)
+    $txt = preg_replace('/^```json\s*|\s*```$/', '', $respuestaExitosa);
+    $dataIA = json_decode($txt, true);
+    
+    if (json_last_error() === JSON_ERROR_NONE) {
+        $response = ['success' => true, 'modo' => $modoReporte, 'data' => $dataIA];
+        
+        if($modoReporte == 'prediccion') {
+            $keyMesActual = date("Y") . "-" . date("m");
+            $acumuladoMesActual = isset($datosCompletos[$keyMesActual]) ? ($datosCompletos[$keyMesActual]['ventas'] - $datosCompletos[$keyMesActual]['devoluciones']) : 0;
+            if($acumuladoMesActual < 0) $acumuladoMesActual = 0;
+
+            $response['historia'] = $datosGrafica ?? [];
+            $response['meta'] = [
+                'mes_actual' => $nombreMesActual,
+                'mes_proximo' => $nombreMesProximo,
+                'venta_acumulada_real' => $acumuladoMesActual
+            ];
+        }
+        echo json_encode($response);
+    } else {
+        // Error al parsear el JSON que devolvió la IA
+        echo json_encode(['error' => 'La IA respondió pero no en formato JSON válido. Texto recibido: ' . substr($txt, 0, 100) . '...']);
+    }
+} else {
+    // AQUÍ ESTÁ EL CAMBIO IMPORTANTE: TE MUESTRA EL ERROR REAL
+    echo json_encode(['error' => "Fallo Conexión IA: " . $ultimoError]);
+}
+?>
 // --- OUTPUT FINAL ---
 if ($respuestaExitosa) {
     $txt = str_replace(['```json', '```'], '', $respuestaExitosa);
