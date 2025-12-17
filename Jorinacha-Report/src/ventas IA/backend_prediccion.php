@@ -68,7 +68,7 @@ foreach ($lista_replicas as $nombreSede => $datos) {
         GROUP BY YEAR(f.fec_emis), MONTH(f.fec_emis)
         UNION ALL
         SELECT 'D' as tipo, YEAR(d.fec_emis) as anio, MONTH(d.fec_emis) as mes, SUM(rd.total_art) as cantidad
-        FROM devol_cli d
+        FROM dev_cli d
         INNER JOIN reng_dvc rd ON d.fact_num = rd.fact_num
         INNER JOIN art a ON rd.co_art = a.co_art
         WHERE d.anulada = 0 AND d.fec_emis >= DATEADD(month, -$meses, GETDATE()) $filtroDevol
