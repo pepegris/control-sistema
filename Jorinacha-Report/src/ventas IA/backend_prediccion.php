@@ -9,7 +9,7 @@ require_once "../../services/db_connection.php";
 $input = json_decode(file_get_contents('php://input'), true);
 $apiKey = "AIzaSyCcDEFD1k_unQiRUl9YaDcf9V-G1KE7PSc"; 
 
-$modelosDisponibles = ["gemini-1.5-flash", "gemini-flash-latest", "gemini-2.5-flash"];
+$modelosDisponibles = ["gemini-2.5-flash","gemini-1.5-flash", "gemini-flash-latest", ];
 
 // DATOS
 $producto  = $input['producto'] ?? '';
