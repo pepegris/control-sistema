@@ -153,24 +153,42 @@ foreach ($modelosDisponibles as $modeloActual) {
     }
 }
 
+// ... (Después de obtener $respuestaExitosa y decodificar $dataIA) ...
+
 if ($respuestaExitosa) {
     $txt = str_replace(['```json', '```'], '', $respuestaExitosa);
     $dataIA = json_decode($txt, true);
+
     if (json_last_error() === JSON_ERROR_NONE) {
+        
+        // --- NUEVO CÁLCULO: Extraer venta real acumulada del mes en curso ---
+        $keyMesActual = date("Y") . "-" . date("m"); // Ej: "2025-12"
+        $acumuladoMesActual = 0;
+        
+        // Buscamos en los datos históricos que ya sacamos de SQL
+        if (isset($datosCompletos[$keyMesActual])) {
+            $vals = $datosCompletos[$keyMesActual];
+            // Venta Neta = Ventas - Devoluciones
+            $acumuladoMesActual = ($vals['ventas'] - $vals['devoluciones']);
+            if($acumuladoMesActual < 0) $acumuladoMesActual = 0;
+        }
+
         echo json_encode([
             'success' => true, 
             'data' => $dataIA, 
             'historia' => $datosGrafica,
-            // Pasamos fechas calculadas para pintar bonito en el frontend
             'meta' => [
                 'mes_actual' => $nombreMesActual,
                 'mes_proximo' => $nombreMesProximo,
-                'dias_restantes' => $diasRestantesMes
+                'dias_restantes' => $diasRestantesMes,
+                'venta_acumulada_real' => $acumuladoMesActual // <--- ESTE ES EL DATO NUEVO
             ]
         ]);
     } else {
         echo json_encode(['error' => 'Error JSON IA']);
     }
+}
+// ...
 } else {
     $errorJson = json_decode($response, true);
     $msg = isset($errorJson['error']['message']) ? $errorJson['error']['message'] : "Error desconocido";

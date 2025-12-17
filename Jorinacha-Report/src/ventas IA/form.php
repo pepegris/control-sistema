@@ -22,124 +22,53 @@ include '../../includes/header.php';
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
-    .form-group {
-        margin-bottom: 20px;
-    }
+    .form-group { margin-bottom: 20px; }
 
     label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: #a0a0a0;
+        display: block; margin-bottom: 8px; font-weight: bold; color: #a0a0a0;
     }
 
-    input,
-    select {
-        width: 100%;
-        padding: 12px;
-        background: #1a1d2e;
-        border: 1px solid #3b3f5c;
-        color: white;
-        border-radius: 5px;
-        font-size: 16px;
+    input, select {
+        width: 100%; padding: 12px; background: #1a1d2e; border: 1px solid #3b3f5c;
+        color: white; border-radius: 5px; font-size: 16px;
     }
 
-    input:focus,
-    select:focus {
-        outline: none;
-        border-color: #5c6ac4;
-    }
+    input:focus, select:focus { outline: none; border-color: #5c6ac4; }
 
     /* Sugerencias */
     #sugerencias {
-        background: #1a1d2e;
-        border: 1px solid #3b3f5c;
-        max-height: 150px;
-        overflow-y: auto;
-        position: absolute;
-        width: 90%;
-        z-index: 1000;
-        display: none;
+        background: #1a1d2e; border: 1px solid #3b3f5c; max-height: 150px;
+        overflow-y: auto; position: absolute; width: 90%; z-index: 1000; display: none;
     }
-
-    .sugerencia-item {
-        padding: 10px;
-        cursor: pointer;
-        border-bottom: 1px solid #2d324a;
-    }
-
-    .sugerencia-item:hover {
-        background: #5c6ac4;
-    }
+    .sugerencia-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #2d324a; }
+    .sugerencia-item:hover { background: #5c6ac4; }
 
     /* Botón con estados */
     .btn-ia {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: none;
-        color: white;
-        padding: 15px 30px;
-        font-size: 18px;
-        border-radius: 50px;
-        cursor: pointer;
-        width: 100%;
-        font-weight: bold;
-        margin-top: 20px;
+        border: none; color: white; padding: 15px 30px; font-size: 18px;
+        border-radius: 50px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 20px;
         transition: all 0.3s;
     }
-
-    .btn-ia:hover {
-        transform: scale(1.02);
-    }
-
-    /* Estado deshabilitado (Cooldown) */
-    .btn-ia:disabled {
-        background: #3b3f5c;
-        /* Gris oscuro */
-        cursor: not-allowed;
-        transform: none;
-        color: #a0a0a0;
-    }
+    .btn-ia:hover { transform: scale(1.02); }
+    .btn-ia:disabled { background: #3b3f5c; cursor: not-allowed; transform: none; color: #a0a0a0; }
 
     /* Resultados */
     #resultado-panel {
-        display: none;
-        margin-top: 30px;
-        background: rgba(0, 255, 127, 0.05);
-        border: 1px solid #00ff7f;
-        padding: 20px;
-        border-radius: 8px;
-    }
-
-    .big-number {
-        font-size: 3em;
-        font-weight: bold;
-        color: #00ff7f;
+        display: none; margin-top: 30px; background: rgba(0, 255, 127, 0.05);
+        border: 1px solid #00ff7f; padding: 20px; border-radius: 8px;
     }
 
     /* ANIMACIÓN DEL LOGO GEMINI */
     .gemini-logo-spin {
-        width: 40px;
-        height: 40px;
-        animation: spin-pulse 3s infinite linear;
-        vertical-align: middle;
-        margin-right: 10px;
+        width: 40px; height: 40px; animation: spin-pulse 3s infinite linear;
+        vertical-align: middle; margin-right: 10px;
     }
 
     @keyframes spin-pulse {
-        0% {
-            transform: rotate(0deg) scale(1);
-            filter: drop-shadow(0 0 5px #4ea8de);
-        }
-
-        50% {
-            transform: rotate(180deg) scale(1.1);
-            filter: drop-shadow(0 0 15px #6930c3);
-        }
-
-        100% {
-            transform: rotate(360deg) scale(1);
-            filter: drop-shadow(0 0 5px #4ea8de);
-        }
+        0% { transform: rotate(0deg) scale(1); filter: drop-shadow(0 0 5px #4ea8de); }
+        50% { transform: rotate(180deg) scale(1.1); filter: drop-shadow(0 0 15px #6930c3); }
+        100% { transform: rotate(360deg) scale(1); filter: drop-shadow(0 0 5px #4ea8de); }
     }
 </style>
 
@@ -179,15 +108,11 @@ include '../../includes/header.php';
     <div class="row">
         <div class="col-md-6 form-group">
             <label>Línea</label>
-            <select id="select_linea">
-                <option value="">-- Seleccionar --</option>
-            </select>
+            <select id="select_linea"><option value="">-- Seleccionar --</option></select>
         </div>
         <div class="col-md-6 form-group">
             <label>Sub-Línea</label>
-            <select id="select_sublinea" disabled>
-                <option value="">-- Seleccionar --</option>
-            </select>
+            <select id="select_sublinea" disabled><option value="">-- Seleccionar --</option></select>
         </div>
     </div>
 
@@ -210,8 +135,8 @@ include '../../includes/header.php';
     </div>
 
     <div id="resultado-panel">
-        <h3>Proyección de Demanda</h3>
-        <div class="big-number" id="res_cantidad">0</div>
+        <div id="res_cantidad"></div>
+
         <p><strong>📊 Tendencia:</strong> <span id="res_tendencia"></span></p>
         <p style="color: #ff4444;"><strong>⚠️ Calidad/Devoluciones:</strong> <span id="res_calidad"></span></p>
         <p><strong>💡 Estrategia:</strong> <span id="res_accion"></span></p>
@@ -234,7 +159,7 @@ include '../../includes/header.php';
                 const sel = document.getElementById('select_linea');
                 data.forEach(d => {
                     let opt = document.createElement('option');
-                    opt.value = d.codigo; opt.text = d.nombre; // Guardamos texto
+                    opt.value = d.codigo; opt.text = d.nombre; 
                     sel.appendChild(opt);
                 });
             });
@@ -280,7 +205,7 @@ include '../../includes/header.php';
                         d.className = 'sugerencia-item';
                         d.innerHTML = `<span style="color:#aaa; font-size:0.8em">${item.codigo}</span> ${item.descripcion}`;
                         d.onclick = () => {
-                            inputBusqueda.value = item.descripcion; // Nombre visible
+                            inputBusqueda.value = item.descripcion; 
                             document.getElementById('codigo_seleccionado').value = item.codigo;
                             div.style.display = 'none';
                         };
@@ -307,7 +232,7 @@ include '../../includes/header.php';
 
         if (!prodCod && !linCod) { alert("Selecciona un producto o línea."); return; }
 
-        // --- CONSTRUIR TÍTULO DEL REPORTE (NOMBRE REAL) ---
+        // --- CONSTRUIR TÍTULO DEL REPORTE ---
         let tituloAnalisis = "";
         if (prodCod) {
             tituloAnalisis = `📦 ${prodNom}`;
@@ -335,7 +260,6 @@ include '../../includes/header.php';
 
             if (json.success) {
                 // INYECTAR TÍTULO
-                // Creamos un div para el título si no existe
                 let divTitulo = document.getElementById('titulo_reporte_dinamico');
                 if(!divTitulo) {
                     divTitulo = document.createElement('div');
@@ -346,40 +270,47 @@ include '../../includes/header.php';
                 }
                 divTitulo.innerText = "Analizando: " + tituloAnalisis;
 
-                // RENDERIZAR DOS NÚMEROS (GRID)
-                // Usamos Flexbox para poner Cierre Dic y Enero lado a lado
+                // --- CÁLCULO DE CIERRE TOTAL ---
+                const ventaReal = parseInt(json.meta.venta_acumulada_real);
+                const ventaFalta = parseInt(json.data.prediccion_cierre);
+                const cierreTotal = ventaReal + ventaFalta;
+
+                // --- RENDERIZAR DOS NÚMEROS (GRID) ---
                 const htmlNumeros = `
                     <div style="display: flex; justify-content: space-around; gap: 20px; margin-bottom: 20px;">
                         
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.8em; color: #aaa; text-transform: uppercase;">
+                        <div style="text-align: center; background: rgba(0, 210, 255, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 210, 255, 0.3); flex:1;">
+                            <div style="font-size: 0.7em; color: #aaa; text-transform: uppercase; margin-bottom: 10px;">
                                 RESTO DE ${json.meta.mes_actual} (${json.meta.dias_restantes} Días)
                             </div>
-                            <div style="font-size: 2.5em; font-weight: bold; color: #00d2ff;">
-                                ${json.data.prediccion_cierre}
+                            
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.2em; color: white;">
+                                <span title="Venta Real Acumulada">${ventaReal}</span>
+                                <span style="color: #00d2ff;">+</span>
+                                <span title="Predicción IA (Días restantes)" style="color: #00d2ff; font-weight:bold;">${ventaFalta}</span>
                             </div>
-                            <div style="font-size: 0.9em; color: white;">Predicción Ventas</div>
+                            
+                            <div style="font-size: 2.5em; font-weight: bold; color: #00d2ff; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 5px;">
+                                = ${cierreTotal}
+                            </div>
+                            <div style="font-size: 0.8em; color: #00d2ff; margin-top:5px;">Cierre Estimado</div>
                         </div>
 
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.8em; color: #aaa; text-transform: uppercase;">
+                        <div style="text-align: center; background: rgba(0, 255, 127, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 255, 127, 0.3); flex:1;">
+                            <div style="font-size: 0.7em; color: #aaa; text-transform: uppercase; margin-bottom: 35px;">
                                 PROYECCIÓN ${json.meta.mes_proximo}
                             </div>
-                            <div style="font-size: 2.5em; font-weight: bold; color: #00ff7f;">
+                            <div style="font-size: 3em; font-weight: bold; color: #00ff7f;">
                                 ${json.data.prediccion_enero}
                             </div>
-                            <div style="font-size: 0.9em; color: white;">Predicción Ventas</div>
+                            <div style="font-size: 0.8em; color: #00ff7f; margin-top:5px;">Predicción Ventas</div>
                         </div>
 
                     </div>
                     <div style="text-align:center; font-size:0.8em; color:#666; margin-bottom:15px;">* Cifras en Unidades Netas (Ventas - Devoluciones)</div>
                 `;
 
-                // Reemplazamos el div "res_cantidad" anterior con este bloque doble
                 document.getElementById('res_cantidad').innerHTML = htmlNumeros;
-                document.getElementById('res_cantidad').className = ''; // Quitamos clase big-number para que no afecte el layout nuevo
-
-                // Resto de datos
                 document.getElementById('res_tendencia').innerText = json.data.tendencia;
                 
                 const elemCalidad = document.getElementById('res_calidad');
@@ -390,8 +321,7 @@ include '../../includes/header.php';
                 document.getElementById('resultado-panel').style.display = 'block';
 
                 if (json.historia) { 
-                    // Graficamos la predicción de Enero (la más importante)
-                    renderizarGrafico(json.historia, json.data.prediccion_enero); 
+                    renderizarGrafico(json.historia, cierreTotal, json.data.prediccion_enero, json.meta.mes_actual, json.meta.mes_proximo); 
                 }
             } else {
                 alert("Error: " + (json.error || "Desconocido"));
@@ -405,7 +335,7 @@ include '../../includes/header.php';
         }
     }
 
-    // Funciones auxiliares (Cooldown y Gráfico) se mantienen igual...
+    // --- COOLDOWN ---
     function activarCooldown(segundosRestantes) {
         const btn = document.getElementById('btnProcesar');
         btn.disabled = true;
@@ -421,26 +351,48 @@ include '../../includes/header.php';
         }, 1000);
     }
 
-    function renderizarGrafico(historia, prediccionFutura) {
+    // --- GRÁFICA MEJORADA ---
+    function renderizarGrafico(historia, cierreMesActual, prediccionMesSiguiente, nombreMesActual, nombreMesSiguiente) {
         const ctx = document.getElementById('graficoVentas');
         if (!ctx) return;
+        
         let etiquetas = Object.keys(historia);
         let datos = Object.values(historia);
-        etiquetas.push("Enero 2026 🤖"); // Etiqueta fija o dinámica según quieras
+
+        // Ajustamos los datos para conectar el mes actual
+        datos.pop(); // Quitamos el mes actual incompleto que viene del backend
+        etiquetas.pop();
+        
+        // Agregamos punto Cierre
+        etiquetas.push(nombreMesActual + " (Cierre)");
+        datos.push(cierreMesActual);
+
+        // Agregamos punto Mes Siguiente
+        etiquetas.push(nombreMesSiguiente + " (IA)");
+        
+        // Creamos la línea de predicción (conecta desde el cierre)
         let datosPrediccion = new Array(datos.length).fill(null);
-        datosPrediccion[datos.length - 1] = datos[datos.length - 1];
-        datosPrediccion.push(prediccionFutura);
+        datosPrediccion[datos.length - 1] = cierreMesActual; // Conexión
+        datosPrediccion.push(prediccionMesSiguiente);
 
         if (chartInstancia) { chartInstancia.destroy(); }
+
         chartInstancia = new Chart(ctx.getContext('2d'), {
             type: 'line',
             data: {
                 labels: etiquetas,
-                datasets: [{
-                    label: 'Ventas Netas', data: datos, borderColor: '#00d2ff', backgroundColor: 'rgba(0, 210, 255, 0.1)', borderWidth: 2, tension: 0.3, pointRadius: 4, fill: true
-                }, {
-                    label: 'Pronóstico Enero', data: datosPrediccion, borderColor: '#00ff7f', borderDash: [5, 5], borderWidth: 3, pointRadius: 6, pointBackgroundColor: '#00ff7f'
-                }]
+                datasets: [
+                    {
+                        label: 'Histórico + Cierre', data: datos, 
+                        borderColor: '#00d2ff', backgroundColor: 'rgba(0, 210, 255, 0.1)', 
+                        borderWidth: 2, tension: 0.3, pointRadius: 4, fill: true
+                    },
+                    {
+                        label: 'Proyección Futura', data: datosPrediccion, 
+                        borderColor: '#00ff7f', borderDash: [5, 5], 
+                        borderWidth: 3, pointRadius: 6, pointBackgroundColor: '#00ff7f'
+                    }
+                ]
             },
             options: {
                 responsive: true, maintainAspectRatio: false,
