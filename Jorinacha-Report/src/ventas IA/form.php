@@ -144,7 +144,7 @@ include '../../includes/header.php';
     </div>
 
     <button class="btn-ia" id="btnProcesar" onclick="consultarIA()">🚀 Analizar Demanda</button>
-    <div id="loader" style="display:none; text-align:center; margin-top:20px;">🤖 Analizando tendencias en 17 sucursales...</div>
+    <div id="loader" style="display:none; text-align:center; margin-top:20px;">🤖 Analizando tendencias en 17 sucursales y Conectado Gemini IA...</div>
 
     <div id="resultado-panel">
 

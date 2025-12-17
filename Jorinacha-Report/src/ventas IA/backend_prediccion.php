@@ -7,28 +7,34 @@ require_once "../../services/empresas.php";
 require_once "../../services/db_connection.php";
 
 $input = json_decode(file_get_contents('php://input'), true);
-$apiKey = "AIzaSyCcDEFD1k_unQiRUl9YaDcf9V-G1KE7PSc"; // ⚠️ TU CLAVE
 
+// ⚠️ TU API KEY AQUÍ
+$apiKey = "PEGA_AQUI_TU_CLAVE_AIza..."; 
+
+// 🛡️ LISTA DE MODELOS (Estrategia Anti-Caídas)
 $modelosDisponibles = ["gemini-1.5-flash", "gemini-flash-latest", "gemini-2.5-flash"];
 
-// FILTROS
+// 1. DATOS RECIBIDOS DEL FRONTEND
 $producto  = $input['producto'] ?? '';
 $linea     = $input['linea'] ?? '';
 $sublinea  = $input['sublinea'] ?? '';
-$meses     = intval($input['meses'] ?? 12);
+$meses     = intval($input['meses'] ?? 12); // Por defecto 12 meses
+
+// Validación de seguridad para los meses
 if (!in_array($meses, [3, 6, 9, 12])) { $meses = 12; }
 
+// 2. CONSTRUCCIÓN DE FILTROS DINÁMICOS (Para Ventas y Devoluciones)
 $modoAnalisis = "";
 $filtroVenta = ""; 
 $filtroDevol = "";
 $paramsSQL = [];
 
-// Construcción dinámica de filtros para ambas tablas (Ventas y Devoluciones)
 if (!empty($producto)) {
     $modoAnalisis = "PRODUCTO: $producto";
     $filtroVenta = " AND rf.co_art = ? ";
-    $filtroDevol = " AND rd.co_art = ? "; // rd = reng_dvc
-    $paramsSQL = [$producto, $producto]; // Se duplica porque usamos UNION
+    $filtroDevol = " AND rd.co_art = ? "; // rd = renglón devolución
+    // Se duplica el parámetro porque la consulta SQL tiene 2 partes (UNION)
+    $paramsSQL = [$producto, $producto]; 
 } elseif (!empty($linea)) {
     $modoAnalisis = "LÍNEA: $linea";
     $filtroVenta = " AND a.co_lin = ? ";
@@ -43,26 +49,26 @@ if (!empty($producto)) {
         $paramsSQL[] = $sublinea;
     }
 } else {
-    echo json_encode(['error' => 'Falta filtro.']);
+    echo json_encode(['error' => 'Falta selección de producto o línea.']);
     exit;
 }
 
-// ARRAYS DE DATOS
-$datosCompletos = []; // Para la IA (Ventas vs Devoluciones)
-$datosGrafica = [];   // Para el Frontend (Solo Ventas Netas para simplificar visualización)
+// 3. EXTRACCIÓN DE DATOS (17 TIENDAS)
+$datosCompletos = []; // Almacena Ventas y Devoluciones por separado
+$datosGrafica = [];   // Almacena Ventas Netas para el Chart.js
+$tiendasConsultadas = 0;
 
 foreach ($lista_replicas as $nombreSede => $datos) {
     $conn = ConectarSQLServer_local_vpn($datos['db'], $datos['ip']);
     if (!$conn) $conn = ConectarSQLServer_local_vpn($datos['db_local'], '172.16.1.39');
     if (!$conn) continue;
 
-    // --- QUERY PODEROSO (UNION ALL) ---
-    // Trae Ventas (Tipo V) y Devoluciones (Tipo D) en un solo viaje
+    $tiendasConsultadas++;
+
+    // SQL PODEROSO: Une Facturas (V) y Devoluciones (D)
     $sql = "
-        /* PARTE 1: VENTAS */
-        SELECT 
-            'V' as tipo,
-            YEAR(f.fec_emis) as anio, MONTH(f.fec_emis) as mes, SUM(rf.total_art) as cantidad
+        /* VENTAS */
+        SELECT 'V' as tipo, YEAR(f.fec_emis) as anio, MONTH(f.fec_emis) as mes, SUM(rf.total_art) as cantidad
         FROM factura f
         INNER JOIN reng_fac rf ON f.fact_num = rf.fact_num
         INNER JOIN art a ON rf.co_art = a.co_art
@@ -71,11 +77,9 @@ foreach ($lista_replicas as $nombreSede => $datos) {
 
         UNION ALL
 
-        /* PARTE 2: DEVOLUCIONES (reng_dvc / devol_cli) */
-        SELECT 
-            'D' as tipo,
-            YEAR(d.fec_emis) as anio, MONTH(d.fec_emis) as mes, SUM(rd.total_art) as cantidad
-        FROM devol_cli d
+        /* DEVOLUCIONES */
+        SELECT 'D' as tipo, YEAR(d.fec_emis) as anio, MONTH(d.fec_emis) as mes, SUM(rd.total_art) as cantidad
+        FROM dev_cli d
         INNER JOIN reng_dvc rd ON d.fact_num = rd.fact_num
         INNER JOIN art a ON rd.co_art = a.co_art
         WHERE d.anulada = 0 AND d.fec_emis >= DATEADD(month, -$meses, GETDATE()) $filtroDevol
@@ -87,12 +91,10 @@ foreach ($lista_replicas as $nombreSede => $datos) {
         while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
             $key = $row['anio'] . "-" . str_pad($row['mes'], 2, "0", STR_PAD_LEFT);
             
-            // Inicializar si no existe
             if (!isset($datosCompletos[$key])) {
                 $datosCompletos[$key] = ['ventas' => 0, 'devoluciones' => 0];
             }
 
-            // Sumar según el tipo
             if ($row['tipo'] == 'V') {
                 $datosCompletos[$key]['ventas'] += $row['cantidad'];
             } else {
@@ -104,17 +106,19 @@ foreach ($lista_replicas as $nombreSede => $datos) {
 }
 
 if (empty($datosCompletos)) {
-    echo json_encode(['error' => "No hay movimientos en $meses meses."]);
+    echo json_encode(['error' => "No hay movimientos en los últimos $meses meses."]);
     exit;
 }
 ksort($datosCompletos);
 
-// Preparar datos para la Gráfica (Ventas Netas)
+// Preparar datos limpios para la Gráfica (Ventas Netas)
 foreach ($datosCompletos as $mes => $vals) {
-    $datosGrafica[$mes] = $vals['ventas'] - $vals['devoluciones'];
+    // Calculamos: Lo que se vendió MENOS lo que devolvieron
+    $neto = $vals['ventas'] - $vals['devoluciones'];
+    $datosGrafica[$mes] = $neto > 0 ? $neto : 0; // Evitamos negativos feos en la gráfica
 }
 
-// --- PROMPT CON INTELIGENCIA DE CALIDAD ---
+// 4. PREPARACIÓN DEL PROMPT PARA IA (CALIDAD Y DEMANDA)
 $prompt = "
 Actúa como Gerente de Producto y Calidad.
 Analiza estos datos (Ventas vs Devoluciones) de $modoAnalisis en los últimos $meses meses.
@@ -122,20 +126,21 @@ Analiza estos datos (Ventas vs Devoluciones) de $modoAnalisis en los últimos $m
 DATOS (Mes: {Ventas, Devoluciones}): " . json_encode($datosCompletos) . "
 
 TU MISIÓN:
-1. Calcula la Tasa de Devolución Global (Devoluciones / Ventas Totales).
-2. Si la tasa es > 5%, ALERTA sobre posible defecto de calidad o insatisfacción.
-3. Pronostica la venta neta del próximo mes.
+1. Calcula la Tasa de Devolución Global.
+2. Si la tasa es > 5%, debes poner una ALERTA sobre calidad.
+3. Pronostica la venta neta del próximo mes (considerando las devoluciones).
 
-RESPONDE SOLO JSON:
+RESPONDE SOLO EN ESTE JSON VÁLIDO:
 {
     \"prediccion\": numero_entero_neto, 
-    \"tendencia\": \"Texto breve sobre ventas (crece/baja)\",
-    \"alerta_calidad\": \"Texto breve. Si hay muchas devoluciones dilo aquí, si no, di 'Calidad Estable'.\",
-    \"accion\": \"Recomendación estratégica\"
+    \"tendencia\": \"Resumen ejecutivo (Max 15 palabras)\", 
+    \"alerta_calidad\": \"Texto breve. Si hay devoluciones altas, dilo aquí. Si no, di 'Calidad Estable'.\",
+    \"accion\": \"Recomendación estratégica de inventario (Max 15 palabras)\"
 }";
 
-// --- CONEXIÓN IA ---
+// 5. CONEXIÓN A GEMINI (FAILOVER LOOP)
 $respuestaExitosa = null;
+
 foreach ($modelosDisponibles as $modeloActual) {
     $url = "https://generativelanguage.googleapis.com/v1beta/models/$modeloActual:generateContent?key=" . $apiKey;
     $ch = curl_init($url);
@@ -144,6 +149,7 @@ foreach ($modelosDisponibles as $modeloActual) {
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(["contents" => [["parts" => [["text" => $prompt]]]]]));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
@@ -152,11 +158,12 @@ foreach ($modelosDisponibles as $modeloActual) {
         $jsonResponse = json_decode($response, true);
         if (isset($jsonResponse['candidates'][0]['content']['parts'][0]['text'])) {
             $respuestaExitosa = $jsonResponse['candidates'][0]['content']['parts'][0]['text'];
-            break;
+            break; // ¡Éxito! Salimos del bucle
         }
     }
 }
 
+// 6. RESPUESTA FINAL AL FRONTEND
 if ($respuestaExitosa) {
     $txt = str_replace(['```json', '```'], '', $respuestaExitosa);
     $dataIA = json_decode($txt, true);
@@ -165,12 +172,12 @@ if ($respuestaExitosa) {
         echo json_encode([
             'success' => true, 
             'data' => $dataIA,
-            'historia' => $datosGrafica // Enviamos ventas netas para la gráfica
+            'historia' => $datosGrafica // Enviamos ventas netas para que Chart.js las pinte
         ]);
     } else {
-        echo json_encode(['error' => 'Error JSON IA']);
+        echo json_encode(['error' => 'La IA respondió pero el formato JSON falló.']);
     }
 } else {
-    echo json_encode(['error' => "IA no disponible."]);
+    echo json_encode(['error' => "Servicio de IA sobrecargado. Intente en 1 minuto."]);
 }
 ?>
