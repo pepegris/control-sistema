@@ -11,7 +11,7 @@ $input = json_decode(file_get_contents('php://input'), true);
 // ⚠️ PEGA TU API KEY AQUÍ
 $apiKey = "AIzaSyCcDEFD1k_unQiRUl9YaDcf9V-G1KE7PSc"; 
 
-$modelosDisponibles = ["gemini-2.5-flash","gemini-1.5-flash", "gemini-flash-latest", ];
+$modelosDisponibles = ["gemini-1.5-flash", "gemini-flash-latest", "gemini-2.5-flash", ];
 
 // DATOS
 $modoReporte = $input['modo'] ?? 'prediccion';
