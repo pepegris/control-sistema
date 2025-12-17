@@ -14,8 +14,9 @@ $apiKey = "AIzaSyCcDEFD1k_unQiRUl9YaDcf9V-G1KE7PSc";
 // 🛡️ LISTA DE MODELOS (Plan A -> Plan B)
 // Si el primero falla (está lleno), usará el segundo automáticamente.
 $modelosDisponibles = [
-    "gemini-2.5-flash",          // 1. El más nuevo (Prioridad)
-    "gemini-2.0-flash-lite-001"  // 2. El ligero (Respaldo seguro)
+    "gemini-1.5-flash",    // El "Tanque": 15 peticiones/minuto (Muy estable)
+    "gemini-flash-latest", // Alias seguro a la última versión estable
+    "gemini-2.5-flash"     // El más nuevo (Úsalo solo si los otros fallan)
 ];
 
 // ... (Lógica de Filtros igual que antes) ...
