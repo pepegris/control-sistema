@@ -22,39 +22,79 @@ include '../../includes/header.php';
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
-    .form-group { margin-bottom: 20px; }
+    .form-group {
+        margin-bottom: 20px;
+    }
 
     label {
-        display: block; margin-bottom: 8px; font-weight: bold; color: #a0a0a0;
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #a0a0a0;
     }
 
-    input, select {
-        width: 100%; padding: 12px; background: #1a1d2e; border: 1px solid #3b3f5c;
-        color: white; border-radius: 5px; font-size: 16px;
+    input,
+    select {
+        width: 100%;
+        padding: 12px;
+        background: #1a1d2e;
+        border: 1px solid #3b3f5c;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px;
     }
 
-    input:focus, select:focus { outline: none; border-color: #5c6ac4; }
+    input:focus,
+    select:focus {
+        outline: none;
+        border-color: #5c6ac4;
+    }
 
     /* Sugerencias */
     #sugerencias {
-        background: #1a1d2e; border: 1px solid #3b3f5c; max-height: 150px;
-        overflow-y: auto; position: absolute; width: 90%; z-index: 1000; display: none;
+        background: #1a1d2e;
+        border: 1px solid #3b3f5c;
+        max-height: 150px;
+        overflow-y: auto;
+        position: absolute;
+        width: 90%;
+        z-index: 1000;
+        display: none;
     }
-    .sugerencia-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #2d324a; }
-    .sugerencia-item:hover { background: #5c6ac4; }
+
+    .sugerencia-item {
+        padding: 10px;
+        cursor: pointer;
+        border-bottom: 1px solid #2d324a;
+    }
+
+    .sugerencia-item:hover {
+        background: #5c6ac4;
+    }
 
     /* Botón con estados */
     .btn-ia {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: none; color: white; padding: 15px 30px; font-size: 18px;
-        border-radius: 50px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 20px;
+        border: none;
+        color: white;
+        padding: 15px 30px;
+        font-size: 18px;
+        border-radius: 50px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: bold;
+        margin-top: 20px;
         transition: all 0.3s;
     }
-    .btn-ia:hover { transform: scale(1.02); }
-    
+
+    .btn-ia:hover {
+        transform: scale(1.02);
+    }
+
     /* Estado deshabilitado (Cooldown) */
     .btn-ia:disabled {
-        background: #3b3f5c; /* Gris oscuro */
+        background: #3b3f5c;
+        /* Gris oscuro */
         cursor: not-allowed;
         transform: none;
         color: #a0a0a0;
@@ -62,10 +102,19 @@ include '../../includes/header.php';
 
     /* Resultados */
     #resultado-panel {
-        display: none; margin-top: 30px; background: rgba(0, 255, 127, 0.05);
-        border: 1px solid #00ff7f; padding: 20px; border-radius: 8px;
+        display: none;
+        margin-top: 30px;
+        background: rgba(0, 255, 127, 0.05);
+        border: 1px solid #00ff7f;
+        padding: 20px;
+        border-radius: 8px;
     }
-    .big-number { font-size: 3em; font-weight: bold; color: #00ff7f; }
+
+    .big-number {
+        font-size: 3em;
+        font-weight: bold;
+        color: #00ff7f;
+    }
 
     /* ANIMACIÓN DEL LOGO GEMINI */
     .gemini-logo-spin {
@@ -77,17 +126,33 @@ include '../../includes/header.php';
     }
 
     @keyframes spin-pulse {
-        0% { transform: rotate(0deg) scale(1); filter: drop-shadow(0 0 5px #4ea8de); }
-        50% { transform: rotate(180deg) scale(1.1); filter: drop-shadow(0 0 15px #6930c3); }
-        100% { transform: rotate(360deg) scale(1); filter: drop-shadow(0 0 5px #4ea8de); }
+        0% {
+            transform: rotate(0deg) scale(1);
+            filter: drop-shadow(0 0 5px #4ea8de);
+        }
+
+        50% {
+            transform: rotate(180deg) scale(1.1);
+            filter: drop-shadow(0 0 15px #6930c3);
+        }
+
+        100% {
+            transform: rotate(360deg) scale(1);
+            filter: drop-shadow(0 0 5px #4ea8de);
+        }
     }
 </style>
 
 <div class="ia-container">
     <h2 style="text-align: center; margin-bottom: 30px;">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C12.5 7 16 11 21 12C16 13 12.5 17 12 22C11.5 17 8 13 3 12C8 11 11.5 7 12 2Z" fill="url(#grad1)"/>
-            <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#4ea8de;stop-opacity:1" /><stop offset="100%" style="stop-color:#6930c3;stop-opacity:1" /></linearGradient></defs>
+            <path d="M12 2C12.5 7 16 11 21 12C16 13 12.5 17 12 22C11.5 17 8 13 3 12C8 11 11.5 7 12 2Z" fill="url(#grad1)" />
+            <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#4ea8de;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#6930c3;stop-opacity:1" />
+                </linearGradient>
+            </defs>
         </svg>
         Planner IA Gemini: Profit Plus
     </h2>
@@ -114,19 +179,23 @@ include '../../includes/header.php';
     <div class="row">
         <div class="col-md-6 form-group">
             <label>Línea</label>
-            <select id="select_linea"><option value="">-- Seleccionar --</option></select>
+            <select id="select_linea">
+                <option value="">-- Seleccionar --</option>
+            </select>
         </div>
         <div class="col-md-6 form-group">
             <label>Sub-Línea</label>
-            <select id="select_sublinea" disabled><option value="">-- Seleccionar --</option></select>
+            <select id="select_sublinea" disabled>
+                <option value="">-- Seleccionar --</option>
+            </select>
         </div>
     </div>
 
     <button class="btn-ia" id="btnProcesar" onclick="consultarIA()">🚀 Analizar Demanda</button>
-    
+
     <div id="loader" style="display:none; text-align:center; margin-top:20px;">
         <svg class="gemini-logo-spin" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 0C12.5 7 16 11 21 12C16 13 12.5 17 12 24C11.5 17 8 13 3 12C8 11 11.5 7 12 0Z" fill="url(#gradLoader)"/>
+            <path d="M12 0C12.5 7 16 11 21 12C16 13 12.5 17 12 24C11.5 17 8 13 3 12C8 11 11.5 7 12 0Z" fill="url(#gradLoader)" />
             <defs>
                 <linearGradient id="gradLoader" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" style="stop-color:#4ea8de;stop-opacity:1" />
@@ -155,7 +224,7 @@ include '../../includes/header.php';
 <script>
     let chartInstancia = null;
     let timerProcesando = null; // Timer de "cuánto tarda la consulta"
-    let timerCooldown = null;   // Timer de "espera 60s"
+    let timerCooldown = null; // Timer de "espera 60s"
 
     // --- CARGA INICIAL ---
     document.addEventListener("DOMContentLoaded", () => {
@@ -165,7 +234,9 @@ include '../../includes/header.php';
                 const sel = document.getElementById('select_linea');
                 data.forEach(d => {
                     let opt = document.createElement('option');
-                    opt.value = d.codigo; opt.innerText = d.nombre; sel.appendChild(opt);
+                    opt.value = d.codigo;
+                    opt.innerText = d.nombre;
+                    sel.appendChild(opt);
                 });
             });
     });
@@ -184,10 +255,14 @@ include '../../includes/header.php';
                 .then(r => r.json()).then(data => {
                     data.forEach(d => {
                         let opt = document.createElement('option');
-                        opt.value = d.codigo; opt.innerText = d.nombre; subSel.appendChild(opt);
+                        opt.value = d.codigo;
+                        opt.innerText = d.nombre;
+                        subSel.appendChild(opt);
                     });
                 });
-        } else { subSel.disabled = true; }
+        } else {
+            subSel.disabled = true;
+        }
     });
 
     // --- AUTOCOMPLETE ---
@@ -195,7 +270,10 @@ include '../../includes/header.php';
     inputBusqueda.addEventListener('input', function() {
         const q = this.value;
         const div = document.getElementById('sugerencias');
-        if (q.length < 3) { div.style.display = 'none'; return; }
+        if (q.length < 3) {
+            div.style.display = 'none';
+            return;
+        }
         document.getElementById('select_linea').value = "";
         document.getElementById('select_sublinea').disabled = true;
 
@@ -226,7 +304,10 @@ include '../../includes/header.php';
         const sub = document.getElementById('select_sublinea').value;
         const meses = document.getElementById('select_meses').value;
 
-        if (!prod && !lin) { alert("Selecciona un producto o línea."); return; }
+        if (!prod && !lin) {
+            alert("Selecciona un producto o línea.");
+            return;
+        }
 
         // 1. UI Loading
         document.getElementById('btnProcesar').disabled = true;
@@ -236,41 +317,66 @@ include '../../includes/header.php';
         // 2. Iniciar Timer de Proceso (0, 1, 2...)
         let segundos = 0;
         document.getElementById('segundos_timer').innerText = "0";
-        if(timerProcesando) clearInterval(timerProcesando);
-        timerProcesando = setInterval(() => { segundos++; document.getElementById('segundos_timer').innerText = segundos; }, 1000);
+        if (timerProcesando) clearInterval(timerProcesando);
+        timerProcesando = setInterval(() => {
+            segundos++;
+            document.getElementById('segundos_timer').innerText = segundos;
+        }, 1000);
 
         try {
             const res = await fetch('backend_prediccion.php', {
                 method: 'POST',
-                body: JSON.stringify({ producto: prod, linea: lin, sublinea: sub, meses: meses })
+                body: JSON.stringify({
+                    producto: prod,
+                    linea: lin,
+                    sublinea: sub,
+                    meses: meses
+                })
             });
             const json = await res.json();
 
             if (json.success) {
-                // Renderizar datos
-                document.getElementById('res_cantidad').innerHTML = json.data.prediccion + " <span style='font-size:20px; color:white'>Predicción de ventas Unidades Netas </span>";
+                // 1. Extraemos el periodo (Ej: "Enero 2026") o usamos un default
+                let periodo = json.data.periodo_prediccion || "Próximo Mes";
+
+                // 2. Renderizar Cantidad con el Título de la Fecha encima
+                document.getElementById('res_cantidad').innerHTML = `
+        <div style="font-size: 0.4em; color: #a0a0a0; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">
+            PROYECCIÓN PARA: ${periodo}
+        </div>
+        ${json.data.prediccion} 
+        <span style='font-size:20px; color:white'>Unidades Netas</span>
+    `;
+
+                // 3. Tendencia
                 document.getElementById('res_tendencia').innerText = json.data.tendencia;
-                
+
+                // 4. Calidad (Colores Semafóricos)
                 const elemCalidad = document.getElementById('res_calidad');
                 elemCalidad.innerText = json.data.alerta_calidad;
-                elemCalidad.style.color = (json.data.alerta_calidad.match(/Estable|Baja|Normal/)) ? "#00ff7f" : "#ff4444";
+                // Agregué 'Buena' a la lista de palabras seguras por si acaso
+                elemCalidad.style.color = (json.data.alerta_calidad.match(/Estable|Baja|Normal|Buena/)) ? "#00ff7f" : "#ff4444";
 
+                // 5. Acción y Gráfica
                 document.getElementById('res_accion').innerText = json.data.accion;
                 document.getElementById('resultado-panel').style.display = 'block';
 
-                if (json.historia) { renderizarGrafico(json.historia, json.data.prediccion); }
+                if (json.historia) {
+                    renderizarGrafico(json.historia, json.data.prediccion);
+                }
             } else {
                 alert("Error: " + (json.error || "Desconocido"));
             }
         } catch (e) {
-            console.error(e); alert("Error de conexión");
+            console.error(e);
+            alert("Error de conexión");
         } finally {
             // Detener timer de proceso y ocultar loader
             clearInterval(timerProcesando);
             document.getElementById('loader').style.display = 'none';
-            
+
             // --- INICIAR COOLDOWN DE 60 SEGUNDOS ---
-            activarCooldown(60); 
+            activarCooldown(60);
         }
     }
 
@@ -303,24 +409,60 @@ include '../../includes/header.php';
         datosPrediccion[datos.length - 1] = datos[datos.length - 1];
         datosPrediccion.push(prediccionFutura);
 
-        if (chartInstancia) { chartInstancia.destroy(); }
+        if (chartInstancia) {
+            chartInstancia.destroy();
+        }
 
         chartInstancia = new Chart(ctx.getContext('2d'), {
             type: 'line',
             data: {
                 labels: etiquetas,
                 datasets: [{
-                    label: 'Ventas Netas', data: datos, borderColor: '#00d2ff', backgroundColor: 'rgba(0, 210, 255, 0.1)', borderWidth: 2, tension: 0.3, pointRadius: 4, fill: true
+                    label: 'Ventas Netas',
+                    data: datos,
+                    borderColor: '#00d2ff',
+                    backgroundColor: 'rgba(0, 210, 255, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    fill: true
                 }, {
-                    label: 'Pronóstico IA', data: datosPrediccion, borderColor: '#00ff7f', borderDash: [5, 5], borderWidth: 3, pointRadius: 6, pointBackgroundColor: '#00ff7f'
+                    label: 'Pronóstico IA',
+                    data: datosPrediccion,
+                    borderColor: '#00ff7f',
+                    borderDash: [5, 5],
+                    borderWidth: 3,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#00ff7f'
                 }]
             },
             options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { labels: { color: 'white' } } },
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white'
+                        }
+                    }
+                },
                 scales: {
-                    y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#a0a0a0' } },
-                    x: { grid: { display: false }, ticks: { color: '#a0a0a0' } }
+                    y: {
+                        grid: {
+                            color: 'rgba(255,255,255,0.1)'
+                        },
+                        ticks: {
+                            color: '#a0a0a0'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#a0a0a0'
+                        }
+                    }
                 }
             }
         });
