@@ -7,9 +7,11 @@ require_once "../../services/empresas.php";
 require_once "../../services/db_connection.php";
 
 $input = json_decode(file_get_contents('php://input'), true);
+
+// ⚠️ PEGA TU API KEY AQUÍ
 $apiKey = "AIzaSyCcDEFD1k_unQiRUl9YaDcf9V-G1KE7PSc"; 
 
-$modelosDisponibles = ["gemini-2.5-flash","gemini-1.5-flash", "gemini-flash-latest", ];
+$modelosDisponibles = ["gemini-1.5-flash", "gemini-flash-latest", "gemini-2.5-flash"];
 
 // DATOS
 $producto  = $input['producto'] ?? '';
@@ -29,7 +31,6 @@ $modoAnalisis = "";
 $filtroVenta = ""; $filtroDevol = ""; $paramsSQL = [];
 
 if (!empty($producto)) {
-    // Usamos el código, pero en el frontend mostraremos el nombre
     $modoAnalisis = "PRODUCTO (Código: $producto)";
     $filtroVenta = " AND rf.co_art = ? ";
     $filtroDevol = " AND rd.co_art = ? ";
@@ -52,6 +53,7 @@ if (!empty($producto)) {
 $datosCompletos = []; 
 $rankingTiendas = []; 
 $tiendasConsultadas = 0;
+$datosGrafica = []; // Inicialización importante
 
 foreach ($lista_replicas as $nombreSede => $datos) {
     $conn = ConectarSQLServer_local_vpn($datos['db'], $datos['ip']);
@@ -62,6 +64,7 @@ foreach ($lista_replicas as $nombreSede => $datos) {
     $ventaTotalSede = 0; 
 
     // SQL (Ventas + Devoluciones)
+    // ⚠️ AQUI ESTA LA CORRECCIÓN: dev_cli unida con reng_dvc
     $sql = "
         SELECT 'V' as tipo, YEAR(f.fec_emis) as anio, MONTH(f.fec_emis) as mes, SUM(rf.total_art) as cantidad
         FROM factura f
@@ -69,7 +72,9 @@ foreach ($lista_replicas as $nombreSede => $datos) {
         INNER JOIN art a ON rf.co_art = a.co_art
         WHERE f.anulada = 0 AND f.fec_emis >= DATEADD(month, -$meses, GETDATE()) $filtroVenta
         GROUP BY YEAR(f.fec_emis), MONTH(f.fec_emis)
+        
         UNION ALL
+        
         SELECT 'D' as tipo, YEAR(d.fec_emis) as anio, MONTH(d.fec_emis) as mes, SUM(rd.total_art) as cantidad
         FROM dev_cli d
         INNER JOIN reng_dvc rd ON d.fact_num = rd.fact_num
@@ -132,6 +137,8 @@ RESPONDE SOLO JSON:
 
 // --- CONEXIÓN IA ---
 $respuestaExitosa = null;
+$ultimoHttpCode = 0; // Para debug
+
 foreach ($modelosDisponibles as $modeloActual) {
     $url = "https://generativelanguage.googleapis.com/v1beta/models/$modeloActual:generateContent?key=" . $apiKey;
     $ch = curl_init($url);
@@ -142,6 +149,7 @@ foreach ($modelosDisponibles as $modeloActual) {
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $ultimoHttpCode = $httpCode; // Guardamos el último código por si falla
     curl_close($ch);
 
     if ($httpCode == 200 && $response) {
@@ -153,7 +161,7 @@ foreach ($modelosDisponibles as $modeloActual) {
     }
 }
 
-// ... (Después de obtener $respuestaExitosa y decodificar $dataIA) ...
+// --- RESPUESTA AL FRONTEND ---
 
 if ($respuestaExitosa) {
     $txt = str_replace(['```json', '```'], '', $respuestaExitosa);
@@ -161,14 +169,12 @@ if ($respuestaExitosa) {
 
     if (json_last_error() === JSON_ERROR_NONE) {
         
-        // --- NUEVO CÁLCULO: Extraer venta real acumulada del mes en curso ---
+        // CÁLCULO: Venta real acumulada del mes en curso
         $keyMesActual = date("Y") . "-" . date("m"); // Ej: "2025-12"
         $acumuladoMesActual = 0;
         
-        // Buscamos en los datos históricos que ya sacamos de SQL
         if (isset($datosCompletos[$keyMesActual])) {
             $vals = $datosCompletos[$keyMesActual];
-            // Venta Neta = Ventas - Devoluciones
             $acumuladoMesActual = ($vals['ventas'] - $vals['devoluciones']);
             if($acumuladoMesActual < 0) $acumuladoMesActual = 0;
         }
@@ -181,17 +187,16 @@ if ($respuestaExitosa) {
                 'mes_actual' => $nombreMesActual,
                 'mes_proximo' => $nombreMesProximo,
                 'dias_restantes' => $diasRestantesMes,
-                'venta_acumulada_real' => $acumuladoMesActual // <--- ESTE ES EL DATO NUEVO
+                'venta_acumulada_real' => $acumuladoMesActual
             ]
         ]);
     } else {
         echo json_encode(['error' => 'Error JSON IA']);
     }
-}
-// ...
 } else {
+    // Modo Detective para errores
     $errorJson = json_decode($response, true);
     $msg = isset($errorJson['error']['message']) ? $errorJson['error']['message'] : "Error desconocido";
-    echo json_encode(['error' => "Fallo IA ($httpCode): $msg"]);
+    echo json_encode(['error' => "Fallo IA ($ultimoHttpCode): $msg"]);
 }
 ?>
