@@ -6,25 +6,25 @@ include '../../includes/header.php';
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-    /* Fondo solicitado */
     body {
         background-color: #242943 !important;
         color: white;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Segoe UI', sans-serif;
     }
 
-    /* Contenedor principal */
     .ia-container {
         max-width: 800px;
         margin: 40px auto;
         padding: 30px;
-        background: rgba(255, 255, 255, 0.05); /* Efecto cristal sutil */
+        background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 10px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
-    .form-group { margin-bottom: 20px; }
+    .form-group {
+        margin-bottom: 20px;
+    }
 
     label {
         display: block;
@@ -33,7 +33,8 @@ include '../../includes/header.php';
         color: #a0a0a0;
     }
 
-    input, select {
+    input,
+    select {
         width: 100%;
         padding: 12px;
         background: #1a1d2e;
@@ -43,12 +44,13 @@ include '../../includes/header.php';
         font-size: 16px;
     }
 
-    input:focus, select:focus {
+    input:focus,
+    select:focus {
         outline: none;
         border-color: #5c6ac4;
     }
 
-    /* Autocomplete sugerencias */
+    /* Sugerencias */
     #sugerencias {
         background: #1a1d2e;
         border: 1px solid #3b3f5c;
@@ -65,12 +67,9 @@ include '../../includes/header.php';
         cursor: pointer;
         border-bottom: 1px solid #2d324a;
     }
-    .sugerencia-item:hover { background: #5c6ac4; }
 
-    .code-span {
-        color: #aaa;
-        font-size: 0.8em;
-        margin-right: 10px;
+    .sugerencia-item:hover {
+        background: #5c6ac4;
     }
 
     .btn-ia {
@@ -82,16 +81,19 @@ include '../../includes/header.php';
         border-radius: 50px;
         cursor: pointer;
         width: 100%;
-        transition: transform 0.2s;
         font-weight: bold;
+        margin-top: 20px;
     }
-    .btn-ia:hover { transform: scale(1.02); }
 
-    /* Resultado */
+    .btn-ia:hover {
+        transform: scale(1.02);
+    }
+
+    /* Resultados */
     #resultado-panel {
         display: none;
         margin-top: 30px;
-        background: rgba(0, 255, 127, 0.05); /* Verde muy suave */
+        background: rgba(0, 255, 127, 0.05);
         border: 1px solid #00ff7f;
         padding: 20px;
         border-radius: 8px;
@@ -105,56 +107,63 @@ include '../../includes/header.php';
 </style>
 
 <div class="ia-container">
-    <h2 style="text-align: center; margin-bottom: 30px;">🔮 Predicción de Demanda IA</h2>
+    <h2 style="text-align: center; margin-bottom: 30px;">🔮 Planner IA: Profit Plus</h2>
+
+    <div class="form-group">
+        <label>📅 Rango de Análisis Histórico</label>
+        <select id="select_meses">
+            <option value="3">Últimos 3 Meses (Corto Plazo)</option>
+            <option value="6">Últimos 6 Meses (Semestral)</option>
+            <option value="9">Últimos 9 Meses</option>
+            <option value="12" selected>Últimos 12 Meses (Anual - Predeterminado)</option>
+        </select>
+    </div>
 
     <div class="form-group" style="position: relative;">
-        <label>Buscar Producto (Escribe para autocompletar)</label>
-        <input type="text" id="input_busqueda" placeholder="Ej: Tornillo, Aceite, Filtro..." autocomplete="off">
+        <label>📦 Buscar Producto</label>
+        <input type="text" id="input_busqueda" placeholder="Escribe el nombre del artículo..." autocomplete="off">
         <input type="hidden" id="codigo_seleccionado">
         <div id="sugerencias"></div>
     </div>
 
-    <div style="text-align: center; color: #666; margin: 15px 0;">--- O BUSCAR POR GRUPOS ---</div>
+    <div style="text-align: center; color: #666; margin: 15px 0;">--- O ANALIZAR POR CATEGORÍA ---</div>
 
     <div class="row">
         <div class="col-md-6 form-group">
             <label>Línea</label>
             <select id="select_linea">
-                <option value="">-- Seleccionar Línea --</option>
+                <option value="">-- Seleccionar --</option>
             </select>
         </div>
         <div class="col-md-6 form-group">
             <label>Sub-Línea</label>
             <select id="select_sublinea" disabled>
-                <option value="">-- Seleccione Línea primero --</option>
+                <option value="">-- Seleccionar --</option>
             </select>
         </div>
     </div>
 
-    <button class="btn-ia" id="btnProcesar" onclick="consultarIA()">✨ Generar Predicción</button>
-    
-    <div id="loader" style="display:none; text-align:center; margin-top:20px;">
-        Conectando a 17 Sucursales y a Gemini IA...
-    </div>
+    <button class="btn-ia" id="btnProcesar" onclick="consultarIA()">🚀 Analizar Demanda</button>
+    <div id="loader" style="display:none; text-align:center; margin-top:20px;">🤖 Analizando tendencias en 17 sucursales...</div>
 
     <div id="resultado-panel">
-        <h3>Resultado del Análisis</h3>
-        
+
+        <h3>Proyección de Demanda</h3>
         <div class="big-number" id="res_cantidad">0</div>
-        
-        <p><strong>Tendencia:</strong> <span id="res_tendencia"></span></p>
-        <p><strong>Acción Recomendada:</strong> <span id="res_accion"></span></p>
-        
-        <div style="margin-top: 30px; height: 300px; position: relative;">
+        <p><strong>📊 Tendencia:</strong> <span id="res_tendencia"></span></p>
+        <p style="color: #ff4444;"><strong>⚠️ Calidad/Devoluciones:</strong> <span id="res_calidad"></span></p>
+        <p><strong>💡 Estrategia:</strong> <span id="res_accion"></span></p>
+
+        <div style="margin-top: 30px; height: 350px; position: relative; width: 100%;">
             <canvas id="graficoVentas"></canvas>
         </div>
     </div>
 </div>
 
 <script>
-    let chartInstancia = null; // Variable para el gráfico
+    let chartInstancia = null;
 
-    // 1. CARGA INICIAL DE LÍNEAS
+    // Cargar Líneas
     document.addEventListener("DOMContentLoaded", () => {
         fetch('ajax_datos_maestros.php?accion=lineas')
             .then(r => r.json())
@@ -169,16 +178,13 @@ include '../../includes/header.php';
             });
     });
 
-    // 2. CAMBIO EN LÍNEA -> CARGAR SUBLÍNEAS
+    // Lógica Selectores (Línea/Sublínea)
     document.getElementById('select_linea').addEventListener('change', function() {
         const linea = this.value;
         const subSel = document.getElementById('select_sublinea');
-
-        // Limpiar formulario de producto si se usa línea
         document.getElementById('input_busqueda').value = '';
         document.getElementById('codigo_seleccionado').value = '';
-
-        subSel.innerHTML = '<option value="">-- Todas las Sub-líneas --</option>';
+        subSel.innerHTML = '<option value="">-- Todas --</option>';
 
         if (linea) {
             subSel.disabled = false;
@@ -197,55 +203,50 @@ include '../../includes/header.php';
         }
     });
 
-    // 3. AUTOCOMPLETADO DE PRODUCTOS
+    // Autocomplete
     const inputBusqueda = document.getElementById('input_busqueda');
-    const sugerenciasDiv = document.getElementById('sugerencias');
-
     inputBusqueda.addEventListener('input', function() {
         const q = this.value;
+        const div = document.getElementById('sugerencias');
         if (q.length < 3) {
-            sugerenciasDiv.style.display = 'none';
+            div.style.display = 'none';
             return;
         }
-
-        // Limpiar selectores si escribe producto
         document.getElementById('select_linea').value = "";
-        document.getElementById('select_sublinea').value = "";
         document.getElementById('select_sublinea').disabled = true;
 
         fetch(`ajax_datos_maestros.php?accion=buscar_art&q=${q}`)
-            .then(r => r.json())
-            .then(data => {
-                sugerenciasDiv.innerHTML = '';
+            .then(r => r.json()).then(data => {
+                div.innerHTML = '';
                 if (data.length > 0) {
-                    sugerenciasDiv.style.display = 'block';
+                    div.style.display = 'block';
                     data.forEach(item => {
-                        let div = document.createElement('div');
-                        div.className = 'sugerencia-item';
-                        div.innerHTML = `<span class="code-span">${item.codigo}</span> ${item.descripcion}`;
-                        div.onclick = () => {
-                            inputBusqueda.value = item.descripcion; 
-                            document.getElementById('codigo_seleccionado').value = item.codigo; 
-                            sugerenciasDiv.style.display = 'none';
+                        let d = document.createElement('div');
+                        d.className = 'sugerencia-item';
+                        d.innerHTML = `<span style="color:#aaa; font-size:0.8em">${item.codigo}</span> ${item.descripcion}`;
+                        d.onclick = () => {
+                            inputBusqueda.value = item.descripcion;
+                            document.getElementById('codigo_seleccionado').value = item.codigo;
+                            div.style.display = 'none';
                         };
-                        sugerenciasDiv.appendChild(div);
+                        div.appendChild(d);
                     });
                 }
             });
     });
 
-    // 4. CONSULTA FINAL AL BACKEND
+    // CONSULTA PRINCIPAL
     async function consultarIA() {
         const prod = document.getElementById('codigo_seleccionado').value;
         const lin = document.getElementById('select_linea').value;
         const sub = document.getElementById('select_sublinea').value;
+        const meses = document.getElementById('select_meses').value; // Nuevo dato
 
         if (!prod && !lin) {
-            alert("Por favor selecciona un Producto O una Línea para analizar.");
+            alert("Selecciona un producto o línea.");
             return;
         }
 
-        // UI Loading
         document.getElementById('btnProcesar').disabled = true;
         document.getElementById('loader').style.display = 'block';
         document.getElementById('resultado-panel').style.display = 'none';
@@ -253,24 +254,49 @@ include '../../includes/header.php';
         try {
             const res = await fetch('backend_prediccion.php', {
                 method: 'POST',
-                body: JSON.stringify({ producto: prod, linea: lin, sublinea: sub })
+                body: JSON.stringify({
+                    producto: prod,
+                    linea: lin,
+                    sublinea: sub,
+                    meses: meses
+                })
             });
             const json = await res.json();
 
-            if (json.success) {
-                // MOSTRAR DATOS
-                document.getElementById('res_cantidad').innerHTML = json.data.prediccion + " <span style='font-size:20px; color:white'>Unidades</span>";
-                document.getElementById('res_tendencia').innerText = json.data.tendencia;
-                document.getElementById('res_accion').innerText = json.data.accion;
-                document.getElementById('resultado-panel').style.display = 'block';
+    if (json.success) {
+                // 1. Cantidad (Cambiamos a "Unds Netas" para ser precisos)
+                document.getElementById('res_cantidad').innerHTML = json.data.prediccion + " <span style='font-size:20px; color:white'>Unds Netas</span>";
                 
-                // DIBUJAR GRÁFICO (Si el backend mandó historia)
-                if(json.historia) {
-                    renderizarGrafico(json.historia, json.data.prediccion);
+                // 2. Tendencia
+                document.getElementById('res_tendencia').innerText = json.data.tendencia;
+                
+                // 3. NUEVO: Alerta de Calidad / Devoluciones
+                // Asumimos que agregaste <span id="res_calidad"></span> en el HTML como vimos antes
+                const elemCalidad = document.getElementById('res_calidad');
+                elemCalidad.innerText = json.data.alerta_calidad;
+
+                // Lógica de colores semafórica
+                // Si la IA dice "Estable", "Baja" o "Normal", lo ponemos verde. Si no, Rojo.
+                if (json.data.alerta_calidad.includes("Estable") || json.data.alerta_calidad.includes("Baja") || json.data.alerta_calidad.includes("Normal")) {
+                     elemCalidad.style.color = "#00ff7f"; // Verde Neón (Todo OK)
+                } else {
+                     elemCalidad.style.color = "#ff4444"; // Rojo (Alerta de devoluciones altas)
                 }
 
+                // 4. Acción Recomendada
+                document.getElementById('res_accion').innerText = json.data.accion;
+                
+                // 5. Mostrar Panel
+                document.getElementById('resultado-panel').style.display = 'block';
+
+                // 6. Gráfica (Datos Netos)
+                if (json.historia) {
+                    renderizarGrafico(json.historia, json.data.prediccion);
+                } else {
+                    console.error("El backend no envió datos históricos para graficar.");
+                }
             } else {
-                alert("Error: " + json.error);
+                alert("Error: " + (json.error || "Desconocido"));
             }
         } catch (e) {
             console.error(e);
@@ -281,40 +307,39 @@ include '../../includes/header.php';
         }
     }
 
-    // 5. FUNCIÓN PARA PINTAR EL GRÁFICO
     function renderizarGrafico(historia, prediccionFutura) {
-        const ctx = document.getElementById('graficoVentas').getContext('2d');
-        
+        const ctx = document.getElementById('graficoVentas');
+        if (!ctx) return; // Seguridad
+
         let etiquetas = Object.keys(historia);
         let datos = Object.values(historia);
 
-        // Agregamos el futuro
-        etiquetas.push("Próximo Mes 🤖");
-        
-        // Creamos array para la línea de predicción (null en el pasado)
+        // Agregar futuro
+        etiquetas.push("Proyección 🤖");
         let datosPrediccion = new Array(datos.length).fill(null);
-        // Conectamos el último punto real con el futuro
-        datosPrediccion[datos.length - 1] = datos[datos.length - 1]; 
+        datosPrediccion[datos.length - 1] = datos[datos.length - 1]; // Conectar
         datosPrediccion.push(prediccionFutura);
 
-        if (chartInstancia) { chartInstancia.destroy(); }
+        if (chartInstancia) {
+            chartInstancia.destroy();
+        }
 
-        chartInstancia = new Chart(ctx, {
+        chartInstancia = new Chart(ctx.getContext('2d'), {
             type: 'line',
             data: {
                 labels: etiquetas,
-                datasets: [
-                    {
-                        label: 'Ventas Históricas',
+                datasets: [{
+                        label: 'Ventas Reales',
                         data: datos,
                         borderColor: '#00d2ff',
                         backgroundColor: 'rgba(0, 210, 255, 0.1)',
                         borderWidth: 2,
                         tension: 0.3,
-                        pointRadius: 4
+                        pointRadius: 4,
+                        fill: true
                     },
                     {
-                        label: 'Predicción IA',
+                        label: 'Pronóstico IA',
                         data: datosPrediccion,
                         borderColor: '#00ff7f',
                         borderDash: [5, 5],
@@ -328,16 +353,28 @@ include '../../includes/header.php';
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { labels: { color: 'white' } },
+                    legend: {
+                        labels: {
+                            color: 'white'
+                        }
+                    }
                 },
                 scales: {
                     y: {
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                        ticks: { color: '#a0a0a0' }
+                        grid: {
+                            color: 'rgba(255,255,255,0.1)'
+                        },
+                        ticks: {
+                            color: '#a0a0a0'
+                        }
                     },
                     x: {
-                        grid: { display: false },
-                        ticks: { color: '#a0a0a0' }
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#a0a0a0'
+                        }
                     }
                 }
             }
