@@ -248,7 +248,7 @@ include '../../includes/header.php';
 
             if (json.success) {
                 // Renderizar datos
-                document.getElementById('res_cantidad').innerHTML = json.data.prediccion + " <span style='font-size:20px; color:white'>Unds Netas</span>";
+                document.getElementById('res_cantidad').innerHTML = json.data.prediccion + " <span style='font-size:20px; color:white'>Predicción de ventas Unidades Netas </span>";
                 document.getElementById('res_tendencia').innerText = json.data.tendencia;
                 
                 const elemCalidad = document.getElementById('res_calidad');
