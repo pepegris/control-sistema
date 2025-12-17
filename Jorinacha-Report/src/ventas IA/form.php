@@ -91,7 +91,7 @@ include '../../includes/header.php';
              <path d="M12 2C12.5 7 16 11 21 12C16 13 12.5 17 12 22C11.5 17 8 13 3 12C8 11 11.5 7 12 2Z" fill="url(#grad1)"/>
              <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#4ea8de;stop-opacity:1" /><stop offset="100%" style="stop-color:#6930c3;stop-opacity:1" /></linearGradient></defs>
         </svg>
-        Planner IA: Profit Plus
+        Planner: Profit Plus
     </h2>
 
     <div class="mode-switch">
@@ -139,7 +139,7 @@ include '../../includes/header.php';
             <path d="M12 0C12.5 7 16 11 21 12C16 13 12.5 17 12 24C11.5 17 8 13 3 12C8 11 11.5 7 12 0Z" fill="url(#gradLoader)" />
              <defs><linearGradient id="gradLoader" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#4ea8de;stop-opacity:1" /><stop offset="100%" style="stop-color:#ff00cc;stop-opacity:1" /></linearGradient></defs>
         </svg>
-        <br><span style="font-size: 1.1em; color: white;">Analizando 17 sucursales y conectando con Gemini IA...</span>
+        <br><span style="font-size: 1.1em; color: white;">Analizando 16 sucursales y conectando con Gemini...</span>
         <br><span style="font-size: 14px; color: #aaa;">Tiempo: <strong id="segundos_timer" style="color: white;">0</strong>s</span>
     </div>
 
