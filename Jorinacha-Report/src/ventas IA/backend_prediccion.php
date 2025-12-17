@@ -1,7 +1,13 @@
 <?php
 // backend_prediccion.php
+// AGREGA ESTAS DOS LINEAS PRIMERO:
+error_reporting(0); 
+ini_set('display_errors', 0);
+
+// ... aquí sigue el resto de tu código (header, require, etc)...
 header('Content-Type: application/json');
-set_time_limit(300); // 5 minutos máximo para recopilar data de todas las sedes
+set_time_limit(300);
+
 
 require_once "../../services/empresas.php";
 require_once "../../services/db_connection.php";
