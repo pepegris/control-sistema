@@ -12,7 +12,7 @@ require_once "../../services/db_connection.php";
 $input = json_decode(file_get_contents('php://input'), true);
 
 // ⚠️ TU API KEY (Mantenla segura)
-$apiKey = "AIzaSyAv_LmWLvbm4QmbfTJ0927cOHpHYEY5KP4"; 
+$apiKey = "AIzaSyAy2X0_diSESHsQhcpkgLxo0sclkhhYnPM"; 
 
 // Filtros recibidos
 $producto  = $input['producto'] ?? ''; // Código de artículo
