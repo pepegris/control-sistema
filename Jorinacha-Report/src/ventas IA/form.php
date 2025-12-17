@@ -2,12 +2,69 @@
 require '../../includes/log.php';
 include '../../includes/header.php';
 ?>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-    /* ... (TUS ESTILOS ANTERIORES CSS SE MANTIENEN IGUAL) ... */
-    
-    /* ESTILOS NUEVOS PARA EL SWITCH Y TABLA */
+    body {
+        background-color: #242943 !important;
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .ia-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    label { display: block; margin-bottom: 8px; font-weight: bold; color: #a0a0a0; }
+
+    input, select {
+        width: 100%; padding: 12px; background: #1a1d2e; border: 1px solid #3b3f5c;
+        color: white; border-radius: 5px; font-size: 16px;
+    }
+    input:focus, select:focus { outline: none; border-color: #5c6ac4; }
+
+    /* Sugerencias */
+    #sugerencias {
+        background: #1a1d2e; border: 1px solid #3b3f5c; max-height: 150px;
+        overflow-y: auto; position: absolute; width: 90%; z-index: 1000; display: none;
+    }
+    .sugerencia-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #2d324a; }
+    .sugerencia-item:hover { background: #5c6ac4; }
+
+    /* Botón Acción */
+    .btn-ia {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none; color: white; padding: 15px 30px; font-size: 18px;
+        border-radius: 50px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 20px;
+        transition: all 0.3s;
+    }
+    .btn-ia:hover { transform: scale(1.02); }
+    .btn-ia:disabled { background: #3b3f5c; cursor: not-allowed; transform: none; color: #a0a0a0; }
+
+    /* Resultados */
+    #resultado-panel {
+        display: none; margin-top: 30px; background: rgba(0, 255, 127, 0.05);
+        border: 1px solid #00ff7f; padding: 20px; border-radius: 8px;
+    }
+
+    /* Animación Gemini */
+    .gemini-logo-spin { width: 40px; height: 40px; animation: spin-pulse 3s infinite linear; vertical-align: middle; margin-right: 10px; }
+    @keyframes spin-pulse {
+        0% { transform: rotate(0deg) scale(1); filter: drop-shadow(0 0 5px #4ea8de); }
+        50% { transform: rotate(180deg) scale(1.1); filter: drop-shadow(0 0 15px #6930c3); }
+        100% { transform: rotate(360deg) scale(1); filter: drop-shadow(0 0 5px #4ea8de); }
+    }
+
+    /* NUEVOS ESTILOS: SWITCH Y TABLA */
     .mode-switch {
         display: flex; justify-content: center; gap: 20px; margin-bottom: 30px;
         background: rgba(0,0,0,0.2); padding: 10px; border-radius: 50px;
@@ -18,9 +75,8 @@ include '../../includes/header.php';
     .mode-option.active {
         background: #00ff7f; color: #1a1d2e; font-weight: bold; box-shadow: 0 0 10px rgba(0,255,127,0.5);
     }
-    .mode-option input { display: none; } /* Ocultar radio real */
+    .mode-option input { display: none; } 
 
-    /* Tabla de Compras */
     .table-compras { width: 100%; border-collapse: collapse; margin-top: 20px; }
     .table-compras th { background: rgba(255,255,255,0.1); padding: 12px; text-align: left; color: #00ff7f; }
     .table-compras td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
@@ -83,7 +139,7 @@ include '../../includes/header.php';
             <path d="M12 0C12.5 7 16 11 21 12C16 13 12.5 17 12 24C11.5 17 8 13 3 12C8 11 11.5 7 12 0Z" fill="url(#gradLoader)" />
              <defs><linearGradient id="gradLoader" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#4ea8de;stop-opacity:1" /><stop offset="100%" style="stop-color:#ff00cc;stop-opacity:1" /></linearGradient></defs>
         </svg>
-        <br><span style="font-size: 1.1em; color: white;">Procesando datos de 17 sucursales...</span>
+        <br><span style="font-size: 1.1em; color: white;">Analizando 17 sucursales y conectando con Gemini IA...</span>
         <br><span style="font-size: 14px; color: #aaa;">Tiempo: <strong id="segundos_timer" style="color: white;">0</strong>s</span>
     </div>
 
@@ -91,7 +147,8 @@ include '../../includes/header.php';
         <div id="titulo_reporte_dinamico" style="text-align:center; color:#fff; font-size:1.2em; margin-bottom:20px; border-bottom:1px solid #333;"></div>
 
         <div id="view_prediccion">
-            <div id="res_cantidad"></div> <p><strong>📊 Tendencia:</strong> <span id="res_tendencia"></span></p>
+            <div id="res_cantidad"></div>
+            <p><strong>📊 Tendencia:</strong> <span id="res_tendencia"></span></p>
             <p><strong>⚠️ Calidad:</strong> <span id="res_calidad"></span></p>
             <p><strong>💡 Estrategia:</strong> <span id="res_accion"></span></p>
             <div style="margin-top: 30px; height: 350px; position: relative; width: 100%;">
@@ -101,24 +158,23 @@ include '../../includes/header.php';
 
         <div id="view_compras" style="display:none;">
             <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="color: #00d2ff; margin-top:0;">🎨 Análisis de Atributos (IA)</h4>
+                <h4 style="color: #00d2ff; margin-top:0;">🎨 Análisis de Atributos (Tallas/Colores)</h4>
                 <p id="res_tallas_colores" style="font-style: italic;"></p>
                 <p><strong>🚨 Tiendas Críticas:</strong> <span id="res_tiendas_criticas" style="color:#ff4444; font-weight:bold;"></span></p>
             </div>
 
-            <h4 style="color: #00ff7f;">🛒 Lista de Sugerencias de Reposición</h4>
+            <h4 style="color: #00ff7f;">🛒 Sugerencias de Reposición</h4>
             <div style="overflow-x: auto;">
                 <table class="table-compras">
                     <thead>
                         <tr>
                             <th>Artículo</th>
-                            <th>Cant. Sugerida</th>
+                            <th>Cant.</th>
                             <th>Prioridad</th>
-                            <th>Distribución Logística</th>
+                            <th>Distribución</th>
                         </tr>
                     </thead>
-                    <tbody id="tabla_compras_body">
-                        </tbody>
+                    <tbody id="tabla_compras_body"></tbody>
                 </table>
             </div>
         </div>
@@ -130,7 +186,7 @@ include '../../includes/header.php';
     let timerProcesando = null;
     let timerCooldown = null;
 
-    // --- CARGA Y EVENTOS (Igual que antes) ---
+    // --- CARGA Y SELECTORES ---
     document.addEventListener("DOMContentLoaded", () => {
         fetch('ajax_datos_maestros.php?accion=lineas').then(r=>r.json()).then(data=>{
             const sel=document.getElementById('select_linea');
@@ -138,17 +194,49 @@ include '../../includes/header.php';
         });
     });
 
-    // Toggle de Modos
     function cambiarModo(radio) {
         document.querySelectorAll('.mode-option').forEach(l => l.classList.remove('active'));
         radio.parentElement.classList.add('active');
-        // Resetear UI
         document.getElementById('resultado-panel').style.display = 'none';
     }
-    
-    // ... (Tu lógica de selectores de Línea/Sublínea y Autocomplete VA AQUÍ IGUAL QUE ANTES) ...
-    // COPIA TU CÓDIGO DE EVENT LISTENERS DE "select_linea" E "input_busqueda" AQUÍ
-    // (Lo omito para ahorrar espacio, pero es idéntico al anterior)
+
+    document.getElementById('select_linea').addEventListener('change', function() {
+        const linea = this.value;
+        const subSel = document.getElementById('select_sublinea');
+        document.getElementById('input_busqueda').value = ''; document.getElementById('codigo_seleccionado').value = '';
+        subSel.innerHTML = '<option value="">-- Todas --</option>';
+        if (linea) {
+            subSel.disabled = false;
+            fetch(`ajax_datos_maestros.php?accion=sublineas&linea=${linea}`).then(r=>r.json()).then(data=>{
+                data.forEach(d=>{ let o=document.createElement('option'); o.value=d.codigo; o.text=d.nombre; subSel.appendChild(o); });
+            });
+        } else { subSel.disabled = true; }
+    });
+
+    const inputBusqueda = document.getElementById('input_busqueda');
+    inputBusqueda.addEventListener('input', function() {
+        const q = this.value;
+        const div = document.getElementById('sugerencias');
+        if (q.length < 3) { div.style.display = 'none'; return; }
+        document.getElementById('select_linea').value = ""; document.getElementById('select_sublinea').disabled = true;
+        fetch(`ajax_datos_maestros.php?accion=buscar_art&q=${q}`).then(r=>r.json()).then(data=>{
+            div.innerHTML = '';
+            if (data.length > 0) {
+                div.style.display = 'block';
+                data.forEach(item => {
+                    let d = document.createElement('div');
+                    d.className = 'sugerencia-item';
+                    d.innerHTML = `<span style="color:#aaa; font-size:0.8em">${item.codigo}</span> ${item.descripcion}`;
+                    d.onclick = () => {
+                        inputBusqueda.value = item.descripcion; 
+                        document.getElementById('codigo_seleccionado').value = item.codigo;
+                        div.style.display = 'none';
+                    };
+                    div.appendChild(d);
+                });
+            }
+        });
+    });
 
     // --- CONSULTA PRINCIPAL ---
     async function consultarIA() {
@@ -158,12 +246,11 @@ include '../../includes/header.php';
         const subCod = document.getElementById('select_sublinea').value;
         const meses = document.getElementById('select_meses').value;
 
-        // Validación según modo
+        // Validación
         if (modo === 'prediccion' && !prodCod && !linCod) { 
             alert("Para Proyección, selecciona un producto o línea."); return; 
         }
 
-        // UI Loading
         document.getElementById('btnProcesar').disabled = true;
         document.getElementById('loader').style.display = 'block';
         document.getElementById('resultado-panel').style.display = 'none';
@@ -181,21 +268,14 @@ include '../../includes/header.php';
             const json = await res.json();
 
             if (json.success) {
-                document.getElementById('titulo_reporte_dinamico').innerText = (modo === 'prediccion') ? "Análisis de Demanda" : "Asistente de Abastecimiento Inteligente";
+                document.getElementById('titulo_reporte_dinamico').innerText = (modo === 'prediccion') ? "Análisis de Demanda" : "Asistente de Compras Inteligente";
                 document.getElementById('resultado-panel').style.display = 'block';
 
                 if (modo === 'prediccion') {
-                    // --- RENDERIZAR MODO 1 (Igual que antes) ---
                     document.getElementById('view_prediccion').style.display = 'block';
                     document.getElementById('view_compras').style.display = 'none';
-                    
-                    // (Tu lógica de pintar números grandes y gráfica VA AQUÍ)
-                    // ... Pega tu código de "htmlNumeros" y "renderizarGrafico" aquí ...
-                    // (Resumido para el ejemplo):
-                    renderizarModoPrediccion(json); // Función auxiliar abajo
-
+                    renderizarModoPrediccion(json); 
                 } else {
-                    // --- RENDERIZAR MODO 2: COMPRAS ---
                     document.getElementById('view_prediccion').style.display = 'none';
                     document.getElementById('view_compras').style.display = 'block';
 
@@ -214,7 +294,6 @@ include '../../includes/header.php';
                         tbody.innerHTML += row;
                     });
                 }
-
             } else {
                 alert("Error: " + (json.error || "Desconocido"));
             }
@@ -223,13 +302,11 @@ include '../../includes/header.php';
         } finally {
             clearInterval(timerProcesando);
             document.getElementById('loader').style.display = 'none';
-            document.getElementById('btnProcesar').disabled = false; // Reactivamos (o usa tu cooldown)
+            activarCooldown(60); 
         }
     }
 
-    // --- FUNCIÓN PARA ORDENAR EL MODO PREDICCIÓN (Tu código viejo encapsulado) ---
     function renderizarModoPrediccion(json) {
-        // CÁLCULO DE CIERRE TOTAL
         const ventaReal = parseInt(json.meta.venta_acumulada_real);
         const ventaFalta = parseInt(json.data.prediccion_cierre);
         const cierreTotal = ventaReal + ventaFalta;
@@ -237,35 +314,49 @@ include '../../includes/header.php';
         const htmlNumeros = `
             <div style="display: flex; justify-content: space-around; gap: 20px; margin-bottom: 20px;">
                 <div style="text-align: center; background: rgba(0, 210, 255, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 210, 255, 0.3); flex:1;">
-                    <div style="font-size: 0.7em; color: #aaa; text-transform: uppercase;">RESTO DE ${json.meta.mes_actual}</div>
+                    <div style="font-size: 0.7em; color: #aaa; text-transform: uppercase; margin-bottom: 10px;">RESTO DE ${json.meta.mes_actual}</div>
                     <div style="display: flex; justify-content: center; gap: 8px; font-size: 1.2em; color: white;">
                         <span>${ventaReal}</span><span style="color:#00d2ff">+</span><span style="color:#00d2ff; font-weight:bold;">${ventaFalta}</span>
                     </div>
                     <div style="font-size: 2.5em; font-weight: bold; color: #00d2ff; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 5px;">= ${cierreTotal}</div>
-                    <div style="font-size: 0.8em; color: #00d2ff;">Cierre Estimado</div>
+                    <div style="font-size: 0.8em; color: #00d2ff; margin-top:5px;">Cierre Estimado</div>
                 </div>
                 <div style="text-align: center; background: rgba(0, 255, 127, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 255, 127, 0.3); flex:1;">
-                    <div style="font-size: 0.7em; color: #aaa; text-transform: uppercase;">PROYECCIÓN ${json.meta.mes_proximo}</div>
+                    <div style="font-size: 0.7em; color: #aaa; text-transform: uppercase; margin-bottom: 35px;">PROYECCIÓN ${json.meta.mes_proximo}</div>
                     <div style="font-size: 3em; font-weight: bold; color: #00ff7f;">${json.data.prediccion_enero}</div>
-                    <div style="font-size: 0.8em; color: #00ff7f;">Predicción Ventas</div>
+                    <div style="font-size: 0.8em; color: #00ff7f; margin-top:5px;">Predicción Ventas</div>
                 </div>
-            </div>`;
+            </div>
+            <div style="text-align:center; font-size:0.8em; color:#666; margin-bottom:15px;">* Cifras en Unidades Netas (Ventas - Devoluciones)</div>`;
         
         document.getElementById('res_cantidad').innerHTML = htmlNumeros;
         document.getElementById('res_tendencia').innerText = json.data.tendencia;
-        document.getElementById('res_calidad').innerText = json.data.alerta_calidad;
+        const elemCalidad = document.getElementById('res_calidad');
+        elemCalidad.innerText = json.data.alerta_calidad;
+        elemCalidad.style.color = (json.data.alerta_calidad.match(/Estable|Baja|Normal|Buena/)) ? "#00ff7f" : "#ff4444";
         document.getElementById('res_accion').innerText = json.data.accion;
         
         if (json.historia) { 
-            // Graficamos (reutiliza tu función renderizarGrafico anterior)
              renderizarGrafico(json.historia, cierreTotal, json.data.prediccion_enero, json.meta.mes_actual, json.meta.mes_proximo); 
         }
     }
-    
-    // (AQUÍ PEGA TU FUNCIÓN renderizarGrafico() QUE YA TENÍAS)
+
+    function activarCooldown(segundosRestantes) {
+        const btn = document.getElementById('btnProcesar');
+        btn.disabled = true;
+        if (timerCooldown) clearInterval(timerCooldown);
+        timerCooldown = setInterval(() => {
+            btn.innerHTML = `⏳ Espera <strong>${segundosRestantes}s</strong>...`;
+            segundosRestantes--;
+            if (segundosRestantes < 0) {
+                clearInterval(timerCooldown);
+                btn.disabled = false; btn.innerHTML = "🚀 Ejecutar Análisis";
+            }
+        }, 1000);
+    }
+
     function renderizarGrafico(historia, cierreMesActual, prediccionMesSiguiente, nombreMesActual, nombreMesSiguiente) {
-        // ... (Tu código de Chart.js) ...
-         const ctx = document.getElementById('graficoVentas');
+        const ctx = document.getElementById('graficoVentas');
         if (!ctx) return;
         let etiquetas = Object.keys(historia);
         let datos = Object.values(historia);

@@ -7,7 +7,8 @@ require_once "../../services/empresas.php";
 require_once "../../services/db_connection.php";
 
 $input = json_decode(file_get_contents('php://input'), true);
-// ⚠️ TU CLAVE
+
+// ⚠️ PEGA TU API KEY AQUÍ
 $apiKey = "AIzaSyCcDEFD1k_unQiRUl9YaDcf9V-G1KE7PSc"; 
 
 $modelosDisponibles = ["gemini-1.5-flash", "gemini-flash-latest", "gemini-2.5-flash"];
@@ -48,9 +49,9 @@ if (!empty($producto)) {
         $paramsSQL[] = $sublinea;
     }
 } else { 
-    // Si quiere "Todo", limitamos para no explotar la IA
+    // Si quiere "Todo", limitamos para no explotar la IA en modo compras
     if($modoReporte == 'compras'){
-        $descFiltro = "TOP 50 ARTÍCULOS MÁS VENDIDOS (Análisis General)";
+        $descFiltro = "TOP VENTAS GENERALES";
     } else {
         echo json_encode(['error' => 'Para predicción numérica selecciona al menos una línea.']); exit;
     }
@@ -61,6 +62,7 @@ $datosCompletos = []; // Para el gráfico (Modo Predicción)
 $analisisDetallado = []; // Para la tabla (Modo Compras)
 $rankingTiendas = []; 
 $tiendasConsultadas = 0;
+$datosGrafica = [];
 
 foreach ($lista_replicas as $nombreSede => $datos) {
     $conn = ConectarSQLServer_local_vpn($datos['db'], $datos['ip']);
@@ -70,9 +72,9 @@ foreach ($lista_replicas as $nombreSede => $datos) {
     $tiendasConsultadas++;
     $ventaTotalSede = 0; 
 
-    // SQL ADAPTATIVO
+    // SQL ADAPTATIVO: Cambia según lo que necesitemos
     if ($modoReporte == 'prediccion') {
-        // SQL LIGERO (Solo montos y fechas)
+        // SQL 1: Agrupado por FECHA (Para Gráficas y Números)
         $sql = "
             SELECT 'V' as tipo, YEAR(f.fec_emis) as anio, MONTH(f.fec_emis) as mes, SUM(rf.total_art) as cantidad
             FROM factura f INNER JOIN reng_fac rf ON f.fact_num = rf.fact_num INNER JOIN art a ON rf.co_art = a.co_art
@@ -85,10 +87,10 @@ foreach ($lista_replicas as $nombreSede => $datos) {
             GROUP BY YEAR(d.fec_emis), MONTH(d.fec_emis)
         ";
     } else {
-        // SQL DETALLADO (Trae descripciones para analizar Tallas/Colores)
-        // Limitamos a TOP 100 items por tienda para no saturar tokens
+        // SQL 2: Agrupado por DESCRIPCIÓN (Para analizar Tallas, Colores y Productos)
+        // Traemos el TOP 60 para que la IA tenga contexto suficiente sin saturarse
         $sql = "
-            SELECT TOP 100 'V' as tipo, a.art_des as descripcion, SUM(rf.total_art) as cantidad
+            SELECT TOP 60 a.art_des as descripcion, SUM(rf.total_art) as cantidad
             FROM factura f INNER JOIN reng_fac rf ON f.fact_num = rf.fact_num INNER JOIN art a ON rf.co_art = a.co_art
             WHERE f.anulada = 0 AND f.fec_emis >= DATEADD(month, -$meses, GETDATE()) $filtroVenta
             GROUP BY a.art_des
@@ -101,7 +103,7 @@ foreach ($lista_replicas as $nombreSede => $datos) {
         while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
             
             if ($modoReporte == 'prediccion') {
-                // Lógica Vieja (Agrupar por Fecha)
+                // Lógica de Fechas
                 $key = $row['anio'] . "-" . str_pad($row['mes'], 2, "0", STR_PAD_LEFT);
                 if (!isset($datosCompletos[$key])) $datosCompletos[$key] = ['ventas' => 0, 'devoluciones' => 0];
                 if ($row['tipo'] == 'V') {
@@ -112,7 +114,7 @@ foreach ($lista_replicas as $nombreSede => $datos) {
                     $ventaTotalSede -= $row['cantidad'];
                 }
             } else {
-                // Lógica Nueva (Agrupar por Descripción para Tallas/Colores)
+                // Lógica de Descripciones (Compras)
                 // Estructura: [Descripcion => [Tienda A => 5, Tienda B => 10]]
                 $desc = trim($row['descripcion']);
                 if (!isset($analisisDetallado[$desc])) $analisisDetallado[$desc] = [];
@@ -129,7 +131,7 @@ foreach ($lista_replicas as $nombreSede => $datos) {
 // --- GENERACIÓN DE PROMPTS SEGÚN MODO ---
 
 if ($modoReporte == 'prediccion') {
-    // ... (Lógica de Predicción Numérica igual que antes) ...
+    // --- MODO 1: PREDICCIÓN NUMÉRICA (Tu lógica original) ---
     if (empty($datosCompletos)) { echo json_encode(['error' => "Sin datos."]); exit; }
     ksort($datosCompletos);
     arsort($rankingTiendas);
@@ -140,50 +142,65 @@ if ($modoReporte == 'prediccion') {
         $datosGrafica[$mes] = $neto > 0 ? $neto : 0;
     }
 
-    $prompt = "Eres Gerente de Supply Chain. Analiza: $descFiltro. Hoy: $hoy.
-    DATOS: " . json_encode($datosCompletos) . " TOP TIENDAS: " . json_encode($topTiendas) . "
-    Predice cierre de $nombreMesActual y total $nombreMesProximo.
-    JSON: {\"prediccion_cierre\": int, \"prediccion_enero\": int, \"tendencia\": string, \"alerta_calidad\": string, \"accion\": string}";
+    $prompt = "
+    Eres un Gerente Experto en Supply Chain. Analiza: $descFiltro.
+    Fecha hoy: $hoy. Quedan $diasRestantesMes días para terminar $nombreMesActual.
+    DATOS HISTÓRICOS (Mes: {Ventas, Devoluciones}): " . json_encode($datosCompletos) . "
+    TOP TIENDAS: " . json_encode($topTiendas) . "
+    OBJETIVOS:
+    1. CIERRE DE MES ($nombreMesActual).
+    2. MES SIGUIENTE ($nombreMesProximo).
+    3. Evalúa calidad y tendencias geográficas.
+    RESPONDE SOLO JSON:
+    {
+        \"prediccion_cierre\": numero_entero (Solo lo que falta para cerrar el mes),
+        \"prediccion_enero\": numero_entero (Todo el mes siguiente),
+        \"tendencia\": \"Texto breve sobre comportamiento y geografía\",
+        \"alerta_calidad\": \"Texto breve sobre devoluciones\",
+        \"accion\": \"Estrategia recomendada\"
+    }";
 
 } else {
     // --- MODO 2: ASISTENTE DE COMPRAS ---
     if (empty($analisisDetallado)) { echo json_encode(['error' => "Sin datos de ventas para analizar."]); exit; }
     
-    // Limpiamos data para enviar solo lo relevante (Top 30 productos globales)
+    // Limpiamos data para enviar solo lo relevante (Top 40 productos globales)
     // Esto es vital para no exceder el límite de caracteres de la IA
     $resumenEnvio = array_slice($analisisDetallado, 0, 40); 
 
     $prompt = "
     Eres un Comprador Experto en Retail/Moda para Venezuela.
-    Estás planificando las compras para el resto de $nombreMesActual y $nombreMesProximo.
-    CONTEXTO VENEZUELA: Considera temporadas (Navidad, Regreso a Clases, Sequía) y la logística compleja.
+    Estás planificando las compras para $nombreMesActual y $nombreMesProximo.
+    CONTEXTO: Considera temporadas locales (Navidad, Carnaval, Clases) y la logística de 17 sucursales.
     
-    DATOS DE VENTAS POR TIENDA (Producto: {Tienda: Cantidad}): " . json_encode($resumenEnvio) . "
+    DATOS DE VENTAS POR PRODUCTO Y TIENDA: " . json_encode($resumenEnvio) . "
 
     TU TAREA:
-    1. Analiza los nombres de los productos para detectar patrones de TALLAS (S, M, L, XL, Números) y COLORES preferidos.
+    1. Analiza los nombres de los productos para detectar patrones de TALLAS (S, M, L, XL, Números) y COLORES que más rotan.
     2. Identifica qué tiendas están vendiendo más (necesitan stock) y cuáles menos.
-    3. Genera una lista de sugerencias de compra.
+    3. Genera una lista de sugerencias de compra inteligente.
 
     RESPONDE SOLO EN ESTE JSON VÁLIDO:
     {
-        \"analisis_tallas_colores\": \"Resumen de qué tallas/colores se mueven más (Ej: 'Dominio de Talla M y colores oscuros')\",
+        \"analisis_tallas_colores\": \"Resumen breve de qué tallas/colores se mueven más (Ej: 'Dominio de Talla M y colores oscuros')\",
+        \"tiendas_criticas\": \"Nombres de 2-3 tiendas que urgen inventario\",
         \"recomendaciones\": [
             {
-                \"articulo\": \"Nombre genérico o específico\",
+                \"articulo\": \"Nombre del artículo o categoría\",
                 \"cantidad_sugerida\": numero_entero_global,
                 \"prioridad\": \"Alta/Media/Baja\",
                 \"distribucion_sugerida\": \"Texto breve (Ej: 'Enviar 60% a Caracas, resto a Occidente')\",
-                \"razon\": \"Por qué comprar esto (Ej: 'Alta rotación en todas las sedes')\"
-            },
-            ... (Máximo 5 recomendaciones clave)
-        ],
-        \"tiendas_criticas\": \"Nombres de 2-3 tiendas que urgen inventario\"
-    }";
+                \"razon\": \"Por qué comprar esto (Ej: 'Alta rotación por temporada')\"
+            }
+        ]
+    }
+    NOTA: Genera máximo 6 recomendaciones clave.";
 }
 
 // --- CONEXIÓN IA ---
 $respuestaExitosa = null;
+$ultimoHttpCode = 0;
+
 foreach ($modelosDisponibles as $modeloActual) {
     $url = "https://generativelanguage.googleapis.com/v1beta/models/$modeloActual:generateContent?key=" . $apiKey;
     $ch = curl_init($url);
@@ -194,7 +211,9 @@ foreach ($modelosDisponibles as $modeloActual) {
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $ultimoHttpCode = $httpCode;
     curl_close($ch);
+
     if ($httpCode == 200 && $response) {
         $jsonResponse = json_decode($response, true);
         if (isset($jsonResponse['candidates'][0]['content']['parts'][0]['text'])) {
@@ -204,7 +223,7 @@ foreach ($modelosDisponibles as $modeloActual) {
     }
 }
 
-// --- OUTPUT ---
+// --- OUTPUT FINAL ---
 if ($respuestaExitosa) {
     $txt = str_replace(['```json', '```'], '', $respuestaExitosa);
     $dataIA = json_decode($txt, true);
@@ -212,9 +231,8 @@ if ($respuestaExitosa) {
     if (json_last_error() === JSON_ERROR_NONE) {
         $response = ['success' => true, 'modo' => $modoReporte, 'data' => $dataIA];
         
-        // Si es predicción, agregamos extras
+        // Si es predicción, agregamos extras (Gráfica y Metadatos)
         if($modoReporte == 'prediccion') {
-            // (Tu lógica de cálculo acumulado anterior...)
             $keyMesActual = date("Y") . "-" . date("m");
             $acumuladoMesActual = isset($datosCompletos[$keyMesActual]) ? ($datosCompletos[$keyMesActual]['ventas'] - $datosCompletos[$keyMesActual]['devoluciones']) : 0;
             if($acumuladoMesActual < 0) $acumuladoMesActual = 0;
@@ -234,6 +252,6 @@ if ($respuestaExitosa) {
 } else {
     $errorJson = json_decode($response, true);
     $msg = isset($errorJson['error']['message']) ? $errorJson['error']['message'] : "Error desconocido";
-    echo json_encode(['error' => "Fallo IA: $msg"]);
+    echo json_encode(['error' => "Fallo IA ($ultimoHttpCode): $msg"]);
 }
 ?>
