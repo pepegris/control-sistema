@@ -13,7 +13,7 @@ include '../../includes/header.php';
     }
 
     .ia-container {
-        max-width: 800px;
+        max-width: 900px;
         margin: 40px auto;
         padding: 30px;
         background: rgba(255, 255, 255, 0.05);
@@ -77,9 +77,9 @@ include '../../includes/header.php';
     }
     .mode-option input { display: none; } 
 
-    .table-compras { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .table-compras { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9em; }
     .table-compras th { background: rgba(255,255,255,0.1); padding: 12px; text-align: left; color: #00ff7f; }
-    .table-compras td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .table-compras td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top;}
     .priority-Alta { color: #ff4444; font-weight: bold; }
     .priority-Media { color: #ffbb33; }
     .priority-Baja { color: #00d2ff; }
@@ -115,7 +115,7 @@ include '../../includes/header.php';
     </div>
 
     <div class="form-group" style="position: relative;">
-        <label>📦 Buscar Producto (Opcional en modo Compras)</label>
+        <label>📦 Buscar Producto (Dejar vacío para análisis Global)</label>
         <input type="text" id="input_busqueda" placeholder="Nombre del artículo..." autocomplete="off">
         <input type="hidden" id="codigo_seleccionado">
         <div id="sugerencias"></div>
@@ -124,11 +124,11 @@ include '../../includes/header.php';
     <div class="row">
         <div class="col-md-6 form-group">
             <label>Línea</label>
-            <select id="select_linea"><option value="">-- Seleccionar --</option></select>
+            <select id="select_linea"><option value="">-- Todas (Global) --</option></select>
         </div>
         <div class="col-md-6 form-group">
             <label>Sub-Línea</label>
-            <select id="select_sublinea" disabled><option value="">-- Seleccionar --</option></select>
+            <select id="select_sublinea" disabled><option value="">-- Todas --</option></select>
         </div>
     </div>
 
@@ -139,12 +139,12 @@ include '../../includes/header.php';
             <path d="M12 0C12.5 7 16 11 21 12C16 13 12.5 17 12 24C11.5 17 8 13 3 12C8 11 11.5 7 12 0Z" fill="url(#gradLoader)" />
              <defs><linearGradient id="gradLoader" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#4ea8de;stop-opacity:1" /><stop offset="100%" style="stop-color:#ff00cc;stop-opacity:1" /></linearGradient></defs>
         </svg>
-        <br><span style="font-size: 1.1em; color: white;">Analizando 16 sucursales y conectando con Gemini...</span>
-        <br><span style="font-size: 14px; color: #aaa;">Tiempo: <strong id="segundos_timer" style="color: white;">0</strong>s</span>
+        <br><span style="font-size: 1.1em; color: white;">Analizando todas las sucursales y conectando con Gemini...</span>
+        <br><span style="font-size: 14px; color: #aaa;">Esto puede tomar unos segundos... <strong id="segundos_timer" style="color: white;">0</strong>s</span>
     </div>
 
     <div id="resultado-panel">
-        <div id="titulo_reporte_dinamico" style="text-align:center; color:#fff; font-size:1.2em; margin-bottom:20px; border-bottom:1px solid #333;"></div>
+        <div id="titulo_reporte_dinamico" style="text-align:center; color:#fff; font-size:1.2em; margin-bottom:20px; border-bottom:1px solid #333; padding-bottom:10px;"></div>
 
         <div id="view_prediccion">
             <div id="res_cantidad"></div>
@@ -163,12 +163,12 @@ include '../../includes/header.php';
                 <p><strong>🚨 Tiendas Críticas:</strong> <span id="res_tiendas_criticas" style="color:#ff4444; font-weight:bold;"></span></p>
             </div>
 
-            <h4 style="color: #00ff7f;">🛒 Sugerencias de Reposición</h4>
+            <h4 style="color: #00ff7f;">🛒 Sugerencias de Reposición (Top x Línea)</h4>
             <div style="overflow-x: auto;">
                 <table class="table-compras">
                     <thead>
                         <tr>
-                            <th>Artículo</th>
+                            <th>Artículo / Categoría</th>
                             <th>Cant.</th>
                             <th>Prioridad</th>
                             <th>Distribución</th>
@@ -246,10 +246,8 @@ include '../../includes/header.php';
         const subCod = document.getElementById('select_sublinea').value;
         const meses = document.getElementById('select_meses').value;
 
-        // Validación
-        if (modo === 'prediccion' && !prodCod && !linCod) { 
-            alert("Para Proyección, selecciona un producto o línea."); return; 
-        }
+        // NOTA: ELIMINADA LA VALIDACIÓN QUE OBLIGABA A SELECCIONAR.
+        // Ahora permite enviar todo vacío para análisis global.
 
         document.getElementById('btnProcesar').disabled = true;
         document.getElementById('loader').style.display = 'block';
@@ -268,7 +266,13 @@ include '../../includes/header.php';
             const json = await res.json();
 
             if (json.success) {
-                document.getElementById('titulo_reporte_dinamico').innerText = (modo === 'prediccion') ? "Análisis de Demanda" : "Asistente de Compras Inteligente";
+                // Título dinámico
+                let titulo = (modo === 'prediccion') ? "Análisis de Demanda" : "Asistente de Compras";
+                if(!linCod && !prodCod) titulo += " (GLOBAL - Toda la Empresa)";
+                else if(linCod) titulo += " (Por Categoría)";
+                else titulo += " (Por Producto Específico)";
+                
+                document.getElementById('titulo_reporte_dinamico').innerText = titulo;
                 document.getElementById('resultado-panel').style.display = 'block';
 
                 if (modo === 'prediccion') {
