@@ -112,7 +112,8 @@ Tu tarea:
 3. Responde SOLO en formato JSON estricto: {\"prediccion\": numero_entero, \"tendencia\": \"texto corto\", \"accion\": \"texto corto\"}";
 
 // --- 3. CONEXIÓN A GEMINI (CON FIX SSL) ---
-$url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" . $apiKey;
+// Usamos Gemini 2.5 Flash (Versión Estable de Junio 2025)
+$url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" . $apiKey;
 
 $data = [
     "contents" => [
