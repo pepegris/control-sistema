@@ -223,8 +223,8 @@ include '../../includes/header.php';
 
 <script>
     let chartInstancia = null;
-    let timerProcesando = null; // Timer de "cuánto tarda la consulta"
-    let timerCooldown = null; // Timer de "espera 60s"
+    let timerProcesando = null;
+    let timerCooldown = null;
 
     // --- CARGA INICIAL ---
     document.addEventListener("DOMContentLoaded", () => {
@@ -234,14 +234,13 @@ include '../../includes/header.php';
                 const sel = document.getElementById('select_linea');
                 data.forEach(d => {
                     let opt = document.createElement('option');
-                    opt.value = d.codigo;
-                    opt.innerText = d.nombre;
+                    opt.value = d.codigo; opt.text = d.nombre; // Guardamos texto
                     sel.appendChild(opt);
                 });
             });
     });
 
-    // --- LÓGICA SELECTORES ---
+    // --- LOGICA SELECTORES ---
     document.getElementById('select_linea').addEventListener('change', function() {
         const linea = this.value;
         const subSel = document.getElementById('select_sublinea');
@@ -255,14 +254,11 @@ include '../../includes/header.php';
                 .then(r => r.json()).then(data => {
                     data.forEach(d => {
                         let opt = document.createElement('option');
-                        opt.value = d.codigo;
-                        opt.innerText = d.nombre;
+                        opt.value = d.codigo; opt.text = d.nombre;
                         subSel.appendChild(opt);
                     });
                 });
-        } else {
-            subSel.disabled = true;
-        }
+        } else { subSel.disabled = true; }
     });
 
     // --- AUTOCOMPLETE ---
@@ -270,10 +266,7 @@ include '../../includes/header.php';
     inputBusqueda.addEventListener('input', function() {
         const q = this.value;
         const div = document.getElementById('sugerencias');
-        if (q.length < 3) {
-            div.style.display = 'none';
-            return;
-        }
+        if (q.length < 3) { div.style.display = 'none'; return; }
         document.getElementById('select_linea').value = "";
         document.getElementById('select_sublinea').disabled = true;
 
@@ -287,7 +280,7 @@ include '../../includes/header.php';
                         d.className = 'sugerencia-item';
                         d.innerHTML = `<span style="color:#aaa; font-size:0.8em">${item.codigo}</span> ${item.descripcion}`;
                         d.onclick = () => {
-                            inputBusqueda.value = item.descripcion;
+                            inputBusqueda.value = item.descripcion; // Nombre visible
                             document.getElementById('codigo_seleccionado').value = item.codigo;
                             div.style.display = 'none';
                         };
@@ -299,98 +292,127 @@ include '../../includes/header.php';
 
     // --- CONSULTA PRINCIPAL ---
     async function consultarIA() {
-        const prod = document.getElementById('codigo_seleccionado').value;
-        const lin = document.getElementById('select_linea').value;
-        const sub = document.getElementById('select_sublinea').value;
+        const prodCod = document.getElementById('codigo_seleccionado').value;
+        const prodNom = document.getElementById('input_busqueda').value;
+        
+        const linSel = document.getElementById('select_linea');
+        const linCod = linSel.value;
+        const linNom = linSel.options[linSel.selectedIndex]?.text || "";
+
+        const subSel = document.getElementById('select_sublinea');
+        const subCod = subSel.value;
+        const subNom = subSel.options[subSel.selectedIndex]?.text || "";
+
         const meses = document.getElementById('select_meses').value;
 
-        if (!prod && !lin) {
-            alert("Selecciona un producto o línea.");
-            return;
+        if (!prodCod && !linCod) { alert("Selecciona un producto o línea."); return; }
+
+        // --- CONSTRUIR TÍTULO DEL REPORTE (NOMBRE REAL) ---
+        let tituloAnalisis = "";
+        if (prodCod) {
+            tituloAnalisis = `📦 ${prodNom}`;
+        } else {
+            tituloAnalisis = `📂 Línea: ${linNom}`;
+            if (subCod) tituloAnalisis += ` ➝ ${subNom}`;
         }
 
-        // 1. UI Loading
+        // UI Loading
         document.getElementById('btnProcesar').disabled = true;
         document.getElementById('loader').style.display = 'block';
         document.getElementById('resultado-panel').style.display = 'none';
 
-        // 2. Iniciar Timer de Proceso (0, 1, 2...)
         let segundos = 0;
         document.getElementById('segundos_timer').innerText = "0";
-        if (timerProcesando) clearInterval(timerProcesando);
-        timerProcesando = setInterval(() => {
-            segundos++;
-            document.getElementById('segundos_timer').innerText = segundos;
-        }, 1000);
+        if(timerProcesando) clearInterval(timerProcesando);
+        timerProcesando = setInterval(() => { segundos++; document.getElementById('segundos_timer').innerText = segundos; }, 1000);
 
         try {
             const res = await fetch('backend_prediccion.php', {
                 method: 'POST',
-                body: JSON.stringify({
-                    producto: prod,
-                    linea: lin,
-                    sublinea: sub,
-                    meses: meses
-                })
+                body: JSON.stringify({ producto: prodCod, linea: linCod, sublinea: subCod, meses: meses })
             });
             const json = await res.json();
 
             if (json.success) {
-                // 1. Extraemos el periodo (Ej: "Enero 2026") o usamos un default
-                let periodo = json.data.periodo_prediccion || "Próximo Mes";
+                // INYECTAR TÍTULO
+                // Creamos un div para el título si no existe
+                let divTitulo = document.getElementById('titulo_reporte_dinamico');
+                if(!divTitulo) {
+                    divTitulo = document.createElement('div');
+                    divTitulo.id = 'titulo_reporte_dinamico';
+                    divTitulo.style.cssText = "text-align:center; color:#fff; font-size:1.2em; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid #333;";
+                    const panel = document.getElementById('resultado-panel');
+                    panel.insertBefore(divTitulo, panel.firstChild);
+                }
+                divTitulo.innerText = "Analizando: " + tituloAnalisis;
 
-                // 2. Renderizar Cantidad con el Título de la Fecha encima
-                document.getElementById('res_cantidad').innerHTML = `
-        <div style="font-size: 0.4em; color: #a0a0a0; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">
-            PROYECCIÓN PARA: ${periodo}
-        </div>
-        ${json.data.prediccion} 
-        <span style='font-size:20px; color:white'>Unidades Netas</span>
-    `;
+                // RENDERIZAR DOS NÚMEROS (GRID)
+                // Usamos Flexbox para poner Cierre Dic y Enero lado a lado
+                const htmlNumeros = `
+                    <div style="display: flex; justify-content: space-around; gap: 20px; margin-bottom: 20px;">
+                        
+                        <div style="text-align: center;">
+                            <div style="font-size: 0.8em; color: #aaa; text-transform: uppercase;">
+                                RESTO DE ${json.meta.mes_actual} (${json.meta.dias_restantes} Días)
+                            </div>
+                            <div style="font-size: 2.5em; font-weight: bold; color: #00d2ff;">
+                                ${json.data.prediccion_cierre}
+                            </div>
+                            <div style="font-size: 0.9em; color: white;">Predicción Ventas</div>
+                        </div>
 
-                // 3. Tendencia
+                        <div style="text-align: center;">
+                            <div style="font-size: 0.8em; color: #aaa; text-transform: uppercase;">
+                                PROYECCIÓN ${json.meta.mes_proximo}
+                            </div>
+                            <div style="font-size: 2.5em; font-weight: bold; color: #00ff7f;">
+                                ${json.data.prediccion_enero}
+                            </div>
+                            <div style="font-size: 0.9em; color: white;">Predicción Ventas</div>
+                        </div>
+
+                    </div>
+                    <div style="text-align:center; font-size:0.8em; color:#666; margin-bottom:15px;">* Cifras en Unidades Netas (Ventas - Devoluciones)</div>
+                `;
+
+                // Reemplazamos el div "res_cantidad" anterior con este bloque doble
+                document.getElementById('res_cantidad').innerHTML = htmlNumeros;
+                document.getElementById('res_cantidad').className = ''; // Quitamos clase big-number para que no afecte el layout nuevo
+
+                // Resto de datos
                 document.getElementById('res_tendencia').innerText = json.data.tendencia;
-
-                // 4. Calidad (Colores Semafóricos)
+                
                 const elemCalidad = document.getElementById('res_calidad');
                 elemCalidad.innerText = json.data.alerta_calidad;
-                // Agregué 'Buena' a la lista de palabras seguras por si acaso
                 elemCalidad.style.color = (json.data.alerta_calidad.match(/Estable|Baja|Normal|Buena/)) ? "#00ff7f" : "#ff4444";
 
-                // 5. Acción y Gráfica
                 document.getElementById('res_accion').innerText = json.data.accion;
                 document.getElementById('resultado-panel').style.display = 'block';
 
-                if (json.historia) {
-                    renderizarGrafico(json.historia, json.data.prediccion);
+                if (json.historia) { 
+                    // Graficamos la predicción de Enero (la más importante)
+                    renderizarGrafico(json.historia, json.data.prediccion_enero); 
                 }
             } else {
                 alert("Error: " + (json.error || "Desconocido"));
             }
         } catch (e) {
-            console.error(e);
-            alert("Error de conexión");
+            console.error(e); alert("Error de conexión");
         } finally {
-            // Detener timer de proceso y ocultar loader
             clearInterval(timerProcesando);
             document.getElementById('loader').style.display = 'none';
-
-            // --- INICIAR COOLDOWN DE 60 SEGUNDOS ---
-            activarCooldown(60);
+            activarCooldown(60); 
         }
     }
 
-    // --- FUNCIÓN DE CUENTA REGRESIVA (BLOQUEO) ---
+    // Funciones auxiliares (Cooldown y Gráfico) se mantienen igual...
     function activarCooldown(segundosRestantes) {
         const btn = document.getElementById('btnProcesar');
-        btn.disabled = true; // Asegurar bloqueado
-
+        btn.disabled = true;
         if (timerCooldown) clearInterval(timerCooldown);
-
         timerCooldown = setInterval(() => {
-            btn.innerHTML = `⏳ Espera <strong>${segundosRestantes}s</strong> para consultar...`;
+            btn.innerHTML = `⏳ Espera <strong>${segundosRestantes}s</strong>...`;
             segundosRestantes--;
-
             if (segundosRestantes < 0) {
                 clearInterval(timerCooldown);
                 btn.disabled = false;
@@ -404,65 +426,28 @@ include '../../includes/header.php';
         if (!ctx) return;
         let etiquetas = Object.keys(historia);
         let datos = Object.values(historia);
-        etiquetas.push("Proyección 🤖");
+        etiquetas.push("Enero 2026 🤖"); // Etiqueta fija o dinámica según quieras
         let datosPrediccion = new Array(datos.length).fill(null);
         datosPrediccion[datos.length - 1] = datos[datos.length - 1];
         datosPrediccion.push(prediccionFutura);
 
-        if (chartInstancia) {
-            chartInstancia.destroy();
-        }
-
+        if (chartInstancia) { chartInstancia.destroy(); }
         chartInstancia = new Chart(ctx.getContext('2d'), {
             type: 'line',
             data: {
                 labels: etiquetas,
                 datasets: [{
-                    label: 'Ventas Netas',
-                    data: datos,
-                    borderColor: '#00d2ff',
-                    backgroundColor: 'rgba(0, 210, 255, 0.1)',
-                    borderWidth: 2,
-                    tension: 0.3,
-                    pointRadius: 4,
-                    fill: true
+                    label: 'Ventas Netas', data: datos, borderColor: '#00d2ff', backgroundColor: 'rgba(0, 210, 255, 0.1)', borderWidth: 2, tension: 0.3, pointRadius: 4, fill: true
                 }, {
-                    label: 'Pronóstico IA',
-                    data: datosPrediccion,
-                    borderColor: '#00ff7f',
-                    borderDash: [5, 5],
-                    borderWidth: 3,
-                    pointRadius: 6,
-                    pointBackgroundColor: '#00ff7f'
+                    label: 'Pronóstico Enero', data: datosPrediccion, borderColor: '#00ff7f', borderDash: [5, 5], borderWidth: 3, pointRadius: 6, pointBackgroundColor: '#00ff7f'
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: 'white'
-                        }
-                    }
-                },
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: 'white' } } },
                 scales: {
-                    y: {
-                        grid: {
-                            color: 'rgba(255,255,255,0.1)'
-                        },
-                        ticks: {
-                            color: '#a0a0a0'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            color: '#a0a0a0'
-                        }
-                    }
+                    y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#a0a0a0' } },
+                    x: { grid: { display: false }, ticks: { color: '#a0a0a0' } }
                 }
             }
         });

@@ -18,16 +18,19 @@ $sublinea  = $input['sublinea'] ?? '';
 $meses     = intval($input['meses'] ?? 12);
 if (!in_array($meses, [3, 6, 9, 12])) { $meses = 12; }
 
-// FECHA ACTUAL PARA CONTEXTO
-$fechaActual = date("d-m-Y");
-$mesProximo  = date("F Y", strtotime("+1 month")); // Ej: January 2026
+// --- FECHAS DINÁMICAS ---
+$hoy = date("d-m-Y");
+$diasRestantesMes = date("t") - date("j"); // Días que faltan para terminar el mes actual
+$nombreMesActual = date("F");
+$nombreMesProximo = date("F Y", strtotime("+1 month")); // Ej: January 2026
 
 // FILTROS
 $modoAnalisis = "";
 $filtroVenta = ""; $filtroDevol = ""; $paramsSQL = [];
 
 if (!empty($producto)) {
-    $modoAnalisis = "PRODUCTO: $producto";
+    // Usamos el código, pero en el frontend mostraremos el nombre
+    $modoAnalisis = "PRODUCTO (Código: $producto)";
     $filtroVenta = " AND rf.co_art = ? ";
     $filtroDevol = " AND rd.co_art = ? ";
     $paramsSQL = [$producto, $producto]; 
@@ -46,8 +49,8 @@ if (!empty($producto)) {
 } else { echo json_encode(['error' => 'Falta selección.']); exit; }
 
 // --- ESTRUCTURAS DE DATOS ---
-$datosCompletos = []; // Para la gráfica temporal (Global)
-$rankingTiendas = []; // NUEVO: Para saber quién vende más
+$datosCompletos = []; 
+$rankingTiendas = []; 
 $tiendasConsultadas = 0;
 
 foreach ($lista_replicas as $nombreSede => $datos) {
@@ -56,9 +59,9 @@ foreach ($lista_replicas as $nombreSede => $datos) {
     if (!$conn) continue;
 
     $tiendasConsultadas++;
-    $ventaTotalSede = 0; // Acumulador local
+    $ventaTotalSede = 0; 
 
-    // SQL (Mismo de antes: Ventas + Devoluciones)
+    // SQL (Ventas + Devoluciones)
     $sql = "
         SELECT 'V' as tipo, YEAR(f.fec_emis) as anio, MONTH(f.fec_emis) as mes, SUM(rf.total_art) as cantidad
         FROM factura f
@@ -83,57 +86,48 @@ foreach ($lista_replicas as $nombreSede => $datos) {
 
             if ($row['tipo'] == 'V') {
                 $datosCompletos[$key]['ventas'] += $row['cantidad'];
-                $ventaTotalSede += $row['cantidad']; // Sumamos al total de esta tienda
+                $ventaTotalSede += $row['cantidad'];
             } else {
                 $datosCompletos[$key]['devoluciones'] += $row['cantidad'];
-                $ventaTotalSede -= $row['cantidad']; // Restamos devoluciones al total de tienda
+                $ventaTotalSede -= $row['cantidad'];
             }
         }
     }
-    
-    // Guardamos el total neto de esta tienda
     $rankingTiendas[$nombreSede] = $ventaTotalSede;
-    
     sqlsrv_close($conn);
 }
 
 if (empty($datosCompletos)) { echo json_encode(['error' => "Sin datos."]); exit; }
 ksort($datosCompletos);
-
-// Ordenamos tiendas de MAYOR a MENOR venta
 arsort($rankingTiendas);
-// Tomamos el TOP 5 para no saturar el prompt, pero pasamos el total
 $topTiendas = array_slice($rankingTiendas, 0, 5); 
 
-// Datos Gráfica Frontend
+// Gráfica Frontend (Ventas Netas)
 foreach ($datosCompletos as $mes => $vals) {
     $neto = $vals['ventas'] - $vals['devoluciones'];
     $datosGrafica[$mes] = $neto > 0 ? $neto : 0;
 }
 
-// --- PROMPT ESPECÍFICO ---
+// --- PROMPT AVANZADO (CIERRE + PROYECCIÓN) ---
 $prompt = "
-Actúa como Gerente Nacional de Logística en Venezuela.
-Analiza $modoAnalisis.
-Fecha actual: $fechaActual.
-Debes predecir la demanda para el MES COMPLETO DE: $mesProximo.
+Eres un Gerente Experto en Supply Chain. Analiza: $modoAnalisis.
+Fecha hoy: $hoy. Quedan $diasRestantesMes días para terminar $nombreMesActual.
 
-DATOS HISTÓRICOS GLOBALES (Mes: {Ventas, Devoluciones}): " . json_encode($datosCompletos) . "
+DATOS HISTÓRICOS (Mes: {Ventas, Devoluciones}): " . json_encode($datosCompletos) . "
+TOP TIENDAS: " . json_encode($topTiendas) . "
 
-DISTRIBUCIÓN GEOGRÁFICA (Ranking de Ventas Acumuladas): " . json_encode($topTiendas) . "
+OBJETIVOS:
+1. CIERRE DE MES ($nombreMesActual): Predice cuánto se venderá SOLAMENTE en los días que faltan ($diasRestantesMes días restantes).
+2. MES SIGUIENTE ($nombreMesProximo): Predice la venta del mes completo entrante.
+3. Evalúa calidad y tendencias geográficas.
 
-TU MISIÓN:
-1. Predice la venta neta total para $mesProximo.
-2. Explica la distribución geográfica: Menciona explícitamente qué tiendas/estados impulsan esta demanda y cuáles no.
-3. Evalúa la calidad (tasa de devoluciones).
-
-RESPUESTA JSON ESTRICTA:
+RESPONDE SOLO JSON:
 {
-    \"prediccion\": numero_entero, 
-    \"periodo_prediccion\": \"Ej: Enero 2026\",
-    \"tendencia\": \"Texto explicando qué tiendas lideran la demanda y la tendencia temporal (Max 25 palabras).\", 
-    \"alerta_calidad\": \"Estado de la calidad.\",
-    \"accion\": \"Recomendación logística específica por región (Ej: Mover stock de Coro a Caracas) (Max 25 palabras)\"
+    \"prediccion_cierre\": numero_entero (Solo lo que falta para cerrar el mes),
+    \"prediccion_enero\": numero_entero (Todo el mes siguiente),
+    \"tendencia\": \"Texto breve sobre comportamiento y geografía\",
+    \"alerta_calidad\": \"Texto breve sobre devoluciones\",
+    \"accion\": \"Estrategia recomendada\"
 }";
 
 // --- CONEXIÓN IA ---
@@ -163,12 +157,21 @@ if ($respuestaExitosa) {
     $txt = str_replace(['```json', '```'], '', $respuestaExitosa);
     $dataIA = json_decode($txt, true);
     if (json_last_error() === JSON_ERROR_NONE) {
-        echo json_encode(['success' => true, 'data' => $dataIA, 'historia' => $datosGrafica]);
+        echo json_encode([
+            'success' => true, 
+            'data' => $dataIA, 
+            'historia' => $datosGrafica,
+            // Pasamos fechas calculadas para pintar bonito en el frontend
+            'meta' => [
+                'mes_actual' => $nombreMesActual,
+                'mes_proximo' => $nombreMesProximo,
+                'dias_restantes' => $diasRestantesMes
+            ]
+        ]);
     } else {
         echo json_encode(['error' => 'Error JSON IA']);
     }
 } else {
-    // Modo Detective
     $errorJson = json_decode($response, true);
     $msg = isset($errorJson['error']['message']) ? $errorJson['error']['message'] : "Error desconocido";
     echo json_encode(['error' => "Fallo IA ($httpCode): $msg"]);
