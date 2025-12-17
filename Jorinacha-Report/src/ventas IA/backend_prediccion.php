@@ -12,7 +12,7 @@ $input = json_decode(file_get_contents('php://input'), true);
 $apiKey = "AIzaSyCcDEFD1k_unQiRUl9YaDcf9V-G1KE7PSc"; 
 
 // 🛡️ LISTA DE MODELOS (Estrategia Anti-Caídas)
-$modelosDisponibles = ["gemini-1.5-flash", "gemini-flash-latest", "gemini-2.5-flash"];
+$modelosDisponibles = ["gemini-2.5-flash","gemini-1.5-flash", "gemini-flash-latest", ];
 
 // 1. DATOS RECIBIDOS DEL FRONTEND
 $producto  = $input['producto'] ?? '';
