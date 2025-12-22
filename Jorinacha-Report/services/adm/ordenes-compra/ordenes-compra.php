@@ -7,27 +7,53 @@ require_once "../../services/empresas.php";
 // =============================================================================
 // HELPER: GESTIÓN INTELIGENTE DE CONEXIÓN DESTINO (VPN -> LOCAL)
 // =============================================================================
-function ConectarDestino($sede) {
-    global $lista_replicas;
+// Variable global para almacenar el estado
+$tipo_conexion_actual = "Desconocido";
 
-    // 1. Validar que la sede exista en el array
+function ConectarDestino($sede) {
+    global $lista_replicas, $tipo_conexion_actual; // <--- IMPORTANTE: Global
+
     if (!isset($lista_replicas[$sede])) {
         return false;
     }
 
     $config = $lista_replicas[$sede];
     
-    // --- INTENTO 1: CONEXIÓN REMOTA (VPN) ---
+    // --- INTENTO 1: VPN ---
     $serverRemoto = $config['ip'];
     $dbRemota = $config['db'];
     
     $connectionInfoRemoto = array(
-        "Database" => $dbRemota, 
-        "UID" => "mezcla", 
-        "PWD" => "Zeus33$", 
-        "CharacterSet" => "UTF-8",
-        "LoginTimeout" => 4 // Espera 4 segundos. Si no responde, asume caída.
+        "Database" => $dbRemota, "UID" => "mezcla", "PWD" => "Zeus33$", 
+        "CharacterSet" => "UTF-8", "LoginTimeout" => 3 
     );
+
+    $conn = @sqlsrv_connect($serverRemoto, $connectionInfoRemoto);
+
+    if ($conn) {
+        $tipo_conexion_actual = "🌍 VPN (Remoto)"; // Guardamos el estado
+        return $conn; 
+    }
+
+    // --- INTENTO 2: LOCAL ---
+    $serverLocal = "172.16.1.39";
+    $dbLocal = $config['db_local'];
+
+    $connectionInfoLocal = array(
+        "Database" => $dbLocal, "UID" => "mezcla", "PWD" => "Zeus33$", 
+        "CharacterSet" => "UTF-8", "LoginTimeout" => 10
+    );
+
+    $connLocal = sqlsrv_connect($serverLocal, $connectionInfoLocal);
+    
+    if ($connLocal) {
+        $tipo_conexion_actual = "🏢 LOCAL (Réplica)"; // Guardamos el estado
+        return $connLocal; 
+    }
+
+    $tipo_conexion_actual = "❌ FALLÓ CONEXIÓN";
+    return false; 
+}
 
     // Usamos @ para suprimir warnings visuales si la VPN está caída
     $conn = @sqlsrv_connect($serverRemoto, $connectionInfoRemoto);
