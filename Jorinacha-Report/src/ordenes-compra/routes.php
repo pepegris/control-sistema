@@ -1,34 +1,44 @@
 <?php
 // routes.php
 
-// 1. CONFIGURACIÓN CRÍTICA PARA VISUALIZACIÓN REAL
-@apache_setenv('no-gzip', 1);
+// 1. CONFIGURACIÓN DE ERRORES (Para ver si falla algo más)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// 2. DESHABILITAR COMPRESIÓN (Compatible con todos los servidores)
+if (function_exists('apache_setenv')) {
+    @apache_setenv('no-gzip', 1); // Solo si es Apache
+}
 @ini_set('zlib.output_compression', 0);
 @ini_set('implicit_flush', 1);
-for ($i = 0; $i < ob_get_level(); $i++) { ob_end_flush(); }
-ob_implicit_flush(1);
+
+// Limpiamos cualquier buffer previo
+while (ob_get_level() > 0) {
+    ob_end_clean();
+}
 
 // Aumentamos tiempo de ejecución
 ini_set('max_execution_time', 300); 
 
 // ====================================================================
-// PASO 1: CARGAR LA INTERFAZ VISUAL ANTES DE PENSAR EN LÓGICA
+// PASO 1: CARGAR LA INTERFAZ VISUAL
 // ====================================================================
 
 // Verificamos que exista el archivo visual
 if (file_exists('../../includes/loading-ordenes-compras.php')) {
     include '../../includes/loading-ordenes-compras.php';
 } else {
-    echo "<h1>Cargando...</h1>"; // Fallback por si no existe
+    // Fallback simple si no encuentra el archivo
+    echo "<html><body style='background:#222; color:white; font-family:sans-serif;'>";
+    echo "<center><h1>Procesando...</h1><div id='log-container'></div></center>";
 }
 
-// TRUCO DE MAGIA: Enviar 8KB de espacios vacíos al navegador.
-// Esto obliga a Chrome/Edge a dejar de esperar y mostrar la página YA.
-echo str_pad(' ', 8192); 
+// TRUCO DE MAGIA SEGURO: Enviar espacios en blanco para forzar el renderizado
+echo str_pad(' ', 4096); 
 flush(); 
 
 // ====================================================================
-// PASO 2: AHORA CARGAMOS LA LÓGICA PESADA
+// PASO 2: CARGAR LA LÓGICA
 // ====================================================================
 
 require '../../includes/log.php';
@@ -47,7 +57,7 @@ if (isset($_POST['tienda'])) {
             document.getElementById('log-container').innerHTML += '<p style=\"color:#fff\">🚀 Iniciando proceso para $tienda...</p>';
         }
     </script>";
-    flush(); // Forzar pintado
+    flush(); 
 
     // --- BUSCAR FACTURAS ---
     $Factura_Ordenes = Factura_Ordenes($tienda, $fecha1, $corregir);
@@ -60,7 +70,7 @@ if (isset($_POST['tienda'])) {
         echo "<center><h3 style='color:#ff5555; margin-top:20px;'>No hay Información que Importar</h3></center>";
         echo "<center><p>Revise la fecha o si ya fueron importadas.</p></center>";
         echo "<center><a href='form.php' class='btn btn-danger'>Volver</a></center>";
-        echo "</div></body>"; // Cerrar HTML
+        echo "</div></body>"; 
         exit;
     }    
 
@@ -77,7 +87,7 @@ if (isset($_POST['tienda'])) {
         // 1. CREAR CABECERA
         $orden = Ordenes_Compra($tienda, $ordenes_fact_num, $ordenes_contrib, $ordenes_saldo, $ordenes_tot_bruto, $ordenes_tot_neto, $ordenes_iva);
         
-        // 2. INFORMAR CONEXIÓN (Feedback Visual)
+        // 2. INFORMAR CONEXIÓN
         global $tipo_conexion_actual;
         $msg_conexion = isset($tipo_conexion_actual) ? $tipo_conexion_actual : 'Desconocida';
         
@@ -96,7 +106,7 @@ if (isset($_POST['tienda'])) {
                 $rf_fact_num = $renglon['fact_num'];
                 $rf_reng_num = $renglon['reng_num'];
                 $rf_co_art = $renglon['co_art'];
-                // ... variables necesarias para la funcion ...
+                
                 $rf_total_art = $renglon['total_art'];
                 $rf_prec_vta = $renglon['prec_vta'];
                 $rf_reng_neto = $renglon['reng_neto'];
@@ -140,7 +150,7 @@ if (isset($_POST['tienda'])) {
     </script>";
 
     echo "<center><br><a href='form.php' class='btn btn-success btn-lg'>Volver al Inicio</a></center>";
-    echo "</div></body>"; // Cierre del body abierto en loading...
+    echo "</div></body>"; 
 
 } else {
     header('Location: form.php');
