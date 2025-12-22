@@ -1,40 +1,47 @@
 <?php
 // routes.php
 
-// 1. IMPORTANTE: PRIMERO LA SESIÓN Y LOGS (Antes de enviar cualquier HTML)
+// 1. PRIMERO LA SESIÓN (Antes de cualquier HTML para evitar error de headers)
 require '../../includes/log.php';
 
-// 2. CONFIGURACIÓN DE ERRORES Y TIEMPOS
+// 2. CONFIGURACIÓN TÉCNICA PARA IIS/WINDOWS
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-ini_set('max_execution_time', 300); 
+ini_set('max_execution_time', 300); // 5 minutos máximo
 
-// 3. DESHABILITAR COMPRESIÓN Y BUFFER (Para ver progreso en tiempo real)
-if (function_exists('apache_setenv')) {
-    @apache_setenv('no-gzip', 1);
-}
+// Deshabilitar compresión de salida (Vital para ver progreso)
 @ini_set('zlib.output_compression', 0);
 @ini_set('implicit_flush', 1);
 
-// Limpiamos cualquier buffer que haya abierto log.php
+// Encabezados para decirle al navegador "No guardes nada, muestra ya"
+header('Content-Encoding: none'); // Desactiva Gzip
+header('Cache-Control: no-cache, must-revalidate'); // No cachear
+
+// Limpiar buffers previos de PHP
 while (ob_get_level() > 0) {
     ob_end_clean();
 }
 
 // ====================================================================
-// PASO 4: AHORA SÍ, CARGAMOS LA INTERFAZ VISUAL
+// PASO 3: CARGAR LA INTERFAZ VISUAL
 // ====================================================================
 
 // Verificamos que exista el archivo visual
 if (file_exists('../../includes/loading-ordenes-compras.php')) {
     include '../../includes/loading-ordenes-compras.php';
 } else {
-    echo "<html><body style='background:#222; color:white; font-family:sans-serif;'>";
-    echo "<center><h1>Procesando...</h1><div id='log-container'></div></center>";
+    // Fallback simple si no encuentra el archivo
+    echo "<html><body style='background:#222; color:white; font-family:sans-serif; text-align:center;'>";
+    echo "<h1>Procesando...</h1><div id='spinner' style='margin:20px auto; border: 5px solid #f3f3f3; border-top: 5px solid #3498db; border-radius: 50%; width: 50px; height: 50px; animation: spin 2s linear infinite;'></div>";
+    echo "<div id='log-container'></div>";
 }
 
-// TRUCO DE MAGIA: Enviar espacios para forzar renderizado (después de log.php)
-echo str_pad(' ', 4096); 
+// ====================================================================
+// PASO 4: EL TRUCO PARA IIS (DESBORDAR EL BUFFER)
+// ====================================================================
+// Enviamos 40KB de espacios vacíos. Esto obliga a IIS a enviar
+// los datos al navegador inmediatamente, cambiando la pantalla.
+echo str_pad(' ', 40000); 
 flush(); 
 
 // ====================================================================
@@ -53,9 +60,10 @@ if (isset($_POST['tienda'])) {
     // MENSAJE INICIAL
     echo "<script>
         if(document.getElementById('log-container')) {
-            document.getElementById('log-container').innerHTML += '<p style=\"color:#fff\">🚀 Iniciando proceso para $tienda...</p>';
+            document.getElementById('log-container').innerHTML += '<p style=\"color:#fff; font-weight:bold;\">🚀 Iniciando proceso para $tienda...</p>';
         }
     </script>";
+    echo str_pad(' ', 1024); // Relleno extra por si acaso
     flush(); 
 
     // --- BUSCAR FACTURAS ---
@@ -93,6 +101,8 @@ if (isset($_POST['tienda'])) {
         echo "<p style='color:#aaa; font-size:12px; margin:0; border-top:1px solid #444; margin-top:5px; padding-top:5px;'>
                 Procesando Factura: <b style='color:#fff'>$ordenes_fact_num</b> <span style='font-size:10px'>($msg_conexion)</span>
               </p>";
+        // Enviamos un poco de relleno en cada vuelta para mantener la conexión viva visualmente
+        echo str_pad(' ', 512); 
         flush();
 
         // 3. RENGLONES
@@ -127,8 +137,9 @@ if (isset($_POST['tienda'])) {
                     echo "<div style='color:#00ff99; font-size:14px;'>✅ Item Creado: $rf_co_art</div>";
                 }
                 
-                // Scroll automático
+                // Scroll automático y flush
                 echo "<script>window.scrollTo(0,document.body.scrollHeight);</script>";
+                echo str_pad(' ', 256); // Relleno pequeño
                 flush(); 
             }
         }
@@ -138,11 +149,12 @@ if (isset($_POST['tienda'])) {
             $importado = Up_Factura_Ordenes($tienda, $fecha1, $ordenes_fact_num, $orden, $reng_orden);
             echo "<h4 style='color:#fff; margin-top:5px; font-size:14px;'>📄 $importado</h4>";
             echo "<script>window.scrollTo(0,document.body.scrollHeight);</script>";
+            echo str_pad(' ', 256);
             flush();
         }
     }
 
-    // FINALIZAR
+    // FINALIZAR (Solo al final de todo el proceso)
     echo "<script>
         if(document.getElementById('spinner')) document.getElementById('spinner').style.display = 'none'; 
         if(document.querySelector('h1')) document.querySelector('h1').innerText = 'PROCESO FINALIZADO';
