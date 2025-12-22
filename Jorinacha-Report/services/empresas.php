@@ -128,93 +128,109 @@ function Database2($sede)
 }
 function Database($sede)
 {
-
+    // Esta funcion se mantiene para compatibilidad con codigo viejo
     $bd = array(
         "Previa Shop" => 'PREVIA_A',
-
-        "Sucursal Caracas I" => 'CARACAS1',
+        "Sucursal Caracas I" => 'CARACAS1', 
         "Sucursal Caracas II" => 'CARACAS2',
-        "Sucursal Cagua" => 'CAGUA',
+        "Sucursal Cagua" => 'CAGUA', 
         "Sucursal Maturin" => 'MATURIN',
-        "Sucursal Coro1" => 'CORO1',
-        "Sucursal Coro2" => 'CORO2',
+        "Sucursal Coro1" => 'CORO1', 
+        "Sucursal Coro2" => 'CORO2', 
         "Sucursal Coro3" => 'CORO3',
-        "Sucursal PtoFijo1" => 'PTOFIJO1',
+        "Sucursal PtoFijo1" => 'PTOFIJO1', 
         "Sucursal PtoFijo2" => 'PTOFIJO2',
-        "Sucursal Ojeda" => 'OJEDA',
+        "Sucursal Ojeda" => 'OJEDA', 
         "Sucursal Valle" => 'VAPASCUA',
         "Sucursal Guigue" => 'GUIGUE',
-        "Sucursal Puerto" => 'PUERTO',
+         "Sucursal Puerto" => 'PUERTO',
         "Sucursal Acarigua" => 'ACARIGUA',
-
-
-        "Comercial Acari" => 'ACARI',
+        "Comercial Acari" => 'ACARI', 
         "Comercial Puecruz" => 'PUECRUZ',
-        "Comercial Vallepa" => 'VALLEPA',
+        "Comercial Vallepa" => 'VALLEPA', 
         "Comercial Higue" => 'HIGUE',
-        "Comercial Valena" => 'VALENA',
+        "Comercial Valena" => 'VALENA', 
         "Comercial Ojena" => 'OJENA',
-        "Comercial Punto Fijo" => 'PUFIJO',
+        "Comercial Punto Fijo" => 'PUFIJO', 
         "Comercial Trina" => 'TRINA',
-        "Comercial Apura" => 'APURA',
+        "Comercial Apura" => 'APURA', 
         "Comercial Corina I" => 'CORINA1',
-        "Comercial Nachari" => 'NACHARI',
+        "Comercial Nachari" => 'NACHARI', 
         "Comercial Corina II" => 'CORINA2',
-        "Comercial Catica II" => 'CATICA2',
-
+        "Comercial Catica II" => 'CATICA2', 
         "Comercial Merina" => 'MERINA',
-        "Comercial Merina3" => 'MERINA3',
+        "Comercial Merina3" => 'MERINA3', 
         "Comercial Kagu" => 'KAGU',
         "Comercial Matur" => 'MATUR',
-
     );
+    
+    // Si la sede viene del codigo viejo, la encuentra arriba.
+    if(isset($bd[$sede])) return $bd[$sede];
 
-    return $bd[$sede];
+    // Si la sede viene del CODIGO NUEVO (el array de abajo), buscamos su DB
+    global $lista_replicas;
+    if(isset($lista_replicas[$sede])) return $lista_replicas[$sede]['db'];
+
+    return '';
 }
 
 function Cliente($sede)
 {
-
     $bd = array(
-        "Sucursal Caracas I"    =>     'S01',
-        "Sucursal Caracas II"    =>     'S02',
-        "Sucursal Cagua" => 'S03',
-        "Sucursal Maturin" => 'S04',
-        "Sucursal Coro1" => 'S05',
-        "Sucursal Coro2" => 'S06',
-        "Sucursal Coro3" => 'S07',
-        "Sucursal PtoFijo1" => 'S08',
-        "Sucursal PtoFijo2" => 'S09',
-        "Sucursal Ojeda" => 'S10',
-        "Sucursal Valle" => 'S11',
-        "Sucursal Guigue" => 'S12',
-        "Sucursal Puerto" => 'S13',
-        "Sucursal Acarigua" => 'S14',
+        // --- NOMBRES VIEJOS (Mantener para compatibilidad) ---
+        "Sucursal Caracas I"    => 'S01',
+        "Sucursal Caracas II"   => 'S02',
+        "Sucursal Cagua"        => 'S03',
+        "Sucursal Maturin"      => 'S04',
+        "Sucursal Coro1"        => 'S05',
+        "Sucursal Coro2"        => 'S06',
+        "Sucursal Coro3"        => 'S07',
+        "Sucursal PtoFijo1"     => 'S08',
+        "Sucursal PtoFijo2"     => 'S09',
+        "Sucursal Ojeda"        => 'S10',
+        "Sucursal Valle"        => 'S11',
+        "Sucursal Guigue"       => 'S12',
+        "Sucursal Puerto"       => 'S13',
+        "Sucursal Acarigua"     => 'S14',
+        
+        "Comercial Acari"       => 'T04',
+        "Comercial Puecruz"     => 'T05',
+        "Comercial Vallepa"     => 'T06',
+        "Comercial Higue"       => 'T09',
+        "Comercial Valena"      => 'T10',
+        "Comercial Ojena"       => 'T12',
+        "Comercial Punto Fijo"  => 'T13',
+        "Comercial Trina"       => 'T16',
+        "Comercial Apura"       => 'T17',
+        "Comercial Corina I"    => 'T18',
+        "Comercial Nachari"     => 'T19',
+        "Comercial Corina II"   => 'T22',
+        "Comercial Catica II"   => 'T24',
 
-
-
-        "Comercial Acari"    =>     'T04',
-        "Comercial Puecruz"    =>     'T05',
-        "Comercial Vallepa"    =>     'T06',
-
-        "Comercial Higue"    =>     'T09',
-        "Comercial Valena"    =>     'T10',
-        "Comercial Ojena"    =>     'T12',
-        "Comercial Punto Fijo"    =>     'T13',
-        "Comercial Trina"    =>     'T16',
-        "Comercial Apura"    =>     'T17',
-        "Comercial Corina I"    =>     'T18',
-        "Comercial Nachari"    =>     'T19',
-        "Comercial Corina II"    =>     'T22',
-        "Comercial Catica II"    =>     'T24',
-
-
-
+        // --- NOMBRES NUEVOS (Mapeo para el nuevo array $lista_replicas) ---
+        "ACARIGUA"     => 'S14',
+        "APURE"        => 'T17',
+        "CAGUA"        => 'S03',
+        "CARACAS 1"    => 'S01',
+        "CORO 1"       => 'S05',
+        "CORO 2"       => 'S06',
+        "CORO 3"       => 'S07',
+        "GUIGUE"       => 'S12',
+        "HIGUEROTE"    => 'T09',
+        "MATURIN"      => 'S04',
+        "OJEDA"        => 'S10',
+        "PUNTO FIJO 1" => 'S08',
+        "PUNTO FIJO 2" => 'S09',
+        "PUERTO"       => 'S13',
+        "VALENCIA"     => 'T10',
+        "VALLE PASCUA" => 'S11'
     );
 
-    return $bd[$sede];
+    if (isset($bd[$sede])) {
+        return $bd[$sede];
+    }
+    return '';
 }
-
 
 
 // COMPATIBILIDAD:
