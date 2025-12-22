@@ -1,163 +1,220 @@
 <?php
 // routes.php
 
-// 1. PRIMERO LA SESIÓN (Siempre lo primero)
-require '../../includes/log.php';
+// ============================================================================
+// PARTE 1: EL CEREBRO (PROCESO EN SEGUNDO PLANO)
+// ============================================================================
+// Si el script recibe la señal "modo_stream", ejecuta la lógica y devuelve texto.
+if (isset($_GET['modo_stream'])) {
 
-// 2. CONFIGURACIÓN TÉCNICA
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('max_execution_time', 600); // 10 minutos
+    // Configuración para que no haya caché ni esperas
+    header('Content-Type: text/html; charset=utf-8');
+    header('Cache-Control: no-cache');
+    @ini_set('implicit_flush', 1);
+    @ini_set('zlib.output_compression', 0);
+    ini_set('max_execution_time', 600);
 
-// Desactivar compresión (Vital)
-@ini_set('zlib.output_compression', 0);
-@ini_set('implicit_flush', 1);
+    require '../../includes/log.php';
+    include '../../services/adm/ordenes-compra/ordenes-compra.php'; 
+    include '../../services/mysql.php';
 
-// Limpiar buffers de PHP
-while (ob_get_level() > 0) {
-    ob_end_clean();
-}
+    // Recibimos los datos por GET (vienen del JavaScript)
+    $tienda = $_GET['tienda'];
+    $fecha1 = $_GET['fecha1'];
+    $corregir = $_GET['corregir'];
 
-// ====================================================================
-// PASO 3: CARGAR LA INTERFAZ VISUAL
-// ====================================================================
-
-if (file_exists('../../includes/loading-ordenes-compras.php')) {
-    include '../../includes/loading-ordenes-compras.php';
-} else {
-    echo "<html><body style='background:#242943; color:white; font-family:sans-serif; text-align:center; padding-top:50px;'>";
-    echo "<h1>Procesando...</h1>";
-    echo "<div id='spinner' style='margin:20px auto; border: 5px solid #f3f3f3; border-top: 5px solid #00ff99; border-radius: 50%; width: 50px; height: 50px; animation: spin 2s linear infinite;'></div>";
-    echo "<style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>";
-    echo "<div id='log-container' style='background:rgba(0,0,0,0.3); max-width:800px; margin:0 auto; padding:20px; text-align:left;'></div>";
-}
-
-// ====================================================================
-// PASO 4: EL TRUCO PARA IIS (BOMBA DE ESPACIOS)
-// ====================================================================
-// Enviamos ~4MB de espacios vacíos. Esto llena el búfer de IIS y lo obliga
-// a empezar a enviar datos al navegador inmediatamente.
-echo ""; 
-flush(); 
-
-// ====================================================================
-// PASO 5: LÓGICA
-// ====================================================================
-
-include '../../services/adm/ordenes-compra/ordenes-compra.php'; 
-include '../../services/mysql.php';
-
-if (isset($_POST['tienda'])) {
-
-    $tienda = $_POST['tienda'];
-    $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
-    $corregir = isset($_POST['corregir']) ? $_POST['corregir'] : '';
-
-    // MENSAJE INICIAL
-    echo "<script>
-        if(document.getElementById('log-container')) {
-            document.getElementById('log-container').innerHTML += '<p style=\"color:#fff; font-weight:bold; border-bottom:1px solid #555; padding-bottom:10px;\">🚀 Iniciando proceso para $tienda...</p>';
+    // Función auxiliar para enviar mensajes al JS
+    function enviarMsg($msg, $tipo = 'info') {
+        $color = '#fff'; // blanco
+        if ($tipo == 'error') $color = '#ff5555'; // rojo
+        if ($tipo == 'success') $color = '#00ff99'; // verde
+        if ($tipo == 'header') {
+            echo "<div style='border-top:1px solid #444; margin-top:10px; padding-top:5px; color:#aaa; font-size:12px;'>$msg</div>";
+        } elseif ($tipo == 'titulo') {
+            echo "<h4 style='color:#fff; border-bottom:1px solid #333; padding-bottom:5px; margin-top:5px;'>$msg</h4>";
+        } else {
+            echo "<div style='color:$color; font-size:14px; margin-left:10px;'>$msg</div>";
         }
-    </script>";
-    // Un pequeño empujón extra de datos
-    echo str_pad(' ', 4096); 
-    flush(); 
+        flush(); // Empujar datos
+    }
 
-    // --- BUSCAR FACTURAS ---
+    // --- INICIO DE LÓGICA ---
     $Factura_Ordenes = Factura_Ordenes($tienda, $fecha1, $corregir);
 
     if (!is_array($Factura_Ordenes) || count($Factura_Ordenes) === 0) {
-        echo "<script>if(document.getElementById('spinner')) document.getElementById('spinner').style.display = 'none';</script>";
-        echo "<center><h3 style='color:#ff5555; margin-top:20px;'>No hay Información que Importar</h3></center>";
-        echo "<center><p>Revise la fecha o si ya fueron importadas.</p></center>";
-        echo "<center><a href='form.php' class='btn btn-danger'>Volver</a></center>";
-        echo "</div></body>"; 
+        enviarMsg("❌ No hay Información que Importar para la fecha seleccionada.", 'error');
         exit;
-    }    
+    }
 
-    // --- RECORRER FACTURAS ---
     foreach ($Factura_Ordenes as $factura) {
+        $ordenes_fact_num = $factura['fact_num'];
+        // Datos cabecera...
+        $ordenes_contrib = $factura['contrib']; $ordenes_saldo = $factura['saldo'];
+        $ordenes_tot_bruto = $factura['tot_bruto']; $ordenes_tot_neto = $factura['tot_neto'];
+        $ordenes_iva = $factura['iva'];
 
-        $ordenes_fact_num = isset($factura['fact_num']) ? $factura['fact_num'] : '';
-        $ordenes_contrib = isset($factura['contrib']) ? $factura['contrib'] : 0;
-        $ordenes_saldo = isset($factura['saldo']) ? $factura['saldo'] : 0;
-        $ordenes_tot_bruto = isset($factura['tot_bruto']) ? $factura['tot_bruto'] : 0;
-        $ordenes_tot_neto = isset($factura['tot_neto']) ? $factura['tot_neto'] : 0;
-        $ordenes_iva = isset($factura['iva']) ? $factura['iva'] : 0;
-
-        // 1. CREAR CABECERA
+        // 1. Crear Cabecera
         $orden = Ordenes_Compra($tienda, $ordenes_fact_num, $ordenes_contrib, $ordenes_saldo, $ordenes_tot_bruto, $ordenes_tot_neto, $ordenes_iva);
         
-        // 2. LOG CONEXIÓN
+        // Detectar conexión
         global $tipo_conexion_actual;
-        $msg_conexion = isset($tipo_conexion_actual) ? $tipo_conexion_actual : 'Desconocida';
+        $con = isset($tipo_conexion_actual) ? $tipo_conexion_actual : 'Desconocida';
         
-        echo "<p style='color:#aaa; font-size:12px; margin:0; margin-top:10px;'>
-                Procesando Factura: <b style='color:#fff'>$ordenes_fact_num</b> <span style='font-size:10px; color:#ffd700'>($msg_conexion)</span>
-              </p>";
-        
-        // Enviamos 4KB extra por cada mensaje para asegurar que salga del servidor
-        echo str_pad(' ', 4096); 
-        flush();
+        enviarMsg("Procesando Factura: <b>$ordenes_fact_num</b> ($con)", 'header');
 
-        // 3. RENGLONES
+        // 2. Renglones
         $Reng_Factura = Reng_Factura($tienda, $fecha1, $ordenes_fact_num);
-        $reng_orden = false; 
+        $reng_orden = false;
 
         if (is_array($Reng_Factura)) {
             foreach ($Reng_Factura as $renglon) {
-                // Variables...
-                $rf_fact_num = $renglon['fact_num'];
-                $rf_reng_num = $renglon['reng_num'];
-                $rf_co_art = $renglon['co_art'];
-                $rf_total_art = $renglon['total_art'];
-                $rf_prec_vta = $renglon['prec_vta'];
-                $rf_reng_neto = $renglon['reng_neto'];
-                $rf_cos_pro_un = $renglon['cos_pro_un'];
-                $rf_ult_cos_un = $renglon['ult_cos_un'];
-                $rf_ult_cos_om = $renglon['ult_cos_om'];
-                $rf_cos_pro_om = $renglon['cos_pro_om'];
+                // Variables renglón...
+                $rf_fact_num = $renglon['fact_num']; $rf_reng_num = $renglon['reng_num']; $rf_co_art = $renglon['co_art'];
+                $rf_total_art = $renglon['total_art']; $rf_prec_vta = $renglon['prec_vta']; $rf_reng_neto = $renglon['reng_neto'];
+                $rf_cos_pro_un = $renglon['cos_pro_un']; $rf_ult_cos_un = $renglon['ult_cos_un'];
+                $rf_ult_cos_om = $renglon['ult_cos_om']; $rf_cos_pro_om = $renglon['cos_pro_om'];
 
                 $existe = Con_Reng_Ordenes($tienda, $rf_fact_num, $rf_reng_num);
                 $insertado = Reng_Ordenes($tienda, $rf_fact_num, $rf_reng_num, $rf_co_art, $rf_total_art, $rf_prec_vta, $rf_reng_neto, $rf_cos_pro_un, $rf_ult_cos_un, $rf_ult_cos_om, $rf_cos_pro_om);
                 
-                if($insertado) $reng_orden = true;
-
+                if ($insertado) $reng_orden = true;
+                
                 $verificacion = Con_Reng_Ordenes($tienda, $rf_fact_num, $rf_reng_num);
 
                 if (!$verificacion) {
-                    echo "<div style='color:#ff5555; font-size:13px; margin-left:15px;'>❌ Error Item: $rf_co_art</div>";
+                    enviarMsg("Error Item: $rf_co_art", 'error');
                 } elseif ($corregir == '' && !$existe) {
-                    echo "<div style='color:#00ff99; font-size:13px; margin-left:15px;'>✅ Item Creado: $rf_co_art</div>";
+                    enviarMsg("✔ Item Creado: $rf_co_art", 'success');
                 }
-                
-                echo "<script>window.scrollTo(0,document.body.scrollHeight);</script>";
-                echo str_pad(' ', 1024); // Empujoncito
-                flush(); 
             }
         }
 
-        // 4. ACTUALIZAR STATUS
+        // 3. Actualizar Status
         if ($corregir == 'IMPORTADO') {
             $importado = Up_Factura_Ordenes($tienda, $fecha1, $ordenes_fact_num, $orden, $reng_orden);
-            echo "<h4 style='color:#fff; margin-top:5px; font-size:14px; border-bottom:1px solid #333; padding-bottom:5px;'>📄 $importado</h4>";
-            echo "<script>window.scrollTo(0,document.body.scrollHeight);</script>";
-            echo str_pad(' ', 4096);
-            flush();
+            enviarMsg("📄 " . $importado, 'titulo');
         }
     }
-
-    // FINALIZAR
-    echo "<script>
-        if(document.getElementById('spinner')) document.getElementById('spinner').style.display = 'none'; 
-        if(document.querySelector('h1')) document.querySelector('h1').innerText = 'PROCESO FINALIZADO';
-    </script>";
-
-    echo "<center><br><a href='form.php' class='btn btn-success btn-lg'>Volver al Inicio</a></center>";
-    echo "</div></body>"; 
-
-} else {
-    header('Location: form.php');
-    exit;
+    
+    // Señal de finalización
+    echo "";
+    exit; // Terminamos el proceso PHP aquí.
 }
 ?>
+
+<?php
+// Si no hay POST, devolvemos al form
+if (!isset($_POST['tienda'])) { header('Location: form.php'); exit; }
+
+// Preparamos los datos para pasarlos al JavaScript
+$tiendaJS = urlencode($_POST['tienda']);
+$fechaJS = urlencode(date("Ymd", strtotime($_POST['fecha1'])));
+$corregirJS = urlencode(isset($_POST['corregir']) ? $_POST['corregir'] : '');
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procesando...</title>
+    <link rel="stylesheet" href="../../assets/css/bootstrap-5.2.0-dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #242943; color: white; font-family: 'Segoe UI', sans-serif;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-top: 50px;
+        }
+        /* Spinner CSS Puro */
+        .spinner {
+            width: 60px; height: 60px;
+            border: 6px solid rgba(255,255,255,0.1);
+            border-top: 6px solid #00ff99;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        #log-container {
+            width: 90%; max-width: 800px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid #444; border-radius: 8px;
+            padding: 20px; height: 400px; overflow-y: auto;
+            font-family: monospace;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="titulo-estado">Conectando...</h1>
+    <div class="spinner" id="spinner"></div>
+
+    <div id="log-container">
+        <div>🚀 Iniciando sistema...</div>
+    </div>
+
+    <br>
+    <div id="btn-volver" style="display:none;">
+        <a href="form.php" class="btn btn-success btn-lg">Volver al Inicio</a>
+    </div>
+
+    <script>
+        const logContainer = document.getElementById('log-container');
+        const titulo = document.getElementById('titulo-estado');
+        const spinner = document.getElementById('spinner');
+        const btnVolver = document.getElementById('btn-volver');
+
+        // Construimos la URL para llamar al mismo archivo en "Modo Stream"
+        const url = `routes.php?modo_stream=1&tienda=<?= $tiendaJS ?>&fecha1=<?= $fechaJS ?>&corregir=<?= $corregirJS ?>`;
+
+        async function iniciarProceso() {
+            titulo.innerText = "Procesando Datos...";
+            
+            try {
+                // Iniciamos la petición FETCH
+                const response = await fetch(url);
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                // Leemos el flujo de datos mientras llega
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    // Decodificamos el pedazo de texto que llegó
+                    const textChunk = decoder.decode(value, { stream: true });
+                    
+                    // Si detectamos el final
+                    if (textChunk.includes("")) {
+                        finalizar();
+                    }
+
+                    // Agregamos al HTML
+                    const div = document.createElement('div');
+                    div.innerHTML = textChunk.replace("", ""); 
+                    logContainer.appendChild(div);
+                    
+                    // Auto-scroll hacia abajo
+                    logContainer.scrollTop = logContainer.scrollHeight;
+                }
+                
+                finalizar();
+
+            } catch (error) {
+                logContainer.innerHTML += `<div style='color:red; margin-top:20px'>❌ Error de conexión: ${error}</div>`;
+                finalizar();
+            }
+        }
+
+        function finalizar() {
+            titulo.innerText = "PROCESO FINALIZADO";
+            spinner.style.display = 'none'; // Ocultar spinner
+            btnVolver.style.display = 'block'; // Mostrar botón
+        }
+
+        // Arrancamos apenas carga la página
+        window.onload = iniciarProceso;
+    </script>
+</body>
+</html>
