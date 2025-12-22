@@ -1,6 +1,7 @@
 <?php
 // services/adm/ordenes-compra/ordenes-compra.php
 
+// Asegúrate que esta ruta sea correcta según tu estructura de carpetas
 require_once "../../services/empresas.php"; 
 
 // =============================================================================
@@ -25,14 +26,14 @@ function ConectarDestino($sede) {
         "UID" => "mezcla", 
         "PWD" => "Zeus33$", 
         "CharacterSet" => "UTF-8",
-        "LoginTimeout" => 4 // 4 segundos de espera máximo
+        "LoginTimeout" => 4 // Espera 4 segundos. Si no responde, asume caída.
     );
 
-    // Usamos @ para que no muestre error en pantalla si falla
+    // Usamos @ para suprimir warnings visuales si la VPN está caída
     $conn = @sqlsrv_connect($serverRemoto, $connectionInfoRemoto);
 
     if ($conn) {
-        return $conn; // Éxito Remoto
+        return $conn; // ¡Éxito por VPN!
     }
 
     // --- INTENTO 2: CONEXIÓN LOCAL (FALLBACK 172.16.1.39) ---
@@ -51,26 +52,27 @@ function ConectarDestino($sede) {
     $connLocal = sqlsrv_connect($serverLocal, $connectionInfoLocal);
     
     if ($connLocal) {
-        return $connLocal; // Éxito Local
+        return $connLocal; // ¡Éxito Local!
     }
 
-    return false; // Fallaron ambos
+    return false; // Fallaron ambos intentos
 }
 
 // =============================================================================
-// 1. LECTURA DE FACTURAS (DESDE CENTRAL PREVIA_A)
+// 1. LECTURA DE FACTURAS (FUENTE: CENTRAL PREVIA_A)
 // =============================================================================
 function Factura_Ordenes($sede, $fecha, $campo7) {
-    // SIEMPRE LEE DE LA CENTRAL
+    // Siempre lee de la central para buscar qué importar
     $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    $cliente = Cliente($sede); // Asumo que esta función está en empresas.php o mysql.php
+    
+    // IMPORTANTE: Cliente($sede) usa la función actualizada en empresas.php
+    $cliente = Cliente($sede); 
 
     if ($conn) {
         try {
-            // Lógica para determinar si es Nota de Entrega o Factura
-            // (Simplifiqué la lista de clientes para legibilidad, asegúrate de tener todos)
+            // Clientes internos (Sedes propias) vs Externos
             $clientes_internos = ['S14','S13','S12','S11','S10','S09','S08','S07','S06','S05','S04','S03','S02','S01'];
             
             if (in_array($cliente, $clientes_internos)) {
@@ -99,7 +101,7 @@ function Factura_Ordenes($sede, $fecha, $campo7) {
                     $ordenes_facturas[] = $row;
                 }
             }
-            return $ordenes_facturas; // Retorna array vacío [] o con datos. NUNCA string.
+            return $ordenes_facturas;
 
         } catch (Exception $e) {
             return [];
@@ -109,7 +111,7 @@ function Factura_Ordenes($sede, $fecha, $campo7) {
 }
 
 // =============================================================================
-// 2. LECTURA DE RENGLONES (DESDE CENTRAL PREVIA_A)
+// 2. LECTURA DE RENGLONES (FUENTE: CENTRAL PREVIA_A)
 // =============================================================================
 function Reng_Factura($sede, $fecha, $fact_num) {
     $serverName = "172.16.1.39";
@@ -168,13 +170,13 @@ function Reng_Factura($sede, $fecha, $fact_num) {
 // 3. INSERTAR CABECERA (DESTINO: VPN O LOCAL)
 // =============================================================================
 function Ordenes_Compra($sede, $fact_num, $contrib, $saldo, $tot_bruto, $tot_neto, $iva) {
-    // Usamos la nueva función inteligente
+    // Usamos la nueva función inteligente que decide dónde conectar
     $conn = ConectarDestino($sede);
 
     if ($conn) {
         try {
             $dif = ($tot_bruto > 0) ? $tot_bruto / 16 : 0;
-            $moneda = ($sede == 'CAGUA') ? 'BOD' : 'BSD'; // Manteniendo tu lógica de moneda
+            $moneda = ($sede == 'CAGUA') ? 'BOD' : 'BSD'; 
 
             $sql = "INSERT INTO ordenes (fact_num, contrib, status, comentario, descrip,
                     co_sucu, forma_pag, moneda, co_cli, co_ven, co_tran,
@@ -240,10 +242,10 @@ function Con_Reng_Ordenes($sede, $fact_num, $reng_num) {
 }
 
 // =============================================================================
-// 6. ACTUALIZAR STATUS (FUENTE: PREVIA_A)
+// 6. ACTUALIZAR STATUS (FUENTE: CENTRAL PREVIA_A)
 // =============================================================================
 function Up_Factura_Ordenes($sede, $fecha, $fact_num, $status1, $status2) {
-    // ESTO SE ACTUALIZA EN LA CENTRAL (172.16.1.39)
+    // Esto siempre se actualiza en la central para marcar lo importado
     $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
@@ -252,7 +254,6 @@ function Up_Factura_Ordenes($sede, $fecha, $fact_num, $status1, $status2) {
 
     if ($conn) {
         try {
-            // Lógica simplificada de clientes internos
             $clientes_internos = ['S14','S13','S12','S11','S10','S09','S08','S07','S06','S05','S04','S03','S02','S01'];
             
             if (in_array($cliente, $clientes_internos)) {
