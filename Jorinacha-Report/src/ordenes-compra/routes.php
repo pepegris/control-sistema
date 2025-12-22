@@ -1,41 +1,39 @@
 <?php
 // routes.php
 
-// 1. ACTIVAR REPORTE DE ERRORES (Para ver qué pasa en lugar del Error 500)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// 1. CONFIGURACIÓN CRÍTICA PARA VISUALIZACIÓN REAL
+@apache_setenv('no-gzip', 1);
+@ini_set('zlib.output_compression', 0);
+@ini_set('implicit_flush', 1);
+for ($i = 0; $i < ob_get_level(); $i++) { ob_end_flush(); }
+ob_implicit_flush(1);
 
-// 2. CONFIGURACIÓN DE TIEMPO Y BUFFER (Versión Compatible)
+// Aumentamos tiempo de ejecución
 ini_set('max_execution_time', 300); 
 
-// Iniciamos buffer solo si no está activo
-if (ob_get_level() == 0) ob_start();
-ob_implicit_flush(true);
+// ====================================================================
+// PASO 1: CARGAR LA INTERFAZ VISUAL ANTES DE PENSAR EN LÓGICA
+// ====================================================================
 
-// ---------------------------------------------------------
-// VERIFICACIÓN DE ARCHIVOS (Evita Error 500 por rutas mal)
-// ---------------------------------------------------------
-$files_to_check = [
-    '../../includes/log.php',
-    '../../includes/loading-ordenes-compras.php',
-    '../../services/adm/ordenes-compra/ordenes-compra.php',
-    '../../services/mysql.php'
-];
-
-foreach ($files_to_check as $file) {
-    if (!file_exists($file)) {
-        die("<h3 style='color:red'>Error Fatal: No se encuentra el archivo: $file <br>Verifica la estructura de carpetas.</h3>");
-    }
+// Verificamos que exista el archivo visual
+if (file_exists('../../includes/loading-ordenes-compras.php')) {
+    include '../../includes/loading-ordenes-compras.php';
+} else {
+    echo "<h1>Cargando...</h1>"; // Fallback por si no existe
 }
 
+// TRUCO DE MAGIA: Enviar 8KB de espacios vacíos al navegador.
+// Esto obliga a Chrome/Edge a dejar de esperar y mostrar la página YA.
+echo str_pad(' ', 8192); 
+flush(); 
+
+// ====================================================================
+// PASO 2: AHORA CARGAMOS LA LÓGICA PESADA
+// ====================================================================
+
 require '../../includes/log.php';
-include '../../includes/loading-ordenes-compras.php'; 
 include '../../services/adm/ordenes-compra/ordenes-compra.php'; 
 include '../../services/mysql.php';
-
-// Enviamos un "paquete" de espacios para forzar al navegador a mostrar la carga
-echo str_pad(' ', 4096); 
-flush();
 
 if (isset($_POST['tienda'])) {
 
@@ -43,31 +41,32 @@ if (isset($_POST['tienda'])) {
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
     $corregir = isset($_POST['corregir']) ? $_POST['corregir'] : '';
 
-    // LOG VISUAL
+    // MENSAJE INICIAL EN EL LOG
     echo "<script>
         if(document.getElementById('log-container')) {
-            document.getElementById('log-container').innerHTML += '<p>Conectando a central...</p>';
+            document.getElementById('log-container').innerHTML += '<p style=\"color:#fff\">🚀 Iniciando proceso para $tienda...</p>';
         }
     </script>";
-    flush();
+    flush(); // Forzar pintado
 
-    // Paso 1: Buscar facturas
+    // --- BUSCAR FACTURAS ---
     $Factura_Ordenes = Factura_Ordenes($tienda, $fecha1, $corregir);
 
-    // Validación
+    // VALIDACIÓN
     if (!is_array($Factura_Ordenes) || count($Factura_Ordenes) === 0) {
         echo "<script>
             if(document.getElementById('spinner')) document.getElementById('spinner').style.display = 'none';
         </script>";
-        echo "<center><h3 style='color:#ff5555;'>No hay Información que Importar (0 Registros encontrados)</h3></center>";
+        echo "<center><h3 style='color:#ff5555; margin-top:20px;'>No hay Información que Importar</h3></center>";
+        echo "<center><p>Revise la fecha o si ya fueron importadas.</p></center>";
         echo "<center><a href='form.php' class='btn btn-danger'>Volver</a></center>";
+        echo "</div></body>"; // Cerrar HTML
         exit;
     }    
 
-    // Paso 2: Recorrer
+    // --- RECORRER FACTURAS ---
     foreach ($Factura_Ordenes as $factura) {
 
-        // Validamos que existan las claves para evitar errores de índice
         $ordenes_fact_num = isset($factura['fact_num']) ? $factura['fact_num'] : '';
         $ordenes_contrib = isset($factura['contrib']) ? $factura['contrib'] : 0;
         $ordenes_saldo = isset($factura['saldo']) ? $factura['saldo'] : 0;
@@ -75,18 +74,19 @@ if (isset($_POST['tienda'])) {
         $ordenes_tot_neto = isset($factura['tot_neto']) ? $factura['tot_neto'] : 0;
         $ordenes_iva = isset($factura['iva']) ? $factura['iva'] : 0;
 
-        // Crear Cabecera
+        // 1. CREAR CABECERA
         $orden = Ordenes_Compra($tienda, $ordenes_fact_num, $ordenes_contrib, $ordenes_saldo, $ordenes_tot_bruto, $ordenes_tot_neto, $ordenes_iva);
         
-        // MOSTRAR TIPO DE CONEXIÓN
-        // Declaramos la variable global para leerla desde la función
+        // 2. INFORMAR CONEXIÓN (Feedback Visual)
         global $tipo_conexion_actual;
         $msg_conexion = isset($tipo_conexion_actual) ? $tipo_conexion_actual : 'Desconocida';
         
-        echo "<p style='color:#aaa; font-size:12px; margin:0; border-top:1px solid #444; margin-top:5px;'>Procesando Factura: $ordenes_fact_num ($msg_conexion)</p>";
+        echo "<p style='color:#aaa; font-size:12px; margin:0; border-top:1px solid #444; margin-top:5px; padding-top:5px;'>
+                Procesando Factura: <b style='color:#fff'>$ordenes_fact_num</b> <span style='font-size:10px'>($msg_conexion)</span>
+              </p>";
         flush();
 
-        // Renglones
+        // 3. RENGLONES
         $Reng_Factura = Reng_Factura($tienda, $fecha1, $ordenes_fact_num);
         $reng_orden = false; 
 
@@ -96,6 +96,7 @@ if (isset($_POST['tienda'])) {
                 $rf_fact_num = $renglon['fact_num'];
                 $rf_reng_num = $renglon['reng_num'];
                 $rf_co_art = $renglon['co_art'];
+                // ... variables necesarias para la funcion ...
                 $rf_total_art = $renglon['total_art'];
                 $rf_prec_vta = $renglon['prec_vta'];
                 $rf_reng_neto = $renglon['reng_neto'];
@@ -112,31 +113,34 @@ if (isset($_POST['tienda'])) {
                 $verificacion = Con_Reng_Ordenes($tienda, $rf_fact_num, $rf_reng_num);
 
                 if (!$verificacion) {
-                    echo "<h3 style='color:#ff5555; font-size:16px;'>❌ Error: Art $rf_co_art</h3>";
+                    echo "<div style='color:#ff5555; font-size:14px;'>❌ Error Item: $rf_co_art</div>";
                 } elseif ($corregir == '' && !$existe) {
-                    echo "<h3 style='color:#00ff99; font-size:16px;'>✅ Creado: Art $rf_co_art</h3>";
+                    echo "<div style='color:#00ff99; font-size:14px;'>✅ Item Creado: $rf_co_art</div>";
                 }
                 
+                // Scroll automático
                 echo "<script>window.scrollTo(0,document.body.scrollHeight);</script>";
                 flush(); 
             }
         }
 
+        // 4. ACTUALIZAR STATUS
         if ($corregir == 'IMPORTADO') {
             $importado = Up_Factura_Ordenes($tienda, $fecha1, $ordenes_fact_num, $orden, $reng_orden);
-            echo "<h3 style='color:#fff; padding-bottom:10px;'>📄 $importado</h3>";
+            echo "<h4 style='color:#fff; margin-top:5px; font-size:14px;'>📄 $importado</h4>";
             echo "<script>window.scrollTo(0,document.body.scrollHeight);</script>";
             flush();
         }
     }
 
+    // FINALIZAR
     echo "<script>
         if(document.getElementById('spinner')) document.getElementById('spinner').style.display = 'none'; 
         if(document.querySelector('h1')) document.querySelector('h1').innerText = 'PROCESO FINALIZADO';
     </script>";
 
     echo "<center><br><a href='form.php' class='btn btn-success btn-lg'>Volver al Inicio</a></center>";
-    echo "</div></body>"; 
+    echo "</div></body>"; // Cierre del body abierto en loading...
 
 } else {
     header('Location: form.php');
