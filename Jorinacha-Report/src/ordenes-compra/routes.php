@@ -1,47 +1,46 @@
 <?php
 // routes.php
 
-// 1. CONFIGURACIÓN DE ERRORES (Para ver si falla algo más)
+// 1. IMPORTANTE: PRIMERO LA SESIÓN Y LOGS (Antes de enviar cualquier HTML)
+require '../../includes/log.php';
+
+// 2. CONFIGURACIÓN DE ERRORES Y TIEMPOS
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+ini_set('max_execution_time', 300); 
 
-// 2. DESHABILITAR COMPRESIÓN (Compatible con todos los servidores)
+// 3. DESHABILITAR COMPRESIÓN Y BUFFER (Para ver progreso en tiempo real)
 if (function_exists('apache_setenv')) {
-    @apache_setenv('no-gzip', 1); // Solo si es Apache
+    @apache_setenv('no-gzip', 1);
 }
 @ini_set('zlib.output_compression', 0);
 @ini_set('implicit_flush', 1);
 
-// Limpiamos cualquier buffer previo
+// Limpiamos cualquier buffer que haya abierto log.php
 while (ob_get_level() > 0) {
     ob_end_clean();
 }
 
-// Aumentamos tiempo de ejecución
-ini_set('max_execution_time', 300); 
-
 // ====================================================================
-// PASO 1: CARGAR LA INTERFAZ VISUAL
+// PASO 4: AHORA SÍ, CARGAMOS LA INTERFAZ VISUAL
 // ====================================================================
 
 // Verificamos que exista el archivo visual
 if (file_exists('../../includes/loading-ordenes-compras.php')) {
     include '../../includes/loading-ordenes-compras.php';
 } else {
-    // Fallback simple si no encuentra el archivo
     echo "<html><body style='background:#222; color:white; font-family:sans-serif;'>";
     echo "<center><h1>Procesando...</h1><div id='log-container'></div></center>";
 }
 
-// TRUCO DE MAGIA SEGURO: Enviar espacios en blanco para forzar el renderizado
+// TRUCO DE MAGIA: Enviar espacios para forzar renderizado (después de log.php)
 echo str_pad(' ', 4096); 
 flush(); 
 
 // ====================================================================
-// PASO 2: CARGAR LA LÓGICA
+// PASO 5: CARGAR EL RESTO DE LÓGICA
 // ====================================================================
 
-require '../../includes/log.php';
 include '../../services/adm/ordenes-compra/ordenes-compra.php'; 
 include '../../services/mysql.php';
 
@@ -51,7 +50,7 @@ if (isset($_POST['tienda'])) {
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
     $corregir = isset($_POST['corregir']) ? $_POST['corregir'] : '';
 
-    // MENSAJE INICIAL EN EL LOG
+    // MENSAJE INICIAL
     echo "<script>
         if(document.getElementById('log-container')) {
             document.getElementById('log-container').innerHTML += '<p style=\"color:#fff\">🚀 Iniciando proceso para $tienda...</p>';
