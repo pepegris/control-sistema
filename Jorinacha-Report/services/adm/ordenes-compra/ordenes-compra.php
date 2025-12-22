@@ -1,65 +1,43 @@
 <?php
 // services/adm/ordenes-compra/ordenes-compra.php
 
-// Asegúrate que esta ruta sea correcta según tu estructura de carpetas
 require_once "../../services/empresas.php"; 
+
+// Variable global para almacenar el estado de la conexión
+$tipo_conexion_actual = "Desconocido";
 
 // =============================================================================
 // HELPER: GESTIÓN INTELIGENTE DE CONEXIÓN DESTINO (VPN -> LOCAL)
 // =============================================================================
-// Variable global para almacenar el estado
-$tipo_conexion_actual = "Desconocido";
-
 function ConectarDestino($sede) {
-    global $lista_replicas, $tipo_conexion_actual; // <--- IMPORTANTE: Global
+    global $lista_replicas, $tipo_conexion_actual;
 
+    // 1. Validar que la sede exista en el array
     if (!isset($lista_replicas[$sede])) {
+        $tipo_conexion_actual = "Error: Sede no existe";
         return false;
     }
 
     $config = $lista_replicas[$sede];
     
-    // --- INTENTO 1: VPN ---
+    // --- INTENTO 1: CONEXIÓN REMOTA (VPN) ---
     $serverRemoto = $config['ip'];
     $dbRemota = $config['db'];
     
     $connectionInfoRemoto = array(
-        "Database" => $dbRemota, "UID" => "mezcla", "PWD" => "Zeus33$", 
-        "CharacterSet" => "UTF-8", "LoginTimeout" => 3 
+        "Database" => $dbRemota, 
+        "UID" => "mezcla", 
+        "PWD" => "Zeus33$", 
+        "CharacterSet" => "UTF-8",
+        "LoginTimeout" => 3 // 3 segundos de espera máximo para VPN
     );
 
+    // Usamos @ para que no muestre error visual si falla
     $conn = @sqlsrv_connect($serverRemoto, $connectionInfoRemoto);
 
     if ($conn) {
-        $tipo_conexion_actual = "🌍 VPN (Remoto)"; // Guardamos el estado
-        return $conn; 
-    }
-
-    // --- INTENTO 2: LOCAL ---
-    $serverLocal = "172.16.1.39";
-    $dbLocal = $config['db_local'];
-
-    $connectionInfoLocal = array(
-        "Database" => $dbLocal, "UID" => "mezcla", "PWD" => "Zeus33$", 
-        "CharacterSet" => "UTF-8", "LoginTimeout" => 10
-    );
-
-    $connLocal = sqlsrv_connect($serverLocal, $connectionInfoLocal);
-    
-    if ($connLocal) {
-        $tipo_conexion_actual = "🏢 LOCAL (Réplica)"; // Guardamos el estado
-        return $connLocal; 
-    }
-
-    $tipo_conexion_actual = "❌ FALLÓ CONEXIÓN";
-    return false; 
-}
-
-    // Usamos @ para suprimir warnings visuales si la VPN está caída
-    $conn = @sqlsrv_connect($serverRemoto, $connectionInfoRemoto);
-
-    if ($conn) {
-        return $conn; // ¡Éxito por VPN!
+        $tipo_conexion_actual = "🌍 VPN (Remoto)";
+        return $conn; // Éxito Remoto
     }
 
     // --- INTENTO 2: CONEXIÓN LOCAL (FALLBACK 172.16.1.39) ---
@@ -78,27 +56,28 @@ function ConectarDestino($sede) {
     $connLocal = sqlsrv_connect($serverLocal, $connectionInfoLocal);
     
     if ($connLocal) {
-        return $connLocal; // ¡Éxito Local!
+        $tipo_conexion_actual = "🏢 LOCAL (Réplica)";
+        return $connLocal; // Éxito Local
     }
 
-    return false; // Fallaron ambos intentos
+    $tipo_conexion_actual = "❌ FALLÓ CONEXIÓN";
+    return false; // Fallaron ambos
 }
 
 // =============================================================================
 // 1. LECTURA DE FACTURAS (FUENTE: CENTRAL PREVIA_A)
 // =============================================================================
 function Factura_Ordenes($sede, $fecha, $campo7) {
-    // Siempre lee de la central para buscar qué importar
+    // Siempre lee de la central
     $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
     
-    // IMPORTANTE: Cliente($sede) usa la función actualizada en empresas.php
+    // Usamos la función Cliente() de empresas.php
     $cliente = Cliente($sede); 
 
     if ($conn) {
         try {
-            // Clientes internos (Sedes propias) vs Externos
             $clientes_internos = ['S14','S13','S12','S11','S10','S09','S08','S07','S06','S05','S04','S03','S02','S01'];
             
             if (in_array($cliente, $clientes_internos)) {
@@ -196,7 +175,7 @@ function Reng_Factura($sede, $fecha, $fact_num) {
 // 3. INSERTAR CABECERA (DESTINO: VPN O LOCAL)
 // =============================================================================
 function Ordenes_Compra($sede, $fact_num, $contrib, $saldo, $tot_bruto, $tot_neto, $iva) {
-    // Usamos la nueva función inteligente que decide dónde conectar
+    // Usamos la nueva función inteligente
     $conn = ConectarDestino($sede);
 
     if ($conn) {
@@ -271,7 +250,7 @@ function Con_Reng_Ordenes($sede, $fact_num, $reng_num) {
 // 6. ACTUALIZAR STATUS (FUENTE: CENTRAL PREVIA_A)
 // =============================================================================
 function Up_Factura_Ordenes($sede, $fecha, $fact_num, $status1, $status2) {
-    // Esto siempre se actualiza en la central para marcar lo importado
+    // Esto se actualiza en la central
     $serverName = "172.16.1.39";
     $connectionInfo = array("Database" => "PREVIA_A", "UID" => "mezcla", "PWD" => "Zeus33$", "CharacterSet" => "UTF-8");
     $conn = sqlsrv_connect($serverName, $connectionInfo);
