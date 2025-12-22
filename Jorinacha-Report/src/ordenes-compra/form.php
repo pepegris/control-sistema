@@ -1,16 +1,15 @@
 <?php
+// form.php
 require '../../includes/log.php';
 include '../../includes/header2.php';
 include '../../services/mysql.php';
-include '../../services/adm/ordenes-compra/ordenes-compra.php';
+// Aseguramos incluir empresas.php para tener acceso a $sedes_ar o $lista_replicas
+require_once "../../services/empresas.php"; 
 ?>
 
 <style>
-  .form-check {
-    display: none;
-    display: flexbox;
-
-  }
+  .form-container { max-width: 500px; margin: 0 auto; padding: 20px; background: #f9f9f9; border-radius: 8px; }
+  select, input { width: 100%; padding: 8px; margin-bottom: 15px; }
 </style>
 
 <center>
@@ -18,70 +17,40 @@ include '../../services/adm/ordenes-compra/ordenes-compra.php';
 </center>
 
 <div id="body">
-
   <form action="routes.php" method="POST">
-
-    <div class="fieldset">
+    <div class="form-container">
       <br>
-      <center>
-        <legend>Reporte</legend>
-      </center>
+      <center><legend>Reporte de Importación</legend></center>
 
-
-
-
-      <!-- FORMULAIO DE FECHAS -->
-
-      <label for="tienda" class="form-label ">Tienda</label>
-      <select name="tienda" id="">
-
-      <?php
-      
-      for ($i=1; $i < count($sedes_ar) ; $i++) { 
-
-        $tienda=$sedes_ar[$i];
-
+      <label for="tienda" class="form-label">Tienda Destino</label>
+      <select name="tienda" id="tienda" required>
+        <option value="">Seleccione una tienda...</option>
+        <?php
+        // Usamos $lista_replicas si quieres las del array nuevo, 
+        // o $sedes_ar si prefieres la lista vieja.
+        // Aquí uso el nuevo array $lista_replicas para asegurar consistencia
+        foreach ($lista_replicas as $nombreTienda => $datos) {
+            echo "<option value='$nombreTienda'>$nombreTienda</option>";
+        }
         ?>
-
-        <option value="<?= $tienda ?>"><?= $tienda ?></option>
-
-
-        <?php 
-      }
-
-      
-      ?>
-      </select> 
-
+      </select>
 
       <div class="form-group">
-        <label for="fecha1" class="form-label " require>Fecha</label>
-        <input type="date" name="fecha1" id="" required>
+        <label for="fecha1" class="form-label">Fecha de Emisión</label>
+        <input type="date" name="fecha1" id="fecha1" required>
       </div>
       
-      <label for="corregir" class="form-label ">Corregir Orden de Compra</label>
-      <select name="corregir" id="">
-
-        <option value="IMPORTADO">No</option>
-        <option value="">Si</option>
-
-
-
+      <label for="corregir" class="form-label">Modo</label>
+      <select name="corregir" id="corregir">
+        <option value="IMPORTADO">Normal (Procesar Pendientes)</option>
+        <option value="">Reprocesar (Corregir Fallos)</option>
       </select> 
       
-
-      <br>
+      <br><br>
       <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
-
-     
-      
-
       <br>
     </div>
   </form>
 </div>
-
-
-
 
 <?php include '../../includes/footer.php'; ?>

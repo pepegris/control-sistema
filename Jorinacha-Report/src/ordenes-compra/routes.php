@@ -1,102 +1,114 @@
 <?php
+// routes.php
 require '../../includes/log.php';
-include '../../includes/loading-ordenes-compras.php';
-include '../../services/adm/ordenes-compra/ordenes-compra.php';
+include '../../includes/loading-ordenes-compras.php'; // Incluimos la parte visual
+include '../../services/adm/ordenes-compra/ordenes-compra.php'; // Incluimos la lógica de BD
 include '../../services/mysql.php';
 
-if (isset($_POST)  ) {
+// INICIAR BUFFER DE SALIDA PARA MOSTRAR PROGRESO EN TIEMPO REAL
+if (ob_get_level() == 0) ob_start();
 
+// Aumentamos tiempo de ejecución (5 minutos) por si la VPN es lenta
+ini_set('max_execution_time', 300); 
 
+if (isset($_POST['tienda'])) {
 
-    
-    $tienda=$_POST['tienda'];
-
+    $tienda = $_POST['tienda'];
     $fecha1 = date("Ymd", strtotime($_POST['fecha1']));
-    $corregir= $_POST['corregir'];
+    $corregir = isset($_POST['corregir']) ? $_POST['corregir'] : '';
 
-    $Factura_Ordenes = Factura_Ordenes($tienda,$fecha1,$corregir);
+    // Paso 1: Buscar facturas pendientes en la central (PREVIA_A)
+    $Factura_Ordenes = Factura_Ordenes($tienda, $fecha1, $corregir);
 
- 
-    if ($Factura_Ordenes == null) {
-
-        echo "<center><h3>No hay Información que Importar</h3></center>";
+    // Validación estricta: Si no hay datos, detenemos todo.
+    if (!is_array($Factura_Ordenes) || count($Factura_Ordenes) === 0) {
+        echo "<script>document.getElementById('spinner').style.display = 'none';</script>";
+        echo "<center><h3 style='color:#ff5555;'>No hay Información que Importar</h3></center>";
+        echo "<center><a href='form.php' class='btn btn-danger'>Volver</a></center>";
+        exit;
     }    
-    
 
-  
-    for ($i=0; $i < count($Factura_Ordenes) ; $i++) { 
+    // Paso 2: Recorrer facturas encontradas
+    foreach ($Factura_Ordenes as $factura) {
 
+        $ordenes_fact_num = $factura['fact_num'];
+        $ordenes_contrib = $factura['contrib'];
+        $ordenes_saldo = $factura['saldo'];
+        $ordenes_tot_bruto = $factura['tot_bruto'];
+        $ordenes_tot_neto = $factura['tot_neto'];
+        $ordenes_iva = $factura['iva'];
 
-        $ordenes_fact_num = $Factura_Ordenes[$i]['fact_num'];
-        $ordenes_contrib = $Factura_Ordenes[$i]['contrib'];
-        $ordenes_saldo = $Factura_Ordenes[$i]['saldo'];
-        $ordenes_tot_bruto = $Factura_Ordenes[$i]['tot_bruto'];
-        $ordenes_tot_neto = $Factura_Ordenes[$i]['tot_neto'];
-        $ordenes_iva = $Factura_Ordenes[$i]['iva'];
+        // Crear Cabecera de Orden (La función decide si es Remoto o Local)
+        $orden = Ordenes_Compra($tienda, $ordenes_fact_num, $ordenes_contrib, $ordenes_saldo, $ordenes_tot_bruto, $ordenes_tot_neto, $ordenes_iva);
+        
+        // Obtener Renglones de la central
+        $Reng_Factura = Reng_Factura($tienda, $fecha1, $ordenes_fact_num);
+        
+        $reng_orden = false; // Flag para saber si se insertaron items
 
+        if (is_array($Reng_Factura)) {
+            foreach ($Reng_Factura as $renglon) {
+                
+                $rf_fact_num = $renglon['fact_num'];
+                $rf_reng_num = $renglon['reng_num'];
+                $rf_co_art = $renglon['co_art'];
+                $rf_total_art = $renglon['total_art'];
+                $rf_prec_vta = $renglon['prec_vta'];
+                $rf_reng_neto = $renglon['reng_neto'];
+                $rf_cos_pro_un = $renglon['cos_pro_un'];
+                $rf_ult_cos_un = $renglon['ult_cos_un'];
+                $rf_ult_cos_om = $renglon['ult_cos_om'];
+                $rf_cos_pro_om = $renglon['cos_pro_om'];
 
-        $orden=Ordenes_Compra($tienda,$ordenes_fact_num,$ordenes_contrib,$ordenes_saldo,$ordenes_tot_bruto,$ordenes_tot_neto,$ordenes_iva);
-        $Reng_Factura = Reng_Factura($tienda,$fecha1,$ordenes_fact_num );
+                // Verificar si ya existe en destino
+                $existe = Con_Reng_Ordenes($tienda, $rf_fact_num, $rf_reng_num);
 
-    
+                // Insertar Renglón (La función decide si es Remoto o Local)
+                $insertado = Reng_Ordenes($tienda, $rf_fact_num, $rf_reng_num, $rf_co_art, $rf_total_art, $rf_prec_vta, $rf_reng_neto, $rf_cos_pro_un, $rf_ult_cos_un, $rf_ult_cos_om, $rf_cos_pro_om);
+                
+                if($insertado) $reng_orden = true;
 
+                // Verificar inserción para mostrar mensaje
+                $verificacion = Con_Reng_Ordenes($tienda, $rf_fact_num, $rf_reng_num);
 
-        for ($e=0; $e < count($Reng_Factura); $e++) { 
+                // --- FEEDBACK VISUAL ---
+                if (!$verificacion) {
+                    echo "<h3 style='color:#ff5555; font-size:16px;'>Error: Articulo $rf_co_art - Orden 10$rf_fact_num Renglon #$rf_reng_num</h3>";
+                } elseif ($corregir == '' && !$existe) {
+                    echo "<h3 style='color:#00ff99; font-size:16px;'>Articulo Creado $rf_co_art - Orden 10$rf_fact_num Renglon #$rf_reng_num</h3>";
+                }
 
-            $Reng_Factura_fact_num = $Reng_Factura[$e]['fact_num'] ;
-            $Reng_Factura_reng_num = $Reng_Factura[$e]['reng_num'] ;
-            $Reng_Factura_co_art = $Reng_Factura[$e]['co_art'] ;
-            $Reng_Factura_total_art = $Reng_Factura[$e]['total_art'] ;
-            $Reng_Factura_prec_vta = $Reng_Factura[$e]['prec_vta'] ;
-            $Reng_Factura_reng_neto = $Reng_Factura[$e]['reng_neto'] ;
-            $Reng_Factura_cos_pro_un= $Reng_Factura[$e]['cos_pro_un'] ;
-            $Reng_Factura_ult_cos_un= $Reng_Factura[$e]['ult_cos_un'] ;
-            $Reng_Factura_ult_cos_om= $Reng_Factura[$e]['ult_cos_om'] ;
-            $Reng_Factura_cos_pro_om= $Reng_Factura[$e]['cos_pro_om'] ;
-
-            $Con_Reng_Factura_error=Con_Reng_Ordenes($tienda, $Reng_Factura_fact_num, $Reng_Factura_reng_num );
-
-            $reng_orden= Reng_Ordenes($tienda,$Reng_Factura_fact_num,$Reng_Factura_reng_num,$Reng_Factura_co_art,$Reng_Factura_total_art,$Reng_Factura_prec_vta,$Reng_Factura_reng_neto,
-            $Reng_Factura_cos_pro_un,
-            $Reng_Factura_ult_cos_un,
-            $Reng_Factura_ult_cos_om,
-            $Reng_Factura_cos_pro_om);
-
-            $Con_Reng_Factura=Con_Reng_Ordenes($tienda, $Reng_Factura_fact_num, $Reng_Factura_reng_num );
-
-            if ($Con_Reng_Factura == null) {
-
-                echo "<center><h3>Articulo sin Crear $Reng_Factura_co_art- Orden de Compra 10$Reng_Factura_fact_num Renglon #$Reng_Factura_reng_num </h3></center>";
-
-            } elseif ($corregir == '' && $Con_Reng_Factura_error == null) {
-
-                echo "<center><h3>Articulos creados $Reng_Factura_co_art- Orden de Compra 10$Reng_Factura_fact_num Renglon #$Reng_Factura_reng_num </h3></center>";
-            } 
-
-
-        } 
-
-        if ($corregir == 'IMPORTADO') {
-            $importado=Up_Factura_Ordenes($tienda,$fecha1,$ordenes_fact_num,$orden,$reng_orden);
-            echo "<center><h3>$importado</h3></center>";
+                // Forzar el scroll hacia abajo y actualizar pantalla
+                echo "<script>window.scrollTo(0,document.body.scrollHeight);</script>";
+                ob_flush();
+                flush();
+            }
         }
 
-  
- 
+        // Paso 3: Actualizar status en la central si todo salió bien
+        if ($corregir == 'IMPORTADO') {
+            $importado = Up_Factura_Ordenes($tienda, $fecha1, $ordenes_fact_num, $orden, $reng_orden);
+            echo "<h3 style='color:#eee; border-top:1px solid #555; padding-top:10px; margin-top:10px;'>$importado</h3><br>";
+            
+            echo "<script>window.scrollTo(0,document.body.scrollHeight);</script>";
+            ob_flush();
+            flush();
+        }
     }
 
-    if ($orden==true && $reng_orden == true ) {
-        echo "<center><a href='form.php' class='btn btn-success'>Volver</a></center>";
-    }else {
-        echo "<center><a href='form.php'' class='btn btn-danger'>Volver</a></center>";
-    }
+    // FINALIZAR PROCESO VISUALMENTE
+    echo "<script>
+        document.getElementById('spinner').style.display = 'none'; // Ocultar spinner
+        document.querySelector('h1').innerText = 'PROCESO FINALIZADO'; // Cambiar titulo
+    </script>";
 
-
+    echo "<center><br><a href='form.php' class='btn btn-success btn-lg'>Volver al Inicio</a></center>";
     
+    // Cerrar divs abiertos en loading.php
+    echo "</div></body>";
 
-   
 } else {
-    header('refresh:1;url= form.php');
+    header('Location: form.php');
     exit;
 }
 ?>
