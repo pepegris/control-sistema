@@ -2,7 +2,7 @@
 header('Content-Type: text/html; charset=utf-8');
 
 // ⚠️ PEGA TU API KEY AQUÍ OTRA VEZ
-$apiKey = "AIzaSyAv_LmWLvbm4QmbfTJ0927cOHpHYEY5KP4"; 
+$apiKey = "AIzaSyDhqVoxKLkGdIHRiymOHA2D1D3Q9M4XyWw"; 
 
 $url = "https://generativelanguage.googleapis.com/v1beta/models?key=" . $apiKey;
 
