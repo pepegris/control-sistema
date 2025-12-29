@@ -9,7 +9,7 @@ require_once "../../services/db_connection.php";
 $input = json_decode(file_get_contents('php://input'), true);
 
 // ⚠️ PEGA TU API KEY AQUÍ
-$apiKey = "AIzaSyBVl8kGnMKa2AlnS9_NjJCS2rXfbIqq6kU"; 
+$apiKey = "AIzaSyDhqVoxKLkGdIHRiymOHA2D1D3Q9M4XyWw"; 
 
 $modelosDisponibles = ["gemini-1.5-flash", "gemini-flash-latest", "gemini-2.5-flash"];
 
