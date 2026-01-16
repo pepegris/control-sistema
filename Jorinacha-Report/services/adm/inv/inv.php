@@ -6,26 +6,25 @@
 $sedes_tiendas = array(
     "DEV_EMP",
     "TPLIO1A",
-    "PREVIA_A",
-    "CARACAS1",
-    "CARACAS2",
-    "MATURIN",
-    "CORO1",
-    "CORO2",
-    "CORO3",
-    
-    "PUFIJO",
-    
-    "VALENA",
-    "CAGUA" ,
-    "NACHARI",
-    "HIGUE",
-    "APURA",
-    "VALLEPA",
-    "OJENA",
-    "PUECRUZ",
-    "ACARI",
-    "CATICA2",
+    'PREVIA_A',
+    'CARACAS1',
+    'CAGUA',
+    'MATURIN',
+    'CORO1',
+    'CORO2',
+    'CORO3',
+    'PTOFIJO1',
+    'PTOFIJO2',
+    'OJEDA',
+    'VAPASCUA',
+    'GUIGUE',
+    'PUERTO',
+    'ACARIGUA',
+
+    'HIGUE',
+    'VALENA',
+    'APURA',
+
 );
 
 
