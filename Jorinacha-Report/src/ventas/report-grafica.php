@@ -228,7 +228,7 @@ for ($i = 1; $i < count($sedes_ar); $i++) {
       ]);
 
       var options = {
-        title: 'Ventas Por Tiendas',
+        title: 'Ventas Por Mes',
         hAxis: {
           title: 'Meses',
           titleTextStyle: {
